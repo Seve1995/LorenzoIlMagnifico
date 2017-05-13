@@ -100,5 +100,5 @@ public class Player {
 	public void setPlayerBoard(PlayerBoard playerBoard) {
 		this.playerBoard = playerBoard;
 	}
-	
+
 }
