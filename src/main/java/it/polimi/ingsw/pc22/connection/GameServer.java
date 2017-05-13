@@ -31,7 +31,7 @@ public class GameServer
 	    while(true){
 	    	try{
 	    		Socket socket=serversocket.accept();
-	    		executor.submit(new GameServerManager(socket));	
+	    		//executor.submit(new GameServerManager(socket));	
 	    	}
 	    	catch (IOException e) {
 	    		break;

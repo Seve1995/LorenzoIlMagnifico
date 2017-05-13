@@ -1,5 +1,9 @@
 package it.polimi.ingsw.pc22.player;
 
+import it.polimi.ingsw.pc22.gamebox.FamilyMember;
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
+import it.polimi.ingsw.pc22.gamebox.PlayerBoard;
+
 public class Player {
 	private String name;
 	private int numberOfMatch;
