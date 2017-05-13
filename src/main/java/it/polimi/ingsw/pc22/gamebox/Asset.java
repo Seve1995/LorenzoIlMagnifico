@@ -1,31 +1,32 @@
 package it.polimi.ingsw.pc22.gamebox;
 
-public class FamilyMember 
+public class Asset 
 {
-	private ColorsEnum color;
 	private int value;
+	private AssetType type;
 	
-	public ColorsEnum getColor() {
-		return color;
-	}
-	public void setColor(ColorsEnum color) {
-		this.color = color;
-	}
 	public int getValue() {
 		return value;
 	}
 	public void setValue(int value) {
 		this.value = value;
 	}
+	public AssetType getType() {
+		return type;
+	}
+	public void setType(AssetType type) {
+		this.type = type;
+	}
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((color == null) ? 0 : color.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		result = prime * result + value;
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -34,8 +35,8 @@ public class FamilyMember
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		FamilyMember other = (FamilyMember) obj;
-		if (color != other.color)
+		Asset other = (Asset) obj;
+		if (type != other.type)
 			return false;
 		if (value != other.value)
 			return false;
@@ -44,6 +45,6 @@ public class FamilyMember
 	
 	@Override
 	public String toString() {
-		return "FamilyMember [color=" + color + ", value=" + value + "]";
+		return "Asset [value=" + value + ", type=" + type + "]";
 	}
 }

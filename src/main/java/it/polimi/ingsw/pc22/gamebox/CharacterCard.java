@@ -1,0 +1,60 @@
+package it.polimi.ingsw.pc22.gamebox;
+
+import it.polimi.ingsw.pc22.player.Player;
+
+public class CharacterCard extends DevelopmentCard
+{
+	private Asset coinsCost;
+
+	public Asset getCoinsCost() {
+		return coinsCost;
+	}
+
+	public void setCoinsCost(Asset coinsCost) {
+		this.coinsCost = coinsCost;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((coinsCost == null) ? 0 : coinsCost.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CharacterCard other = (CharacterCard) obj;
+		if (coinsCost == null) {
+			if (other.coinsCost != null)
+				return false;
+		} else if (!coinsCost.equals(other.coinsCost))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "CharacterCard [coinsCost=" + coinsCost + "]";
+	}
+
+	@Override
+	public void useImmediateEffect(Player player) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void usePermanentEffect(Player player) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+}
