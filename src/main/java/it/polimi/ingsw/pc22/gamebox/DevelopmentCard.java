@@ -8,6 +8,7 @@ import it.polimi.ingsw.pc22.player.Player;
 public abstract class DevelopmentCard 
 {
 	private String name;
+	private CardTypeEnum type;
 	private int roundNumber;
 	private List<Effect> immediateEffect;
 	private List<Effect> permanentEffect;

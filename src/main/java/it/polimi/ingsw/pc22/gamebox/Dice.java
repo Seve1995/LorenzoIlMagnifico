@@ -6,9 +6,7 @@ public class Dice {
 	private int diceValue;
 	private ColorsEnum color;
 	
-	public Dice(ColorsEnum color)
-	{
-		this.diceValue = 0;
+	public Dice(ColorsEnum color) {
 		this.color = color;
 	}
 	
