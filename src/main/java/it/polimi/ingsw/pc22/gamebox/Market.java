@@ -6,6 +6,6 @@ public class Market {
 	
 	private MarketCell marketCell[];
 	
-	public void ExecuteEffect (Player player, int i) {
+	public void ExecuteEffect (Player player) {
 	}
 }

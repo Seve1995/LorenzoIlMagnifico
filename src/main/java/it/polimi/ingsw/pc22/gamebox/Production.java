@@ -5,7 +5,7 @@ import it.polimi.ingsw.pc22.player.Player;
 public class Production {
 	private ProductionCell productionCell[];
 	
-	public void executeEffect(Player p, int i){
+	public void executeEffect(Player p){
 		//TODO: implement this kind of method
 	} 
 	
