@@ -1,5 +1,12 @@
 package it.polimi.ingsw.pc22.gamebox;
 
-public class Production {
+import it.polimi.ingsw.pc22.player.Player;
 
+public class Production {
+	private ProductionCell productionCell[];
+	
+	public void executeEffect(Player p){
+		//TODO: implement this kind of method
+	} 
+	
 }

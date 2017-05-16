@@ -3,15 +3,15 @@ package it.polimi.ingsw.pc22.gamebox;
 import java.util.Random;
 
 public class Dice {
-	private int number;
+	private int diceValue;
 	private ColorsEnum color;
 	
-	public int getNumber() {
-		return number;
+	public Dice(ColorsEnum color) {
+		this.color = color;
 	}
 	
-	public void setNumber(int number) {
-		this.number = number;
+	public int getNumber() {
+		return diceValue;
 	}
 	
 	public ColorsEnum getColor() {
@@ -24,7 +24,7 @@ public class Dice {
 	
 	public void rollingDice() {
 		Random random = new Random();
-		this.number = random.nextInt(5) + 1;
+		this.diceValue = random.nextInt(5) + 1;
 	}
 	
 }

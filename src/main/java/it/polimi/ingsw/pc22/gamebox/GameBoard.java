@@ -7,4 +7,8 @@ public class GameBoard {
 	Market market;
 	CouncilPalace councilPalace;
 	Dice[] dice;
+	
+	public GameBoard() {
+		
+	}
 }
