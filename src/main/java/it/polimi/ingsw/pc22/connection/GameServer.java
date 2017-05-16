@@ -5,44 +5,42 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 
 public class GameServer 
 {
-	private String connectionType;
-	private Map gamesMatchesMap;
-	private int port;
+	private static Map<String, GameMatch> gameMatchMap;
 	
-	public void startServer(){
-		gamesMatchesMap = new ConcurrentHashMap<>();
-		ExecutorService executor=Executors.newCachedThreadPool();
-		ServerSocket serversocket;
-	    try{
-	    	serversocket=new ServerSocket(port);
-	    }
-	    catch(IOException e)
-	    {
-	    	System.err.println(e.getMessage());
-	    	return;
-	    }
-	    System.out.println("Server Ready");
-	    while(true){
-	    	try{
-	    		Socket socket=serversocket.accept();
-	    		//executor.submit(new GameServerManager(socket));	
-	    	}
-	    	catch (IOException e) {
-	    		break;
-	    	}
-	    }
-	    try {
-			serversocket.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+	public static void main(String[] args)
+	{
+		System.out.println("Inizializzazione");
+		
+		gameMatchMap = new ConcurrentHashMap<>();
+		
+		ServerSocket serverSocket;
+		
+		try 
+		{
+			serverSocket = new ServerSocket(9001);
+			
+			while(true)
+			{
+				Socket socket = serverSocket.accept();
+				
+				ConnectionHandler handler = new ConnectionHandler();
+				
+				handler.setGameMatchMap(gameMatchMap);
+				handler.setSocket(socket);
+				
+				new Thread(handler).start();
+			}
+			
+		} 
+			catch (IOException e) 
+		{
 			e.printStackTrace();
 		}
-	    executor.shutdown();
+		
+		
 	}
+
 }

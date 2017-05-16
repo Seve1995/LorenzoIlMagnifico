@@ -4,5 +4,6 @@ public enum ColorsEnum
 {
 	WHITE,
 	ORANGE,
-	BLACK
+	BLACK,
+	NEUTER
 }

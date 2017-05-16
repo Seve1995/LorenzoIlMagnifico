@@ -3,7 +3,7 @@ package it.polimi.ingsw.pc22.gamebox;
 public class FamilyMember 
 {
 	private ColorsEnum color;
-	private int value;
+	private int familiarValue;
 	
 	public ColorsEnum getColor() {
 		return color;
@@ -11,19 +11,18 @@ public class FamilyMember
 	public void setColor(ColorsEnum color) {
 		this.color = color;
 	}
-	public int getValue() {
-		return value;
+	public int getFamiliarValue() {
+		return familiarValue;
 	}
-	public void setValue(int value) {
-		this.value = value;
+	public void setFamiliarValue(int familiarValue) {
+		this.familiarValue = familiarValue;
 	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((color == null) ? 0 : color.hashCode());
-		result = prime * result + value;
+		result = prime * result + familiarValue;
 		return result;
 	}
 	@Override
@@ -37,13 +36,13 @@ public class FamilyMember
 		FamilyMember other = (FamilyMember) obj;
 		if (color != other.color)
 			return false;
-		if (value != other.value)
+		if (familiarValue != other.familiarValue)
 			return false;
 		return true;
 	}
 	
 	@Override
 	public String toString() {
-		return "FamilyMember [color=" + color + ", value=" + value + "]";
+		return "FamilyMember [color=" + color + ", value=" + familiarValue + "]";
 	}
 }
