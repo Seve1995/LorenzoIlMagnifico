@@ -10,4 +10,14 @@ public class Harvest {
 		//TODO: implement the execution effect for this kind of cells
 	}
 
+	public HarvestCell[] getHarvestCell() {
+		return harvestCell;
+	}
+
+	public void setHarvestCell(HarvestCell[] harvestCell) {
+		this.harvestCell = harvestCell;
+	}
+
+
+
 }
