@@ -9,7 +9,10 @@ import it.polimi.ingsw.pc22.gamebox.Tower;
 import it.polimi.ingsw.pc22.gamebox.TowerCell;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class FamiliarSetting extends Action
+
+//DEPRECATED
+
+/*public class FamiliarSetting extends Action
 {
 	private FamilyMember familyMember;
 	private Cell cell;
@@ -88,4 +91,4 @@ public class FamiliarSetting extends Action
 		// TODO Auto-generated method stub
 		
 	}
-}
+}*/
