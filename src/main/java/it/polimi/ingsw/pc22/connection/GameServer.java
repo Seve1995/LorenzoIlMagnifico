@@ -9,7 +9,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class GameServer 
 {
 	private static Map<String, GameMatch> gameMatchMap;
-	
+	private static final int PORT = 9001;
+
 	public static void main(String[] args)
 	{
 		System.out.println("Inizializzazione");
@@ -20,8 +21,8 @@ public class GameServer
 		
 		try 
 		{
-			serverSocket = new ServerSocket(9001);
-			
+			serverSocket = new ServerSocket(PORT);
+			AuthenticationHandler.loadJSon();
 			while(true)
 			{
 				Socket socket = serverSocket.accept();
