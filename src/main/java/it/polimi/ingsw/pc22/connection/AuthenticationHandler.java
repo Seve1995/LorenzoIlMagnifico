@@ -16,14 +16,13 @@ import it.polimi.ingsw.pc22.player.Player;
 public class AuthenticationHandler implements Runnable {
 	private Socket socket;
 	int i;
-	private static List<User> usersList; //Meglio farla come List
+	private static List<User> usersList; 
 	private Boolean validUsername=false;
 	private Boolean validPassword=false;
 	private Boolean authenticated=false;
 	private BufferedReader in;
 	private PrintWriter out;
 	private User user;
-	
 	private Map<String, GameMatch> gameMatchMap;
 	
 	public AuthenticationHandler(Socket socket, Map<String, GameMatch> gameMatchMap)
@@ -41,19 +40,19 @@ public class AuthenticationHandler implements Runnable {
 			
 			while(!authenticated) 
 			{	
-				out.println("Registrazione o login?");
+				out.println("Sign In or Login?");
 				
-				String risposta = in.readLine();
+				String risposta = in.readLine().toLowerCase();
 				
 				switch(risposta)
 				{
-					case "Login":
+					case "login":
 						
 						user = login();
 						authenticated = true;
 						
 						break;
-					case "Registra":
+					case "sign in":
 						
 						user = registration();
 						authenticated = true;
@@ -61,7 +60,7 @@ public class AuthenticationHandler implements Runnable {
 						break;
 						
 					default:
-						out.println("Input non valido. Riprova. :) ");
+						out.println("Non-valid input. Please retry... ");
 						
 						break;
 				}
@@ -69,8 +68,7 @@ public class AuthenticationHandler implements Runnable {
 			 	
 			GameMatch gameMatch = null;
 			
-			//TODO RINOMINARE IN GETUSERNAME?
-			String playerName = user.getUser();
+			String playerName = user.getUsername();
 			
 			Player player = new Player();
 			
@@ -78,27 +76,26 @@ public class AuthenticationHandler implements Runnable {
 			
 			while(true)
 			{
-				out.println("Scegliere un'operazione da effettuare:\n"
-			 			+ "1) Creazione nuova partita\n"
-			 			+ "2) Partecipa a una partita creata da un amico\n"
-			 			+ "3) Partecipa a una partita casuale"
+				out.println("Choose an operation:\n"
+			 			+ "(1) Create new game match\n"
+			 			+ "(2) Join a friend's game match\n"
+			 			+ "(3) Join a random game match"
 			 			);
 				
 				String userChoice = in.readLine();
 				
 				if(userChoice.equals("1"))
 				{
-					out.println("inserire un nome per la partita");
+					out.println("Type a name for the new game match:");
 					
 					String gameName = in.readLine();
 					
-					out.println("Nome inserito: " + gameName);
-					
+					out.println("Game name: " + gameName);
 					gameMatch = gameMatchMap.get(gameName);
 					
 					if (gameMatch != null) 
 					{
-						out.println("Nome non valido, partita già presente");
+						out.println("A game match with the specified name already exists.");
 						
 						continue;
 					}
@@ -111,17 +108,17 @@ public class AuthenticationHandler implements Runnable {
 				
 				if(userChoice.equals("2"))
 				{
-					out.println("inserire un nome per la partita");
+					out.println("Type the name of the chosen game match:");
 					
 					String gameName = in.readLine();
 					
-					out.println("Nome inserito: " + gameName);
+					out.println("Game name: " + gameName);
 					
 					gameMatch = gameMatchMap.get(gameName);
 					
 					if (gameMatch == null) 
 					{
-						out.println("Partita non trovata");
+						out.println("Game match not found.");
 						
 						continue;
 					}
@@ -136,7 +133,7 @@ public class AuthenticationHandler implements Runnable {
 					
 				}
 				
-				out.println("Inserire scelta valida");
+				out.println("Non-valid input. Please retry... ");
 			}
 			
 			in.close();
@@ -160,21 +157,21 @@ public class AuthenticationHandler implements Runnable {
 		String username=null, password=null;
 		while(!validUsername)
 		{
-			out.println("Inserire username:");
+			out.println("Type an existing username:");
 			username = in.readLine();
 			validUsername = existingUsername(username);
 			if (!validUsername)
-				out.println("Username errato! Riprova.");
+				out.println("Error: username not found! Please retry.");
 		}
-		out.println("Username corretto. Adesso inserisci la password.");
+		out.println("Username OK. Now type the password:");
 		while(!validPassword)
 		{
 			password=in.readLine();
 			validPassword = checkPassword(username, password);
 			if (!validPassword) 
-				out.println("Password errata! Riprova.");
+				out.println("Error: wrong password! Please retry.");
 		}
-		out.print("Password corretta!");
+		out.println("Successful logged in!");
 		return new User(username, password);
 	}
 	
@@ -184,12 +181,15 @@ public class AuthenticationHandler implements Runnable {
 		boolean registrated=false;
 		while(!registrated)
 		{
-			out.println("Inserire username:");
+			out.println("Type an username:");
 			username = in.readLine();
 			validUsername = !existingUsername(username);
 			if (!validUsername) 
-				continue;
-			out.println("Adesso inserisci la password"); 
+				{
+					out.println("The specified username already exist! Please type a new username.");
+					continue;
+				}
+			out.println("Type a password"); 
 			password = in.readLine();
 			synchronized (usersList) 
 			{	
@@ -199,17 +199,20 @@ public class AuthenticationHandler implements Runnable {
 					registrated = true;
 					}
 				else
+					{
+					out.println("The specified username already exist! Please type a new username.");
 					validUsername = false;
+					}
 			}	
 		}
-		out.print("User creato!");
+		out.println("User created!");
 		return new User(username, password);
 	}
 	
 	synchronized private boolean existingUsername(String username) 
 	{ 
 		for (int i=0; i<usersList.size(); i++)
-			if (username.equals(usersList.get(i).getUser()))
+			if (username.equals(usersList.get(i).getUsername()))
 				return true;
 		return false;
 	}
@@ -217,7 +220,7 @@ public class AuthenticationHandler implements Runnable {
 	synchronized private boolean checkPassword(String username, String password) 
 	{
 		for (int i=0; i<usersList.size(); i++)
-			if (username.equals(usersList.get(i).getUser()))
+			if (username.equals(usersList.get(i).getUsername()))
 				if(password.equals(usersList.get(i).getPassword()))
 						return true;
 		return false;

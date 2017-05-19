@@ -22,5 +22,9 @@
   {
     "username": "Abc",
     "password": "Def"
+  },
+  {
+    "username": "Luca",
+    "password": "Oddone"
   }
 ]
