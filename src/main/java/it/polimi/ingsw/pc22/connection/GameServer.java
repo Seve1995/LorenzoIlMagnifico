@@ -27,10 +27,8 @@ public class GameServer
 			{
 				Socket socket = serverSocket.accept();
 				
-				ConnectionHandler handler = new ConnectionHandler();
-				
-				handler.setGameMatchMap(gameMatchMap);
-				handler.setSocket(socket);
+				AuthenticationHandler handler = 
+						new AuthenticationHandler(socket, gameMatchMap);
 				
 				new Thread(handler).start();
 			}

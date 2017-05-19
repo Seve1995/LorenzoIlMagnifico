@@ -3,14 +3,13 @@ package it.polimi.ingsw.pc22.connection;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import it.polimi.ingsw.pc22.connection.ConnectionHandler.PlayerComparator;
 import it.polimi.ingsw.pc22.player.Player;
 
 
@@ -24,95 +23,136 @@ public class AuthenticationHandler implements Runnable {
 	private BufferedReader in;
 	private PrintWriter out;
 	private User user;
-	public AuthenticationHandler (Socket socket){
+	
+	private Map<String, GameMatch> gameMatchMap;
+	
+	public AuthenticationHandler(Socket socket, Map<String, GameMatch> gameMatchMap)
+	{
+		this.gameMatchMap = gameMatchMap;
 		this.socket=socket;
 	}
 	
-	public void run(){
-		try {
+	public void run()
+	{
+		try 
+		{
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new PrintWriter(socket.getOutputStream(), true);
+			
 			while(!authenticated) 
 			{	
 				out.println("Registrazione o login?");
+				
 				String risposta = in.readLine();
-				if (risposta.equalsIgnoreCase("Login"))
-					{
-					user = login();
-					authenticated = true;
-					}
-				if (risposta.equalsIgnoreCase("Registra"))
-					{
-					user = registration();
-					authenticated = true;
-					}
-				else
-					out.println("Input non valido. Riprova. :) ");
+				
+				switch(risposta)
+				{
+					case "Login":
+						
+						user = login();
+						authenticated = true;
+						
+						break;
+					case "Registra":
+						
+						user = registration();
+						authenticated = true;
+						
+						break;
+						
+					default:
+						out.println("Input non valido. Riprova. :) ");
+						
+						break;
+				}
 			}
-			 	out.print("Scegliere un'operazione da effettuare:/n"
-			 			+ "1) Creazione nuova partita/n"
-			 			+ "2) Partecipa a una partita creata da un amico/n"
+			 	
+			GameMatch gameMatch = null;
+			
+			//TODO RINOMINARE IN GETUSERNAME?
+			String playerName = user.getUser();
+			
+			Player player = new Player();
+			
+			player.setName(playerName);
+			
+			while(true)
+			{
+				out.println("Scegliere un'operazione da effettuare:\n"
+			 			+ "1) Creazione nuova partita\n"
+			 			+ "2) Partecipa a una partita creata da un amico\n"
 			 			+ "3) Partecipa a una partita casuale"
 			 			);
-				String playerName = (String) ois.readObject();
 				
-				String gameName = (String) ois.readObject();
+				String userChoice = in.readLine();
 				
-				Player player = new Player();
-				
-				player.setName(playerName);
-				
-				GameMatch gameMatch = gameMatchMap.get(gameName);
-				
-				if (gameMatch == null)
+				if(userChoice.equals("1"))
 				{
-					gameMatch = new GameMatch();
+					out.println("inserire un nome per la partita");
 					
-					gameMatchMap.put(gameName, gameMatch);
+					String gameName = in.readLine();
 					
-					Map<Player, Socket> players = new TreeMap<>(new PlayerComparator());
+					out.println("Nome inserito: " + gameName);
 					
-					System.out.println(player);
+					gameMatch = gameMatchMap.get(gameName);
 					
-					players.put(player, socket);
+					if (gameMatch != null) 
+					{
+						out.println("Nome non valido, partita già presente");
+						
+						continue;
+					}
 					
-					gameMatch.setPlayers(players);
+					startNewGameMatch(gameName, player);
 					
-					int counter = gameMatch.getPlayerCounter() + 1;
+					break;
 					
-					gameMatch.setPlayerCounter(counter);
-					
-					new Thread(gameMatch).start();
 				}
-					else
-				{
-					Map<Player, Socket> players = gameMatch.getPlayers();
-					
-					players.put(player, socket);
-					
-					gameMatch.setPlayers(players);
-					
-					System.out.println(player);
-					
-					int counter = gameMatch.getPlayerCounter() + 1;
-					
-					gameMatch.setPlayerCounter(counter);
-				}
-							
-			} catch (IOException | ClassNotFoundException e) 
-			{
 				
-				e.printStackTrace();
+				if(userChoice.equals("2"))
+				{
+					out.println("inserire un nome per la partita");
+					
+					String gameName = in.readLine();
+					
+					out.println("Nome inserito: " + gameName);
+					
+					gameMatch = gameMatchMap.get(gameName);
+					
+					if (gameMatch == null) 
+					{
+						out.println("Partita non trovata");
+						
+						continue;
+					}
+					
+					loadGameMatch(gameMatch, player);
+					
+					break;
+				}
+				
+				if(userChoice.equals("3"))
+				{
+					
+				}
+				
+				out.println("Inserire scelta valida");
 			}
+			
 			in.close();
+			
 			out.close();
+			
 			socket.close();
+			
 			JsonManager.refreshJson(usersList);
-		} catch (IOException e) 
+			
+		} 
+		catch (IOException e) 
 		{
 			e.printStackTrace();
 		}
-		}
+	}
 	
 	
 	private User login() throws IOException
@@ -134,7 +174,7 @@ public class AuthenticationHandler implements Runnable {
 			if (!validPassword) 
 				out.println("Password errata! Riprova.");
 		}
-		out.println("Password corretta!");
+		out.print("Password corretta!");
 		return new User(username, password);
 	}
 	
@@ -162,7 +202,7 @@ public class AuthenticationHandler implements Runnable {
 					validUsername = false;
 			}	
 		}
-		out.println("User creato!");
+		out.print("User creato!");
 		return new User(username, password);
 	}
 	
@@ -185,6 +225,55 @@ public class AuthenticationHandler implements Runnable {
 	
 	protected static void loadJSon() throws IOException{
 		usersList = JsonManager.returnList();
+	}
+	
+	
+	//TODO FAR SI CHE I VALORI VENGANO GESTITI DAL PARSER JSON
+	private void startNewGameMatch(String gameName, Player player)
+	{
+		GameMatch gameMatch = new GameMatch(10000L, 4);
+		
+		gameMatchMap.put(gameName, gameMatch);
+		
+		Map<Player, Socket> players = new TreeMap<>(new PlayerComparator());
+		
+		players.put(player, socket);
+		
+		gameMatch.setPlayers(players);
+		
+		int counter = gameMatch.getPlayerCounter() + 1;
+		
+		gameMatch.setPlayerCounter(counter);
+		
+		new Thread(gameMatch).start();
+	}
+	
+	synchronized private void loadGameMatch(GameMatch gameMatch, Player player)
+	{
+		Map<Player, Socket> players = gameMatch.getPlayers();
+		
+		players.put(player, socket);
+		
+		gameMatch.setPlayers(players);
+	
+		int counter = gameMatch.getPlayerCounter() + 1;
+		
+		gameMatch.setPlayerCounter(counter);
+	}
+	
+	public class PlayerComparator implements Comparator<Player>
+	{
+
+		@Override
+		public int compare(Player o1, Player o2) 
+		{
+			int value = Integer.compare(o1.getPriority(), o2.getPriority());
+			
+			if (value == 0) value = o1.getName().compareTo(o2.getName());
+			
+			return value;
+		}
+		
 	}
 }
 

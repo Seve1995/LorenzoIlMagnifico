@@ -2,9 +2,6 @@ package it.polimi.ingsw.pc22.connection;
 
 import java.net.Socket;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.FutureTask;
 
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
@@ -12,8 +9,6 @@ import it.polimi.ingsw.pc22.player.Player;
 public class GameMatch implements Runnable
 {
 	private int currentRoundNumber;
-
-	//- playersThreadPool : ThreadPool
 	
 	private String gameName;
 	
@@ -21,34 +16,38 @@ public class GameMatch implements Runnable
 	
 	private int playerCounter = 0;
 	
-	//private List<Socket> playersSocket = new ArrayList<>();
-	
-	private ExecutorService executor = Executors.newFixedThreadPool(2);
-	
+	private int maxPlayersNumber;
+
 	private GameBoard gameBoard;
+	
+	private Long timeOut;
+	
+	public GameMatch(Long timeOut, int maxPlayersNumber)
+	{
+		this.timeOut = timeOut;
+		this.maxPlayersNumber = maxPlayersNumber;
+	}
 	
 	@Override
 	public void run() 
 	{
-		FutureTask<String> time = new FutureTask<>(new Timer());
-		
-		FutureTask<Boolean> counter = new FutureTask<>(new Counter(this));
-		
-		executor.execute(time); executor.execute(counter);
+		Long timeStamp = System.currentTimeMillis();
 		
 		while(true)
 		{
-			if (time.isDone() || counter.isDone())
-			{
-				counter.cancel(true);
-				time.cancel(true);
-				
-				executor.shutdown();
-				
-				System.out.println("Inizio partita");
-				break;
-			}
+			boolean isTimeoutExpired = 
+					System.currentTimeMillis() > timeStamp + timeOut; 
+					
+			boolean isGameFull = playerCounter == maxPlayersNumber;
+			
+			if (!isTimeoutExpired && !isGameFull) continue;
+			
+			break;
 		}
+		
+		if (playerCounter <= 1) return;
+		
+		System.out.println("Inizio partita");
 		
 		startGame();
 	}
@@ -86,14 +85,6 @@ public class GameMatch implements Runnable
 		this.playerCounter = playerCounter;
 	}
 	
-	public ExecutorService getExecutor() {
-		return executor;
-	}
-
-	public void setExecutor(ExecutorService executor) {
-		this.executor = executor;
-	}
-
 	public GameBoard getGameBoard() {
 		return gameBoard;
 	}
