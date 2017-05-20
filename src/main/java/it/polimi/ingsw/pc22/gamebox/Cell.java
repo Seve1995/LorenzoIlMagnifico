@@ -7,7 +7,7 @@ public abstract class Cell {
 	private FamilyMember familyMember;
 	
 	public abstract void executeEffect(Player player);
-	
+
 	public int getRequiredDiceValue() {
 		return requiredDiceValue;
 	}

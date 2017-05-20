@@ -6,6 +6,14 @@ public class Production {
 	private int productionMaxPlaces;
 	private ProductionCell productionCell[];
 	
+	public int getProductionMaxPlaces() {
+		return productionMaxPlaces;
+	}
+
+	public void setProductionMaxPlaces(int productionMaxPlaces) {
+		this.productionMaxPlaces = productionMaxPlaces;
+	}
+
 	public ProductionCell[] getProductionCell() {
 		return productionCell;
 	}
