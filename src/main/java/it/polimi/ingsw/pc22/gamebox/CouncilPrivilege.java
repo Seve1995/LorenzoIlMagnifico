@@ -3,7 +3,7 @@ package it.polimi.ingsw.pc22.gamebox;
 import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class CouncilPrivilage extends Effect {
+public class CouncilPrivilege extends Effect {
 	
 	@Override
 	public boolean isLegal(Player player) {
