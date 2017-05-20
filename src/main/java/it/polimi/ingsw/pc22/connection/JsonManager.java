@@ -1,4 +1,5 @@
 package it.polimi.ingsw.pc22.connection;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,19 +12,30 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
-public class JsonManager {
-	private static final String FILEPATH = "src/main/java/it/polimi/ingsw/pc22/connection/UsersJson.json";
+public class JsonManager
+{
+	private static final String FILEPATH = "users/UsersJson.json";
 	
-	public static List<User> returnList() throws IOException{
-		JsonReader reader = new JsonReader(new FileReader(FILEPATH));
+	public static List<User> returnList() throws IOException
+	{
+		ClassLoader classLoader = JsonManager.class.getClassLoader();
+
+		File usersFile = new File(classLoader.getResource(FILEPATH).getFile());
+
+		JsonReader reader = new JsonReader(new FileReader(usersFile));
 		Gson gson = new Gson();
 		Type type = new TypeToken<List<User>>(){}.getType();
 		List<User> users = Collections.synchronizedList(gson.fromJson(reader, type));
 		return users;
 	}
 	
-	public static void refreshJson(List<User> users) throws IOException{
-		FileWriter fileWriter = new FileWriter(FILEPATH);
+	public static void refreshJson(List<User> users) throws IOException
+	{
+		ClassLoader classLoader = JsonManager.class.getClassLoader();
+
+		File usersFile = new File(classLoader.getResource(FILEPATH).getFile());
+
+		FileWriter fileWriter = new FileWriter(usersFile);
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		Type type = new TypeToken<List<User>>(){}.getType();
 		String jsonString = gson.toJson(users, type);

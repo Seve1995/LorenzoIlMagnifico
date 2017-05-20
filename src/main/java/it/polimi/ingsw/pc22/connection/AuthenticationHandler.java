@@ -34,36 +34,33 @@ public class AuthenticationHandler implements Runnable
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new PrintWriter(socket.getOutputStream(), true);
 			
-			while(!authenticated) 
-			{	
+			while(!authenticated) {
 				out.println("Sign In or Login?");
-				
+
 				String risposta = in.readLine().toLowerCase();
-				
-				switch(risposta)
-				{
+
+				switch (risposta) {
 					case "login":
-						
+
 						user = login();
 						authenticated = true;
-						
+
 						break;
 					case "sign in":
-						
+
 						user = registration();
 						authenticated = true;
-						
+
 						break;
-						
+
 					default:
 						out.println("Non-valid input. Please retry... ");
-						
+
 						break;
 				}
+
 			}
-			 	
-			GameMatch gameMatch = null;
-			
+
 			String playerName = user.getUsername();
 			
 			Player player = new Player();
@@ -91,7 +88,7 @@ public class AuthenticationHandler implements Runnable
 					boolean existingGameMatch = 
 							GameServer.getGameMatchMap().containsKey(gameName);
 					
-					if (!existingGameMatch) 
+					if (existingGameMatch)
 					{
 						out.println("A game match with the specified name already exists.");
 						
@@ -99,7 +96,9 @@ public class AuthenticationHandler implements Runnable
 					}
 					
 					startNewGameMatch(gameName, player);
-					
+
+					out.println("Player: " + playerName + " created GameMatch - " + gameName);
+
 					break;
 					
 				}
@@ -122,8 +121,10 @@ public class AuthenticationHandler implements Runnable
 						continue;
 					}
 					
-					loadGameMatch(gameMatch, player);
-					
+					loadGameMatch(gameName, player);
+
+					out.println("Player: " + playerName + " joined GameMatch - " + gameName);
+
 					break;
 				}
 				
@@ -134,13 +135,7 @@ public class AuthenticationHandler implements Runnable
 				
 				out.println("Non-valid input. Please retry... ");
 			}
-			
-			in.close();
-			
-			out.close();
-			
-			socket.close();
-			
+
 			updateJson();
 				
 		} 
@@ -236,7 +231,7 @@ public class AuthenticationHandler implements Runnable
 	//TODO FAR SI CHE I VALORI VENGANO GESTITI DAL PARSER JSON
 	private void startNewGameMatch(String gameName, Player player)
 	{
-		GameMatch gameMatch = new GameMatch(10000L, 4);
+		GameMatch gameMatch = new GameMatch(60000L, 4);
 		
 		Map<String, GameMatch> gameMatchMap = GameServer.getGameMatchMap();
 		
@@ -255,8 +250,12 @@ public class AuthenticationHandler implements Runnable
 		new Thread(gameMatch).start();
 	}
 	
-	synchronized private void loadGameMatch(GameMatch gameMatch, Player player)
+	synchronized private void loadGameMatch(String gameName, Player player)
 	{
+		Map<String, GameMatch> gameMatchMap = GameServer.getGameMatchMap();
+
+		GameMatch gameMatch = gameMatchMap.get(gameName);
+
 		Map<Player, Socket> players = gameMatch.getPlayers();
 		
 		players.put(player, socket);

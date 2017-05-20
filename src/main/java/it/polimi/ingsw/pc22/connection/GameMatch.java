@@ -1,10 +1,17 @@
 package it.polimi.ingsw.pc22.connection;
 
-import java.net.Socket;
-import java.util.Map;
-
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
+import it.polimi.ingsw.pc22.utils.BoardLoader;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class GameMatch implements Runnable
 {
@@ -21,6 +28,8 @@ public class GameMatch implements Runnable
 	private GameBoard gameBoard;
 	
 	private Long timeOut;
+
+	private static final String BOARD_PATH = "boards/";
 	
 	public GameMatch(Long timeOut, int maxPlayersNumber)
 	{
@@ -45,11 +54,18 @@ public class GameMatch implements Runnable
 			break;
 		}
 		
-		if (playerCounter <= 1) return;
+		if (playerCounter <= 1)
+		{
+			endGame();
+
+			return;
+		}
 		
 		System.out.println("Inizio partita");
 		
 		startGame();
+
+		endGame();
 	}
 	
 
@@ -95,8 +111,42 @@ public class GameMatch implements Runnable
 	
 	private void startGame()
 	{
+		String boardName = BOARD_PATH + "Gameboard-" + playerCounter + ".json";
+
+		ClassLoader classLoader = this.getClass().getClassLoader();
+
+		File file = new File(classLoader.getResource(boardName).getFile());
+
+		JSONObject jsonBoard = new JSONObject(file);
+
+		jsonBoard.toString();
+
+		GameBoard gameBoard = BoardLoader.loadGameBoard();
+
 		//loadJson su base counter
 		//caricamento board
 		//
+	}
+
+	private void endGame()
+	{
+		List<Socket> playerSockets = new ArrayList<>(players.values());
+
+		for (Socket playerSocket : playerSockets)
+		{
+			try
+			{
+				PrintWriter printWriter =
+						new PrintWriter(playerSocket.getOutputStream(), true);
+
+				printWriter.println("EXIT");
+
+				playerSocket.close();
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
 	}
 }
