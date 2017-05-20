@@ -13,21 +13,18 @@ import java.util.TreeMap;
 import it.polimi.ingsw.pc22.player.Player;
 
 
-public class AuthenticationHandler implements Runnable {
+public class AuthenticationHandler implements Runnable 
+{
 	private Socket socket;
-	int i;
-	private static List<User> usersList; 
 	private Boolean validUsername=false;
 	private Boolean validPassword=false;
 	private Boolean authenticated=false;
 	private BufferedReader in;
 	private PrintWriter out;
 	private User user;
-	private Map<String, GameMatch> gameMatchMap;
 	
-	public AuthenticationHandler(Socket socket, Map<String, GameMatch> gameMatchMap)
+	public AuthenticationHandler(Socket socket)
 	{
-		this.gameMatchMap = gameMatchMap;
 		this.socket=socket;
 	}
 	
@@ -91,9 +88,11 @@ public class AuthenticationHandler implements Runnable {
 					String gameName = in.readLine();
 					
 					out.println("Game name: " + gameName);
-					gameMatch = gameMatchMap.get(gameName);
 					
-					if (gameMatch != null) 
+					boolean existingGameMatch = 
+							GameServer.getGameMatchMap().containsKey(gameName);
+					
+					if (!existingGameMatch) 
 					{
 						out.println("A game match with the specified name already exists.");
 						
@@ -114,9 +113,10 @@ public class AuthenticationHandler implements Runnable {
 					
 					out.println("Game name: " + gameName);
 					
-					gameMatch = gameMatchMap.get(gameName);
+					boolean existingGameMatch = 
+							GameServer.getGameMatchMap().containsKey(gameName);
 					
-					if (gameMatch == null) 
+					if (!existingGameMatch) 
 					{
 						out.println("Game match not found.");
 						
@@ -142,8 +142,8 @@ public class AuthenticationHandler implements Runnable {
 			
 			socket.close();
 			
-			JsonManager.refreshJson(usersList);
-			
+			updateJson();
+				
 		} 
 		catch (IOException e) 
 		{
@@ -184,6 +184,7 @@ public class AuthenticationHandler implements Runnable {
 			out.println("Type an username:");
 			username = in.readLine();
 			validUsername = !existingUsername(username);
+			
 			if (!validUsername) 
 				{
 					out.println("The specified username already exist! Please type a new username.");
@@ -191,18 +192,21 @@ public class AuthenticationHandler implements Runnable {
 				}
 			out.println("Type a password"); 
 			password = in.readLine();
+			
+			List<User> usersList = GameServer.getUsersList();
+			
 			synchronized (usersList) 
 			{	
 				if(!existingUsername(username)) 
-					{
+				{
 					usersList.add(new User(username,password));
 					registrated = true;
-					}
+				}
 				else
-					{
+				{
 					out.println("The specified username already exist! Please type a new username.");
 					validUsername = false;
-					}
+				}
 			}	
 		}
 		out.println("User created!");
@@ -211,6 +215,8 @@ public class AuthenticationHandler implements Runnable {
 	
 	synchronized private boolean existingUsername(String username) 
 	{ 
+		List<User> usersList = GameServer.getUsersList();
+		
 		for (int i=0; i<usersList.size(); i++)
 			if (username.equals(usersList.get(i).getUsername()))
 				return true;
@@ -219,6 +225,8 @@ public class AuthenticationHandler implements Runnable {
 
 	synchronized private boolean checkPassword(String username, String password) 
 	{
+		List<User> usersList = GameServer.getUsersList();
+		
 		for (int i=0; i<usersList.size(); i++)
 			if (username.equals(usersList.get(i).getUsername()))
 				if(password.equals(usersList.get(i).getPassword()))
@@ -226,15 +234,12 @@ public class AuthenticationHandler implements Runnable {
 		return false;
 	}
 	
-	protected static void loadJSon() throws IOException{
-		usersList = JsonManager.returnList();
-	}
-	
-	
 	//TODO FAR SI CHE I VALORI VENGANO GESTITI DAL PARSER JSON
 	private void startNewGameMatch(String gameName, Player player)
 	{
 		GameMatch gameMatch = new GameMatch(10000L, 4);
+		
+		Map<String, GameMatch> gameMatchMap = GameServer.getGameMatchMap();
 		
 		gameMatchMap.put(gameName, gameMatch);
 		
@@ -264,9 +269,15 @@ public class AuthenticationHandler implements Runnable {
 		gameMatch.setPlayerCounter(counter);
 	}
 	
+	synchronized private void updateJson() throws IOException
+	{
+		List<User> usersList = GameServer.getUsersList();
+		
+		JsonManager.refreshJson(usersList);
+	}
+	
 	public class PlayerComparator implements Comparator<Player>
 	{
-
 		@Override
 		public int compare(Player o1, Player o2) 
 		{
@@ -275,8 +286,7 @@ public class AuthenticationHandler implements Runnable {
 			if (value == 0) value = o1.getName().compareTo(o2.getName());
 			
 			return value;
-		}
-		
+		}	
 	}
 }
 
