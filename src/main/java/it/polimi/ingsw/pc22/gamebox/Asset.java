@@ -5,6 +5,10 @@ public class Asset
 	private int value;
 	private AssetType type;
 	
+	public Asset(int value, AssetType type) {
+		this.value = value;
+		this.type = type;
+	}
 	public int getValue() {
 		return value;
 	}
