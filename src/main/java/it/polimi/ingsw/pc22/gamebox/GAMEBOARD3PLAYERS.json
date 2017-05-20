@@ -1,0 +1,200 @@
+{
+  "tower": [
+    {
+      "towerType": "TERRITORY",
+      "towerCells": [
+        {
+          "resourceBonus": null,
+          "requiredDiceValue": 1
+        },
+        {
+          "resourceBonus": null,
+          "requiredDiceValue": 3
+        },
+        {
+          "resourceBonus": {
+            "value": 1,
+            "type": "WOOD"
+          },
+          "requiredDiceValue": 5
+        },
+        {
+          "resourceBonus": {
+            "value": 2,
+            "type": "WOOD"
+          },
+          "requiredDiceValue": 7
+        }
+      ]
+    },
+    {
+      "towerType": "CHARACTER",
+      "towerCells": [
+        {
+          "resourceBonus": null,
+          "requiredDiceValue": 1
+        },
+        {
+          "resourceBonus": null,
+          "requiredDiceValue": 3
+        },
+        {
+          "resourceBonus": {
+            "value": 1,
+            "type": "STONE"
+          },
+          "requiredDiceValue": 5
+        },
+        {
+          "resourceBonus": {
+            "value": 2,
+            "type": "STONE"
+          },
+          "requiredDiceValue": 7
+        }
+      ]
+    },
+    {
+      "towerType": "BUILDING",
+      "towerCells": [
+        {
+          "resourceBonus": null,
+          "requiredDiceValue": 1
+        },
+        {
+          "resourceBonus": null,
+          "requiredDiceValue": 3
+        },
+        {
+          "resourceBonus": {
+            "value": 1,
+            "type": "MILITARYPOINT"
+          },
+          "requiredDiceValue": 5
+        },
+        {
+          "resourceBonus": {
+            "value": 2,
+            "type": "MILITARYPOINT"
+          },
+          "requiredDiceValue": 7
+        }
+      ]
+    },
+    {
+      "towerType": "VENTURE",
+      "towerCells": [
+        {
+          "resourceBonus": null,
+          "requiredDiceValue": 1
+        },
+        {
+          "resourceBonus": null,
+          "requiredDiceValue": 3
+        },
+        {
+          "resourceBonus": {
+            "value": 1,
+            "type": "COIN"
+          },
+          "requiredDiceValue": 5
+        },
+        {
+          "resourceBonus": {
+            "value": 2,
+            "type": "COIN"
+          },
+          "requiredDiceValue": 7
+        }
+      ]
+    }
+  ],
+  "councilPalace": {
+    "councilPalaceMaxPlaces": 16,
+    "councilPalaceCell": {
+      "requiredDiceValue": 1,
+      "resourceBonus": {
+        "value": 1,
+        "type": "COIN"
+      },
+      "effect": {
+        "name": "pickCouncilPrivilege"
+      }
+    }
+  },
+  "market": {
+    "marketCell": [
+      {
+        "requiredDiceValue": 1,
+        "blockedCell": false,
+        "resourceBonus": [
+          {
+            "value": 5,
+            "type": "COIN"
+          }
+        ]
+      },
+      {
+        "requiredDiceValue": 1,
+        "blockedCell": false,
+        "resourceBonus": [
+          {
+            "value": 5,
+            "type": "SERVANT"
+          }
+        ]
+      },
+      {
+        "requiredDiceValue": 1,
+        "blockedCell": true,
+        "resourceBonus": [
+          {
+            "value": 2,
+            "type": "COIN"
+          },
+          {
+            "value": 3,
+            "type": "MILITARYPOINT"
+          }
+        ]
+      },
+      {
+        "requiredDiceValue": 1,
+        "blockedCell": true,
+        "effect": {
+          "name": "chooseTwoDifferentCouncilPrivileges"
+        }
+      }
+    ]
+  },
+  "harvest": {
+    "harvestMaxPlaces": 7,
+    "harvestCell": [
+      {
+        "requiredDiceValue": 1,
+        "blockedCell": false,
+        "penaltyCell": false
+      },
+      {
+        "requiredDiceValue": 1,
+        "blockedCell": false,
+        "penaltyCell": true
+      }
+    ]
+  },
+  "production": {
+    "productionMaxPlaces": 7,
+    "productionCell": [
+      {
+        "requiredDiceValue": 1,
+        "blockedCell": false,
+        "penaltyCell": false
+      },
+      {
+        "requiredDiceValue": 1,
+        "blockedCell": false,
+        "penaltyCell": true
+      }
+    ]
+  }
+}
