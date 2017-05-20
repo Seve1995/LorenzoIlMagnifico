@@ -9,7 +9,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class GameServer 
 {
-	//TODO: @FABIO: Meglio dichiararla nell'AuthenticationHandler come fatto con la userList e fare da gameServer il caricamento con una chiamate a un metodo statico?
 	private static Map<String, GameMatch> gameMatchMap;
 	private static final int PORT = 9001;
 	private static List<User> usersList; 
