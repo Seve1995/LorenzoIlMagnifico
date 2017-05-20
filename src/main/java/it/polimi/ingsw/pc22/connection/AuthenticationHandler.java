@@ -12,7 +12,6 @@ import java.util.TreeMap;
 
 import it.polimi.ingsw.pc22.player.Player;
 
-
 public class AuthenticationHandler implements Runnable 
 {
 	private Socket socket;
