@@ -6,7 +6,8 @@ public class TowerCell extends Cell{
 	private DevelopmentCard developmentCard;
 	private Asset resourceBonus;
 	
-	public TowerCell(Asset resourceBonus, int requiredDiceValue) {
+	public TowerCell(Asset resourceBonus, int requiredDiceValue)
+	{
 		super(requiredDiceValue);
 		this.resourceBonus = resourceBonus;
 		this.developmentCard = null;

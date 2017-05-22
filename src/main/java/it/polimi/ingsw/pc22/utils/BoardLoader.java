@@ -65,11 +65,9 @@ public class BoardLoader
         {
             JSONObject cell = cells.getJSONObject(i);
 
-            TowerCell towerCell = new TowerCell();
-
             int requiredDiceValue = cell.getInt("requiredDiceValue");
 
-            towerCell.setRequiredDiceValue(requiredDiceValue);
+            Asset asset = null;
 
             if (!cell.isNull("resourceBonus"))
             {
@@ -81,10 +79,10 @@ public class BoardLoader
 
                 int value = resourceBonus.getInt("value");
 
-                Asset asset = new Asset(value, assetType);
-
-                towerCell.setResourceBonus(asset);
+                asset = new Asset(value, assetType);
             }
+
+            TowerCell towerCell = new TowerCell(asset, requiredDiceValue);
 
             towerCellsArray[i] = towerCell;
         }
