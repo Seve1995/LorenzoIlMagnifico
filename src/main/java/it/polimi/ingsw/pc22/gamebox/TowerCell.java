@@ -25,7 +25,7 @@ public class TowerCell extends Cell{
 		return resourceBonus;
 	}
 
-	public void setResourceBonus(Asset resource) { //Shoul it be final?
+	public void setResourceBonus(Asset resource) { //Should it be final?
 		this.resourceBonus = resource;
 	}
 
