@@ -6,19 +6,17 @@ import it.polimi.ingsw.pc22.gamebox.Tower;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class SettingFamiliarMemberOnCounsilPalace extends Action {
-	private FamilyMember familyMember;
 	private CouncilPalace councilPalace;
 
 	public SettingFamiliarMemberOnCounsilPalace(FamilyMember familyMember, CouncilPalace councilPalace) {
 		super(familyMember);
-		this.familyMember = familyMember;
 		this.councilPalace = councilPalace;
 	}
 
 	@Override
 	public boolean isLegal(Player player) {
 		
-		if (familyMember.getFamiliarValue()<1) 
+		if (super.getFamilyMember().getFamiliarValue()<1) 
 			return false;
 		
 		return true;
