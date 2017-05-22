@@ -24,7 +24,6 @@ public class SettingFamiliarMemberOnCounsilPalace extends Action {
 
 	@Override
 	public void executeAction(Player player) {
-		// TODO Auto-generated method stub
 		
 	}
 	
