@@ -11,7 +11,7 @@ public class TowerCell extends Cell{
 		this.resourceBonus = resourceBonus;
 		this.developmentCard = null;
 	}
-	
+
 	public DevelopmentCard getDevelopmentCard() {
 		return developmentCard;
 	}
