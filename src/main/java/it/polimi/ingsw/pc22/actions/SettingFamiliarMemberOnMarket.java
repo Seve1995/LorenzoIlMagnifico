@@ -6,13 +6,11 @@ import it.polimi.ingsw.pc22.gamebox.MarketCell;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class SettingFamiliarMemberOnMarket extends Action{
-	private FamilyMember familyMember;
 	private Market market;
 	private int zone;
 
 	public SettingFamiliarMemberOnMarket(FamilyMember familyMember, Market market, int zone) {
-		super();
-		this.familyMember = familyMember;
+		super(familyMember);
 		this.market = market;
 		this.zone = zone;
 	}
@@ -22,7 +20,7 @@ public class SettingFamiliarMemberOnMarket extends Action{
 		
 		MarketCell[] currMarketCell = market.getMarketCell();
 		
-		if(currMarketCell[zone].getRequiredDiceValue() < familyMember.getFamiliarValue())
+		if(currMarketCell[zone].getRequiredDiceValue() < super.getFamilyMember().getFamiliarValue())
 			return false;
 		
 		if(!currMarketCell[zone].isEmpty())

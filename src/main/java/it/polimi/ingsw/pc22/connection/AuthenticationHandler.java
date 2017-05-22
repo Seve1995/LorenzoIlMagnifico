@@ -33,13 +33,17 @@ public class AuthenticationHandler implements Runnable
 		{
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new PrintWriter(socket.getOutputStream(), true);
-			
+
+			//TODO BISOGNA CONTROLLARE LO STATO TOTALE DEI PLAYERS,
+            // EVITARE CHE DUE POSSANO ACCEDERE CON LO STESSO NOME/PASWWORD
+
 			while(!authenticated) {
 				out.println("Sign In or Login?");
 
-				String risposta = in.readLine().toLowerCase();
+				String answer = in.readLine().toLowerCase();
 
-				switch (risposta) {
+				switch (answer)
+				{
 					case "login":
 
 						user = login();
@@ -172,8 +176,8 @@ public class AuthenticationHandler implements Runnable
 	private User registration() throws IOException
 	{
 		String username = null, password = null;
-		boolean registrated=false;
-		while(!registrated)
+		boolean registered =false;
+		while(!registered)
 		{
 			out.println("Type an username:");
 			username = in.readLine();
@@ -194,7 +198,7 @@ public class AuthenticationHandler implements Runnable
 				if(!existingUsername(username)) 
 				{
 					usersList.add(new User(username,password));
-					registrated = true;
+                    registered = true;
 				}
 				else
 				{

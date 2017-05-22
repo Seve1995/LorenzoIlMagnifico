@@ -9,19 +9,17 @@ import it.polimi.ingsw.pc22.player.Player;
 
 public class SettingFamiliarMemberOnHarvest extends Action{
 	
-	private FamilyMember familyMember;
 	private Harvest harvest; 
 	
 	public SettingFamiliarMemberOnHarvest(FamilyMember familyMember, Harvest harvest) {
-		super();
-		this.familyMember = familyMember;
+		super(familyMember);
 		this.harvest = harvest;
 	}
 
 	@Override
 	public boolean isLegal (Player player) {
 		
-		if (familyMember.getFamiliarValue() < 1)
+		if (super.getFamilyMember().getFamiliarValue() < 1)
 			return false;
 		
 		for (HarvestCell harvestCell : harvest.getHarvestCell()){
@@ -33,7 +31,7 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 			if
 			(
 					currFamilyMember.getColor()==ColorsEnum.NEUTER ||
-					familyMember.getColor() == ColorsEnum.NEUTER
+					super.getFamilyMember().getColor() == ColorsEnum.NEUTER
 			)
 				break;
 			

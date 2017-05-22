@@ -10,7 +10,7 @@ public class SettingFamiliarMemberOnCounsilPalace extends Action {
 	private CouncilPalace councilPalace;
 
 	public SettingFamiliarMemberOnCounsilPalace(FamilyMember familyMember, CouncilPalace councilPalace) {
-		super();
+		super(familyMember);
 		this.familyMember = familyMember;
 		this.councilPalace = councilPalace;
 	}

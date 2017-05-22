@@ -9,13 +9,12 @@ import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 
 
 public class SettingFamiliarMemberOnTower extends Action {
-	private FamilyMember familyMember;
 	private int floor;
 	private Tower tower;
 	
 	public SettingFamiliarMemberOnTower (FamilyMember familyMember, Tower tower, int floor) 
 	{
-		this.familyMember = familyMember;
+		super(familyMember);
 		this.floor = floor;
 		this.tower = tower;
 	}
@@ -28,7 +27,7 @@ public class SettingFamiliarMemberOnTower extends Action {
 		
 		if (!tower.getTowerCells()[floor].isEmpty()) return false; 
 		
-		int familiarValue = familyMember.getFamiliarValue();
+		int familiarValue = super.getFamilyMember().getFamiliarValue();
 		
 		if (tower.getTowerCells()[floor].getRequiredDiceValue() > familiarValue) return false;
 		
@@ -45,7 +44,7 @@ public class SettingFamiliarMemberOnTower extends Action {
 			if
 			(
 					currFamilyMember.getColor()==ColorsEnum.NEUTER ||
-					familyMember.getColor() == ColorsEnum.NEUTER
+					super.getFamilyMember().getColor() == ColorsEnum.NEUTER
 			)
 				break;
 			
