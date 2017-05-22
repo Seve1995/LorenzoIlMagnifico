@@ -5,10 +5,10 @@ import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.BoardLoader;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -117,11 +117,23 @@ public class GameMatch implements Runnable
 
 		File file = new File(classLoader.getResource(boardName).getFile());
 
-		JSONObject jsonBoard = new JSONObject(file);
+		StringBuilder builder = new StringBuilder();
+
+		try
+		{
+
+			Files.lines(file.toPath()).forEach(s -> builder.append(s));
+
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+
+		JSONObject jsonBoard = new JSONObject(builder.toString());
 
 		jsonBoard.toString();
 
-		GameBoard gameBoard = BoardLoader.loadGameBoard();
+		GameBoard gameBoard = BoardLoader.loadGameBoard(jsonBoard);
 
 		//loadJson su base counter
 		//caricamento board

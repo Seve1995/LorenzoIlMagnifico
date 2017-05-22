@@ -4,7 +4,8 @@ public class Tower {
 	private CardTypeEnum towerType;
 	private TowerCell[] towerCells;
 	
-	public Tower(CardTypeEnum towerType) {
+	public Tower(CardTypeEnum towerType)
+	{
 		this.towerType = towerType;
 		towerCells = new TowerCell[4];
 	}
