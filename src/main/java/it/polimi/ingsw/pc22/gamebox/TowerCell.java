@@ -7,8 +7,9 @@ public class TowerCell extends Cell{
 	private Asset resourceBonus;
 	
 	public TowerCell(Asset resourceBonus, int requiredDiceValue) {
+		super(requiredDiceValue);
 		this.resourceBonus = resourceBonus;
-		super.setRequiredDiceValue(requiredDiceValue);
+		this.developmentCard = null;
 	}
 	
 	public DevelopmentCard getDevelopmentCard() {
@@ -19,11 +20,11 @@ public class TowerCell extends Cell{
 		this.developmentCard = developmentCard;
 	}
 
-	public Asset getResourceBonus() {
+	public Asset getResourceBonus() { 
 		return resourceBonus;
 	}
 
-	public void setResourceBonus(Asset resource) {
+	public void setResourceBonus(Asset resource) { //Shoul it be final?
 		this.resourceBonus = resource;
 	}
 
