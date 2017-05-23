@@ -32,7 +32,7 @@ public class TowerCell extends Cell
 	public String toString() {
 		String output="";
 		for (int i=0; i<super.getEffects().size(); i++){
-			output = "(Required Value: " + this.getRequiredDiceValue() + " + " + "Bonus: " + super.getEffects().get(i).toString() + ") " + this.developmentCard.getName();
+			output += "(Required Value: " + this.getRequiredDiceValue() + " + " + "Bonus: " + super.getEffects().get(i).toString() + ") " + this.developmentCard.getName();
 		}
 			
 		return output;
