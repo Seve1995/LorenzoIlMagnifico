@@ -45,8 +45,24 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 
 	@Override
 	public void executeAction(Player player) {
-		// TODO Auto-generated method stub
+		if (isLegal(player))
+		{
+			harvest.getHarvestCell()[harvest.firstCellFree()].setFamilyMember(this.getFamilyMember());
+			
+			if (harvest.firstCellFree()>0)
+			{
+				if ((this.getFamilyMember().getFamiliarValue()-3)>0)
+					this.getFamilyMember().setFamiliarValue(this.getFamilyMember().getFamiliarValue()-3);
+				else 
+					this.getFamilyMember().setFamiliarValue(0);
+			}
+			
+		}
 		
+		else 
+		{
+			System.out.println("You can't do this action");
+		}
 	}
 	
 

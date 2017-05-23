@@ -30,5 +30,17 @@ public class Harvest
 				"that have a value equal to or lower than your Harvest action value.";
 		return output;
 	}
+	
+	public int firstCellFree() {
+		int i=0;
+		while ( i < this.harvestCell.length)
+		{
+			if (!(harvestCell[i].isEmpty()))
+			{
+				i++;
+			}
+		}
+		return i;
+	}
 
 }
