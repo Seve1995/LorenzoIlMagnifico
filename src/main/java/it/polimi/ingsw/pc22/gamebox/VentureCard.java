@@ -10,6 +10,8 @@ public class VentureCard extends DevelopmentCard
 	private List<Asset> resourceCost; 
 	private Asset militaryCost;
 	private int militaryPointsGain;
+	private boolean requiredCostChoice = false;
+	
 	
 	public VentureCard(String name, int roundNumber, List<Effect> immediateEffects, List<Effect> permanentEffects, List<Asset> resourceCost, Asset militaryCost, int militaryPointsGain) 
 	{
@@ -46,5 +48,22 @@ public class VentureCard extends DevelopmentCard
 	public void usePermanentEffect(Player player) {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public String toString() {
+		
+		String output = this.getName() + " is a Venture Card.\n Its activation cost are ";
+		
+		for (Asset a: this.resourceCost){ 
+			 output += a.toString() + "\n";
+			 if (this.requiredCostChoice && !(a.equals(resourceCost.get(resourceCost.size()-1))))
+			 {
+				 output += "or";
+			 }
+		}
+		
+		output += super.toString();
+		
+		return output;
 	}
 }

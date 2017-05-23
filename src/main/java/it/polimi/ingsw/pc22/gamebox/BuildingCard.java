@@ -2,13 +2,14 @@ package it.polimi.ingsw.pc22.gamebox;
 
 import java.util.List;
 
+import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class BuildingCard extends DevelopmentCard
 {
 	private List<Asset> costs; 
 	private int permanentEffectActivationCost;
-	
+
 	public List<Asset> getCosts() {
 		return costs;
 	}
@@ -54,9 +55,18 @@ public class BuildingCard extends DevelopmentCard
 	}
 	
 	@Override
-	public String toString() {
-		return "BuildingCard [costs=" + costs + ", permanentEffectActivationCost=" + permanentEffectActivationCost
-				+ "]";
+	public String toString()
+	{
+		String output = this.getName() + " is a Building Card.\n Its activation cost are ";
+		for (Asset a: costs)
+		{
+			output += a.toString() + "\n";
+		}
+		
+		output += super.toString();
+		
+		return output;
+		
 	}
 
 	@Override
@@ -70,5 +80,4 @@ public class BuildingCard extends DevelopmentCard
 		// TODO Auto-generated method stub
 		
 	}
-	
 }

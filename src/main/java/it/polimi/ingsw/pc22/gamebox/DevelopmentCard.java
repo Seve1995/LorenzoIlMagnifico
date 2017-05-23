@@ -10,6 +10,8 @@ public abstract class DevelopmentCard
 	private String name;
 	private int roundNumber;
 	private boolean permanentEffectChoiche = false;
+
+	
 	private List<Effect> immediateEffects;
 	private List<Effect> permanentEffects;
 	
@@ -55,13 +57,7 @@ public abstract class DevelopmentCard
 	public void setPermanentEffectChoiche(boolean permanentEffectChoiche) {
 		this.permanentEffectChoiche = permanentEffectChoiche;
 	}
-
-	@Override
-	public String toString() {
-		return "DevelopmentCard [name=" + name + ", roundNumber=" + roundNumber + ", permanentEffectChoiche="
-				+ permanentEffectChoiche + ", immediateEffects=" + immediateEffects + ", permanentEffects="
-				+ permanentEffects + "]";
-	}
+	
 
 	@Override
 	public int hashCode() {
@@ -104,6 +100,34 @@ public abstract class DevelopmentCard
 		if (roundNumber != other.roundNumber)
 			return false;
 		return true;
+	}
+	
+	@Override
+	
+	public String toString() {
+		
+		String output="";
+		
+		if (!((this.getImmediateEffects())==null)){
+			output += "It has the following Immediate Effects ";
+			for (Effect e: this.immediateEffects){
+				output += e.toString() + "\n";
+			}
+		}
+		
+		if (!((this.getPermanentEffects())==null))
+		{
+			output += "It has the following Permanent Effects " ;
+			for (Effect e: this.permanentEffects){ 
+				 output += e.toString() + "\n";
+				 if (permanentEffectChoiche && !(e.equals(permanentEffects.get(permanentEffects.size()-1))))
+				 {
+					 output += "or";
+				 }
+			}
+		}
+		
+		return output;
 	}
 	
 	

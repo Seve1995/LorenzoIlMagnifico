@@ -25,4 +25,5 @@ public class HarvestCell extends Cell {
 	public void setAsPenaltyCell() {
 		this.isAPenaltyCell=true;
 	}
+	
 }

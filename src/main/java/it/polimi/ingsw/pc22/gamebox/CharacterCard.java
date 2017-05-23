@@ -1,5 +1,6 @@
 package it.polimi.ingsw.pc22.gamebox;
 
+import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class CharacterCard extends DevelopmentCard
@@ -41,8 +42,16 @@ public class CharacterCard extends DevelopmentCard
 
 	@Override
 	public String toString() {
-		return "CharacterCard [coinsCost=" + coinsCost + "]";
+		
+		String output = this.getName() + " is a Character Card.\n Its activation cost is ";
+		
+		output += coinsCost.toString();
+		
+		output += super.toString();
+		
+		return output;
 	}
+
 
 	@Override
 	public void useImmediateEffect(Player player) {

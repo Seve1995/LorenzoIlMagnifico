@@ -42,6 +42,17 @@ public class Tower {
 		}
 		return output;
 	}
+	
+	public static String gainInfo(){
+		String output="This area is composed by four towers, each one with four floors."
+				+ "On every floor, there is an action space that allows the player to take"
+				+ "the corresponding card and, if present, some bonuses.";
+		return output;
+	}
+	
+	
+	
+	
 	/*
 	public static void main(String[] args) {
 		List<Effect> effects = new ArrayList<Effect>();
