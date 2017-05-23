@@ -41,7 +41,7 @@ public class BoardLoader
 
                 JSONArray cells = tower.getJSONArray("towerCells");
 
-                Tower loadedTower = loadTower(cells, towerType);;
+                Tower loadedTower = loadTower(cells, towerType);
 
                 if (loadedTower == null) continue;
 
@@ -62,9 +62,7 @@ public class BoardLoader
 
         Tower tower = new Tower(towerTypeEnum);
 
-        TowerCell[] towerCellsArray = new TowerCell[4];
-
-        tower.setTowerCells(towerCellsArray);
+        List<TowerCell> towerCells = new ArrayList<>();
 
         for (int i = 0; i < cells.length(); i++)
         {
@@ -85,8 +83,10 @@ public class BoardLoader
                 towerCell.setEffects(effects);
             }
 
-            towerCellsArray[i] = towerCell;
+            towerCells.add(towerCell);
         }
+
+        tower.setTowerCells(towerCells);
 
         return tower;
     }
@@ -102,16 +102,20 @@ public class BoardLoader
 
             Effect effect = null;
 
-            try {
+            try
+            {
                 Class effectName = Class.forName(name);
 
                 effect = (Effect) effectName.newInstance();
 
-            } catch (ClassNotFoundException e) {
+            } catch (ClassNotFoundException e)
+            {
                 e.printStackTrace();
-            } catch (IllegalAccessException e) {
+            } catch (InstantiationException e)
+            {
                 e.printStackTrace();
-            } catch (InstantiationException e) {
+            } catch (IllegalAccessException e)
+            {
                 e.printStackTrace();
             }
 
@@ -144,9 +148,7 @@ public class BoardLoader
 
         AssetType assetType = AssetType.valueOf(type);
 
-        Asset asset = new Asset(value, assetType);
-
-        return asset;
+        return new Asset(value, assetType);
     }
 
     private static CouncilPalace loadCouncilPalace(JSONObject board)
@@ -174,6 +176,8 @@ public class BoardLoader
 
             cells[i] = cell;
         }
+
+        palace.setCouncilPalaceCells(cells);
 
         return palace;
     }

@@ -2,13 +2,25 @@ package it.polimi.ingsw.pc22.gamebox;
 
 import java.util.List;
 
+import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class BuildingCard extends DevelopmentCard
 {
 	private List<Asset> costs; 
 	private int permanentEffectActivationCost;
-	
+
+	public BuildingCard
+	(
+		String name, int roundNumber, List<Effect> immediateEffects,
+		List<Effect> permanentEffects, List<Asset> costs, int permanentEffectActivationCost
+	)
+	{
+		super(name, roundNumber, immediateEffects, permanentEffects);
+		this.costs = costs;
+		this.permanentEffectActivationCost = permanentEffectActivationCost;
+	}
+
 	public List<Asset> getCosts() {
 		return costs;
 	}

@@ -24,7 +24,10 @@ public class SettingFamiliarMemberOnTower extends Action {
 	{
 		
 		//if (floor > 4 || floor < 1) return false; TODO check validazione dell'input
-		
+
+		//TODO FIX
+
+		/*
 		if (!tower.getTowerCells()[floor].isEmpty()) return false; 
 		
 		int familiarValue = super.getFamilyMember().getFamiliarValue();
@@ -55,9 +58,8 @@ public class SettingFamiliarMemberOnTower extends Action {
 		
 		if (thereIsAnotherFamilyMember && player.getCoins() < 3)
 			return false;
-			
+			*/
 		return true;
-		
 	}
 	
 	@Override

@@ -1,10 +1,23 @@
 package it.polimi.ingsw.pc22.gamebox;
 
+import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.player.Player;
+
+import java.util.List;
 
 public class CharacterCard extends DevelopmentCard
 {
 	private Asset coinsCost;
+
+	public CharacterCard
+	(
+		String name, int roundNumber, List<Effect> immediateEffects,
+		List<Effect> permanentEffects, Asset coinsCost
+	)
+	{
+		super(name, roundNumber, immediateEffects, permanentEffects);
+		this.coinsCost = coinsCost;
+	}
 
 	public Asset getCoinsCost() {
 		return coinsCost;
