@@ -19,6 +19,7 @@ public class Player
 	private int victoryPoints;
 	private int priority;
 	private boolean newAction; 
+	private boolean removeTowerBonus;
 	private List<FamilyMember> familyMember;
 	private GameBoard gameBoard;
 	private PlayerBoard playerBoard;
@@ -89,6 +90,15 @@ public class Player
 	public void setNewAction(boolean newAction) {
 		this.newAction = newAction;
 	}
+	
+	public boolean isRemoveTowerBonus() {
+		return removeTowerBonus;
+	}
+	
+	public void setRemoveTowerBonus(boolean removeTowerBonus) {
+		this.removeTowerBonus = removeTowerBonus;
+	}
+	
 	public List<FamilyMember> getFamilyMember() {
 		return familyMember;
 	}
