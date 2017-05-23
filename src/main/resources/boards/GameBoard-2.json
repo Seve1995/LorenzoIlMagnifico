@@ -14,7 +14,7 @@
         {
           "effects": [
             {
-              "name": "PickCouncilPrivilege",
+              "name": "GainAsset",
               "asset": {
                 "value": 1,
                 "type": "WOOD"
@@ -26,7 +26,7 @@
         {
           "effects": [
             {
-              "name": "PickCouncilPrivilege",
+              "name": "GainAsset",
               "asset": {
                 "value": 2,
                 "type": "WOOD"
@@ -51,7 +51,7 @@
         {
           "effects": [
             {
-              "name": "PickCouncilPrivilege",
+              "name": "GainAsset",
               "asset": {
                 "value": 1,
                 "type": "STONE"
@@ -63,7 +63,7 @@
         {
           "effects": [
             {
-              "name": "PickCouncilPrivilege",
+              "name": "GainAsset",
               "asset": {
                 "value": 2,
                 "type": "STONE"
@@ -88,7 +88,7 @@
         {
           "effects": [
             {
-              "name": "PickCouncilPrivilege",
+              "name": "GainAsset",
               "asset": {
                 "value": 1,
                 "type": "MILITARYPOINT"
@@ -100,7 +100,7 @@
         {
           "effects": [
             {
-              "name": "PickCouncilPrivilege",
+              "name": "GainAsset",
               "asset": {
                 "value": 2,
                 "type": "MILITARYPOINT"
@@ -125,7 +125,7 @@
         {
           "effects": [
             {
-              "name": "PickCouncilPrivilege",
+              "name": "GainAsset",
               "asset": {
                 "value": 1,
                 "type": "COIN"
@@ -137,7 +137,7 @@
         {
           "effects": [
             {
-              "name": "PickCouncilPrivilege",
+              "name": "GainAsset",
               "asset": {
                 "value": 2,
                 "type": "COIN"
@@ -151,11 +151,12 @@
   ],
   "councilPalace": {
     "councilPalaceMaxPlaces": 16,
-    "councilPalaceCell": {
+    "councilPalaceCells": {
       "requiredDiceValue": 1,
       "effects": [
         {
-          "name": "PickCouncilPrivilege"
+          "name": "PickCouncilPrivilege",
+          "asset": null
         },
         {
           "name": "GainAsset",
@@ -167,92 +168,86 @@
       ]
     }
   },
-  "market": {
-    "marketCell": [
-      {
-        "requiredDiceValue": 1,
-        "blockedCell": false,
-        "effects": [
-          {
-            "name": "GainAsset",
-            "asset": {
-              "value": 5,
-              "type": "COIN"
-            }
+  "market": [
+    {
+      "requiredDiceValue": 1,
+      "blockedCell": false,
+      "effects": [
+        {
+          "name": "GainAsset",
+          "asset": {
+            "value": 5,
+            "type": "COIN"
           }
-        ]
-      },
-      {
-        "requiredDiceValue": 1,
-        "blockedCell": false,
-        "effects": [
-          {
-            "name": "GainAsset",
-            "asset": {
-              "value": 5,
-              "type": "SERVANT"
-            }
+        }
+      ]
+    },
+    {
+      "requiredDiceValue": 1,
+      "blockedCell": false,
+      "effects": [
+        {
+          "name": "GainAsset",
+          "asset": {
+            "value": 5,
+            "type": "SERVANT"
           }
-        ]
-      },
-      {
-        "requiredDiceValue": 1,
-        "blockedCell": true,
-        "effects": [
-          {
-            "name": "GainAsset",
-            "asset": {
-              "value": 5,
-              "type": "COIN"
-            }
-          },
-          {
-            "name": "GainAsset",
-            "asset": {
-              "value": 5,
-              "type": "MILITARYPOINT"
-            }
+        }
+      ]
+    },
+    {
+      "requiredDiceValue": 1,
+      "blockedCell": true,
+      "effects": [
+        {
+          "name": "GainAsset",
+          "asset": {
+            "value": 5,
+            "type": "COIN"
           }
-        ]
-      },
-      {
-        "requiredDiceValue": 1,
-        "blockedCell": true,
-        "effects": null
-      }
-    ]
-  },
+        },
+        {
+          "name": "GainAsset",
+          "asset": {
+            "value": 5,
+            "type": "MILITARYPOINT"
+          }
+        }
+      ]
+    },
+    {
+      "requiredDiceValue": 1,
+      "blockedCell": true,
+      "effects": null
+    }
+  ],
   "harvest": {
     "harvestMaxPlaces": 7,
-    "harvestCell": [
+    "harvestCells": [
       {
         "requiredDiceValue": 1,
         "blockedCell": false,
-        "penaltyCell": false,
-        "effects": null
+        "penaltyCell": false
       },
       {
         "requiredDiceValue": 1,
         "blockedCell": true,
-        "penaltyCell": true,
-        "effects": null
+        "penaltyCell": true
       }
     ]
   },
   "production": {
     "productionMaxPlaces": 7,
-    "productionCell": [
+    "productionCells": [
       {
         "requiredDiceValue": 1,
         "blockedCell": false,
-        "penaltyCell": false,
-        "effects": null
+        "penaltyCell": false
       },
       {
         "requiredDiceValue": 1,
         "blockedCell": true,
-        "penaltyCell": true,
-        "effects": null
+        "penaltyCell": true
       }
     ]
   }

@@ -2,16 +2,13 @@ package it.polimi.ingsw.pc22.gamebox;
 
 import it.polimi.ingsw.pc22.player.Player;
 
-public class Production {
-	private int productionMaxPlaces;
+public class Production
+{
 	private ProductionCell productionCell[];
-	
-	public int getProductionMaxPlaces() {
-		return productionMaxPlaces;
-	}
 
-	public void setProductionMaxPlaces(int productionMaxPlaces) {
-		this.productionMaxPlaces = productionMaxPlaces;
+	public Production(ProductionCell[] productionCell)
+	{
+		this.productionCell = productionCell;
 	}
 
 	public ProductionCell[] getProductionCell() {

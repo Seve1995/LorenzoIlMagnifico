@@ -1,5 +1,7 @@
 package it.polimi.ingsw.pc22.connection;
 
+import it.polimi.ingsw.pc22.effects.Effect;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -20,13 +22,13 @@ public class GameServer
 		gameMatchMap = new ConcurrentHashMap<>();
 		
 		ServerSocket serverSocket;
-		
+
 		try 
 		{
 			serverSocket = new ServerSocket(PORT);
 			
 			usersList = loadJSon();
-			
+
 			while(true)
 			{
 				Socket socket = serverSocket.accept();
@@ -40,7 +42,9 @@ public class GameServer
 			catch (IOException e) 
 		{
 			e.printStackTrace();
-		}	
+		}
+
+		//test();
 	}
 	
 	protected static List<User> loadJSon() throws IOException
@@ -68,5 +72,23 @@ public class GameServer
 	public static void setUsersList(List<User> usersList) 
 	{
 		GameServer.usersList = usersList;
+	}
+
+	private static void test()
+	{
+		try {
+			Class effectName = Class.forName("it.polimi.ingsw.pc22.effects.PickCouncilPrivilege");
+
+			Effect effect = (Effect) effectName.newInstance();
+
+			System.out.println(effect);
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
 	}
 }

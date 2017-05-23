@@ -67,7 +67,61 @@ public class GameMatch implements Runnable
 
 		endGame();
 	}
-	
+
+	private void startGame()
+	{
+		String boardName = BOARD_PATH + "Gameboard-" + playerCounter + ".json";
+
+		ClassLoader classLoader = this.getClass().getClassLoader();
+
+		File file = new File(classLoader.getResource(boardName).getFile());
+
+		StringBuilder builder = new StringBuilder();
+
+		try
+		{
+			Files.lines(file.toPath()).forEach(s -> builder.append(s));
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+
+		JSONObject jsonBoard = new JSONObject(builder.toString());
+
+		jsonBoard.toString();
+
+		GameBoard gameBoard = BoardLoader.loadGameBoard(jsonBoard);
+
+		//loadJson su base counter
+
+		System.out.println(gameBoard.toString());
+
+		//caricamento board
+		//
+	}
+
+	private void endGame()
+	{
+		List<Socket> playerSockets = new ArrayList<>(players.values());
+
+		for (Socket playerSocket : playerSockets)
+		{
+			try
+			{
+				PrintWriter printWriter =
+						new PrintWriter(playerSocket.getOutputStream(), true);
+
+				printWriter.println("EXIT");
+
+				playerSocket.close();
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
 
 	public int getCurrentRoundNumber() {
 		return currentRoundNumber;
@@ -107,57 +161,5 @@ public class GameMatch implements Runnable
 	
 	public void setGameBoard(GameBoard gameBoard) {
 		this.gameBoard = gameBoard;
-	}
-	
-	private void startGame()
-	{
-		String boardName = BOARD_PATH + "Gameboard-" + playerCounter + ".json";
-
-		ClassLoader classLoader = this.getClass().getClassLoader();
-
-		File file = new File(classLoader.getResource(boardName).getFile());
-
-		StringBuilder builder = new StringBuilder();
-
-		try
-		{
-			Files.lines(file.toPath()).forEach(s -> builder.append(s));
-		}
-			catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
-		JSONObject jsonBoard = new JSONObject(builder.toString());
-
-		jsonBoard.toString();
-
-		GameBoard gameBoard = BoardLoader.loadGameBoard(jsonBoard);
-
-		//loadJson su base counter
-		//caricamento board
-		//
-	}
-
-	private void endGame()
-	{
-		List<Socket> playerSockets = new ArrayList<>(players.values());
-
-		for (Socket playerSocket : playerSockets)
-		{
-			try
-			{
-				PrintWriter printWriter =
-						new PrintWriter(playerSocket.getOutputStream(), true);
-
-				printWriter.println("EXIT");
-
-				playerSocket.close();
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
 	}
 }

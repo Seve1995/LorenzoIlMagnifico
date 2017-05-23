@@ -7,7 +7,8 @@ import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.effects.GainAsset;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class MarketCell extends Cell {
+public class MarketCell extends Cell
+{
 	private boolean isABlockedCell=false;
 
 	public MarketCell(int requiredDiceValue, List<Effect> effects)
