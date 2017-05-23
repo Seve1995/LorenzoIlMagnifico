@@ -30,17 +30,21 @@ public class TowerCell extends Cell
 	}
 	
 	public String toString() {
-		String output = "(Required Value: " + this.getRequiredDiceValue() + " + " + "Bonus: " + super.getEffects().get(0).toString() + ") " + this.developmentCard.getName();
+		String output="";
+		for (int i=0; i<super.getEffects().size(); i++){
+			output = "(Required Value: " + this.getRequiredDiceValue() + " + " + "Bonus: " + super.getEffects().get(i).toString() + ") " + this.developmentCard.getName();
+		}
+			
 		return output;
 	}
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		List<Effect> effects = new ArrayList<Effect>();
 		effects.add(new GainAsset(new Asset(3, AssetType.COIN)));
 		DevelopmentCard developmentCard = new VentureCard("Morgana", 1, effects, null, null, null, 0);
 		TowerCell c = new TowerCell(3, effects);
 		c.setDevelopmentCard(developmentCard);
 		System.out.println(c.toString());
-	}
+	}*/
 	
 }
