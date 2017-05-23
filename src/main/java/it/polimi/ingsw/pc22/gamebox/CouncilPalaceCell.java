@@ -10,8 +10,7 @@ public class CouncilPalaceCell extends Cell
 	
 	public CouncilPalaceCell(int requiredDiceValue, List<Effect> effects)
 	{
-		super(requiredDiceValue);
-		setEffects(effects);
+		super(requiredDiceValue, effects);
 	}
 	
 	@Override
