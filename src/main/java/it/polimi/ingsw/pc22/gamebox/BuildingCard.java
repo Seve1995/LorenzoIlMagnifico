@@ -66,9 +66,18 @@ public class BuildingCard extends DevelopmentCard
 	}
 	
 	@Override
-	public String toString() {
-		return "BuildingCard [costs=" + costs + ", permanentEffectActivationCost=" + permanentEffectActivationCost
-				+ "]";
+	public String toString()
+	{
+		String output = this.getName() + " is a Building Card.\n Its activation cost are ";
+		for (Asset a: costs)
+		{
+			output += a.toString() + "\n";
+		}
+
+		output += super.toString();
+
+		return output;
+
 	}
 
 	@Override
@@ -82,5 +91,4 @@ public class BuildingCard extends DevelopmentCard
 		// TODO Auto-generated method stub
 		
 	}
-	
 }

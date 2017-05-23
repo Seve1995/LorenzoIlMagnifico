@@ -49,6 +49,6 @@ public class Asset
 	
 	@Override
 	public String toString() {
-		return "Asset [value=" + value + ", type=" + type + "]";
+		return value + " " + type;
 	}
 }

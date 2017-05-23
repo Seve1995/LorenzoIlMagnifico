@@ -54,8 +54,16 @@ public class CharacterCard extends DevelopmentCard
 
 	@Override
 	public String toString() {
-		return "CharacterCard [coinsCost=" + coinsCost + "]";
+		
+		String output = this.getName() + " is a Character Card.\n Its activation cost is ";
+		
+		output += coinsCost.toString();
+		
+		output += super.toString();
+		
+		return output;
 	}
+
 
 	@Override
 	public void useImmediateEffect(Player player) {

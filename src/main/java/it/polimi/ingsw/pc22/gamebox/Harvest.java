@@ -23,5 +23,12 @@ public class Harvest
 	{
 		//TODO: implement the execution effect for this kind of cells
 	}
+	
+	public String gainInfo() {
+		String output = "Harvest activates the corresponding personal bonus and the" +
+				"permanent effects of all Territories on your Personal Board, but only of those Territories" +
+				"that have a value equal to or lower than your Harvest action value.";
+		return output;
+	}
 
 }

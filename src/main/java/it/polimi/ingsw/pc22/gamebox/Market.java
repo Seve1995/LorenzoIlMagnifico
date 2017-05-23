@@ -21,9 +21,11 @@ public class Market {
 	public void ExecuteEffect (Player player) {
 	}
 
-	@Override
-	public String toString() {
-		String output = "";
+	public String gainInfo() {
+		String output = "There are 4 action spaces in the Market."
+				+ "Each space may contain only 1 Family Member."
+				+ "There can be any number of Family Members of the same color in the market area." 
+				+ "Every action space has a different effect.";
 		for (int i=0; i<marketCells.size(); i++) 
 		{
 			if (!marketCells.get(i).isABlockedCell())
@@ -31,7 +33,7 @@ public class Market {
 		}
 		return output;
 	}
-	
+		
 	/*
   	public static void main(String[] args) {
 		Asset asset = new Asset(3, AssetType.COIN);

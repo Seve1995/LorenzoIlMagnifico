@@ -32,4 +32,5 @@ public class HarvestCell extends Cell
 	public void setAPenaltyCell(boolean APenaltyCell) {
 		isAPenaltyCell = APenaltyCell;
 	}
+	
 }

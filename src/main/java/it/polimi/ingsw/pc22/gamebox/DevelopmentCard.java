@@ -9,6 +9,9 @@ public abstract class DevelopmentCard
 {
 	private String name;
 	private int roundNumber;
+	private boolean permanentEffectChoiche = false;
+
+	
 	private List<Effect> immediateEffects;
 	private List<Effect> permanentEffects;
 	
@@ -52,16 +55,27 @@ public abstract class DevelopmentCard
 		this.permanentEffects = permanentEffects;
 	}
 	
+	public boolean isPermanentEffectChoiche() {
+		return permanentEffectChoiche;
+	}
+
+	public void setPermanentEffectChoiche(boolean permanentEffectChoiche) {
+		this.permanentEffectChoiche = permanentEffectChoiche;
+	}
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((immediateEffects == null) ? 0 : immediateEffects.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + (permanentEffectChoiche ? 1231 : 1237);
 		result = prime * result + ((permanentEffects == null) ? 0 : permanentEffects.hashCode());
 		result = prime * result + roundNumber;
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -81,6 +95,8 @@ public abstract class DevelopmentCard
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (permanentEffectChoiche != other.permanentEffectChoiche)
+			return false;
 		if (permanentEffects == null) {
 			if (other.permanentEffects != null)
 				return false;
@@ -90,9 +106,35 @@ public abstract class DevelopmentCard
 			return false;
 		return true;
 	}
+	
 	@Override
+	
 	public String toString() {
-		return "DevelopmentCard [name=" + name + ", roundNumber=" + roundNumber
-				+ ", immediateEffect=" + immediateEffects + ", permanentEffect=" + permanentEffects + "]";
+		
+		String output="";
+		
+		if (!((this.getImmediateEffects())==null)){
+			output += "It has the following Immediate Effects ";
+			for (Effect e: this.immediateEffects){
+				output += e.toString() + "\n";
+			}
+		}
+		
+		if (!((this.getPermanentEffects())==null))
+		{
+			output += "It has the following Permanent Effects " ;
+			for (Effect e: this.permanentEffects){ 
+				 output += e.toString() + "\n";
+				 if (permanentEffectChoiche && !(e.equals(permanentEffects.get(permanentEffects.size()-1))))
+				 {
+					 output += "or";
+				 }
+			}
+		}
+		
+		return output;
 	}
+	
+	
+
 }

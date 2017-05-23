@@ -23,4 +23,11 @@ public class Production
 		//TODO: implement this kind of method
 	} 
 	
+	public String gainInfo() {
+		String output = "Production activates the corresponding personal bonus and the" +
+				"permanent effects of all Buildings on your Personal Board, but only of those Buildings" +
+				"that have a value equal to or lower than your Production action value.";
+		return output;
+	}
+
 }
