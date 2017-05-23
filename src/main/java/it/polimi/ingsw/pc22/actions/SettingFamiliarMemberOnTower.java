@@ -25,7 +25,7 @@ public class SettingFamiliarMemberOnTower extends Action {
 		
 		//if (floor > 4 || floor < 1) return false; TODO check validazione dell'input
 		
-		if (!tower.getTowerCells().get(floor).isEmpty()) return false; 
+		if (!tower.getTowerCells().get(floor).isEmpty()) return false;
 		
 		int familiarValue = super.getFamilyMember().getFamiliarValue();
 		

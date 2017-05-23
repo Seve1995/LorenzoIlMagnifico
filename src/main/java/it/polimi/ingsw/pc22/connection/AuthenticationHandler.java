@@ -235,7 +235,7 @@ public class AuthenticationHandler implements Runnable
 	//TODO FAR SI CHE I VALORI VENGANO GESTITI DAL PARSER JSON
 	private void startNewGameMatch(String gameName, Player player)
 	{
-		GameMatch gameMatch = new GameMatch(60000L, 4);
+		GameMatch gameMatch = new GameMatch(15000L, 4);
 		
 		Map<String, GameMatch> gameMatchMap = GameServer.getGameMatchMap();
 		

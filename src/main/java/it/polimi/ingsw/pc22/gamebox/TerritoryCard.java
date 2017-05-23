@@ -3,10 +3,18 @@ package it.polimi.ingsw.pc22.gamebox;
 import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.player.Player;
 
+import java.util.List;
+
 public class TerritoryCard extends DevelopmentCard
 {
 	private int permanentEffectActivationCost;
-	
+
+	public TerritoryCard(String name, int roundNumber, List<Effect> immediateEffects, List<Effect> permanentEffects, int permanentEffectActivationCost)
+	{
+		super(name, roundNumber, immediateEffects, permanentEffects);
+		this.permanentEffectActivationCost = permanentEffectActivationCost;
+	}
+
 	public int getPermanentEffectActivationCost() {
 		return permanentEffectActivationCost;
 	}

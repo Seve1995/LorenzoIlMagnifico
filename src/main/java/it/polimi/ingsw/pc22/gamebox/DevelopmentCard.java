@@ -15,7 +15,12 @@ public abstract class DevelopmentCard
 	private List<Effect> immediateEffects;
 	private List<Effect> permanentEffects;
 	
-	public DevelopmentCard(String name, int roundNumber, List<Effect> immediateEffects, List<Effect> permanentEffects) {
+	public DevelopmentCard
+	(
+		String name, int roundNumber, List<Effect> immediateEffects,
+		List<Effect> permanentEffects
+	)
+	{
 		this.name = name;
 		this.roundNumber = roundNumber;
 		this.immediateEffects = immediateEffects;

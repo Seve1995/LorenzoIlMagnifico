@@ -10,6 +10,17 @@ public class BuildingCard extends DevelopmentCard
 	private List<Asset> costs; 
 	private int permanentEffectActivationCost;
 
+	public BuildingCard
+	(
+		String name, int roundNumber, List<Effect> immediateEffects,
+		List<Effect> permanentEffects, List<Asset> costs, int permanentEffectActivationCost
+	)
+	{
+		super(name, roundNumber, immediateEffects, permanentEffects);
+		this.costs = costs;
+		this.permanentEffectActivationCost = permanentEffectActivationCost;
+	}
+
 	public List<Asset> getCosts() {
 		return costs;
 	}
@@ -62,11 +73,11 @@ public class BuildingCard extends DevelopmentCard
 		{
 			output += a.toString() + "\n";
 		}
-		
+
 		output += super.toString();
-		
+
 		return output;
-		
+
 	}
 
 	@Override

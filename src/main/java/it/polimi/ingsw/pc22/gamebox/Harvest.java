@@ -2,16 +2,13 @@ package it.polimi.ingsw.pc22.gamebox;
 
 import it.polimi.ingsw.pc22.player.Player;
 
-public class Harvest {
-	private int harvestMaxPlaces;
-	private HarvestCell harvestCell[]; 
-	
-	public int getharvestMaxPlaces() {
-		return harvestMaxPlaces;
-	}
+public class Harvest
+{
+	private HarvestCell harvestCell[];
 
-	public void setharvestMaxPlaces(int harvestMaxPlaces) {
-		this.harvestMaxPlaces = harvestMaxPlaces;
+	public Harvest(HarvestCell[] harvestCell)
+	{
+		this.harvestCell = harvestCell;
 	}
 
 	public HarvestCell[] getHarvestCell() {
