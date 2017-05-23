@@ -1,16 +1,15 @@
 package it.polimi.ingsw.pc22.gamebox;
 
 import it.polimi.ingsw.pc22.effects.Effect;
-import it.polimi.ingsw.pc22.effects.GainAsset;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class MarketCell extends Cell {
 	private boolean isABlockedCell=false;
-	private Effect[] effects;
-	
-	public MarketCell(int requiredDiceValue, Effect[] effects) {
+
+	public MarketCell(int requiredDiceValue, Effect[] effects)
+	{
 		super(requiredDiceValue);
-		this.effects = effects;
+		super.setEffects(effects);
 	}
 	
 	public boolean isABlockedCell() {
@@ -29,6 +28,9 @@ public class MarketCell extends Cell {
 	@Override
 	public String toString() {
 		String output = "You will gain ";
+
+		Effect[] effects = super.getEffects();
+
 		for (Effect e : effects) {
 			if (!e.equals(effects[effects.length-1]))
 				output += e.toString() + " & ";

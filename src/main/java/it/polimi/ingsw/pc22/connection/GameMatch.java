@@ -121,10 +121,9 @@ public class GameMatch implements Runnable
 
 		try
 		{
-
 			Files.lines(file.toPath()).forEach(s -> builder.append(s));
-
-		} catch (IOException e)
+		}
+			catch (IOException e)
 		{
 			e.printStackTrace();
 		}

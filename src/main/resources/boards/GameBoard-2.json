@@ -4,18 +4,24 @@
       "towerType": "TERRITORY",
       "towerCells": [
         {
-          "resourceBonus": null,
+          "effect": null,
           "requiredDiceValue": 1
         },
         {
-          "resourceBonus": null,
+          "effect": null,
           "requiredDiceValue": 3
         },
         {
-          "resourceBonus": {
+
+          "effect": [
+            {
+              "name": "PickCouncilPrivilege",
+            "asset": {
             "value": 1,
-            "type": "WOOD"
-          },
+        "type": "WOOD"
+        }
+            }
+          ],
           "requiredDiceValue": 5
         },
         {
@@ -118,7 +124,7 @@
         "type": "COIN"
       },
       "effect": {
-        "name": "pickCouncilPrivilege"
+        "name": "PickCouncilPrivilege"
       }
     }
   },

@@ -2,17 +2,10 @@ package it.polimi.ingsw.pc22.gamebox;
 
 import it.polimi.ingsw.pc22.player.Player;
 
-public class CouncilPalace {
-	private int councilPalaceMaxPlaces;
-	private CouncilPalaceCell[] councilPalaceCells;
-	
-	public int getcouncilPalaceMaxPlaces() {
-		return councilPalaceMaxPlaces;
-	}
+public class CouncilPalace
+{
 
-	public void setcouncilPalaceMaxPlaces(int councilPalaceMaxPlaces) {
-		this.councilPalaceMaxPlaces = councilPalaceMaxPlaces;
-	}
+	private CouncilPalaceCell[] councilPalaceCells;
 
 	public CouncilPalaceCell[] getCouncilPalaceCells() {
 		return councilPalaceCells;

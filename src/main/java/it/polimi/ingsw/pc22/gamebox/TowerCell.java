@@ -2,14 +2,12 @@ package it.polimi.ingsw.pc22.gamebox;
 
 import it.polimi.ingsw.pc22.player.Player;
 
-public class TowerCell extends Cell{
+public class TowerCell extends Cell
+{
 	private DevelopmentCard developmentCard;
-	private Asset resourceBonus;
-	
-	public TowerCell(Asset resourceBonus, int requiredDiceValue)
+	public TowerCell(int requiredDiceValue)
 	{
 		super(requiredDiceValue);
-		this.resourceBonus = resourceBonus;
 		this.developmentCard = null;
 	}
 
@@ -20,15 +18,7 @@ public class TowerCell extends Cell{
 	public void setDevelopmentCard(DevelopmentCard developmentCard) {
 		this.developmentCard = developmentCard;
 	}
-
-	public Asset getResourceBonus() { 
-		return resourceBonus;
-	}
-
-	public void setResourceBonus(Asset resource) { //Should it be final?
-		this.resourceBonus = resource;
-	}
-
+	
 	@Override
 	public void executeEffect(Player player) {
 	}
