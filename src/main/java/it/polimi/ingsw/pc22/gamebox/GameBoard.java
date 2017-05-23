@@ -1,5 +1,7 @@
 package it.polimi.ingsw.pc22.gamebox;
 
+import java.util.Arrays;
+
 public class GameBoard 
 {
 	Tower[] tower;
@@ -61,6 +63,11 @@ public class GameBoard
 	public void setDice(Dice[] dice) {
 		this.dice = dice;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "GameBoard [tower=" + Arrays.toString(tower) + ", harvest=" + harvest + ", production=" + production
+				+ ", market=" + market + ", councilPalace=" + councilPalace + ", dice=" + Arrays.toString(dice) + "]";
+	}
 	
 }
