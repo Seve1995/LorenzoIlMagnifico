@@ -6,9 +6,8 @@ import it.polimi.ingsw.pc22.player.Player;
 public class GainAsset extends Effect{
 	private Asset asset;
 
-	public GainAsset(Player player, Asset asset) 
+	public GainAsset(Asset asset) 
 	{
-		super(player);
 		this.asset = asset;
 	}
 
