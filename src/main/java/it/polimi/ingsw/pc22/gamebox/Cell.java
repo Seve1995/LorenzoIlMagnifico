@@ -17,7 +17,9 @@ public abstract class Cell
 		this.effects = effects;
 		this.familyMember = null;
 	}
-	
+
+	public Cell() {}
+
 	public abstract void executeEffect(Player player);
 
 	public int getRequiredDiceValue() {

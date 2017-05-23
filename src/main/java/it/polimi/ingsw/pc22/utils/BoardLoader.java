@@ -1,8 +1,12 @@
 package it.polimi.ingsw.pc22.utils;
 
+import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.gamebox.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BoardLoader
 {
@@ -14,13 +18,16 @@ public class BoardLoader
 
         gameBoard.setTower(towers);
 
+        CouncilPalace councilPalace = loadCouncilPalace(board);
+
+        gameBoard.setCouncilPalace(councilPalace);
+
         return gameBoard;
     }
 
     private static Tower[] loadTowers(JSONObject board)
     {
         Tower[] towersArray = new Tower[4];
-
 
         try
         {
@@ -46,8 +53,6 @@ public class BoardLoader
             e.printStackTrace();
         }
 
-
-
         return towersArray;
     }
 
@@ -67,26 +72,109 @@ public class BoardLoader
 
             int requiredDiceValue = cell.getInt("requiredDiceValue");
 
-            Asset asset = null;
+            TowerCell towerCell = new TowerCell();
 
-            if (!cell.isNull("resourceBonus"))
+            towerCell.setRequiredDiceValue(requiredDiceValue);
+
+            if (!cell.isNull("effects"))
             {
-                JSONObject resourceBonus = cell.getJSONObject("resourceBonus");
+                JSONArray effectsArray = cell.getJSONArray("effects");
 
-                String type = resourceBonus.getString("type");
+                List<Effect> effects = loadEffect(effectsArray);
 
-                AssetType assetType = AssetType.valueOf(type);
-
-                int value = resourceBonus.getInt("value");
-
-                asset = new Asset(value, assetType);
+                towerCell.setEffects(effects);
             }
-
-            TowerCell towerCell = new TowerCell(asset, requiredDiceValue);
 
             towerCellsArray[i] = towerCell;
         }
 
         return tower;
+    }
+
+    private static List<Effect> loadEffect(JSONArray effectsArray)
+    {
+        List<Effect> effects = new ArrayList<>();
+
+        for(int i = 0; i < effectsArray.length(); i++) {
+            JSONObject jsonEffect = effectsArray.getJSONObject(i);
+
+            String name = jsonEffect.getString("name");
+
+            Effect effect = null;
+
+            try {
+                Class effectName = Class.forName(name);
+
+                effect = (Effect) effectName.newInstance();
+
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            }
+
+            if (effect == null) continue;
+
+            if (jsonEffect.isNull("asset"))
+            {
+                effects.add(effect);
+
+                continue;
+            }
+
+            JSONObject jsonAsset = jsonEffect.getJSONObject("asset");
+
+            Asset asset = loadAsset(jsonAsset);
+
+            effect.setAsset(asset);
+
+            effects.add(effect);
+        }
+
+        return effects;
+    }
+
+    private static Asset loadAsset(JSONObject jsonAsset)
+    {
+        String type = jsonAsset.getString("type");
+
+        int value = jsonAsset.getInt("value");
+
+        AssetType assetType = AssetType.valueOf(type);
+
+        Asset asset = new Asset(value, assetType);
+
+        return asset;
+    }
+
+    private static CouncilPalace loadCouncilPalace(JSONObject board)
+    {
+        JSONObject jsonPalace = board.getJSONObject("councilPalace");
+
+        int councilPalaceMaxPlaces = jsonPalace.getInt("councilPalaceMaxPlaces");
+
+        JSONObject jsonCells = jsonPalace.getJSONObject("councilPalaceCells");
+
+        int requiredDiceValue = jsonCells.getInt("requiredDiceValue");
+
+        JSONArray jsonEffects = jsonCells.getJSONArray("resourceBonus");
+
+        List<Effect> effects = loadEffect(jsonEffects);
+
+        CouncilPalace palace = new CouncilPalace();
+
+        CouncilPalaceCell[] cells = new CouncilPalaceCell[councilPalaceMaxPlaces];
+
+        for (int i = 0; i < councilPalaceMaxPlaces; i++)
+        {
+            CouncilPalaceCell cell =
+                    new CouncilPalaceCell(requiredDiceValue,effects);
+
+            cells[i] = cell;
+        }
+
+        return palace;
     }
 }

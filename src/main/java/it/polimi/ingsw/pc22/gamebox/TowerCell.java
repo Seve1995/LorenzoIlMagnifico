@@ -1,16 +1,16 @@
 package it.polimi.ingsw.pc22.gamebox;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import it.polimi.ingsw.pc22.effects.Effect;
-import it.polimi.ingsw.pc22.effects.GainAsset;
 import it.polimi.ingsw.pc22.player.Player;
+
+import java.util.List;
 
 public class TowerCell extends Cell
 {
 	private DevelopmentCard developmentCard;
-	
+
+	public TowerCell() {}
+
 	public TowerCell(int requiredDiceValue, List<Effect> effects)
 	{
 		super(requiredDiceValue, effects);

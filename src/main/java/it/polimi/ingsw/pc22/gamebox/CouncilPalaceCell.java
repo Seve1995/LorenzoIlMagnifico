@@ -7,7 +7,6 @@ import it.polimi.ingsw.pc22.player.Player;
 
 public class CouncilPalaceCell extends Cell
 {
-	
 	public CouncilPalaceCell(int requiredDiceValue, List<Effect> effects)
 	{
 		super(requiredDiceValue, effects);
