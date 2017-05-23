@@ -1,5 +1,7 @@
 package it.polimi.ingsw.pc22.actions;
 
+import java.util.List;
+
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.gamebox.Market;
 import it.polimi.ingsw.pc22.gamebox.MarketCell;
@@ -18,12 +20,12 @@ public class SettingFamiliarMemberOnMarket extends Action{
 	@Override
 	public boolean isLegal(Player player) {
 		
-		MarketCell[] currMarketCell = market.getMarketCell();
+		List<MarketCell> currMarketCells = market.getMarketCells();
 		
-		if(currMarketCell[zone].getRequiredDiceValue() < super.getFamilyMember().getFamiliarValue())
+		if(currMarketCells.get(zone).getRequiredDiceValue() < super.getFamilyMember().getFamiliarValue())
 			return false;
 		
-		if(!currMarketCell[zone].isEmpty())
+		if(!currMarketCells.get(zone).isEmpty())
 			return false;
 		
 		return true;
@@ -32,7 +34,6 @@ public class SettingFamiliarMemberOnMarket extends Action{
 	@Override
 	public void executeAction(Player player) {
 		// TODO Auto-generated method stub
-		
 	}
 	
 

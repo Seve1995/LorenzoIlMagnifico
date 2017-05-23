@@ -1,24 +1,21 @@
 package it.polimi.ingsw.pc22.gamebox;
 
-import java.util.Arrays;
-
-import it.polimi.ingsw.pc22.effects.Effect;
-import it.polimi.ingsw.pc22.effects.GainAsset;
+import java.util.List;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class Market {
 	
-	private MarketCell[] marketCells;
+	private List<MarketCell> marketCells;
 	
-	public Market(MarketCell[] marketCells) {
+	public Market(List<MarketCell> marketCells) {
 		this.marketCells = marketCells;
 	}
-	public MarketCell[] getMarketCell() {
+	public List<MarketCell> getMarketCells() {
 		return marketCells;
 	}
 
-	public void setMarketCell(MarketCell[] marketCell) {
-		this.marketCells = marketCell;
+	public void setMarketCell(List<MarketCell> marketCells) {
+		this.marketCells = marketCells;
 	}
 
 	public void ExecuteEffect (Player player) {
@@ -27,10 +24,10 @@ public class Market {
 	@Override
 	public String toString() {
 		String output = "";
-		for (int i=0; i<marketCells.length; i++) 
+		for (int i=0; i<marketCells.size(); i++) 
 		{
-			if (!marketCells[i].isABlockedCell())
-				output += "On cell " + (i+1) + " " + marketCells[i].toString().toLowerCase() + "\n";
+			if (!marketCells.get(i).isABlockedCell())
+				output += "On cell " + (i+1) + " " + marketCells.get(i).toString().toLowerCase() + "\n";
 		}
 		return output;
 	}
@@ -39,14 +36,15 @@ public class Market {
   	public static void main(String[] args) {
 		Asset asset = new Asset(3, AssetType.COIN);
 		Asset asset2 = new Asset(3, AssetType.FAITHPOINT);
-		Effect[] effect = new Effect[2];
-		effect[0] = new GainAsset(null, asset);
-		effect[1] = new GainAsset(null, asset2);
-		Effect[] effect2 = new Effect[1];
-		effect2[0] = new GainAsset(null, asset);
-		MarketCell[] marketCells = new MarketCell[2];
-		marketCells[0] = new MarketCell(3, effect);
-		marketCells[1] = new MarketCell(5, effect2);
+		List<Effect> effects = new ArrayList<Effect>();
+		effects.add(new GainAsset(asset));
+		effects.add(new GainAsset(asset2));
+		List<Effect> effects2 = new ArrayList<Effect>();
+		effects2.add(new GainAsset(asset));
+		List<MarketCell> marketCells = new ArrayList<MarketCell>();
+		marketCells.add(new MarketCell(3, effects));
+		marketCells.add(new MarketCell(5, effects2));
+		marketCells.get(1).setABlockedCell(true);
 		Market market = new Market(marketCells);
 		System.out.print(market.toString());
   	}
