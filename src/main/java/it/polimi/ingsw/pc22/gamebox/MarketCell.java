@@ -12,8 +12,7 @@ public class MarketCell extends Cell {
 
 	public MarketCell(int requiredDiceValue, List<Effect> effects)
 	{
-		super(requiredDiceValue);
-		super.setEffects(effects);
+		super(requiredDiceValue, effects);
 	}
 	
 	public boolean isABlockedCell() {

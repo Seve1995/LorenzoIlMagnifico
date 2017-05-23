@@ -12,8 +12,9 @@ public abstract class Cell
 
 	private List<Effect> effects;
 	
-	public Cell(int requiredDiceValue) {
+	public Cell(int requiredDiceValue, List<Effect> effects) {
 		this.requiredDiceValue = requiredDiceValue;
+		this.effects = effects;
 		this.familyMember = null;
 	}
 	
