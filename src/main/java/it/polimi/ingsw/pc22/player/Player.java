@@ -1,10 +1,10 @@
 package it.polimi.ingsw.pc22.player;
 
-import java.util.List;
-
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.gamebox.PlayerBoard;
+
+import java.util.List;
 
 public class Player 
 {

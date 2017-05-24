@@ -1,7 +1,8 @@
 package it.polimi.ingsw.pc22.gamebox;
 
-import java.util.List;
 import it.polimi.ingsw.pc22.player.Player;
+
+import java.util.List;
 
 public class Market {
 	

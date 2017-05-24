@@ -4,7 +4,6 @@ import it.polimi.ingsw.pc22.effects.GainAsset;
 import it.polimi.ingsw.pc22.effects.PickCouncilPrivilege;
 import it.polimi.ingsw.pc22.gamebox.CouncilPalace;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
-import it.polimi.ingsw.pc22.gamebox.Tower;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class SettingFamiliarMemberOnCounsilPalace extends Action {

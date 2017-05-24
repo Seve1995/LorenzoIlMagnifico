@@ -1,11 +1,7 @@
 package it.polimi.ingsw.pc22.gamebox;
 
-import java.util.List;
-
-import it.polimi.ingsw.pc22.effects.Effect;
-import it.polimi.ingsw.pc22.effects.GainAsset;
-
 import java.util.ArrayList;
+import java.util.List;
 
 public class Tower {
 	private CardTypeEnum towerType;

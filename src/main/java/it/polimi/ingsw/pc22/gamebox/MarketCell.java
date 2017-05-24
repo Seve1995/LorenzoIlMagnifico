@@ -1,11 +1,9 @@
 package it.polimi.ingsw.pc22.gamebox;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import it.polimi.ingsw.pc22.effects.Effect;
-import it.polimi.ingsw.pc22.effects.GainAsset;
 import it.polimi.ingsw.pc22.player.Player;
+
+import java.util.List;
 
 public class MarketCell extends Cell
 {

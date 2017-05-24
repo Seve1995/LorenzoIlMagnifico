@@ -1,6 +1,5 @@
 package it.polimi.ingsw.pc22.connection;
 
-import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.utils.BoardLoader;
 import org.json.JSONObject;
