@@ -51,7 +51,7 @@ public class TerritoryCard extends DevelopmentCard
 			String output = super.toString();
 			
 			return output;
-		}
+	}
 	
 
 	@Override

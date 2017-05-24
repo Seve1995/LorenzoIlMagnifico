@@ -19,4 +19,16 @@ public class CouncilPalace
 	{
 		//TODO: implement the execution effect for this kind of cells
 	}
+	
+	public int firstCellFree() {
+		int i=0;
+		while ( i < this.councilPalaceCells.length)
+		{
+			if (!(councilPalaceCells[i].isEmpty()))
+			{
+				i++;
+			}
+		}
+		return i;
+	}
 }
