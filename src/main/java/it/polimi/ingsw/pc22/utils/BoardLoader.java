@@ -1,6 +1,7 @@
 package it.polimi.ingsw.pc22.utils;
 
 import it.polimi.ingsw.pc22.effects.Effect;
+import it.polimi.ingsw.pc22.effects.GainAsset;
 import it.polimi.ingsw.pc22.gamebox.*;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class BoardLoader
 {
-    public static String EFFECT_PATH = "it.polimi.ingsw.pc22.effects.";
+    private static String EFFECT_PATH = "it.polimi.ingsw.pc22.effects.";
 
     public static GameBoard loadGameBoard(JSONObject board)
     {
@@ -41,7 +42,13 @@ public class BoardLoader
 
             gameBoard.setHarvest(harvest);
 
-        } catch (JSONException e)
+        }
+
+        catch
+        (
+            JSONException | IllegalAccessException |
+                    InstantiationException | ClassNotFoundException e
+        )
         {
             e.printStackTrace();
         }
@@ -49,42 +56,41 @@ public class BoardLoader
         return gameBoard;
     }
 
-    private static Tower[] loadTowers(JSONObject board) throws JSONException
+    private static Tower[] loadTowers(JSONObject board)
+    throws JSONException, IllegalAccessException, ClassNotFoundException,
+            InstantiationException
     {
         Tower[] towersArray = new Tower[4];
 
-        try
+        JSONArray towers = board.getJSONArray("towers");
+
+        for (int i = 0; i < towers.length(); i++)
         {
-            JSONArray towers = board.getJSONArray("towers");
+            JSONObject tower = towers.getJSONObject(i);
 
-            for (int i = 0; i < towers.length(); i++)
-            {
-                JSONObject tower = towers.getJSONObject(i);
+            String towerType = tower.getString("towerType");
 
-                String towerType = tower.getString("towerType");
+            JSONArray cells = tower.getJSONArray("towerCells");
 
-                JSONArray cells = tower.getJSONArray("towerCells");
+            Tower loadedTower = loadTower(cells, towerType);
 
-                Tower loadedTower = loadTower(cells, towerType);
+            if (loadedTower == null) continue;
 
-                if (loadedTower == null) continue;
-
-                towersArray[i] = loadedTower;
-            }
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
+            towersArray[i] = loadedTower;
         }
 
         return towersArray;
     }
 
-    private static Tower loadTower(JSONArray cells, String towerType) throws JSONException
+    private static Tower loadTower(JSONArray cells, String towerType)
+    throws JSONException, InstantiationException, IllegalAccessException,
+            ClassNotFoundException
     {
         CardTypeEnum towerTypeEnum = CardTypeEnum.valueOf(towerType);
 
         Tower tower = new Tower(towerTypeEnum);
+
+        tower.setTowerType(towerTypeEnum);
 
         List<TowerCell> towerCells = new ArrayList<>();
 
@@ -116,6 +122,7 @@ public class BoardLoader
     }
 
     private static List<Effect> loadEffect(JSONArray effectsArray)
+    throws ClassNotFoundException, InstantiationException, IllegalAccessException
     {
         List<Effect> effects = new ArrayList<>();
 
@@ -124,46 +131,34 @@ public class BoardLoader
 
             String name = jsonEffect.getString("name");
 
-            Effect effect = null;
-
             String className = EFFECT_PATH + name;
 
-            try
-            {
-                Class effectName = Class.forName(className);
+            Class effectClass = Class.forName(className);
 
-                effect = (Effect) effectName.newInstance();
-
-            } catch (ClassNotFoundException e)
-            {
-                e.printStackTrace();
-            } catch (InstantiationException e)
-            {
-                e.printStackTrace();
-            } catch (IllegalAccessException e)
-            {
-                e.printStackTrace();
-            }
+            Effect effect = (Effect) effectClass.newInstance();
 
             if (effect == null) continue;
 
-            if (jsonEffect.isNull("asset"))
-            {
-                effects.add(effect);
+            effects.add(effect);
 
-                continue;
-            }
+            if (jsonEffect.isNull("asset")) continue;
 
             JSONObject jsonAsset = jsonEffect.getJSONObject("asset");
 
-            Asset asset = loadAsset(jsonAsset);
-
-            effect.setAsset(asset);
-
-            effects.add(effect);
+            addAssetToGenericEffect(jsonAsset, effect);
         }
 
         return effects;
+    }
+
+    private static void addAssetToGenericEffect(JSONObject jsonAsset, Effect effect)
+    {
+        if (effect instanceof GainAsset)
+        {
+            Asset asset = loadAsset(jsonAsset);
+
+            ((GainAsset) effect).setAsset(asset);
+        }
     }
 
     private static Asset loadAsset(JSONObject jsonAsset) throws JSONException
@@ -177,7 +172,9 @@ public class BoardLoader
         return new Asset(value, assetType);
     }
 
-    private static CouncilPalace loadCouncilPalace(JSONObject board) throws JSONException
+    private static CouncilPalace loadCouncilPalace(JSONObject board)
+    throws JSONException, InstantiationException, IllegalAccessException,
+            ClassNotFoundException
     {
         JSONObject jsonPalace = board.getJSONObject("councilPalace");
 
@@ -187,7 +184,7 @@ public class BoardLoader
 
         int requiredDiceValue = jsonCells.getInt("requiredDiceValue");
 
-        JSONArray jsonEffects = jsonCells.getJSONArray("resourceBonus");
+        JSONArray jsonEffects = jsonCells.getJSONArray("effects");
 
         List<Effect> effects = loadEffect(jsonEffects);
 
@@ -208,7 +205,9 @@ public class BoardLoader
         return palace;
     }
 
-    private static Market loadMarket(JSONObject board) throws JSONException
+    private static Market loadMarket(JSONObject board)
+    throws JSONException, InstantiationException, IllegalAccessException,
+            ClassNotFoundException
     {
         JSONArray jsonMarketCells = board.getJSONArray("market");
 
@@ -242,7 +241,7 @@ public class BoardLoader
 
         int harvestMaxPlaces = jsonHarvest.getInt("harvestMaxPlaces");
 
-        HarvestCell[] harvestCells = new HarvestCell[harvestMaxPlaces];
+        HarvestCell[] harvestCells = new HarvestCell[harvestMaxPlaces + 1];
 
         JSONArray jsonHarvestCells = jsonHarvest.getJSONArray("harvestCells");
 
@@ -273,9 +272,9 @@ public class BoardLoader
 
         int productionMaxPlaces = jsonProduction.getInt("productionMaxPlaces");
 
-        ProductionCell[] productionCells = new ProductionCell[productionMaxPlaces];
+        ProductionCell[] productionCells = new ProductionCell[productionMaxPlaces + 1];
 
-        JSONArray jsonProductionCells = jsonProduction.getJSONArray("harvestCells");
+        JSONArray jsonProductionCells = jsonProduction.getJSONArray("productionCells");
 
         for (int i = 0; i < jsonProductionCells.length(); i++)
         {

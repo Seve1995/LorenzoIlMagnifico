@@ -70,7 +70,7 @@ public class GameMatch implements Runnable
 
 	private void startGame()
 	{
-		String boardName = BOARD_PATH + "Gameboard-" + playerCounter + ".json";
+		String boardName = BOARD_PATH + "GameBoard-" + playerCounter + ".json";
 
 		ClassLoader classLoader = this.getClass().getClassLoader();
 

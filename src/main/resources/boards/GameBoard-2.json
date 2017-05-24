@@ -218,7 +218,15 @@
     {
       "requiredDiceValue": 1,
       "blockedCell": true,
-      "effects": null
+      "effects": [
+        {
+          "name": "GainAsset",
+          "asset": {
+            "value": 5,
+            "type": "COIN"
+          }
+        }
+      ]
     }
   ],
   "harvest": {
@@ -228,6 +236,36 @@
         "requiredDiceValue": 1,
         "blockedCell": false,
         "penaltyCell": false
+      },
+      {
+        "requiredDiceValue": 1,
+        "blockedCell": true,
+        "penaltyCell": true
+      },
+      {
+        "requiredDiceValue": 1,
+        "blockedCell": true,
+        "penaltyCell": true
+      },
+      {
+        "requiredDiceValue": 1,
+        "blockedCell": true,
+        "penaltyCell": true
+      },
+      {
+        "requiredDiceValue": 1,
+        "blockedCell": true,
+        "penaltyCell": true
+      },
+      {
+        "requiredDiceValue": 1,
+        "blockedCell": true,
+        "penaltyCell": true
+      },
+      {
+        "requiredDiceValue": 1,
+        "blockedCell": true,
+        "penaltyCell": true
       },
       {
         "requiredDiceValue": 1,
@@ -243,6 +281,36 @@
         "requiredDiceValue": 1,
         "blockedCell": false,
         "penaltyCell": false
+      },
+      {
+        "requiredDiceValue": 1,
+        "blockedCell": true,
+        "penaltyCell": true
+      },
+      {
+        "requiredDiceValue": 1,
+        "blockedCell": true,
+        "penaltyCell": true
+      },
+      {
+        "requiredDiceValue": 1,
+        "blockedCell": true,
+        "penaltyCell": true
+      },
+      {
+        "requiredDiceValue": 1,
+        "blockedCell": true,
+        "penaltyCell": true
+      },
+      {
+        "requiredDiceValue": 1,
+        "blockedCell": true,
+        "penaltyCell": true
+      },
+      {
+        "requiredDiceValue": 1,
+        "blockedCell": true,
+        "penaltyCell": true
       },
       {
         "requiredDiceValue": 1,

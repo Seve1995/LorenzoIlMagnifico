@@ -8,7 +8,8 @@ import it.polimi.ingsw.pc22.player.Player;
  * effect of another card).
  */
 
-public class RemoveAssetsFromTower extends Effect{
+public class RemoveAssetsFromTower implements Effect
+{
 
 	@Override
 	public void executeAction(Player player) {
