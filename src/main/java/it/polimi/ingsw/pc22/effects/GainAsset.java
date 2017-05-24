@@ -20,9 +20,7 @@ public class GainAsset implements Effect
 	@Override
 	public String toString()
 	{
-		return "GainAsset{" +
-				"asset=" + asset +
-				'}';
+		return this.getAsset().getValue() + " " + this.getAsset().getType();
 	}
 
 	@Override
