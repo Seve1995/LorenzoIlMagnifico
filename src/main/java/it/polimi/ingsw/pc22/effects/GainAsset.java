@@ -3,12 +3,24 @@ package it.polimi.ingsw.pc22.effects;
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class GainAsset extends Effect
+public class GainAsset implements Effect
 {
+	private Asset asset;
+
+	public Asset getAsset()
+	{
+		return asset;
+	}
+
+	public void setAsset(Asset asset)
+	{
+		this.asset = asset;
+	}
+
 	@Override
 	public String toString()
 	{
-		return this.getAsset().getValue() + " " + this.getAsset().getType();
+		return this.getAsset().toString();
 	}
 
 	@Override
@@ -22,4 +34,8 @@ public class GainAsset extends Effect
 	}
 	
 	
-}
+}	
+	
+	
+	
+	

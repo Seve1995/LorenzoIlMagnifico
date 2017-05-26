@@ -1,7 +1,9 @@
 package it.polimi.ingsw.pc22.actions;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.gamebox.Market;
 import it.polimi.ingsw.pc22.gamebox.MarketCell;
@@ -18,7 +20,7 @@ public class SettingFamiliarMemberOnMarket extends Action{
 	}
 
 	@Override
-	public boolean isLegal(Player player) {
+	protected boolean isLegal(Player player) {
 		
 		List<MarketCell> currMarketCells = market.getMarketCells();
 		
@@ -32,8 +34,27 @@ public class SettingFamiliarMemberOnMarket extends Action{
 	}
 	
 	@Override
-	public void executeAction(Player player) {
-		// TODO Auto-generated method stub
+	public boolean executeAction(Player player) {
+		List<Effect> currEffects;
+		
+		
+		if (isLegal(player))
+		{
+			market.getMarketCells().get(zone).setFamilyMember(this.getFamilyMember());
+			currEffects = market.getMarketCells().get(zone).getEffects();
+			
+			for (Effect e : currEffects)
+			{
+				e.executeEffect(player);
+			}
+			return true;
+		}
+		
+		else 
+		{
+			return false;
+		}
+		
 	}
 	
 

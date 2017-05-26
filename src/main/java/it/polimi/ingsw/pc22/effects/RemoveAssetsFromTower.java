@@ -11,7 +11,7 @@ import it.polimi.ingsw.pc22.player.Player;
 public class RemoveAssetsFromTower extends Effect{
 
 	@Override
-	public void executeAction(Player player) {
+	public void executeEffect(Player player) {
 		player.setRemoveTowerBonus(true);
 	}
 

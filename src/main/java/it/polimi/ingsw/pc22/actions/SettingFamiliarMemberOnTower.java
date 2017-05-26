@@ -4,13 +4,18 @@ package it.polimi.ingsw.pc22.actions;
 import it.polimi.ingsw.pc22.gamebox.Tower;
 import it.polimi.ingsw.pc22.gamebox.TowerCell;
 import it.polimi.ingsw.pc22.player.Player;
+
+import java.util.List;
+
+import it.polimi.ingsw.pc22.effects.Effect;
+import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
 import it.polimi.ingsw.pc22.gamebox.ColorsEnum;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 
 
 public class SettingFamiliarMemberOnTower extends Action {
 	private int floor;
-	private Tower tower;
+	private Tower tower; 
 	
 	public SettingFamiliarMemberOnTower (FamilyMember familyMember, Tower tower, int floor) 
 	{
@@ -20,7 +25,7 @@ public class SettingFamiliarMemberOnTower extends Action {
 	}
 
 	@Override
-	public boolean isLegal (Player player)
+	protected boolean isLegal (Player player)
 	{
 		
 		//if (floor > 4 || floor < 1) return false; TODO check validazione dell'input
@@ -61,8 +66,27 @@ public class SettingFamiliarMemberOnTower extends Action {
 	}
 	
 	@Override
-	public void executeAction (Player player) {
-		// TODO Auto-generated method stub
+	public boolean executeAction (Player player) {
+		List<Effect> currEffects;
+		if (isLegal(player))
+		{
+			this.tower.getTowerCells().get(floor).setFamilyMember(this.getFamilyMember());
+			currEffects = this.tower.getTowerCells().get(floor).getEffects();
+			for (Effect e : currEffects)
+			{
+				e.executeEffect(player);
+			}
+			
+			//this.tower.getTowerCells().get(floor).pickTowerCard();
+			
+			return true;
+			
+		}
+		
+		else{
+			
+			return false;
+		}
 		
 	}
 	

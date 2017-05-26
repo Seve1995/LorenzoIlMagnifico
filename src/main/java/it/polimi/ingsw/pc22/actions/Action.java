@@ -21,6 +21,7 @@ public abstract class Action
 
 
 
-	public abstract boolean isLegal(Player player);
-	public abstract void executeAction(Player player);
+	protected abstract boolean isLegal(Player player);
+	
+	public abstract boolean executeAction(Player player);
 }
