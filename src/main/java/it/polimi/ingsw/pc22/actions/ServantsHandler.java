@@ -30,7 +30,7 @@ public class ServantsHandler extends Action
     }
 
     @Override
-    public void executeAction(Player player)
+    public boolean executeAction(Player player)
     {
        int familiarValue =  action.getFamilyMember().getFamiliarValue();
 
@@ -44,6 +44,6 @@ public class ServantsHandler extends Action
 
        player.setServants(servantsNumber);
 
-       action.executeAction(player);
+       return action.executeAction(player);
     }
 }
