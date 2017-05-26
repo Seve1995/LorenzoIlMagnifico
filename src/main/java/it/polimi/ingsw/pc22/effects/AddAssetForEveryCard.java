@@ -42,6 +42,7 @@ public class AddAssetForEveryCard implements Effect{
 		// TODO Auto-generated method stub
 		
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -51,6 +52,7 @@ public class AddAssetForEveryCard implements Effect{
 		result = prime * result + ((payedAsset == null) ? 0 : payedAsset.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
