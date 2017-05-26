@@ -28,11 +28,27 @@ public class TowerCell extends Cell
 	@Override
 	public void executeEffect(Player player) {
 	}
-	
+
+	@Override
 	public String toString() {
+		if (super.getEffects() == null && this.developmentCard != null)
+
+			return "(Required Value: " + this.getRequiredDiceValue() + ") " + this.developmentCard.getName();
+
+		if (super.getEffects() == null && this.developmentCard == null)
+
+			return "(Required Value: " + this.getRequiredDiceValue() + ")";
+
 		String output="";
-		for (int i=0; i<super.getEffects().size(); i++){
-			output += "(Required Value: " + this.getRequiredDiceValue() + " + " + "Bonus: " + super.getEffects().get(i).toString() + ") " + this.developmentCard.getName();
+
+		for (int i=0; i<super.getEffects().size(); i++)
+		{
+			if (this.developmentCard == null)
+				output += "(Required Value: " + this.getRequiredDiceValue() + " + " + "Bonus: " + super.getEffects().get(i).toString() + ") ";
+
+			else
+				output += "(Required Value: " + this.getRequiredDiceValue() + " + " + "Bonus: " + super.getEffects().get(i).toString() + ") " + this.developmentCard.getName();
+
 		}
 			
 		return output;

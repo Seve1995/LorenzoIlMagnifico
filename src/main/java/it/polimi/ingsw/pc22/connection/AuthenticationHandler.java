@@ -1,5 +1,7 @@
 package it.polimi.ingsw.pc22.connection;
 
+import it.polimi.ingsw.pc22.player.Player;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,8 +11,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
-import it.polimi.ingsw.pc22.player.Player;
 
 public class AuthenticationHandler implements Runnable 
 {

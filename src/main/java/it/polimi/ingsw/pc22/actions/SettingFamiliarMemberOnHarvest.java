@@ -4,7 +4,6 @@ import it.polimi.ingsw.pc22.gamebox.ColorsEnum;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.gamebox.Harvest;
 import it.polimi.ingsw.pc22.gamebox.HarvestCell;
-import it.polimi.ingsw.pc22.gamebox.TowerCell;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class SettingFamiliarMemberOnHarvest extends Action{

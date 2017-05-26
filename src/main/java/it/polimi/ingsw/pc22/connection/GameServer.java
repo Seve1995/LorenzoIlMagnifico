@@ -1,10 +1,14 @@
 package it.polimi.ingsw.pc22.connection;
 
-import it.polimi.ingsw.pc22.effects.Effect;
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
+import it.polimi.ingsw.pc22.utils.BoardLoader;
+import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -76,19 +80,29 @@ public class GameServer
 
 	private static void test()
 	{
-		try {
-			Class effectName = Class.forName("it.polimi.ingsw.pc22.effects.PickCouncilPrivilege");
+		String boardName = "boards/GameBoard-" + 2 + ".json";
 
-			Effect effect = (Effect) effectName.newInstance();
+		ClassLoader classLoader = GameServer.class.getClassLoader();
 
-			System.out.println(effect);
+		File file = new File(classLoader.getResource(boardName).getFile());
 
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
+		StringBuilder builder = new StringBuilder();
+
+		try
+		{
+			Files.lines(file.toPath()).forEach(s -> builder.append(s));
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
+
+		JSONObject jsonBoard = new JSONObject(builder.toString());
+
+		jsonBoard.toString();
+
+		GameBoard gameBoard = BoardLoader.loadGameBoard(jsonBoard);
+
+		System.out.println(gameBoard);
 	}
 }

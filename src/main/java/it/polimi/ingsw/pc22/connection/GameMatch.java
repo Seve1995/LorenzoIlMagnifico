@@ -5,10 +5,11 @@ import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.BoardLoader;
 import org.json.JSONObject;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -70,7 +71,7 @@ public class GameMatch implements Runnable
 
 	private void startGame()
 	{
-		String boardName = BOARD_PATH + "Gameboard-" + playerCounter + ".json";
+		String boardName = BOARD_PATH + "GameBoard-" + playerCounter + ".json";
 
 		ClassLoader classLoader = this.getClass().getClassLoader();
 
