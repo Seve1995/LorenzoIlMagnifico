@@ -1,6 +1,6 @@
 package it.polimi.ingsw.pc22.actions;
 
-import it.polimi.ingsw.pc22.effects.GainAsset;
+import it.polimi.ingsw.pc22.effects.AddAsset;
 import it.polimi.ingsw.pc22.effects.PickCouncilPrivilege;
 import it.polimi.ingsw.pc22.gamebox.CouncilPalace;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
@@ -30,7 +30,7 @@ public class SettingFamiliarMemberOnCounsilPalace extends Action {
 			councilPalace.getCouncilPalaceCells()[councilPalace.firstCellFree()].setFamilyMember(this.getFamilyMember());
 			PickCouncilPrivilege pickCouncilPrivilege= new PickCouncilPrivilege();
 			pickCouncilPrivilege.executeEffect(player);
-			GainAsset gainAsset=new GainAsset();
+			AddAsset addAsset=new AddAsset();
 			
 			//TODO gainAsset() definire come parametri tipo e quantita dell'asset
 			return true;

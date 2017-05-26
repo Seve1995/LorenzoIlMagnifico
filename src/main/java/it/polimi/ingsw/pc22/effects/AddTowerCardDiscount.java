@@ -44,7 +44,7 @@ public class AddTowerCardDiscount implements Effect{
 		return false;
 	}
 	@Override
-	public void executeAction(Player player) 
+	public void executeEffect(Player player) 
 	{
 		// TODO Auto-generated method stub
 		

@@ -6,17 +6,8 @@ import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.gamebox.Tower;
 import it.polimi.ingsw.pc22.gamebox.TowerCell;
 import it.polimi.ingsw.pc22.player.Player;
-<<<<<<< HEAD
-
 import java.util.List;
-
 import it.polimi.ingsw.pc22.effects.Effect;
-import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
-import it.polimi.ingsw.pc22.gamebox.ColorsEnum;
-import it.polimi.ingsw.pc22.gamebox.FamilyMember;
-=======
->>>>>>> branch 'master' of https://github.com/Seve1995/LorenzoIlMagnifico
-
 
 public class SettingFamiliarMemberOnTower extends Action {
 	private int floor;
