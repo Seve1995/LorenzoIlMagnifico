@@ -10,16 +10,24 @@ import it.polimi.ingsw.pc22.player.Player;
 
 public class RemoveBonusesFromTowers implements Effect
 {
-
+	
 	@Override
-	public void executeAction(Player player) {
+	public void executeAction(Player player) 
+	{
 		player.setRemoveTowerBonus(true);
 	}
 
 	@Override
-	public boolean isLegal(Player player) {
+	public boolean isLegal(Player player) 
+	{
 		// Always legal, it doesn't have requirements
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "RemoveBonusesFromTowers []";
+	}
+	
 	
 }
