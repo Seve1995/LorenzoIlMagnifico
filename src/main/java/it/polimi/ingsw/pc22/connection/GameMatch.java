@@ -5,21 +5,21 @@ import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.BoardLoader;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class GameMatch implements Runnable
 {
-	private int currentRoundNumber;
+	private int currentRoundNumber = 0;
 	
 	private String gameName;
-	
+
+	//TODO non possiamo avere solo scoket, nel caso di rmi bisogna mettere il callback del client
 	private Map<Player, Socket> players;
 	
 	private int playerCounter = 0;
@@ -39,7 +39,7 @@ public class GameMatch implements Runnable
 	}
 	
 	@Override
-	public void run() 
+	public void run()
 	{
 		Long timeStamp = System.currentTimeMillis();
 		
@@ -94,12 +94,66 @@ public class GameMatch implements Runnable
 
 		GameBoard gameBoard = BoardLoader.loadGameBoard(jsonBoard);
 
-		//loadJson su base counter
+		//loadCarte
 
-		System.out.println(gameBoard.toString());
+		//loadBonusTile
 
-		//caricamento board
-		//
+        //int turnNumber = 6 *
+
+		//loadresourcestoplayers
+
+		//loadBonusTilestoplayers
+
+		//setDellecartescomunica
+
+		//INIZIO PARTITA SU BASE CONNESSIONE
+
+		/*for ( ; currentRoundNumber < 24; currentRoundNumber++)
+		{
+			//if (currentRoundNumber % 4|3) funzione rolladadi gameBoard.setDice(rollDices()); e settacarte
+
+			for(Socket socket : players.values())
+			{
+				//socket.getInputStream();
+				//socket.getOutputStream();
+
+				//pensare a timeout
+
+				while(true)
+				{
+
+					//stampa gameBoard
+
+					//stampa plancia
+
+					//Richiesta: che razza di azione vuoi fare??
+
+					//vuoi sacrificare i servitori??
+
+					//scegli dove metterti? mercato-concilio-torre-produzione-raccolto
+
+					//se player dice "setFamiliarOnTower WHITE tipo floor"
+					//se player dice "setFamiliarOnmarket BLACK position"
+					//se player dice "setFamiliarOnCouncil ORANGE"
+					//se player dice "setFamiliarOnHarvest NEUTER"
+					//se player dice "setFamiliarOnProduction "
+
+					//new decorator(new Action(), numServitori);
+					//boolean  executed = decorator.execute(player);
+					//else
+					//boolean executed =  action.execute(player);
+
+					//if (exectuted) continue;
+
+				}
+			}
+
+			//if (currentRoundNumber % 8|6) gestionefineEra()
+		}
+		*/
+		//gestioneFineGioco();decreto vincitore e tutto quello che ne consegue
+
+
 	}
 
 	private void endGame()

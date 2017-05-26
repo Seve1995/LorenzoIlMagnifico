@@ -159,6 +159,8 @@ public class BoardLoader
 
             ((GainAsset) effect).setAsset(asset);
         }
+
+
     }
 
     private static Asset loadAsset(JSONObject jsonAsset) throws JSONException

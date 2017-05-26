@@ -1,43 +1,71 @@
 package it.polimi.ingsw.pc22.connection;
 
-import it.polimi.ingsw.pc22.gamebox.GameBoard;
-import it.polimi.ingsw.pc22.utils.BoardLoader;
-import org.json.JSONObject;
+import it.polimi.ingsw.pc22.rmi.RMIAuthenicationService;
+import it.polimi.ingsw.pc22.utils.UserLoader;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.file.Files;
-import java.util.List;
+import java.rmi.AlreadyBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class GameServer 
 {
 	private static Map<String, GameMatch> gameMatchMap;
-	private static final int PORT = 9001;
-	private static List<User> usersList; 
+	private static final int SOCKET_PORT = 9001;
+
+	private static final int RMI_PORT = 5252;
+
+	private static Map<String, User> usersMap;
 
 	public static void main(String[] args)
 	{
 		System.out.println("Server online");
 		
 		gameMatchMap = new ConcurrentHashMap<>();
-		
+
+		/*//TODO HANDLE RMI CONNECTION
+
+		RMIAuthenticationHandler rmiAuthenicationService
+				= new RMIAuthenticationHandler();
+
+		try
+		{
+			RMIAuthenicationService stub = (RMIAuthenicationService)
+					UnicastRemoteObject.exportObject(rmiAuthenicationService, 0);
+
+			Registry registry = LocateRegistry.createRegistry(RMI_PORT);
+
+
+			registry.bind("auth", stub);
+
+		}
+			catch (RemoteException | AlreadyBoundException e )
+		{
+			e.printStackTrace();
+		}
+
+		System.out.println("Authentication Service running at "+ RMI_PORT +" port...");*/
+
 		ServerSocket serverSocket;
 
 		try 
 		{
-			serverSocket = new ServerSocket(PORT);
-			
-			usersList = loadJSon();
+			serverSocket = new ServerSocket(SOCKET_PORT);
+
+			usersMap = loadUsers();
 
 			while(true)
 			{
 				Socket socket = serverSocket.accept();
 				
-				AuthenticationHandler handler = new AuthenticationHandler(socket);
+				SocketAuthenticationHandler handler
+						= new SocketAuthenticationHandler(socket);
 				
 				new Thread(handler).start();
 			}
@@ -47,15 +75,13 @@ public class GameServer
 		{
 			e.printStackTrace();
 		}
-
-		//test();
 	}
 	
-	protected static List<User> loadJSon() throws IOException
+	protected static Map<String, User> loadUsers() throws IOException
 	{
-		List<User> usersList = JsonManager.returnList();
+		Map<String, User> usersMap = UserLoader.generateUserMap();
 		
-		return usersList; 
+		return usersMap;
 	}
 
 	public static Map<String, GameMatch> getGameMatchMap() 
@@ -68,41 +94,11 @@ public class GameServer
 		GameServer.gameMatchMap = gameMatchMap;
 	}
 
-	public static List<User> getUsersList() 
-	{
-		return usersList;
+	public static Map<String, User> getUsersMap() {
+		return usersMap;
 	}
 
-	public static void setUsersList(List<User> usersList) 
-	{
-		GameServer.usersList = usersList;
-	}
-
-	private static void test()
-	{
-		String boardName = "boards/GameBoard-" + 2 + ".json";
-
-		ClassLoader classLoader = GameServer.class.getClassLoader();
-
-		File file = new File(classLoader.getResource(boardName).getFile());
-
-		StringBuilder builder = new StringBuilder();
-
-		try
-		{
-			Files.lines(file.toPath()).forEach(s -> builder.append(s));
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
-		JSONObject jsonBoard = new JSONObject(builder.toString());
-
-		jsonBoard.toString();
-
-		GameBoard gameBoard = BoardLoader.loadGameBoard(jsonBoard);
-
-		System.out.println(gameBoard);
+	public static void setUsersMap(Map<String, User> usersMap) {
+		GameServer.usersMap = usersMap;
 	}
 }

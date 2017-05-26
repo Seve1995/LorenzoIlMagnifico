@@ -6,6 +6,8 @@ import it.polimi.ingsw.pc22.player.Player;
 public abstract class Action 
 {
 	private FamilyMember familyMember;
+
+	public Action(){}
 	
 	public Action(FamilyMember familyMember) {
 		this.familyMember = familyMember;
@@ -18,7 +20,6 @@ public abstract class Action
 	public void setFamilyMember(FamilyMember familyMember) {
 		this.familyMember = familyMember;
 	}
-
 
 
 	public abstract boolean isLegal(Player player);
