@@ -10,7 +10,7 @@ public class PickCouncilPrivilege  implements   Effect
     }
 
     @Override
-    public void executeAction(Player player) {
+    public void executeEffect(Player player) {
 
     }
 }

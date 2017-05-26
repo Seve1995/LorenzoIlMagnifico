@@ -1,6 +1,6 @@
 package it.polimi.ingsw.pc22.actions;
 
-import it.polimi.ingsw.pc22.effects.GainAsset;
+import it.polimi.ingsw.pc22.effects.AddAsset;
 import it.polimi.ingsw.pc22.effects.PickCouncilPrivilege;
 import it.polimi.ingsw.pc22.gamebox.CouncilPalace;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
@@ -15,7 +15,7 @@ public class SettingFamiliarMemberOnCounsilPalace extends Action {
 	}
 
 	@Override
-	public boolean isLegal(Player player) {
+	protected boolean isLegal(Player player) {
 		
 		if (super.getFamilyMember().getFamiliarValue()<1) 
 			return false;
@@ -24,18 +24,23 @@ public class SettingFamiliarMemberOnCounsilPalace extends Action {
 	}
 
 	@Override
-	public void executeAction(Player player) {
+	public boolean executeAction(Player player) {
 		if (isLegal(player))
 		{
 			councilPalace.getCouncilPalaceCells()[councilPalace.firstCellFree()].setFamilyMember(this.getFamilyMember());
 			PickCouncilPrivilege pickCouncilPrivilege= new PickCouncilPrivilege();
-			pickCouncilPrivilege.executeAction(player);
-			GainAsset gainAsset=new GainAsset();
+			pickCouncilPrivilege.executeEffect(player);
+			AddAsset addAsset=new AddAsset();
+			
 			//TODO gainAsset() definire come parametri tipo e quantita dell'asset
+			return true;
 		}
+		
 		else {
-			System.out.println("You can't do this action");
+			
+			return false;
 		}
+
 	}
 	
 

@@ -30,4 +30,17 @@ public class Production
 		return output;
 	}
 
+	
+	public int firstCellFree() {
+		int i=0;
+		while ( i < this.productionCell.length)
+		{
+			if (!(productionCell[i].isEmpty()))
+			{
+				i++;
+			}
+		}
+		return i;
+	}
+
 }

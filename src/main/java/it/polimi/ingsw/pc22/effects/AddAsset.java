@@ -3,7 +3,7 @@ package it.polimi.ingsw.pc22.effects;
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class GainAsset implements Effect
+public class AddAsset implements Effect
 {
 	private Asset asset;
 
@@ -20,9 +20,7 @@ public class GainAsset implements Effect
 	@Override
 	public String toString()
 	{
-		return "GainAsset{" +
-				"asset=" + asset +
-				'}';
+		return this.getAsset().toString();
 	}
 
 	@Override
@@ -31,9 +29,13 @@ public class GainAsset implements Effect
 	}
 
 	@Override
-	public void executeAction(Player player) {
+	public void executeEffect(Player player) {
 		
 	}
 	
 	
-}
+}	
+	
+	
+	
+	

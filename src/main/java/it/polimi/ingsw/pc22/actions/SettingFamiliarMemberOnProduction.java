@@ -15,7 +15,7 @@ public class SettingFamiliarMemberOnProduction extends Action {
 	}
 
 	@Override
-	public boolean isLegal(Player player) {
+	protected boolean isLegal(Player player) {
 		
 		if (super.getFamilyMember().getFamiliarValue()<1)
 			return false;
@@ -42,9 +42,27 @@ public class SettingFamiliarMemberOnProduction extends Action {
 	}
 
 	@Override
-	public void executeAction(Player player) {
-		// TODO Auto-generated method stub
+	public boolean executeAction(Player player) {
+		if (isLegal(player))
+		{
+			production.getProductionCell()[production.firstCellFree()].setFamilyMember(this.getFamilyMember());
+			
+			if (production.firstCellFree()>0)
+			{
+				if ((this.getFamilyMember().getFamiliarValue()-3)>0)
+					this.getFamilyMember().setFamiliarValue(this.getFamilyMember().getFamiliarValue()-3);
+				else 
+					this.getFamilyMember().setFamiliarValue(0);
+			}
+			return true;
+			
+		}
 		
+		else 
+		{
+			return false;
+		}
 	}
-
+		
 }
+

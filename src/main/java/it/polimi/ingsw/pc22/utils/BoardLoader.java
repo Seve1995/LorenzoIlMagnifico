@@ -1,7 +1,7 @@
 package it.polimi.ingsw.pc22.utils;
 
 import it.polimi.ingsw.pc22.effects.Effect;
-import it.polimi.ingsw.pc22.effects.GainAsset;
+import it.polimi.ingsw.pc22.effects.AddAsset;
 import it.polimi.ingsw.pc22.gamebox.*;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -153,11 +153,11 @@ public class BoardLoader
 
     private static void addAssetToGenericEffect(JSONObject jsonAsset, Effect effect)
     {
-        if (effect instanceof GainAsset)
+        if (effect instanceof AddAsset)
         {
             Asset asset = loadAsset(jsonAsset);
 
-            ((GainAsset) effect).setAsset(asset);
+            ((AddAsset) effect).setAsset(asset);
         }
 
 

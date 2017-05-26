@@ -8,7 +8,7 @@ public abstract class Action
 	private FamilyMember familyMember;
 
 	public Action(){}
-	
+
 	public Action(FamilyMember familyMember) {
 		this.familyMember = familyMember;
 	}
@@ -21,7 +21,7 @@ public abstract class Action
 		this.familyMember = familyMember;
 	}
 
+	protected abstract boolean isLegal(Player player);
 
-	public abstract boolean isLegal(Player player);
-	public abstract void executeAction(Player player);
+	public abstract boolean executeAction(Player player);
 }
