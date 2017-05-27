@@ -1,5 +1,7 @@
 package it.polimi.ingsw.pc22.player;
 
+import it.polimi.ingsw.pc22.gamebox.Asset;
+import it.polimi.ingsw.pc22.gamebox.AssetType;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.gamebox.PlayerBoard;
@@ -10,10 +12,10 @@ public class Player
 {
 	private String name;
 	private int numberOfMatch;
-	private int Woods;
-	private int Stones;
-	private int Servants;
-	private int Coins;
+	private int woods;
+	private int stones;
+	private int servants;
+	private int coins;
 	private int militaryPoints;
 	private int faithPoints;
 	private int victoryPoints;
@@ -37,28 +39,28 @@ public class Player
 		this.numberOfMatch = numberOfMatch;
 	}
 	public int getWoods() {
-		return Woods;
+		return woods;
 	}
 	public void setWoods(int woods) {
-		Woods = woods;
+		this.woods = woods;
 	}
 	public int getStones() {
-		return Stones;
+		return stones;
 	}
 	public void setStones(int stones) {
-		Stones = stones;
+		this.stones = stones;
 	}
 	public int getServants() {
-		return Servants;
+		return servants;
 	}
 	public void setServants(int servants) {
-		Servants = servants;
+		this.servants = servants;
 	}
 	public int getCoins() {
-		return Coins;
+		return coins;
 	}
 	public void setCoins(int coins) {
-		Coins = coins;
+		this.coins = coins;
 	}
 	public int getMilitaryPoints() {
 		return militaryPoints;
@@ -118,14 +120,88 @@ public class Player
 		this.playerBoard = playerBoard;
 	}
 	
+	public int getAsset(AssetType assetType) 
+	{
+		String assetTypeString = assetType.toString().toLowerCase();
+		
+		switch (assetTypeString) {
+		
+		case "coin":
+			return this.coins;
+			
+		case "wood":
+			return this.woods;
+			
+		case "stone":
+			return this.stones;
+			
+		case "servant":
+			return this.servants;
+			
+		case "faithPoint":
+			return this.faithPoints;
+			
+		case "victoryPoint":
+			return this.victoryPoints;
+			
+		case "militaryPoint":
+			return this.militaryPoints;
+			
+		default:
+			return -1;
+		}
+		
+	}
+	
+	public void addAsset(Asset asset) 
+	{
+		String assetType = asset.getType().toString().toLowerCase();
+		
+		int value = asset.getValue();
+		
+		switch (assetType) {
+		
+		case "coin":
+			this.coins += value;
+			break;
+			
+		case "wood":
+			this.woods += value;
+			break;
+			
+		case "stone":
+			this.stones += value;
+			break;
+			
+		case "servant":
+			this.servants += value;
+			break;
+			
+		case "faithPoint":
+			this.faithPoints += value;
+			break;
+			
+		case "victoryPoint":
+			this.faithPoints += value;
+			break;
+			
+		case "militaryPoint":
+			this.militaryPoints += value;
+			
+		default:
+			break;
+		}
+		
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + Coins;
-		result = prime * result + Servants;
-		result = prime * result + Stones;
-		result = prime * result + Woods;
+		result = prime * result + coins;
+		result = prime * result + servants;
+		result = prime * result + stones;
+		result = prime * result + woods;
 		result = prime * result + faithPoints;
 		result = prime * result + ((familyMember == null) ? 0 : familyMember.hashCode());
 		result = prime * result + ((gameBoard == null) ? 0 : gameBoard.hashCode());
@@ -148,13 +224,13 @@ public class Player
 		if (getClass() != obj.getClass())
 			return false;
 		Player other = (Player) obj;
-		if (Coins != other.Coins)
+		if (coins != other.coins)
 			return false;
-		if (Servants != other.Servants)
+		if (servants != other.servants)
 			return false;
-		if (Stones != other.Stones)
+		if (stones != other.stones)
 			return false;
-		if (Woods != other.Woods)
+		if (woods != other.woods)
 			return false;
 		if (faithPoints != other.faithPoints)
 			return false;
@@ -193,8 +269,8 @@ public class Player
 	
 	@Override
 	public String toString() {
-		return "Player [name=" + name + ", numberOfMatch=" + numberOfMatch + ", Woods=" + Woods + ", Stones=" + Stones
-				+ ", Servants=" + Servants + ", Coins=" + Coins + ", militaryPoints=" + militaryPoints
+		return "Player [name=" + name + ", numberOfMatch=" + numberOfMatch + ", Woods=" + woods + ", Stones=" + stones
+				+ ", Servants=" + servants + ", Coins=" + coins + ", militaryPoints=" + militaryPoints
 				+ ", faithPoints=" + faithPoints + ", victoryPoints=" + victoryPoints + ", priority=" + priority
 				+ ", newAction=" + newAction + ", familyMember=" + familyMember + ", gameBoard=" + gameBoard
 				+ ", playerBoard=" + playerBoard + "]";

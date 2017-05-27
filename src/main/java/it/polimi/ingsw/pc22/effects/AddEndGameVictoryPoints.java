@@ -16,14 +16,14 @@ public class AddEndGameVictoryPoints implements Effect{
 	}
 
 	@Override
-	public boolean isLegal(Player player) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isLegal(Player player) 
+	{
+		return true;
 	}
 
 	@Override
 	public void executeEffect(Player player) {
-		// TODO Auto-generated method stub
+		// TODO: Aggiungere 
 		
 	}
 
