@@ -17,14 +17,16 @@ public class AddHarvestValueBonus implements Effect{
 	@Override
 	public boolean isLegal(Player player) 
 	{
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public void executeEffect(Player player) 
 	{
-		// TODO Auto-generated method stub
+		if (isLegal(player))
+		{
+			player.setProductionValueModifier(player.getProductionValueModifier() + value);
+		}
 		
 	}
 	

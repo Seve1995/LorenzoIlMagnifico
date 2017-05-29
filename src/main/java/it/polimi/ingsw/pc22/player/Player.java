@@ -9,7 +9,7 @@ import it.polimi.ingsw.pc22.gamebox.PlayerBoard;
 import java.util.List;
 
 public class Player 
-{
+{	
 	private String name;
 	private int numberOfMatch;
 	private int woods;
@@ -20,7 +20,20 @@ public class Player
 	private int faithPoints;
 	private int victoryPoints;
 	private int priority;
-	private boolean newAction; 
+	private List<LeaderCard> leaderCards;
+	private List<CardModifier> cardModifiers;
+	private int haverstValueModifier; //Serve per gestire l'effetto AddHarvestValueBonus
+	private int productionValueModifier; //Serve per gestire l'effetto AddProductionValueBonus
+	private boolean militaryPointsMalus; //Serve per gestire l'effetto della tessera scomunica
+	private boolean coinMalus; //Serve per gestire l'effetto della tessera scomunica
+	private boolean servantMalus; //Serve per gestire l'effetto della tessera scomunica
+	private boolean woodMalus; //Serve per gestire l'effetto della tessera scomunica
+	private boolean stoneMalus; //Serve per gestire l'effetto della tessera scomunica
+	private boolean familyMemberMalus; //Serve per gestire l'effetto della tessera scomunica
+	private boolean disableMarket; //Serve per gestire l'effetto della tessera scomunica
+	private boolean servantsHandlerMalus; //Serve per gestire l'effetto della tessera scomunica
+	private boolean noFirstAction; //Serve per gestire l'effetto della tessera scomunica
+	private boolean newAction;
 	private boolean removeTowerBonus;
 	private List<FamilyMember> familyMember;
 	private GameBoard gameBoard;
@@ -85,6 +98,78 @@ public class Player
 	}
 	public void setPriority(int priority) {
 		this.priority = priority;
+	}
+	public List<CardModifier> getCardModifier() {
+		return cardModifiers;
+	}
+	public void setCardModifier(List<CardModifier> cardModifiers) {
+		this.cardModifiers = cardModifiers;
+	}
+	public int getHaverstValueModifier() {
+		return haverstValueModifier;
+	}
+	public void setHaverstValueModifier(int haverstValueModifier) {
+		this.haverstValueModifier = haverstValueModifier;
+	}
+	public int getProductionValueModifier() {
+		return productionValueModifier;
+	}
+	public void setProductionValueModifier(int productionValueModifier) {
+		this.productionValueModifier = productionValueModifier;
+	}
+	public boolean isMilitaryPointsMalus() {
+		return militaryPointsMalus;
+	}
+	public void setMilitaryPointsMalus(boolean militaryPointsMalus) {
+		this.militaryPointsMalus = militaryPointsMalus;
+	}
+	public boolean isCoinMalus() {
+		return coinMalus;
+	}
+	public void setCoinMalus(boolean coinMalus) {
+		this.coinMalus = coinMalus;
+	}
+	public boolean isServantMalus() {
+		return servantMalus;
+	}
+	public void setServantMalus(boolean servantMalus) {
+		this.servantMalus = servantMalus;
+	}
+	public boolean isWoodMalus() {
+		return woodMalus;
+	}
+	public void setWoodMalus(boolean woodMalus) {
+		this.woodMalus = woodMalus;
+	}
+	public boolean isStoneMalus() {
+		return stoneMalus;
+	}
+	public void setStoneMalus(boolean stoneMalus) {
+		this.stoneMalus = stoneMalus;
+	}
+	public boolean isFamilyMemberMalus() {
+		return familyMemberMalus;
+	}
+	public void setFamilyMemberMalus(boolean familyMemberMalus) {
+		this.familyMemberMalus = familyMemberMalus;
+	}
+	public boolean isDisableMarket() {
+		return disableMarket;
+	}
+	public void setDisableMarket(boolean disableMarket) {
+		this.disableMarket = disableMarket;
+	}
+	public boolean isServantsHandlerMalus() {
+		return servantsHandlerMalus;
+	}
+	public void setServantsHandlerMalus(boolean servantsHandlerMalus) {
+		this.servantsHandlerMalus = servantsHandlerMalus;
+	}
+	public boolean isNoFirstAction() {
+		return noFirstAction;
+	}
+	public void setNoFirstAction(boolean noFirstAction) {
+		this.noFirstAction = noFirstAction;
 	}
 	public boolean isNewAction() {
 		return newAction;

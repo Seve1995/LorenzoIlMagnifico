@@ -4,6 +4,7 @@ import java.util.List;
 
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
+import it.polimi.ingsw.pc22.player.CardModifier;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class AddTowerCardDiscount implements Effect{
@@ -40,14 +41,27 @@ public class AddTowerCardDiscount implements Effect{
 	@Override
 	public boolean isLegal(Player player) 
 	{
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	@Override
 	public void executeEffect(Player player) 
 	{
-		// TODO Auto-generated method stub
-		
+		if(isLegal(player))
+		{
+			CardModifier cardModifier = new CardModifier();
+			cardModifier.setValueModifier(diceValue);
+			cardModifier.setAssetDiscount(discounts);
+			cardModifier.setOnlyOneAsset(onlyOneAsset);
+			List<CardModifier> cardModifiers;
+			cardModifiers = player.getCardModifier();
+			for (int i = 0; i<cardModifiers.size(); i++)
+				if(cardModifiers.get(i).getCardType() == cardType)
+				{
+					cardModifiers.get(i).setValueModifier(cardModifiers.get(i).getValueModifier()+diceValue);
+					//cardModifiers.get(i).setAssetDiscount(cardModifiers.get(i).getAssetDiscount().);
+				}
+			
+		}
 	}
 	
 	@Override
