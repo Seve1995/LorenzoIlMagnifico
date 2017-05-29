@@ -20,7 +20,6 @@ public class RemoveBonusesFromTowers implements Effect
 	@Override
 	public boolean isLegal(Player player) 
 	{
-		// Always legal, it doesn't have requirements
 		return true;
 	}
 

@@ -40,16 +40,35 @@ public class FromAssetToAssetOrEffect implements Effect{
 	@Override
 	public boolean isLegal(Player player) 
 	{
-		// TODO Auto-generated method stub
-		return false;
+		for (Asset a : paidAssets){
+			if(a.getValue() > player.getAsset(a.getType()))
+			{
+				return false;
+			}
+		}
+		
+		return true;
 	}
 	
 	@Override
 	public void executeEffect(Player player) 
 	{
-		// TODO Auto-generated method stub
-		
+		if (isLegal(player)){
+			if (gainedEffect != null)
+			{
+				gainedEffect.executeEffect(player);
+				
+			}
+			if (gainedAssets != null){
+				for (Asset a : gainedAssets)
+				{
+					player.addAsset(a);
+				}
+			}
+		}
+				
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

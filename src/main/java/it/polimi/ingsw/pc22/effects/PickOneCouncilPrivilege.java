@@ -1,18 +1,22 @@
 package it.polimi.ingsw.pc22.effects;
 
+import it.polimi.ingsw.pc22.gamebox.Asset;
+import it.polimi.ingsw.pc22.gamebox.AssetType;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class PickOneCouncilPrivilege implements Effect{
+	private Asset choosenAsset;
 
 	@Override
 	public boolean isLegal(Player player) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		return true;
 	}
 
 	@Override
 	public void executeEffect(Player player) {
-		// TODO Auto-generated method stub
+		
+		//pickCouncilPrivilege(player);
 		
 	}
 	

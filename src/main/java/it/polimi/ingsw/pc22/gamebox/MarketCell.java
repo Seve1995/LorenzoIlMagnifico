@@ -25,6 +25,11 @@ public class MarketCell extends Cell
 	@Override
 	public void executeEffect(Player player) {
 		
+		for(Effect e : this.getEffects())
+		{
+			e.executeEffect(player);
+		}
+		
 	}
 
 	@Override

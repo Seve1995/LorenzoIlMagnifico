@@ -45,25 +45,25 @@ public class AddAssetForEveryAssetOrCard implements Effect{
 			switch (paidCardType) {
 			
 			case TERRITORY:
-				totalCards = player.getPlayerBoard().getTerritories().length;
+				totalCards = player.getPlayerBoard().getTerritories().size();
 				for (int i=0; i<totalCards; i++)
 					player.addAsset(gainedAsset);
 				break;
 				
 			case VENTURE:
-				totalCards = player.getPlayerBoard().getVentures().length;
+				totalCards = player.getPlayerBoard().getVentures().size();
 				for (int i=0; i<totalCards; i++)
 					player.addAsset(gainedAsset);
 				break;
 				
 			case CHARACTER:
-				totalCards = player.getPlayerBoard().getCharacters().length;
+				totalCards = player.getPlayerBoard().getCharacters().size();
 				for (int i=0; i<totalCards; i++)
 					player.addAsset(gainedAsset);
 				break;
 				
 			case BUILDING:
-				totalCards = player.getPlayerBoard().getBuildings().length;
+				totalCards = player.getPlayerBoard().getBuildings().size();
 				for (int i=0; i<totalCards; i++)
 					player.addAsset(gainedAsset);
 				break;
