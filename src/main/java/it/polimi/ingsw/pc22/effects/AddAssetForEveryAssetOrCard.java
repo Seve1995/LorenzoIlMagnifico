@@ -78,6 +78,9 @@ public class AddAssetForEveryAssetOrCard implements Effect{
 		{
 			int totalAsset = 0;
 			totalAsset = player.getAsset(gainedAsset.getType());
+			totalAsset = totalAsset/paidAsset.getValue(); 
+			//Perché se ad esempio ho un guadagno di 1 moneta "OGNI 2" punti militari e il player ha 10 punti military, devo aggiungerli un
+			//coin ogni 2 miltary point! Quindi faccio, nell'esempio, 10/2 = 5 
 			for (int i=0; i<totalAsset; i++)
 				player.addAsset(gainedAsset);
 		}

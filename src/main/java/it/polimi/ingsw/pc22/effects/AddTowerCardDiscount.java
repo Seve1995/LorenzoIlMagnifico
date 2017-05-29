@@ -48,15 +48,13 @@ public class AddTowerCardDiscount implements Effect{
 	{
 		if(isLegal(player))
 		{
-			List<CardModifier> cardModifiers;
-			cardModifiers = player.getCardModifier();
-			for (int i = 0; i<cardModifiers.size(); i++)
-				if(cardModifiers.get(i).getCardType() == cardType)
-				{
-					cardModifiers.get(i).setValueModifier(diceValueDiscount);
-					cardModifiers.get(i).setAssetDiscount(assetDiscounts);
-					cardModifiers.get(i).setOnlyOneAsset(onlyOneAsset);
-				}
+			List<CardModifier> playerCardModifiers;
+			playerCardModifiers = player.getCardModifier();
+			CardModifier cardModifier = new CardModifier();
+			cardModifier.setValueModifier(diceValueDiscount);
+			cardModifier.setAssetDiscount(assetDiscounts);
+			cardModifier.setOnlyOneAsset(onlyOneAsset);
+			playerCardModifiers.add(cardModifier);
 		}
 	}
 	

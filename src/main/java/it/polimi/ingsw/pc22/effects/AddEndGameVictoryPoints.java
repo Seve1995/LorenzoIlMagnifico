@@ -23,8 +23,8 @@ public class AddEndGameVictoryPoints implements Effect{
 
 	@Override
 	public void executeEffect(Player player) {
-		// TODO: Aggiungere 
-		
+		// TODO: Aggiungere controllo di fine partita. Questo metodo viene evocato solo al termine dell partita!
+		player.addAsset(asset);
 	}
 
 	@Override
