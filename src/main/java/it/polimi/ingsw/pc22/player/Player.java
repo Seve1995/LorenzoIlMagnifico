@@ -4,6 +4,7 @@ import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.AssetType;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
+import it.polimi.ingsw.pc22.gamebox.LeaderCard;
 import it.polimi.ingsw.pc22.gamebox.PlayerBoard;
 
 import java.util.List;
@@ -205,6 +206,12 @@ public class Player
 		this.playerBoard = playerBoard;
 	}
 	
+	public List<LeaderCard> getLeaderCards() {
+		return leaderCards;
+	}
+	public void setLeaderCards(List<LeaderCard> leaderCards) {
+		this.leaderCards = leaderCards;
+	}
 	public int getAsset(AssetType assetType) 
 	{
 		String assetTypeString = assetType.toString().toLowerCase();

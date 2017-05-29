@@ -7,8 +7,7 @@ public class PickThreeCouncilPrivilege implements Effect{
 	@Override
 	public boolean isLegal(Player player) 
 	{
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override

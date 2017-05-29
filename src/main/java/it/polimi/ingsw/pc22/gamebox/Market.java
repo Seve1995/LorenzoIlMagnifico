@@ -20,6 +20,10 @@ public class Market {
 	}
 
 	public void ExecuteEffect (Player player) {
+		
+		
+		
+		
 	}
 
 	public String gainInfo() {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
+import it.polimi.ingsw.pc22.gamebox.DevelopmentCard;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class PickTowerCard implements Effect{
@@ -11,6 +12,7 @@ public class PickTowerCard implements Effect{
 	private CardTypeEnum cardType;
 	private int diceValue;
 	private List<Asset> cardCostDiscount;
+    
 	
 	public CardTypeEnum getCardType() {
 		return cardType;
@@ -35,14 +37,82 @@ public class PickTowerCard implements Effect{
 	@Override
 	public boolean isLegal(Player player) 
 	{
-		// TODO Auto-generated method stub
-		return false;
+		
+		//controllo costi dappertutto
+		if (this.cardType.equals(CardTypeEnum.CHARACTER))
+		{
+			if (player.getPlayerBoard().getCharacters().size() > 6)
+			{
+				return false;
+			}
+			
+			
+		}
+		
+		if (this.cardType.equals(CardTypeEnum.BUILDING)) 
+		{
+			
+			
+		}
+		
+		if (this.cardType.equals(CardTypeEnum.VENTURE))
+		{
+			
+		}
+		
+		if (this.cardType.equals(CardTypeEnum.TERRITORY))
+		{
+			if (player.getPlayerBoard().getTerritories().size() > 6)
+			{
+				return false;
+			}
+			
+			else if (player.getPlayerBoard().getTerritories().size() + 1 == 3)
+			{
+				if (player.getMilitaryPoints() < 3)
+				{
+					return false;
+				}
+			}
+				
+			else if (player.getPlayerBoard().getTerritories().size() + 1 == 4)
+			{
+				if (player.getMilitaryPoints() < 7)
+				{
+					return false;
+				}
+			}
+				
+			else if (player.getPlayerBoard().getTerritories().size() + 1 == 5)
+			{
+				if (player.getMilitaryPoints() < 12)
+				{
+					return false;
+				}
+			}
+			
+			else if  (player.getPlayerBoard().getTerritories().size() + 1 == 6)
+			{
+
+				if (player.getMilitaryPoints() < 18)
+				{
+					return false;
+				}
+			}
+			
+		}
+		
+		return true;
 	}
 	
 	@Override
 	public void executeEffect(Player player) 
 	{
-		// TODO Auto-generated method stub
+		if (isLegal(player))
+		{
+	
+			
+		}
 		
 	}
 	
