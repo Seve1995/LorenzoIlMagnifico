@@ -1,34 +1,89 @@
 package it.polimi.ingsw.pc22.client;
+
+import it.polimi.ingsw.pc22.rmi.RMIAuthenticationService;
+
 import java.net.Socket;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.Scanner;
 
 public class Client 
 {
+	private static final int RMI_PORT = 5252;
+
+	private static final int SOCKET_PORT = 9001;
+
 	public static void main(String[] args)
 	{
-		Socket socket;
-		
-		try 
+		System.out.println("Scelgi tipologia di connessione: rmi o socket");
+
+		while (true)
 		{
-			System.out.println("Client running. Type 'EXIT' to exit.");
+			Scanner scanner = new Scanner(System.in);
 
-			socket = new Socket("localhost",9001);
+			String choice = scanner.nextLine();
 
-			//Start the SendThread
+
+			if (choice.equals("rmi"))
+			{
+				loadRMIConnection();
+
+				break;
+			}
+
+			if (choice.equals("socket"))
+			{
+				loadSocketConnection();
+
+				break;
+			}
+
+		}
+
+		System.out.println("Client running. Type 'EXIT' to exit.");
+	}
+
+	private static void loadRMIConnection()
+	{
+		try
+		{
+			Registry registry = LocateRegistry.getRegistry(RMI_PORT);
+
+			RMIAuthenticationService stub = (RMIAuthenticationService) registry.lookup("auth");
+
+			stub.login(registry);
+
+		} catch (RemoteException | NotBoundException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	private static void loadSocketConnection()
+	{
+		Socket socket;
+
+		try
+		{
+			System.out.println("Client running.");
+
+			socket = new Socket("localhost", SOCKET_PORT);
+
 			SendThread sendThread = new SendThread(socket);
 			Thread thread = new Thread(sendThread);
 			thread.start();
 
-			//Start the ReceiveThread
-			ReceiveThread recieveThread = new ReceiveThread(socket);
-			Thread thread2 = new Thread(recieveThread);
+
+			ReceiveThread receiveThread = new ReceiveThread(socket);
+			Thread thread2 = new Thread(receiveThread);
 			thread2.start();
-		} 
-			catch (Exception e) 
+
+		}
+		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
-		
-		
 	}
-
 }

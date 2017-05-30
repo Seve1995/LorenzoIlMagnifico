@@ -25,11 +25,11 @@ public class ServantsHandler extends Action
     public boolean isLegal(Player player)
     {
     	if(this.sacrifiedServantsNumber > player.getServants()){
-    		
+
     		return false;
-    		
+
     	}
-        
+
         return true;
     }
 
@@ -51,8 +51,8 @@ public class ServantsHandler extends Action
 
     	       return true;
     	}
-    	
+
     	return false;
-       
+
     }
 }

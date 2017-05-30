@@ -12,7 +12,7 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class SocketAuthenticationHandler implements Runnable
+public class SocketAuthenticationHandler implements Runnable, AuthenticationHandler
 {
 	private Socket socket;
 	private BufferedReader in;
@@ -64,86 +64,8 @@ public class SocketAuthenticationHandler implements Runnable
 
 				break;
 			}
-
-			String playerName = user.getUsername();
-			
-			Player player = new Player();
-			
-			player.setName(playerName);
-			
-			while(true)
-			{
-				out.println("Choose an operation:\n"
-			 			+ "(1) Create new game match\n"
-			 			+ "(2) Join a friend's game match\n"
-			 			+ "(3) Join a random game match"
-			 			);
-				
-				String userChoice = in.readLine();
-				
-				if(userChoice.equals("1"))
-				{
-					out.println("Type a name for the new game match:");
-					
-					String gameName = in.readLine();
-					
-					out.println("Game name: " + gameName);
-					
-					boolean existingGameMatch = 
-							GameServer.getGameMatchMap().containsKey(gameName);
-					
-					if (existingGameMatch)
-					{
-						out.println("A game match with the specified name already exists.");
-						
-						continue;
-					}
-					
-					startNewGameMatch(gameName, player);
-
-					out.println("Player: " + playerName + " created GameMatch - " + gameName);
-
-					break;
-					
-				}
-				
-				if(userChoice.equals("2"))
-				{
-					out.println("Type the name of the chosen game match:");
-					
-					String gameName = in.readLine();
-					
-					out.println("Game name: " + gameName);
-					
-					boolean existingGameMatch = 
-							GameServer.getGameMatchMap().containsKey(gameName);
-					
-					if (!existingGameMatch) 
-					{
-						out.println("Game match not found.");
-						
-						continue;
-					}
-					
-					loadGameMatch(gameName, player);
-
-					out.println("Player: " + playerName + " joined GameMatch - " + gameName);
-
-					break;
-				}
-				
-				if(userChoice.equals("3"))
-				{
-					
-				}
-				
-				out.println("Non-valid input. Please retry... ");
-			}
-
-			updateJson();
-				
-		} 
-		catch (IOException e) 
+		}
+		catch (IOException e)
 		{
 			e.printStackTrace();
 		}
