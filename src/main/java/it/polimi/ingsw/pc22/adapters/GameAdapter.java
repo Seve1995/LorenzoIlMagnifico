@@ -5,5 +5,5 @@ package it.polimi.ingsw.pc22.adapters;
  */
 public interface GameAdapter
 {
-
+    void endConnection();
 }

@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import it.polimi.ingsw.pc22.connection.User;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -19,7 +20,7 @@ public class UserLoader
 {
 	private static final String FILEPATH = "users/UsersJson.json";
 
-	public static Map<String, User> generateUserMap() throws IOException
+	public static Map<String, User> generateUserMap() throws IOException, JSONException
 	{
 		ClassLoader classLoader = UserLoader.class.getClassLoader();
 

@@ -17,14 +17,13 @@ public class Client
 
 	public static void main(String[] args)
 	{
-		System.out.println("Scelgi tipologia di connessione: rmi o socket");
-
 		while (true)
 		{
+			System.out.println("Scelgi tipologia di connessione: rmi o socket");
+
 			Scanner scanner = new Scanner(System.in);
 
 			String choice = scanner.nextLine();
-
 
 			if (choice.equals("rmi"))
 			{

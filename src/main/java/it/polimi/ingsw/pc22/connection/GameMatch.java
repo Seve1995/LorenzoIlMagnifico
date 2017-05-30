@@ -1,5 +1,7 @@
 package it.polimi.ingsw.pc22.connection;
 
+import com.sun.xml.internal.xsom.impl.scd.Iterators;
+import it.polimi.ingsw.pc22.adapters.GameAdapter;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.BoardLoader;
@@ -20,7 +22,7 @@ public class GameMatch implements Runnable
 	private String gameName;
 
 	//TODO non possiamo avere solo scoket, nel caso di rmi bisogna mettere il callback del client
-	private Map<Player, Socket> players;
+	private Map<Player, GameAdapter> players;
 	
 	private int playerCounter = 0;
 	
@@ -158,23 +160,11 @@ public class GameMatch implements Runnable
 
 	private void endGame()
 	{
-		List<Socket> playerSockets = new ArrayList<>(players.values());
+		List<GameAdapter> playersAdapters = new ArrayList<GameAdapter>(players.values());
 
-		for (Socket playerSocket : playerSockets)
+		for (GameAdapter playerAdapter : playersAdapters)
 		{
-			try
-			{
-				PrintWriter printWriter =
-						new PrintWriter(playerSocket.getOutputStream(), true);
-
-				printWriter.println("EXIT");
-
-				playerSocket.close();
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
+			playerAdapter.endConnection();
 		}
 	}
 
@@ -194,11 +184,11 @@ public class GameMatch implements Runnable
 		this.gameName = gameName;
 	}
 
-	public Map<Player, Socket> getPlayers() {
+	public Map<Player, GameAdapter> getPlayers() {
 		return players;
 	}
 
-	public void setPlayers(Map<Player, Socket> players) {
+	public void setPlayers(Map<Player, GameAdapter> players) {
 		this.players = players;
 	}
 

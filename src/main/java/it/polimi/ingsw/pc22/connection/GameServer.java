@@ -2,6 +2,7 @@ package it.polimi.ingsw.pc22.connection;
 
 import it.polimi.ingsw.pc22.rmi.RMIAuthenticationService;
 import it.polimi.ingsw.pc22.utils.UserLoader;
+import org.json.JSONException;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -61,21 +62,22 @@ public class GameServer
 			while(true)
 			{
 				Socket socket = serverSocket.accept();
-				
+
+
 				SocketAuthenticationHandler handler
 						= new SocketAuthenticationHandler(socket);
-				
+
 				new Thread(handler).start();
 			}
 			
 		} 
-			catch (IOException e) 
+			catch (IOException | JSONException e)
 		{
 			e.printStackTrace();
 		}
 	}
 	
-	protected static Map<String, User> loadUsers() throws IOException
+	protected static Map<String, User> loadUsers() throws IOException, JSONException
 	{
 		Map<String, User> usersMap = UserLoader.generateUserMap();
 		
