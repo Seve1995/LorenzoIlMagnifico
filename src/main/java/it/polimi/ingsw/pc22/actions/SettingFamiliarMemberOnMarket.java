@@ -45,6 +45,7 @@ public class SettingFamiliarMemberOnMarket extends Action{
 			{
 				e.executeEffect(player);
 			}
+			
 			return true;
 		}
 		

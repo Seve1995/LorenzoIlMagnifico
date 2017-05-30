@@ -4,13 +4,14 @@ import java.util.List;
 
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
+import it.polimi.ingsw.pc22.player.CardModifier;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class AddTowerCardDiscount implements Effect{
 	
 	private CardTypeEnum cardType;
-	private int diceValue;
-	private List<Asset> discounts; 
+	private int diceValueDiscount;
+	private List<Asset> assetDiscounts; 
 	private boolean onlyOneAsset;
 	
 	public CardTypeEnum getCardType() {
@@ -19,17 +20,17 @@ public class AddTowerCardDiscount implements Effect{
 	public void setCardType(CardTypeEnum cardType) {
 		this.cardType = cardType;
 	}
-	public int getDiceValue() {
-		return diceValue;
+	public int getDiceValueDiscount() {
+		return diceValueDiscount;
 	}
-	public void setDiceValue(int diceValue) {
-		this.diceValue = diceValue;
+	public void setDiceValueDiscount(int diceValueDiscount) {
+		this.diceValueDiscount = diceValueDiscount;
 	}
 	public List<Asset> getDiscounts() {
-		return discounts;
+		return assetDiscounts;
 	}
 	public void setDiscounts(List<Asset> discounts) {
-		this.discounts = discounts;
+		this.assetDiscounts = discounts;
 	}
 	public boolean isOnlyOneAsset() {
 		return onlyOneAsset;
@@ -40,14 +41,21 @@ public class AddTowerCardDiscount implements Effect{
 	@Override
 	public boolean isLegal(Player player) 
 	{
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	@Override
 	public void executeEffect(Player player) 
 	{
-		// TODO Auto-generated method stub
-		
+		if(isLegal(player))
+		{
+			List<CardModifier> playerCardModifiers;
+			playerCardModifiers = player.getCardModifier();
+			CardModifier cardModifier = new CardModifier();
+			cardModifier.setValueModifier(diceValueDiscount);
+			cardModifier.setAssetDiscount(assetDiscounts);
+			cardModifier.setOnlyOneAsset(onlyOneAsset);
+			playerCardModifiers.add(cardModifier);
+		}
 	}
 	
 	@Override
@@ -55,8 +63,8 @@ public class AddTowerCardDiscount implements Effect{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cardType == null) ? 0 : cardType.hashCode());
-		result = prime * result + diceValue;
-		result = prime * result + ((discounts == null) ? 0 : discounts.hashCode());
+		result = prime * result + diceValueDiscount;
+		result = prime * result + ((assetDiscounts == null) ? 0 : assetDiscounts.hashCode());
 		result = prime * result + (onlyOneAsset ? 1231 : 1237);
 		return result;
 	}
@@ -72,12 +80,12 @@ public class AddTowerCardDiscount implements Effect{
 		AddTowerCardDiscount other = (AddTowerCardDiscount) obj;
 		if (cardType != other.cardType)
 			return false;
-		if (diceValue != other.diceValue)
+		if (diceValueDiscount != other.diceValueDiscount)
 			return false;
-		if (discounts == null) {
-			if (other.discounts != null)
+		if (assetDiscounts == null) {
+			if (other.assetDiscounts != null)
 				return false;
-		} else if (!discounts.equals(other.discounts))
+		} else if (!assetDiscounts.equals(other.assetDiscounts))
 			return false;
 		if (onlyOneAsset != other.onlyOneAsset)
 			return false;
@@ -86,7 +94,7 @@ public class AddTowerCardDiscount implements Effect{
 	
 	@Override
 	public String toString() {
-		return "AddTowerCardDiscount [cardType=" + cardType + ", diceValue=" + diceValue + ", discounts=" + discounts
+		return "AddTowerCardDiscount [cardType=" + cardType + ", diceValue=" + diceValueDiscount + ", discounts=" + assetDiscounts
 				+ ", onlyOneAsset=" + onlyOneAsset + "]";
 	}
 	

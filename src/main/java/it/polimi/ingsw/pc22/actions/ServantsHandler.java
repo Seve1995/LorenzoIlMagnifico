@@ -24,26 +24,35 @@ public class ServantsHandler extends Action
     @Override
     public boolean isLegal(Player player)
     {
+    	if(this.sacrifiedServantsNumber > player.getServants()){
 
-        //TODO DA IMPLEMENTARE
-        return false;
+    		return false;
+
+    	}
+
+        return true;
     }
 
     @Override
     public boolean executeAction(Player player)
     {
-       int familiarValue =  action.getFamilyMember().getFamiliarValue();
+    	if (isLegal(player)) {
+    		 int familiarValue =  action.getFamilyMember().getFamiliarValue();
 
-        familiarValue = familiarValue + this.sacrifiedServantsNumber;
+    	        familiarValue = familiarValue + this.sacrifiedServantsNumber;
 
-       action.getFamilyMember().setFamiliarValue(familiarValue);
+    	       action.getFamilyMember().setFamiliarValue(familiarValue);
 
-       int servantsNumber = player.getServants();
+    	       int servantsNumber = player.getServants();
 
-       servantsNumber = servantsNumber - this.sacrifiedServantsNumber;
+    	       servantsNumber = servantsNumber - this.sacrifiedServantsNumber;
 
-       player.setServants(servantsNumber);
+    	       player.setServants(servantsNumber);
 
-       return action.executeAction(player);
+    	       return true;
+    	}
+
+    	return false;
+
     }
 }

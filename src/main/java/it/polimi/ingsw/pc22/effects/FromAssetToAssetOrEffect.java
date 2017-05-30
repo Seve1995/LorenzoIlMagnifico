@@ -7,16 +7,16 @@ import it.polimi.ingsw.pc22.player.Player;
 
 public class FromAssetToAssetOrEffect implements Effect{
 	
-	private List<Asset> paiedAssets;
+	private List<Asset> paidAssets;
 	private List<Asset> gainedAssets;
 	private boolean onlyOneAsset;
 	private Effect gainedEffect;
 	
 	public List<Asset> getPaiedAssets() {
-		return paiedAssets;
+		return paidAssets;
 	}
 	public void setPaiedAssets(List<Asset> paiedAssets) {
-		this.paiedAssets = paiedAssets;
+		this.paidAssets = paiedAssets;
 	}
 	public List<Asset> getGainedAssets() {
 		return gainedAssets;
@@ -40,16 +40,35 @@ public class FromAssetToAssetOrEffect implements Effect{
 	@Override
 	public boolean isLegal(Player player) 
 	{
-		// TODO Auto-generated method stub
-		return false;
+		for (Asset a : paidAssets){
+			if(a.getValue() > player.getAsset(a.getType()))
+			{
+				return false;
+			}
+		}
+		
+		return true;
 	}
 	
 	@Override
 	public void executeEffect(Player player) 
 	{
-		// TODO Auto-generated method stub
-		
+		if (isLegal(player)){
+			if (gainedEffect != null)
+			{
+				gainedEffect.executeEffect(player);
+				
+			}
+			if (gainedAssets != null){
+				for (Asset a : gainedAssets)
+				{
+					player.addAsset(a);
+				}
+			}
+		}
+				
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -57,7 +76,7 @@ public class FromAssetToAssetOrEffect implements Effect{
 		result = prime * result + ((gainedAssets == null) ? 0 : gainedAssets.hashCode());
 		result = prime * result + ((gainedEffect == null) ? 0 : gainedEffect.hashCode());
 		result = prime * result + (onlyOneAsset ? 1231 : 1237);
-		result = prime * result + ((paiedAssets == null) ? 0 : paiedAssets.hashCode());
+		result = prime * result + ((paidAssets == null) ? 0 : paidAssets.hashCode());
 		return result;
 	}
 	@Override
@@ -81,17 +100,17 @@ public class FromAssetToAssetOrEffect implements Effect{
 			return false;
 		if (onlyOneAsset != other.onlyOneAsset)
 			return false;
-		if (paiedAssets == null) {
-			if (other.paiedAssets != null)
+		if (paidAssets == null) {
+			if (other.paidAssets != null)
 				return false;
-		} else if (!paiedAssets.equals(other.paiedAssets))
+		} else if (!paidAssets.equals(other.paidAssets))
 			return false;
 		return true;
 	}
 	
 	@Override
 	public String toString() {
-		return "FromAssetToAssetOrEffect [paiedAssets=" + paiedAssets + ", gainedAssets=" + gainedAssets
+		return "FromAssetToAssetOrEffect [paiedAssets=" + paidAssets + ", gainedAssets=" + gainedAssets
 				+ ", onlyOneAsset=" + onlyOneAsset + ", gainedEffect=" + gainedEffect + "]";
 	} 
 	
