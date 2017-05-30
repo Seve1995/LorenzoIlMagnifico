@@ -8,9 +8,10 @@ import java.util.List;
 public abstract class DevelopmentCard 
 {
 	private String name;
+	private int cardNumber;
 	private int roundNumber;
 	private boolean permanentEffectChoiche = false;
-
+	
 	
 	private List<Effect> immediateEffects;
 	private List<Effect> permanentEffects;
@@ -36,6 +37,14 @@ public abstract class DevelopmentCard
 	public void setName(String name) {
 		this.name = name;
 	}
+	public int getCardNumber() {
+		return cardNumber;
+	}
+
+	public void setCardNumber(int cardNumber) {
+		this.cardNumber = cardNumber;
+	}
+
 	public int getRoundNumber() {
 		return roundNumber;
 	}
