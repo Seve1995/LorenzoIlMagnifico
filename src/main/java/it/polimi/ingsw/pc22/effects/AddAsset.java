@@ -31,7 +31,8 @@ public class AddAsset implements Effect
 
 	@Override
 	public void executeEffect(Player player) {
-		player.addAsset(asset);
+		if (isLegal(player))
+			player.addAsset(asset);
 	}
 	
 	/*

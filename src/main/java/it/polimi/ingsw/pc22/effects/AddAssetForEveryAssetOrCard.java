@@ -39,38 +39,41 @@ public class AddAssetForEveryAssetOrCard implements Effect{
 	@Override
 	public void executeEffect(Player player) 
 	{
-		if (paidCardType != null) 
+		if(isLegal(player))
 		{
-			int totalCards = 0;
-			switch (paidCardType) {
-			
-			case TERRITORY:
-				totalCards = player.getPlayerBoard().getTerritories().size();
-				for (int i=0; i<totalCards; i++)
-					player.addAsset(gainedAsset);
-				break;
+			if (paidCardType != null) 
+			{
+				int totalCards = 0;
+				switch (paidCardType) {
 				
-			case VENTURE:
-				totalCards = player.getPlayerBoard().getVentures().size();
-				for (int i=0; i<totalCards; i++)
-					player.addAsset(gainedAsset);
-				break;
+				case TERRITORY:
+					totalCards = player.getPlayerBoard().getTerritories().size();
+					for (int i=0; i<totalCards; i++)
+						player.addAsset(gainedAsset);
+					break;
+					
+				case VENTURE:
+					totalCards = player.getPlayerBoard().getVentures().size();
+					for (int i=0; i<totalCards; i++)
+						player.addAsset(gainedAsset);
+					break;
+					
+				case CHARACTER:
+					totalCards = player.getPlayerBoard().getCharacters().size();
+					for (int i=0; i<totalCards; i++)
+						player.addAsset(gainedAsset);
+					break;
+					
+				case BUILDING:
+					totalCards = player.getPlayerBoard().getBuildings().size();
+					for (int i=0; i<totalCards; i++)
+						player.addAsset(gainedAsset);
+					break;
+					
+				default:
+					break;
 				
-			case CHARACTER:
-				totalCards = player.getPlayerBoard().getCharacters().size();
-				for (int i=0; i<totalCards; i++)
-					player.addAsset(gainedAsset);
-				break;
-				
-			case BUILDING:
-				totalCards = player.getPlayerBoard().getBuildings().size();
-				for (int i=0; i<totalCards; i++)
-					player.addAsset(gainedAsset);
-				break;
-				
-			default:
-				break;
-			
+				}
 			}
 		}
 		
