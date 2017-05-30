@@ -1,27 +1,43 @@
 package it.polimi.ingsw.pc22.connection;
 
-import it.polimi.ingsw.pc22.rmi.RMIAuthenicationService;
+import it.polimi.ingsw.pc22.rmi.RMIAuthenticationService;
+import it.polimi.ingsw.pc22.rmi.RMIClientAuthenticator;
 
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.rmi.registry.Registry;
+import java.util.Map;
 import java.util.Scanner;
 
-/**
- * Created by fandroid95 on 26/05/2017.
- */
-public class RMIAuthenticationHandler implements RMIAuthenicationService
+public class RMIAuthenticationHandler implements RMIAuthenticationService, AuthenticationHandler
 {
-
     @Override
-    public boolean login()
+    public void login(Registry registry) throws RemoteException
     {
-        System.out.println("Prova RMI inserisci username!");
+        Map<String, User> usesrMap = GameServer.getUsersMap();
 
-        Scanner scanner = new Scanner(System.in);
+        try
+        {
+            RMIClientAuthenticator authenticator = (RMIClientAuthenticator)
+                    registry.lookup("client");
 
-        String username = scanner.nextLine();
+            User user = null;
 
-        if (GameServer.getGameMatchMap().containsKey(username))
-            return true;
+            while(true)
+            {
+                String answer = authenticator.authenticationChioce();
 
-        return false;
+                if (user == null) continue;
+
+                break;
+            }
+
+
+        }
+        catch (NotBoundException e)
+        {
+            e.printStackTrace();
+        }
+
     }
 }

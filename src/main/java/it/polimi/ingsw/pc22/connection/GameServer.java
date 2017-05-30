@@ -1,6 +1,6 @@
 package it.polimi.ingsw.pc22.connection;
 
-import it.polimi.ingsw.pc22.rmi.RMIAuthenicationService;
+import it.polimi.ingsw.pc22.rmi.RMIAuthenticationService;
 import it.polimi.ingsw.pc22.utils.UserLoader;
 
 import java.io.IOException;
@@ -17,6 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class GameServer 
 {
 	private static Map<String, GameMatch> gameMatchMap;
+
 	private static final int SOCKET_PORT = 9001;
 
 	private static final int RMI_PORT = 5252;
@@ -29,15 +30,12 @@ public class GameServer
 		
 		gameMatchMap = new ConcurrentHashMap<>();
 
-		/*//TODO HANDLE RMI CONNECTION
-
-		RMIAuthenticationHandler rmiAuthenicationService
+		RMIAuthenticationHandler rmiAuthenticationHandler
 				= new RMIAuthenticationHandler();
-
 		try
 		{
-			RMIAuthenicationService stub = (RMIAuthenicationService)
-					UnicastRemoteObject.exportObject(rmiAuthenicationService, 0);
+			RMIAuthenticationService stub = (RMIAuthenticationService)
+					UnicastRemoteObject.exportObject(rmiAuthenticationHandler, 0);
 
 			Registry registry = LocateRegistry.createRegistry(RMI_PORT);
 
@@ -50,7 +48,7 @@ public class GameServer
 			e.printStackTrace();
 		}
 
-		System.out.println("Authentication Service running at "+ RMI_PORT +" port...");*/
+		System.out.println("Authentication Service running at " + RMI_PORT + " port");
 
 		ServerSocket serverSocket;
 
