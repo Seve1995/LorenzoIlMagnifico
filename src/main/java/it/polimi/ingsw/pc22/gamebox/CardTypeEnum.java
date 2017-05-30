@@ -5,4 +5,5 @@ public enum CardTypeEnum {
 	VENTURE,
 	BUILDING,
 	CHARACTER,
+	ANY
 }

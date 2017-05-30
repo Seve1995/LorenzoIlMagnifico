@@ -1,12 +1,17 @@
 package it.polimi.ingsw.pc22.gamebox;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import it.polimi.ingsw.pc22.effects.Effect;
 
 public class LeaderCard {
 	private String name;
 	private List<Asset> requiredAssets;
-	private List<DevelopmentCard> requiredCard;
-	private boolean faceUp; 
+	private Map <CardTypeEnum, Integer> requiredCard = new HashMap<CardTypeEnum, Integer>();
+	private boolean faceUp;
+	private List<Effect> effects; 
 	
 	public String getName() {
 		return name;
@@ -20,10 +25,22 @@ public class LeaderCard {
 	public void setRequiredAssets(List<Asset> requiredAssets) {
 		this.requiredAssets = requiredAssets;
 	}
-	public List<DevelopmentCard> getRequiredCard() {
+	public Map<CardTypeEnum, Integer> getRequiredCard() {
 		return requiredCard;
 	}
-	public void setRequiredCard(List<DevelopmentCard> requiredCard) {
+	public void setRequiredCard(Map<CardTypeEnum, Integer> requiredCard) {
 		this.requiredCard = requiredCard;
+	}
+	public boolean isFaceUp() {
+		return faceUp;
+	}
+	public void setFaceUp(boolean faceUp) {
+		this.faceUp = faceUp;
+	}
+	public List<Effect> getEffects() {
+		return effects;
+	}
+	public void setEffects(List<Effect> effects) {
+		this.effects = effects;
 	}
 }

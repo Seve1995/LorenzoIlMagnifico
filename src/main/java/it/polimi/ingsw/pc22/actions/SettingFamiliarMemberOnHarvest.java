@@ -8,7 +8,8 @@ import it.polimi.ingsw.pc22.player.Player;
 
 public class SettingFamiliarMemberOnHarvest extends Action{
 	
-	private Harvest harvest; 
+	private Harvest harvest;
+	
 	
 	public SettingFamiliarMemberOnHarvest(FamilyMember familyMember, Harvest harvest) {
 		super(familyMember);
@@ -35,6 +36,7 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 				break;
 			
 			if (player.getFamilyMember().contains(currFamilyMember))
+				
 				return false;
 			
 		}

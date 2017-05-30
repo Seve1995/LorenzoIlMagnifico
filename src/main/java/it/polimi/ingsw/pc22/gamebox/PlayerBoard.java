@@ -76,6 +76,16 @@ public class PlayerBoard {
 	public void getBonus (BonusTile bonusTile){
 		
 	}
+
+
+	public List<LeaderCard> getLeaderCards() {
+		return leaderCards;
+	}
+
+
+	public void setLeaderCards(List<LeaderCard> leaderCards) {
+		this.leaderCards = leaderCards;
+	}
 	
 	
 		

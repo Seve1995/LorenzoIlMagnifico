@@ -33,6 +33,7 @@ public class SettingFamiliarMemberOnMarket extends Action{
 	
 	@Override
 	public boolean executeAction(Player player) {
+		
 		List<Effect> currEffects;
 		
 		

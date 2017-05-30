@@ -60,8 +60,9 @@ public class PickTowerCard implements Effect{
 			
 		}
 		
-		if (this.cardType.equals(CardTypeEnum.TERRITORY))
+		if (this.cardType.equals(CardTypeEnum.TERRITORY)) 
 		{
+			
 			if (player.getPlayerBoard().getTerritories().size() > 6)
 			{
 				return false;

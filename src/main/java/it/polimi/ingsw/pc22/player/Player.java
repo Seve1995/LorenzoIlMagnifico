@@ -34,11 +34,13 @@ public class Player
 	private boolean disableMarket; //Serve per gestire l'effetto della tessera scomunica
 	private boolean servantsHandlerMalus; //Serve per gestire l'effetto della tessera scomunica
 	private boolean noFirstAction; //Serve per gestire l'effetto della tessera scomunica
+	private boolean noMilitaryPointsForTerritories;//Serve per gestire l'effetto della carta Leader Cesare Borgia
 	private boolean newAction;
 	private boolean removeTowerBonus;
 	private List<FamilyMember> familyMember;
 	private GameBoard gameBoard;
 	private PlayerBoard playerBoard;
+	
 	
 	public String getName() {
 		return name;
