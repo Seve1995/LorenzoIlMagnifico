@@ -1,6 +1,5 @@
 package it.polimi.ingsw.pc22.connection;
 
-import com.sun.xml.internal.xsom.impl.scd.Iterators;
 import it.polimi.ingsw.pc22.adapters.GameAdapter;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
