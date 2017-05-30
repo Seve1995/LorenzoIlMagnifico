@@ -18,4 +18,10 @@ public class RMIClientHandler implements RMIClientAuthenticator
     public String getPassword() {
         return null;
     }
+
+	@Override
+	public String authenticationChioce() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
