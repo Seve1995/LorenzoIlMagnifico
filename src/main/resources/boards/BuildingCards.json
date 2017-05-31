@@ -5,6 +5,7 @@
       "cardNumber": 25,
       "cardType": "BUILDING",
       "roundNumber": 1,
+      "permanentEffectChoiche": false,
       "permanentEffectActivationCost": 5,
       "costs": [
         {
@@ -32,6 +33,7 @@
       "permanentEffect": [
         {
           "name": "AddAssetForEveryAssetOrCard",
+          "paidAsset" : null,
           "paidCardType": "BUILDING",
           "gainedAsset": {
             "type": "COIN",
@@ -45,6 +47,7 @@
       "cardNumber": 26,
       "cardType": "BUILDING",
       "roundNumber": 1,
+      "permanentEffectChoiche": false,
       "permanentEffectActivationCost": 5,
       "costs": [
         {
@@ -72,6 +75,7 @@
       "permanentEffect": [
         {
           "name": "AddAssetForEveryAssetOrCard",
+          "paidAsset" : null,
           "paidCardType": "TERRITORY",
           "gainedAsset": {
             "type": "COIN",
@@ -85,6 +89,7 @@
       "cardNumber": 27,
       "cardType": "BUILDING",
       "roundNumber": 1,
+      "permanentEffectChoiche": false,
       "permanentEffectActivationCost": 6,
       "costs": [
         {
@@ -112,6 +117,7 @@
       "permanentEffect": [
         {
           "name": "AddAssetForEveryAssetOrCard",
+          "paidAsset" : null,
           "paidCardType": "BUILDING",
           "gainedAsset": {
             "type": "VICTORYPOINT",
@@ -125,6 +131,7 @@
       "cardNumber": 28,
       "cardType": "BUILDING",
       "roundNumber": 1,
+      "permanentEffectChoiche": false,
       "permanentEffectActivationCost": 6,
       "costs": [
         {
@@ -152,6 +159,7 @@
       "permanentEffect": [
         {
           "name": "AddAssetForEveryAssetOrCard",
+          "paidAsset" : null,
           "paidCardType": "CHARACTER",
           "gainedAsset": {
             "type": "VICTORYPOINT",
@@ -208,7 +216,9 @@
                 "value": 3
               }
             }
-          ]
+          ],
+          "onlyOneAsset" : false,
+          "gainedEffect" : null
         },
         {
           "name": "FromAssetToAssetOrEffect",
@@ -227,7 +237,9 @@
                 "value": 5
               }
             }
-          ]
+          ],
+          "onlyOneAsset" : false,
+          "gainedEffect": null
         }
       ]
     },
@@ -279,7 +291,9 @@
                 "value": 3
               }
             }
-          ]
+          ],
+          "onlyOneAsset" : false,
+          "gainedEffect" : null
         },
         {
           "name": "FromAssetToAssetOrEffect",
@@ -298,7 +312,9 @@
                 "value": 5
               }
             }
-          ]
+          ],
+          "onlyOneAsset" : false,
+          "gainedEffect" : null
         }
       ]
     },
@@ -307,6 +323,7 @@
       "cardNumber": 31,
       "cardType": "BUILDING",
       "roundNumber": 1,
+      "permanentEffectChoiche": false,
       "permanentEffectActivationCost": 2,
       "costs": [
         {
@@ -343,7 +360,9 @@
                 "value": 1
               }
             }
-          ]
+          ],
+          "onlyOneAsset" : false,
+          "gainedEffect" : null
         }
       ]
     },
@@ -352,6 +371,7 @@
       "cardNumber": 32,
       "cardType": "BUILDING",
       "roundNumber": 1,
+      "permanentEffectChoiche": false,
       "permanentEffectActivationCost": 1,
       "costs": [
         {
@@ -381,6 +401,8 @@
               }
             }
           ],
+          "gainedAssets": null,
+          "onlyOneAsset" : false,
           "gainedEffect": {
             "name": "PickOneCouncilPrivilege"
           }
@@ -392,6 +414,7 @@
       "cardNumber": 33,
       "cardType": "BUILDING",
       "roundNumber": 2,
+      "permanentEffectChoiche": false,
       "permanentEffectActivationCost": 3,
       "costs": [
         {
@@ -440,7 +463,9 @@
                 "value": 2
               }
             }
-          ]
+          ],
+          "onlyOneAsset" : false,
+          "gainedEffect" : null
         }
       ]
     },
@@ -486,7 +511,9 @@
                 "value": 3
               }
             }
-          ]
+          ],
+          "onlyOneAsset" : false,
+          "gainedEffect" : null
         },
         {
           "name": "FromAssetToAssetOrEffect",
@@ -505,7 +532,9 @@
                 "value": 5
               }
             }
-          ]
+          ],
+          "onlyOneAsset" : false,
+          "gainedEffect" : null
         }
       ]
     },
@@ -514,6 +543,7 @@
       "cardNumber": 35,
       "cardType": "BUILDING",
       "roundNumber": 2,
+      "permanentEffectChoiche": false,
       "permanentEffectActivationCost": 4,
       "costs": [
         {
@@ -550,7 +580,9 @@
                 "value": 3
               }
             }
-          ]
+          ],
+          "onlyOneAsset" : false,
+          "gainedEffect" : null
         },
         {
           "name": "FromAssetToAssetOrEffect",
@@ -569,7 +601,9 @@
                 "value": 7
               }
             }
-          ]
+          ],
+          "onlyOneAsset" : false,
+          "gainedEffect" : null
         }
       ]
     },
@@ -578,6 +612,7 @@
       "cardNumber": 36,
       "cardType": "BUILDING",
       "roundNumber": 2,
+      "permanentEffectChoiche": false,
       "permanentEffectActivationCost": 5,
       "costs": [
         {
@@ -614,7 +649,9 @@
                 "value": 3
               }
             }
-          ]
+          ],
+          "onlyOneAsset" : false,
+          "gainedEffect" : null
         },
         {
           "name": "FromAssetToAssetOrEffect",
@@ -633,7 +670,9 @@
                 "value": 7
               }
             }
-          ]
+          ],
+          "onlyOneAsset" : false,
+          "gainedEffect" : null
         }
       ]
     },
@@ -642,6 +681,7 @@
       "cardNumber": 37,
       "cardType": "BUILDING",
       "roundNumber": 2,
+      "permanentEffectChoiche": false,
       "permanentEffectActivationCost": 4,
       "costs": [
         {
@@ -696,7 +736,9 @@
                 "value": 6
               }
             }
-          ]
+          ],
+          "onlyOneAsset" : false,
+          "gainedEffect" : null
         }
       ]
     },
@@ -705,6 +747,7 @@
       "cardNumber": 38,
       "cardType": "BUILDING",
       "roundNumber": 2,
+      "permanentEffectChoiche": false,
       "permanentEffectActivationCost": 2,
       "costs": [
         {
@@ -754,7 +797,9 @@
                 "value": 2
               }
             }
-          ]
+          ],
+          "onlyOneAsset" : false,
+          "gainedEffect" : null
         }
       ]
     },
@@ -763,6 +808,7 @@
       "cardNumber": 39,
       "cardType": "BUILDING",
       "roundNumber": 2,
+      "permanentEffectChoiche": false,
       "permanentEffectActivationCost": 1,
       "costs": [
         {
@@ -805,7 +851,9 @@
                 "value": 3
               }
             }
-          ]
+          ],
+          "onlyOneAsset" : false,
+          "gainedEffect" : null
         }
       ]
     },
@@ -814,6 +862,7 @@
       "cardNumber": 40,
       "cardType": "BUILDING",
       "roundNumber": 2,
+      "permanentEffectChoiche": false,
       "permanentEffectActivationCost": 6,
       "costs": [
         {
@@ -866,6 +915,7 @@
       "cardNumber": 41,
       "cardType": "BUILDING",
       "roundNumber": 3,
+      "permanentEffectChoiche": false,
       "permanentEffectActivationCost": 2,
       "costs": [
         {
@@ -911,6 +961,7 @@
       "cardNumber": 42,
       "cardType": "BUILDING",
       "roundNumber": 3,
+      "permanentEffectChoiche": false,
       "permanentEffectActivationCost": 4,
       "costs": [
         {
@@ -959,7 +1010,9 @@
                 "value": 3
               }
             }
-          ]
+          ],
+          "onlyOneAsset" : false,
+          "gainedEffect" : null
         }
       ]
     },
@@ -968,6 +1021,7 @@
       "cardNumber": 43,
       "cardType": "BUILDING",
       "roundNumber": 3,
+      "permanentEffectChoiche": false,
       "permanentEffectActivationCost": 1,
       "costs": [
         {
@@ -1013,6 +1067,7 @@
       "cardNumber": 44,
       "cardType": "BUILDING",
       "roundNumber": 3,
+      "permanentEffectChoiche": false,
       "permanentEffectActivationCost": 5,
       "costs": [
         {
@@ -1061,6 +1116,7 @@
       "cardNumber": 45,
       "cardType": "BUILDING",
       "roundNumber": 3,
+      "permanentEffectChoiche": false,
       "permanentEffectActivationCost": 6,
       "costs": [
         {
@@ -1115,7 +1171,9 @@
                 "value": 4
               }
             }
-          ]
+          ],
+          "onlyOneAsset" : false,
+          "gainedEffect" : null
         }
       ]
     },
@@ -1124,6 +1182,7 @@
       "cardNumber": 46,
       "cardType": "BUILDING",
       "roundNumber": 3,
+      "permanentEffectChoiche": false,
       "permanentEffectActivationCost": 1,
       "costs": [
         {
@@ -1158,7 +1217,6 @@
       "permanentEffect": [
         {
           "name": "FromAssetToAssetOrEffect",
-          "onlyOneAsset" : true,
           "paidAssets": [
             {
               "asset": {
@@ -1180,7 +1238,9 @@
                 "value": 2
               }
             }
-          ]
+          ],
+          "onlyOneAsset" : true,
+          "gainedEffect" : null
         }
       ]
     },
@@ -1189,6 +1249,7 @@
       "cardNumber": 47,
       "cardType": "BUILDING",
       "roundNumber": 3,
+      "permanentEffectChoiche": false,
       "permanentEffectActivationCost": 3,
       "costs": [
         {
@@ -1243,7 +1304,9 @@
                 "value": 1
               }
             }
-          ]
+          ],
+          "onlyOneAsset" : false,
+          "gainedEffect" : null
         }
       ]
     },
@@ -1252,6 +1315,7 @@
       "cardNumber": 48,
       "cardType": "BUILDING",
       "roundNumber": 3,
+      "permanentEffectChoiche": false,
       "permanentEffectActivationCost": 2,
       "costs": [
         {
