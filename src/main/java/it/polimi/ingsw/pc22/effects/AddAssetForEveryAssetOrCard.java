@@ -1,7 +1,6 @@
 package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.gamebox.Asset;
-import it.polimi.ingsw.pc22.gamebox.AssetType;
 import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
 import it.polimi.ingsw.pc22.player.Player;
 
@@ -43,7 +42,7 @@ public class AddAssetForEveryAssetOrCard implements Effect{
 		{
 			if (paidCardType != null) 
 			{
-				int totalCards = 0;
+				int totalCards;
 				switch (paidCardType) {
 				
 				case TERRITORY:
@@ -79,7 +78,7 @@ public class AddAssetForEveryAssetOrCard implements Effect{
 		
 		else if (gainedAsset!=null)
 		{
-			int totalAsset = 0;
+			int totalAsset;
 			totalAsset = player.getAsset(gainedAsset.getType());
 			totalAsset = totalAsset/paidAsset.getValue(); 
 			//Perché se ad esempio ho un guadagno di 1 moneta "OGNI 2" punti militari e il player ha 10 punti military, devo aggiungerli un

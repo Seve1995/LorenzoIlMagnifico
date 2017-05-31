@@ -1,8 +1,5 @@
 package it.polimi.ingsw.pc22.utils;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import it.polimi.ingsw.pc22.connection.User;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,10 +8,9 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.nio.file.Files;
-import java.util.*;
-import java.util.stream.Stream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserLoader
 {

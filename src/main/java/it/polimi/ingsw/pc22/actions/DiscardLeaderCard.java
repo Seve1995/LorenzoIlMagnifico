@@ -1,7 +1,6 @@
 package it.polimi.ingsw.pc22.actions;
 
 import it.polimi.ingsw.pc22.effects.PickOneCouncilPrivilege;
-import it.polimi.ingsw.pc22.gamebox.LeaderCard;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class DiscardLeaderCard extends Action{

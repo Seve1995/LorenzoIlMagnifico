@@ -1,13 +1,14 @@
 package it.polimi.ingsw.pc22.actions;
 
 
+import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.gamebox.ColorsEnum;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.gamebox.Tower;
 import it.polimi.ingsw.pc22.gamebox.TowerCell;
 import it.polimi.ingsw.pc22.player.Player;
+
 import java.util.List;
-import it.polimi.ingsw.pc22.effects.Effect;
 
 public class SettingFamiliarMemberOnTower extends Action {
 	private int floor;
