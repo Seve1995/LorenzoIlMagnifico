@@ -1,0 +1,193 @@
+{
+  "ExcommunicationCards": [
+    {
+      "age": 1,
+      "number": 1,
+      "effects": [
+        {
+          "name": null
+        }
+      ]
+    },
+    {
+      "age": 1,
+      "number": 2,
+      "effects": [
+        {
+          "name": null
+        }
+      ]
+    },
+    {
+      "age": 1,
+      "number": 3,
+      "effects": [
+        {
+          "name": null
+        }
+      ]
+    },
+    {
+      "age": 1,
+      "number": 4,
+      "effects": [
+        {
+          "name": null
+        }
+      ]
+    },
+    {
+      "age": 1,
+      "number": 5,
+      "effects": [
+        {
+          "name": null
+        }
+      ]
+    },
+    {
+      "age": 1,
+      "number": 6,
+      "effects": [
+        {
+          "name": null
+        }
+      ]
+    },
+    {
+      "age": 1,
+      "number": 7,
+      "effects": [
+        {
+          "name": null
+        }
+      ]
+    },
+    {
+      "age": 2,
+      "number": 1,
+      "effects": [
+        {
+          "name": null
+        }
+      ]
+    },
+    {
+      "age": 2,
+      "number": 2,
+      "effects": [
+        {
+          "name": null
+        }
+      ]
+    },
+    {
+      "age": 2,
+      "number": 3,
+      "effects": [
+        {
+          "name": null
+        }
+      ]
+    },
+    {
+      "age": 2,
+      "number": 4,
+      "effects": [
+        {
+          "name": null
+        }
+      ]
+    },
+    {
+      "age": 2,
+      "number": 5,
+      "effects": [
+        {
+          "name": null
+        }
+      ]
+    },
+    {
+      "age": 2,
+      "number": 6,
+      "effects": [
+        {
+          "name": null
+        }
+      ]
+    },
+    {
+      "age": 2,
+      "number": 7,
+      "effects": [
+        {
+          "name": null
+        }
+      ]
+    },
+    {
+      "age": 3,
+      "number": 1,
+      "effects": [
+        {
+          "name": null
+        }
+      ]
+    },
+    {
+      "age": 3,
+      "number": 2,
+      "effects": [
+        {
+          "name": null
+        }
+      ]
+    },
+    {
+      "age": 3,
+      "number": 3,
+      "effects": [
+        {
+          "name": null
+        }
+      ]
+    },
+    {
+      "age": 3,
+      "number": 4,
+      "effects": [
+        {
+          "name": null
+        }
+      ]
+    },
+    {
+      "age": 3,
+      "number": 5,
+      "effects": [
+        {
+          "name": null
+        }
+      ]
+    },
+    {
+      "age": 3,
+      "number": 6,
+      "effects": [
+        {
+          "name": null
+        }
+      ]
+    },
+    {
+      "age": 3,
+      "number": 7,
+      "effects": [
+        {
+          "name": null
+        }
+      ]
+    }
+  ]
+}

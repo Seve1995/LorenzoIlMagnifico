@@ -30,6 +30,7 @@ public class Player
 	private boolean servantsHandlerMalus; //Serve per gestire l'effetto della tessera scomunica
 	private boolean noFirstAction; //Serve per gestire l'effetto della tessera scomunica
 	private boolean noMilitaryPointsForTerritories;//Serve per gestire l'effetto della carta Leader Cesare Borgia
+	private boolean excommunicated;
 	private boolean newAction;
 	private boolean removeTowerBonus;
 	private List<FamilyMember> familyMember;
@@ -208,6 +209,13 @@ public class Player
 	}
 	public void setLeaderCards(List<LeaderCard> leaderCards) {
 		this.leaderCards = leaderCards;
+	}
+	
+	public boolean isExcommunicated() {
+		return excommunicated;
+	}
+	public void setExcommunicated(boolean excommunicated) {
+		this.excommunicated = excommunicated;
 	}
 	public int getAsset(AssetType assetType) 
 	{
