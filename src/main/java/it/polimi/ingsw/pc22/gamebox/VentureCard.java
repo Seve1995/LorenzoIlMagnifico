@@ -7,10 +7,10 @@ import java.util.List;
 
 public class VentureCard extends DevelopmentCard
 {
+	private boolean requiredCostChoice = false;
 	private Asset militaryPointsRequired;
 	private Asset militaryPointsCost;
 	private List<Asset> resourcesCost; 
-	private boolean requiredCostChoice = false;
 	
 	
 	public VentureCard

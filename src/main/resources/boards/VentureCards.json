@@ -1,0 +1,999 @@
+{
+  "cards": [
+    {
+      "name": "Hiring Recruits",
+      "cardNumber": 73,
+      "cardType": "VENTURE",
+      "roundNumber": 1,
+      "permanentEffectChoiche": false,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "resourcesCost": [
+        {
+          "asset": {
+            "type": "COIN",
+            "value": 4
+          }
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 5
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 4
+          }
+        }
+      ]
+    },
+    {
+      "name": "Repairing the Church",
+      "cardNumber": 74,
+      "cardType": "VENTURE",
+      "roundNumber": 1,
+      "permanentEffectChoiche": false,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "resourcesCost": [
+        {
+          "asset": {
+            "type": "COIN",
+            "value": 1
+          }
+        },
+        {
+          "asset": {
+            "type": "WOOD",
+            "value": 1
+          }
+        },
+        {
+          "asset": {
+            "type": "STONE",
+            "value": 1
+          }
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 1
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Building the Walls",
+      "cardNumber": 75,
+      "cardType": "VENTURE",
+      "roundNumber": 1,
+      "permanentEffectChoiche": false,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "resourcesCost": [
+        {
+          "asset": {
+            "type": "STONE",
+            "value": 3
+          }
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 2
+          }
+        },
+        {
+          "name": "PickOneCouncilPrivilege"
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 3
+          }
+        }
+      ]
+    },
+    {
+      "name": "Raising a Statue",
+      "cardNumber": 76,
+      "cardType": "VENTURE",
+      "roundNumber": 1,
+      "permanentEffectChoiche": false,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "resourcesCost": [
+        {
+          "asset": {
+            "type": "WOOD",
+            "value": 2
+          }
+        },
+        {
+          "asset": {
+            "type": "STONE",
+            "value": 2
+          }
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "PickTwoCouncilPrivilege"
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 4
+          }
+        }
+      ]
+    },
+    {
+      "name": "Military Campaign",
+      "cardNumber": 77,
+      "cardType": "VENTURE",
+      "roundNumber": 1,
+      "permanentEffectChoiche": false,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": {
+        "type": "MILITARYPOINT",
+        "value": 3
+      },
+      "militaryPointsCost": {
+        "type": "MILITARYPOINT",
+        "value": 2
+      },
+      "resourcesCost": null,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "COIN",
+            "value": 3
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hosting Panhandlers",
+      "cardNumber": 78,
+      "cardType": "VENTURE",
+      "roundNumber": 1,
+      "permanentEffectChoiche": false,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "resourcesCost": [
+        {
+          "asset": {
+            "type": "WOOD",
+            "value": 3
+          }
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "SERVANT",
+            "value": 4
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 4
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fighting Heresies",
+      "cardNumber": 79,
+      "cardType": "VENTURE",
+      "roundNumber": 1,
+      "permanentEffectChoiche": false,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": {
+        "type": "MILITARYPOINT",
+        "value": 5
+      },
+      "militaryPointsCost": {
+        "type": "MILITARYPOINT",
+        "value": 3
+      },
+      "resourcesCost": null,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 2
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Support to the Bishop",
+      "cardNumber": 80,
+      "cardType": "VENTURE",
+      "roundNumber": 1,
+      "permanentEffectChoiche": false,
+      "requiredCostChoice": true,
+      "militaryPointsRequired": {
+        "type": "MILITARYPOINT",
+        "value": 4
+      },
+      "militaryPointsCost": {
+        "type": "MILITARYPOINT",
+        "value": 2
+      },
+      "resourcesCost": [
+        {
+          "asset": {
+            "type": "WOOD",
+            "value": 1
+          }
+        },
+        {
+          "asset": {
+            "type": "STONE",
+            "value": 1
+          }
+        },
+        {
+          "asset": {
+            "type": "COIN",
+            "value": 2
+          }
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 3
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "Support to the Bishop",
+      "cardNumber": 81,
+      "cardType": "VENTURE",
+      "roundNumber": 2,
+      "permanentEffectChoiche": false,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "resourcesCost": [
+        {
+          "asset": {
+            "type": "COIN",
+            "value": 6
+          }
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 6
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Repairing the Abbey",
+      "cardNumber": 82,
+      "cardType": "VENTURE",
+      "roundNumber": 2,
+      "permanentEffectChoiche": false,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "resourcesCost": [
+        {
+          "asset": {
+            "type": "COIN",
+            "value": 2
+          }
+        },
+        {
+          "asset": {
+            "type": "WOOD",
+            "value": 2
+          }
+        },
+        {
+          "asset": {
+            "type": "STONE",
+            "value": 2
+          }
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 2
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 6
+          }
+        }
+      ]
+    },
+    {
+      "name": "Building the Bastions",
+      "cardNumber": 83,
+      "cardType": "VENTURE",
+      "roundNumber": 2,
+      "permanentEffectChoiche": false,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "resourcesCost": [
+        {
+          "asset": {
+            "type": "STONE",
+            "value": 4
+          }
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 3
+          }
+        },
+        {
+          "name": "PickOneCouncilPrivilege"
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 2
+          }
+        }
+      ]
+    },
+    {
+      "name": "Support to the King",
+      "cardNumber": 84,
+      "cardType": "VENTURE",
+      "roundNumber": 2,
+      "permanentEffectChoiche": false,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": {
+        "type": "MILITARYPOINT",
+        "value": 6
+      },
+      "militaryPointsCost": {
+        "type": "MILITARYPOINT",
+        "value": 3
+      },
+      "resourcesCost": null,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "COIN",
+            "value": 5
+          }
+        },
+        {
+          "name": "PickOneCouncilPrivilege"
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 3
+          }
+        }
+      ]
+    },
+    {
+      "name": "Improving the Canals",
+      "cardNumber": 85,
+      "cardType": "VENTURE",
+      "roundNumber": 2,
+      "permanentEffectChoiche": false,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "resourcesCost": [
+        {
+          "asset": {
+            "type": "SERVANT",
+            "value": 2
+          }
+        },
+        {
+          "asset": {
+            "type": "COIN",
+            "value": 3
+          }
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "DoProductionAction",
+          "value": 4
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hosting Foreigners",
+      "cardNumber": 86,
+      "cardType": "VENTURE",
+      "roundNumber": 2,
+      "permanentEffectChoiche": false,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "resourcesCost": [
+        {
+          "asset": {
+            "type": "WOOD",
+            "value": 4
+          }
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "SERVANT",
+            "value": 5
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 4
+          }
+        }
+      ]
+    },
+    {
+      "name": "Crusade",
+      "cardNumber": 87,
+      "cardType": "VENTURE",
+      "roundNumber": 2,
+      "permanentEffectChoiche": false,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": {
+        "type": "MILITARYPOINT",
+        "value": 8
+      },
+      "militaryPointsCost": {
+        "type": "MILITARYPOINT",
+        "value": 4
+      },
+      "resourcesCost": null,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "COIN",
+            "value": 5
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "COIN",
+            "value": 5
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Support to the Cardinal",
+      "cardNumber": 88,
+      "cardType": "VENTURE",
+      "roundNumber": 2,
+      "permanentEffectChoiche": false,
+      "requiredCostChoice": true,
+      "militaryPointsRequired": {
+        "type": "MILITARYPOINT",
+        "value": 7
+      },
+      "militaryPointsCost": {
+        "type": "MILITARYPOINT",
+        "value": 4
+      },
+      "resourcesCost": [
+        {
+          "asset": {
+            "type": "WOOD",
+            "value": 2
+          }
+        },
+        {
+          "asset": {
+            "type": "STONE",
+            "value": 2
+          }
+        },
+        {
+          "asset": {
+            "type": "COIN",
+            "value": 3
+          }
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 3
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 4
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hiring Mercenaries",
+      "cardNumber": 89,
+      "cardType": "VENTURE",
+      "roundNumber": 3,
+      "permanentEffectChoiche": false,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "resourcesCost": [
+        {
+          "asset": {
+            "type": "COIN",
+            "value": 8
+          }
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 7
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 6
+          }
+        }
+      ]
+    },
+    {
+      "name": "Repairing the Cathedral",
+      "cardNumber": 90,
+      "cardType": "VENTURE",
+      "roundNumber": 3,
+      "permanentEffectChoiche": false,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "resourcesCost": [
+        {
+          "asset": {
+            "type": "COIN",
+            "value": 3
+          }
+        },
+        {
+          "asset": {
+            "type": "WOOD",
+            "value": 3
+          }
+        },
+        {
+          "asset": {
+            "type": "STONE",
+            "value": 3
+          }
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "PickTowerCard",
+          "cardType": "ANY",
+          "diceValue": 7,
+          "cardCostDiscount": null
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 1
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Building the Towers",
+      "cardNumber": 91,
+      "cardType": "VENTURE",
+      "roundNumber": 3,
+      "permanentEffectChoiche": false,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "resourcesCost": [
+        {
+          "asset": {
+            "type": "STONE",
+            "value": 6
+          }
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 4
+          }
+        },
+        {
+          "name": "PickOneCouncilPalace"
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 4
+          }
+        }
+      ]
+    },
+    {
+      "name": "Promoting Sacred Art",
+      "cardNumber": 92,
+      "cardType": "VENTURE",
+      "roundNumber": 3,
+      "permanentEffectChoiche": false,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "resourcesCost": [
+        {
+          "asset": {
+            "type": "WOOD",
+            "value": 6
+          }
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 3
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 3
+          }
+        }
+      ]
+    },
+    {
+      "name": "Military Conquest",
+      "cardNumber": 93,
+      "cardType": "VENTURE",
+      "roundNumber": 3,
+      "permanentEffectChoiche": false,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": {
+        "type": "MILITARYPOINT",
+        "value": 12
+      },
+      "militaryPointsCost": {
+        "type": "MILITARYPOINT",
+        "value": 6
+      },
+      "resourcesCost": null,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "WOOD",
+            "value": 3
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "STONE",
+            "value": 3
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "COIN",
+            "value": 3
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 7
+          }
+        }
+      ]
+    },
+    {
+      "name": "Improving the Roads",
+      "cardNumber": 94,
+      "cardType": "VENTURE",
+      "roundNumber": 3,
+      "permanentEffectChoiche": false,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "resourcesCost": [
+        {
+          "asset": {
+            "type": "SERVANT",
+            "value": 3
+          }
+        },
+        {
+          "asset": {
+            "type": "COIN",
+            "value": 4
+          }
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "DoProductionAction",
+          "value": 3
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sacred War",
+      "cardNumber": 95,
+      "cardType": "VENTURE",
+      "roundNumber": 3,
+      "permanentEffectChoiche": false,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": {
+        "type": "MILITARYPOINT",
+        "value": 15
+      },
+      "militaryPointsCost": {
+        "type": "MILITARYPOINT",
+        "value": 8
+      },
+      "resourcesCost": null,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 4
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 8
+          }
+        }
+      ]
+    },
+    {
+      "name": "Support to the Pope",
+      "cardNumber": 96,
+      "cardType": "VENTURE",
+      "roundNumber": 3,
+      "permanentEffectChoiche": false,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": {
+        "type": "MILITARYPOINT",
+        "value": 10
+      },
+      "militaryPointsCost": {
+        "type": "MILITARYPOINT",
+        "value": 5
+      },
+      "resourcesCost": [
+        {
+          "asset": {
+            "type": "WOOD",
+            "value": 3
+          }
+        },
+        {
+          "asset": {
+            "type": "STONE",
+            "value": 3
+          }
+        },
+        {
+          "asset": {
+            "type": "COIN",
+            "value": 4
+          }
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 2
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 10
+          }
+        }
+      ]
+    }
+  ]
+}

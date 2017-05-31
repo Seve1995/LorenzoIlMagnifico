@@ -10,7 +10,7 @@ public abstract class DevelopmentCard
 	private String name;
 	private int cardNumber;
 	private int roundNumber;
-	private boolean permanentEffectChoiche = false;
+	private boolean permanentEffectChoice = false;
 	
 	
 	private List<Effect> immediateEffects;
@@ -64,12 +64,12 @@ public abstract class DevelopmentCard
 		this.permanentEffects = permanentEffects;
 	}
 	
-	public boolean isPermanentEffectChoiche() {
-		return permanentEffectChoiche;
+	public boolean isPermanentEffectChoice() {
+		return permanentEffectChoice;
 	}
 
-	public void setPermanentEffectChoiche(boolean permanentEffectChoiche) {
-		this.permanentEffectChoiche = permanentEffectChoiche;
+	public void setPermanentEffectChoiche(boolean permanentEffectChoice) {
+		this.permanentEffectChoice = permanentEffectChoice;
 	}
 	
 
@@ -79,7 +79,7 @@ public abstract class DevelopmentCard
 		int result = 1;
 		result = prime * result + ((immediateEffects == null) ? 0 : immediateEffects.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + (permanentEffectChoiche ? 1231 : 1237);
+		result = prime * result + (permanentEffectChoice ? 1231 : 1237);
 		result = prime * result + ((permanentEffects == null) ? 0 : permanentEffects.hashCode());
 		result = prime * result + roundNumber;
 		return result;
@@ -104,7 +104,7 @@ public abstract class DevelopmentCard
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (permanentEffectChoiche != other.permanentEffectChoiche)
+		if (permanentEffectChoice != other.permanentEffectChoice)
 			return false;
 		if (permanentEffects == null) {
 			if (other.permanentEffects != null)
@@ -134,7 +134,7 @@ public abstract class DevelopmentCard
 			output += "It has the following Permanent Effects " ;
 			for (Effect e: this.permanentEffects){ 
 				 output += e.toString() + "\n";
-				 if (permanentEffectChoiche && !(e.equals(permanentEffects.get(permanentEffects.size()-1))))
+				 if (permanentEffectChoice && !(e.equals(permanentEffects.get(permanentEffects.size()-1))))
 				 {
 					 output += "or";
 				 }
