@@ -1,11 +1,6 @@
 package it.polimi.ingsw.pc22.player;
 
-import it.polimi.ingsw.pc22.gamebox.Asset;
-import it.polimi.ingsw.pc22.gamebox.AssetType;
-import it.polimi.ingsw.pc22.gamebox.FamilyMember;
-import it.polimi.ingsw.pc22.gamebox.GameBoard;
-import it.polimi.ingsw.pc22.gamebox.LeaderCard;
-import it.polimi.ingsw.pc22.gamebox.PlayerBoard;
+import it.polimi.ingsw.pc22.gamebox.*;
 
 import java.util.List;
 

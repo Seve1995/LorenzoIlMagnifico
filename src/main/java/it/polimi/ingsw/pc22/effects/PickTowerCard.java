@@ -1,11 +1,10 @@
 package it.polimi.ingsw.pc22.effects;
 
-import java.util.List;
-
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
-import it.polimi.ingsw.pc22.gamebox.DevelopmentCard;
 import it.polimi.ingsw.pc22.player.Player;
+
+import java.util.List;
 
 public class PickTowerCard implements Effect{
 	

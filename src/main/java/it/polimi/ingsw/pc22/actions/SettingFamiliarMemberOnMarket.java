@@ -1,11 +1,12 @@
 package it.polimi.ingsw.pc22.actions;
 
-import java.util.List;
 import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.gamebox.Market;
 import it.polimi.ingsw.pc22.gamebox.MarketCell;
 import it.polimi.ingsw.pc22.player.Player;
+
+import java.util.List;
 
 public class SettingFamiliarMemberOnMarket extends Action{
 	private Market market;

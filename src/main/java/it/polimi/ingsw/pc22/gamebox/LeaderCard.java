@@ -1,10 +1,10 @@
 package it.polimi.ingsw.pc22.gamebox;
 
+import it.polimi.ingsw.pc22.effects.Effect;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import it.polimi.ingsw.pc22.effects.Effect;
 
 public class LeaderCard {
 	private String name;

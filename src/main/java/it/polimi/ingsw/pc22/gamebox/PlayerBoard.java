@@ -1,6 +1,5 @@
 package it.polimi.ingsw.pc22.gamebox;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class PlayerBoard {

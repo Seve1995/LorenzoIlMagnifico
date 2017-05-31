@@ -1,10 +1,5 @@
 package it.polimi.ingsw.pc22.actions;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.Before;
-
 import it.polimi.ingsw.pc22.effects.AddAsset;
 import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.effects.PickTwoCouncilPrivilege;
@@ -12,7 +7,11 @@ import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.AssetType;
 import it.polimi.ingsw.pc22.gamebox.Market;
 import it.polimi.ingsw.pc22.gamebox.MarketCell;
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SettingFamiliarMemberOnMarketTest {
 	private Market market;

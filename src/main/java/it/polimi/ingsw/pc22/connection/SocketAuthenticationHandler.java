@@ -8,11 +8,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.logging.Logger;
 
 public class SocketAuthenticationHandler extends AuthenticationHandler implements Runnable {
 	private Socket socket;
 	private BufferedReader in;
 	private PrintWriter out;
+
+	private static final Logger logger = Logger.getLogger(SocketAuthenticationHandler.class.getName());
 
 	public SocketAuthenticationHandler(Socket socket) {
 		this.socket = socket;
@@ -71,17 +74,17 @@ public class SocketAuthenticationHandler extends AuthenticationHandler implement
 
 				String userChoice = in.readLine();
 
-				if (userChoice.equals("1"))
+				if ("1".equals(userChoice))
 				{
 					gameHandling = createNewGame(player);
 				}
 
-				if (userChoice.equals("2"))
+				if ("2".equals(userChoice))
 				{
 					gameHandling = checkExistingGame(player);
 				}
 
-				if (userChoice.equals("3"))
+				if ("3".equals(userChoice))
 				{
 
 				}
@@ -91,7 +94,7 @@ public class SocketAuthenticationHandler extends AuthenticationHandler implement
 		}
 		catch (IOException e)
 		{
-			e.printStackTrace();
+			logger.info(e.getMessage());
 		}
 	}
 

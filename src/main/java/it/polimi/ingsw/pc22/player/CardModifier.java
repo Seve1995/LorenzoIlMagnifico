@@ -1,9 +1,9 @@
 package it.polimi.ingsw.pc22.player;
 
-import java.util.List;
-
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
+
+import java.util.List;
 
 public class CardModifier {
 	private CardTypeEnum cardType;

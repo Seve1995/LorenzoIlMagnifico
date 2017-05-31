@@ -1,9 +1,6 @@
 package it.polimi.ingsw.pc22.effects;
 
-import java.util.Set;
-
 import it.polimi.ingsw.pc22.connection.GameMatch;
-import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
 import it.polimi.ingsw.pc22.gamebox.LeaderCard;
 import it.polimi.ingsw.pc22.player.Player;
 

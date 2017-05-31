@@ -1,7 +1,6 @@
 package it.polimi.ingsw.pc22.actions;
 
 import it.polimi.ingsw.pc22.effects.Effect;
-import it.polimi.ingsw.pc22.gamebox.LeaderCard;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class ActiveLeaderCard extends Action 

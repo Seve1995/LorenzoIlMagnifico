@@ -1,7 +1,5 @@
 package it.polimi.ingsw.pc22.adapters;
 
-import it.polimi.ingsw.pc22.connection.GameServer;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;

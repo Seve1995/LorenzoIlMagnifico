@@ -9,11 +9,14 @@ import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.Registry;
+import java.util.logging.Logger;
 
 public class RMIAuthenticationServiceImpl extends AuthenticationHandler implements RMIAuthenticationService
 {
     RMIClientStreamService streamService;
     Registry registry;
+
+    private static final Logger logger = Logger.getLogger(RMIAuthenticationServiceImpl.class.getName());
 
     public RMIAuthenticationServiceImpl(Registry registry)
     {
@@ -76,17 +79,17 @@ public class RMIAuthenticationServiceImpl extends AuthenticationHandler implemen
 
                 String userChoice = streamService.getMessage();
 
-                if (userChoice.equals("1"))
+                if ("1".equals(userChoice))
                 {
                     gameHandling = createNewGame(player);
                 }
 
-                if (userChoice.equals("2"))
+                if ("2".equals(userChoice))
                 {
                     gameHandling = checkExistingGame(player);
                 }
 
-                if (userChoice.equals("3"))
+                if ("3".equals(userChoice))
                 {
 
                 }
@@ -97,7 +100,7 @@ public class RMIAuthenticationServiceImpl extends AuthenticationHandler implemen
         }
         catch (NotBoundException | IOException e)
         {
-            e.printStackTrace();
+           logger.info(e.getMessage());
         }
 
     }
