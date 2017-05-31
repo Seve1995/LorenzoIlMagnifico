@@ -3,7 +3,7 @@
     {
       "name": "Mint",
       "cardNumber": 25,
-      "cardType": "Building",
+      "cardType": "BUILDING",
       "roundNumber": 1,
       "permanentEffectActivationCost": 5,
       "costs": [
@@ -43,7 +43,7 @@
     {
       "name": "Tax Office",
       "cardNumber": 26,
-      "cardType": "Building",
+      "cardType": "BUILDING",
       "roundNumber": 1,
       "permanentEffectActivationCost": 5,
       "costs": [
@@ -83,7 +83,7 @@
     {
       "name": "Triumphal Arch",
       "cardNumber": 27,
-      "cardType": "Building",
+      "cardType": "BUILDING",
       "roundNumber": 1,
       "permanentEffectActivationCost": 6,
       "costs": [
@@ -112,7 +112,7 @@
       "permanentEffect": [
         {
           "name": "AddAssetForEveryAssetOrCard",
-          "paidCardType": "VENTURE",
+          "paidCardType": "BUILDING",
           "gainedAsset": {
             "type": "VICTORYPOINT",
             "value": 1
@@ -123,7 +123,7 @@
     {
       "name": "Theater",
       "cardNumber": 28,
-      "cardType": "Building",
+      "cardType": "BUILDING",
       "roundNumber": 1,
       "permanentEffectActivationCost": 6,
       "costs": [
@@ -163,7 +163,7 @@
     {
       "name": "Carpenter's Shop",
       "cardNumber": 29,
-      "cardType": "Building",
+      "cardType": "BUILDING",
       "roundNumber": 1,
       "permanentEffectChoiche": true,
       "permanentEffectActivationCost": 4,
@@ -234,7 +234,7 @@
     {
       "name": "Stonemason's Shop",
       "cardNumber": 30,
-      "cardType": "Building",
+      "cardType": "BUILDING",
       "roundNumber": 1,
       "permanentEffectChoiche": true,
       "permanentEffectActivationCost": 3,
@@ -305,7 +305,7 @@
     {
       "name": "Chapel",
       "cardNumber": 31,
-      "cardType": "Building",
+      "cardType": "BUILDING",
       "roundNumber": 1,
       "permanentEffectActivationCost": 2,
       "costs": [
@@ -350,7 +350,7 @@
     {
       "name": "Residence",
       "cardNumber": 32,
-      "cardType": "Building",
+      "cardType": "BUILDING",
       "roundNumber": 1,
       "permanentEffectActivationCost": 1,
       "costs": [
@@ -390,7 +390,7 @@
     {
       "name": "Marketplace",
       "cardNumber": 33,
-      "cardType": "Building",
+      "cardType": "BUILDING",
       "roundNumber": 2,
       "permanentEffectActivationCost": 3,
       "costs": [
@@ -447,7 +447,7 @@
     {
       "name": "Treasury",
       "cardNumber": 34,
-      "cardType": "Building",
+      "cardType": "BUILDING",
       "roundNumber": 2,
       "permanentEffectChoiche": true,
       "permanentEffectActivationCost": 3,
@@ -512,7 +512,7 @@
     {
       "name": "Painter's Guild",
       "cardNumber": 35,
-      "cardType": "Building",
+      "cardType": "BUILDING",
       "roundNumber": 2,
       "permanentEffectActivationCost": 4,
       "costs": [
@@ -576,7 +576,7 @@
     {
       "name": "Sculptor's Guild",
       "cardNumber": 36,
-      "cardType": "Building",
+      "cardType": "BUILDING",
       "roundNumber": 2,
       "permanentEffectActivationCost": 5,
       "costs": [
@@ -640,7 +640,7 @@
     {
       "name": "Stonemasons' Guild",
       "cardNumber": 37,
-      "cardType": "Building",
+      "cardType": "BUILDING",
       "roundNumber": 2,
       "permanentEffectActivationCost": 4,
       "costs": [
@@ -703,7 +703,7 @@
     {
       "name": "Bapistery",
       "cardNumber": 38,
-      "cardType": "Building",
+      "cardType": "BUILDING",
       "roundNumber": 2,
       "permanentEffectActivationCost": 2,
       "costs": [
@@ -761,7 +761,7 @@
     {
       "name": "Barracks",
       "cardNumber": 39,
-      "cardType": "Building",
+      "cardType": "BUILDING",
       "roundNumber": 2,
       "permanentEffectActivationCost": 1,
       "costs": [
@@ -812,7 +812,7 @@
     {
       "name": "Stronghold",
       "cardNumber": 40,
-      "cardType": "Building",
+      "cardType": "BUILDING",
       "roundNumber": 2,
       "permanentEffectActivationCost": 6,
       "costs": [
@@ -864,7 +864,7 @@
     {
       "name": "Stronghold",
       "cardNumber": 41,
-      "cardType": "Building",
+      "cardType": "BUILDING",
       "roundNumber": 3,
       "permanentEffectActivationCost": 2,
       "costs": [
@@ -909,7 +909,7 @@
     {
       "name": "Fair",
       "cardNumber": 42,
-      "cardType": "Building",
+      "cardType": "BUILDING",
       "roundNumber": 3,
       "permanentEffectActivationCost": 4,
       "costs": [
@@ -966,7 +966,7 @@
     {
       "name": "Garden",
       "cardNumber": 43,
-      "cardType": "Building",
+      "cardType": "BUILDING",
       "roundNumber": 3,
       "permanentEffectActivationCost": 1,
       "costs": [
@@ -1011,7 +1011,7 @@
     {
       "name": "Fortress",
       "cardNumber": 44,
-      "cardType": "Building",
+      "cardType": "BUILDING",
       "roundNumber": 3,
       "permanentEffectActivationCost": 5,
       "costs": [
@@ -1059,7 +1059,7 @@
     {
       "name": "Palace",
       "cardNumber": 45,
-      "cardType": "Building",
+      "cardType": "BUILDING",
       "roundNumber": 3,
       "permanentEffectActivationCost": 6,
       "costs": [
@@ -1122,7 +1122,7 @@
     {
       "name": "Church",
       "cardNumber": 46,
-      "cardType": "Building",
+      "cardType": "BUILDING",
       "roundNumber": 3,
       "permanentEffectActivationCost": 1,
       "costs": [
@@ -1187,7 +1187,7 @@
     {
       "name": "Military Academy",
       "cardNumber": 47,
-      "cardType": "Building",
+      "cardType": "BUILDING",
       "roundNumber": 3,
       "permanentEffectActivationCost": 3,
       "costs": [
@@ -1250,7 +1250,7 @@
     {
       "name": "Cathedral",
       "cardNumber": 48,
-      "cardType": "Building",
+      "cardType": "BUILDING",
       "roundNumber": 3,
       "permanentEffectActivationCost": 2,
       "costs": [
