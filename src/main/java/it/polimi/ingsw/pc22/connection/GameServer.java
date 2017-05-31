@@ -7,7 +7,6 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -30,21 +29,20 @@ public class GameServer
 		System.out.println("Server online");
 		
 		gameMatchMap = new ConcurrentHashMap<>();
-
-		RMIAuthenticationHandler rmiAuthenticationHandler
-				= new RMIAuthenticationHandler();
 		try
 		{
+			Registry registry = LocateRegistry.createRegistry(RMI_PORT);
+
+			RMIAuthenticationServiceImpl rmiAuthenticationHandler
+					= new RMIAuthenticationServiceImpl(registry);
+
 			RMIAuthenticationService stub = (RMIAuthenticationService)
 					UnicastRemoteObject.exportObject(rmiAuthenticationHandler, 0);
 
-			Registry registry = LocateRegistry.createRegistry(RMI_PORT);
-
-
-			registry.bind("auth", stub);
+			registry.rebind("auth", stub);
 
 		}
-			catch (RemoteException | AlreadyBoundException e )
+			catch (RemoteException e )
 		{
 			e.printStackTrace();
 		}

@@ -1,12 +1,14 @@
 package it.polimi.ingsw.pc22.client;
 
 import it.polimi.ingsw.pc22.rmi.RMIAuthenticationService;
+import it.polimi.ingsw.pc22.rmi.RMIClientStreamService;
 
 import java.net.Socket;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Scanner;
 
 public class Client 
@@ -50,9 +52,17 @@ public class Client
 		{
 			Registry registry = LocateRegistry.getRegistry(RMI_PORT);
 
-			RMIAuthenticationService stub = (RMIAuthenticationService) registry.lookup("auth");
+			RMIAuthenticationService authenticationService = (RMIAuthenticationService)
+					registry.lookup("auth");
 
-			stub.login(registry);
+			RMIClientStreamServiceImpl streamService = new RMIClientStreamServiceImpl();
+
+			RMIClientStreamService stub = (RMIClientStreamService)
+					UnicastRemoteObject.exportObject(streamService, 0);
+
+			registry.rebind("client", stub);
+
+			authenticationService.login();
 
 		} catch (RemoteException | NotBoundException e)
 		{

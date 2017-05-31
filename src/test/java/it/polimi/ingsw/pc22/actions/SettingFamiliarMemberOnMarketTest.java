@@ -12,6 +12,7 @@ import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.AssetType;
 import it.polimi.ingsw.pc22.gamebox.Market;
 import it.polimi.ingsw.pc22.gamebox.MarketCell;
+import org.junit.*;
 
 public class SettingFamiliarMemberOnMarketTest {
 	private Market market;
@@ -52,5 +53,11 @@ public class SettingFamiliarMemberOnMarketTest {
 		marketCells.get(3).setABlockedCell(true);
 		market = new Market(marketCells);
 		
+	}
+
+	@Test
+	public void testIsValid()
+	{
+
 	}
 }

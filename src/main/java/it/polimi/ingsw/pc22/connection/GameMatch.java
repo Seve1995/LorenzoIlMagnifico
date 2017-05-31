@@ -20,7 +20,6 @@ public class GameMatch implements Runnable
 	
 	private String gameName;
 
-	//TODO non possiamo avere solo scoket, nel caso di rmi bisogna mettere il callback del client
 	private Map<Player, GameAdapter> players;
 	
 	private int playerCounter = 0;
@@ -42,12 +41,19 @@ public class GameMatch implements Runnable
 	@Override
 	public void run()
 	{
-		Long timeStamp = System.currentTimeMillis();
+		Long timeStamp = null;
 		
 		while(true)
 		{
-			boolean isTimeoutExpired = 
-					System.currentTimeMillis() > timeStamp + timeOut; 
+			if (playerCounter == 2 && timeStamp == null)
+				timeStamp = System.currentTimeMillis();
+
+			boolean isTimeoutExpired;
+
+			if (timeStamp == null)
+				isTimeoutExpired = false;
+			else
+				isTimeoutExpired = System.currentTimeMillis() > timeStamp + timeOut;
 					
 			boolean isGameFull = playerCounter == maxPlayersNumber;
 			
@@ -55,7 +61,7 @@ public class GameMatch implements Runnable
 			
 			break;
 		}
-		
+
 		if (playerCounter <= 1)
 		{
 			endGame();
@@ -94,6 +100,8 @@ public class GameMatch implements Runnable
 		jsonBoard.toString();
 
 		GameBoard gameBoard = BoardLoader.loadGameBoard(jsonBoard);
+
+		System.out.println(gameBoard);
 
 		//loadCarte
 
@@ -163,7 +171,14 @@ public class GameMatch implements Runnable
 
 		for (GameAdapter playerAdapter : playersAdapters)
 		{
-			playerAdapter.endConnection();
+			try
+			{
+				playerAdapter.endConnection();
+			}
+				catch (IOException e)
+			{
+				e.printStackTrace();
+			}
 		}
 	}
 

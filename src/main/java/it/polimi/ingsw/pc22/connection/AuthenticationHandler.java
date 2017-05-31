@@ -20,7 +20,7 @@ public abstract class AuthenticationHandler
 
     protected abstract User registerNewUser() throws IOException;
 
-    protected User login() throws IOException
+    protected User loginUser() throws IOException
     {
         User user = null;
 

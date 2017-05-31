@@ -2,6 +2,8 @@ package it.polimi.ingsw.pc22.adapters;
 
 import it.polimi.ingsw.pc22.connection.GameServer;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 /**
@@ -17,8 +19,13 @@ public class SocketGameAdapter implements GameAdapter
     }
 
     @Override
-    public void endConnection()
+    public void endConnection() throws IOException
     {
+        PrintWriter printWriter =
+                new PrintWriter(socket.getOutputStream(), true);
 
+        printWriter.println("EXIT");
+
+        socket.close();
     }
 }

@@ -36,7 +36,7 @@ public class SocketAuthenticationHandler extends AuthenticationHandler implement
 				{
 					case "login":
 
-						user = login();
+						user = loginUser();
 
 						break;
 					case "sign up":
@@ -85,12 +85,12 @@ public class SocketAuthenticationHandler extends AuthenticationHandler implement
 				{
 
 				}
-
-				out.println("Non-valid input. Please retry... ");
 			}
 
 			updateJson();
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -104,8 +104,9 @@ public class SocketAuthenticationHandler extends AuthenticationHandler implement
 
 		User user = existingUsername(username);
 
-		if (user != null) {
-			out.println("Error: username not found! Please retry.");
+		if (user != null)
+		{
+			out.println("Username OK. Now type the password:");
 
 			return user;
 		}
@@ -118,11 +119,10 @@ public class SocketAuthenticationHandler extends AuthenticationHandler implement
 	@Override
 	protected void checkPassword(User user) throws IOException
 	{
-		out.println("Username OK. Now type the password:");
-
 		String password = in.readLine();
 
-		if (user.getPassword().equals(password)) {
+		if (user.getPassword().equals(password))
+		{
 			out.println("Successful logged in!");
 
 			user.setLogged(true);
@@ -147,7 +147,8 @@ public class SocketAuthenticationHandler extends AuthenticationHandler implement
 		Boolean invalidUsername =
 				GameServer.getUsersMap().containsKey(username);
 
-		if (invalidUsername) {
+		if (invalidUsername)
+		{
 			out.println("The specified username already exist! Please type a new username.");
 			return null;
 		}
