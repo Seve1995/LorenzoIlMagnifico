@@ -1,6 +1,5 @@
 package it.polimi.ingsw.pc22.utils;
 
-import it.polimi.ingsw.pc22.effects.AddAsset;
 import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.gamebox.*;
 import org.json.JSONArray;
@@ -10,10 +9,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BoardLoader
+public class BoardLoader extends GenericLoader
 {
-    private static String EFFECT_PATH = "it.polimi.ingsw.pc22.effects.";
-
     public static GameBoard loadGameBoard(JSONObject board)
     {
         GameBoard gameBoard = null;
@@ -108,7 +105,7 @@ public class BoardLoader
             {
                 JSONArray effectsArray = cell.getJSONArray("effects");
 
-                List<Effect> effects = loadEffect(effectsArray);
+                List<Effect> effects = loadEffectList(effectsArray);
 
                 towerCell.setEffects(effects);
             }
@@ -119,59 +116,6 @@ public class BoardLoader
         tower.setTowerCells(towerCells);
 
         return tower;
-    }
-
-    private static List<Effect> loadEffect(JSONArray effectsArray)
-    throws ClassNotFoundException, InstantiationException, IllegalAccessException
-    {
-        List<Effect> effects = new ArrayList<>();
-
-        for(int i = 0; i < effectsArray.length(); i++) {
-            JSONObject jsonEffect = effectsArray.getJSONObject(i);
-
-            String name = jsonEffect.getString("name");
-
-            String className = EFFECT_PATH + name;
-
-            Class effectClass = Class.forName(className);
-
-            Effect effect = (Effect) effectClass.newInstance();
-
-            if (effect == null) continue;
-
-            effects.add(effect);
-
-            if (jsonEffect.isNull("asset")) continue;
-
-            JSONObject jsonAsset = jsonEffect.getJSONObject("asset");
-
-            addAssetToGenericEffect(jsonAsset, effect);
-        }
-
-        return effects;
-    }
-
-    private static void addAssetToGenericEffect(JSONObject jsonAsset, Effect effect)
-    {
-        if (effect instanceof AddAsset)
-        {
-            Asset asset = loadAsset(jsonAsset);
-
-            ((AddAsset) effect).setAsset(asset);
-        }
-
-
-    }
-
-    private static Asset loadAsset(JSONObject jsonAsset) throws JSONException
-    {
-        String type = jsonAsset.getString("type");
-
-        int value = jsonAsset.getInt("value");
-
-        AssetType assetType = AssetType.valueOf(type);
-
-        return new Asset(value, assetType);
     }
 
     private static CouncilPalace loadCouncilPalace(JSONObject board)
@@ -188,7 +132,7 @@ public class BoardLoader
 
         JSONArray jsonEffects = jsonCells.getJSONArray("effects");
 
-        List<Effect> effects = loadEffect(jsonEffects);
+        List<Effect> effects = loadEffectList(jsonEffects);
 
         CouncilPalace palace = new CouncilPalace();
 
@@ -223,7 +167,7 @@ public class BoardLoader
 
             JSONArray jsonEffect = jsonCell.getJSONArray("effects");
 
-            List<Effect> effects = loadEffect(jsonEffect);
+            List<Effect> effects = loadEffectList(jsonEffect);
 
             MarketCell cell = new MarketCell(requiredDiceValue, effects);
 

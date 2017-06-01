@@ -9,10 +9,24 @@ public class TerritoryCard extends DevelopmentCard
 {
 	private int permanentEffectActivationCost;
 
-	public TerritoryCard(String name, int roundNumber, List<Effect> immediateEffects, List<Effect> permanentEffects, int permanentEffectActivationCost)
+	public TerritoryCard
+	(
+		String name, int roundNumber, List<Effect> immediateEffects,
+		List<Effect> permanentEffects, int permanentEffectActivationCost,
+		int cardNumber
+	)
 	{
-		super(name, roundNumber, immediateEffects, permanentEffects);
+		super(name, roundNumber, immediateEffects, permanentEffects, cardNumber);
 		this.permanentEffectActivationCost = permanentEffectActivationCost;
+	}
+
+	public TerritoryCard
+	(
+			String name, int roundNumber, List<Effect> immediateEffects,
+			List<Effect> permanentEffects, int cardNumber
+	)
+	{
+		super(name, roundNumber, immediateEffects, permanentEffects, cardNumber);
 	}
 
 	public int getPermanentEffectActivationCost() {

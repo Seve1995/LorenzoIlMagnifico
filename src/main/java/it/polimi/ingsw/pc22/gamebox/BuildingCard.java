@@ -13,12 +13,22 @@ public class BuildingCard extends DevelopmentCard
 	public BuildingCard
 	(
 		String name, int roundNumber, List<Effect> immediateEffects,
-		List<Effect> permanentEffects, List<Asset> costs, int permanentEffectActivationCost
+		List<Effect> permanentEffects, List<Asset> costs,
+		int permanentEffectActivationCost, int cardNumber
 	)
 	{
-		super(name, roundNumber, immediateEffects, permanentEffects);
+		super(name, roundNumber, immediateEffects, permanentEffects, cardNumber);
 		this.costs = costs;
 		this.permanentEffectActivationCost = permanentEffectActivationCost;
+	}
+
+	public BuildingCard
+	(
+		String name, int roundNumber, List<Effect> immediateEffects,
+		List<Effect> permanentEffects, int cardNumber
+	)
+	{
+		super(name, roundNumber, immediateEffects, permanentEffects, cardNumber);
 	}
 
 	public List<Asset> getCosts() {

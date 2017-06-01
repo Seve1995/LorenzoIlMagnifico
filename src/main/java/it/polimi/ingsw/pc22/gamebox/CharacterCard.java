@@ -12,11 +12,20 @@ public class CharacterCard extends DevelopmentCard
 	public CharacterCard
 	(
 		String name, int roundNumber, List<Effect> immediateEffects,
-		List<Effect> permanentEffects, Asset coinsCost
+		List<Effect> permanentEffects, Asset coinsCost, int cardNumber
 	)
 	{
-		super(name, roundNumber, immediateEffects, permanentEffects);
+		super(name, roundNumber, immediateEffects, permanentEffects, cardNumber);
 		this.coinsCost = coinsCost;
+	}
+
+	public CharacterCard
+	(
+		String name, int roundNumber, List<Effect> immediateEffects,
+		List<Effect> permanentEffects, int cardNumber
+	)
+	{
+		super(name, roundNumber, immediateEffects, permanentEffects, cardNumber);
 	}
 
 	public Asset getCoinsCost() {

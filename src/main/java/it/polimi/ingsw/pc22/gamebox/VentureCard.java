@@ -15,18 +15,27 @@ public class VentureCard extends DevelopmentCard
 	
 	public VentureCard
 	(
-			String name, int roundNumber, List<Effect> immediateEffects, List<Effect> permanentEffects, 
-			Asset militaryPointsRequired, Asset militaryPointsCost, List<Asset> resourcesCost, boolean requiredCostChoice
+		String name, int roundNumber, List<Effect> immediateEffects,
+		List<Effect> permanentEffects, Asset militaryPointsRequired,
+		Asset militaryPointsCost, List<Asset> resourcesCost,
+		boolean requiredCostChoice, int cardNumber
 	) 
 	{
-		super(name, roundNumber, immediateEffects, permanentEffects);
+		super(name, roundNumber, immediateEffects, permanentEffects, cardNumber);
 		this.militaryPointsRequired = militaryPointsRequired;
 		this.militaryPointsCost = militaryPointsCost;
 		this.resourcesCost = resourcesCost;
 		this.requiredCostChoice = requiredCostChoice;
 	}
-	
-	
+
+	public VentureCard
+	(
+		String name, int roundNumber, List<Effect> immediateEffects,
+		List<Effect> permanentEffects, int cardNumber
+	)
+	{
+		super(name, roundNumber, immediateEffects, permanentEffects, cardNumber);
+	}
 
 	public Asset getMilitaryPointsRequired() {
 		return militaryPointsRequired;

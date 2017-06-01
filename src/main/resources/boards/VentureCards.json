@@ -5,11 +5,11 @@
       "cardNumber": 73,
       "cardType": "VENTURE",
       "roundNumber": 1,
-      "permanentEffectChoiche": false,
+      "permanentEffectChoice": false,
       "requiredCostChoice": false,
       "militaryPointsRequired": null,
       "militaryPointsCost": null,
-      "resourcesCost": [
+      "costs": [
         {
           "asset": {
             "type": "COIN",
@@ -41,11 +41,11 @@
       "cardNumber": 74,
       "cardType": "VENTURE",
       "roundNumber": 1,
-      "permanentEffectChoiche": false,
+      "permanentEffectChoice": false,
       "requiredCostChoice": false,
       "militaryPointsRequired": null,
       "militaryPointsCost": null,
-      "resourcesCost": [
+      "costs": [
         {
           "asset": {
             "type": "COIN",
@@ -89,11 +89,11 @@
       "cardNumber": 75,
       "cardType": "VENTURE",
       "roundNumber": 1,
-      "permanentEffectChoiche": false,
+      "permanentEffectChoice": false,
       "requiredCostChoice": false,
       "militaryPointsRequired": null,
       "militaryPointsCost": null,
-      "resourcesCost": [
+      "costs": [
         {
           "asset": {
             "type": "STONE",
@@ -128,11 +128,11 @@
       "cardNumber": 76,
       "cardType": "VENTURE",
       "roundNumber": 1,
-      "permanentEffectChoiche": false,
+      "permanentEffectChoice": false,
       "requiredCostChoice": false,
       "militaryPointsRequired": null,
       "militaryPointsCost": null,
-      "resourcesCost": [
+      "costs": [
         {
           "asset": {
             "type": "WOOD",
@@ -166,7 +166,7 @@
       "cardNumber": 77,
       "cardType": "VENTURE",
       "roundNumber": 1,
-      "permanentEffectChoiche": false,
+      "permanentEffectChoice": false,
       "requiredCostChoice": false,
       "militaryPointsRequired": {
         "type": "MILITARYPOINT",
@@ -176,7 +176,7 @@
         "type": "MILITARYPOINT",
         "value": 2
       },
-      "resourcesCost": null,
+      "costs": null,
       "immediateEffect": [
         {
           "name": "AddAsset",
@@ -201,11 +201,11 @@
       "cardNumber": 78,
       "cardType": "VENTURE",
       "roundNumber": 1,
-      "permanentEffectChoiche": false,
+      "permanentEffectChoice": false,
       "requiredCostChoice": false,
       "militaryPointsRequired": null,
       "militaryPointsCost": null,
-      "resourcesCost": [
+      "costs": [
         {
           "asset": {
             "type": "WOOD",
@@ -237,7 +237,7 @@
       "cardNumber": 79,
       "cardType": "VENTURE",
       "roundNumber": 1,
-      "permanentEffectChoiche": false,
+      "permanentEffectChoice": false,
       "requiredCostChoice": false,
       "militaryPointsRequired": {
         "type": "MILITARYPOINT",
@@ -247,7 +247,7 @@
         "type": "MILITARYPOINT",
         "value": 3
       },
-      "resourcesCost": null,
+      "costs": null,
       "immediateEffect": [
         {
           "name": "AddAsset",
@@ -272,7 +272,7 @@
       "cardNumber": 80,
       "cardType": "VENTURE",
       "roundNumber": 1,
-      "permanentEffectChoiche": false,
+      "permanentEffectChoice": false,
       "requiredCostChoice": true,
       "militaryPointsRequired": {
         "type": "MILITARYPOINT",
@@ -282,7 +282,7 @@
         "type": "MILITARYPOINT",
         "value": 2
       },
-      "resourcesCost": [
+      "costs": [
         {
           "asset": {
             "type": "WOOD",
@@ -326,11 +326,11 @@
       "cardNumber": 81,
       "cardType": "VENTURE",
       "roundNumber": 2,
-      "permanentEffectChoiche": false,
+      "permanentEffectChoice": false,
       "requiredCostChoice": false,
       "militaryPointsRequired": null,
       "militaryPointsCost": null,
-      "resourcesCost": [
+      "costs": [
         {
           "asset": {
             "type": "COIN",
@@ -362,11 +362,11 @@
       "cardNumber": 82,
       "cardType": "VENTURE",
       "roundNumber": 2,
-      "permanentEffectChoiche": false,
+      "permanentEffectChoice": false,
       "requiredCostChoice": false,
       "militaryPointsRequired": null,
       "militaryPointsCost": null,
-      "resourcesCost": [
+      "costs": [
         {
           "asset": {
             "type": "COIN",
@@ -410,11 +410,11 @@
       "cardNumber": 83,
       "cardType": "VENTURE",
       "roundNumber": 2,
-      "permanentEffectChoiche": false,
+      "permanentEffectChoice": false,
       "requiredCostChoice": false,
       "militaryPointsRequired": null,
       "militaryPointsCost": null,
-      "resourcesCost": [
+      "costs": [
         {
           "asset": {
             "type": "STONE",
@@ -449,7 +449,7 @@
       "cardNumber": 84,
       "cardType": "VENTURE",
       "roundNumber": 2,
-      "permanentEffectChoiche": false,
+      "permanentEffectChoice": false,
       "requiredCostChoice": false,
       "militaryPointsRequired": {
         "type": "MILITARYPOINT",
@@ -459,7 +459,7 @@
         "type": "MILITARYPOINT",
         "value": 3
       },
-      "resourcesCost": null,
+      "costs": null,
       "immediateEffect": [
         {
           "name": "AddAsset",
@@ -487,11 +487,11 @@
       "cardNumber": 85,
       "cardType": "VENTURE",
       "roundNumber": 2,
-      "permanentEffectChoiche": false,
+      "permanentEffectChoice": false,
       "requiredCostChoice": false,
       "militaryPointsRequired": null,
       "militaryPointsCost": null,
-      "resourcesCost": [
+      "costs": [
         {
           "asset": {
             "type": "SERVANT",
@@ -526,11 +526,11 @@
       "cardNumber": 86,
       "cardType": "VENTURE",
       "roundNumber": 2,
-      "permanentEffectChoiche": false,
+      "permanentEffectChoice": false,
       "requiredCostChoice": false,
       "militaryPointsRequired": null,
       "militaryPointsCost": null,
-      "resourcesCost": [
+      "costs": [
         {
           "asset": {
             "type": "WOOD",
@@ -562,7 +562,7 @@
       "cardNumber": 87,
       "cardType": "VENTURE",
       "roundNumber": 2,
-      "permanentEffectChoiche": false,
+      "permanentEffectChoice": false,
       "requiredCostChoice": false,
       "militaryPointsRequired": {
         "type": "MILITARYPOINT",
@@ -572,7 +572,7 @@
         "type": "MILITARYPOINT",
         "value": 4
       },
-      "resourcesCost": null,
+      "costs": null,
       "immediateEffect": [
         {
           "name": "AddAsset",
@@ -604,7 +604,7 @@
       "cardNumber": 88,
       "cardType": "VENTURE",
       "roundNumber": 2,
-      "permanentEffectChoiche": false,
+      "permanentEffectChoice": false,
       "requiredCostChoice": true,
       "militaryPointsRequired": {
         "type": "MILITARYPOINT",
@@ -614,7 +614,7 @@
         "type": "MILITARYPOINT",
         "value": 4
       },
-      "resourcesCost": [
+      "costs": [
         {
           "asset": {
             "type": "WOOD",
@@ -658,11 +658,11 @@
       "cardNumber": 89,
       "cardType": "VENTURE",
       "roundNumber": 3,
-      "permanentEffectChoiche": false,
+      "permanentEffectChoice": false,
       "requiredCostChoice": false,
       "militaryPointsRequired": null,
       "militaryPointsCost": null,
-      "resourcesCost": [
+      "costs": [
         {
           "asset": {
             "type": "COIN",
@@ -694,11 +694,11 @@
       "cardNumber": 90,
       "cardType": "VENTURE",
       "roundNumber": 3,
-      "permanentEffectChoiche": false,
+      "permanentEffectChoice": false,
       "requiredCostChoice": false,
       "militaryPointsRequired": null,
       "militaryPointsCost": null,
-      "resourcesCost": [
+      "costs": [
         {
           "asset": {
             "type": "COIN",
@@ -748,11 +748,11 @@
       "cardNumber": 91,
       "cardType": "VENTURE",
       "roundNumber": 3,
-      "permanentEffectChoiche": false,
+      "permanentEffectChoice": false,
       "requiredCostChoice": false,
       "militaryPointsRequired": null,
       "militaryPointsCost": null,
-      "resourcesCost": [
+      "costs": [
         {
           "asset": {
             "type": "STONE",
@@ -787,11 +787,11 @@
       "cardNumber": 92,
       "cardType": "VENTURE",
       "roundNumber": 3,
-      "permanentEffectChoiche": false,
+      "permanentEffectChoice": false,
       "requiredCostChoice": false,
       "militaryPointsRequired": null,
       "militaryPointsCost": null,
-      "resourcesCost": [
+      "costs": [
         {
           "asset": {
             "type": "WOOD",
@@ -823,7 +823,7 @@
       "cardNumber": 93,
       "cardType": "VENTURE",
       "roundNumber": 3,
-      "permanentEffectChoiche": false,
+      "permanentEffectChoice": false,
       "requiredCostChoice": false,
       "militaryPointsRequired": {
         "type": "MILITARYPOINT",
@@ -833,7 +833,7 @@
         "type": "MILITARYPOINT",
         "value": 6
       },
-      "resourcesCost": null,
+      "costs": null,
       "immediateEffect": [
         {
           "name": "AddAsset",
@@ -872,11 +872,11 @@
       "cardNumber": 94,
       "cardType": "VENTURE",
       "roundNumber": 3,
-      "permanentEffectChoiche": false,
+      "permanentEffectChoice": false,
       "requiredCostChoice": false,
       "militaryPointsRequired": null,
       "militaryPointsCost": null,
-      "resourcesCost": [
+      "costs": [
         {
           "asset": {
             "type": "SERVANT",
@@ -911,7 +911,7 @@
       "cardNumber": 95,
       "cardType": "VENTURE",
       "roundNumber": 3,
-      "permanentEffectChoiche": false,
+      "permanentEffectChoice": false,
       "requiredCostChoice": false,
       "militaryPointsRequired": {
         "type": "MILITARYPOINT",
@@ -921,7 +921,7 @@
         "type": "MILITARYPOINT",
         "value": 8
       },
-      "resourcesCost": null,
+      "costs": null,
       "immediateEffect": [
         {
           "name": "AddAsset",
@@ -946,7 +946,7 @@
       "cardNumber": 96,
       "cardType": "VENTURE",
       "roundNumber": 3,
-      "permanentEffectChoiche": false,
+      "permanentEffectChoice": false,
       "requiredCostChoice": false,
       "militaryPointsRequired": {
         "type": "MILITARYPOINT",
@@ -956,7 +956,7 @@
         "type": "MILITARYPOINT",
         "value": 5
       },
-      "resourcesCost": [
+      "costs": [
         {
           "asset": {
             "type": "WOOD",

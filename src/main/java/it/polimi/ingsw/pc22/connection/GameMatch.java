@@ -1,9 +1,12 @@
 package it.polimi.ingsw.pc22.connection;
 
 import it.polimi.ingsw.pc22.adapters.GameAdapter;
+import it.polimi.ingsw.pc22.gamebox.DevelopmentCard;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.BoardLoader;
+import it.polimi.ingsw.pc22.utils.CardLoader;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -102,7 +105,26 @@ public class GameMatch implements Runnable
 
 		System.out.println(gameBoard);
 
-		//loadCarte
+		String cardFile = BOARD_PATH + "VentureCards.json";
+
+		file = new File(classLoader.getResource(cardFile).getFile());
+
+		StringBuilder cardBuilder = new StringBuilder();
+
+		try
+		{
+			Files.lines(file.toPath()).forEach(s -> cardBuilder.append(s));
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+
+		JSONObject jsonCards = new JSONObject(builder.toString());
+
+		jsonBoard.toString();
+
+		List<DevelopmentCard> cards = CardLoader.loadCards(jsonCards);
 
 		//loadBonusTile
 
