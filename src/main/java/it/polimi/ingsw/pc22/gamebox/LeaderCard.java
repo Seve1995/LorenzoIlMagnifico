@@ -11,7 +11,7 @@ public class LeaderCard {
 	private List<Asset> requiredAssets;
 	private Map <CardTypeEnum, Integer> requiredCard = new HashMap<CardTypeEnum, Integer>();
 	private boolean faceUp;
-	private List<Effect> effects; 
+	private List<Effect> effects;
 	
 	public String getName() {
 		return name;

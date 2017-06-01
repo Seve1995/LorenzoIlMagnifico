@@ -1,23 +1,34 @@
 package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.gamebox.Asset;
+import it.polimi.ingsw.pc22.gamebox.BuildingCard;
 import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
+import it.polimi.ingsw.pc22.gamebox.CharacterCard;
+import it.polimi.ingsw.pc22.gamebox.DevelopmentCard;
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
+import it.polimi.ingsw.pc22.gamebox.TerritoryCard;
+import it.polimi.ingsw.pc22.gamebox.Tower;
+import it.polimi.ingsw.pc22.gamebox.VentureCard;
+import it.polimi.ingsw.pc22.player.CardModifier;
 import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 
 public class PickTowerCard implements Effect{
 	
+
+	private int floor;
 	private CardTypeEnum cardType;
 	private int diceValue;
-	private List<Asset> cardCostDiscount;
-    
+	private List<Asset> assetsDiscount;
 	
-	public CardTypeEnum getCardType() {
-		return cardType;
+	
+
+	public List<Asset> getAssetsDiscount() {
+		return assetsDiscount;
 	}
-	public void setCardType(CardTypeEnum cardType) {
-		this.cardType = cardType;
+	public void setAssetsDiscount(List<Asset> assetsDiscount) {
+		this.assetsDiscount = assetsDiscount;
 	}
 	public int getDiceValue() {
 		return diceValue;
@@ -25,19 +36,31 @@ public class PickTowerCard implements Effect{
 	public void setDiceValue(int diceValue) {
 		this.diceValue = diceValue;
 	}
-	public List<Asset> getCardCostDiscount() {
-		return cardCostDiscount;
-	}
-	public void setCardCostDiscount(List<Asset> cardCostDiscount) {
-		this.cardCostDiscount = cardCostDiscount;
+		
+	public PickTowerCard(int floor, CardTypeEnum cardType, int diceValue) {
+		super();
+		this.floor = floor;
+		this.cardType = cardType;
+		this.diceValue = diceValue;
 	}
 	
-
 	@Override
 	public boolean isLegal(Player player) 
 	{
+		Tower tower = null;
 		
-		//controllo costi dappertutto
+		for (Tower t : player.getGameBoard().getTower())
+		{
+			if (t.getTowerType().equals(cardType))
+				tower = t;
+		}
+		
+		if (tower.getTowerCells().get(floor).getRequiredDiceValue() < diceValue)
+			return false;
+		
+		else
+		{
+		
 		if (this.cardType.equals(CardTypeEnum.CHARACTER))
 		{
 			if (player.getPlayerBoard().getCharacters().size() > 6)
@@ -45,18 +68,46 @@ public class PickTowerCard implements Effect{
 				return false;
 			}
 			
+			CharacterCard currCharacterCard = (CharacterCard) tower.getTowerCells().get(floor).getDevelopmentCard();
 			
+			if ( currCharacterCard.getCoinsCost().getValue() - 3 < player.getCoins())
+			
+			if (currCharacterCard.getCoinsCost().getValue() < player.getCoins())
+			{
+				return false;
+			}
+				
 		}
 		
 		if (this.cardType.equals(CardTypeEnum.BUILDING)) 
 		{
+			if (player.getPlayerBoard().getBuildings().size() > 6)
+			{
+				return false;
+			}
 			
+			BuildingCard currBuildingCard = (BuildingCard) tower.getTowerCells().get(floor).getDevelopmentCard();
 			
+			for (Asset a : currBuildingCard.getCosts())
+			{
+				if (player.getAsset(a.getType()) < a.getValue())
+					return false;
+			}
+	
 		}
 		
 		if (this.cardType.equals(CardTypeEnum.VENTURE))
 		{
+			if (player.getPlayerBoard().getBuildings().size() > 6)
+			{
+				return false;
+			}
 			
+			VentureCard currVentureCard = (VentureCard) tower.getTowerCells().get(floor).getDevelopmentCard();
+			
+			if (currVentureCard.getMilitaryPointsRequired().getValue() < player.getMilitaryPoints())
+				return false;
+		
 		}
 		
 		if (this.cardType.equals(CardTypeEnum.TERRITORY)) 
@@ -67,90 +118,87 @@ public class PickTowerCard implements Effect{
 				return false;
 			}
 			
-			else if (player.getPlayerBoard().getTerritories().size() + 1 == 3)
-			{
-				if (player.getMilitaryPoints() < 3)
-				{
-					return false;
-				}
-			}
-				
-			else if (player.getPlayerBoard().getTerritories().size() + 1 == 4)
-			{
-				if (player.getMilitaryPoints() < 7)
-				{
-					return false;
-				}
-			}
-				
-			else if (player.getPlayerBoard().getTerritories().size() + 1 == 5)
-			{
-				if (player.getMilitaryPoints() < 12)
-				{
-					return false;
-				}
-			}
+			else if (!(player.isNoMilitaryPointsForTerritories())) 
 			
-			else if  (player.getPlayerBoard().getTerritories().size() + 1 == 6)
 			{
-
-				if (player.getMilitaryPoints() < 18)
-				{
-					return false;
-				}
-			}
-			
-		}
+					if (player.getPlayerBoard().getTerritories().size() + 1 == 3)
+					{
+						if (player.getMilitaryPoints() < 3)
+						{
+							return false;
+						}
+					}
+						
+					else if (player.getPlayerBoard().getTerritories().size() + 1 == 4)
+					{
+						if (player.getMilitaryPoints() < 7)
+						{
+							return false;
+						}
+					}
+						
+					else if (player.getPlayerBoard().getTerritories().size() + 1 == 5)
+					{
+						if (player.getMilitaryPoints() < 12)
+						{
+							return false;
+						}
+					}
+					
+					else if  (player.getPlayerBoard().getTerritories().size() + 1 == 6)
+					{
 		
+						if (player.getMilitaryPoints() < 18)
+						{
+							return false;
+						}
+					}
+			}
+			
+			else if (player.isNoMilitaryPointsForTerritories())
+				return true;
+		}
+		}
 		return true;
 	}
 	
 	@Override
 	public void executeEffect(Player player) 
 	{
+
 		if (isLegal(player))
 		{
-	
-			
+				for (Tower t : player.getGameBoard().getTower())
+				{
+					if (t.getTowerType().equals(cardType))
+					{   
+						if (cardType.equals(CardTypeEnum.BUILDING))
+						{
+							player.getPlayerBoard().getBuildings().add((BuildingCard) t.getTowerCells().get(floor).getDevelopmentCard());
+							t.getTowerCells().get(floor).setDevelopmentCard(null);
+						}
+						
+						if (cardType.equals(CardTypeEnum.CHARACTER))
+						{
+							player.getPlayerBoard().getCharacters().add((CharacterCard) t.getTowerCells().get(floor).getDevelopmentCard());
+							t.getTowerCells().get(floor).setDevelopmentCard(null);
+						}
+						
+						if (cardType.equals(CardTypeEnum.TERRITORY))
+						{
+							player.getPlayerBoard().getTerritories().add((TerritoryCard) t.getTowerCells().get(floor).getDevelopmentCard());
+							t.getTowerCells().get(floor).setDevelopmentCard(null);
+						}
+						if (cardType.equals(CardTypeEnum.VENTURE))
+						{
+							player.getPlayerBoard().getVentures().add((VentureCard) t.getTowerCells().get(floor).getDevelopmentCard());
+							t.getTowerCells().get(floor).setDevelopmentCard(null);
+						}
+					}
+				}
 		}
 		
-	}
 	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((cardCostDiscount == null) ? 0 : cardCostDiscount.hashCode());
-		result = prime * result + ((cardType == null) ? 0 : cardType.hashCode());
-		result = prime * result + diceValue;
-		return result;
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		PickTowerCard other = (PickTowerCard) obj;
-		if (cardCostDiscount == null) {
-			if (other.cardCostDiscount != null)
-				return false;
-		} else if (!cardCostDiscount.equals(other.cardCostDiscount))
-			return false;
-		if (cardType != other.cardType)
-			return false;
-		if (diceValue != other.diceValue)
-			return false;
-		return true;
-	}
-	
-	@Override
-	public String toString() {
-		return "PickTowerCard [cardType=" + cardType + ", diceValue=" + diceValue + ", cardCostDiscount="
-				+ cardCostDiscount + "]";
 	}
 	
 }

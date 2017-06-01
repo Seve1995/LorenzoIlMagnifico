@@ -4,11 +4,13 @@ public class BonusTile {
 	private int productionServantBonus; 
 	private int productionCoinsBonus;
 	private int productionMilitaryPointsBonus;
+	private int productionActivationValue;
 	private int harvestServantBonus;
 	private int harvestCoinsBonus;
 	private int harvestMilitaryPointsBonus;
 	private int harvestWoodsBonus;
 	private int harvestStonesBonus;
+	private int harvestActiovationValue;
 	
 	public int getProductionServantBonus() {
 		return productionServantBonus;
@@ -59,5 +61,18 @@ public class BonusTile {
 	public void setHarvestStonesBonus(int harvestStonesBonus) {
 		this.harvestStonesBonus = harvestStonesBonus;
 	}
+	public int getProductionActivationValue() {
+		return productionActivationValue;
+	}
+	public void setProductionActivationValue(int productionActivationValue) {
+		this.productionActivationValue = productionActivationValue;
+	}
+	public int getHarvestActiovationValue() {
+		return harvestActiovationValue;
+	}
+	public void setHarvestActiovationValue(int harvestActiovationValue) {
+		this.harvestActiovationValue = harvestActiovationValue;
+	}
+	
 
 }

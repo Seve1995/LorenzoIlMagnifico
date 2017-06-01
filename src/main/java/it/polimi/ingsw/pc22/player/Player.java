@@ -30,6 +30,9 @@ public class Player
 	private boolean servantsHandlerMalus; //Serve per gestire l'effetto della tessera scomunica
 	private boolean noFirstAction; //Serve per gestire l'effetto della tessera scomunica
 	private boolean noMilitaryPointsForTerritories;//Serve per gestire l'effetto della carta Leader Cesare Borgia
+	private boolean dontCareOccupiedPlaces; //Serve per l'effetto del leader Ludovico Ariosto
+	private boolean dontPayThreeCoinsInTowers; //Serve per l'effetto del leader Filippo Brunelleschi
+	private boolean playWithThePope; //Serve per l'effetto di Sisto IV
 	private boolean excommunicated;
 	private boolean newAction;
 	private boolean removeTowerBonus;
@@ -216,6 +219,32 @@ public class Player
 	}
 	public void setExcommunicated(boolean excommunicated) {
 		this.excommunicated = excommunicated;
+	}
+	public boolean isDontCareOccupiedPlaces() {
+		return dontCareOccupiedPlaces;
+	}
+	public void setDontCareOccupiedPlaces(boolean dontCareOccupiedPlaces) {
+		this.dontCareOccupiedPlaces = dontCareOccupiedPlaces;
+	}
+
+	public boolean isDontPayThreeCoinsInTowers() {
+		return dontPayThreeCoinsInTowers;
+	}
+	public void setDontPayThreeCoinsInTowers(boolean dontPayThreeCoinsInTowers) {
+		this.dontPayThreeCoinsInTowers = dontPayThreeCoinsInTowers;
+	}
+	
+	public boolean isNoMilitaryPointsForTerritories() {
+		return noMilitaryPointsForTerritories;
+	}
+	public void setNoMilitaryPointsForTerritories(boolean noMilitaryPointsForTerritories) {
+		this.noMilitaryPointsForTerritories = noMilitaryPointsForTerritories;
+	}
+	public boolean isPlayWithThePope() {
+		return playWithThePope;
+	}
+	public void setPlayWithThePope(boolean playWithThePope) {
+		this.playWithThePope = playWithThePope;
 	}
 	public int getAsset(AssetType assetType) 
 	{

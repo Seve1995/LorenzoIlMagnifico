@@ -5,7 +5,7 @@ import it.polimi.ingsw.pc22.player.Player;
 
 public abstract class Action 
 {
-	private FamilyMember familyMember;
+	protected FamilyMember familyMember;
 	
 	public Action(){}
 

@@ -46,7 +46,7 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 
 	@Override
 	public boolean executeAction(Player player) {
-		if (isLegal(player))
+		if (isLegal(player) && !(player.isDontCareOccupiedPlaces()))
 		{
 			harvest.getHarvestCell()[harvest.firstCellFree()].setFamilyMember(this.getFamilyMember());
 			
@@ -59,6 +59,12 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 			}
 			return true;
 			
+		}
+		
+		else if (isLegal(player) && player.isDontCareOccupiedPlaces())
+		{
+			harvest.getHarvestCell()[0].setFamilyMember(this.getFamilyMember());
+			return true;
 		}
 		
 		else 

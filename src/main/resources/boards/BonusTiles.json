@@ -1,0 +1,64 @@
+{
+  "bonusTiles":[
+    {
+      "productionServantBonus": 0, 
+      "productionCoinsBonus": 2,
+      "productionMilitaryPointsBonus": 1,
+      "harvestServantBonus": 1,
+      "harvestCoinsBonus": 0,
+      "harvestStoneBonus": 1,
+      "harvestWoodBonus": 1,
+      "harvestMilitaryPointsBonus": 0,
+      "productionActivationValue": 1,
+      "harvestActivationValue": 1 
+    },
+    {
+      "productionServantBonus": 1,
+      "productionCoinsBonus": 2,
+      "productionMilitaryPointsBonus": 0,
+      "harvestServantBonus": 0,
+      "harvestCoinsBonus": 0,
+      "harvestStoneBonus": 1,
+      "harvestWoodBonus": 1,
+      "harvestMilitaryPointsBonus": 1,
+      "productionActivationValue": 1,
+      "harvestActivationValue": 1 
+    },
+    {
+      "productionServantBonus": 1,
+      "productionCoinsBonus": 0,
+      "productionMilitaryPointsBonus": 2,
+      "harvestServantBonus": 0,
+      "harvestCoinsBonus": 1,
+      "harvestStoneBonus": 1,
+      "harvestWoodBonus": 1,
+      "harvestMilitaryPointsBonus": 0,
+      "productionActivationValue": 1,
+      "harvestActivationValue": 1 
+    },
+    {
+      "productionServantBonus": 2,
+      "productionCoinsBonus": 1,
+      "productionMilitaryPointsBonus": 0,
+      "harvestServantBonus": 0,
+      "harvestCoinsBonus": 0,
+      "harvestStoneBonus": 1,
+      "harvestWoodBonus": 1,
+      "harvestMilitaryPointsBonus": 1,
+      "productionActivationValue": 1,
+      "harvestActivationValue": 1 
+    },
+    {
+      "productionServantBonus": 0,
+      "productionCoinsBonus": 1,
+      "productionMilitaryPointsBonus": 2,
+      "harvestServantBonus": 1,
+      "harvestCoinsBonus": 0,
+      "harvestStoneBonus": 1,
+      "harvestWoodBonus": 1,
+      "harvestMilitaryPointsBonus": 0,
+      "productionActivationValue": 1,
+      "harvestActivationValue": 1 
+    }
+    ]
+}

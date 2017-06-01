@@ -10,21 +10,28 @@ public class DoProductionAction implements Effect {
 	@Override
 	public boolean isLegal(Player player) {
 		
-		return false;
+		return true;
+		
 	}
 
 	@Override
 	public void executeEffect(Player player) {
-		
-			player.setServants(player.getServants() + player.getPlayerBoard().getBonusTile().getProductionServantBonus() );
-			player.setCoins(player.getCoins() + player.getPlayerBoard().getBonusTile().getProductionCoinsBonus());
-			player.setMilitaryPoints(player.getMilitaryPoints() + player.getPlayerBoard().getBonusTile().getProductionMilitaryPointsBonus());
+			
+			if (value >= player.getPlayerBoard().getBonusTile().getProductionActivationValue())
+			{
+				player.setServants(player.getServants() + player.getPlayerBoard().getBonusTile().getProductionServantBonus() );
+				player.setCoins(player.getCoins() + player.getPlayerBoard().getBonusTile().getProductionCoinsBonus());
+				player.setMilitaryPoints(player.getMilitaryPoints() + player.getPlayerBoard().getBonusTile().getProductionMilitaryPointsBonus());
+			}
 			
 			for (TerritoryCard t : player.getPlayerBoard().getTerritories())
 			{
-				for (Effect e : t.getPermanentEffects())
+				if (value >= t.getPermanentEffectActivationCost())
 				{
-					e.executeEffect(player);
+					for (Effect e : t.getPermanentEffects())
+					{
+						e.executeEffect(player);
+					}
 				}
 			}
 	}

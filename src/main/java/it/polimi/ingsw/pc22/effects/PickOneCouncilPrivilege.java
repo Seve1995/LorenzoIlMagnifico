@@ -13,9 +13,10 @@ public class PickOneCouncilPrivilege implements Effect{
 	}
 
 	@Override
-	public void executeEffect(Player player) {
+	public void executeEffect(Player player)
+	{
 		
-		//pickCouncilPrivilege(player);
+		player.addAsset(choosenAsset);
 		
 	}
 	

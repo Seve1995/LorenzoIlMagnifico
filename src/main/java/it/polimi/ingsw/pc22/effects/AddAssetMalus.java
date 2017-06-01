@@ -4,6 +4,7 @@ import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class AddAssetMalus implements Effect{
+	
 	private Asset asset;
 
 	public Asset getAsset()
@@ -18,13 +19,15 @@ public class AddAssetMalus implements Effect{
 
 	@Override
 	public boolean isLegal(Player player) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		return true;
+		
 	}
 
 	@Override
 	public void executeEffect(Player player) {
-		// TODO Auto-generated method stub
+		
+		player.addAsset(asset);
 		
 	}
 

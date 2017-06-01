@@ -29,6 +29,9 @@ public class Tower {
 		this.towerCells = towerCells;
 	}
 	
+	
+	
+	
 	@Override
 	public String toString(){
 		String output=this.towerType.toString()+" Tower\n";

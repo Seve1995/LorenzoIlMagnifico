@@ -1,5 +1,7 @@
 package it.polimi.ingsw.pc22.effects;
 
+import java.util.Set;
+
 import it.polimi.ingsw.pc22.connection.GameMatch;
 import it.polimi.ingsw.pc22.gamebox.LeaderCard;
 import it.polimi.ingsw.pc22.player.Player;
@@ -12,32 +14,35 @@ public class Copycut implements Effect
 	@Override
 	public boolean isLegal(Player player) {
 		
-		for (LeaderCard l : player.getPlayerBoard().getLeaderCards())
-		{
-			if(l.equals(leaderCard))
-			{
-				return false;
-			}
-		}
+		//Set<CardTypeEnum> currCardType = this.leaderCard.getRequiredCard().keySet();
 		
-		for (LeaderCard l : player.getLeaderCards())
+		Set<Player> currPlayers = this.gameMatch.getPlayers().keySet();
+		
+		for (Player p : currPlayers)
 		{
-			if(l.equals(leaderCard))
+			for (LeaderCard l : p.getPlayerBoard().getLeaderCards())
 			{
-				return false;
+				if(l.equals(leaderCard))
+				{
+					return true;
+				}
 			}
+			
 		}
 		
 		return false;
-		
+	
 	}
 
 	@Override
 	public void executeEffect(Player player)
 	{
-		for (Effect e : leaderCard.getEffects())
+		if (isLegal(player))
 		{
-			e.executeEffect(player);
+			for (Effect e : leaderCard.getEffects())
+			{
+				e.executeEffect(player);
+			}
 		}
 		
 	}
