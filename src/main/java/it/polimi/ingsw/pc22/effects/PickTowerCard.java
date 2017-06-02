@@ -22,8 +22,6 @@ public class PickTowerCard implements Effect{
 	private int diceValue;
 	private List<Asset> assetsDiscount;
 	
-	
-
 	public List<Asset> getAssetsDiscount() {
 		return assetsDiscount;
 	}
@@ -69,8 +67,6 @@ public class PickTowerCard implements Effect{
 			}
 			
 			CharacterCard currCharacterCard = (CharacterCard) tower.getTowerCells().get(floor).getDevelopmentCard();
-			
-			if ( currCharacterCard.getCoinsCost().getValue() - 3 < player.getCoins())
 			
 			if (currCharacterCard.getCoinsCost().getValue() < player.getCoins())
 			{
@@ -162,6 +158,27 @@ public class PickTowerCard implements Effect{
 		return true;
 	}
 	
+	
+	
+	private void removeCards(Tower t, int floor)
+	{
+		t.getTowerCells().get(floor).setDevelopmentCard(null);
+	}
+	
+	
+	private void activeEffects(DevelopmentCard d, Player p)
+	{
+		for (Effect e : d.getImmediateEffects())
+		{
+				e.executeEffect(p);
+				
+				//if (e istanceof AddAsset && p.isSantaRita)
+				//e.executeEffect(p);
+		}
+			
+	}
+	
+	
 	@Override
 	public void executeEffect(Player player) 
 	{
@@ -175,25 +192,31 @@ public class PickTowerCard implements Effect{
 						if (cardType.equals(CardTypeEnum.BUILDING))
 						{
 							player.getPlayerBoard().getBuildings().add((BuildingCard) t.getTowerCells().get(floor).getDevelopmentCard());
-							t.getTowerCells().get(floor).setDevelopmentCard(null);
+							
 						}
 						
 						if (cardType.equals(CardTypeEnum.CHARACTER))
 						{
 							player.getPlayerBoard().getCharacters().add((CharacterCard) t.getTowerCells().get(floor).getDevelopmentCard());
-							t.getTowerCells().get(floor).setDevelopmentCard(null);
+							
 						}
 						
 						if (cardType.equals(CardTypeEnum.TERRITORY))
 						{
 							player.getPlayerBoard().getTerritories().add((TerritoryCard) t.getTowerCells().get(floor).getDevelopmentCard());
-							t.getTowerCells().get(floor).setDevelopmentCard(null);
+				
 						}
+						
 						if (cardType.equals(CardTypeEnum.VENTURE))
 						{
 							player.getPlayerBoard().getVentures().add((VentureCard) t.getTowerCells().get(floor).getDevelopmentCard());
-							t.getTowerCells().get(floor).setDevelopmentCard(null);
+							
 						}
+						
+						activeEffects(t.getTowerCells().get(floor).getDevelopmentCard(), player);
+						
+						removeCards(t, floor);
+						
 					}
 				}
 		}

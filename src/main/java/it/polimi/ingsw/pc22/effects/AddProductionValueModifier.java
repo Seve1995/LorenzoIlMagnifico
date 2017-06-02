@@ -2,7 +2,7 @@ package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.player.Player;
 
-public class AddProductionBonus implements Effect{
+public class AddProductionValueModifier implements Effect{
 	
 	private int value;
 
@@ -46,7 +46,7 @@ public class AddProductionBonus implements Effect{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AddProductionBonus other = (AddProductionBonus) obj;
+		AddProductionValueModifier other = (AddProductionValueModifier) obj;
 		if (value != other.value)
 			return false;
 		return true;

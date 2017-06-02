@@ -32,7 +32,8 @@ public class Player
 	private boolean noMilitaryPointsForTerritories;//Serve per gestire l'effetto della carta Leader Cesare Borgia
 	private boolean dontCareOccupiedPlaces; //Serve per l'effetto del leader Ludovico Ariosto
 	private boolean dontPayThreeCoinsInTowers; //Serve per l'effetto del leader Filippo Brunelleschi
-	private boolean playWithThePope; //Serve per l'effetto di Sisto IV
+	private boolean playWithThePope; //Serve per l'effetto di Sisto IV-> da modellare alla fine di ogni era
+	private boolean santaRita;
 	private boolean excommunicated;
 	private boolean newAction;
 	private boolean removeTowerBonus;

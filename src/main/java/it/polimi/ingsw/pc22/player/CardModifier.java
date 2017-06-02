@@ -14,6 +14,11 @@ public class CardModifier {
 	private List<Asset> assetDiscount;
 	private boolean onlyOneAsset;
 
+	public CardModifier() {
+		
+	}
+
+
 	public CardTypeEnum getCardType() {
 		return cardType;
 	}

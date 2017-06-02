@@ -2,7 +2,7 @@ package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.player.Player;
 
-public class AddHarvestValueBonus implements Effect{
+public class AddHarvestValueModifier implements Effect{
 	
 	private int value;
 
@@ -44,9 +44,9 @@ public class AddHarvestValueBonus implements Effect{
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof AddHarvestValueBonus))
+		if (!(obj instanceof AddHarvestValueModifier))
 			return false;
-		AddHarvestValueBonus other = (AddHarvestValueBonus) obj;
+		AddHarvestValueModifier other = (AddHarvestValueModifier) obj;
 		if (value != other.value)
 			return false;
 		return true;

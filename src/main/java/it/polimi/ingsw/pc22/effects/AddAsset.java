@@ -30,10 +30,11 @@ public class AddAsset implements Effect
 
 	@Override
 	public void executeEffect(Player player) {
+		
 		if (isLegal(player))
 			
 			player.addAsset(asset);
-		
+			
 	}
 	
 	/*
