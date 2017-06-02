@@ -31,13 +31,12 @@ public class Player
 	private boolean disableMarket; //Serve per gestire l'effetto della tessera scomunica
 	private boolean servantsHandlerMalus; //Serve per gestire l'effetto della tessera scomunica
 	private boolean noFirstAction; //Serve per gestire l'effetto della tessera scomunica
-	private boolean noMarketSetting; //Serve per gestire l'effetto della tessera scomunica
 	private boolean noMilitaryPointsForTerritories;//Serve per gestire l'effetto della carta Leader Cesare Borgia
 	private boolean dontCareOccupiedPlaces; //Serve per l'effetto del leader Ludovico Ariosto
 	private boolean dontPayThreeCoinsInTowers; //Serve per l'effetto del leader Filippo Brunelleschi
 	private boolean playWithThePope; //Serve per l'effetto di Sisto IV-> da modellare alla fine di ogni era
 	private boolean santaRita;
-	private boolean excommunicated;
+	private boolean sistoIV;
 	private boolean newAction;
 	private boolean removeTowerBonus;
 	private List<FamilyMember> familyMember;
@@ -218,11 +217,11 @@ public class Player
 		this.leaderCards = leaderCards;
 	}
 	
-	public boolean isExcommunicated() {
-		return excommunicated;
+	public boolean isSistoIV() {
+		return sistoIV;
 	}
-	public void setExcommunicated(boolean excommunicated) {
-		this.excommunicated = excommunicated;
+	public void setSistoIV (boolean sistoIV) {
+		this.sistoIV = sistoIV;
 	}
 	public boolean isDontCareOccupiedPlaces() {
 		return dontCareOccupiedPlaces;
@@ -357,6 +356,27 @@ public class Player
 		result = prime * result + priority;
 		result = prime * result + victoryPoints;
 		return result;
+	}
+	
+	
+	
+	public void removeFamilyMember (FamilyMember f)
+	
+	{
+	
+		for(int i=0; i < familyMember.size(); i++)
+		{
+		
+			if (this.familyMember.get(i).getColor().equals(f.getColor()))
+				
+			{
+			
+				this.familyMember.remove(i);
+				
+			}
+		
+		}
+	
 	}
 	
 	@Override

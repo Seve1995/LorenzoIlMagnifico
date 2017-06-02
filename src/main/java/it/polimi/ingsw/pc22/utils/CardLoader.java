@@ -35,6 +35,7 @@ public class CardLoader extends GenericLoader
         }
 
         return cards;
+        
     }
 
     private static DevelopmentCard loadCard(JSONObject jsonCard)

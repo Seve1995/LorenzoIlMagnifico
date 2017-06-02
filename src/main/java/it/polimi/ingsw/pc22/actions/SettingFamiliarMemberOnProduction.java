@@ -46,6 +46,7 @@ public class SettingFamiliarMemberOnProduction extends Action {
 		if (isLegal(player) && !(player.isDontCareOccupiedPlaces()))
 		{
 			production.getProductionCell()[production.firstCellFree()].setFamilyMember(this.getFamilyMember());
+			player.removeFamilyMember(familyMember);
 			
 			if (production.firstCellFree()>0)
 			{
@@ -61,6 +62,7 @@ public class SettingFamiliarMemberOnProduction extends Action {
 		else if (isLegal(player) && player.isDontCareOccupiedPlaces())
 		{
 			production.getProductionCell()[0].setFamilyMember(this.getFamilyMember());
+			player.removeFamilyMember(familyMember);
 			return true;
 		}
 		

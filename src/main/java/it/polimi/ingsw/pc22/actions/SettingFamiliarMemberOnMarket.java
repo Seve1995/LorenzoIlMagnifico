@@ -47,6 +47,9 @@ public class SettingFamiliarMemberOnMarket extends Action{
 		if (isLegal(player) )
 		{
 			market.getMarketCells().get(zone).setFamilyMember(this.getFamilyMember());
+			
+			player.removeFamilyMember(familyMember);
+			
 			currEffects = market.getMarketCells().get(zone).getEffects();
 			
 			for (Effect e : currEffects)

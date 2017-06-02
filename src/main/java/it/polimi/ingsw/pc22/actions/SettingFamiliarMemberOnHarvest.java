@@ -49,6 +49,7 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 		if (isLegal(player) && !(player.isDontCareOccupiedPlaces()))
 		{
 			harvest.getHarvestCell()[harvest.firstCellFree()].setFamilyMember(this.getFamilyMember());
+			player.removeFamilyMember(familyMember);
 			
 			if (harvest.firstCellFree()>0)
 			{
@@ -64,6 +65,7 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 		else if (isLegal(player) && player.isDontCareOccupiedPlaces())
 		{
 			harvest.getHarvestCell()[0].setFamilyMember(this.getFamilyMember());
+			player.removeFamilyMember(familyMember);
 			return true;
 		}
 		
