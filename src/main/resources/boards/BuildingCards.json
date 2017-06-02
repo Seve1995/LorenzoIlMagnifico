@@ -9,16 +9,12 @@
       "permanentEffectActivationCost": 5,
       "costs": [
         {
-          "asset": {
-            "type": "WOOD",
-            "value": 1
-          }
+          "type": "WOOD",
+          "value": 1
         },
         {
-          "asset": {
-            "type": "STONE",
-            "value": 3
-          }
+          "type": "STONE",
+          "value": 3
         }
       ],
       "immediateEffect": [
@@ -33,7 +29,7 @@
       "permanentEffect": [
         {
           "name": "AddAssetForEveryAssetOrCard",
-          "paidAsset" : null,
+          "paidAsset": null,
           "paidCardType": "BUILDING",
           "gainedAsset": {
             "type": "COIN",
@@ -51,16 +47,12 @@
       "permanentEffectActivationCost": 5,
       "costs": [
         {
-          "asset": {
-            "type": "WOOD",
-            "value": 3
-          }
+          "type": "WOOD",
+          "value": 3
         },
         {
-          "asset": {
-            "type": "STONE",
-            "value": 1
-          }
+          "type": "STONE",
+          "value": 1
         }
       ],
       "immediateEffect": [
@@ -75,7 +67,7 @@
       "permanentEffect": [
         {
           "name": "AddAssetForEveryAssetOrCard",
-          "paidAsset" : null,
+          "paidAsset": null,
           "paidCardType": "TERRITORY",
           "gainedAsset": {
             "type": "COIN",
@@ -93,16 +85,12 @@
       "permanentEffectActivationCost": 6,
       "costs": [
         {
-          "asset": {
-            "type": "COIN",
-            "value": 2
-          }
+          "type": "COIN",
+          "value": 2
         },
         {
-          "asset": {
-            "type": "STONE",
-            "value": 2
-          }
+          "type": "STONE",
+          "value": 2
         }
       ],
       "immediateEffect": [
@@ -117,7 +105,7 @@
       "permanentEffect": [
         {
           "name": "AddAssetForEveryAssetOrCard",
-          "paidAsset" : null,
+          "paidAsset": null,
           "paidCardType": "BUILDING",
           "gainedAsset": {
             "type": "VICTORYPOINT",
@@ -135,16 +123,12 @@
       "permanentEffectActivationCost": 6,
       "costs": [
         {
-          "asset": {
-            "type": "COIN",
-            "value": 2
-          }
+          "type": "COIN",
+          "value": 2
         },
         {
-          "asset": {
-            "type": "WOOD",
-            "value": 2
-          }
+          "type": "WOOD",
+          "value": 2
         }
       ],
       "immediateEffect": [
@@ -159,7 +143,7 @@
       "permanentEffect": [
         {
           "name": "AddAssetForEveryAssetOrCard",
-          "paidAsset" : null,
+          "paidAsset": null,
           "paidCardType": "CHARACTER",
           "gainedAsset": {
             "type": "VICTORYPOINT",
@@ -177,16 +161,12 @@
       "permanentEffectActivationCost": 4,
       "costs": [
         {
-          "asset": {
-            "type": "COIN",
-            "value": 1
-          }
+          "type": "COIN",
+          "value": 1
         },
         {
-          "asset": {
-            "type": "WOOD",
-            "value": 2
-          }
+          "type": "WOOD",
+          "value": 2
         }
       ],
       "immediateEffect": [
@@ -203,42 +183,34 @@
           "name": "FromAssetToAssetOrEffect",
           "paidAssets": [
             {
-              "asset": {
-                "type": "WOOD",
-                "value": 1
-              }
+              "type": "WOOD",
+              "value": 1
             }
           ],
           "gainedAssets": [
             {
-              "asset": {
-                "type": "COIN",
-                "value": 3
-              }
+              "type": "COIN",
+              "value": 3
             }
           ],
-          "onlyOneAsset" : false,
-          "gainedEffect" : null
+          "onlyOneAsset": false,
+          "gainedEffect": null
         },
         {
           "name": "FromAssetToAssetOrEffect",
           "paidAssets": [
             {
-              "asset": {
-                "type": "WOOD",
-                "value": 2
-              }
+              "type": "WOOD",
+              "value": 2
             }
           ],
           "gainedAssets": [
             {
-              "asset": {
-                "type": "COIN",
-                "value": 5
-              }
+              "type": "COIN",
+              "value": 5
             }
           ],
-          "onlyOneAsset" : false,
+          "onlyOneAsset": false,
           "gainedEffect": null
         }
       ]
@@ -252,16 +224,12 @@
       "permanentEffectActivationCost": 3,
       "costs": [
         {
-          "asset": {
-            "type": "COIN",
-            "value": 1
-          }
+          "type": "COIN",
+          "value": 1
         },
         {
-          "asset": {
-            "type": "STONE",
-            "value": 2
-          }
+          "type": "STONE",
+          "value": 2
         }
       ],
       "immediateEffect": [
@@ -278,43 +246,35 @@
           "name": "FromAssetToAssetOrEffect",
           "paidAssets": [
             {
-              "asset": {
-                "type": "STONE",
-                "value": 1
-              }
+              "type": "STONE",
+              "value": 1
             }
           ],
           "gainedAssets": [
             {
-              "asset": {
-                "type": "COIN",
-                "value": 3
-              }
+              "type": "COIN",
+              "value": 3
             }
           ],
-          "onlyOneAsset" : false,
-          "gainedEffect" : null
+          "onlyOneAsset": false,
+          "gainedEffect": null
         },
         {
           "name": "FromAssetToAssetOrEffect",
           "paidAssets": [
             {
-              "asset": {
-                "type": "STONE",
-                "value": 2
-              }
+              "type": "STONE",
+              "value": 2
             }
           ],
           "gainedAssets": [
             {
-              "asset": {
-                "type": "COIN",
-                "value": 5
-              }
+              "type": "COIN",
+              "value": 5
             }
           ],
-          "onlyOneAsset" : false,
-          "gainedEffect" : null
+          "onlyOneAsset": false,
+          "gainedEffect": null
         }
       ]
     },
@@ -327,10 +287,8 @@
       "permanentEffectActivationCost": 2,
       "costs": [
         {
-          "asset": {
-            "type": "WOOD",
-            "value": 2
-          }
+          "type": "WOOD",
+          "value": 2
         }
       ],
       "immediateEffect": [
@@ -347,22 +305,18 @@
           "name": "FromAssetToAssetOrEffect",
           "paidAssets": [
             {
-              "asset": {
-                "type": "COIN",
-                "value": 1
-              }
+              "type": "COIN",
+              "value": 1
             }
           ],
           "gainedAssets": [
             {
-              "asset": {
-                "type": "FAITHPOINT",
-                "value": 1
-              }
+              "type": "FAITHPOINT",
+              "value": 1
             }
           ],
-          "onlyOneAsset" : false,
-          "gainedEffect" : null
+          "onlyOneAsset": false,
+          "gainedEffect": null
         }
       ]
     },
@@ -375,10 +329,8 @@
       "permanentEffectActivationCost": 1,
       "costs": [
         {
-          "asset": {
-            "type": "STONE",
-            "value": 2
-          }
+          "type": "STONE",
+          "value": 2
         }
       ],
       "immediateEffect": [
@@ -395,14 +347,12 @@
           "name": "FromAssetToAssetOrEffect",
           "paidAssets": [
             {
-              "asset": {
-                "type": "COIN",
-                "value": 1
-              }
+              "type": "COIN",
+              "value": 1
             }
           ],
           "gainedAssets": null,
-          "onlyOneAsset" : false,
+          "onlyOneAsset": false,
           "gainedEffect": {
             "name": "PickOneCouncilPrivilege"
           }
@@ -418,16 +368,12 @@
       "permanentEffectActivationCost": 3,
       "costs": [
         {
-          "asset": {
-            "type": "WOOD",
-            "value": 2
-          }
+          "type": "WOOD",
+          "value": 2
         },
         {
-          "asset": {
-            "type": "STONE",
-            "value": 1
-          }
+          "type": "STONE",
+          "value": 1
         }
       ],
       "immediateEffect": [
@@ -444,28 +390,22 @@
           "name": "FromAssetToAssetOrEffect",
           "paidAssets": [
             {
-              "asset": {
-                "type": "COIN",
-                "value": 3
-              }
+              "type": "COIN",
+              "value": 3
             }
           ],
           "gainedAssets": [
             {
-              "asset": {
-                "type": "WOOD",
-                "value": 2
-              }
+              "type": "WOOD",
+              "value": 2
             },
             {
-              "asset": {
-                "type": "STONE",
-                "value": 2
-              }
+              "type": "STONE",
+              "value": 2
             }
           ],
-          "onlyOneAsset" : false,
-          "gainedEffect" : null
+          "onlyOneAsset": false,
+          "gainedEffect": null
         }
       ]
     },
@@ -478,10 +418,8 @@
       "permanentEffectActivationCost": 3,
       "costs": [
         {
-          "asset": {
-            "type": "WOOD",
-            "value": 3
-          }
+          "type": "WOOD",
+          "value": 3
         }
       ],
       "immediateEffect": [
@@ -498,43 +436,35 @@
           "name": "FromAssetToAssetOrEffect",
           "paidAssets": [
             {
-              "asset": {
-                "type": "COIN",
-                "value": 1
-              }
+              "type": "COIN",
+              "value": 1
             }
           ],
           "gainedAssets": [
             {
-              "asset": {
-                "type": "VICTORYPOINT",
-                "value": 3
-              }
+              "type": "VICTORYPOINT",
+              "value": 3
             }
           ],
-          "onlyOneAsset" : false,
-          "gainedEffect" : null
+          "onlyOneAsset": false,
+          "gainedEffect": null
         },
         {
           "name": "FromAssetToAssetOrEffect",
           "paidAssets": [
             {
-              "asset": {
-                "type": "COIN",
-                "value": 2
-              }
+              "type": "COIN",
+              "value": 2
             }
           ],
           "gainedAssets": [
             {
-              "asset": {
-                "type": "VICTORYPOINT",
-                "value": 5
-              }
+              "type": "VICTORYPOINT",
+              "value": 5
             }
           ],
-          "onlyOneAsset" : false,
-          "gainedEffect" : null
+          "onlyOneAsset": false,
+          "gainedEffect": null
         }
       ]
     },
@@ -547,10 +477,8 @@
       "permanentEffectActivationCost": 4,
       "costs": [
         {
-          "asset": {
-            "type": "WOOD",
-            "value": 4
-          }
+          "type": "WOOD",
+          "value": 4
         }
       ],
       "immediateEffect": [
@@ -567,43 +495,35 @@
           "name": "FromAssetToAssetOrEffect",
           "paidAssets": [
             {
-              "asset": {
-                "type": "WOOD",
-                "value": 1
-              }
+              "type": "WOOD",
+              "value": 1
             }
           ],
           "gainedAssets": [
             {
-              "asset": {
-                "type": "VICTORYPOINT",
-                "value": 3
-              }
+              "type": "VICTORYPOINT",
+              "value": 3
             }
           ],
-          "onlyOneAsset" : false,
-          "gainedEffect" : null
+          "onlyOneAsset": false,
+          "gainedEffect": null
         },
         {
           "name": "FromAssetToAssetOrEffect",
           "paidAssets": [
             {
-              "asset": {
-                "type": "WOOD",
-                "value": 3
-              }
+              "type": "WOOD",
+              "value": 3
             }
           ],
           "gainedAssets": [
             {
-              "asset": {
-                "type": "VICTORYPOINT",
-                "value": 7
-              }
+              "type": "VICTORYPOINT",
+              "value": 7
             }
           ],
-          "onlyOneAsset" : false,
-          "gainedEffect" : null
+          "onlyOneAsset": false,
+          "gainedEffect": null
         }
       ]
     },
@@ -616,10 +536,8 @@
       "permanentEffectActivationCost": 5,
       "costs": [
         {
-          "asset": {
-            "type": "STONE",
-            "value": 4
-          }
+          "type": "STONE",
+          "value": 4
         }
       ],
       "immediateEffect": [
@@ -636,43 +554,35 @@
           "name": "FromAssetToAssetOrEffect",
           "paidAssets": [
             {
-              "asset": {
-                "type": "STONE",
-                "value": 1
-              }
+              "type": "STONE",
+              "value": 1
             }
           ],
           "gainedAssets": [
             {
-              "asset": {
-                "type": "VICTORYPOINT",
-                "value": 3
-              }
+              "type": "VICTORYPOINT",
+              "value": 3
             }
           ],
-          "onlyOneAsset" : false,
-          "gainedEffect" : null
+          "onlyOneAsset": false,
+          "gainedEffect": null
         },
         {
           "name": "FromAssetToAssetOrEffect",
           "paidAssets": [
             {
-              "asset": {
-                "type": "STONE",
-                "value": 3
-              }
+              "type": "STONE",
+              "value": 3
             }
           ],
           "gainedAssets": [
             {
-              "asset": {
-                "type": "VICTORYPOINT",
-                "value": 7
-              }
+              "type": "VICTORYPOINT",
+              "value": 7
             }
           ],
-          "onlyOneAsset" : false,
-          "gainedEffect" : null
+          "onlyOneAsset": false,
+          "gainedEffect": null
         }
       ]
     },
@@ -685,16 +595,12 @@
       "permanentEffectActivationCost": 4,
       "costs": [
         {
-          "asset": {
-            "type": "WOOD",
-            "value": 1
-          }
+          "type": "WOOD",
+          "value": 1
         },
         {
-          "asset": {
-            "type": "STONE",
-            "value": 2
-          }
+          "type": "STONE",
+          "value": 2
         }
       ],
       "immediateEffect": [
@@ -711,34 +617,26 @@
           "name": "FromAssetToAssetOrEffect",
           "paidAssets": [
             {
-              "asset": {
-                "type": "SERVANT",
-                "value": 1
-              }
+              "type": "SERVANT",
+              "value": 1
             },
             {
-              "asset": {
-                "type": "WOOD",
-                "value": 1
-              }
+              "type": "WOOD",
+              "value": 1
             },
             {
-              "asset": {
-                "type": "STONE",
-                "value": 1
-              }
+              "type": "STONE",
+              "value": 1
             }
           ],
           "gainedAssets": [
             {
-              "asset": {
-                "type": "VICTORYPOINT",
-                "value": 6
-              }
+              "type": "VICTORYPOINT",
+              "value": 6
             }
           ],
-          "onlyOneAsset" : false,
-          "gainedEffect" : null
+          "onlyOneAsset": false,
+          "gainedEffect": null
         }
       ]
     },
@@ -751,10 +649,8 @@
       "permanentEffectActivationCost": 2,
       "costs": [
         {
-          "asset": {
-            "type": "STONE",
-            "value": 3
-          }
+          "type": "STONE",
+          "value": 3
         }
       ],
       "immediateEffect": [
@@ -778,28 +674,22 @@
           "name": "FromAssetToAssetOrEffect",
           "paidAssets": [
             {
-              "asset": {
-                "type": "FAITHPOINT",
-                "value": 1
-              }
+              "type": "FAITHPOINT",
+              "value": 1
             }
           ],
           "gainedAssets": [
             {
-              "asset": {
-                "type": "COIN",
-                "value": 2
-              }
+              "type": "COIN",
+              "value": 2
             },
             {
-              "asset": {
-                "type": "VICTORYPOINT",
-                "value": 2
-              }
+              "type": "VICTORYPOINT",
+              "value": 2
             }
           ],
-          "onlyOneAsset" : false,
-          "gainedEffect" : null
+          "onlyOneAsset": false,
+          "gainedEffect": null
         }
       ]
     },
@@ -812,16 +702,12 @@
       "permanentEffectActivationCost": 1,
       "costs": [
         {
-          "asset": {
-            "type": "WOOD",
-            "value": 1
-          }
+          "type": "WOOD",
+          "value": 1
         },
         {
-          "asset": {
-            "type": "STONE",
-            "value": 1
-          }
+          "type": "STONE",
+          "value": 1
         }
       ],
       "immediateEffect": [
@@ -838,22 +724,18 @@
           "name": "FromAssetToAssetOrEffect",
           "paidAssets": [
             {
-              "asset": {
-                "type": "SERVANT",
-                "value": 1
-              }
+              "type": "SERVANT",
+              "value": 1
             }
           ],
           "gainedAssets": [
             {
-              "asset": {
-                "type": "MILITARYPOINT",
-                "value": 3
-              }
+              "type": "MILITARYPOINT",
+              "value": 3
             }
           ],
-          "onlyOneAsset" : false,
-          "gainedEffect" : null
+          "onlyOneAsset": false,
+          "gainedEffect": null
         }
       ]
     },
@@ -866,22 +748,16 @@
       "permanentEffectActivationCost": 6,
       "costs": [
         {
-          "asset": {
-            "type": "COIN",
-            "value": 2
-          }
+          "type": "COIN",
+          "value": 2
         },
         {
-          "asset": {
-            "type": "WOOD",
-            "value": 2
-          }
+          "type": "WOOD",
+          "value": 2
         },
         {
-          "asset": {
-            "type": "STONE",
-            "value": 2
-          }
+          "type": "STONE",
+          "value": 2
         }
       ],
       "immediateEffect": [
@@ -919,22 +795,16 @@
       "permanentEffectActivationCost": 2,
       "costs": [
         {
-          "asset": {
-            "type": "COIN",
-            "value": 3
-          }
+          "type": "COIN",
+          "value": 3
         },
         {
-          "asset": {
-            "type": "WOOD",
-            "value": 1
-          }
+          "type": "WOOD",
+          "value": 1
         },
         {
-          "asset": {
-            "type": "STONE",
-            "value": 3
-          }
+          "type": "STONE",
+          "value": 3
         }
       ],
       "immediateEffect": [
@@ -965,16 +835,12 @@
       "permanentEffectActivationCost": 4,
       "costs": [
         {
-          "asset": {
-            "type": "COIN",
-            "value": 4
-          }
+          "type": "COIN",
+          "value": 4
         },
         {
-          "asset": {
-            "type": "WOOD",
-            "value": 3
-          }
+          "type": "WOOD",
+          "value": 3
         }
       ],
       "immediateEffect": [
@@ -991,28 +857,22 @@
           "name": "FromAssetToAssetOrEffect",
           "paidAssets": [
             {
-              "asset": {
-                "type": "COIN",
-                "value": 4
-              }
+              "type": "COIN",
+              "value": 4
             }
           ],
           "gainedAssets": [
             {
-              "asset": {
-                "type": "WOOD",
-                "value": 3
-              }
+              "type": "WOOD",
+              "value": 3
             },
             {
-              "asset": {
-                "type": "STONE",
-                "value": 3
-              }
+              "type": "STONE",
+              "value": 3
             }
           ],
-          "onlyOneAsset" : false,
-          "gainedEffect" : null
+          "onlyOneAsset": false,
+          "gainedEffect": null
         }
       ]
     },
@@ -1025,22 +885,16 @@
       "permanentEffectActivationCost": 1,
       "costs": [
         {
-          "asset": {
-            "type": "SERVANT",
-            "value": 2
-          }
+          "type": "SERVANT",
+          "value": 2
         },
         {
-          "asset": {
-            "type": "WOOD",
-            "value": 4
-          }
+          "type": "WOOD",
+          "value": 4
         },
         {
-          "asset": {
-            "type": "STONE",
-            "value": 2
-          }
+          "type": "STONE",
+          "value": 2
         }
       ],
       "immediateEffect": [
@@ -1071,22 +925,16 @@
       "permanentEffectActivationCost": 5,
       "costs": [
         {
-          "asset": {
-            "type": "COIN",
-            "value": 2
-          }
+          "type": "COIN",
+          "value": 2
         },
         {
-          "asset": {
-            "type": "WOOD",
-            "value": 2
-          }
+          "type": "WOOD",
+          "value": 2
         },
         {
-          "asset": {
-            "type": "STONE",
-            "value": 4
-          }
+          "type": "STONE",
+          "value": 4
         }
       ],
       "immediateEffect": [
@@ -1120,22 +968,16 @@
       "permanentEffectActivationCost": 6,
       "costs": [
         {
-          "asset": {
-            "type": "COIN",
-            "value": 3
-          }
+          "type": "COIN",
+          "value": 3
         },
         {
-          "asset": {
-            "type": "WOOD",
-            "value": 3
-          }
+          "type": "WOOD",
+          "value": 3
         },
         {
-          "asset": {
-            "type": "STONE",
-            "value": 1
-          }
+          "type": "STONE",
+          "value": 1
         }
       ],
       "immediateEffect": [
@@ -1152,28 +994,22 @@
           "name": "FromAssetToAssetOrEffect",
           "paidAssets": [
             {
-              "asset": {
-                "type": "COIN",
-                "value": 1
-              }
+              "type": "COIN",
+              "value": 1
             }
           ],
           "gainedAssets": [
             {
-              "asset": {
-                "type": "SERVANT",
-                "value": 2
-              }
+              "type": "SERVANT",
+              "value": 2
             },
             {
-              "asset": {
-                "type": "VICTORYPOINT",
-                "value": 4
-              }
+              "type": "VICTORYPOINT",
+              "value": 4
             }
           ],
-          "onlyOneAsset" : false,
-          "gainedEffect" : null
+          "onlyOneAsset": false,
+          "gainedEffect": null
         }
       ]
     },
@@ -1186,16 +1022,12 @@
       "permanentEffectActivationCost": 1,
       "costs": [
         {
-          "asset": {
-            "type": "WOOD",
-            "value": 1
-          }
+          "type": "WOOD",
+          "value": 1
         },
         {
-          "asset": {
-            "type": "STONE",
-            "value": 4
-          }
+          "type": "STONE",
+          "value": 4
         }
       ],
       "immediateEffect": [
@@ -1219,28 +1051,22 @@
           "name": "FromAssetToAssetOrEffect",
           "paidAssets": [
             {
-              "asset": {
-                "type": "WOOD",
-                "value": 1
-              }
+              "type": "WOOD",
+              "value": 1
             },
             {
-              "asset": {
-                "type": "STONE",
-                "value": 1
-              }
+              "type": "STONE",
+              "value": 1
             }
           ],
           "gainedAssets": [
             {
-              "asset": {
-                "type": "FAITHPOINT",
-                "value": 2
-              }
+              "type": "FAITHPOINT",
+              "value": 2
             }
           ],
-          "onlyOneAsset" : true,
-          "gainedEffect" : null
+          "onlyOneAsset": true,
+          "gainedEffect": null
         }
       ]
     },
@@ -1253,22 +1079,16 @@
       "permanentEffectActivationCost": 3,
       "costs": [
         {
-          "asset": {
-            "type": "SERVANT",
-            "value": 1
-          }
+          "type": "SERVANT",
+          "value": 1
         },
         {
-          "asset": {
-            "type": "WOOD",
-            "value": 2
-          }
+          "type": "WOOD",
+          "value": 2
         },
         {
-          "asset": {
-            "type": "STONE",
-            "value": 2
-          }
+          "type": "STONE",
+          "value": 2
         }
       ],
       "immediateEffect": [
@@ -1285,28 +1105,22 @@
           "name": "FromAssetToAssetOrEffect",
           "paidAssets": [
             {
-              "asset": {
-                "type": "SERVANT",
-                "value": 1
-              }
+              "type": "SERVANT",
+              "value": 1
             }
           ],
           "gainedAssets": [
             {
-              "asset": {
-                "type": "MILITARYPOINT",
-                "value": 3
-              }
+              "type": "MILITARYPOINT",
+              "value": 3
             },
             {
-              "asset": {
-                "type": "VICTORYPOINT",
-                "value": 1
-              }
+              "type": "VICTORYPOINT",
+              "value": 1
             }
           ],
-          "onlyOneAsset" : false,
-          "gainedEffect" : null
+          "onlyOneAsset": false,
+          "gainedEffect": null
         }
       ]
     },
@@ -1319,16 +1133,12 @@
       "permanentEffectActivationCost": 2,
       "costs": [
         {
-          "asset": {
-            "type": "WOOD",
-            "value": 4
-          }
+          "type": "WOOD",
+          "value": 4
         },
         {
-          "asset": {
-            "type": "STONE",
-            "value": 4
-          }
+          "type": "STONE",
+          "value": 4
         }
       ],
       "immediateEffect": [

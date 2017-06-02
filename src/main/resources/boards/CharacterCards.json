@@ -1,467 +1,532 @@
 {
-  "CharactersDeck": [
+  "cards": [
     {
-      "name": "Badessa",
-      "type": "Character",
-      "age": 1,
-      "coinCost": 3,
-      "rapidEffect": [
+      "name": "Warlord",
+      "cardNumber": 49,
+      "cardType": "CHARACTER",
+      "roundNumber": 1,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 2
+      },
+      "immediateEffect": [
         {
-          "name": "GainPoints",
-          "value": 1
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 3
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddTowerCardDiscount",
+          "cardType": "TERRITORY",
+          "diceValueDiscount": 2,
+          "assetDiscounts": null,
+          "onlyOneAsset": false
+        }
+      ]
+    },
+    {
+      "name": "Stonemason",
+      "cardNumber": 50,
+      "cardType": "CHARACTER",
+      "roundNumber": 1,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 4
+      },
+      "immediateEffect": null,
+      "permanentEffect": [
+        {
+          "name": "AddTowerCardDiscount",
+          "cardType": "BUILDING",
+          "diceValueDiscount": 2,
+          "assetDiscounts": [
+            {
+                "type": "WOOD",
+                "value": 1
+              },
+            {
+                "type": "STONE",
+                "value": 1
+              }
+          ],
+          "onlyOneAsset": true
+        }
+      ]
+    },
+    {
+      "name": "Dame",
+      "cardNumber": 51,
+      "cardType": "CHARACTER",
+      "roundNumber": 1,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 4
+      },
+      "immediateEffect": null,
+      "permanentEffect": [
+        {
+          "name": "AddTowerCardDiscount",
+          "cardType": "CHARACTER",
+          "diceValueDiscount": 2,
+          "assetDiscounts": [
+            {
+                "type": "COIN",
+                "value": 1
+              }
+          ],
+          "onlyOneAsset": false
+        }
+      ]
+    },
+    {
+      "name": "Knight",
+      "cardNumber": 52,
+      "cardType": "CHARACTER",
+      "roundNumber": 1,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 2
+      },
+      "immediateEffect": [
+        {
+          "name" : "PickOneCouncilPrivilege"
+        }],
+      "permanentEffect": [
+        {
+          "name": "AddTowerCardDiscount",
+          "cardType": "VENTURE",
+          "diceValueDiscount": 2,
+          "assetDiscounts": null,
+          "onlyOneAsset": false
+        }
+      ]
+    },
+    {
+      "name": "Farmer",
+      "cardNumber": 53,
+      "cardType": "CHARACTER",
+      "roundNumber": 1,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 3
+      },
+      "immediateEffect": null,
+      "permanentEffect": [
+        {
+          "name" : "AddHarvestValueModifier",
+          "value" : 2
+        }
+      ]
+    },
+    {
+      "name": "Artisan",
+      "cardNumber": 54,
+      "cardType": "CHARACTER",
+      "roundNumber": 1,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 3
+      },
+      "immediateEffect": null,
+      "permanentEffect": [
+        {
+          "name" : "AddProductionValueModifier",
+          "value" : 2
+        }
+      ]
+    },
+    {
+      "name": "Preacher",
+      "cardNumber": 55,
+      "cardType": "CHARACTER",
+      "roundNumber": 1,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 2
+      },
+      "immediateEffect": [{
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 4
+          }
+        }],
+      "permanentEffect": [
+        {
+          "name" : "RemoveBonusesFromTowers"
+        }
+      ]
+    },
+    {
+      "name": "Abbess",
+      "cardNumber": 56,
+      "cardType": "CHARACTER",
+      "roundNumber": 1,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 3
+      },
+      "immediateEffect": [
+        {
+          "name": "PickTowerCard",
+          "floor": 0,
+          "cardType": "ANY",
+          "diceValue": 4,
+          "assetsDiscount": null
         },
         {
-          "name": "CardHandling",
-          "value": 4
-        }
-      ]
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 1
+          }
+        }],
+      "permanentEffect": null
     },
     {
-      "name": "Predicatore",
-      "type": "Character",
-      "age": 1,
-      "coinCost": 2,
-      "rapidEffect": [
+      "name": "Captain",
+      "cardNumber": 57,
+      "cardType": "CHARACTER",
+      "roundNumber": 2,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 4
+      },
+      "immediateEffect": [
         {
-          "name": "GainPoints",
-          "value": 4
-        }
-      ],
-      "permanentEffect": [
-        {
-          "name": "???"
-        }
-      ]
-    },
-    {
-      "name": "Dama",
-      "type": "Character",
-      "age": 1,
-      "coinCost": 4,
-      "rapidEffect": [
-        {
-          "name": "noActionBonus"
-        }
-      ],
-      "permanentEffect": [
-        {
-          "name": "CardHandling",
-          "coinDiscount": 1,
-          "addingDiceValue": 2
-        }
-      ]
-    },
-    {
-      "name": "Cavaliere",
-      "type": "Character",
-      "age": 1,
-      "coinCost": 2,
-      "rapidEffect": [
-        {
-          "name": "HandleAsset",
-          "value": 1
-        }
-      ],
-      "permanentEffect": [
-        {
-          "name": "HandleCard",
-          "value": 2
-        }
-      ]
-    },
-    {
-      "name": "Contadino",
-      "type": "Character",
-      "age": 1,
-      "coinCost": 3,
-      "rapidEffect": [
-        {
-          "name": "noActionBonus"
-        }
-      ],
-      "permanentEffect": [
-        {
-          "name": "harvestActionBonus",
-          "value": 2
-        }
-      ]
-    },
-    {
-      "name": "Artigiano",
-      "type": "Character",
-      "age": 1,
-      "coinCost": 3,
-      "rapidEffect": [
-        {
-          "name": "noActionBonus"
-        }
-      ],
-      "permanentEffect": [
-        {
-          "name": "productionActionBonus",
-          "value": 2
-        }
-      ]
-    },
-    {
-      "name": "Predicatore",
-      "type": "Characters",
-      "age": 1,
-      "coinCost": 2,
-      "rapidEffect": [
-        {
-          "name": "addFaithPoints",
-          "value": 4
-        }
-      ],
-      "permanentEffect": [
-        {
-          "name": "noActionBonus"
-        }
-      ]
-    },
-    {
-      "name": "Costruttore",
-      "type": "Character",
-      "age": 1,
-      "coinCost": 4,
-      "rapidEffect": [
-        {
-          "name": "noActionBonus"
-        }
-      ],
-      "permanentEffect": [
-        {
-          "name": "CardHandling",
-          "addingDiceValue": 2,
-          "woodDiscount": 1,
-          "stoneDiscount": 1
-        }
-      ]
-    },
-    {
-      "name": "Condottiero",
-      "type": "Character",
-      "age": 1,
-      "coinCost": 2,
-      "rapidEffect": [
-        {
-          "name": "GainPoints",
-          "value": 2
-        }
-      ],
-      "permanentEffect": [
-        {
-          "name": "HandleCard",
-          "value": 2
-        }
-      ]
-    },
-    {
-      "name": "Messo Papale",
-      "type": "Character",
-      "age": 2,
-      "coinCost": 5,
-      "rapidEffect":[
-        {
-          "name":"GainPoints",
-          "value": 3
-        }
-      ],
-      "permanentEffect":[
-        {
-          "name": "noActionBonus"
-        }
-      ]
-    },
-    {
-      "name": "Fattore",
-      "type": "Character",
-      "age": 2,
-      "coinCost": 2,
-      "rapidEffect":[
-        {
-          "name":"noActionBonus"
-        }
-      ],
-      "permanentEffect":[
-        {
-          "name": "harvestActionBonus",
-          "value": 3
-        }
-      ]
-    },
-    {
-      "name": "Messo Reale",
-      "type": "Character",
-      "age": 2,
-      "coinCost": 5,
-      "rapidEffect":[
-        {
-          "name":"getThreeCounsilPrivileges"
-        }
-      ],
-      "permanentEffect":[
-        {
-          "name": "noActionBonus"
-        }
-      ]
-    },
-    {
-      "name": "Mecenate",
-      "type": "Character",
-      "age": 2,
-      "coinCost": 3,
-      "rapidEffect":[
-        {
-          "name":"CardHandle",
-          "coinDiscount": 1,
-          "diceValue": 6
-        }
-      ],
-      "permanentEffect":[
-        {
-          "name": "noActionBonus"
-        }
-      ]
-    },
-    {
-      "name": "Capitano",
-      "type": "Character",
-      "age": 2,
-      "coinCost": 4,
-      "rapidEffect":[
-        {
-          "name":"GainPoints",
-          "value": 2
-        },
-        {
-          "name": "CardHandle",
-          "value": 6
-        }
-      ],
-      "permanentEffect":[
-        {
-          "name": "noActionBonus"
-        }
-      ]
-    },
-    {
-      "name": "Studioso",
-      "type": "Character",
-      "age": 2,
-      "coinCost": 4,
-      "rapidEffect":[
-        {
-          "name":"noActionBonus"
-        }
-      ],
-      "permanentEffect":[
-        {
-          "name": "productionActionBonus",
-          "value": 3
-        }
-      ]
-    },
-    {
-      "name": "Architetto",
-      "type": "Character",
-      "age": 2,
-      "coinCost": 4,
-      "rapidEffect":[
-        {
-          "name":"CardHandle",
+          "name": "PickTowerCard",
+          "floor": 0,
+          "cardType": "TERRITORY",
           "diceValue": 6,
-          "woodDiscount": 1,
-          "stoneDiscount": 1
-        }
-      ],
-      "permanentEffect":[
-        {
-          "name": "noActionBonus"
-        }
-      ]
-    },
-    {
-      
-      "name": "Eroe",
-      "type": "Character",
-      "age": 2,
-      "coinCost": 4,
-      "rapidEffect":[
-        {
-          "name":"CardHandle",
-          "value": 6
+          "assetsDiscount": null
         },
         {
-          "name":"getCounsilPrivilage"
-        }
-      ],
-      "permanentEffect":[
-        {
-          "name": "noActionBonus"
-        }
-      ]
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 2
+          }
+        }],
+      "permanentEffect": null
     },
     {
-      "name": "Cardinale",
-      "type": "Character",
-      "age": 3,
-      "coinCost": 4,
-      "rapidEffect":[
+      "name": "Captain",
+      "cardNumber": 58,
+      "cardType": "CHARACTER",
+      "roundNumber": 2,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 4
+      },
+      "immediateEffect": [
         {
-          "name":"harvestActionBonus",
+          "name": "PickTowerCard",
+          "floor": 0,
+          "cardType": "BUILDING",
+          "diceValue": 6,
+          "assetsDiscount": [
+            {
+              "type": "WOOD",
+              "value": 1
+            },
+            {
+              "type": "STONE",
+              "value": 1
+            }]
+        }
+        ],
+      "permanentEffect": null
+    },
+    {
+      "name": "Patron",
+      "cardNumber": 59,
+      "cardType": "CHARACTER",
+      "roundNumber": 2,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 3
+      },
+      "immediateEffect": [
+        {
+          "name": "PickTowerCard",
+          "floor": 0,
+          "cardType": "CHARACTER",
+          "diceValue": 6,
+          "assetsDiscount": [
+            {
+              "type": "COIN",
+              "value": 2
+            }]
+        }
+        ],
+      "permanentEffect": null
+    },
+    {
+      "name": "Hero",
+      "cardNumber": 60,
+      "cardType": "CHARACTER",
+      "roundNumber": 2,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 4
+      },
+      "immediateEffect": [
+        {
+          "name": "PickTowerCard",
+          "floor": 0,
+          "cardType": "VENTURE",
+          "diceValue": 6,
+          "assetsDiscount": null
+        },
+        {
+          "name": "PickOneCouncilPrivilege"
+        }
+        ],
+      "permanentEffect": null
+    },
+    {
+      "name": "Peasant",
+      "cardNumber": 61,
+      "cardType": "CHARACTER",
+      "roundNumber": 2,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 4
+      },
+      "immediateEffect": null,
+      "permanentEffect": [{
+          "name" : "AddHarvestValueModifier",
+          "value" : 3
+      }]
+    },
+    {
+      "name": "Scholar",
+      "cardNumber": 62,
+      "cardType": "CHARACTER",
+      "roundNumber": 2,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 4
+      },
+      "immediateEffect": null,
+      "permanentEffect": [{
+          "name" : "AddProductionValueModifier",
+          "value" : 3
+      }]
+    },
+    {
+      "name": "Papal Messenger",
+      "cardNumber": 63,
+      "cardType": "CHARACTER",
+      "roundNumber": 2,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 5
+      },
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 3
+          }
+        }],
+      "permanentEffect": null
+    },
+    {
+      "name": "Royal Messenger",
+      "cardNumber": 64,
+      "cardType": "CHARACTER",
+      "roundNumber": 2,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 5
+      },
+      "immediateEffect": [
+        {
+          "name": "PickThreeCouncilPrivilege"
+        }],
+      "permanentEffect": null
+    },
+    {
+      "name": "Noble",
+      "cardNumber": 65,
+      "cardType": "CHARACTER",
+      "roundNumber": 3,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 6
+      },
+      "immediateEffect": [
+        {
+          "name": "AddAssetForEveryAssetOrCard",
+          "paidAsset": null,
+          "paidCardType": "TERRITORY",
+          "gainedAsset": {
+            "type": "VICTORYPOINT",
+            "value": 2
+          }
+        }],
+      "permanentEffect": null
+    },
+    {
+      "name": "Governor",
+      "cardNumber": 66,
+      "cardType": "CHARACTER",
+      "roundNumber": 3,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 6
+      },
+      "immediateEffect": [
+        {
+          "name": "AddAssetForEveryAssetOrCard",
+          "paidAsset": null,
+          "paidCardType": "BUILDING",
+          "gainedAsset": {
+            "type": "VICTORYPOINT",
+            "value": 2
+          }
+        }],
+      "permanentEffect": null
+    },
+    {
+      "name": "Paramour",
+      "cardNumber": 67,
+      "cardType": "CHARACTER",
+      "roundNumber": 3,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 7
+      },
+      "immediateEffect": [
+        {
+          "name": "AddAssetForEveryAssetOrCard",
+          "paidAsset": null,
+          "paidCardType": "CHARACTER",
+          "gainedAsset": {
+            "type": "VICTORYPOINT",
+            "value": 2
+          }
+        }],
+      "permanentEffect": null
+    },
+    {
+      "name": "Herald",
+      "cardNumber": 68,
+      "cardType": "CHARACTER",
+      "roundNumber": 3,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 6
+      },
+      "immediateEffect": [
+        {
+          "name": "AddAssetForEveryAssetOrCard",
+          "paidAsset": null,
+          "paidCardType": "VENTURE",
+          "gainedAsset": {
+            "type": "VICTORYPOINT",
+            "value": 2
+          }
+        }],
+      "permanentEffect": null
+    },
+    {
+      "name": "Cardinal",
+      "cardNumber": 69,
+      "cardType": "CHARACTER",
+      "roundNumber": 3,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 4
+      },
+      "immediateEffect": [
+        {
+          "name": "DoHarvestAction",
           "value": 4
         },
         {
-          "name":"GainPoints",
-          "value": 2
-        }
-      ],
-      "permanentEffect":[
-        {
-          "name":"noActionBonus"
-        }
-      ]
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 2
+          }
+        }],
+      "permanentEffect": null
     },
     {
-      "name": "Araldo",
-      "type": "Character",
-      "age": 3,
-      "coinCost": 6,
-      "rapidEffect":[
+      "name": "Bishop",
+      "cardNumber": 70,
+      "cardType": "CHARACTER",
+      "roundNumber": 3,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 5
+      },
+      "immediateEffect": [
         {
-          "name":"GainPoints",
-          "value": 2
-          //factor:numberOfVioletCards
-        }
-      ],
-      "permanentEffect":[
-        {
-          "name":"noActionBonus"
-        }
-      ]
-    },
-    {
-      "name": "Vescovo",
-      "type": "Character",
-      "age": 3,
-      "coinCost": 5,
-      "rapidEffect":[
-        {
-          "name":"productionActionBonus",
+          "name": "DoProductionAction",
           "value": 4
         },
         {
-          "name":"GainPoints",
-          "value": 1
-        }
-      ],
-      "permanentEffect":[
-        {
-          "name":"noActionBonus"
-        }
-      ]
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 1
+          }
+        }],
+      "permanentEffect": null
     },
     {
-      "name": "Ambasciatore",
-      "type": "Character",
-      "age": 3,
-      "coinCost": 6,
-      "rapidEffect":[
+      "name": "General",
+      "cardNumber": 71,
+      "cardType": "CHARACTER",
+      "roundNumber": 3,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 5
+      },
+      "immediateEffect": [
         {
-          "name":"HandleCard",
-          "value": 7
+          "name": "AddAssetForEveryAssetOrCard",
+          "paidAsset": {
+            "type": "MILITARYPOINT",
+            "value": 2
+          },
+          "paidCardType": null,
+          "gainedAsset": {
+            "type": "VICTORYPOINT",
+            "value": 2
+          }
+        }],
+      "permanentEffect": null
+    },
+    {
+      "name": "Ambassador",
+      "cardNumber": 72,
+      "cardType": "CHARACTER",
+      "roundNumber": 3,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 6
+      },
+      "immediateEffect": [
+        {
+          "name": "PickTowerCard",
+          "floor": 0,
+          "cardType": "ANY",
+          "diceValue": 7,
+          "assetsDiscount": null
         },
         {
-          "name":"getCounsilPrivilage"
-        }
-      ],
-      "permanentEffect":[
-        {
-          "name":"noActionBonus"
-        }
-      ]
-    },
-    {
-      "name": "Cortigiana",
-      "type": "Character",
-      "age": 3,
-      "coinCost": 7,
-      "rapidEffect":[
-        {
-          "name":"GainPoints",
-          "value": 2
-          //factor:numberOfBlueCards
-        }
-      ],
-      "permanentEffect":[
-        {
-          "name":"noActionBonus"
-        }
-      ] 
-    },
-    {
-      "name": "Generale",
-      "type": "Character",
-      "age": 3,
-      "coinCost": 5,
-      "rapidEffect":[
-        {
-          "name":"GainPoints,
-          "value": 4
-          //factor:numberOfMilitaryPoints/2
-        },
-      ],
-      "permanentEffect":[
-        {
-          "name":"noActionBonus"
-        }
-      ]
-    },
-    {
-      "name": "Nobile",
-      "type": "Character",
-      "age": 3,
-      "coinCost": 6,
-      "rapidEffect":[
-        {
-          "name":"GainPoints",
-          "value": 2
-          //"factor":numberOfGreenCards 
-        }
-      ],
-      "permanentEffect":[
-        {
-          "name":"noActionBonus"
-        }
-      ]
-    },
-    {
-      "name": "Governatore",
-      "type": "Character",
-      "age": 3,
-      "coinCost": 6,
-      "rapidEffect":[
-        {
-          "name":"GainPoints",
-          "value": 2
-          //factor:numberOfYellowCards
-        }
-      ],
-      "permanentEffect":[
-        {
-          "name":"noActionBonus"
-        }
-      ]
-    },
-    {
-     "name": "Campagna Militare",
-     "type": "Venture",
-     "age": 1,
-     "militaryPointsRequirements": 3,
-     "militaryPointsCost"
-
+          "name": "PickOneCouncilPrivilege"
+        }],
+      "permanentEffect": null
     }
   ]
 }

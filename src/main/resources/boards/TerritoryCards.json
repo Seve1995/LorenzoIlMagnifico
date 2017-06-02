@@ -5,7 +5,6 @@
       "cardNumber": 1,
       "cardType": "TERRITORY",
       "roundNumber": 1,
-      "permanentEffectChoice": false,
       "permanentEffectActivationCost": 1,
       "immediateEffect": null,
       "permanentEffect": [
@@ -23,7 +22,6 @@
       "cardNumber": 2,
       "cardType": "TERRITORY",
       "roundNumber": 1,
-      "permanentEffectChoice": false,
       "permanentEffectActivationCost": 2,
       "immediateEffect": [
         {
@@ -49,7 +47,6 @@
       "cardNumber": 3,
       "cardType": "TERRITORY",
       "roundNumber": 1,
-      "permanentEffectChoice": false,
       "permanentEffectActivationCost": 3,
       "immediateEffect": null,
       "permanentEffect": [
@@ -74,7 +71,6 @@
       "cardNumber": 4,
       "cardType": "TERRITORY",
       "roundNumber": 1,
-      "permanentEffectChoice": false,
       "permanentEffectActivationCost": 4,
       "immediateEffect": [
         {
@@ -100,7 +96,6 @@
       "cardNumber": 5,
       "cardType": "TERRITORY",
       "roundNumber": 1,
-      "permanentEffectChoice": false,
       "permanentEffectActivationCost": 5,
       "immediateEffect": [
         {
@@ -126,7 +121,6 @@
       "cardNumber": 6,
       "cardType": "TERRITORY",
       "roundNumber": 1,
-      "permanentEffectChoice": false,
       "permanentEffectActivationCost": 6,
       "immediateEffect": [
         {
@@ -166,7 +160,6 @@
       "cardNumber": 7,
       "cardType": "TERRITORY",
       "roundNumber": 1,
-      "permanentEffectChoice": false,
       "permanentEffectActivationCost": 5,
       "immediateEffect": null,
       "permanentEffect": [
@@ -191,7 +184,6 @@
       "cardNumber": 8,
       "cardType": "TERRITORY",
       "roundNumber": 1,
-      "permanentEffectChoice": false,
       "permanentEffectActivationCost": 6,
       "immediateEffect": [
         {
@@ -213,7 +205,6 @@
       "cardNumber": 9,
       "cardType": "TERRITORY",
       "roundNumber": 2,
-      "permanentEffectChoice": false,
       "permanentEffectActivationCost": 1,
       "immediateEffect": [
         {
@@ -239,7 +230,6 @@
       "cardNumber": 10,
       "cardType": "TERRITORY",
       "roundNumber": 2,
-      "permanentEffectChoice": false,
       "permanentEffectActivationCost": 3,
       "immediateEffect": [
         {
@@ -272,7 +262,6 @@
       "cardNumber": 11,
       "cardType": "TERRITORY",
       "roundNumber": 2,
-      "permanentEffectChoice": false,
       "permanentEffectActivationCost": 4,
       "immediateEffect": [
         {
@@ -312,7 +301,6 @@
       "cardNumber": 12,
       "cardType": "TERRITORY",
       "roundNumber": 2,
-      "permanentEffectChoice": false,
       "permanentEffectActivationCost": 3,
       "immediateEffect": [
         {
@@ -338,7 +326,6 @@
       "cardNumber": 13,
       "cardType": "TERRITORY",
       "roundNumber": 2,
-      "permanentEffectChoice": false,
       "permanentEffectActivationCost": 4,
       "immediateEffect": [
         {
@@ -378,7 +365,6 @@
       "cardNumber": 14,
       "cardType": "TERRITORY",
       "roundNumber": 2,
-      "permanentEffectChoice": false,
       "permanentEffectActivationCost": 2,
       "immediateEffect": [
         {
@@ -404,7 +390,6 @@
       "cardNumber": 15,
       "cardType": "TERRITORY",
       "roundNumber": 2,
-      "permanentEffectChoice": false,
       "permanentEffectActivationCost": 5,
       "immediateEffect": null,
       "permanentEffect": [
@@ -429,7 +414,6 @@
       "cardNumber": 16,
       "cardType": "TERRITORY",
       "roundNumber": 2,
-      "permanentEffectChoice": false,
       "permanentEffectActivationCost": 6,
       "immediateEffect": [
         {
@@ -469,7 +453,6 @@
       "cardNumber": 17,
       "cardType": "TERRITORY",
       "roundNumber": 3,
-      "permanentEffectChoice": false,
       "permanentEffectActivationCost": 1,
       "immediateEffect": [
         {
@@ -502,7 +485,6 @@
       "cardNumber": 18,
       "cardType": "TERRITORY",
       "roundNumber": 3,
-      "permanentEffectChoice": false,
       "permanentEffectActivationCost": 3,
       "immediateEffect": [
         {
@@ -542,7 +524,6 @@
       "cardNumber": 19,
       "cardType": "TERRITORY",
       "roundNumber": 3,
-      "permanentEffectChoice": false,
       "permanentEffectActivationCost": 5,
       "immediateEffect": [
         {
@@ -575,7 +556,6 @@
       "cardNumber": 20,
       "cardType": "TERRITORY",
       "roundNumber": 3,
-      "permanentEffectChoice": false,
       "permanentEffectActivationCost": 5,
       "immediateEffect": [
         {
@@ -608,7 +588,6 @@
       "cardNumber": 21,
       "cardType": "TERRITORY",
       "roundNumber": 3,
-      "permanentEffectChoice": false,
       "permanentEffectActivationCost": 6,
       "immediateEffect": [
         {
@@ -644,7 +623,6 @@
       "cardNumber": 22,
       "cardType": "TERRITORY",
       "roundNumber": 3,
-      "permanentEffectChoice": false,
       "permanentEffectActivationCost": 1,
       "immediateEffect": [
         {
@@ -677,7 +655,6 @@
       "cardNumber": 23,
       "cardType": "TERRITORY",
       "roundNumber": 3,
-      "permanentEffectChoice": false,
       "permanentEffectActivationCost": 4,
       "immediateEffect": [
         {
@@ -717,7 +694,6 @@
       "cardNumber": 24,
       "cardType": "TERRITORY",
       "roundNumber": 3,
-      "permanentEffectChoice": false,
       "permanentEffectActivationCost": 2,
       "immediateEffect": [
         {
