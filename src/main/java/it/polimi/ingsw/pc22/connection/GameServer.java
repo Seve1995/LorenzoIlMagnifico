@@ -1,5 +1,6 @@
 package it.polimi.ingsw.pc22.connection;
 
+import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.rmi.RMIAuthenticationService;
 import it.polimi.ingsw.pc22.utils.UserLoader;
 import org.json.JSONException;
@@ -11,6 +12,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Comparator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -98,5 +100,18 @@ public class GameServer
 
 	public static void setUsersMap(Map<String, User> usersMap) {
 		GameServer.usersMap = usersMap;
+	}
+
+	public class PlayerComparator implements Comparator<Player>
+	{
+		@Override
+		public int compare(Player o1, Player o2)
+		{
+			int value = Integer.compare(o1.getPriority(), o2.getPriority());
+
+			if (value == 0) value = o1.getName().compareTo(o2.getName());
+
+			return value;
+		}
 	}
 }

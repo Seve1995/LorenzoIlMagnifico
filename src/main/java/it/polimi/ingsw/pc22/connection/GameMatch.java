@@ -22,7 +22,7 @@ public class GameMatch implements Runnable
 	
 	private String gameName;
 
-	private Map<Player, GameAdapter> players;
+	private List<Player> players;
 	
 	private int playerCounter = 0;
 	
@@ -43,37 +43,33 @@ public class GameMatch implements Runnable
 	@Override
 	public void run()
 	{
-		Long timeStamp = null;
+		Long timeStamp = System.currentTimeMillis();
 		
 		while(true)
 		{
-			if (playerCounter == 2 && timeStamp == null)
-				timeStamp = System.currentTimeMillis();
+			try
+			{
+				Thread.sleep(1000);
+			}
+				catch (InterruptedException e)
+			{
+				e.printStackTrace();
+			}
 
-			boolean isTimeoutExpired;
+			boolean isTimeoutExpired =
+					System.currentTimeMillis() > timeStamp + timeOut;;
 
-			if (timeStamp == null)
-				isTimeoutExpired = false;
-			else
-				isTimeoutExpired = System.currentTimeMillis() > timeStamp + timeOut;
-					
+
 			boolean isGameFull = playerCounter == maxPlayersNumber;
-			
+
 			if (!isTimeoutExpired && !isGameFull) continue;
 			
 			break;
 		}
 
-		if (playerCounter <= 1)
-		{
-			endGame();
-
-			return;
-		}
-		
 		System.out.println("Inizio partita");
 		
-		startGame();
+		//startGame();
 
 		endGame();
 	}
@@ -188,13 +184,13 @@ public class GameMatch implements Runnable
 
 	private void endGame()
 	{
-		List<GameAdapter> playersAdapters = new ArrayList<GameAdapter>(players.values());
-
-		for (GameAdapter playerAdapter : playersAdapters)
+		for (Player player : players)
 		{
+			GameAdapter playerAdapter = player.getAdapter();
+
 			try
 			{
-				playerAdapter.endConnection();
+				playerAdapter.endConnection(player);
 			}
 				catch (IOException e)
 			{
@@ -219,11 +215,11 @@ public class GameMatch implements Runnable
 		this.gameName = gameName;
 	}
 
-	public Map<Player, GameAdapter> getPlayers() {
+	public List<Player> getPlayers() {
 		return players;
 	}
 
-	public void setPlayers(Map<Player, GameAdapter> players) {
+	public void setPlayers(List<Player> players) {
 		this.players = players;
 	}
 

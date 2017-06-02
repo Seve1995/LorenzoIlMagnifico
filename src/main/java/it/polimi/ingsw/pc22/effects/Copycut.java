@@ -1,5 +1,6 @@
 package it.polimi.ingsw.pc22.effects;
 
+import java.util.List;
 import java.util.Set;
 
 import it.polimi.ingsw.pc22.connection.GameMatch;
@@ -16,7 +17,7 @@ public class Copycut implements Effect
 		
 		//Set<CardTypeEnum> currCardType = this.leaderCard.getRequiredCard().keySet();
 		
-		Set<Player> currPlayers = this.gameMatch.getPlayers().keySet();
+		List<Player> currPlayers = this.gameMatch.getPlayers();
 		
 		for (Player p : currPlayers)
 		{

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.pc22.adapters;
 
+import it.polimi.ingsw.pc22.player.Player;
+
 import java.io.IOException;
 
 /**
@@ -7,5 +9,9 @@ import java.io.IOException;
  */
 public interface GameAdapter
 {
-    void endConnection() throws IOException;
+    void endConnection(Player player) throws IOException;
+
+    void printMessage(String message);
+
+    String getMessage();
 }

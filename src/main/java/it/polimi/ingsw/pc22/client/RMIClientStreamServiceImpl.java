@@ -2,6 +2,9 @@ package it.polimi.ingsw.pc22.client;
 
 import it.polimi.ingsw.pc22.rmi.RMIClientStreamService;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.rmi.RemoteException;
 import java.util.Scanner;
 
@@ -13,14 +16,30 @@ public class RMIClientStreamServiceImpl implements RMIClientStreamService
     @Override
     public String getMessage() throws RemoteException
     {
-        Scanner scanner = new Scanner(System.in);
+        String message = null;
 
-        return scanner.nextLine();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        try
+        {
+            message =  reader.readLine();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        return message;
     }
 
     @Override
     public void printMessage(String message) throws RemoteException
     {
         System.out.println(message);
+    }
+
+    public void exit()
+    {
+
     }
 }
