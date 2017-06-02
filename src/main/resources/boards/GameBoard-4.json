@@ -118,7 +118,8 @@
         "type": "COIN"
       },
       "effect": {
-        "name": "pickCouncilPrivilege"
+        "name": "pickOneCouncilPrivilege",
+	"name": "AddAsset"
       }
     }
   },

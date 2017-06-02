@@ -32,6 +32,9 @@ public class SettingFamiliarMemberOnMarket extends Action{
 		if (!currMarketCells.get(zone).isEmpty() && player.isDontCareOccupiedPlaces())
 			return true;
 		
+		if (player.isDisableMarket())
+			return false;
+		
 		return true;
 	}
 	
@@ -44,6 +47,9 @@ public class SettingFamiliarMemberOnMarket extends Action{
 		if (isLegal(player) )
 		{
 			market.getMarketCells().get(zone).setFamilyMember(this.getFamilyMember());
+			
+			player.removeFamilyMember(familyMember);
+			
 			currEffects = market.getMarketCells().get(zone).getEffects();
 			
 			for (Effect e : currEffects)

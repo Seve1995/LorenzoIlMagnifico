@@ -172,8 +172,8 @@ public class PickTowerCard implements Effect{
 		{
 				e.executeEffect(p);
 				
-				//if (e istanceof AddAsset && p.isSantaRita)
-				//e.executeEffect(p);
+				if ((e instanceof AddAsset) && p.isSantaRita())
+					e.executeEffect(p);
 		}
 			
 	}

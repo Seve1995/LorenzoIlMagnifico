@@ -1,6 +1,7 @@
 package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.gamebox.Asset;
+import it.polimi.ingsw.pc22.gamebox.AssetType;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class PickTwoCouncilPrivilege implements Effect{
@@ -22,6 +23,8 @@ public class PickTwoCouncilPrivilege implements Effect{
 	@Override
 	public void executeEffect(Player player) 
 	{
+		this.choosenAsset1.setType(AssetType.COIN);
+		this.choosenAsset1.setValue(0);
 		if (isLegal(player))
 		{
 			player.addAsset(choosenAsset1);

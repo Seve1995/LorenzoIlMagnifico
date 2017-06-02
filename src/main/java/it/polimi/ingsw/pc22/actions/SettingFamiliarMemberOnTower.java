@@ -81,6 +81,9 @@ public class SettingFamiliarMemberOnTower extends Action {
 		{
 			
 			this.tower.getTowerCells().get(floor).setFamilyMember(this.getFamilyMember());
+			
+			player.removeFamilyMember(familyMember);
+			
 			currEffects = this.tower.getTowerCells().get(floor).getEffects();
 				
 			for (Effect e : currEffects)
@@ -89,6 +92,7 @@ public class SettingFamiliarMemberOnTower extends Action {
 			}
 			
 			pickTowerCard.executeEffect(player);
+			
 			return true;
 		}
 

@@ -6,17 +6,19 @@ import it.polimi.ingsw.pc22.player.Player;
 
 public class FamilyMemberModifier implements Effect
 {
-	private FamilyMember familyMember;
+	private ColorsEnum familyMemberColor;
 	private int diceValueSet;
 	private int diceValueBonus;
 	private boolean toColoured;
 	private boolean isABonus;
 	private boolean toAll;
+	
+	//se toCOloured=true && toAll=false richiede un input-> familyMemberColor
 
 	@Override
 	public boolean isLegal(Player player) {
 		
-		if(this.familyMember.getColor().equals(ColorsEnum.NEUTER))
+		if(this.familyMemberColor.equals(ColorsEnum.NEUTER))
 		{
 			return false;
 		}
@@ -40,7 +42,7 @@ public class FamilyMemberModifier implements Effect
 			}
 		}
 		
-		if (toColoured){
+		if (toColoured && toAll){
 			for (FamilyMember f : player.getFamilyMember())
 			{
 				if (!(f.getColor().equals(ColorsEnum.NEUTER)))
@@ -55,18 +57,23 @@ public class FamilyMemberModifier implements Effect
 						f.setFamiliarValue(f.getFamiliarValue() + this.diceValueBonus);
 					}
 					
-					if (!isABonus && !toAll)
-					{
-						if(isLegal(player))
-						{
-							this.familyMember.setFamiliarValue(diceValueSet);
-						}
-					}
+					
 				}	
 			}
 		}
+			
+		if (toColoured && !isABonus && !toAll)
+			{
+				if(isLegal(player))
+				{
+					for (FamilyMember f : player.getFamilyMember())
+					{
+						if (f.getColor().equals(familyMemberColor))
+							f.setFamiliarValue(diceValueSet);
+					}
 		
-		
+				}
+			}
 	}
 }
 			

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.pc22.actions;
 
+import it.polimi.ingsw.pc22.effects.AddAsset;
 import it.polimi.ingsw.pc22.effects.PickOneCouncilPrivilege;
 import it.polimi.ingsw.pc22.gamebox.CouncilPalace;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
@@ -27,8 +28,9 @@ public class SettingFamiliarMemberOnCouncilPalace extends Action {
 		if (isLegal(player))
 		{
 			councilPalace.getCouncilPalaceCells()[councilPalace.firstCellFree()].setFamilyMember(this.getFamilyMember());
-			PickOneCouncilPrivilege pickOneCouncilPrivilege= new PickOneCouncilPrivilege();
-			pickOneCouncilPrivilege.executeEffect(player);
+			player.removeFamilyMember(familyMember);
+			councilPalace.getCouncilPalaceCells()[councilPalace.firstCellFree()].executeEffect(player);
+			
 			
 			return true;
 		}

@@ -14,7 +14,11 @@ public class CouncilPalaceCell extends Cell
 	
 	@Override
 	public void executeEffect(Player player) {
-		// TODO Auto-generated method stub
+		
+		for(Effect e : this.getEffects())
+		{
+			e.executeEffect(player);
+		}
 		
 	}
 }
