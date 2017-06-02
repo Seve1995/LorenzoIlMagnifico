@@ -36,16 +36,26 @@ public class ServantsHandler extends Action
     @Override
     public boolean executeAction(Player player)
     {
+    	
+    	double multiplier;
+    	
+    	if (player.isServantMalus())
+    		multiplier=1;
+    	
+    	else
+    		multiplier=0.5;
+    	
     	if (isLegal(player)) {
+    		
     		 int familiarValue =  action.getFamilyMember().getFamiliarValue();
 
-    	        familiarValue = familiarValue + this.sacrifiedServantsNumber;
+    	       familiarValue = (int) (familiarValue + this.sacrifiedServantsNumber/(2*multiplier));
 
     	       action.getFamilyMember().setFamiliarValue(familiarValue);
 
     	       int servantsNumber = player.getServants();
 
-    	       servantsNumber = servantsNumber - this.sacrifiedServantsNumber;
+    	       servantsNumber = (int) (servantsNumber - 2*multiplier*this.sacrifiedServantsNumber);
 
     	       player.setServants(servantsNumber);
 

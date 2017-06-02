@@ -6,13 +6,13 @@ public class AddNoMarketActionMalus implements Effect{
 
 	@Override
 	public boolean isLegal(Player player) {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public void executeEffect(Player player) {
-		// TODO Auto-generated method stub
+		
+		player.setDisableMarket(true);
 		
 	}
 

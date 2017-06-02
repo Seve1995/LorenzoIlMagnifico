@@ -1,5 +1,6 @@
 package it.polimi.ingsw.pc22.player;
 
+import it.polimi.ingsw.pc22.effects.AddEndGameVictoryPoints;
 import it.polimi.ingsw.pc22.gamebox.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class Player
 	private int priority;
 	private List<LeaderCard> leaderCards;
 	private List<CardModifier> cardModifiers;
+	private List<AddEndGameVictoryPoints> addEndGameVictoryPoints;
 	private int haverstValueModifier; //Serve per gestire l'effetto AddHarvestValueBonus
 	private int productionValueModifier; //Serve per gestire l'effetto AddProductionValueBonus
 	private boolean militaryPointsMalus; //Serve per gestire l'effetto della tessera scomunica
@@ -29,6 +31,7 @@ public class Player
 	private boolean disableMarket; //Serve per gestire l'effetto della tessera scomunica
 	private boolean servantsHandlerMalus; //Serve per gestire l'effetto della tessera scomunica
 	private boolean noFirstAction; //Serve per gestire l'effetto della tessera scomunica
+	private boolean noMarketSetting; //Serve per gestire l'effetto della tessera scomunica
 	private boolean noMilitaryPointsForTerritories;//Serve per gestire l'effetto della carta Leader Cesare Borgia
 	private boolean dontCareOccupiedPlaces; //Serve per l'effetto del leader Ludovico Ariosto
 	private boolean dontPayThreeCoinsInTowers; //Serve per l'effetto del leader Filippo Brunelleschi
@@ -247,6 +250,20 @@ public class Player
 	public void setPlayWithThePope(boolean playWithThePope) {
 		this.playWithThePope = playWithThePope;
 	}
+	public boolean isSantaRita() {
+		return santaRita;
+	}
+	public void setSantaRita(boolean santaRita) {
+		this.santaRita = santaRita;
+	}
+	
+	public List<AddEndGameVictoryPoints> getAddEndGameVictoryPoints() {
+		return addEndGameVictoryPoints;
+	}
+	public void setAddEndGameVictoryPoints(List<AddEndGameVictoryPoints> addEndGameVictoryPoints) {
+		this.addEndGameVictoryPoints = addEndGameVictoryPoints;
+	}
+	
 	public int getAsset(AssetType assetType) 
 	{
 		String assetTypeString = assetType.toString().toLowerCase();

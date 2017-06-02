@@ -32,6 +32,9 @@ public class SettingFamiliarMemberOnMarket extends Action{
 		if (!currMarketCells.get(zone).isEmpty() && player.isDontCareOccupiedPlaces())
 			return true;
 		
+		if (player.isDisableMarket())
+			return false;
+		
 		return true;
 	}
 	
