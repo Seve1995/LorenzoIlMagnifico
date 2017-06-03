@@ -18,7 +18,6 @@ public class CardModifier {
 		
 	}
 
-
 	public CardTypeEnum getCardType() {
 		return cardType;
 	}

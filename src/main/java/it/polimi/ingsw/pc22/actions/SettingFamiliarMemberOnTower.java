@@ -21,14 +21,46 @@ public class SettingFamiliarMemberOnTower extends Action {
 		this.floor = floor;
 		this.tower = tower;
 	}
+	
+	private boolean PayThreeCoins (Player p, Tower t)
+	{
+	
+		for (TowerCell tc : t.getTowerCells())
+		{
+			FamilyMember currFM = tc.getFamilyMember();
+		
+			if(currFM !=null && !(currFM.getPlayer().equals(p)))
+			{
+				return true;
+			}	
+		}
+		
+		return false;
+			
+	}
+	
+	private boolean AlreadySetAMember(Player p, Tower t)
+	{
+		for (TowerCell tc : t.getTowerCells())
+		{
+			FamilyMember currFM = tc.getFamilyMember();
+		
+			if(currFM !=null && (currFM.getPlayer().equals(p)) && currFM.getColor().equals(ColorsEnum.NEUTER) 
+					|| super.getFamilyMember().getColor().equals(ColorsEnum.NEUTER))
+			{
+				return false;
+			}	 
+		}
+		
+		return true;
+		
+	}
+	
 
 	@Override
 	protected boolean isLegal (Player player)
 	{
-		
 		PickTowerCard pickTowerCard = new PickTowerCard(floor, tower.getTowerType(), familyMember.getFamiliarValue());
-		
-		//if (floor > 4 || floor < 1) return false; TODO check validazione dell'input
 		
 		if (!tower.getTowerCells().get(floor).isEmpty() && !(player.isDontCareOccupiedPlaces())) return false;
 		
@@ -36,39 +68,16 @@ public class SettingFamiliarMemberOnTower extends Action {
 		
 		if (tower.getTowerCells().get(floor).getRequiredDiceValue() > familiarValue) return false;
 		
-		boolean thereIsAnotherFamilyMember = false;
+		if(AlreadySetAMember(player, tower)) return false;
 		
-		for (TowerCell towerCell : tower.getTowerCells())
-		{
-			FamilyMember currFamilyMember = towerCell.getFamilyMember();
-			
-			if (currFamilyMember == null) continue;
-			
-			thereIsAnotherFamilyMember = true;
-			
-			if
-			(
-					currFamilyMember.getColor()==ColorsEnum.NEUTER ||
-					super.getFamilyMember().getColor() == ColorsEnum.NEUTER
-			)
-				break;
-			
-			if (player.getFamilyMember().contains(currFamilyMember))
-				return false;
-			
-		}
+		if(PayThreeCoins(player, tower) && player.getCoins() < 3 && !(player.isDontPayThreeCoinsInTowers())) return false;
 		
-		if (thereIsAnotherFamilyMember && !(player.isDontPayThreeCoinsInTowers()) && player.getCoins() < 3)
-			return false;
+		if (!(pickTowerCard.isLegal(player))) return false;
 		
-		if ((thereIsAnotherFamilyMember && (player.isDontPayThreeCoinsInTowers())) 
-				||  (!tower.getTowerCells().get(floor).isEmpty() && (player.isDontCareOccupiedPlaces())))
-			if (!(pickTowerCard.isLegal(player)))
-				return false;
-				
+		
 		return true;
-		
 	}
+	
 	
 	@Override
 	public boolean executeAction (Player player) {
@@ -79,6 +88,10 @@ public class SettingFamiliarMemberOnTower extends Action {
 		
 		if (isLegal(player))
 		{
+			if (PayThreeCoins(player, tower))
+			{
+				player.setCoins(player.getCoins() - 3);
+			}
 			
 			this.tower.getTowerCells().get(floor).setFamilyMember(this.getFamilyMember());
 			

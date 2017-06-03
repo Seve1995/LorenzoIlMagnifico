@@ -66,6 +66,27 @@ public class FamilyMemberModifier implements Effect
 			{
 				if(isLegal(player))
 				{
+					
+					player.getAdapter().printMessage("Which Familiar Color Do You Want?");
+					
+					player.getAdapter().getMessage();
+					
+					/*if (player.getAdapter().getMessage().equals("B"))
+					{
+						this.familyMemberColor = ColorsEnum.BLACK;
+					}
+					
+					if (player.getAdapter().getMessage().equals("W"))
+					{
+						this.familyMemberColor = ColorsEnum.WHITE;
+					}
+					
+					if (player.getAdapter().getMessage().equals("O"))
+					{
+						this.familyMemberColor = ColorsEnum.ORANGE;
+					}*/
+					
+					
 					for (FamilyMember f : player.getFamilyMember())
 					{
 						if (f.getColor().equals(familyMemberColor))
