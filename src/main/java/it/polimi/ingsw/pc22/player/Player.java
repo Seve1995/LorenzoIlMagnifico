@@ -1,7 +1,6 @@
 package it.polimi.ingsw.pc22.player;
 
 import it.polimi.ingsw.pc22.adapters.GameAdapter;
-import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.effects.AddEndGameVictoryPoints;
 import it.polimi.ingsw.pc22.gamebox.*;
 
@@ -22,7 +21,7 @@ public class Player
 	private List<LeaderCard> leaderCards;
 	private List<CardModifier> cardModifiers;
 	private List<AddEndGameVictoryPoints> addEndGameVictoryPoints;
-	private int haverstValueModifier; //Serve per gestire l'effetto AddHarvestValueBonus
+	private int harvestValueModifier; //Serve per gestire l'effetto AddHarvestValueBonus
 	private int productionValueModifier; //Serve per gestire l'effetto AddProductionValueBonus
 	private boolean militaryPointsMalus; //Serve per gestire l'effetto della tessera scomunica
 	private boolean coinMalus; //Serve per gestire l'effetto della tessera scomunica
@@ -46,6 +45,7 @@ public class Player
 	private PlayerBoard playerBoard;
 	private GameAdapter adapter;
 
+
 	@Override
 	public String toString() {
 		return "Player{" +
@@ -62,7 +62,7 @@ public class Player
 				", leaderCards=" + leaderCards +
 				", cardModifiers=" + cardModifiers +
 				", addEndGameVictoryPoints=" + addEndGameVictoryPoints +
-				", haverstValueModifier=" + haverstValueModifier +
+				", haverstValueModifier=" + harvestValueModifier +
 				", productionValueModifier=" + productionValueModifier +
 				", militaryPointsMalus=" + militaryPointsMalus +
 				", coinMalus=" + coinMalus +
@@ -104,7 +104,7 @@ public class Player
 		if (faithPoints != player.faithPoints) return false;
 		if (victoryPoints != player.victoryPoints) return false;
 		if (priority != player.priority) return false;
-		if (haverstValueModifier != player.haverstValueModifier) return false;
+		if (harvestValueModifier != player.harvestValueModifier) return false;
 		if (productionValueModifier != player.productionValueModifier) return false;
 		if (militaryPointsMalus != player.militaryPointsMalus) return false;
 		if (coinMalus != player.coinMalus) return false;
@@ -151,7 +151,7 @@ public class Player
 		result = 31 * result + (leaderCards != null ? leaderCards.hashCode() : 0);
 		result = 31 * result + (cardModifiers != null ? cardModifiers.hashCode() : 0);
 		result = 31 * result + (addEndGameVictoryPoints != null ? addEndGameVictoryPoints.hashCode() : 0);
-		result = 31 * result + haverstValueModifier;
+		result = 31 * result + harvestValueModifier;
 		result = 31 * result + productionValueModifier;
 		result = 31 * result + (militaryPointsMalus ? 1 : 0);
 		result = 31 * result + (coinMalus ? 1 : 0);
@@ -253,10 +253,10 @@ public class Player
 		this.cardModifiers = cardModifiers;
 	}
 	public int getHaverstValueModifier() {
-		return haverstValueModifier;
+		return harvestValueModifier;
 	}
 	public void setHaverstValueModifier(int haverstValueModifier) {
-		this.haverstValueModifier = haverstValueModifier;
+		this.harvestValueModifier = haverstValueModifier;
 	}
 	public int getProductionValueModifier() {
 		return productionValueModifier;

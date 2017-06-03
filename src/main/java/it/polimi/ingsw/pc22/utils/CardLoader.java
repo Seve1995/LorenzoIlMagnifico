@@ -51,11 +51,15 @@ public class CardLoader extends GenericLoader
 
         int roundNumber = jsonCard.getInt("roundNumber");
 
-        List<Effect> immediateEffects =
-                loadEffectList(jsonCard.getJSONArray("immediateEffect"));
+        List<Effect> immediateEffects = null;
 
-        List<Effect> permanentEffect =
-                loadEffectList(jsonCard.getJSONArray("immediateEffect"));
+        if (!jsonCard.isNull("immediateEffect"))
+            immediateEffects = loadEffectList(jsonCard.getJSONArray("immediateEffect"));
+
+        List<Effect> permanentEffect = null;
+
+        if (!jsonCard.isNull("permanentEffect"))
+            permanentEffect = loadEffectList(jsonCard.getJSONArray("permanentEffect"));
 
         DevelopmentCard card = createCard
                 (cardType, name, roundNumber, cardNumber, immediateEffects, permanentEffect);
@@ -84,17 +88,43 @@ public class CardLoader extends GenericLoader
 
             case TERRITORY:
 
+                loadCustomParametersTerritoryCard(jsonCard, card);
 
                 break;
 
             case CHARACTER:
 
+                loadCustomParametersCharacterCard(jsonCard, card);
+
                 break;
         }
     }
 
-    private static void loadCustomParametersBuildingCard
+    private static void loadCustomParametersTerritoryCard
             (JSONObject jsonCard, DevelopmentCard card)
+    {
+        TerritoryCard currentCard = ((TerritoryCard)card);
+
+        int permanentEffectActivationCost =
+                jsonCard.getInt("permanentEffectActivationCost");
+
+        currentCard.setPermanentEffectActivationCost(permanentEffectActivationCost);
+    }
+
+    private static void loadCustomParametersCharacterCard
+        (JSONObject jsonCard, DevelopmentCard card)
+    {
+        CharacterCard currentCard = ((CharacterCard) card);
+
+        JSONObject coinCosts = jsonCard.getJSONObject("coinsCost");
+
+        Asset costs = loadAsset(coinCosts);
+
+        currentCard.setCoinsCost(costs);
+    }
+
+    private static void loadCustomParametersBuildingCard
+        (JSONObject jsonCard, DevelopmentCard card)
     {
         BuildingCard currentCard = ((BuildingCard)card);
 

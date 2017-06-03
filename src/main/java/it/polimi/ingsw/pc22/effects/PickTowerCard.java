@@ -21,20 +21,39 @@ public class PickTowerCard implements Effect{
 	private CardTypeEnum cardType;
 	private int diceValue;
 	private List<Asset> assetsDiscount;
-	
-	public List<Asset> getAssetsDiscount() {
-		return assetsDiscount;
+
+	public int getFloor() {
+		return floor;
 	}
-	public void setAssetsDiscount(List<Asset> assetsDiscount) {
-		this.assetsDiscount = assetsDiscount;
+
+	public void setFloor(int floor) {
+		this.floor = floor;
 	}
+
+	public CardTypeEnum getCardType() {
+		return cardType;
+	}
+
+	public void setCardType(CardTypeEnum cardType) {
+		this.cardType = cardType;
+	}
+
 	public int getDiceValue() {
 		return diceValue;
 	}
+
 	public void setDiceValue(int diceValue) {
 		this.diceValue = diceValue;
 	}
-		
+
+	public List<Asset> getAssetsDiscount() {
+		return assetsDiscount;
+	}
+
+	public void setAssetsDiscount(List<Asset> assetsDiscount) {
+		this.assetsDiscount = assetsDiscount;
+	}
+
 	public PickTowerCard(int floor, CardTypeEnum cardType, int diceValue) {
 		super();
 		this.floor = floor;
