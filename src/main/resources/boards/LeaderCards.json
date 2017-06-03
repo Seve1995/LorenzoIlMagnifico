@@ -39,8 +39,7 @@
       ],
       "effects": [
         {
-          "name": null,
-          "value": 0
+          "name": "DontCareOccupiedPlaces"
         }
       ]
     },
@@ -81,8 +80,12 @@
       ],
       "requiredCard": [
         {
-          "CardTypeEnum": null,
-          "Value": 0
+          "CardTypeEnum": "FamilyMemberModifier",
+          "diceValueSet": 0,
+          "diceValueBonus": 3,
+          "toColoured": false,
+          "isABonus": true,
+          "toAll": false
         }
       ],
       "effects": [
@@ -92,7 +95,7 @@
           "diceValueSet": 0,
           "isColoured": false,
           "isABonus": true,
-          "toAll": false
+          "toAll": true
         }
       ]
     },
@@ -196,8 +199,8 @@
       ],
       "effects": [
         {
-          "name" : "DoProductionAction",
-          "value" : 0
+          "name": "DoProductionAction",
+          "value": 0
         }
       ]
     },
@@ -325,7 +328,7 @@
       "requiredAssets": [
         {
           "AssetType": "VICTORYPOINT",
-          "Value": 35 
+          "Value": 35
         }
       ],
       "requiredCard": [
@@ -346,19 +349,19 @@
       "requiredAssets": [
         {
           "AssetType": "WOOD",
-          "Value": 6 
+          "Value": 6
         },
         {
           "AssetType": "STONE",
-          "Value": 6 
+          "Value": 6
         },
         {
           "AssetType": "SERVANT",
-          "Value": 6 
+          "Value": 6
         },
         {
           "AssetType": "COIN",
-          "Value": 6 
+          "Value": 6
         }
       ],
       "requiredCard": [
@@ -369,7 +372,9 @@
       ],
       "effects": [
         {
-          "name": null
+          "name": "AddAsset",
+          "assetType": "VICTORYPOINTS",
+          "value": 5
         }
       ]
     },
@@ -394,7 +399,7 @@
       ],
       "effects": [
         {
-          "name": null
+          "name": "NoMilitaryPointsForTerritories"
         }
       ]
     },
@@ -415,7 +420,7 @@
       ],
       "effects": [
         {
-          "name": null
+          "name": "DoubleYourBonuses"
         }
       ]
     },
@@ -440,12 +445,20 @@
       ],
       "effects": [
         {
-          "name": null
+          "name": "AddAsset",
+          "AssetType" : "SERVANT",
+          "value": 3
+          
+        },
+        {
+          "name": "AddAsset",
+          "AssetType":"VICTORYPOINT",
+          "value": 1
         }
       ]
     },
     {
-     "name": "Ludovico III Gonzaga",
+      "name": "Ludovico III Gonzaga",
       "faceUp": false,
       "requiredAssets": [
         {
@@ -463,7 +476,7 @@
         {
           "name": "PickOneCouncilPrivilege"
         }
-      ] 
+      ]
     },
     {
       "name": "Bartolomeo Celloni",
@@ -513,7 +526,17 @@
       ],
       "effects": [
         {
-          "name": null
+          "name": "AddTowerCardDiscount",
+          "cardType": "CHARACTER",
+          "diceValueDiscount": 0,
+          "assetDiscount":
+	  [
+          {
+           "assetType": "COIN",
+           "value": 3
+          }
+	  ],
+	  "onlyOneAsset": false
         }
       ]
     }

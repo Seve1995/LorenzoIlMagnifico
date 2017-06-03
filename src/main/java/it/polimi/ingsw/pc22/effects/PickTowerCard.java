@@ -8,9 +8,11 @@ import it.polimi.ingsw.pc22.gamebox.DevelopmentCard;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.gamebox.TerritoryCard;
 import it.polimi.ingsw.pc22.gamebox.Tower;
+import it.polimi.ingsw.pc22.gamebox.TowerCell;
 import it.polimi.ingsw.pc22.gamebox.VentureCard;
 import it.polimi.ingsw.pc22.player.CardModifier;
 import it.polimi.ingsw.pc22.player.Player;
+
 
 import java.util.List;
 
@@ -20,14 +22,7 @@ public class PickTowerCard implements Effect{
 	private int floor;
 	private CardTypeEnum cardType;
 	private int diceValue;
-	private List<Asset> assetsDiscount;
 	
-	public List<Asset> getAssetsDiscount() {
-		return assetsDiscount;
-	}
-	public void setAssetsDiscount(List<Asset> assetsDiscount) {
-		this.assetsDiscount = assetsDiscount;
-	}
 	public int getDiceValue() {
 		return diceValue;
 	}
@@ -42,6 +37,25 @@ public class PickTowerCard implements Effect{
 		this.diceValue = diceValue;
 	}
 	
+	/*private void ApplyChanges(DevelopmentCard d, Player p, CardTypeEnum ct)
+	{
+		
+		if (ct.equals(CardTypeEnum.BUILDING))
+		{
+			BuildingCard currBuildingCard = (BuildingCard) d;
+			
+			currBuildingCard.se
+		}
+		
+		
+		
+		
+		
+		
+		
+	}*/
+	
+	
 	@Override
 	public boolean isLegal(Player player) 
 	{
@@ -50,9 +64,19 @@ public class PickTowerCard implements Effect{
 		for (Tower t : player.getGameBoard().getTower())
 		{
 			if (t.getTowerType().equals(cardType))
+			{
 				tower = t;
+				
+				for (TowerCell tc : tower.getTowerCells())
+				{
+					//ApplyChanges(tc.getDevelopmentCard(), player);
+				}
+				
+			}
 		}
 		
+		//modifico tutte le carte di quella torre!!
+	
 		if (tower.getTowerCells().get(floor).getRequiredDiceValue() < diceValue)
 			return false;
 		
@@ -154,6 +178,7 @@ public class PickTowerCard implements Effect{
 			else if (player.isNoMilitaryPointsForTerritories())
 				return true;
 		}
+		
 		}
 		return true;
 	}

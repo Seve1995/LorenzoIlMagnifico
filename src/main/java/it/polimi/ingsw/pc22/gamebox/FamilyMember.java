@@ -1,10 +1,20 @@
 package it.polimi.ingsw.pc22.gamebox;
 
+import it.polimi.ingsw.pc22.player.Player;
+
 public class FamilyMember 
 {
 	private ColorsEnum color;
 	private int familiarValue;
+	private Player player;
+
 	
+	public Player getPlayer() {
+		return player;
+	}
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
 	public ColorsEnum getColor() {
 		return color;
 	}
