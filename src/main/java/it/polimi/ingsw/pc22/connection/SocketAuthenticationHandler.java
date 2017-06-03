@@ -1,11 +1,8 @@
 package it.polimi.ingsw.pc22.connection;
 
 import it.polimi.ingsw.pc22.adapters.SocketGameAdapter;
-import it.polimi.ingsw.pc22.player.Player;
 
-import java.io.IOException;
 import java.net.Socket;
-import java.util.logging.Logger;
 
 public class SocketAuthenticationHandler extends AuthenticationHandler implements Runnable {
 

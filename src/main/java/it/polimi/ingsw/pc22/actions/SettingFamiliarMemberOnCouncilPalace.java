@@ -1,7 +1,5 @@
 package it.polimi.ingsw.pc22.actions;
 
-import it.polimi.ingsw.pc22.effects.AddAsset;
-import it.polimi.ingsw.pc22.effects.PickOneCouncilPrivilege;
 import it.polimi.ingsw.pc22.gamebox.CouncilPalace;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.player.Player;

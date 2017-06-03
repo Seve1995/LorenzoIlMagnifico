@@ -1,18 +1,7 @@
 package it.polimi.ingsw.pc22.effects;
 
-import it.polimi.ingsw.pc22.gamebox.Asset;
-import it.polimi.ingsw.pc22.gamebox.BuildingCard;
-import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
-import it.polimi.ingsw.pc22.gamebox.CharacterCard;
-import it.polimi.ingsw.pc22.gamebox.DevelopmentCard;
-import it.polimi.ingsw.pc22.gamebox.GameBoard;
-import it.polimi.ingsw.pc22.gamebox.TerritoryCard;
-import it.polimi.ingsw.pc22.gamebox.Tower;
-import it.polimi.ingsw.pc22.gamebox.TowerCell;
-import it.polimi.ingsw.pc22.gamebox.VentureCard;
-import it.polimi.ingsw.pc22.player.CardModifier;
+import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
-
 
 import java.util.List;
 
