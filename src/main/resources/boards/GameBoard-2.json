@@ -14,7 +14,7 @@
         {
           "effects": [
             {
-              "name": "GainAsset",
+              "name": "AddAsset",
               "asset": {
                 "value": 1,
                 "type": "WOOD"
@@ -26,7 +26,7 @@
         {
           "effects": [
             {
-              "name": "GainAsset",
+              "name": "AddAsset",
               "asset": {
                 "value": 2,
                 "type": "WOOD"
@@ -51,7 +51,7 @@
         {
           "effects": [
             {
-              "name": "GainAsset",
+              "name": "AddAsset",
               "asset": {
                 "value": 1,
                 "type": "STONE"
@@ -63,7 +63,7 @@
         {
           "effects": [
             {
-              "name": "GainAsset",
+              "name": "AddAsset",
               "asset": {
                 "value": 2,
                 "type": "STONE"
@@ -88,7 +88,7 @@
         {
           "effects": [
             {
-              "name": "GainAsset",
+              "name": "AddAsset",
               "asset": {
                 "value": 1,
                 "type": "MILITARYPOINT"
@@ -100,7 +100,7 @@
         {
           "effects": [
             {
-              "name": "GainAsset",
+              "name": "AddAsset",
               "asset": {
                 "value": 2,
                 "type": "MILITARYPOINT"
@@ -125,7 +125,7 @@
         {
           "effects": [
             {
-              "name": "GainAsset",
+              "name": "AddAsset",
               "asset": {
                 "value": 1,
                 "type": "COIN"
@@ -137,7 +137,7 @@
         {
           "effects": [
             {
-              "name": "GainAsset",
+              "name": "AddAsset",
               "asset": {
                 "value": 2,
                 "type": "COIN"
@@ -155,11 +155,10 @@
       "requiredDiceValue": 1,
       "effects": [
         {
-          "name": "PickCouncilPrivilege",
-          "asset": null
+          "name": "PickOneCouncilPrivilege"
         },
         {
-          "name": "GainAsset",
+          "name": "AddAsset",
           "asset": {
             "value": 1,
             "type": "COIN"
@@ -174,7 +173,7 @@
       "blockedCell": false,
       "effects": [
         {
-          "name": "GainAsset",
+          "name": "AddAsset",
           "asset": {
             "value": 5,
             "type": "COIN"
@@ -187,7 +186,7 @@
       "blockedCell": false,
       "effects": [
         {
-          "name": "GainAsset",
+          "name": "AddAsset",
           "asset": {
             "value": 5,
             "type": "SERVANT"
@@ -200,14 +199,14 @@
       "blockedCell": true,
       "effects": [
         {
-          "name": "GainAsset",
+          "name": "AddAsset",
           "asset": {
             "value": 5,
             "type": "COIN"
           }
         },
         {
-          "name": "GainAsset",
+          "name": "AddAsset",
           "asset": {
             "value": 5,
             "type": "MILITARYPOINT"
@@ -220,7 +219,7 @@
       "blockedCell": true,
       "effects": [
         {
-          "name": "GainAsset",
+          "name": "AddAsset",
           "asset": {
             "value": 5,
             "type": "COIN"
