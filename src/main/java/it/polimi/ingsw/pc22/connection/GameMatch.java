@@ -1,11 +1,15 @@
 package it.polimi.ingsw.pc22.connection;
 
 import it.polimi.ingsw.pc22.adapters.GameAdapter;
+import it.polimi.ingsw.pc22.gamebox.BonusTile;
 import it.polimi.ingsw.pc22.gamebox.DevelopmentCard;
+import it.polimi.ingsw.pc22.gamebox.ExcommunicationCard;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.BoardLoader;
+import it.polimi.ingsw.pc22.utils.BonusTileLoader;
 import it.polimi.ingsw.pc22.utils.CardLoader;
+import it.polimi.ingsw.pc22.utils.ExcommunicationCardLoader;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -26,7 +30,13 @@ public class GameMatch implements Runnable
 	private int maxPlayersNumber;
 
 	private GameBoard gameBoard;
-	
+
+	private List<DevelopmentCard> cards;
+
+	private List<BonusTile> tiles;
+
+	private List<ExcommunicationCard> excommunicationCards;
+
 	private Long timeOut;
 
 	private static final String BOARD_PATH = "boards/";
@@ -73,51 +83,11 @@ public class GameMatch implements Runnable
 
 	private void startGame()
 	{
-		String boardName = BOARD_PATH + "GameBoard-" + playerCounter + ".json";
+		loadGameBoard();
 
-		ClassLoader classLoader = this.getClass().getClassLoader();
+		loadCards();
 
-		File file = new File(classLoader.getResource(boardName).getFile());
-
-		StringBuilder builder = new StringBuilder();
-
-		try
-		{
-			Files.lines(file.toPath()).forEach(s -> builder.append(s));
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
-		JSONObject jsonBoard = new JSONObject(builder.toString());
-
-		jsonBoard.toString();
-
-		GameBoard gameBoard = BoardLoader.loadGameBoard(jsonBoard);
-
-		System.out.println(gameBoard);
-
-		String cardFile = BOARD_PATH + "VentureCards.json";
-
-		file = new File(classLoader.getResource(cardFile).getFile());
-
-		StringBuilder cardBuilder = new StringBuilder();
-
-		try
-		{
-			Files.lines(file.toPath()).forEach(s -> cardBuilder.append(s));
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
-
-		JSONObject jsonCards = new JSONObject(builder.toString());
-
-		jsonBoard.toString();
-
-		List<DevelopmentCard> cards = CardLoader.loadCards(jsonCards);
+		loadExcommunicationCards();
 
 		//loadBonusTile
 
@@ -194,6 +164,73 @@ public class GameMatch implements Runnable
 				e.printStackTrace();
 			}
 		}
+	}
+
+	private void loadGameBoard()
+	{
+		String path = BOARD_PATH + "GameBoard-" + playerCounter + ".json";
+
+		String boardString = fileLoader(path);
+
+		JSONObject jsonBoard = new JSONObject(boardString);
+
+		gameBoard = BoardLoader.loadGameBoard(jsonBoard);
+
+		System.out.println(gameBoard);
+	}
+
+	private void loadCards()
+	{
+		String path = BOARD_PATH + "VentureCards.json";
+
+		String cardString = fileLoader(path);
+
+		JSONObject jsonCards = new JSONObject(cardString);
+
+		cards = CardLoader.loadCards(jsonCards);
+	}
+
+	private void loadExcommunicationCards()
+	{
+		String path = BOARD_PATH + "ExcommunicationCards.json";
+
+		String excommunicationString = fileLoader(path);
+
+		JSONObject cards = new JSONObject(excommunicationString);
+
+		excommunicationCards =
+				ExcommunicationCardLoader.loadExcomunicationCards(cards);
+	}
+
+	private void loadBonusTiles()
+	{
+		String path = BOARD_PATH + "BonusTiles.json";
+
+		String bonusTilesString = fileLoader(path);
+
+		JSONObject bonusTiles = new JSONObject(bonusTilesString);
+
+		tiles = BonusTileLoader.loadBonusTiles(bonusTiles);
+	}
+
+	private String fileLoader(String path)
+	{
+		ClassLoader classLoader = this.getClass().getClassLoader();
+
+		File file = new File(classLoader.getResource(path).getFile());
+
+		StringBuilder builder = new StringBuilder();
+
+		try
+		{
+			Files.lines(file.toPath()).forEach(s -> builder.append(s));
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+
+		return builder.toString();
 	}
 
 	public int getCurrentRoundNumber() {

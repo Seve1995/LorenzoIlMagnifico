@@ -1,64 +1,184 @@
 {
-  "bonusTiles":[
+  "bonusTiles": [
     {
-      "productionServantBonus": 0, 
-      "productionCoinsBonus": 2,
-      "productionMilitaryPointsBonus": 1,
-      "harvestServantBonus": 1,
-      "harvestCoinsBonus": 0,
-      "harvestStoneBonus": 1,
-      "harvestWoodBonus": 1,
-      "harvestMilitaryPointsBonus": 0,
+      "productionServantBonus": {
+        "type": "SERVANT",
+        "value": 0
+      },
+      "productionCoinsBonus": {
+        "type": "COIN",
+        "value": 2
+      },
+      "productionMilitaryPointsBonus": {
+        "type": "MILITARYPOINT",
+        "value": 1
+      },
+      "harvestServantBonus": {
+        "type": "SERVANT",
+        "value": 1
+      },
+      "harvestCoinsBonus": {
+        "type": "COIN",
+        "value": 0
+      },
+      "harvestStoneBonus": {
+        "type": "STONE",
+        "value": 1
+      },
+      "harvestWoodBonus": {
+        "type": "WOOD",
+        "value": 1
+      },
+      "harvestMilitaryPointsBonus": {
+        "type": "MILITARYPOINT",
+        "value": 0
+      },
       "productionActivationValue": 1,
-      "harvestActivationValue": 1 
+      "harvestActivationValue": 1
     },
     {
-      "productionServantBonus": 1,
-      "productionCoinsBonus": 2,
-      "productionMilitaryPointsBonus": 0,
-      "harvestServantBonus": 0,
-      "harvestCoinsBonus": 0,
-      "harvestStoneBonus": 1,
-      "harvestWoodBonus": 1,
-      "harvestMilitaryPointsBonus": 1,
+      "productionServantBonus": {
+        "type": "SERVANT",
+        "value": 1
+      },
+      "productionCoinsBonus": {
+        "type": "COIN",
+        "value": 2
+      },
+      "productionMilitaryPointsBonus": {
+        "type": "MILITARYPOINT",
+        "value": 0
+      },
+      "harvestServantBonus": {
+        "type": "SERVANT",
+        "value": 0
+      },
+      "harvestCoinsBonus": {
+        "type": "COIN",
+        "value": 0
+      },
+      "harvestStoneBonus": {
+        "type": "STONE",
+        "value": 1
+      },
+      "harvestWoodBonus": {
+        "type": "WOOD",
+        "value": 1
+      },
+      "harvestMilitaryPointsBonus": {
+        "type": "MILITARYPOINT",
+        "value": 1
+      },
       "productionActivationValue": 1,
-      "harvestActivationValue": 1 
+      "harvestActivationValue": 1
     },
     {
-      "productionServantBonus": 1,
-      "productionCoinsBonus": 0,
-      "productionMilitaryPointsBonus": 2,
-      "harvestServantBonus": 0,
-      "harvestCoinsBonus": 1,
-      "harvestStoneBonus": 1,
-      "harvestWoodBonus": 1,
-      "harvestMilitaryPointsBonus": 0,
+      "productionServantBonus": {
+        "type": "SERVANT",
+        "value": 1
+      },
+      "productionCoinsBonus": {
+        "type": "COIN",
+        "value": 0
+      },
+      "productionMilitaryPointsBonus": {
+        "type": "MILITARYPOINT",
+        "value": 2
+      },
+      "harvestServantBonus": {
+        "type": "SERVANT",
+        "value": 0
+      },
+      "harvestCoinsBonus": {
+        "type": "COIN",
+        "value": 1
+      },
+      "harvestStoneBonus": {
+        "type": "STONE",
+        "value": 1
+      },
+      "harvestWoodBonus": {
+        "type": "WOOD",
+        "value": 1
+      },
+      "harvestMilitaryPointsBonus": {
+        "type": "MILITARYPOINT",
+        "value": 0
+      },
       "productionActivationValue": 1,
-      "harvestActivationValue": 1 
+      "harvestActivationValue": 1
     },
     {
-      "productionServantBonus": 2,
-      "productionCoinsBonus": 1,
-      "productionMilitaryPointsBonus": 0,
-      "harvestServantBonus": 0,
-      "harvestCoinsBonus": 0,
-      "harvestStoneBonus": 1,
-      "harvestWoodBonus": 1,
-      "harvestMilitaryPointsBonus": 1,
+      "productionServantBonus": {
+        "type": "SERVANT",
+        "value": 2
+      },
+      "productionCoinsBonus": {
+        "type": "COIN",
+        "value": 1
+      },
+      "productionMilitaryPointsBonus": {
+        "type": "MILITARYPOINT",
+        "value": 0
+      },
+      "harvestServantBonus": {
+        "type": "SERVANT",
+        "value": 0
+      },
+      "harvestCoinsBonus": {
+        "type": "COIN",
+        "value": 0
+      },
+      "harvestStoneBonus": {
+        "type": "STONE",
+        "value": 1
+      },
+      "harvestWoodBonus": {
+        "type": "WOOD",
+        "value": 1
+      },
+      "harvestMilitaryPointsBonus": {
+        "type": "MILITARYPOINT",
+        "value": 1
+      },
       "productionActivationValue": 1,
-      "harvestActivationValue": 1 
+      "harvestActivationValue": 1
     },
     {
-      "productionServantBonus": 0,
-      "productionCoinsBonus": 1,
-      "productionMilitaryPointsBonus": 2,
-      "harvestServantBonus": 1,
-      "harvestCoinsBonus": 0,
-      "harvestStoneBonus": 1,
-      "harvestWoodBonus": 1,
-      "harvestMilitaryPointsBonus": 0,
+      "productionServantBonus": {
+        "type": "SERVANT",
+        "value": 0
+      },
+      "productionCoinsBonus": {
+        "type": "COIN",
+        "value": 1
+      },
+      "productionMilitaryPointsBonus": {
+        "type": "MILITARYPOINT",
+        "value": 2
+      },
+      "harvestServantBonus": {
+        "type": "SERVANT",
+        "value": 1
+      },
+      "harvestCoinsBonus": {
+        "type": "COIN",
+        "value": 0
+      },
+      "harvestStoneBonus": {
+        "type": "STONE",
+        "value": 1
+      },
+      "harvestWoodBonus": {
+        "type": "WOOD",
+        "value": 1
+      },
+      "harvestMilitaryPointsBonus": {
+        "type": "MILITARYPOINT",
+        "value": 0
+      },
       "productionActivationValue": 1,
-      "harvestActivationValue": 1 
+      "harvestActivationValue": 1
     }
-    ]
+  ]
 }

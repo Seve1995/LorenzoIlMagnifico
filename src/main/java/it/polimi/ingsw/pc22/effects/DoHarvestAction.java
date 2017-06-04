@@ -24,7 +24,7 @@ public class DoHarvestAction implements Effect {
 	@Override
 	public void executeEffect(Player player) {
 		
-		if (value >= player.getPlayerBoard().getBonusTile().getHarvestActiovationValue())
+		if (value >= player.getPlayerBoard().getBonusTile().getHarvestActivationValue())
 		{
 		
 			player.setCoins(player.getCoins() + player.getPlayerBoard().getBonusTile().getHarvestCoinsBonus());
