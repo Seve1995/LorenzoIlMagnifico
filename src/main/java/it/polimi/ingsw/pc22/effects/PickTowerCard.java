@@ -5,14 +5,16 @@ import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 
-public class PickTowerCard implements Effect{
-	
+public class PickTowerCard implements Effect
 
+{
 	private int floor;
 	private CardTypeEnum cardType;
 	private int diceValue;
 	private List<Asset> assetsDiscount;
 
+	
+	
 	public int getFloor() {
 		return floor;
 	}
@@ -69,7 +71,7 @@ public class PickTowerCard implements Effect{
 	{
 		Tower tower = null;
 		
-		for (Tower t : player.getGameBoard().getTowers())
+		/*for (Tower t : getTowers())
 		{
 			if (t.getTowerType().equals(cardType))
 			{
@@ -81,7 +83,7 @@ public class PickTowerCard implements Effect{
 				}
 
 			}
-		}
+		}*/
 		
 		//modifico tutte le carte di quella torre!!
 
@@ -218,7 +220,7 @@ public class PickTowerCard implements Effect{
 
 		if (isLegal(player))
 		{
-				for (Tower t : player.getGameBoard().getTowers())
+				/*for (Tower t : player.getGameBoard().getTowers())
 				{
 					if (t.getTowerType().equals(cardType))
 					{   
@@ -251,7 +253,7 @@ public class PickTowerCard implements Effect{
 						removeCards(t, floor);
 						
 					}
-				}
+				}*/
 		}
 		
 	

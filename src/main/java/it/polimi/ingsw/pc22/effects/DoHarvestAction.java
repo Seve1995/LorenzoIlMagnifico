@@ -24,14 +24,18 @@ public class DoHarvestAction implements Effect {
 	@Override
 	public void executeEffect(Player player) {
 		
+		
+		
 		if (value >= player.getPlayerBoard().getBonusTile().getHarvestActivationValue())
 		{
 		
-			player.setCoins(player.getCoins() + player.getPlayerBoard().getBonusTile().getHarvestCoinsBonus());
-			player.setMilitaryPoints(player.getMilitaryPoints() + player.getPlayerBoard().getBonusTile().getHarvestMilitaryPointsBonus());
-			player.setServants(player.getServants() + player.getPlayerBoard().getBonusTile().getHarvestServantBonus() );
-			player.setStones(player.getServants()+player.getPlayerBoard().getBonusTile().getHarvestStonesBonus());
-			player.setWoods(player.getWoods()+player.getPlayerBoard().getBonusTile().getHarvestWoodsBonus());
+			player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestServantBonus());
+			player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestCoinsBonus());
+			player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestMilitaryPointsBonus());
+			player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestStonesBonus());
+			player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestWoodsBonus());
+		
+			
 		
 		}
 		for (BuildingCard b : player.getPlayerBoard().getBuildings()){

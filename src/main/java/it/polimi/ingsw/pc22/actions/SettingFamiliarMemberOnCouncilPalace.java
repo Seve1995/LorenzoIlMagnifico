@@ -5,6 +5,7 @@ import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class SettingFamiliarMemberOnCouncilPalace extends Action {
+	
 	private CouncilPalace councilPalace;
 
 	public SettingFamiliarMemberOnCouncilPalace(FamilyMember familyMember, CouncilPalace councilPalace) {

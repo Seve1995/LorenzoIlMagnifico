@@ -29,7 +29,7 @@ public class SettingFamiliarMemberOnTower extends Action {
 		{
 			FamilyMember currFM = tc.getFamilyMember();
 		
-			if(currFM !=null && !(currFM.getPlayer().equals(p)))
+			if(currFM !=null && !(currFM.getPlayerColor().equals(p.getPlayerColorsEnum())))
 			{
 				return true;
 			}	
@@ -45,7 +45,7 @@ public class SettingFamiliarMemberOnTower extends Action {
 		{
 			FamilyMember currFM = tc.getFamilyMember();
 		
-			if(currFM !=null && (currFM.getPlayer().equals(p)) && currFM.getColor().equals(ColorsEnum.NEUTER) 
+			if(currFM !=null && (currFM.getPlayerColor().equals(p.getPlayerColorsEnum())) && currFM.getColor().equals(ColorsEnum.NEUTER) 
 					|| super.getFamilyMember().getColor().equals(ColorsEnum.NEUTER))
 			{
 				return false;

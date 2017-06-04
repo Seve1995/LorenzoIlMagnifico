@@ -78,8 +78,8 @@ public class RMIGameAdapter implements GameAdapter
         return message;
     }
 
-	@Override
-	public Action askAction(FamilyMember familyMember, Player p, GameBoard gameBoard) {
+	
+	//public Action askAction(FamilyMember familyMember, Player p, GameBoard gameBoard) {
 		/*
 		 * [PARTE IL TIMEOUT]
 		OPERAZIONE 1:
@@ -103,9 +103,15 @@ public class RMIGameAdapter implements GameAdapter
 		- Metti familiare nel concilio (es: set council)
 		 */
 		
-		this.printMessage("WE ZIO DIMMI L'AZIONE!");
-		String risposta = getMessage();
-		if (risposta.equalsIgnoreCase("set market"))
-			return new SettingFamiliarMemberOnMarket(familyMember, gameBoard.getMarket(), zone) ;
+		//this.printMessage("WE ZIO DIMMI L'AZIONE!");
+		//String risposta = getMessage();
+		//if (risposta.equalsIgnoreCase("set market"))
+		//	return new SettingFamiliarMemberOnMarket(familyMember, gameBoard.getMarket(), zone) ;
+	//}
+
+	@Override
+	public Action askAction() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

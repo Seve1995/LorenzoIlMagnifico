@@ -27,9 +27,10 @@ public class DoProductionAction implements Effect {
 			
 			if (value >= player.getPlayerBoard().getBonusTile().getProductionActivationValue())
 			{
-				player.setServants(player.getServants() + player.getPlayerBoard().getBonusTile().getProductionServantBonus() );
-				player.setCoins(player.getCoins() + player.getPlayerBoard().getBonusTile().getProductionCoinsBonus());
-				player.setMilitaryPoints(player.getMilitaryPoints() + player.getPlayerBoard().getBonusTile().getProductionMilitaryPointsBonus());
+				
+				player.addAsset(player.getPlayerBoard().getBonusTile().getProductionCoinsBonus());
+				player.addAsset(player.getPlayerBoard().getBonusTile().getProductionMilitaryPointsBonus());
+				player.addAsset(player.getPlayerBoard().getBonusTile().getProductionServantBonus());
 			}
 			
 			for (TerritoryCard t : player.getPlayerBoard().getTerritories())
