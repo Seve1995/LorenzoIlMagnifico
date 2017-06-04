@@ -36,7 +36,15 @@ public class PickTowerCard implements Effect{
 	public void setDiceValue(int diceValue) {
 		this.diceValue = diceValue;
 	}
-		
+
+	public List<Asset> getAssetsDiscount() {
+		return assetsDiscount;
+	}
+
+	public void setAssetsDiscount(List<Asset> assetsDiscount) {
+		this.assetsDiscount = assetsDiscount;
+	}
+
 	public PickTowerCard(int floor, CardTypeEnum cardType, int diceValue) {
 		super();
 		this.floor = floor;
@@ -53,13 +61,6 @@ public class PickTowerCard implements Effect{
 
 			currBuildingCard.se
 		}
-
-
-
-
-
-
-
 	}*/
 
 

@@ -13,18 +13,19 @@ public class EndGameMalus implements Effect{
 	private CardTypeEnum noCardVictoryPoint;
 	private List<Asset> assetsMalus; //Per ogni asset della lista in possesso del giocatore perdi un punto vittoria 
 	private boolean loseOneVictoryPointEveryFiveVictoryPoints;
-	private boolean buildingCardsMalus; //TRUE = Perdi un punto vittoria per ogni legno e pietra raffigurata sui costi delle carte edificio in possesso
-	public CardTypeEnum getNoCardVictoryPoint() {
-		return noCardVictoryPoint;
-	}
-	public void setNoCardVictoryPoint(CardTypeEnum noCardVictoryPoint) {
-		this.noCardVictoryPoint = noCardVictoryPoint;
-	}
+	private boolean territoryCardsMalus; //TRUE = Perdi un punto vittoria per ogni legno e pietra raffigurata sui costi delle carte edificio in possesso
+
 	public List<Asset> getAssetsMalus() {
 		return assetsMalus;
 	}
 	public void setAssetsMalus(List<Asset> assetsMalus) {
 		this.assetsMalus = assetsMalus;
+	}
+	public CardTypeEnum getNoCardVictoryPoint() {
+		return noCardVictoryPoint;
+	}
+	public void setNoCardVictoryPoint(CardTypeEnum noCardVictoryPoint) {
+		this.noCardVictoryPoint = noCardVictoryPoint;
 	}
 	public boolean isLoseOneVictoryPointEveryFiveVictoryPoints() {
 		return loseOneVictoryPointEveryFiveVictoryPoints;
@@ -32,12 +33,15 @@ public class EndGameMalus implements Effect{
 	public void setLoseOneVictoryPointEveryFiveVictoryPoints(boolean loseOneVictoryPointEveryFiveVictoryPoints) {
 		this.loseOneVictoryPointEveryFiveVictoryPoints = loseOneVictoryPointEveryFiveVictoryPoints;
 	}
-	public boolean isBuildingCardsMalus() {
-		return buildingCardsMalus;
+
+	public boolean isTerritoryCardsMalus() {
+		return territoryCardsMalus;
 	}
-	public void setBuildingCardsMalus(boolean territoryCardsMalus) {
-		this.buildingCardsMalus = territoryCardsMalus;
+
+	public void setTerritoryCardsMalus(boolean territoryCardsMalus) {
+		this.territoryCardsMalus = territoryCardsMalus;
 	}
+
 	@Override
 	public boolean isLegal(Player player) {
 		
@@ -65,7 +69,7 @@ public class EndGameMalus implements Effect{
 			player.setVictoryPoints(player.getVictoryPoints() - sum);
 		}
 		
-		if (buildingCardsMalus)
+		if (territoryCardsMalus)
 		{
 			int sum = 0;
 			for (BuildingCard b : player.getPlayerBoard().getBuildings())

@@ -213,6 +213,83 @@ public class GenericLoader
             ((AddProductionValueModifier) effect).setValue(value);
         }
 
+        if (effect instanceof AddAssetMalus)
+        {
+            JSONObject assetJson = jsonEffect.getJSONObject("asset");
+
+            Asset asset = loadAsset(assetJson);
+
+            ((AddAssetMalus) effect).setAsset(asset);
+        }
+
+        if (effect instanceof AddHarvestValueModifier)
+        {
+            int value = jsonEffect.getInt("value");
+
+            ((AddHarvestValueModifier) effect).setValue(value);
+        }
+
+        if (effect instanceof  AddProductionValueModifier)
+        {
+            int value = jsonEffect.getInt("value");
+
+            ((AddProductionValueModifier) effect).setValue(value);
+        }
+
+        if (effect instanceof AddFamilyMembersMalus)
+        {
+            int value = jsonEffect.getInt("value");
+
+            ((AddFamilyMembersMalus) effect).setDiceValueMalus(value);
+        }
+
+        if (effect instanceof AddCardPickMalus)
+        {
+            AddCardPickMalus addCardPickMalus = ((AddCardPickMalus) effect);
+
+            int value = jsonEffect.getInt("value");
+
+            String cardTypeValue = jsonEffect.getString("cardType");
+
+            CardTypeEnum type = CardTypeEnum.valueOf(cardTypeValue);
+
+            addCardPickMalus.setMalusValue(value);
+
+            addCardPickMalus.setCardType(type);
+        }
+
+        if (effect instanceof EndGameMalus)
+        {
+            EndGameMalus endGameMalus = ((EndGameMalus) effect);
+
+            boolean loseOneVictoryPointEveryFiveVictoryPoints =
+                    jsonEffect.getBoolean("loseOneVictoryPointEveryFiveVictoryPoints");
+
+            endGameMalus.setLoseOneVictoryPointEveryFiveVictoryPoints
+                    (loseOneVictoryPointEveryFiveVictoryPoints);
+
+            boolean territoryCardsMalus = jsonEffect.getBoolean("territoryCardsMalus");
+
+            endGameMalus.setTerritoryCardsMalus(territoryCardsMalus);
+
+            if (!jsonEffect.isNull("noCardVictoryPoint"))
+            {
+                String cardTypeValue = jsonEffect.getString("noCardVictoryPoint");
+
+                CardTypeEnum type = CardTypeEnum.valueOf(cardTypeValue);
+
+                endGameMalus.setNoCardVictoryPoint(type);
+            }
+
+            if (!jsonEffect.isNull("assetsMalus"))
+            {
+                List<Asset> assets =
+                        loadAssetList(jsonEffect.getJSONArray("assetsMalus"));
+
+                endGameMalus.setAssetsMalus(assets);
+            }
+        }
+
     }
 
     protected static Asset loadAsset(JSONObject jsonAsset) throws JSONException
