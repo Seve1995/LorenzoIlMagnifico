@@ -3,6 +3,9 @@ package it.polimi.ingsw.pc22.gamebox;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.polimi.ingsw.pc22.effects.AddAsset;
+import it.polimi.ingsw.pc22.effects.Effect;
+
 public class Tower {
 	private CardTypeEnum towerType;
 	private List<TowerCell> towerCells;
@@ -56,11 +59,11 @@ public class Tower {
 	public static void main(String[] args) {
 		List<Effect> effects = new ArrayList<Effect>();
 		Asset asset = new Asset(3, AssetType.COIN);
-		GainAsset gainAsset = new GainAsset();
+		AddAsset gainAsset = new AddAsset();
 		gainAsset.setAsset(asset);
 		effects.add(gainAsset);
-		DevelopmentCard developmentCard = new VentureCard("Morgana", 1, effects, null, null, null, 0);
-		DevelopmentCard developmentCard2 = new VentureCard("PIPPOOO", 3, effects, null, null, null, 0);
+		DevelopmentCard developmentCard = new VentureCard("Morgana", 1, effects, null, 0);
+		DevelopmentCard developmentCard2 = new VentureCard("Pippo", 3, effects, null, 0);
 		TowerCell c = new TowerCell(3, effects);
 		TowerCell c1 = new TowerCell(5, effects);
 		TowerCell c2 = new TowerCell(3, effects);
