@@ -1,7 +1,5 @@
 package it.polimi.ingsw.pc22.gamebox;
 
-import it.polimi.ingsw.pc22.player.Player;
-
 import java.util.List;
 
 public class Market {
@@ -17,13 +15,6 @@ public class Market {
 
 	public void setMarketCell(List<MarketCell> marketCells) {
 		this.marketCells = marketCells;
-	}
-
-	public void ExecuteEffect (Player player) {
-		
-		
-		
-		
 	}
 
 	public String gainInfo() {
