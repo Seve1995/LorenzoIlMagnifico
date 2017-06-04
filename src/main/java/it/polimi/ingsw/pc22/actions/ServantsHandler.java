@@ -1,5 +1,6 @@
 package it.polimi.ingsw.pc22.actions;
 
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
 /**
@@ -22,7 +23,7 @@ public class ServantsHandler extends Action
     }
 
     @Override
-    public boolean isLegal(Player player)
+    public boolean isLegal(Player player, GameBoard gameBoard)
     {
     	if(this.sacrifiedServantsNumber > player.getServants()){
 
@@ -34,7 +35,7 @@ public class ServantsHandler extends Action
     }
 
     @Override
-    public boolean executeAction(Player player)
+    public boolean executeAction(Player player, GameBoard gameBoard)
     {
     	
     	double multiplier;
@@ -45,7 +46,7 @@ public class ServantsHandler extends Action
     	else
     		multiplier=0.5;
     	
-    	if (isLegal(player)) {
+    	if (isLegal(player, gameBoard)) {
     		
     		 int familiarValue =  action.getFamilyMember().getFamiliarValue();
 

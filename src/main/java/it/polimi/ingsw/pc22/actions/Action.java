@@ -24,7 +24,7 @@ public abstract class Action
 		this.familyMember = familyMember;
 	}
 
-	protected abstract boolean isLegal(Player player);
+	protected abstract boolean isLegal(Player player, GameBoard gameBoard);
 
-	public abstract boolean executeAction(Player player);
+	public abstract boolean executeAction(Player player, GameBoard gameBoard);
 }

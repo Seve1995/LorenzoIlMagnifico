@@ -200,17 +200,17 @@ public class PickTowerCard extends Effect
 	}
 	
 	
-	private void activeEffects(DevelopmentCard d, Player p)
+	/*private void activeEffects(DevelopmentCard d, Player p)
 	{
 		for (Effect e : d.getImmediateEffects())
 		{
-				e.executeEffect(p);
+				e.executeEffect(p, null);
 				
 				if ((e instanceof AddAsset) && p.isSantaRita())
 					e.executeEffect(p);
 		}
 			
-	}
+	}*/
 	
 	
 	@Override

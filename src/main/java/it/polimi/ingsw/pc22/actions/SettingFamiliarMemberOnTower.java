@@ -6,6 +6,7 @@ import it.polimi.ingsw.pc22.effects.PickTowerCard;
 import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
 import it.polimi.ingsw.pc22.gamebox.ColorsEnum;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.gamebox.Tower;
 import it.polimi.ingsw.pc22.gamebox.TowerCell;
 import it.polimi.ingsw.pc22.player.Player;
@@ -75,10 +76,10 @@ public class SettingFamiliarMemberOnTower extends Action {
 	
 
 	@Override
-	protected boolean isLegal (Player player)
+	protected boolean isLegal (Player player, GameBoard gameBoard)
 	{
 		
-		Tower tower = selectedTower(cardTypeEnum, this.gameBoard.getTowers()); 
+		Tower tower = selectedTower(cardTypeEnum, gameBoard.getTowers()); 
 		
 		PickTowerCard pickTowerCard = new PickTowerCard(floor, tower.getTowerType(), familyMember.getFamiliarValue());
 		
@@ -92,7 +93,7 @@ public class SettingFamiliarMemberOnTower extends Action {
 		
 		if(PayThreeCoins(player, tower) && player.getCoins() < 3 && !(player.isDontPayThreeCoinsInTowers())) return false;
 		
-		if (!(pickTowerCard.isLegal(player))) return false;
+		if (!(pickTowerCard.isLegal(player, gameBoard))) return false;
 		
 		
 		return true;
@@ -100,15 +101,15 @@ public class SettingFamiliarMemberOnTower extends Action {
 	
 	
 	@Override
-	public boolean executeAction (Player player) {
+	public boolean executeAction (Player player, GameBoard gameBoard) {
 		
-		Tower tower = selectedTower(cardTypeEnum, this.gameBoard.getTowers()); 
+		Tower tower = selectedTower(cardTypeEnum, gameBoard.getTowers()); 
 		
 		List<Effect> currEffects;
 		
 		PickTowerCard pickTowerCard = new PickTowerCard(floor, tower.getTowerType(), familyMember.getFamiliarValue());
 		
-		if (isLegal(player))
+		if (isLegal(player, gameBoard))
 		{
 			if (PayThreeCoins(player, tower))
 			{
@@ -123,10 +124,10 @@ public class SettingFamiliarMemberOnTower extends Action {
 				
 			for (Effect e : currEffects)
 			{
-				e.executeEffect(player);
+				e.executeEffect(player, gameBoard);
 			}
 			
-			pickTowerCard.executeEffect(player);
+			pickTowerCard.executeEffect(player, gameBoard);
 			
 			return true;
 		}
