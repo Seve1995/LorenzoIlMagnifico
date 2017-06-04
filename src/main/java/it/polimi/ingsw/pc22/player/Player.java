@@ -9,6 +9,7 @@ import java.util.List;
 public class Player 
 {	
 	private String name;
+	private PlayerColorsEnum playerColorsEnum;
 	private int numberOfMatch;
 	private int woods;
 	private int stones;
@@ -41,7 +42,6 @@ public class Player
 	private boolean newAction;
 	private boolean removeTowerBonus;
 	private List<FamilyMember> familyMember;
-	private GameBoard gameBoard;
 	private PlayerBoard playerBoard;
 	private GameAdapter adapter;
 
@@ -82,7 +82,6 @@ public class Player
 				", newAction=" + newAction +
 				", removeTowerBonus=" + removeTowerBonus +
 				", familyMember=" + familyMember +
-				", gameBoard=" + gameBoard +
 				", playerBoard=" + playerBoard +
 				", adapter=" + adapter +
 				'}';
@@ -131,7 +130,6 @@ public class Player
 			return false;
 		if (familyMember != null ? !familyMember.equals(player.familyMember) : player.familyMember != null)
 			return false;
-		if (gameBoard != null ? !gameBoard.equals(player.gameBoard) : player.gameBoard != null) return false;
 		if (playerBoard != null ? !playerBoard.equals(player.playerBoard) : player.playerBoard != null) return false;
 		return adapter != null ? adapter.equals(player.adapter) : player.adapter == null;
 	}
@@ -171,7 +169,6 @@ public class Player
 		result = 31 * result + (newAction ? 1 : 0);
 		result = 31 * result + (removeTowerBonus ? 1 : 0);
 		result = 31 * result + (familyMember != null ? familyMember.hashCode() : 0);
-		result = 31 * result + (gameBoard != null ? gameBoard.hashCode() : 0);
 		result = 31 * result + (playerBoard != null ? playerBoard.hashCode() : 0);
 		result = 31 * result + (adapter != null ? adapter.hashCode() : 0);
 		return result;
@@ -192,6 +189,31 @@ public class Player
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public PlayerColorsEnum getPlayerColorsEnum() {
+		return playerColorsEnum;
+	}
+
+	public void setPlayerColorsEnum(PlayerColorsEnum playerColorsEnum) {
+		this.playerColorsEnum = playerColorsEnum;
+	}
+
+	public List<CardModifier> getCardModifiers() {
+		return cardModifiers;
+	}
+
+	public void setCardModifiers(List<CardModifier> cardModifiers) {
+		this.cardModifiers = cardModifiers;
+	}
+
+	public int getHarvestValueModifier() {
+		return harvestValueModifier;
+	}
+
+	public void setHarvestValueModifier(int harvestValueModifier) {
+		this.harvestValueModifier = harvestValueModifier;
+	}
+
 	public int getNumberOfMatch() {
 		return numberOfMatch;
 	}
@@ -338,12 +360,6 @@ public class Player
 	}
 	public void setFamilyMember(List<FamilyMember> familyMember) {
 		this.familyMember = familyMember;
-	}
-	public GameBoard getGameBoard() {
-		return gameBoard;
-	}
-	public void setGameBoard(GameBoard gameBoard) {
-		this.gameBoard = gameBoard;
 	}
 	public PlayerBoard getPlayerBoard() {
 		return playerBoard;

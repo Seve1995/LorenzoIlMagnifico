@@ -5,15 +5,14 @@ import it.polimi.ingsw.pc22.player.Player;
 public class FamilyMember 
 {
 	private ColorsEnum color;
+	private PlayerColorsEnum playerColor;
 	private int familiarValue;
-	private Player player;
-
 	
-	public Player getPlayer() {
-		return player;
+	public PlayerColorsEnum getPlayerColor() {
+		return playerColor;
 	}
-	public void setPlayer(Player player) {
-		this.player = player;
+	public void setPlayerColor(PlayerColorsEnum playerColor) {
+		this.playerColor = playerColor;
 	}
 	public ColorsEnum getColor() {
 		return color;

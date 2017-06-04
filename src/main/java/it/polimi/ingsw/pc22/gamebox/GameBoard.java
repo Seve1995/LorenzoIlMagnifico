@@ -1,29 +1,28 @@
 package it.polimi.ingsw.pc22.gamebox;
 
+import java.util.List;
+
 public class GameBoard
 {
 	
-	Tower[] tower;
+	Tower[] towers;
 	Harvest harvest;
 	Production production;
 	Market market;
 	CouncilPalace councilPalace;
-	Dice[] dice;
+	List<Dice> dices;
 	
 	public GameBoard() 
 	{
 		
 	}
 
-	
-	
-
-	public Tower[] getTower() {
-		return tower;
+	public Tower[] getTowers() {
+		return towers;
 	}
 
-	public void setTower(Tower[] tower) {
-		this.tower = tower;
+	public void setTowers(Tower[] towers) {
+		this.towers = towers;
 	}
 
 	public Harvest getHarvest() {
@@ -58,12 +57,14 @@ public class GameBoard
 		this.councilPalace = councilPalace;
 	}
 
-	public Dice[] getDice() {
-		return dice;
+	public List<Dice> getDices() {
+		return dices;
 	}
 
-	public void setDice(Dice[] dice) {
-		this.dice = dice;
+	public void setDices(List<Dice> dices) {
+		this.dices = dices;
 	}
+
+	
 
 }

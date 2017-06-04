@@ -1,5 +1,6 @@
 package it.polimi.ingsw.pc22.adapters;
 
+import it.polimi.ingsw.pc22.actions.Action;
 import it.polimi.ingsw.pc22.player.Player;
 
 import java.io.IOException;
@@ -14,4 +15,6 @@ public interface GameAdapter
     void printMessage(String message);
 
     String getMessage();
+    
+    Action askAction();
 }

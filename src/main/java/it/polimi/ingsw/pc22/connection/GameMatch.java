@@ -2,9 +2,20 @@ package it.polimi.ingsw.pc22.connection;
 
 import it.polimi.ingsw.pc22.adapters.GameAdapter;
 import it.polimi.ingsw.pc22.gamebox.BonusTile;
+import it.polimi.ingsw.pc22.gamebox.BuildingCard;
+import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
+import it.polimi.ingsw.pc22.gamebox.CharacterCard;
+import it.polimi.ingsw.pc22.gamebox.ColorsEnum;
 import it.polimi.ingsw.pc22.gamebox.DevelopmentCard;
+import it.polimi.ingsw.pc22.gamebox.Dice;
 import it.polimi.ingsw.pc22.gamebox.ExcommunicationCard;
+import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
+import it.polimi.ingsw.pc22.gamebox.PlayerColorsEnum;
+import it.polimi.ingsw.pc22.gamebox.TerritoryCard;
+import it.polimi.ingsw.pc22.gamebox.Tower;
+import it.polimi.ingsw.pc22.gamebox.TowerCell;
+import it.polimi.ingsw.pc22.gamebox.VentureCard;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.BoardLoader;
 import it.polimi.ingsw.pc22.utils.BonusTileLoader;
@@ -15,12 +26,14 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class GameMatch implements Runnable
-{
-	private int currentRoundNumber = 0;
-	
+{	
 	private String gameName;
 
 	private List<Player> players;
@@ -76,7 +89,7 @@ public class GameMatch implements Runnable
 
 		System.out.println("Inizio partita");
 		
-		//startGame();
+		startGame();
 
 		endGame();
 	}
@@ -89,8 +102,10 @@ public class GameMatch implements Runnable
 
 		loadExcommunicationCards();
 
-		//loadBonusTile
+		loadBonusTiles();
 
+		//loadLeaderCards();
+		
         //int turnNumber = 6 *
 
 		//loadresourcestoplayers
@@ -100,16 +115,53 @@ public class GameMatch implements Runnable
 		//setDellecartescomunica
 
 		//INIZIO PARTITA SU BASE CONNESSIONE
-
-		/*for ( ; currentRoundNumber < 24; currentRoundNumber++)
+		
+		int coins = 5;
+		for (int i=0; i<playerCounter; i++)
 		{
-			//if (currentRoundNumber % 4|3) funzione rolladadi gameBoard.setDice(rollDices()); e settacarte
-
-			for(Socket socket : players.values())
+			Player p = players.get(i);
+			p.setCoins(coins);
+			p.setWoods(2);
+			p.setStones(2);
+			p.setServants(3);
+			p.setFamilyMember(new ArrayList<FamilyMember>());
+			p.setPriority(i);
+			coins++;
+			switch (i) {
+			case 0:
+				p.setPlayerColorsEnum(PlayerColorsEnum.RED);
+				break;
+			case 1:
+				p.setPlayerColorsEnum(PlayerColorsEnum.BLUE);
+				break;
+			case 2:
+				p.setPlayerColorsEnum(PlayerColorsEnum.YELLOW);
+				break;
+			case 3:
+				p.setPlayerColorsEnum(PlayerColorsEnum.GREEN);
+				break;
+			case 4:
+				p.setPlayerColorsEnum(PlayerColorsEnum.BROWN);
+				break;
+			default:
+				break;
+			}
+		}
+		
+		for (int currentRoundNumber=0; currentRoundNumber < 24; currentRoundNumber++)
+		{
+			if (isNewTurn(currentRoundNumber)) 
+				{
+				addDices();
+				addTowerCards(getEra(currentRoundNumber));
+				//Controlla il council palace 
+				//ordina l'array in base a player.priority
+				}
+			
+			for(Player player : players)
 			{
-				//socket.getInputStream();
-				//socket.getOutputStream();
-
+				
+				
 				//pensare a timeout
 
 				while(true)
@@ -119,7 +171,7 @@ public class GameMatch implements Runnable
 
 					//stampa plancia
 
-					//Richiesta: che razza di azione vuoi fare??
+					player.getAdapter().askAction(); //Richiesta: che razza di azione vuoi fare??
 
 					//vuoi sacrificare i servitori??
 
@@ -143,11 +195,12 @@ public class GameMatch implements Runnable
 
 			//if (currentRoundNumber % 8|6) gestionefineEra()
 		}
-		*/
+		
 		//gestioneFineGioco();decreto vincitore e tutto quello che ne consegue
-
-
 	}
+
+
+	
 
 	private void endGame()
 	{
@@ -188,6 +241,8 @@ public class GameMatch implements Runnable
 		JSONObject jsonCards = new JSONObject(cardString);
 
 		cards = CardLoader.loadCards(jsonCards);
+		
+		Collections.shuffle(cards);
 	}
 
 	private void loadExcommunicationCards()
@@ -233,12 +288,114 @@ public class GameMatch implements Runnable
 		return builder.toString();
 	}
 
-	public int getCurrentRoundNumber() {
-		return currentRoundNumber;
+	private boolean isNewTurn(int currentNumber)
+	{
+		if (currentNumber==0) 
+			return true;
+		
+		if (this.playerCounter==5)
+			return currentNumber%3==0;
+		
+		return currentNumber%4==0;
 	}
 	
-	public void setCurrentRoundNumber(int currentRoundNumber) {
-		this.currentRoundNumber = currentRoundNumber;
+	private void addDices() 
+	{
+		ArrayList<Dice> dices = new ArrayList<Dice>();
+		Dice blackDice = new Dice(ColorsEnum.BLACK);
+		blackDice.rollingDice();
+		dices.add(blackDice);
+		Dice whiteDice = new Dice(ColorsEnum.WHITE);
+		whiteDice.rollingDice();
+		dices.add(whiteDice);
+		if(this.playerCounter==5)
+			{
+			Dice orangeDice = new Dice(ColorsEnum.ORANGE);
+			dices.add(orangeDice);
+			orangeDice.rollingDice();
+			}
+		gameBoard.setDices(dices);
+	}
+	
+	private void addTowerCards(int era) 
+	{   
+		Tower[] towers = gameBoard.getTowers();
+		final int roundNumber = era;
+		
+		List<DevelopmentCard> territoryCards = cards.parallelStream()
+				.filter(devCard -> (devCard.getRoundNumber() == roundNumber && devCard instanceof TerritoryCard))
+				.collect(Collectors.toList())
+				.subList(0, 3);
+		cards.removeAll(territoryCards);
+		List<TowerCell> territoryTowerCells = towers[0].getTowerCells();
+		for (int i=0; i<territoryTowerCells.size(); i++)
+			{
+			territoryTowerCells.get(i).setDevelopmentCard(territoryCards.get(i));
+			}
+		
+		List<DevelopmentCard> characterCards = cards.parallelStream()
+				.filter(devCard -> (devCard.getRoundNumber() == roundNumber && devCard instanceof CharacterCard))
+				.collect(Collectors.toList());;
+		cards.removeAll(characterCards);
+		List<TowerCell> characterTowerCells = towers[0].getTowerCells();
+		for (int i=0; i<characterTowerCells.size(); i++)
+			{
+			characterTowerCells.get(i).setDevelopmentCard(characterCards.get(i));
+			}
+
+		List<DevelopmentCard> buildingCards = cards.parallelStream()
+				.filter(devCard -> (devCard.getRoundNumber() == roundNumber && devCard instanceof BuildingCard))
+				.collect(Collectors.toList());;
+		cards.removeAll(buildingCards);
+		List<TowerCell> buildingTowerCells = towers[0].getTowerCells();
+		for (int i=0; i<buildingTowerCells.size(); i++)
+			{
+			buildingTowerCells.get(i).setDevelopmentCard(buildingCards.get(i));
+			}
+		
+		List<DevelopmentCard> ventureCards = cards.parallelStream()
+				.filter(devCard -> (devCard.getRoundNumber() == roundNumber && devCard instanceof VentureCard))
+				.collect(Collectors.toList());;
+		cards.removeAll(ventureCards);
+		List<TowerCell> ventureTowerCells = towers[0].getTowerCells();
+		for (int i=0; i<ventureTowerCells.size(); i++)
+			{
+			ventureTowerCells.get(i).setDevelopmentCard(ventureCards.get(i));
+			}
+		
+	}
+		
+		
+	
+	
+	private int getEra(int currentRoundNumber)
+	{
+		//Valori di currentRoundNumber associati alle ere:
+		//FINO A 4 GIOCATORI:
+		//0,4 = 1^ era
+		//8, 12 = 2^ era
+		//16, 20 = 3^ era
+		//A 5 GIOCATORI:
+		//0,3 = 1^ era
+		//6,9 = 2^ era
+		//12,15 = 3^ era
+		if(playerCounter < 5)
+			{
+			if(currentRoundNumber==0 || currentRoundNumber==4)
+				return 1;
+			if(currentRoundNumber==8 || currentRoundNumber==12)
+				return 2;
+			if(currentRoundNumber==16 || currentRoundNumber==20)
+				return 3;
+			}
+		else
+			if(currentRoundNumber==0 || currentRoundNumber==3)
+				return 1;
+			if(currentRoundNumber==6 || currentRoundNumber==9)
+				return 2;
+			if(currentRoundNumber==12 || currentRoundNumber==15)
+				return 3;
+		return -1;
 	}
 	
 	public String getGameName() {
@@ -272,4 +429,6 @@ public class GameMatch implements Runnable
 	public void setGameBoard(GameBoard gameBoard) {
 		this.gameBoard = gameBoard;
 	}
+	
+	
 }

@@ -69,7 +69,7 @@ public class PickTowerCard implements Effect{
 	{
 		Tower tower = null;
 		
-		for (Tower t : player.getGameBoard().getTower())
+		for (Tower t : player.getGameBoard().getTowers())
 		{
 			if (t.getTowerType().equals(cardType))
 			{
@@ -218,7 +218,7 @@ public class PickTowerCard implements Effect{
 
 		if (isLegal(player))
 		{
-				for (Tower t : player.getGameBoard().getTower())
+				for (Tower t : player.getGameBoard().getTowers())
 				{
 					if (t.getTowerType().equals(cardType))
 					{   
