@@ -5,20 +5,16 @@ import it.polimi.ingsw.pc22.player.Player;
 
 public class AddServantsHandlerMalus extends Effect{
 
-	public AddServantsHandlerMalus(GameBoard gameBoard) {
-		super(gameBoard);
-		
-	}
-
 	@Override
-	public boolean isLegal(Player player) {
+	public boolean isLegal(Player player, GameBoard gameBoard) {
 		return true;
 	}
 
 	@Override
-	public void executeEffect(Player player) {
+	public void executeEffect(Player player, GameBoard gameBoard) {
 		
-		player.setServantMalus(true);
+		if (isLegal(player,gameBoard))
+			player.setServantMalus(true);
 		
 	}
 

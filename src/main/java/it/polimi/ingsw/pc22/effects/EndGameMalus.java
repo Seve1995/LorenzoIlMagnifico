@@ -11,10 +11,6 @@ import java.util.List;
 
 public class EndGameMalus extends Effect{
 	
-	public EndGameMalus(GameBoard gameBoard) {
-		super(gameBoard);
-		
-	}
 	private CardTypeEnum noCardVictoryPoint;
 	private List<Asset> assetsMalus; //Per ogni asset della lista in possesso del giocatore perdi un punto vittoria 
 	private boolean loseOneVictoryPointEveryFiveVictoryPoints;
@@ -48,12 +44,12 @@ public class EndGameMalus extends Effect{
 	}
 
 	@Override
-	public boolean isLegal(Player player) {
-		
+	public boolean isLegal(Player player, GameBoard gameBoard) {
 		return true;
 	}
+	
 	@Override
-	public void executeEffect(Player player) {
+	public void executeEffect(Player player, GameBoard gameBoard) {
 		
 		if (loseOneVictoryPointEveryFiveVictoryPoints)
 		{

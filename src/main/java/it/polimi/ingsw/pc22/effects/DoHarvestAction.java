@@ -5,11 +5,6 @@ import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class DoHarvestAction extends Effect {
-	
-	public DoHarvestAction(GameBoard gameBoard) {
-		super(gameBoard);
-		
-	}
 
 	private int value;
 
@@ -22,41 +17,34 @@ public class DoHarvestAction extends Effect {
 	}
 
 	@Override
-	public boolean isLegal(Player player) {
-		
+	public boolean isLegal(Player player, GameBoard gameBoard) {
+		if (value < player.getPlayerBoard().getBonusTile().getHarvestActivationValue())
+				return false;
 		return true;
 	}
 
 	@Override
-	public void executeEffect(Player player) {
+	public void executeEffect(Player player, GameBoard gameBoard) {
 		
-		
-		
-		if (value >= player.getPlayerBoard().getBonusTile().getHarvestActivationValue())
+		if (isLegal(player,gameBoard))
 		{
-		
-			player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestServantBonus());
-			player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestCoinsBonus());
-			player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestMilitaryPointsBonus());
-			player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestStonesBonus());
-			player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestWoodsBonus());
-		
+				player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestServantBonus());
+				player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestCoinsBonus());
+				player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestMilitaryPointsBonus());
+				player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestStonesBonus());
+				player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestWoodsBonus());
+			}
 			
-		
-		}
-		for (BuildingCard b : player.getPlayerBoard().getBuildings()){
-			
-			if(value >= b.getPermanentEffectActivationCost()){
+			for (BuildingCard b : player.getPlayerBoard().getBuildings()){
 				
-				for (Effect e : b.getPermanentEffects())
-				{
-					e.executeEffect(player);
+				if(value >= b.getPermanentEffectActivationCost()){
+					
+					for (Effect e : b.getPermanentEffects())
+					{
+						e.executeEffect(player, gameBoard);
+					}
+					
 				}
-				
 			}
 		}
-		
-	}
-	
-
 }

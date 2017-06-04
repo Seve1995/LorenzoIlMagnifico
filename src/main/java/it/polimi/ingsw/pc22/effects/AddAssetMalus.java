@@ -5,11 +5,6 @@ import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class AddAssetMalus extends Effect{
-	
-	public AddAssetMalus(GameBoard gameBoard) {
-		super(gameBoard);
-		
-	}
 
 	private Asset asset;
 
@@ -24,16 +19,17 @@ public class AddAssetMalus extends Effect{
 	}
 
 	@Override
-	public boolean isLegal(Player player) {
+	public boolean isLegal(Player player, GameBoard gameBoard) {
 		
 		return true;
 		
 	}
 
 	@Override
-	public void executeEffect(Player player) {
+	public void executeEffect(Player player, GameBoard gameBoard) {
 		
-		player.addAsset(asset);
+		if (isLegal(player,gameBoard))
+			player.addAsset(asset);
 		
 	}
 

@@ -11,20 +11,15 @@ import it.polimi.ingsw.pc22.player.Player;
 
 public class RemoveBonusesFromTowers extends Effect
 {
-	
-	public RemoveBonusesFromTowers(GameBoard gameBoard) {
-		super(gameBoard);
-		
-	}
 
 	@Override
-	public void executeEffect(Player player) 
+	public void executeEffect(Player player, GameBoard gameBoard) 
 	{
 		player.setRemoveTowerBonus(true);
 	}
 
 	@Override
-	public boolean isLegal(Player player) 
+	public boolean isLegal(Player player, GameBoard gameBoard) 
 	{
 		return true;
 	}

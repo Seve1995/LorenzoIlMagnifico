@@ -5,10 +5,6 @@ import it.polimi.ingsw.pc22.gamebox.TerritoryCard;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class DoProductionAction extends Effect {
-	
-	public DoProductionAction(GameBoard gameBoard) {
-		super(gameBoard);
-	}
 
 	private int value;
 
@@ -21,14 +17,15 @@ public class DoProductionAction extends Effect {
 	}
 
 	@Override
-	public boolean isLegal(Player player) {
-		
+	public boolean isLegal(Player player, GameBoard gameBoard) {
+		if (value < player.getPlayerBoard().getBonusTile().getProductionActivationValue())
+			return false;
 		return true;
 		
 	}
 
 	@Override
-	public void executeEffect(Player player) {
+	public void executeEffect(Player player, GameBoard gameBoard) {
 			
 			if (value >= player.getPlayerBoard().getBonusTile().getProductionActivationValue())
 			{
@@ -44,7 +41,7 @@ public class DoProductionAction extends Effect {
 				{
 					for (Effect e : t.getPermanentEffects())
 					{
-						e.executeEffect(player);
+						e.executeEffect(player, gameBoard);
 					}
 				}
 			}

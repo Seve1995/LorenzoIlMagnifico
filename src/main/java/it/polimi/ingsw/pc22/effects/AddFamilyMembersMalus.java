@@ -6,10 +6,6 @@ import it.polimi.ingsw.pc22.player.Player;
 
 public class AddFamilyMembersMalus extends Effect{
 
-	public AddFamilyMembersMalus(GameBoard gameBoard) {
-		super(gameBoard);
-	}
-
 	private int diceValueMalus;
 	
 	public int getDiceValueMalus() {
@@ -21,17 +17,19 @@ public class AddFamilyMembersMalus extends Effect{
 	}
 
 	@Override
-	public boolean isLegal(Player player) {
+	public boolean isLegal(Player player, GameBoard gameBoard) {
 		return true;
 	}
 
+	//TODO: Bisogna renderlo un effetto permanente! I family member vengono rimossi ogni volta, quindi non va bene!
 	@Override
-	public void executeEffect(Player player) {
+	public void executeEffect(Player player, GameBoard gameBoard) {
 		
-		for(FamilyMember f : player.getFamilyMember())
-		{
-			f.setFamiliarValue(f.getFamiliarValue()+diceValueMalus);
-		}
+		if (isLegal(player,gameBoard))
+			for(FamilyMember f : player.getFamilyMember())
+			{
+				f.setFamiliarValue(f.getFamiliarValue()+diceValueMalus);
+			}
 		
 	}
 

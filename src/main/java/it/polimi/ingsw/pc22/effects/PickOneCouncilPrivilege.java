@@ -5,20 +5,17 @@ import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class PickOneCouncilPrivilege extends Effect{
-	public PickOneCouncilPrivilege(GameBoard gameBoard) {
-		super(gameBoard);
-	}
 
 	private Asset choosenAsset;
 
 	@Override
-	public boolean isLegal(Player player) {
+	public boolean isLegal(Player player, GameBoard gameBoard) {
 		
 		return true;
 	}
 
 	@Override
-	public void executeEffect(Player player)
+	public void executeEffect(Player player, GameBoard gameBoard)
 	{
 		
 		player.addAsset(choosenAsset);

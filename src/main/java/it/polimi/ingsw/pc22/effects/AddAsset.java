@@ -6,10 +6,6 @@ import it.polimi.ingsw.pc22.player.Player;
 
 public class AddAsset extends Effect
 {
-	public AddAsset(GameBoard gameBoard) {
-		super(gameBoard);
-	}
-
 	private Asset asset;
 
 	public Asset getAsset()
@@ -29,14 +25,14 @@ public class AddAsset extends Effect
 	}
 
 	@Override
-	public boolean isLegal(Player player) {
+	public boolean isLegal(Player player, GameBoard gameBoard) {
 		return true;
 	}
 
 	@Override
-	public void executeEffect(Player player) {
+	public void executeEffect(Player player, GameBoard gameBoard) {
 		
-		if (isLegal(player))
+		if (isLegal(player,gameBoard))
 			
 			player.addAsset(asset);
 			

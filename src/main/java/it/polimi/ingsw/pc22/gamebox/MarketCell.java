@@ -27,7 +27,7 @@ public class MarketCell extends Cell
 		
 		for(Effect e : this.getEffects())
 		{
-			e.executeEffect(player);
+			e.executeEffect(player, null);
 		}
 		
 	}

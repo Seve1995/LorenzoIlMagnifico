@@ -7,11 +7,6 @@ import it.polimi.ingsw.pc22.player.Player;
 import java.util.List;
 
 public class FromAssetToAssetOrEffect extends Effect{
-	
-	public FromAssetToAssetOrEffect(GameBoard gameBoard) {
-		super(gameBoard);
-		
-	}
 
 	private List<Asset> paidAssets;
 	private List<Asset> gainedAssets;
@@ -44,7 +39,7 @@ public class FromAssetToAssetOrEffect extends Effect{
 	}
 	
 	@Override
-	public boolean isLegal(Player player) 
+	public boolean isLegal(Player player, GameBoard gameBoard) 
 	{
 		for (Asset a : paidAssets){
 			if(a.getValue() > player.getAsset(a.getType()))
@@ -57,12 +52,12 @@ public class FromAssetToAssetOrEffect extends Effect{
 	}
 	
 	@Override
-	public void executeEffect(Player player) 
+	public void executeEffect(Player player, GameBoard gameBoard) 
 	{
-		if (isLegal(player)){
+		if (isLegal(player, gameBoard)){
 			if (gainedEffect != null)
 			{
-				gainedEffect.executeEffect(player);
+				gainedEffect.executeEffect(player, gameBoard);
 				
 			}
 			if (gainedAssets != null){

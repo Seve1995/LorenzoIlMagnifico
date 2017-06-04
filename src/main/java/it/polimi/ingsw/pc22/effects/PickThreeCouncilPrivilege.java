@@ -5,17 +5,13 @@ import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class PickThreeCouncilPrivilege extends Effect{
-	public PickThreeCouncilPrivilege(GameBoard gameBoard) {
-		super(gameBoard);
-		
-	}
 
 	private Asset choosenAsset1;
 	private Asset choosenAsset2;
 	private Asset choosenAsset3;
 	
 	@Override
-	public boolean isLegal(Player player) 
+	public boolean isLegal(Player player, GameBoard gameBoard) 
 	{
 		if (!(choosenAsset1.getType().equals(choosenAsset2.getType())) && !(choosenAsset1.getType().equals(choosenAsset3.getType())) 
 				&& !(choosenAsset1.getType().equals(choosenAsset2.getType())))
@@ -27,9 +23,9 @@ public class PickThreeCouncilPrivilege extends Effect{
 	}
 
 	@Override
-	public void executeEffect(Player player) 
+	public void executeEffect(Player player, GameBoard gameBoard) 
 	{
-		if (isLegal(player))
+		if (isLegal(player, gameBoard))
 		{
 			player.addAsset(choosenAsset1);
 			player.addAsset(choosenAsset2);

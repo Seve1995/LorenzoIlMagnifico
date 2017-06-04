@@ -47,9 +47,7 @@ public class PickTowerCard extends Effect
 		this.assetsDiscount = assetsDiscount;
 	}
 
-	public PickTowerCard(int floor, CardTypeEnum cardType, int diceValue, GameBoard gameBoard) {
-		
-		super(gameBoard);
+	public PickTowerCard(int floor, CardTypeEnum cardType, int diceValue) {
 		this.floor = floor;
 		this.cardType = cardType;
 		this.diceValue = diceValue;
@@ -68,7 +66,7 @@ public class PickTowerCard extends Effect
 
 
 	@Override
-	public boolean isLegal(Player player) 
+	public boolean isLegal(Player player, GameBoard gameBoard) 
 	{
 		Tower tower = null;
 		
@@ -216,10 +214,10 @@ public class PickTowerCard extends Effect
 	
 	
 	@Override
-	public void executeEffect(Player player) 
+	public void executeEffect(Player player, GameBoard gameBoard) 
 	{
 
-		if (isLegal(player))
+		if (isLegal(player, gameBoard))
 		{
 				/*for (Tower t : player.getGameBoard().getTowers())
 				{

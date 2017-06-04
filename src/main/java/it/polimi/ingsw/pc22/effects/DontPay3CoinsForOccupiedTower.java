@@ -5,18 +5,13 @@ import it.polimi.ingsw.pc22.player.Player;
 
 public class DontPay3CoinsForOccupiedTower extends Effect {
 
-	public DontPay3CoinsForOccupiedTower(GameBoard gameBoard) {
-		super(gameBoard);
-		
-	}
-
 	@Override
-	protected boolean isLegal(Player player) {
+	protected boolean isLegal(Player player, GameBoard gameBoard) {
 		return true;
 	}
 
 	@Override
-	public void executeEffect(Player player) {
+	public void executeEffect(Player player, GameBoard gameBoard) {
 	
 		player.setDontPayThreeCoinsInTowers(true);
 		
