@@ -11,6 +11,8 @@ public class PlayerBoard {
 	private int typeOfBonusTile;
 	private BonusTile bonusTile;
 	
+	
+	
 	public List<TerritoryCard> getTerritories() {
 		return territories;
 	}
