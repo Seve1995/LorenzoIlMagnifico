@@ -1,10 +1,15 @@
 package it.polimi.ingsw.pc22.effects;
 
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.gamebox.TerritoryCard;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class DoProductionAction implements Effect {
+public class DoProductionAction extends Effect {
 	
+	public DoProductionAction(GameBoard gameBoard) {
+		super(gameBoard);
+	}
+
 	private int value;
 
 	public int getValue() {

@@ -2,10 +2,16 @@ package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class AddAssetForEveryAssetOrCard implements Effect{
+public class AddAssetForEveryAssetOrCard extends Effect{
 	
+	public AddAssetForEveryAssetOrCard(GameBoard gameBoard) {
+		super(gameBoard);
+		
+	}
+
 	private Asset paidAsset;
 	private CardTypeEnum paidCardType;
 	private Asset gainedAsset;

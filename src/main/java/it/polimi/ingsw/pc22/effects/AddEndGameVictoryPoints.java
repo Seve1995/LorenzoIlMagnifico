@@ -1,10 +1,16 @@
 package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.gamebox.Asset;
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class AddEndGameVictoryPoints implements Effect{
+public class AddEndGameVictoryPoints extends Effect{
 	
+	public AddEndGameVictoryPoints(GameBoard gameBoard) {
+		super(gameBoard);
+		
+	}
+
 	private Asset asset;
 
 	public Asset getAsset() {

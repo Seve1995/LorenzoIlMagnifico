@@ -1,9 +1,14 @@
 package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class AddFamilyMembersMalus implements Effect{
+public class AddFamilyMembersMalus extends Effect{
+
+	public AddFamilyMembersMalus(GameBoard gameBoard) {
+		super(gameBoard);
+	}
 
 	private int diceValueMalus;
 	

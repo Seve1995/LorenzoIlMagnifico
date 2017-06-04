@@ -1,10 +1,16 @@
 package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.gamebox.BuildingCard;
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class DoHarvestAction implements Effect {
+public class DoHarvestAction extends Effect {
 	
+	public DoHarvestAction(GameBoard gameBoard) {
+		super(gameBoard);
+		
+	}
+
 	private int value;
 
 	public int getValue() {

@@ -6,11 +6,10 @@ import it.polimi.ingsw.pc22.player.Player;
 
 public class SettingFamiliarMemberOnCouncilPalace extends Action {
 	
-	private CouncilPalace councilPalace;
+	
 
-	public SettingFamiliarMemberOnCouncilPalace(FamilyMember familyMember, CouncilPalace councilPalace) {
+	public SettingFamiliarMemberOnCouncilPalace(FamilyMember familyMember) {
 		super(familyMember);
-		this.councilPalace = councilPalace;
 	}
 
 	@Override
@@ -24,8 +23,13 @@ public class SettingFamiliarMemberOnCouncilPalace extends Action {
 
 	@Override
 	public boolean executeAction(Player player) {
+		
+		CouncilPalace councilPalace = this.gameBoard.getCouncilPalace(); 
+		
 		if (isLegal(player))
 		{
+			
+			
 			councilPalace.getCouncilPalaceCells()[councilPalace.firstCellFree()].setFamilyMember(this.getFamilyMember());
 			player.removeFamilyMember(familyMember);
 			councilPalace.getCouncilPalaceCells()[councilPalace.firstCellFree()].executeEffect(player);

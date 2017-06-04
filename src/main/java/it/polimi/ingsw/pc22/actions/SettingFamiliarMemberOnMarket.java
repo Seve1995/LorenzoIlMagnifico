@@ -9,17 +9,18 @@ import it.polimi.ingsw.pc22.player.Player;
 import java.util.List;
 
 public class SettingFamiliarMemberOnMarket extends Action{
-	private Market market;
+	
 	private int zone;
 
-	public SettingFamiliarMemberOnMarket(FamilyMember familyMember, Market market, int zone) {
+	public SettingFamiliarMemberOnMarket(FamilyMember familyMember, int zone) {
 		super(familyMember);
-		this.market = market;
 		this.zone = zone;
 	}
 
 	@Override
 	protected boolean isLegal(Player player) {
+		
+		Market market = this.gameBoard.getMarket(); 
 		
 		List<MarketCell> currMarketCells = market.getMarketCells();
 		
@@ -43,6 +44,7 @@ public class SettingFamiliarMemberOnMarket extends Action{
 		
 		List<Effect> currEffects;
 		
+		Market market = this.gameBoard.getMarket(); 
 		
 		if (isLegal(player) )
 		{

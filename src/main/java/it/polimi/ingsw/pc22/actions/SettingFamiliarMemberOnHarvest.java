@@ -7,17 +7,16 @@ import it.polimi.ingsw.pc22.gamebox.HarvestCell;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class SettingFamiliarMemberOnHarvest extends Action{
+
 	
-	private Harvest harvest;
-	
-	
-	public SettingFamiliarMemberOnHarvest(FamilyMember familyMember, Harvest harvest) {
+	public SettingFamiliarMemberOnHarvest(FamilyMember familyMember) {
 		super(familyMember);
-		this.harvest = harvest;
 	}
 
 	@Override
 	protected boolean isLegal (Player player) {
+		
+		Harvest harvest = this.gameBoard.getHarvest(); 
 		
 		if (super.getFamilyMember().getFamiliarValue() < 1)
 			return false;
@@ -46,8 +45,13 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 
 	@Override
 	public boolean executeAction(Player player) {
+		
+		Harvest harvest = this.gameBoard.getHarvest(); 
+		
 		if (isLegal(player) && !(player.isDontCareOccupiedPlaces()))
 		{
+			
+			
 			harvest.getHarvestCell()[harvest.firstCellFree()].setFamilyMember(this.getFamilyMember());
 			player.removeFamilyMember(familyMember);
 			

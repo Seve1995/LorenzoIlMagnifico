@@ -1,9 +1,15 @@
 package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.gamebox.Asset;
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class PickThreeCouncilPrivilege implements Effect{
+public class PickThreeCouncilPrivilege extends Effect{
+	public PickThreeCouncilPrivilege(GameBoard gameBoard) {
+		super(gameBoard);
+		
+	}
+
 	private Asset choosenAsset1;
 	private Asset choosenAsset2;
 	private Asset choosenAsset3;

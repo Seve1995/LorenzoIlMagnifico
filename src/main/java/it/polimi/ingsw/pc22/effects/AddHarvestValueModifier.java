@@ -1,9 +1,14 @@
 package it.polimi.ingsw.pc22.effects;
 
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class AddHarvestValueModifier implements Effect{
+public class AddHarvestValueModifier extends Effect{
 	
+	public AddHarvestValueModifier(GameBoard gameBoard) {
+		super(gameBoard);
+	}
+
 	private int value;
 
 	public int getValue() {

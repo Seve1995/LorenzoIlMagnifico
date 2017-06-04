@@ -2,13 +2,19 @@ package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.CardModifier;
 import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 
-public class AddTowerCardDiscount implements Effect{
+public class AddTowerCardDiscount extends Effect{
 	
+	public AddTowerCardDiscount(GameBoard gameBoard) {
+		super(gameBoard);
+		
+	}
+
 	private CardTypeEnum cardType;
 	private int diceValueDiscount;
 	private List<Asset> assetDiscounts; 

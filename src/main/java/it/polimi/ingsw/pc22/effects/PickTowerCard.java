@@ -5,7 +5,7 @@ import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 
-public class PickTowerCard implements Effect
+public class PickTowerCard extends Effect
 
 {
 	private int floor;
@@ -47,8 +47,9 @@ public class PickTowerCard implements Effect
 		this.assetsDiscount = assetsDiscount;
 	}
 
-	public PickTowerCard(int floor, CardTypeEnum cardType, int diceValue) {
-		super();
+	public PickTowerCard(int floor, CardTypeEnum cardType, int diceValue, GameBoard gameBoard) {
+		
+		super(gameBoard);
 		this.floor = floor;
 		this.cardType = cardType;
 		this.diceValue = diceValue;

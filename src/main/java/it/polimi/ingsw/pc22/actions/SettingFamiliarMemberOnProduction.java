@@ -7,15 +7,17 @@ import it.polimi.ingsw.pc22.gamebox.ProductionCell;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class SettingFamiliarMemberOnProduction extends Action {
-	private Production production;
+
 	
-	public SettingFamiliarMemberOnProduction(FamilyMember familyMember, Production production) {
+	public SettingFamiliarMemberOnProduction(FamilyMember familyMember) {
 		super(familyMember);
-		this.production = production;
+		
 	}
 
 	@Override
 	protected boolean isLegal(Player player) {
+		
+		Production production = this.gameBoard.getProduction();
 		
 		if (super.getFamilyMember().getFamiliarValue()<1)
 			return false;
@@ -43,8 +45,13 @@ public class SettingFamiliarMemberOnProduction extends Action {
 
 	@Override
 	public boolean executeAction(Player player) {
+		
+		Production production = this.gameBoard.getProduction();
+		
 		if (isLegal(player) && !(player.isDontCareOccupiedPlaces()))
 		{
+			
+			
 			production.getProductionCell()[production.firstCellFree()].setFamilyMember(this.getFamilyMember());
 			player.removeFamilyMember(familyMember);
 			

@@ -4,12 +4,17 @@ import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.AssetType;
 import it.polimi.ingsw.pc22.gamebox.BuildingCard;
 import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 
-public class EndGameMalus implements Effect{
+public class EndGameMalus extends Effect{
 	
+	public EndGameMalus(GameBoard gameBoard) {
+		super(gameBoard);
+		
+	}
 	private CardTypeEnum noCardVictoryPoint;
 	private List<Asset> assetsMalus; //Per ogni asset della lista in possesso del giocatore perdi un punto vittoria 
 	private boolean loseOneVictoryPointEveryFiveVictoryPoints;

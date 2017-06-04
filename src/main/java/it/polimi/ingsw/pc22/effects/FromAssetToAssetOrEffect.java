@@ -1,12 +1,18 @@
 package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.gamebox.Asset;
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 
-public class FromAssetToAssetOrEffect implements Effect{
+public class FromAssetToAssetOrEffect extends Effect{
 	
+	public FromAssetToAssetOrEffect(GameBoard gameBoard) {
+		super(gameBoard);
+		
+	}
+
 	private List<Asset> paidAssets;
 	private List<Asset> gainedAssets;
 	private boolean onlyOneAsset;

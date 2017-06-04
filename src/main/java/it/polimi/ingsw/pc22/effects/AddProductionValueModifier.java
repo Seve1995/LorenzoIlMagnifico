@@ -1,9 +1,15 @@
 package it.polimi.ingsw.pc22.effects;
 
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class AddProductionValueModifier implements Effect{
+public class AddProductionValueModifier extends Effect{
 	
+	public AddProductionValueModifier(GameBoard gameBoard) {
+		super(gameBoard);
+		
+	}
+
 	private int value;
 
 	public int getValue() {

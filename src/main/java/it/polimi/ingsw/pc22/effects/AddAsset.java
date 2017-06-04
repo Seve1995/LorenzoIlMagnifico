@@ -1,10 +1,15 @@
 package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.gamebox.Asset;
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class AddAsset implements Effect
+public class AddAsset extends Effect
 {
+	public AddAsset(GameBoard gameBoard) {
+		super(gameBoard);
+	}
+
 	private Asset asset;
 
 	public Asset getAsset()

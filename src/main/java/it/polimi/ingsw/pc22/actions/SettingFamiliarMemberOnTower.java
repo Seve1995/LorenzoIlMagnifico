@@ -3,6 +3,7 @@ package it.polimi.ingsw.pc22.actions;
 
 import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.effects.PickTowerCard;
+import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
 import it.polimi.ingsw.pc22.gamebox.ColorsEnum;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.gamebox.Tower;
@@ -13,13 +14,15 @@ import java.util.List;
 
 public class SettingFamiliarMemberOnTower extends Action {
 	private int floor;
-	private Tower tower; 
+	private CardTypeEnum cardTypeEnum;
 	
-	public SettingFamiliarMemberOnTower (FamilyMember familyMember, Tower tower, int floor) 
+	
+	public SettingFamiliarMemberOnTower (FamilyMember familyMember, CardTypeEnum cardTypeEnum, int floor) 
 	{
 		super(familyMember);
 		this.floor = floor;
-		this.tower = tower;
+		this.cardTypeEnum = cardTypeEnum;
+
 	}
 	
 	private boolean PayThreeCoins (Player p, Tower t)
@@ -56,10 +59,27 @@ public class SettingFamiliarMemberOnTower extends Action {
 		
 	}
 	
+	private Tower selectedTower(CardTypeEnum c, Tower[] ts)
+	{
+		
+		for (Tower t : ts)
+		{
+			if (t.getTowerType().equals(cardTypeEnum))
+				
+				return t;
+		}
+		
+		return null;
+		
+	}
+	
 
 	@Override
 	protected boolean isLegal (Player player)
 	{
+		
+		Tower tower = selectedTower(cardTypeEnum, this.gameBoard.getTowers()); 
+		
 		PickTowerCard pickTowerCard = new PickTowerCard(floor, tower.getTowerType(), familyMember.getFamiliarValue());
 		
 		if (!tower.getTowerCells().get(floor).isEmpty() && !(player.isDontCareOccupiedPlaces())) return false;
@@ -82,6 +102,8 @@ public class SettingFamiliarMemberOnTower extends Action {
 	@Override
 	public boolean executeAction (Player player) {
 		
+		Tower tower = selectedTower(cardTypeEnum, this.gameBoard.getTowers()); 
+		
 		List<Effect> currEffects;
 		
 		PickTowerCard pickTowerCard = new PickTowerCard(floor, tower.getTowerType(), familyMember.getFamiliarValue());
@@ -93,11 +115,11 @@ public class SettingFamiliarMemberOnTower extends Action {
 				player.setCoins(player.getCoins() - 3);
 			}
 			
-			this.tower.getTowerCells().get(floor).setFamilyMember(this.getFamilyMember());
+			tower.getTowerCells().get(floor).setFamilyMember(this.getFamilyMember());
 			
 			player.removeFamilyMember(familyMember);
 			
-			currEffects = this.tower.getTowerCells().get(floor).getEffects();
+			currEffects = tower.getTowerCells().get(floor).getEffects();
 				
 			for (Effect e : currEffects)
 			{
