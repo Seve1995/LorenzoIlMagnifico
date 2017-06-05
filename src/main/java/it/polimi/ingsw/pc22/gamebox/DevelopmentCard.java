@@ -30,10 +30,7 @@ public abstract class DevelopmentCard
 		this.immediateEffects = immediateEffects;
 		this.permanentEffects = permanentEffects;
 	}
-	
-	public abstract void useImmediateEffect(Player player);
-	public abstract void usePermanentEffect(Player player);
-	
+
 	public String getName() {
 		return name;
 	}

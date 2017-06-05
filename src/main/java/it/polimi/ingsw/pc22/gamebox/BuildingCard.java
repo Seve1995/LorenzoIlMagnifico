@@ -74,31 +74,12 @@ public class BuildingCard extends DevelopmentCard
 			return false;
 		return true;
 	}
-	
-	@Override
-	public String toString()
-	{
-		String output = this.getName() + " is a Building Card.\n Its activation cost are ";
-		for (Asset a: costs)
-		{
-			output += a.toString() + "\n";
-		}
-
-		output += super.toString();
-
-		return output;
-
-	}
 
 	@Override
-	public void useImmediateEffect(Player player) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void usePermanentEffect(Player player) {
-		// TODO Auto-generated method stub
-		
+	public String toString() {
+		return "BuildingCard{" +
+				"costs=" + costs +
+				", permanentEffectActivationCost=" + permanentEffectActivationCost +
+				'}';
 	}
 }

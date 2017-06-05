@@ -127,35 +127,13 @@ public class VentureCard extends DevelopmentCard
 		return true;
 	}
 
-
-
-	@Override
-	public void useImmediateEffect(Player player) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void usePermanentEffect(Player player) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	//TODO: Rifare con la nuova logica implementata
 	@Override
 	public String toString() {
-		
-		String output = this.getName() + " is a Venture Card.\n Its activation cost are ";
-		
-		for (Asset a: this.resourcesCost){ 
-			 output += a.toString() + "\n";
-			 if (this.requiredCostChoice && !(a.equals(resourcesCost.get(resourcesCost.size()-1))))
-			 {
-				 output += "or";
-			 }
-		}
-		
-		output += super.toString();
-		
-		return output;
+		return "VentureCard{" +
+				"requiredCostChoice=" + requiredCostChoice +
+				", militaryPointsRequired=" + militaryPointsRequired +
+				", militaryPointsCost=" + militaryPointsCost +
+				", resourcesCost=" + resourcesCost +
+				'}';
 	}
 }
