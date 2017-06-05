@@ -76,7 +76,7 @@ public class GameMatch implements Runnable
 
 		System.out.println("Inizio partita");
 		
-		//startGame();
+		startGame();
 
 		endGame();
 	}
@@ -89,7 +89,7 @@ public class GameMatch implements Runnable
 
 		loadExcommunicationCards();
 
-		//loadBonusTile
+		loadBonusTiles();
 
         //int turnNumber = 6 *
 
@@ -181,7 +181,7 @@ public class GameMatch implements Runnable
 
 	private void loadCards()
 	{
-		String path = BOARD_PATH + "VentureCards.json";
+		String path = BOARD_PATH + "cards.json";
 
 		String cardString = fileLoader(path);
 

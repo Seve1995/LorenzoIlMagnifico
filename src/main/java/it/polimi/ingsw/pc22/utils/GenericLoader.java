@@ -79,11 +79,14 @@ public class GenericLoader
 
             addAssetForEveryAssetOrCard.setGainedAsset(asset);
 
-            String paidCardTypeValue = jsonEffect.getString("paidCardType");
+            if (!jsonEffect.isNull("paidCardType"))
+            {
+                String paidCardTypeValue = jsonEffect.getString("paidCardType");
 
-            CardTypeEnum type = CardTypeEnum.valueOf(paidCardTypeValue);
+                CardTypeEnum type = CardTypeEnum.valueOf(paidCardTypeValue);
 
-            addAssetForEveryAssetOrCard.setGainedCardType(type);
+                addAssetForEveryAssetOrCard.setGainedCardType(type);
+            }
 
             if (jsonEffect.isNull("paidAsset")) return;
 
@@ -105,11 +108,14 @@ public class GenericLoader
 
             fromAssetToAssetOrEffect.setPaiedAssets(paidAssets);
 
-            JSONArray gainedAssetsJson = jsonEffect.getJSONArray("gainedAssets");
+            if (!jsonEffect.isNull("gainedAssets"))
+            {
+                JSONArray gainedAssetsJson = jsonEffect.getJSONArray("gainedAssets");
 
-            List<Asset> gainAssets = loadAssetList(gainedAssetsJson);
+                List<Asset> gainAssets = loadAssetList(gainedAssetsJson);
 
-            fromAssetToAssetOrEffect.setGainedAssets(gainAssets);
+                fromAssetToAssetOrEffect.setGainedAssets(gainAssets);
+            }
 
             boolean onlyOneAsset = jsonEffect.getBoolean("onlyOneAsset");
 

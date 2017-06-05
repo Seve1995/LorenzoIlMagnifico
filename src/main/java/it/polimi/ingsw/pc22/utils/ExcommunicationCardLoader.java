@@ -18,7 +18,7 @@ public class ExcommunicationCardLoader extends GenericLoader
     {
         List<ExcommunicationCard> cards = new ArrayList<>();
 
-        JSONArray jsonCards = jsonCardsObject.getJSONArray("cards");
+        JSONArray jsonCards = jsonCardsObject.getJSONArray("ExcommunicationCards");
         try
         {
             for(int i  = 0; i < jsonCards.length(); i++)

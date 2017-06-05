@@ -15,9 +15,6 @@ public class GameBoard
 		
 	}
 
-	
-	
-
 	public Tower[] getTower() {
 		return tower;
 	}

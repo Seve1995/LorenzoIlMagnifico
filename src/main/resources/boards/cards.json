@@ -1,0 +1,3333 @@
+{
+  "cards": [
+    {
+      "name": "Commercial Hub",
+      "cardNumber": 1,
+      "cardType": "TERRITORY",
+      "roundNumber": 1,
+      "permanentEffectActivationCost": 1,
+      "immediateEffect": null,
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "COIN",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "Woods",
+      "cardNumber": 2,
+      "cardType": "TERRITORY",
+      "roundNumber": 1,
+      "permanentEffectActivationCost": 2,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "WOOD",
+            "value": 1
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "WOOD",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "Village",
+      "cardNumber": 3,
+      "cardType": "TERRITORY",
+      "roundNumber": 1,
+      "permanentEffectActivationCost": 3,
+      "immediateEffect": null,
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "COIN",
+            "value": 1
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "SERVANT",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "Gravel Pit",
+      "cardNumber": 4,
+      "cardType": "TERRITORY",
+      "roundNumber": 1,
+      "permanentEffectActivationCost": 4,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "STONE",
+            "value": 2
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "STONE",
+            "value": 2
+          }
+        }
+      ]
+    },
+    {
+      "name": "Forest",
+      "cardNumber": 5,
+      "cardType": "TERRITORY",
+      "roundNumber": 1,
+      "permanentEffectActivationCost": 5,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "WOOD",
+            "value": 1
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "WOOD",
+            "value": 3
+          }
+        }
+      ]
+    },
+    {
+      "name": "Monastery",
+      "cardNumber": 6,
+      "cardType": "TERRITORY",
+      "roundNumber": 1,
+      "permanentEffectActivationCost": 6,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 2
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "SERVANT",
+            "value": 1
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 1
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "STONE",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "Citadel",
+      "cardNumber": 7,
+      "cardType": "TERRITORY",
+      "roundNumber": 1,
+      "permanentEffectActivationCost": 5,
+      "immediateEffect": null,
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 2
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "STONE",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "City",
+      "cardNumber": 8,
+      "cardType": "TERRITORY",
+      "roundNumber": 1,
+      "permanentEffectActivationCost": 6,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "COIN",
+            "value": 3
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "PickOneCouncilPrivilege"
+        }
+      ]
+    },
+    {
+      "name": "Gold Mine",
+      "cardNumber": 9,
+      "cardType": "TERRITORY",
+      "roundNumber": 2,
+      "permanentEffectActivationCost": 1,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "COIN",
+            "value": 1
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "COIN",
+            "value": 2
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mountain Town",
+      "cardNumber": 10,
+      "cardType": "TERRITORY",
+      "roundNumber": 2,
+      "permanentEffectActivationCost": 3,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "SERVANT",
+            "value": 1
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 1
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "WOOD",
+            "value": 2
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mining Town",
+      "cardNumber": 11,
+      "cardType": "TERRITORY",
+      "roundNumber": 2,
+      "permanentEffectActivationCost": 4,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "SERVANT",
+            "value": 2
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "STONE",
+            "value": 1
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "SERVANT",
+            "value": 1
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "STONE",
+            "value": 2
+          }
+        }
+      ]
+    },
+    {
+      "name": "Rock Pit",
+      "cardNumber": 12,
+      "cardType": "TERRITORY",
+      "roundNumber": 2,
+      "permanentEffectActivationCost": 3,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "WOOD",
+            "value": 1
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "STONE",
+            "value": 3
+          }
+        }
+      ]
+    },
+    {
+      "name": "Estate",
+      "cardNumber": 13,
+      "cardType": "TERRITORY",
+      "roundNumber": 2,
+      "permanentEffectActivationCost": 4,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "SERVANT",
+            "value": 2
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "WOOD",
+            "value": 1
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "COIN",
+            "value": 1
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "WOOD",
+            "value": 2
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hermitage",
+      "cardNumber": 14,
+      "cardType": "TERRITORY",
+      "roundNumber": 2,
+      "permanentEffectActivationCost": 2,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 1
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "Manor House",
+      "cardNumber": 15,
+      "cardType": "TERRITORY",
+      "roundNumber": 2,
+      "permanentEffectActivationCost": 5,
+      "immediateEffect": null,
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 2
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "SERVANT",
+            "value": 2
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dukedom",
+      "cardNumber": 16,
+      "cardType": "TERRITORY",
+      "roundNumber": 2,
+      "permanentEffectActivationCost": 6,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "COIN",
+            "value": 4
+          }
+        }
+        ],
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "COIN",
+            "value": 1
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "WOOD",
+            "value": 2
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "STONE",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "Trading Town",
+      "cardNumber": 17,
+      "cardType": "TERRITORY",
+      "roundNumber": 3,
+      "permanentEffectActivationCost": 1,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "COIN",
+            "value": 1
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "SERVANT",
+            "value": 1
+          }
+        }
+        ],
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "COIN",
+            "value": 3
+          }
+        }
+      ]
+    },
+    {
+      "name": "Farm",
+      "cardNumber": 18,
+      "cardType": "TERRITORY",
+      "roundNumber": 3,
+      "permanentEffectActivationCost": 3,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 1
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "WOOD",
+            "value": 1
+          }
+        }
+        ],
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 2
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "WOOD",
+            "value": 2
+          }
+        }
+      ]
+    },
+    {
+      "name": "Colony",
+      "cardNumber": 19,
+      "cardType": "TERRITORY",
+      "roundNumber": 3,
+      "permanentEffectActivationCost": 5,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 2
+          }
+        }
+        ],
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 4
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "WOOD",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "Marble Pit",
+      "cardNumber": 20,
+      "cardType": "TERRITORY",
+      "roundNumber": 3,
+      "permanentEffectActivationCost": 5,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 3
+          }
+        }
+        ],
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 1
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "STONE",
+            "value": 2
+          }
+        }
+      ]
+    },
+    {
+      "name": "Province",
+      "cardNumber": 21,
+      "cardType": "TERRITORY",
+      "roundNumber": 3,
+      "permanentEffectActivationCost": 6,
+      "immediateEffect": [
+        {
+          "name": "PickOneCouncilPrivilege"
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "STONE",
+            "value": 1
+          }
+        }
+        ],
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 4
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "STONE",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sanctuary",
+      "cardNumber": 22,
+      "cardType": "TERRITORY",
+      "roundNumber": 3,
+      "permanentEffectActivationCost": 1,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 1
+          }
+        }
+        ],
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "COIN",
+            "value": 1
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "Castle",
+      "cardNumber": 23,
+      "cardType": "TERRITORY",
+      "roundNumber": 3,
+      "permanentEffectActivationCost": 4,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 2
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "COIN",
+            "value": 2
+          }
+    }
+        ],
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 3
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "SERVANT",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fortified Town",
+      "cardNumber": 24,
+      "cardType": "TERRITORY",
+      "roundNumber": 3,
+      "permanentEffectActivationCost": 2,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 2
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "SERVANT",
+            "value": 1
+          }
+        }
+        ],
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 1
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "SERVANT",
+            "value": 2
+          }
+        }
+      ]
+    },
+    {
+      "name": "Warlord",
+      "cardNumber": 49,
+      "cardType": "CHARACTER",
+      "roundNumber": 1,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 2
+      },
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 3
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddTowerCardDiscount",
+          "cardType": "TERRITORY",
+          "diceValueDiscount": 2,
+          "assetDiscounts": null,
+          "onlyOneAsset": false
+        }
+      ]
+    },
+    {
+      "name": "Stonemason",
+      "cardNumber": 50,
+      "cardType": "CHARACTER",
+      "roundNumber": 1,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 4
+      },
+      "immediateEffect": null,
+      "permanentEffect": [
+        {
+          "name": "AddTowerCardDiscount",
+          "cardType": "BUILDING",
+          "diceValueDiscount": 2,
+          "assetDiscounts": [
+            {
+              "type": "WOOD",
+              "value": 1
+            },
+            {
+              "type": "STONE",
+              "value": 1
+            }
+          ],
+          "onlyOneAsset": true
+        }
+      ]
+    },
+    {
+      "name": "Dame",
+      "cardNumber": 51,
+      "cardType": "CHARACTER",
+      "roundNumber": 1,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 4
+      },
+      "immediateEffect": null,
+      "permanentEffect": [
+        {
+          "name": "AddTowerCardDiscount",
+          "cardType": "CHARACTER",
+          "diceValueDiscount": 2,
+          "assetDiscounts": [
+            {
+              "type": "COIN",
+              "value": 1
+            }
+          ],
+          "onlyOneAsset": false
+        }
+      ]
+    },
+    {
+      "name": "Knight",
+      "cardNumber": 52,
+      "cardType": "CHARACTER",
+      "roundNumber": 1,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 2
+      },
+      "immediateEffect": [
+        {
+          "name" : "PickOneCouncilPrivilege"
+        }],
+      "permanentEffect": [
+        {
+          "name": "AddTowerCardDiscount",
+          "cardType": "VENTURE",
+          "diceValueDiscount": 2,
+          "assetDiscounts": null,
+          "onlyOneAsset": false
+        }
+      ]
+    },
+    {
+      "name": "Farmer",
+      "cardNumber": 53,
+      "cardType": "CHARACTER",
+      "roundNumber": 1,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 3
+      },
+      "immediateEffect": null,
+      "permanentEffect": [
+        {
+          "name" : "AddHarvestValueModifier",
+          "value" : 2
+        }
+      ]
+    },
+    {
+      "name": "Artisan",
+      "cardNumber": 54,
+      "cardType": "CHARACTER",
+      "roundNumber": 1,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 3
+      },
+      "immediateEffect": null,
+      "permanentEffect": [
+        {
+          "name" : "AddProductionValueModifier",
+          "value" : 2
+        }
+      ]
+    },
+    {
+      "name": "Preacher",
+      "cardNumber": 55,
+      "cardType": "CHARACTER",
+      "roundNumber": 1,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 2
+      },
+      "immediateEffect": [{
+        "name": "AddAsset",
+        "asset": {
+          "type": "FAITHPOINT",
+          "value": 4
+        }
+      }],
+      "permanentEffect": [
+        {
+          "name" : "RemoveBonusesFromTowers"
+        }
+      ]
+    },
+    {
+      "name": "Abbess",
+      "cardNumber": 56,
+      "cardType": "CHARACTER",
+      "roundNumber": 1,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 3
+      },
+      "immediateEffect": [
+        {
+          "name": "PickTowerCard",
+          "floor": 0,
+          "cardType": "ANY",
+          "diceValue": 4,
+          "assetsDiscount": null
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 1
+          }
+        }],
+      "permanentEffect": null
+    },
+    {
+      "name": "Captain",
+      "cardNumber": 57,
+      "cardType": "CHARACTER",
+      "roundNumber": 2,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 4
+      },
+      "immediateEffect": [
+        {
+          "name": "PickTowerCard",
+          "floor": 0,
+          "cardType": "TERRITORY",
+          "diceValue": 6,
+          "assetsDiscount": null
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 2
+          }
+        }],
+      "permanentEffect": null
+    },
+    {
+      "name": "Captain",
+      "cardNumber": 58,
+      "cardType": "CHARACTER",
+      "roundNumber": 2,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 4
+      },
+      "immediateEffect": [
+        {
+          "name": "PickTowerCard",
+          "floor": 0,
+          "cardType": "BUILDING",
+          "diceValue": 6,
+          "assetsDiscount": [
+            {
+              "type": "WOOD",
+              "value": 1
+            },
+            {
+              "type": "STONE",
+              "value": 1
+            }]
+        }
+      ],
+      "permanentEffect": null
+    },
+    {
+      "name": "Patron",
+      "cardNumber": 59,
+      "cardType": "CHARACTER",
+      "roundNumber": 2,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 3
+      },
+      "immediateEffect": [
+        {
+          "name": "PickTowerCard",
+          "floor": 0,
+          "cardType": "CHARACTER",
+          "diceValue": 6,
+          "assetsDiscount": [
+            {
+              "type": "COIN",
+              "value": 2
+            }]
+        }
+      ],
+      "permanentEffect": null
+    },
+    {
+      "name": "Hero",
+      "cardNumber": 60,
+      "cardType": "CHARACTER",
+      "roundNumber": 2,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 4
+      },
+      "immediateEffect": [
+        {
+          "name": "PickTowerCard",
+          "floor": 0,
+          "cardType": "VENTURE",
+          "diceValue": 6,
+          "assetsDiscount": null
+        },
+        {
+          "name": "PickOneCouncilPrivilege"
+        }
+      ],
+      "permanentEffect": null
+    },
+    {
+      "name": "Peasant",
+      "cardNumber": 61,
+      "cardType": "CHARACTER",
+      "roundNumber": 2,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 4
+      },
+      "immediateEffect": null,
+      "permanentEffect": [{
+        "name" : "AddHarvestValueModifier",
+        "value" : 3
+      }]
+    },
+    {
+      "name": "Scholar",
+      "cardNumber": 62,
+      "cardType": "CHARACTER",
+      "roundNumber": 2,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 4
+      },
+      "immediateEffect": null,
+      "permanentEffect": [{
+        "name" : "AddProductionValueModifier",
+        "value" : 3
+      }]
+    },
+    {
+      "name": "Papal Messenger",
+      "cardNumber": 63,
+      "cardType": "CHARACTER",
+      "roundNumber": 2,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 5
+      },
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 3
+          }
+        }],
+      "permanentEffect": null
+    },
+    {
+      "name": "Royal Messenger",
+      "cardNumber": 64,
+      "cardType": "CHARACTER",
+      "roundNumber": 2,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 5
+      },
+      "immediateEffect": [
+        {
+          "name": "PickThreeCouncilPrivilege"
+        }],
+      "permanentEffect": null
+    },
+    {
+      "name": "Noble",
+      "cardNumber": 65,
+      "cardType": "CHARACTER",
+      "roundNumber": 3,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 6
+      },
+      "immediateEffect": [
+        {
+          "name": "AddAssetForEveryAssetOrCard",
+          "paidAsset": null,
+          "paidCardType": "TERRITORY",
+          "gainedAsset": {
+            "type": "VICTORYPOINT",
+            "value": 2
+          }
+        }],
+      "permanentEffect": null
+    },
+    {
+      "name": "Governor",
+      "cardNumber": 66,
+      "cardType": "CHARACTER",
+      "roundNumber": 3,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 6
+      },
+      "immediateEffect": [
+        {
+          "name": "AddAssetForEveryAssetOrCard",
+          "paidAsset": null,
+          "paidCardType": "BUILDING",
+          "gainedAsset": {
+            "type": "VICTORYPOINT",
+            "value": 2
+          }
+        }],
+      "permanentEffect": null
+    },
+    {
+      "name": "Paramour",
+      "cardNumber": 67,
+      "cardType": "CHARACTER",
+      "roundNumber": 3,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 7
+      },
+      "immediateEffect": [
+        {
+          "name": "AddAssetForEveryAssetOrCard",
+          "paidAsset": null,
+          "paidCardType": "CHARACTER",
+          "gainedAsset": {
+            "type": "VICTORYPOINT",
+            "value": 2
+          }
+        }],
+      "permanentEffect": null
+    },
+    {
+      "name": "Herald",
+      "cardNumber": 68,
+      "cardType": "CHARACTER",
+      "roundNumber": 3,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 6
+      },
+      "immediateEffect": [
+        {
+          "name": "AddAssetForEveryAssetOrCard",
+          "paidAsset": null,
+          "paidCardType": "VENTURE",
+          "gainedAsset": {
+            "type": "VICTORYPOINT",
+            "value": 2
+          }
+        }],
+      "permanentEffect": null
+    },
+    {
+      "name": "Cardinal",
+      "cardNumber": 69,
+      "cardType": "CHARACTER",
+      "roundNumber": 3,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 4
+      },
+      "immediateEffect": [
+        {
+          "name": "DoHarvestAction",
+          "value": 4
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 2
+          }
+        }],
+      "permanentEffect": null
+    },
+    {
+      "name": "Bishop",
+      "cardNumber": 70,
+      "cardType": "CHARACTER",
+      "roundNumber": 3,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 5
+      },
+      "immediateEffect": [
+        {
+          "name": "DoProductionAction",
+          "value": 4
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 1
+          }
+        }],
+      "permanentEffect": null
+    },
+    {
+      "name": "General",
+      "cardNumber": 71,
+      "cardType": "CHARACTER",
+      "roundNumber": 3,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 5
+      },
+      "immediateEffect": [
+        {
+          "name": "AddAssetForEveryAssetOrCard",
+          "paidAsset": {
+            "type": "MILITARYPOINT",
+            "value": 2
+          },
+          "paidCardType": null,
+          "gainedAsset": {
+            "type": "VICTORYPOINT",
+            "value": 2
+          }
+        }],
+      "permanentEffect": null
+    },
+    {
+      "name": "Ambassador",
+      "cardNumber": 72,
+      "cardType": "CHARACTER",
+      "roundNumber": 3,
+      "coinsCost": {
+        "type": "COIN",
+        "value": 6
+      },
+      "immediateEffect": [
+        {
+          "name": "PickTowerCard",
+          "floor": 0,
+          "cardType": "ANY",
+          "diceValue": 7,
+          "assetsDiscount": null
+        },
+        {
+          "name": "PickOneCouncilPrivilege"
+        }],
+      "permanentEffect": null
+    },
+    {
+      "name": "Mint",
+      "cardNumber": 25,
+      "cardType": "BUILDING",
+      "roundNumber": 1,
+      "permanentEffectChoice": false,
+      "permanentEffectActivationCost": 5,
+      "costs": [
+        {
+          "type": "WOOD",
+          "value": 1
+        },
+        {
+          "type": "STONE",
+          "value": 3
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 5
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddAssetForEveryAssetOrCard",
+          "paidAsset": null,
+          "paidCardType": "BUILDING",
+          "gainedAsset": {
+            "type": "COIN",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tax Office",
+      "cardNumber": 26,
+      "cardType": "BUILDING",
+      "roundNumber": 1,
+      "permanentEffectChoice": false,
+      "permanentEffectActivationCost": 5,
+      "costs": [
+        {
+          "type": "WOOD",
+          "value": 3
+        },
+        {
+          "type": "STONE",
+          "value": 1
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 5
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddAssetForEveryAssetOrCard",
+          "paidAsset": null,
+          "paidCardType": "TERRITORY",
+          "gainedAsset": {
+            "type": "COIN",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "Triumphal Arch",
+      "cardNumber": 27,
+      "cardType": "BUILDING",
+      "roundNumber": 1,
+      "permanentEffectChoice": false,
+      "permanentEffectActivationCost": 6,
+      "costs": [
+        {
+          "type": "COIN",
+          "value": 2
+        },
+        {
+          "type": "STONE",
+          "value": 2
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 6
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddAssetForEveryAssetOrCard",
+          "paidAsset": null,
+          "paidCardType": "BUILDING",
+          "gainedAsset": {
+            "type": "VICTORYPOINT",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "Theater",
+      "cardNumber": 28,
+      "cardType": "BUILDING",
+      "roundNumber": 1,
+      "permanentEffectChoice": false,
+      "permanentEffectActivationCost": 6,
+      "costs": [
+        {
+          "type": "COIN",
+          "value": 2
+        },
+        {
+          "type": "WOOD",
+          "value": 2
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 6
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddAssetForEveryAssetOrCard",
+          "paidAsset": null,
+          "paidCardType": "CHARACTER",
+          "gainedAsset": {
+            "type": "VICTORYPOINT",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "Carpenter's Shop",
+      "cardNumber": 29,
+      "cardType": "BUILDING",
+      "roundNumber": 1,
+      "permanentEffectChoice": true,
+      "permanentEffectActivationCost": 4,
+      "costs": [
+        {
+          "type": "COIN",
+          "value": 1
+        },
+        {
+          "type": "WOOD",
+          "value": 2
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 3
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "FromAssetToAssetOrEffect",
+          "paidAssets": [
+            {
+              "type": "WOOD",
+              "value": 1
+            }
+          ],
+          "gainedAssets": [
+            {
+              "type": "COIN",
+              "value": 3
+            }
+          ],
+          "onlyOneAsset": false,
+          "gainedEffect": null
+        },
+        {
+          "name": "FromAssetToAssetOrEffect",
+          "paidAssets": [
+            {
+              "type": "WOOD",
+              "value": 2
+            }
+          ],
+          "gainedAssets": [
+            {
+              "type": "COIN",
+              "value": 5
+            }
+          ],
+          "onlyOneAsset": false,
+          "gainedEffect": null
+        }
+      ]
+    },
+    {
+      "name": "Stonemason's Shop",
+      "cardNumber": 30,
+      "cardType": "BUILDING",
+      "roundNumber": 1,
+      "permanentEffectChoice": true,
+      "permanentEffectActivationCost": 3,
+      "costs": [
+        {
+          "type": "COIN",
+          "value": 1
+        },
+        {
+          "type": "STONE",
+          "value": 2
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 2
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "FromAssetToAssetOrEffect",
+          "paidAssets": [
+            {
+              "type": "STONE",
+              "value": 1
+            }
+          ],
+          "gainedAssets": [
+            {
+              "type": "COIN",
+              "value": 3
+            }
+          ],
+          "onlyOneAsset": false,
+          "gainedEffect": null
+        },
+        {
+          "name": "FromAssetToAssetOrEffect",
+          "paidAssets": [
+            {
+              "type": "STONE",
+              "value": 2
+            }
+          ],
+          "gainedAssets": [
+            {
+              "type": "COIN",
+              "value": 5
+            }
+          ],
+          "onlyOneAsset": false,
+          "gainedEffect": null
+        }
+      ]
+    },
+    {
+      "name": "Chapel",
+      "cardNumber": 31,
+      "cardType": "BUILDING",
+      "roundNumber": 1,
+      "permanentEffectChoice": false,
+      "permanentEffectActivationCost": 2,
+      "costs": [
+        {
+          "type": "WOOD",
+          "value": 2
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 1
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "FromAssetToAssetOrEffect",
+          "paidAssets": [
+            {
+              "type": "COIN",
+              "value": 1
+            }
+          ],
+          "gainedAssets": [
+            {
+              "type": "FAITHPOINT",
+              "value": 1
+            }
+          ],
+          "onlyOneAsset": false,
+          "gainedEffect": null
+        }
+      ]
+    },
+    {
+      "name": "Residence",
+      "cardNumber": 32,
+      "cardType": "BUILDING",
+      "roundNumber": 1,
+      "permanentEffectChoice": false,
+      "permanentEffectActivationCost": 1,
+      "costs": [
+        {
+          "type": "STONE",
+          "value": 2
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 1
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "FromAssetToAssetOrEffect",
+          "paidAssets": [
+            {
+              "type": "COIN",
+              "value": 1
+            }
+          ],
+          "gainedAssets": null,
+          "onlyOneAsset": false,
+          "gainedEffect": {
+            "name": "PickOneCouncilPrivilege"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Marketplace",
+      "cardNumber": 33,
+      "cardType": "BUILDING",
+      "roundNumber": 2,
+      "permanentEffectChoice": false,
+      "permanentEffectActivationCost": 3,
+      "costs": [
+        {
+          "type": "WOOD",
+          "value": 2
+        },
+        {
+          "type": "STONE",
+          "value": 1
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 3
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "FromAssetToAssetOrEffect",
+          "paidAssets": [
+            {
+              "type": "COIN",
+              "value": 3
+            }
+          ],
+          "gainedAssets": [
+            {
+              "type": "WOOD",
+              "value": 2
+            },
+            {
+              "type": "STONE",
+              "value": 2
+            }
+          ],
+          "onlyOneAsset": false,
+          "gainedEffect": null
+        }
+      ]
+    },
+    {
+      "name": "Treasury",
+      "cardNumber": 34,
+      "cardType": "BUILDING",
+      "roundNumber": 2,
+      "permanentEffectChoice": true,
+      "permanentEffectActivationCost": 3,
+      "costs": [
+        {
+          "type": "WOOD",
+          "value": 3
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 4
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "FromAssetToAssetOrEffect",
+          "paidAssets": [
+            {
+              "type": "COIN",
+              "value": 1
+            }
+          ],
+          "gainedAssets": [
+            {
+              "type": "VICTORYPOINT",
+              "value": 3
+            }
+          ],
+          "onlyOneAsset": false,
+          "gainedEffect": null
+        },
+        {
+          "name": "FromAssetToAssetOrEffect",
+          "paidAssets": [
+            {
+              "type": "COIN",
+              "value": 2
+            }
+          ],
+          "gainedAssets": [
+            {
+              "type": "VICTORYPOINT",
+              "value": 5
+            }
+          ],
+          "onlyOneAsset": false,
+          "gainedEffect": null
+        }
+      ]
+    },
+    {
+      "name": "Painter's Guild",
+      "cardNumber": 35,
+      "cardType": "BUILDING",
+      "roundNumber": 2,
+      "permanentEffectChoice": false,
+      "permanentEffectActivationCost": 4,
+      "costs": [
+        {
+          "type": "WOOD",
+          "value": 4
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 5
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "FromAssetToAssetOrEffect",
+          "paidAssets": [
+            {
+              "type": "WOOD",
+              "value": 1
+            }
+          ],
+          "gainedAssets": [
+            {
+              "type": "VICTORYPOINT",
+              "value": 3
+            }
+          ],
+          "onlyOneAsset": false,
+          "gainedEffect": null
+        },
+        {
+          "name": "FromAssetToAssetOrEffect",
+          "paidAssets": [
+            {
+              "type": "WOOD",
+              "value": 3
+            }
+          ],
+          "gainedAssets": [
+            {
+              "type": "VICTORYPOINT",
+              "value": 7
+            }
+          ],
+          "onlyOneAsset": false,
+          "gainedEffect": null
+        }
+      ]
+    },
+    {
+      "name": "Sculptor's Guild",
+      "cardNumber": 36,
+      "cardType": "BUILDING",
+      "roundNumber": 2,
+      "permanentEffectChoice": false,
+      "permanentEffectActivationCost": 5,
+      "costs": [
+        {
+          "type": "STONE",
+          "value": 4
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 6
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "FromAssetToAssetOrEffect",
+          "paidAssets": [
+            {
+              "type": "STONE",
+              "value": 1
+            }
+          ],
+          "gainedAssets": [
+            {
+              "type": "VICTORYPOINT",
+              "value": 3
+            }
+          ],
+          "onlyOneAsset": false,
+          "gainedEffect": null
+        },
+        {
+          "name": "FromAssetToAssetOrEffect",
+          "paidAssets": [
+            {
+              "type": "STONE",
+              "value": 3
+            }
+          ],
+          "gainedAssets": [
+            {
+              "type": "VICTORYPOINT",
+              "value": 7
+            }
+          ],
+          "onlyOneAsset": false,
+          "gainedEffect": null
+        }
+      ]
+    },
+    {
+      "name": "Stonemasons' Guild",
+      "cardNumber": 37,
+      "cardType": "BUILDING",
+      "roundNumber": 2,
+      "permanentEffectChoice": false,
+      "permanentEffectActivationCost": 4,
+      "costs": [
+        {
+          "type": "WOOD",
+          "value": 1
+        },
+        {
+          "type": "STONE",
+          "value": 2
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 4
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "FromAssetToAssetOrEffect",
+          "paidAssets": [
+            {
+              "type": "SERVANT",
+              "value": 1
+            },
+            {
+              "type": "WOOD",
+              "value": 1
+            },
+            {
+              "type": "STONE",
+              "value": 1
+            }
+          ],
+          "gainedAssets": [
+            {
+              "type": "VICTORYPOINT",
+              "value": 6
+            }
+          ],
+          "onlyOneAsset": false,
+          "gainedEffect": null
+        }
+      ]
+    },
+    {
+      "name": "Bapistery",
+      "cardNumber": 38,
+      "cardType": "BUILDING",
+      "roundNumber": 2,
+      "permanentEffectChoice": false,
+      "permanentEffectActivationCost": 2,
+      "costs": [
+        {
+          "type": "STONE",
+          "value": 3
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 2
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 1
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "FromAssetToAssetOrEffect",
+          "paidAssets": [
+            {
+              "type": "FAITHPOINT",
+              "value": 1
+            }
+          ],
+          "gainedAssets": [
+            {
+              "type": "COIN",
+              "value": 2
+            },
+            {
+              "type": "VICTORYPOINT",
+              "value": 2
+            }
+          ],
+          "onlyOneAsset": false,
+          "gainedEffect": null
+        }
+      ]
+    },
+    {
+      "name": "Barracks",
+      "cardNumber": 39,
+      "cardType": "BUILDING",
+      "roundNumber": 2,
+      "permanentEffectChoice": false,
+      "permanentEffectActivationCost": 1,
+      "costs": [
+        {
+          "type": "WOOD",
+          "value": 1
+        },
+        {
+          "type": "STONE",
+          "value": 1
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 3
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "FromAssetToAssetOrEffect",
+          "paidAssets": [
+            {
+              "type": "SERVANT",
+              "value": 1
+            }
+          ],
+          "gainedAssets": [
+            {
+              "type": "MILITARYPOINT",
+              "value": 3
+            }
+          ],
+          "onlyOneAsset": false,
+          "gainedEffect": null
+        }
+      ]
+    },
+    {
+      "name": "Stronghold",
+      "cardNumber": 40,
+      "cardType": "BUILDING",
+      "roundNumber": 2,
+      "permanentEffectChoice": false,
+      "permanentEffectActivationCost": 6,
+      "costs": [
+        {
+          "type": "COIN",
+          "value": 2
+        },
+        {
+          "type": "WOOD",
+          "value": 2
+        },
+        {
+          "type": "STONE",
+          "value": 2
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 8
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 2
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 2
+          }
+        }
+      ]
+    },
+    {
+      "name": "Stronghold",
+      "cardNumber": 41,
+      "cardType": "BUILDING",
+      "roundNumber": 3,
+      "permanentEffectChoice": false,
+      "permanentEffectActivationCost": 2,
+      "costs": [
+        {
+          "type": "COIN",
+          "value": 3
+        },
+        {
+          "type": "WOOD",
+          "value": 1
+        },
+        {
+          "type": "STONE",
+          "value": 3
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 7
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "COIN",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fair",
+      "cardNumber": 42,
+      "cardType": "BUILDING",
+      "roundNumber": 3,
+      "permanentEffectChoice": false,
+      "permanentEffectActivationCost": 4,
+      "costs": [
+        {
+          "type": "COIN",
+          "value": 4
+        },
+        {
+          "type": "WOOD",
+          "value": 3
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 8
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "FromAssetToAssetOrEffect",
+          "paidAssets": [
+            {
+              "type": "COIN",
+              "value": 4
+            }
+          ],
+          "gainedAssets": [
+            {
+              "type": "WOOD",
+              "value": 3
+            },
+            {
+              "type": "STONE",
+              "value": 3
+            }
+          ],
+          "onlyOneAsset": false,
+          "gainedEffect": null
+        }
+      ]
+    },
+    {
+      "name": "Garden",
+      "cardNumber": 43,
+      "cardType": "BUILDING",
+      "roundNumber": 3,
+      "permanentEffectChoice": false,
+      "permanentEffectActivationCost": 1,
+      "costs": [
+        {
+          "type": "SERVANT",
+          "value": 2
+        },
+        {
+          "type": "WOOD",
+          "value": 4
+        },
+        {
+          "type": "STONE",
+          "value": 2
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 10
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 3
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fortress",
+      "cardNumber": 44,
+      "cardType": "BUILDING",
+      "roundNumber": 3,
+      "permanentEffectChoice": false,
+      "permanentEffectActivationCost": 5,
+      "costs": [
+        {
+          "type": "COIN",
+          "value": 2
+        },
+        {
+          "type": "WOOD",
+          "value": 2
+        },
+        {
+          "type": "STONE",
+          "value": 4
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 9
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 3
+          }
+        },
+        {
+          "name": "PickOneCouncilPrivilege"
+        }
+      ]
+    },
+    {
+      "name": "Palace",
+      "cardNumber": 45,
+      "cardType": "BUILDING",
+      "roundNumber": 3,
+      "permanentEffectChoice": false,
+      "permanentEffectActivationCost": 6,
+      "costs": [
+        {
+          "type": "COIN",
+          "value": 3
+        },
+        {
+          "type": "WOOD",
+          "value": 3
+        },
+        {
+          "type": "STONE",
+          "value": 1
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 9
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "FromAssetToAssetOrEffect",
+          "paidAssets": [
+            {
+              "type": "COIN",
+              "value": 1
+            }
+          ],
+          "gainedAssets": [
+            {
+              "type": "SERVANT",
+              "value": 2
+            },
+            {
+              "type": "VICTORYPOINT",
+              "value": 4
+            }
+          ],
+          "onlyOneAsset": false,
+          "gainedEffect": null
+        }
+      ]
+    },
+    {
+      "name": "Church",
+      "cardNumber": 46,
+      "cardType": "BUILDING",
+      "roundNumber": 3,
+      "permanentEffectChoice": false,
+      "permanentEffectActivationCost": 1,
+      "costs": [
+        {
+          "type": "WOOD",
+          "value": 1
+        },
+        {
+          "type": "STONE",
+          "value": 4
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 5
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 1
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "FromAssetToAssetOrEffect",
+          "paidAssets": [
+            {
+              "type": "WOOD",
+              "value": 1
+            },
+            {
+              "type": "STONE",
+              "value": 1
+            }
+          ],
+          "gainedAssets": [
+            {
+              "type": "FAITHPOINT",
+              "value": 2
+            }
+          ],
+          "onlyOneAsset": true,
+          "gainedEffect": null
+        }
+      ]
+    },
+    {
+      "name": "Military Academy",
+      "cardNumber": 47,
+      "cardType": "BUILDING",
+      "roundNumber": 3,
+      "permanentEffectChoice": false,
+      "permanentEffectActivationCost": 3,
+      "costs": [
+        {
+          "type": "SERVANT",
+          "value": 1
+        },
+        {
+          "type": "WOOD",
+          "value": 2
+        },
+        {
+          "type": "STONE",
+          "value": 2
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 7
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "FromAssetToAssetOrEffect",
+          "paidAssets": [
+            {
+              "type": "SERVANT",
+              "value": 1
+            }
+          ],
+          "gainedAssets": [
+            {
+              "type": "MILITARYPOINT",
+              "value": 3
+            },
+            {
+              "type": "VICTORYPOINT",
+              "value": 1
+            }
+          ],
+          "onlyOneAsset": false,
+          "gainedEffect": null
+        }
+      ]
+    },
+    {
+      "name": "Cathedral",
+      "cardNumber": 48,
+      "cardType": "BUILDING",
+      "roundNumber": 3,
+      "permanentEffectChoice": false,
+      "permanentEffectActivationCost": 2,
+      "costs": [
+        {
+          "type": "WOOD",
+          "value": 4
+        },
+        {
+          "type": "STONE",
+          "value": 4
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 7
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 3
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hiring Recruits",
+      "cardNumber": 73,
+      "cardType": "VENTURE",
+      "roundNumber": 1,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "costs": [
+        {
+          "type": "COIN",
+          "value": 4
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 5
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 4
+          }
+        }
+      ]
+    },
+    {
+      "name": "Repairing the Church",
+      "cardNumber": 74,
+      "cardType": "VENTURE",
+      "roundNumber": 1,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "costs": [
+        {
+          "type": "COIN",
+          "value": 1
+        },
+        {
+          "type": "WOOD",
+          "value": 1
+        },
+        {
+          "type": "STONE",
+          "value": 1
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 1
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Building the Walls",
+      "cardNumber": 75,
+      "cardType": "VENTURE",
+      "roundNumber": 1,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "costs": [
+        {
+          "type": "STONE",
+          "value": 3
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 2
+          }
+        },
+        {
+          "name": "PickOneCouncilPrivilege"
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 3
+          }
+        }
+      ]
+    },
+    {
+      "name": "Raising a Statue",
+      "cardNumber": 76,
+      "cardType": "VENTURE",
+      "roundNumber": 1,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "costs": [
+        {
+          "type": "WOOD",
+          "value": 2
+        },
+        {
+          "type": "STONE",
+          "value": 2
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "PickTwoCouncilPrivilege"
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 4
+          }
+        }
+      ]
+    },
+    {
+      "name": "Military Campaign",
+      "cardNumber": 77,
+      "cardType": "VENTURE",
+      "roundNumber": 1,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": {
+        "type": "MILITARYPOINT",
+        "value": 3
+      },
+      "militaryPointsCost": {
+        "type": "MILITARYPOINT",
+        "value": 2
+      },
+      "costs": null,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "COIN",
+            "value": 3
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hosting Panhandlers",
+      "cardNumber": 78,
+      "cardType": "VENTURE",
+      "roundNumber": 1,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "costs": [
+        {
+          "type": "WOOD",
+          "value": 3
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "SERVANT",
+            "value": 4
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 4
+          }
+        }
+      ]
+    },
+    {
+      "name": "Fighting Heresies",
+      "cardNumber": 79,
+      "cardType": "VENTURE",
+      "roundNumber": 1,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": {
+        "type": "MILITARYPOINT",
+        "value": 5
+      },
+      "militaryPointsCost": {
+        "type": "MILITARYPOINT",
+        "value": 3
+      },
+      "costs": null,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 2
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Support to the Bishop",
+      "cardNumber": 80,
+      "cardType": "VENTURE",
+      "roundNumber": 1,
+      "requiredCostChoice": true,
+      "militaryPointsRequired": {
+        "type": "MILITARYPOINT",
+        "value": 4
+      },
+      "militaryPointsCost": {
+        "type": "MILITARYPOINT",
+        "value": 2
+      },
+      "costs": [
+        {
+          "type": "WOOD",
+          "value": 1
+        },
+        {
+          "type": "STONE",
+          "value": 1
+        },
+        {
+          "type": "COIN",
+          "value": 2
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 3
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "Support to the Bishop",
+      "cardNumber": 81,
+      "cardType": "VENTURE",
+      "roundNumber": 2,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "costs": [
+        {
+          "type": "COIN",
+          "value": 6
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 6
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Repairing the Abbey",
+      "cardNumber": 82,
+      "cardType": "VENTURE",
+      "roundNumber": 2,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "costs": [
+        {
+          "type": "COIN",
+          "value": 2
+        },
+        {
+          "type": "WOOD",
+          "value": 2
+        },
+        {
+          "type": "STONE",
+          "value": 2
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 2
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 6
+          }
+        }
+      ]
+    },
+    {
+      "name": "Building the Bastions",
+      "cardNumber": 83,
+      "cardType": "VENTURE",
+      "roundNumber": 2,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "costs": [
+        {
+          "type": "STONE",
+          "value": 4
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 3
+          }
+        },
+        {
+          "name": "PickOneCouncilPrivilege"
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 2
+          }
+        }
+      ]
+    },
+    {
+      "name": "Support to the King",
+      "cardNumber": 84,
+      "cardType": "VENTURE",
+      "roundNumber": 2,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": {
+        "type": "MILITARYPOINT",
+        "value": 6
+      },
+      "militaryPointsCost": {
+        "type": "MILITARYPOINT",
+        "value": 3
+      },
+      "costs": null,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "COIN",
+            "value": 5
+          }
+        },
+        {
+          "name": "PickOneCouncilPrivilege"
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 3
+          }
+        }
+      ]
+    },
+    {
+      "name": "Improving the Canals",
+      "cardNumber": 85,
+      "cardType": "VENTURE",
+      "roundNumber": 2,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "costs": [
+        {
+          "type": "SERVANT",
+          "value": 2
+        },
+        {
+          "type": "COIN",
+          "value": 3
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "DoProductionAction",
+          "value": 4
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hosting Foreigners",
+      "cardNumber": 86,
+      "cardType": "VENTURE",
+      "roundNumber": 2,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "costs": [
+        {
+          "type": "WOOD",
+          "value": 4
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "SERVANT",
+            "value": 5
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 4
+          }
+        }
+      ]
+    },
+    {
+      "name": "Crusade",
+      "cardNumber": 87,
+      "cardType": "VENTURE",
+      "roundNumber": 2,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": {
+        "type": "MILITARYPOINT",
+        "value": 8
+      },
+      "militaryPointsCost": {
+        "type": "MILITARYPOINT",
+        "value": 4
+      },
+      "costs": null,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "COIN",
+            "value": 5
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "COIN",
+            "value": 5
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Support to the Cardinal",
+      "cardNumber": 88,
+      "cardType": "VENTURE",
+      "roundNumber": 2,
+      "requiredCostChoice": true,
+      "militaryPointsRequired": {
+        "type": "MILITARYPOINT",
+        "value": 7
+      },
+      "militaryPointsCost": {
+        "type": "MILITARYPOINT",
+        "value": 4
+      },
+      "costs": [
+        {
+          "type": "WOOD",
+          "value": 2
+        },
+        {
+          "type": "STONE",
+          "value": 2
+        },
+        {
+          "type": "COIN",
+          "value": 3
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 3
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 4
+          }
+        }
+      ]
+    },
+    {
+      "name": "Hiring Mercenaries",
+      "cardNumber": 89,
+      "cardType": "VENTURE",
+      "roundNumber": 3,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "costs": [
+        {
+          "type": "COIN",
+          "value": 8
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 7
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 6
+          }
+        }
+      ]
+    },
+    {
+      "name": "Repairing the Cathedral",
+      "cardNumber": 90,
+      "cardType": "VENTURE",
+      "roundNumber": 3,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "costs": [
+        {
+          "type": "COIN",
+          "value": 3
+        },
+        {
+          "type": "WOOD",
+          "value": 3
+        },
+        {
+          "type": "STONE",
+          "value": 3
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "PickTowerCard",
+          "floor": 0,
+          "cardType": "ANY",
+          "diceValue": 7,
+          "assetsDiscount": null
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 1
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Building the Towers",
+      "cardNumber": 91,
+      "cardType": "VENTURE",
+      "roundNumber": 3,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "costs": [
+        {
+          "type": "STONE",
+          "value": 6
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 4
+          }
+        },
+        {
+          "name": "PickOneCouncilPrivilege"
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 4
+          }
+        }
+      ]
+    },
+    {
+      "name": "Promoting Sacred Art",
+      "cardNumber": 92,
+      "cardType": "VENTURE",
+      "roundNumber": 3,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "costs": [
+        {
+          "type": "WOOD",
+          "value": 6
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 3
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 3
+          }
+        }
+      ]
+    },
+    {
+      "name": "Military Conquest",
+      "cardNumber": 93,
+      "cardType": "VENTURE",
+      "roundNumber": 3,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": {
+        "type": "MILITARYPOINT",
+        "value": 12
+      },
+      "militaryPointsCost": {
+        "type": "MILITARYPOINT",
+        "value": 6
+      },
+      "costs": null,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "WOOD",
+            "value": 3
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "STONE",
+            "value": 3
+          }
+        },
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "COIN",
+            "value": 3
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 7
+          }
+        }
+      ]
+    },
+    {
+      "name": "Improving the Roads",
+      "cardNumber": 94,
+      "cardType": "VENTURE",
+      "roundNumber": 3,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": null,
+      "militaryPointsCost": null,
+      "costs": [
+        {
+          "type": "SERVANT",
+          "value": 3
+        },
+        {
+          "type": "COIN",
+          "value": 4
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "DoProductionAction",
+          "value": 3
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sacred War",
+      "cardNumber": 95,
+      "cardType": "VENTURE",
+      "roundNumber": 3,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": {
+        "type": "MILITARYPOINT",
+        "value": 15
+      },
+      "militaryPointsCost": {
+        "type": "MILITARYPOINT",
+        "value": 8
+      },
+      "costs": null,
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 4
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 8
+          }
+        }
+      ]
+    },
+    {
+      "name": "Support to the Pope",
+      "cardNumber": 96,
+      "cardType": "VENTURE",
+      "roundNumber": 3,
+      "requiredCostChoice": false,
+      "militaryPointsRequired": {
+        "type": "MILITARYPOINT",
+        "value": 10
+      },
+      "militaryPointsCost": {
+        "type": "MILITARYPOINT",
+        "value": 5
+      },
+      "costs": [
+        {
+          "type": "WOOD",
+          "value": 3
+        },
+        {
+          "type": "STONE",
+          "value": 3
+        },
+        {
+          "type": "COIN",
+          "value": 4
+        }
+      ],
+      "immediateEffect": [
+        {
+          "name": "AddAsset",
+          "asset": {
+            "type": "FAITHPOINT",
+            "value": 2
+          }
+        }
+      ],
+      "permanentEffect": [
+        {
+          "name": "AddEndGameVictoryPoints",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 10
+          }
+        }
+      ]
+    }
+  ]
+}

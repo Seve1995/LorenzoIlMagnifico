@@ -45,6 +45,8 @@ public class PickTowerCard implements Effect{
 		this.assetsDiscount = assetsDiscount;
 	}
 
+	public PickTowerCard() {}
+
 	public PickTowerCard(int floor, CardTypeEnum cardType, int diceValue) {
 		super();
 		this.floor = floor;

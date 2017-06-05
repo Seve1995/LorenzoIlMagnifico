@@ -148,18 +148,17 @@ public class CardLoader extends GenericLoader
     {
         VentureCard currentCard = ((VentureCard) card);
 
-        boolean permanentEffectChoice =
-                jsonCard.getBoolean("permanentEffectChoice");
         boolean requiredCostChoice =
                 jsonCard.getBoolean("requiredCostChoice");
 
-        List<Asset> costs = loadAssetList(jsonCard.getJSONArray("costs"));
+        if (!jsonCard.isNull("costs"))
+        {
+            List<Asset> costs = loadAssetList(jsonCard.getJSONArray("costs"));
 
-        currentCard.setPermanentEffectChoiche(permanentEffectChoice);
+            currentCard.setRequiredCostChoice(requiredCostChoice);
 
-        currentCard.setRequiredCostChoice(requiredCostChoice);
-
-        currentCard.setResourcesCost(costs);
+            currentCard.setResourcesCost(costs);
+        }
 
         if (!jsonCard.isNull("militaryPointsRequired"))
         {
