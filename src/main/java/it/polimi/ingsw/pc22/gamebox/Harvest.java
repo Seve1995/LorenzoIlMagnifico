@@ -22,12 +22,13 @@ public class Harvest
 		int i=0;
 		while ( i < this.harvestCells.length)
 		{
-			if (!(harvestCells[i].isEmpty()))
+			if ((harvestCells[i].isEmpty()))
 			{
-				i++;
+				return i;
 			}
+			i++;
 		}
-		return i;
+		return -1;
 	}
 	
 	public String gainInfo() {
@@ -42,7 +43,7 @@ public class Harvest
 		if (firstCellFree()!=0)
 			{
 			 output += "FamilyMembers already in harvest area:\n";
-			for (int i=0; i<firstCellFree(); i++)
+			 for (int i=0; i<firstCellFree(); i++)
 				output += i + ") " + harvestCells[i].getFamilyMember().toString();
 			}
 		return output;

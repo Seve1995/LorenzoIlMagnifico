@@ -23,12 +23,13 @@ public class Production
 		int i=0;
 		while ( i < this.productionCells.length)
 		{
-			if (!(productionCells[i].isEmpty()))
+			if ((productionCells[i].isEmpty()))
 			{
-				i++;
+				return i;
 			}
+			i++;
 		}
-		return i;
+		return -1;
 	}
 	
 	public String toString() {
@@ -36,7 +37,7 @@ public class Production
 		if (firstCellFree()!=0)
 			{
 			 output += "FamilyMembers already in production area:\n";
-			for (int i=0; i<firstCellFree(); i++)
+			 for (int i=0; i<firstCellFree(); i++)
 				output += i + ") " + productionCells[i].getFamilyMember().toString();
 			}
 		return output;
@@ -48,5 +49,6 @@ public class Production
 				"that have a value equal to or lower than your Production action value.";
 		return output;
 	}
+	
 	
 }
