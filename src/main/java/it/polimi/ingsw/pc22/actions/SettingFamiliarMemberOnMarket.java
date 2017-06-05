@@ -25,7 +25,7 @@ public class SettingFamiliarMemberOnMarket extends Action{
 		
 		List<MarketCell> currMarketCells = market.getMarketCells();
 		
-		if(currMarketCells.get(zone).getRequiredDiceValue() < super.getFamilyMember().getFamiliarValue())
+		if(currMarketCells.get(zone).getRequiredDiceValue() > super.getFamilyMember().getValue())
 			return false;
 		
 		if(!currMarketCells.get(zone).isEmpty())
@@ -51,7 +51,7 @@ public class SettingFamiliarMemberOnMarket extends Action{
 		{
 			market.getMarketCells().get(zone).setFamilyMember(this.getFamilyMember());
 			
-			player.removeFamilyMember(familyMember);
+			familyMember.setPlayed(true);
 			
 			currEffects = market.getMarketCells().get(zone).getEffects();
 			

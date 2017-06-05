@@ -38,7 +38,7 @@ public class FamilyMemberModifier implements Effect
 				{
 					if (isABonus)
 					{
-						f.setFamiliarValue(f.getFamiliarValue() + this.diceValueBonus);
+						f.setValueModifier(f.getValueModifier() + this.diceValueBonus);
 					}
 				}
 			}
@@ -51,12 +51,12 @@ public class FamilyMemberModifier implements Effect
 				{
 					if (!isABonus && toAll)
 					{
-						f.setFamiliarValue(diceValueSet);
+						f.setFamiliarValue(diceValueSet); 
 					}
 					
 					if(isABonus && toAll)
 					{
-						f.setFamiliarValue(f.getFamiliarValue() + this.diceValueBonus);
+						f.setValueModifier(f.getValueModifier() + this.diceValueBonus);
 					}
 					
 					
@@ -92,7 +92,9 @@ public class FamilyMemberModifier implements Effect
 					for (FamilyMember f : player.getFamilyMember())
 					{
 						if (f.getColor().equals(familyMemberColor))
+							
 							f.setFamiliarValue(diceValueSet);
+						
 					}
 		
 				}

@@ -81,11 +81,11 @@ public class SettingFamiliarMemberOnTower extends Action {
 		
 		Tower tower = selectedTower(cardTypeEnum, gameBoard.getTowers()); 
 		
-		PickTowerCard pickTowerCard = new PickTowerCard(floor, tower.getTowerType(), familyMember.getFamiliarValue());
+		PickTowerCard pickTowerCard = new PickTowerCard(floor, tower.getTowerType(), familyMember.getValue());
 		
 		if (!tower.getTowerCells().get(floor).isEmpty() && !(player.isDontCareOccupiedPlaces())) return false;
 		
-		int familiarValue = super.getFamilyMember().getFamiliarValue();
+		int familiarValue = super.getFamilyMember().getValue();
 		
 		if (tower.getTowerCells().get(floor).getRequiredDiceValue() > familiarValue) return false;
 		
@@ -107,7 +107,7 @@ public class SettingFamiliarMemberOnTower extends Action {
 		
 		List<Effect> currEffects;
 		
-		PickTowerCard pickTowerCard = new PickTowerCard(floor, tower.getTowerType(), familyMember.getFamiliarValue());
+		PickTowerCard pickTowerCard = new PickTowerCard(floor, tower.getTowerType(), familyMember.getValue());
 		
 		if (isLegal(player, gameBoard))
 		{
@@ -118,7 +118,7 @@ public class SettingFamiliarMemberOnTower extends Action {
 			
 			tower.getTowerCells().get(floor).setFamilyMember(this.getFamilyMember());
 			
-			player.removeFamilyMember(familyMember);
+			familyMember.setPlayed(true);
 			
 			currEffects = tower.getTowerCells().get(floor).getEffects();
 				

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.gamebox.*;
+import it.polimi.ingsw.pc22.player.CardModifier;
 import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
@@ -13,7 +14,10 @@ public class PickTowerCard implements Effect
 	private int diceValue;
 	private List<Asset> assetsDiscount;
 
-	
+	private int diceValueCharacter;
+	private int diceValueBuilding;
+	private int diceValueVenture;
+	private int diceValueTerritory;
 	
 	public int getFloor() {
 		return floor;
@@ -55,88 +59,239 @@ public class PickTowerCard implements Effect
 		this.diceValue = diceValue;
 	}
 	
-	/*private void ApplyChanges(DevelopmentCard d, Player p, CardTypeEnum ct)
+	private void ApplyDiceChanges (Player p)
+	{
+		for (CardModifier cm : p.getCardModifiers())
+		{
+			if (cm.getCardType().equals(CardTypeEnum.CHARACTER))
+			{
+				diceValueCharacter = diceValue + cm.getValueModifier();
+			}
+			
+			if (cm.getCardType().equals(CardTypeEnum.TERRITORY))
+			{
+				diceValueTerritory = diceValue + cm.getValueModifier();
+			}
+			
+			if (cm.getCardType().equals(CardTypeEnum.VENTURE))
+			{
+				diceValueVenture = diceValue + cm.getValueModifier();
+				
+			}
+			
+			if (cm.getCardType().equals(CardTypeEnum.BUILDING))
+			{
+				diceValueBuilding = diceValue + cm.getValueModifier();
+			}
+			
+		}
+	}
+	
+	
+	private void ApplyChanges (DevelopmentCard d, Player p, CardTypeEnum ct)
+	
 	{
 
 		if (ct.equals(CardTypeEnum.BUILDING))
+			
 		{
 			BuildingCard currBuildingCard = (BuildingCard) d;
-
-			currBuildingCard.se
+			
+			for (CardModifier cm : p.getCardModifiers())
+			{
+				if (cm.getCardType().equals(ct))
+				{
+					
+					for (Asset a : cm.getAssetDiscount())
+					{
+						for (Asset a1 : currBuildingCard.getCosts())
+						{
+						
+							if (a1.getType().equals(a.getType()))
+							
+								a1.setValue(a1.getValue() - a.getValue());	
+						}
+					
+					}
+					
+				}
+			
+			}
+			
 		}
-	}*/
+		
+		if (ct.equals(CardTypeEnum.CHARACTER))
+			
+		{
+			CharacterCard currCharacterCard = (CharacterCard) d;
+			
+			for (CardModifier cm : p.getCardModifiers())
+			{
+				if (cm.getCardType().equals(ct))
+					
+				for (Asset a : cm.getAssetDiscount())
+				{
+					
+					if (a.getType().equals(AssetType.COIN))
+					{
+						currCharacterCard.getCoinsCost().setValue(currCharacterCard.getCoinsCost().getValue() - a.getValue());
+					}
+					
+				}
+			
+			}
+	
+		}
+		
+	}
+	
+	
+	private void RemoveChanges(DevelopmentCard d, Player p, CardTypeEnum ct)
+	{
 
-
+		if (ct.equals(CardTypeEnum.BUILDING))
+			
+		{
+			BuildingCard currBuildingCard = (BuildingCard) d;
+			
+			for (CardModifier cm : p.getCardModifiers())
+			{
+				if (cm.getCardType().equals(ct) && !(cm.isOnlyOneAsset()))
+				{
+					
+					for (Asset a : cm.getAssetDiscount())
+					{
+						for (Asset a1 : currBuildingCard.getCosts())
+						{
+						
+							if (a1.getType().equals(a.getType()))
+							
+								a1.setValue(a1.getValue() + a.getValue());	
+						}
+					
+					}
+					
+				}
+				
+				else if (cm.getCardType().equals(ct) && !(cm.isOnlyOneAsset()))
+				{
+					//stampa a video l'elenco degli asset, selezionane uno 
+					
+				}
+				
+			
+			}
+			
+		}
+		
+		if (ct.equals(CardTypeEnum.CHARACTER))
+			
+		{
+			CharacterCard currCharacterCard = (CharacterCard) d;
+			
+			for (CardModifier cm : p.getCardModifiers())
+			{
+				if (cm.getCardType().equals(ct))
+					
+				for (Asset a : cm.getAssetDiscount())
+				{
+					
+					if (a.getType().equals(AssetType.COIN))
+					{
+						currCharacterCard.getCoinsCost().setValue(currCharacterCard.getCoinsCost().getValue() + a.getValue());
+					}
+					
+				}
+			
+			}
+	
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
 	@Override
 	public boolean isLegal(Player player, GameBoard gameBoard) 
 	{
 		Tower tower = null;
 		
-		/*for (Tower t : getTowers())
+		for (Tower t : gameBoard.getTowers())
 		{
 			if (t.getTowerType().equals(cardType))
 			{
-				tower = t;
-
-				for (TowerCell tc : tower.getTowerCells())
-				{
-					//ApplyChanges(tc.getDevelopmentCard(), player);
-				}
-
+				tower=t;
 			}
-		}*/
+			
+		}
 		
-		//modifico tutte le carte di quella torre!!
-
-		if (tower.getTowerCells().get(floor).getRequiredDiceValue() < diceValue)
-			return false;
-		
-		else
-		{
+		ApplyDiceChanges(player);
 		
 		if (this.cardType.equals(CardTypeEnum.CHARACTER))
 		{
-			if (player.getPlayerBoard().getCharacters().size() > 6)
+			
+			
+			if (player.getPlayerBoard().getCharacters().size() > 6 || diceValueCharacter < tower.getTowerCells().get(floor).getRequiredDiceValue())
 			{
+				
 				return false;
 			}
 			
 			CharacterCard currCharacterCard = (CharacterCard) tower.getTowerCells().get(floor).getDevelopmentCard();
 			
+			ApplyChanges (currCharacterCard, player, CardTypeEnum.CHARACTER);
+			
 			if (currCharacterCard.getCoinsCost().getValue() < player.getCoins())
 			{
+				
+				RemoveChanges(currCharacterCard, player, CardTypeEnum.CHARACTER);
+				
 				return false;
 			}
+			
+			RemoveChanges(currCharacterCard, player, CardTypeEnum.CHARACTER);
 				
 		}
 		
 		if (this.cardType.equals(CardTypeEnum.BUILDING)) 
 		{
-			if (player.getPlayerBoard().getBuildings().size() > 6)
+			if (player.getPlayerBoard().getBuildings().size() > 6 || diceValueBuilding < tower.getTowerCells().get(floor).getRequiredDiceValue())
 			{
+				
 				return false;
 			}
-			
+	
 			BuildingCard currBuildingCard = (BuildingCard) tower.getTowerCells().get(floor).getDevelopmentCard();
+			
+			ApplyChanges (currBuildingCard, player, CardTypeEnum.BUILDING);
 			
 			for (Asset a : currBuildingCard.getCosts())
 			{
 				if (player.getAsset(a.getType()) < a.getValue())
+					
+					RemoveChanges(currBuildingCard, player, CardTypeEnum.BUILDING);
+					
 					return false;
 			}
+			
+			RemoveChanges(currBuildingCard, player, CardTypeEnum.CHARACTER);
 	
 		}
 		
 		if (this.cardType.equals(CardTypeEnum.VENTURE))
 		{
-			if (player.getPlayerBoard().getBuildings().size() > 6)
-			{
+			if (player.getPlayerBoard().getBuildings().size() > 6 || diceValueVenture < tower.getTowerCells().get(floor).getRequiredDiceValue())
+			{				
 				return false;
 			}
 			
 			VentureCard currVentureCard = (VentureCard) tower.getTowerCells().get(floor).getDevelopmentCard();
 			
 			if (currVentureCard.getMilitaryPointsRequired().getValue() < player.getMilitaryPoints())
+			
 				return false;
 		
 		}
@@ -144,7 +299,7 @@ public class PickTowerCard implements Effect
 		if (this.cardType.equals(CardTypeEnum.TERRITORY)) 
 		{
 			
-			if (player.getPlayerBoard().getTerritories().size() > 6)
+			if (player.getPlayerBoard().getTerritories().size() > 6 || diceValueTerritory < tower.getTowerCells().get(floor).getRequiredDiceValue())
 			{
 				return false;
 			}
@@ -172,6 +327,7 @@ public class PickTowerCard implements Effect
 					{
 						if (player.getMilitaryPoints() < 12)
 						{
+							
 							return false;
 						}
 					}
@@ -181,16 +337,18 @@ public class PickTowerCard implements Effect
 		
 						if (player.getMilitaryPoints() < 18)
 						{
+							
 							return false;
 						}
 					}
 			}
 			
 			else if (player.isNoMilitaryPointsForTerritories())
+				
+				
 				return true;
 		}
 
-		}
 		return true;
 	}
 	
@@ -202,17 +360,17 @@ public class PickTowerCard implements Effect
 	}
 	
 	
-	/*private void activeEffects(DevelopmentCard d, Player p)
+	private void activeEffects(DevelopmentCard d, Player p, GameBoard gb)
 	{
 		for (Effect e : d.getImmediateEffects())
 		{
 				e.executeEffect(p, null);
 				
 				if ((e instanceof AddAsset) && p.isSantaRita())
-					e.executeEffect(p);
+					e.executeEffect(p, gb);
 		}
 			
-	}*/
+	}
 	
 	
 	@Override
@@ -221,7 +379,7 @@ public class PickTowerCard implements Effect
 
 		if (isLegal(player, gameBoard))
 		{
-				/*for (Tower t : player.getGameBoard().getTowers())
+				for (Tower t : gameBoard.getTowers())
 				{
 					if (t.getTowerType().equals(cardType))
 					{   
@@ -249,14 +407,13 @@ public class PickTowerCard implements Effect
 							
 						}
 						
-						activeEffects(t.getTowerCells().get(floor).getDevelopmentCard(), player);
+						activeEffects(t.getTowerCells().get(floor).getDevelopmentCard(), player, gameBoard);
 						
 						removeCards(t, floor);
 						
 					}
-				}*/
+				}
 		}
-		
 	
 	}
 	

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.pc22.actions;
 
+import it.polimi.ingsw.pc22.effects.DoProductionAction;
 import it.polimi.ingsw.pc22.gamebox.ColorsEnum;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
@@ -20,7 +21,7 @@ public class SettingFamiliarMemberOnProduction extends Action {
 		
 		Production production = this.gameBoard.getProduction();
 		
-		if (super.getFamilyMember().getFamiliarValue()<1)
+		if (super.getFamilyMember().getFamiliarValue() < 1)
 			return false;
 		
 		for (ProductionCell productionCell : production.getProductionCell()){
@@ -49,20 +50,26 @@ public class SettingFamiliarMemberOnProduction extends Action {
 		
 		Production production = this.gameBoard.getProduction();
 		
+		DoProductionAction doProductionAction = new DoProductionAction();
+		
 		if (isLegal(player, gameBoard) && !(player.isDontCareOccupiedPlaces()))
 		{
 			
 			
 			production.getProductionCell()[production.firstCellFree()].setFamilyMember(this.getFamilyMember());
-			player.removeFamilyMember(familyMember);
+			
+			familyMember.setPlayed(true);
 			
 			if (production.firstCellFree()>0)
 			{
-				if ((this.getFamilyMember().getFamiliarValue()-3)>0)
-					this.getFamilyMember().setFamiliarValue(this.getFamilyMember().getFamiliarValue()-3);
-				else 
-					this.getFamilyMember().setFamiliarValue(0);
+				familyMember.setFamiliarValue(familyMember.getFamiliarValue() - 3);
 			}
+			
+			doProductionAction.setValue(familyMember.getValue());
+			
+			doProductionAction.executeEffect(player, gameBoard);
+			
+			
 			return true;
 			
 		}
@@ -70,7 +77,13 @@ public class SettingFamiliarMemberOnProduction extends Action {
 		else if (isLegal(player, gameBoard) && player.isDontCareOccupiedPlaces())
 		{
 			production.getProductionCell()[0].setFamilyMember(this.getFamilyMember());
-			player.removeFamilyMember(familyMember);
+
+			familyMember.setPlayed(true);
+			
+			doProductionAction.setValue(familyMember.getValue());
+			
+			doProductionAction.executeEffect(player, gameBoard);
+			
 			return true;
 		}
 		

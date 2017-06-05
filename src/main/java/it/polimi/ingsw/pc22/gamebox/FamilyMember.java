@@ -38,6 +38,15 @@ public class FamilyMember
 	public void setValueModifier(int valueModifier) {
 		this.valueModifier = valueModifier;
 	}
+	
+	public int getValue()
+	{
+		if (familiarValue + valueModifier < 0 )
+			return 0;
+		
+		return familiarValue + valueModifier;
+		
+	}
 	@Override
 	public String toString() 
 	{

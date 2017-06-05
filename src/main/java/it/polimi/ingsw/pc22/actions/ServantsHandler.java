@@ -48,7 +48,7 @@ public class ServantsHandler extends Action
     	
     	if (isLegal(player, gameBoard)) {
     		
-    		 int familiarValue =  action.getFamilyMember().getFamiliarValue();
+    		   int familiarValue =  action.getFamilyMember().getFamiliarValue();
 
     	       familiarValue = (int) (familiarValue + this.sacrifiedServantsNumber/(2*multiplier));
 

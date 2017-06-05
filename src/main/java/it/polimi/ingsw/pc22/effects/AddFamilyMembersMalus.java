@@ -28,7 +28,7 @@ public class AddFamilyMembersMalus implements Effect{
 		if (isLegal(player,gameBoard))
 			for(FamilyMember f : player.getFamilyMember())
 			{
-				f.setFamiliarValue(f.getFamiliarValue()+diceValueMalus);
+				f.setValueModifier(diceValueMalus);
 			}
 		
 	}
