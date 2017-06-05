@@ -33,13 +33,10 @@ public class Production
 	}
 	
 	public String toString() {
-		String output = "PRODUCTION\n";
-		if (firstCellFree()!=0)
-			{
-			 output += "FamilyMembers already in production area:\n";
-			 for (int i=0; i<firstCellFree(); i++)
-				output += i + ") " + productionCells[i].getFamilyMember().toString();
-			}
+		String output = "PRODUCTION\n"
+						+ "FamilyMembers already in production area:\n";
+		for (int i=0; i<firstCellFree(); i++)
+			output += i + ") " + productionCells[i].getFamilyMember().toString();
 		return output;
 	}
 	
