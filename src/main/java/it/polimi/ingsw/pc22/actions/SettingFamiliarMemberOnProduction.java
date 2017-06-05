@@ -69,7 +69,6 @@ public class SettingFamiliarMemberOnProduction extends Action {
 			
 			doProductionAction.executeEffect(player, gameBoard);
 			
-			
 			return true;
 			
 		}

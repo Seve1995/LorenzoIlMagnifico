@@ -1,6 +1,7 @@
 package it.polimi.ingsw.pc22.adapters;
 
 import it.polimi.ingsw.pc22.actions.Action;
+import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
 import it.polimi.ingsw.pc22.player.Player;
 
 import java.io.IOException;
@@ -17,4 +18,8 @@ public interface GameAdapter
     String getMessage();
     
     Action askAction();
+    
+    int askFloor();
+    
+    CardTypeEnum askForCardType();
 }

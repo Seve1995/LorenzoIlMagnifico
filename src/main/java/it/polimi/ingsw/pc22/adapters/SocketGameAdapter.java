@@ -3,6 +3,7 @@ package it.polimi.ingsw.pc22.adapters;
 import it.polimi.ingsw.pc22.actions.Action;
 import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.connection.User;
+import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
 import it.polimi.ingsw.pc22.player.Player;
 
 import java.io.BufferedReader;
@@ -81,6 +82,18 @@ public class SocketGameAdapter implements GameAdapter
 
 	@Override
 	public Action askAction() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int askFloor() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public CardTypeEnum askForCardType() {
 		// TODO Auto-generated method stub
 		return null;
 	}

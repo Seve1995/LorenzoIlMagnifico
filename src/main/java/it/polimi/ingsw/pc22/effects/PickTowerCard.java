@@ -376,7 +376,19 @@ public class PickTowerCard implements Effect
 	@Override
 	public void executeEffect(Player player, GameBoard gameBoard) 
 	{
-
+		if (floor==0)
+			
+			//ask for floor 
+			
+			floor = player.getAdapter().askFloor();
+			
+			
+		if (cardType.equals(CardTypeEnum.ANY))
+			
+			//ask for card type
+			
+			cardType = player.getAdapter().askForCardType();
+			
 		if (isLegal(player, gameBoard))
 		{
 				for (Tower t : gameBoard.getTowers())

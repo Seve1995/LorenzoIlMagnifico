@@ -1,17 +1,23 @@
 package it.polimi.ingsw.pc22.connection;
 
 import it.polimi.ingsw.pc22.adapters.GameAdapter;
+import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.gamebox.BonusTile;
 import it.polimi.ingsw.pc22.gamebox.BuildingCard;
 import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
 import it.polimi.ingsw.pc22.gamebox.CharacterCard;
 import it.polimi.ingsw.pc22.gamebox.ColorsEnum;
+import it.polimi.ingsw.pc22.gamebox.CouncilPalaceCell;
 import it.polimi.ingsw.pc22.gamebox.DevelopmentCard;
 import it.polimi.ingsw.pc22.gamebox.Dice;
 import it.polimi.ingsw.pc22.gamebox.ExcommunicationCard;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
+import it.polimi.ingsw.pc22.gamebox.HarvestCell;
+import it.polimi.ingsw.pc22.gamebox.LeaderCard;
+import it.polimi.ingsw.pc22.gamebox.MarketCell;
 import it.polimi.ingsw.pc22.gamebox.PlayerColorsEnum;
+import it.polimi.ingsw.pc22.gamebox.ProductionCell;
 import it.polimi.ingsw.pc22.gamebox.TerritoryCard;
 import it.polimi.ingsw.pc22.gamebox.Tower;
 import it.polimi.ingsw.pc22.gamebox.TowerCell;
@@ -106,7 +112,7 @@ public class GameMatch implements Runnable
 
 		//loadLeaderCards();
 		
-        //int turnNumber = 6 *
+        //int turnNumber = 6 * currentmembers
 
 		//loadresourcestoplayers
 
@@ -152,10 +158,10 @@ public class GameMatch implements Runnable
 		{
 			if (isNewTurn(currentRoundNumber)) 
 				{
-				addDices();
-				addTowerCards(getEra(currentRoundNumber));
-				//Controlla il council palace 
-				//ordina l'array in base a player.priority
+					addDices();
+					addTowerCards(getEra(currentRoundNumber));
+					//Controlla il council palace 
+					//ordina l'array in base a player.priority
 				}
 			
 			for(Player player : players)
@@ -172,6 +178,8 @@ public class GameMatch implements Runnable
 					//stampa plancia
 
 					player.getAdapter().askAction(); //Richiesta: che razza di azione vuoi fare??
+					
+					//aggiungere le tre azioni leader: scarta, gioca, attiva
 
 					//vuoi sacrificare i servitori??
 
@@ -192,11 +200,52 @@ public class GameMatch implements Runnable
 
 				}
 			}
-
-			//if (currentRoundNumber % 8|6) gestionefineEra()
+			
+			resetLeaderCards(players);
+			
+			//manca ordine di turno
+			
+			epurateGameBoard(gameBoard);
+			
+			resetFamiliars(players);
+			
+			
+			// se é la fine di una era
+			if (((playerCounter < 5) && ((currentRoundNumber+1) % 8==0)) || ((playerCounter == 5) && (currentRoundNumber+1) %6==0)) 
+			{
+				for (Player p : players)
+				{
+					if (true)
+						
+						excommunicate(p, excommunicationCards, getEra(currentRoundNumber+1) -1);
+					
+					else 
+					{
+						//ask if they want to be excommunicated
+						
+						if (true)
+						{
+							p.setFaithPoints(0);	
+						}
+						
+						else 
+						{
+							//excommunicate(p, )
+						}
+					}
+					
+				}
+			
+			}
+			 
 		}
+	
+		sumFinalPoints(players);
 		
-		//gestioneFineGioco();decreto vincitore e tutto quello che ne consegue
+		selectWinner(players);
+		
+		endGame();
+		
 	}
 
 
@@ -308,7 +357,7 @@ public class GameMatch implements Runnable
 		Dice whiteDice = new Dice(ColorsEnum.WHITE);
 		whiteDice.rollingDice();
 		dices.add(whiteDice);
-		if(this.playerCounter==5)
+		if(this.playerCounter<5)
 			{
 			Dice orangeDice = new Dice(ColorsEnum.ORANGE);
 			dices.add(orangeDice);
@@ -397,6 +446,162 @@ public class GameMatch implements Runnable
 				return 3;
 		return -1;
 	}
+	
+	
+	private void epurateGameBoard(GameBoard gameBoard)
+	{
+		for (Tower t : gameBoard.getTowers())
+			for(TowerCell tc : t.getTowerCells())
+			{
+				tc.setFamilyMember(null);
+			}
+		
+		for (HarvestCell hc : gameBoard.getHarvest().getHarvestCell())
+		{
+			hc.setFamilyMember(null);
+		}
+		
+		for (ProductionCell p : gameBoard.getProduction().getProductionCell())
+		{
+			p.setFamilyMember(null);
+		}
+		
+		for (MarketCell m : gameBoard.getMarket().getMarketCells())
+		{
+			m.setFamilyMember(null);
+		}
+		
+		for (CouncilPalaceCell cp : gameBoard.getCouncilPalace().getCouncilPalaceCells())
+		{
+			cp.setFamilyMember(null);
+		}
+	
+	}
+	
+	private void resetFamiliars(List<Player> players)
+	{
+		for (Player p : players)
+		{
+			for (FamilyMember f : p.getFamilyMember())
+			{
+				f.setPlayed(false);
+			}
+		}
+	}
+	
+	private void resetLeaderCards(List<Player> players)
+	{
+		for (Player p : players)
+		{
+			for (LeaderCard l : p.getLeaderCards())
+			{
+				l.setFaceUp(true);
+			}
+		
+		}
+	}
+	
+	private void excommunicate(Player p, List<ExcommunicationCard> e, int era)
+	{
+		
+		for (Effect eff : e.get(era-1).getEffects())
+		{
+			eff.executeEffect(p, gameBoard);
+		}
+	
+	}
+	
+	private int sumFinalResources(Player p)
+	{
+		
+		return p.getCoins()+p.getServants()+p.getWoods()+p.getStones();
+		
+	}
+	
+	
+	private void sumFinalPoints(List<Player> players)
+	{
+		for (Player p : players)
+		{
+			if (p.getPlayerBoard().getTerritories().size() == 3)
+				
+				p.setVictoryPoints(p.getVictoryPoints() + 1);
+			
+			if (p.getPlayerBoard().getTerritories().size() == 4)
+				
+				p.setVictoryPoints(p.getVictoryPoints() + 4);
+			
+			if (p.getPlayerBoard().getTerritories().size() == 5)
+				
+				p.setVictoryPoints(p.getVictoryPoints() + 10);
+			
+			if (p.getPlayerBoard().getTerritories().size() == 6)
+				
+				p.setVictoryPoints(p.getVictoryPoints() + 20);
+			
+			if (p.getPlayerBoard().getCharacters().size() == 1)
+				
+				p.setVictoryPoints(p.getVictoryPoints() + 1);
+			
+			if (p.getPlayerBoard().getCharacters().size() == 2)
+				
+				p.setVictoryPoints(p.getVictoryPoints() + 3);
+			
+			if (p.getPlayerBoard().getCharacters().size() == 3)
+				
+				p.setVictoryPoints(p.getVictoryPoints() +6);
+			
+			if (p.getPlayerBoard().getCharacters().size() == 4)
+				
+				p.setVictoryPoints(p.getVictoryPoints() + 10);
+			
+			if (p.getPlayerBoard().getCharacters().size() == 5)
+				
+				p.setVictoryPoints(p.getVictoryPoints() + 15);
+			
+			if (p.getPlayerBoard().getCharacters().size() == 6)
+				
+				p.setVictoryPoints(p.getVictoryPoints() + 21);
+			
+			for (VentureCard v : p.getPlayerBoard().getVentures())
+			{
+				for (Effect e : v.getPermanentEffects())
+				{
+					e.executeEffect(p, gameBoard);
+				}
+
+			}
+			
+			p.setVictoryPoints(p.getVictoryPoints()+(sumFinalResources(p)/5));
+			
+			//mancano i punti vittoria associati alla forza militare
+				
+		}
+		
+	}
+	
+	
+	private String selectWinner(List<Player> players)
+	{
+		int winner=0;
+		
+		String winnerName = null;
+		
+		for (Player p : players)
+		{
+			if(p.getVictoryPoints() > winner)
+			{
+				
+				winner = p.getVictoryPoints(); 
+			
+				winnerName = p.getName(); 
+			}
+		}
+		
+		return winnerName;
+		
+	}
+	
 	
 	public String getGameName() {
 		return gameName;
