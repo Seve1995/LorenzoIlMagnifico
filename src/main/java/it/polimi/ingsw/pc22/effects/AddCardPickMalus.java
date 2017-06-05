@@ -1,11 +1,12 @@
 package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.CardModifier;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class AddCardPickMalus implements Effect{
-	
+public class AddCardPickMalus extends Effect{
+
 	private CardTypeEnum cardType;
 	private int malusValue;
 	
@@ -26,13 +27,14 @@ public class AddCardPickMalus implements Effect{
 	}
 
 	@Override
-	public boolean isLegal(Player player) {
+	public boolean isLegal(Player player, GameBoard gameBoard) {
 		return true;
 	}
 
 	@Override
-	public void executeEffect(Player player) {
-		if (isLegal(player))
+	public void executeEffect(Player player, GameBoard gameBoard) {
+		
+		if (isLegal(player,gameBoard))
 		{
 			CardModifier currCardModifier = new CardModifier();
 			currCardModifier.setValueModifier(malusValue);

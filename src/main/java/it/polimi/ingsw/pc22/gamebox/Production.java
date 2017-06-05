@@ -19,10 +19,6 @@ public class Production
 		this.productionCell = productionCell;
 	}
 
-	public void executeEffect(Player p){
-		//TODO: implement this kind of method
-	} 
-	
 	public String gainInfo() {
 		String output = "Production activates the corresponding personal bonus and the" +
 				"permanent effects of all Buildings on your Personal Board, but only of those Buildings" +

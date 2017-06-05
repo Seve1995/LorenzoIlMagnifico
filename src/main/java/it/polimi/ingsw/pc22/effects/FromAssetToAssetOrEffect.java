@@ -1,12 +1,13 @@
 package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.gamebox.Asset;
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 
-public class FromAssetToAssetOrEffect implements Effect{
-	
+public class FromAssetToAssetOrEffect extends Effect{
+
 	private List<Asset> paidAssets;
 	private List<Asset> gainedAssets;
 	private boolean onlyOneAsset;
@@ -38,7 +39,7 @@ public class FromAssetToAssetOrEffect implements Effect{
 	}
 	
 	@Override
-	public boolean isLegal(Player player) 
+	public boolean isLegal(Player player, GameBoard gameBoard) 
 	{
 		for (Asset a : paidAssets){
 			if(a.getValue() > player.getAsset(a.getType()))
@@ -51,12 +52,12 @@ public class FromAssetToAssetOrEffect implements Effect{
 	}
 	
 	@Override
-	public void executeEffect(Player player) 
+	public void executeEffect(Player player, GameBoard gameBoard) 
 	{
-		if (isLegal(player)){
+		if (isLegal(player, gameBoard)){
 			if (gainedEffect != null)
 			{
-				gainedEffect.executeEffect(player);
+				gainedEffect.executeEffect(player, gameBoard);
 				
 			}
 			if (gainedAssets != null){

@@ -2,22 +2,22 @@ package it.polimi.ingsw.pc22.actions;
 
 import it.polimi.ingsw.pc22.gamebox.ColorsEnum;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.gamebox.Harvest;
 import it.polimi.ingsw.pc22.gamebox.HarvestCell;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class SettingFamiliarMemberOnHarvest extends Action{
+
 	
-	private Harvest harvest;
-	
-	
-	public SettingFamiliarMemberOnHarvest(FamilyMember familyMember, Harvest harvest) {
+	public SettingFamiliarMemberOnHarvest(FamilyMember familyMember) {
 		super(familyMember);
-		this.harvest = harvest;
 	}
 
 	@Override
-	protected boolean isLegal (Player player) {
+	protected boolean isLegal (Player player, GameBoard gameBoard) {
+		
+		Harvest harvest = this.gameBoard.getHarvest(); 
 		
 		if (super.getFamilyMember().getFamiliarValue() < 1)
 			return false;
@@ -45,9 +45,14 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 	}
 
 	@Override
-	public boolean executeAction(Player player) {
-		if (isLegal(player) && !(player.isDontCareOccupiedPlaces()))
+	public boolean executeAction(Player player, GameBoard gameBoard) {
+		
+		Harvest harvest = this.gameBoard.getHarvest(); 
+		
+		if (isLegal(player, gameBoard) && !(player.isDontCareOccupiedPlaces()))
 		{
+			
+			
 			harvest.getHarvestCell()[harvest.firstCellFree()].setFamilyMember(this.getFamilyMember());
 			player.removeFamilyMember(familyMember);
 			
@@ -62,7 +67,7 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 			
 		}
 		
-		else if (isLegal(player) && player.isDontCareOccupiedPlaces())
+		else if (isLegal(player, gameBoard) && player.isDontCareOccupiedPlaces())
 		{
 			harvest.getHarvestCell()[0].setFamilyMember(this.getFamilyMember());
 			player.removeFamilyMember(familyMember);

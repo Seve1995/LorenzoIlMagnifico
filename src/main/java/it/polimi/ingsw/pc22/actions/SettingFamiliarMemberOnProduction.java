@@ -2,20 +2,23 @@ package it.polimi.ingsw.pc22.actions;
 
 import it.polimi.ingsw.pc22.gamebox.ColorsEnum;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.gamebox.Production;
 import it.polimi.ingsw.pc22.gamebox.ProductionCell;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class SettingFamiliarMemberOnProduction extends Action {
-	private Production production;
+
 	
-	public SettingFamiliarMemberOnProduction(FamilyMember familyMember, Production production) {
+	public SettingFamiliarMemberOnProduction(FamilyMember familyMember) {
 		super(familyMember);
-		this.production = production;
+		
 	}
 
 	@Override
-	protected boolean isLegal(Player player) {
+	protected boolean isLegal(Player player, GameBoard gameBoard) {
+		
+		Production production = this.gameBoard.getProduction();
 		
 		if (super.getFamilyMember().getFamiliarValue()<1)
 			return false;
@@ -42,9 +45,14 @@ public class SettingFamiliarMemberOnProduction extends Action {
 	}
 
 	@Override
-	public boolean executeAction(Player player) {
-		if (isLegal(player) && !(player.isDontCareOccupiedPlaces()))
+	public boolean executeAction(Player player, GameBoard gameBoard) {
+		
+		Production production = this.gameBoard.getProduction();
+		
+		if (isLegal(player, gameBoard) && !(player.isDontCareOccupiedPlaces()))
 		{
+			
+			
 			production.getProductionCell()[production.firstCellFree()].setFamilyMember(this.getFamilyMember());
 			player.removeFamilyMember(familyMember);
 			
@@ -59,7 +67,7 @@ public class SettingFamiliarMemberOnProduction extends Action {
 			
 		}
 		
-		else if (isLegal(player) && player.isDontCareOccupiedPlaces())
+		else if (isLegal(player, gameBoard) && player.isDontCareOccupiedPlaces())
 		{
 			production.getProductionCell()[0].setFamilyMember(this.getFamilyMember());
 			player.removeFamilyMember(familyMember);

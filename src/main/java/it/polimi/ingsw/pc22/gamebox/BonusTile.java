@@ -91,7 +91,7 @@ public class BonusTile {
 	public void setHarvestActivationValue(int harvestActivationValue) {
 		this.harvestActivationValue = harvestActivationValue;
 	}
-
+	
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;

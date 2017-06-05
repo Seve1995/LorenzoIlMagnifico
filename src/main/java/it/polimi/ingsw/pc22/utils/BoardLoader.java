@@ -21,7 +21,7 @@ public class BoardLoader extends GenericLoader
 
             Tower[] towers = loadTowers(board);
 
-            gameBoard.setTower(towers);
+            gameBoard.setTowers(towers);
 
             CouncilPalace councilPalace = loadCouncilPalace(board);
 

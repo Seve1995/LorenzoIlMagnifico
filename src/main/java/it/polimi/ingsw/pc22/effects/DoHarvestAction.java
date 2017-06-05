@@ -1,10 +1,11 @@
 package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.gamebox.BuildingCard;
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class DoHarvestAction implements Effect {
-	
+public class DoHarvestAction extends Effect {
+
 	private int value;
 
 	public int getValue() {
@@ -16,37 +17,34 @@ public class DoHarvestAction implements Effect {
 	}
 
 	@Override
-	public boolean isLegal(Player player) {
-		
+	public boolean isLegal(Player player, GameBoard gameBoard) {
+		if (value < player.getPlayerBoard().getBonusTile().getHarvestActivationValue())
+				return false;
 		return true;
 	}
 
 	@Override
-	public void executeEffect(Player player) {
+	public void executeEffect(Player player, GameBoard gameBoard) {
 		
-		if (value >= player.getPlayerBoard().getBonusTile().getHarvestActivationValue())
+		if (isLegal(player,gameBoard))
 		{
-		
-			player.setCoins(player.getCoins() + player.getPlayerBoard().getBonusTile().getHarvestCoinsBonus());
-			player.setMilitaryPoints(player.getMilitaryPoints() + player.getPlayerBoard().getBonusTile().getHarvestMilitaryPointsBonus());
-			player.setServants(player.getServants() + player.getPlayerBoard().getBonusTile().getHarvestServantBonus() );
-			player.setStones(player.getServants()+player.getPlayerBoard().getBonusTile().getHarvestStonesBonus());
-			player.setWoods(player.getWoods()+player.getPlayerBoard().getBonusTile().getHarvestWoodsBonus());
-		
-		}
-		for (BuildingCard b : player.getPlayerBoard().getBuildings()){
+				player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestServantBonus());
+				player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestCoinsBonus());
+				player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestMilitaryPointsBonus());
+				player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestStonesBonus());
+				player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestWoodsBonus());
+			}
 			
-			if(value >= b.getPermanentEffectActivationCost()){
+			for (BuildingCard b : player.getPlayerBoard().getBuildings()){
 				
-				for (Effect e : b.getPermanentEffects())
-				{
-					e.executeEffect(player);
+				if(value >= b.getPermanentEffectActivationCost()){
+					
+					for (Effect e : b.getPermanentEffects())
+					{
+						e.executeEffect(player, gameBoard);
+					}
+					
 				}
-				
 			}
 		}
-		
-	}
-	
-
 }

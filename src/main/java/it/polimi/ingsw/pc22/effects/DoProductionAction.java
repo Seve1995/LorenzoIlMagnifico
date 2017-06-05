@@ -1,10 +1,11 @@
 package it.polimi.ingsw.pc22.effects;
 
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.gamebox.TerritoryCard;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class DoProductionAction implements Effect {
-	
+public class DoProductionAction extends Effect {
+
 	private int value;
 
 	public int getValue() {
@@ -16,20 +17,22 @@ public class DoProductionAction implements Effect {
 	}
 
 	@Override
-	public boolean isLegal(Player player) {
-		
+	public boolean isLegal(Player player, GameBoard gameBoard) {
+		if (value < player.getPlayerBoard().getBonusTile().getProductionActivationValue())
+			return false;
 		return true;
 		
 	}
 
 	@Override
-	public void executeEffect(Player player) {
+	public void executeEffect(Player player, GameBoard gameBoard) {
 			
 			if (value >= player.getPlayerBoard().getBonusTile().getProductionActivationValue())
 			{
-				player.setServants(player.getServants() + player.getPlayerBoard().getBonusTile().getProductionServantBonus() );
-				player.setCoins(player.getCoins() + player.getPlayerBoard().getBonusTile().getProductionCoinsBonus());
-				player.setMilitaryPoints(player.getMilitaryPoints() + player.getPlayerBoard().getBonusTile().getProductionMilitaryPointsBonus());
+				
+				player.addAsset(player.getPlayerBoard().getBonusTile().getProductionCoinsBonus());
+				player.addAsset(player.getPlayerBoard().getBonusTile().getProductionMilitaryPointsBonus());
+				player.addAsset(player.getPlayerBoard().getBonusTile().getProductionServantBonus());
 			}
 			
 			for (TerritoryCard t : player.getPlayerBoard().getTerritories())
@@ -38,7 +41,7 @@ public class DoProductionAction implements Effect {
 				{
 					for (Effect e : t.getPermanentEffects())
 					{
-						e.executeEffect(player);
+						e.executeEffect(player, gameBoard);
 					}
 				}
 			}

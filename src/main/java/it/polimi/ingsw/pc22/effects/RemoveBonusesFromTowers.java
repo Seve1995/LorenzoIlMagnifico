@@ -1,4 +1,5 @@
 package it.polimi.ingsw.pc22.effects;
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
 /*
@@ -8,17 +9,17 @@ import it.polimi.ingsw.pc22.player.Player;
  * effect of another card).
  */
 
-public class RemoveBonusesFromTowers implements Effect
+public class RemoveBonusesFromTowers extends Effect
 {
-	
+
 	@Override
-	public void executeEffect(Player player) 
+	public void executeEffect(Player player, GameBoard gameBoard) 
 	{
 		player.setRemoveTowerBonus(true);
 	}
 
 	@Override
-	public boolean isLegal(Player player) 
+	public boolean isLegal(Player player, GameBoard gameBoard) 
 	{
 		return true;
 	}

@@ -339,7 +339,9 @@
       ],
       "effects": [
         {
-          "name": "Copycut"
+          "name": "AddAsset",
+	  "assetType": "VICTORYPOINTS",
+	  "value": 99
         }
       ]
     },

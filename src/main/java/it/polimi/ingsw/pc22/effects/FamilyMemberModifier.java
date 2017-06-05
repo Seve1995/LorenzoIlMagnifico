@@ -2,10 +2,12 @@ package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.gamebox.ColorsEnum;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class FamilyMemberModifier implements Effect
+public class FamilyMemberModifier extends Effect
 {
+
 	private ColorsEnum familyMemberColor;
 	private int diceValueSet;
 	private int diceValueBonus;
@@ -16,7 +18,7 @@ public class FamilyMemberModifier implements Effect
 	//se toCOloured=true && toAll=false richiede un input-> familyMemberColor
 
 	@Override
-	public boolean isLegal(Player player) {
+	public boolean isLegal(Player player, GameBoard gameBoard) {
 		
 		if(this.familyMemberColor.equals(ColorsEnum.NEUTER))
 		{
@@ -28,7 +30,7 @@ public class FamilyMemberModifier implements Effect
 	}
 
 	@Override
-	public void executeEffect(Player player) {
+	public void executeEffect(Player player, GameBoard gameBoard) {
 		if (!toColoured){
 			for (FamilyMember f : player.getFamilyMember())
 			{
@@ -64,7 +66,7 @@ public class FamilyMemberModifier implements Effect
 			
 		if (toColoured && !isABonus && !toAll)
 			{
-				if(isLegal(player))
+				if(isLegal(player, gameBoard))
 				{
 					
 					player.getAdapter().printMessage("Which Familiar Color Do You Want?");

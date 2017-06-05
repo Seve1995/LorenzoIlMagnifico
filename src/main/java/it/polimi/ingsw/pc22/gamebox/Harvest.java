@@ -18,11 +18,6 @@ public class Harvest
 	public void setHarvestCell(HarvestCell[] harvestCell) {
 		this.harvestCell = harvestCell;
 	}
-
-	public void ExecuteEffect(Player player)
-	{
-		//TODO: implement the execution effect for this kind of cells
-	}
 	
 	public String gainInfo() {
 		String output = "Harvest activates the corresponding personal bonus and the" +

@@ -1,11 +1,24 @@
 package it.polimi.ingsw.pc22.gamebox;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import it.polimi.ingsw.pc22.player.Player;
 
+//TODO: Nel gameMatch va controllata la lista di playersInCouncilPalace all'inizio di ogni nuovo turno e va SVUOTATA all'inizio del nuovo turno.
 public class CouncilPalace
 {
 
 	private CouncilPalaceCell[] councilPalaceCells;
+	private List<Player> playersInCouncilPalace = new ArrayList<Player>();
+	
+	public List<Player> getPlayersInCouncilPalace() {
+		return playersInCouncilPalace;
+	}
+
+	public void setPlayersInCouncilPalace(List<Player> playersInCouncilPalace) {
+		this.playersInCouncilPalace = playersInCouncilPalace;
+	}
 
 	public CouncilPalaceCell[] getCouncilPalaceCells() {
 		return councilPalaceCells;
@@ -15,20 +28,16 @@ public class CouncilPalace
 		this.councilPalaceCells = councilPalaceCells;
 	}
 
-	public void ExecuteEffect(Player player)
-	{
-		//TODO: implement the execution effect for this kind of cells
-	}
-	
 	public int firstCellFree() {
 		int i=0;
 		while ( i < this.councilPalaceCells.length)
 		{
-			if (!(councilPalaceCells[i].isEmpty()))
+			if ((councilPalaceCells[i].isEmpty()))
 			{
-				i++;
+				return i;
 			}
+			i++;
 		}
-		return i;
+		return -1;
 	}
 }

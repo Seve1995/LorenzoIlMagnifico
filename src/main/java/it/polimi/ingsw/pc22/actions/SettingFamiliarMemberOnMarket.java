@@ -2,6 +2,7 @@ package it.polimi.ingsw.pc22.actions;
 
 import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.gamebox.Market;
 import it.polimi.ingsw.pc22.gamebox.MarketCell;
 import it.polimi.ingsw.pc22.player.Player;
@@ -9,17 +10,18 @@ import it.polimi.ingsw.pc22.player.Player;
 import java.util.List;
 
 public class SettingFamiliarMemberOnMarket extends Action{
-	private Market market;
+	
 	private int zone;
 
-	public SettingFamiliarMemberOnMarket(FamilyMember familyMember, Market market, int zone) {
+	public SettingFamiliarMemberOnMarket(FamilyMember familyMember, int zone) {
 		super(familyMember);
-		this.market = market;
 		this.zone = zone;
 	}
 
 	@Override
-	protected boolean isLegal(Player player) {
+	protected boolean isLegal(Player player, GameBoard gameBoard) {
+		
+		Market market = this.gameBoard.getMarket(); 
 		
 		List<MarketCell> currMarketCells = market.getMarketCells();
 		
@@ -39,12 +41,13 @@ public class SettingFamiliarMemberOnMarket extends Action{
 	}
 	
 	@Override
-	public boolean executeAction(Player player) {
+	public boolean executeAction(Player player, GameBoard gameBoard) {
 		
 		List<Effect> currEffects;
 		
+		Market market = this.gameBoard.getMarket(); 
 		
-		if (isLegal(player) )
+		if (isLegal(player, gameBoard) )
 		{
 			market.getMarketCells().get(zone).setFamilyMember(this.getFamilyMember());
 			
@@ -54,7 +57,7 @@ public class SettingFamiliarMemberOnMarket extends Action{
 			
 			for (Effect e : currEffects)
 			{
-				e.executeEffect(player);
+				e.executeEffect(player, gameBoard);
 			}
 			
 			return true;

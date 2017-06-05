@@ -1,5 +1,6 @@
 package it.polimi.ingsw.pc22.adapters;
 
+import it.polimi.ingsw.pc22.actions.Action;
 import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.connection.User;
 import it.polimi.ingsw.pc22.player.Player;
@@ -77,4 +78,10 @@ public class SocketGameAdapter implements GameAdapter
 
         return  answer;
     }
+
+	@Override
+	public Action askAction() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

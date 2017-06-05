@@ -27,6 +27,7 @@ public class TowerCell extends Cell
 	
 	@Override
 	public void executeEffect(Player player) {
+		
 	}
 
 	@Override

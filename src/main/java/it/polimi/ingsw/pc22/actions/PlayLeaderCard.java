@@ -2,6 +2,7 @@ package it.polimi.ingsw.pc22.actions;
 
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.gamebox.LeaderCard;
 import it.polimi.ingsw.pc22.player.Player;
 
@@ -12,7 +13,7 @@ public class PlayLeaderCard extends Action {
 	private LeaderCard leaderCard;
 
 	
-	protected boolean isLegal(Player player) 
+	protected boolean isLegal(Player player, GameBoard gameBoard) 
 	{	
 		if (player.getPlayerBoard().getLeaderCards().size() > 4)
 		{
@@ -86,9 +87,9 @@ public class PlayLeaderCard extends Action {
 	}
 
 	@Override
-	public boolean executeAction(Player player) 
+	public boolean executeAction(Player player, GameBoard gameBoard) 
 	{
-		if (isLegal(player)){
+		if (isLegal(player, gameBoard)){
 			player.getPlayerBoard().getLeaderCards().add(leaderCard);
 			return true;
 		}

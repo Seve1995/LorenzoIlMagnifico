@@ -5,14 +5,16 @@ import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 
-public class PickTowerCard implements Effect{
-	
+public class PickTowerCard extends Effect
 
+{
 	private int floor;
 	private CardTypeEnum cardType;
 	private int diceValue;
 	private List<Asset> assetsDiscount;
 
+	
+	
 	public int getFloor() {
 		return floor;
 	}
@@ -48,7 +50,6 @@ public class PickTowerCard implements Effect{
 	public PickTowerCard() {}
 
 	public PickTowerCard(int floor, CardTypeEnum cardType, int diceValue) {
-		super();
 		this.floor = floor;
 		this.cardType = cardType;
 		this.diceValue = diceValue;
@@ -67,11 +68,11 @@ public class PickTowerCard implements Effect{
 
 
 	@Override
-	public boolean isLegal(Player player) 
+	public boolean isLegal(Player player, GameBoard gameBoard) 
 	{
 		Tower tower = null;
 		
-		for (Tower t : player.getGameBoard().getTower())
+		/*for (Tower t : getTowers())
 		{
 			if (t.getTowerType().equals(cardType))
 			{
@@ -83,7 +84,7 @@ public class PickTowerCard implements Effect{
 				}
 
 			}
-		}
+		}*/
 		
 		//modifico tutte le carte di quella torre!!
 
@@ -201,26 +202,26 @@ public class PickTowerCard implements Effect{
 	}
 	
 	
-	private void activeEffects(DevelopmentCard d, Player p)
+	/*private void activeEffects(DevelopmentCard d, Player p)
 	{
 		for (Effect e : d.getImmediateEffects())
 		{
-				e.executeEffect(p);
+				e.executeEffect(p, null);
 				
 				if ((e instanceof AddAsset) && p.isSantaRita())
 					e.executeEffect(p);
 		}
 			
-	}
+	}*/
 	
 	
 	@Override
-	public void executeEffect(Player player) 
+	public void executeEffect(Player player, GameBoard gameBoard) 
 	{
 
-		if (isLegal(player))
+		if (isLegal(player, gameBoard))
 		{
-				for (Tower t : player.getGameBoard().getTower())
+				/*for (Tower t : player.getGameBoard().getTowers())
 				{
 					if (t.getTowerType().equals(cardType))
 					{   
@@ -253,7 +254,7 @@ public class PickTowerCard implements Effect{
 						removeCards(t, floor);
 						
 					}
-				}
+				}*/
 		}
 		
 	
