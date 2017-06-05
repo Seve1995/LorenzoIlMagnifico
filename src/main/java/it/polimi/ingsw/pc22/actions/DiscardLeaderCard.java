@@ -2,11 +2,12 @@ package it.polimi.ingsw.pc22.actions;
 
 import it.polimi.ingsw.pc22.effects.PickOneCouncilPrivilege;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
+import it.polimi.ingsw.pc22.gamebox.LeaderCard;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class DiscardLeaderCard extends Action{
 	
-	private int index;
+	private LeaderCard leaderCard;
 
 	@Override
 	protected boolean isLegal(Player player, GameBoard gameBoard) {
@@ -17,10 +18,12 @@ public class DiscardLeaderCard extends Action{
 	@Override
 	public boolean executeAction(Player player, GameBoard gameBoard) {
 		
+		leaderCard = null;
 		
-		player.getLeaderCards().remove(index);
 		PickOneCouncilPrivilege currCouncilPrivilege=new PickOneCouncilPrivilege();
+		
 		currCouncilPrivilege.executeEffect(player, gameBoard);
+		
 		return true;
 		
 	}

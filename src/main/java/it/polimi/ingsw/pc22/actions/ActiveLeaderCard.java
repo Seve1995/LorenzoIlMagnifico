@@ -27,6 +27,8 @@ public class ActiveLeaderCard extends Action
 	@Override
 	public boolean executeAction(Player player, GameBoard gameBoard)
 	{
+		
+		
 		player.getPlayerBoard().getLeaderCards().get(index).setFaceUp(false);
 		
 		for (Effect e : player.getPlayerBoard().getLeaderCards().get(index).getEffects())

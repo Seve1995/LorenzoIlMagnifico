@@ -11,6 +11,13 @@ public class LeaderCard {
 	private List<Asset> requiredAssets;
 	private Map <CardTypeEnum, Integer> requiredCard = new HashMap<CardTypeEnum, Integer>();
 	private boolean faceUp;
+	private boolean isPlayed;
+	public boolean isPlayed() {
+		return isPlayed;
+	}
+	public void setPlayed(boolean isPlayed) {
+		this.isPlayed = isPlayed;
+	}
 	private List<Effect> effects;
 	
 	public String getName() {

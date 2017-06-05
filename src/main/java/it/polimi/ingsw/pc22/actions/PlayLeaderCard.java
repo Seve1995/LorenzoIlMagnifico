@@ -91,6 +91,8 @@ public class PlayLeaderCard extends Action {
 	{
 		if (isLegal(player, gameBoard)){
 			player.getPlayerBoard().getLeaderCards().add(leaderCard);
+			leaderCard.setPlayed(true);
+			
 			return true;
 		}
 		return false;
