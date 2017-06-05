@@ -156,21 +156,21 @@ public class GameMatch implements Runnable
 		for (int currentRoundNumber=0; currentRoundNumber < 24; currentRoundNumber++)
 		{
 			if (isNewTurn(currentRoundNumber)) 
-<<<<<<< HEAD
+
 				{
 					addDices();
 					addTowerCards(getEra(currentRoundNumber));
 					//Controlla il council palace 
 					//ordina l'array in base a player.priority
 				}
-=======
+
 			{
 				addDices();
 				addTowerCards(getEra(currentRoundNumber));
 				//Controlla il council palace
 				//ordina l'array in base a player.priority
 			}
->>>>>>> branch 'master' of https://github.com/Seve1995/LorenzoIlMagnifico.git
+
 			
 			for(Player player : players)
 			{
