@@ -65,6 +65,15 @@ public class GameBoard
 		this.dices = dices;
 	}
 
-	
+	public String toString() {
+		String output = "GAMEBOARD\n";
+		for(Tower t : towers)
+			output+=t.toString() + "\n";
+		output += harvest.toString();
+		output += production.toString();
+		output += market.toString();
+		output += councilPalace.toString();
+		return output;
+	}
 
 }

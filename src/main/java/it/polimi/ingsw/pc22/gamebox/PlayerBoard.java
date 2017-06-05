@@ -11,8 +11,6 @@ public class PlayerBoard {
 	private int typeOfBonusTile;
 	private BonusTile bonusTile;
 	
-	
-	
 	public List<TerritoryCard> getTerritories() {
 		return territories;
 	}
@@ -89,6 +87,31 @@ public class PlayerBoard {
 	}
 	
 	
-		
+	public String toString() {
+		String output ="";
+		output += "(PLAYER BUILDINGS) ";
+		for (BuildingCard b : buildings)
+			output += b.getName() + "|";
+		output += "\nProduction Bonus: " 
+			+ bonusTile.getProductionCoinsBonus().toString() + ", " 
+			+ bonusTile.getProductionMilitaryPointsBonus().toString() + ", " 
+			+ bonusTile.getProductionServantBonus().toString() + "\n";
+		output += "\n(PLAYER TERRITORIES) ";
+		for (TerritoryCard t : territories)
+			output += t.getName() + "|";
+		output += "\nHarvest Bonus: "
+			+ bonusTile.getHarvestCoinsBonus().toString() + ", " 
+			+ bonusTile.getHarvestMilitaryPointsBonus().toString() + ", " 
+			+ bonusTile.getHarvestServantBonus().toString() + ", " 
+			+ bonusTile.getHarvestStonesBonus().toString() + ", " 
+			+ bonusTile.getHarvestWoodsBonus() + "\n";
+		output += "\n(PLAYER CHARACTERS) ";
+		for (CharacterCard c : characters)
+			output += c.getName() + "|";
+		output += "\n(PLAYER VENTURES) ";
+		for (VentureCard v: ventures)
+			output += v.getName() + "|";
+		return output;
+	}
 	
 }
