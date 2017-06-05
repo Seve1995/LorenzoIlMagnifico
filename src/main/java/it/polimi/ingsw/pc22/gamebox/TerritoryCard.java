@@ -58,27 +58,11 @@ public class TerritoryCard extends DevelopmentCard
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
-		
-			String output = super.toString();
-			
-			return output;
+		return "TerritoryCard{" +
+				"permanentEffectActivationCost=" + permanentEffectActivationCost +
+				'}';
 	}
-	
-
-	@Override
-	public void useImmediateEffect(Player player) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void usePermanentEffect(Player player) {
-		// TODO Auto-generated method stub
-		
-	}
-	
-
 }

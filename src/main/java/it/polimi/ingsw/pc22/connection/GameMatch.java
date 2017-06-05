@@ -69,7 +69,7 @@ public class GameMatch implements Runnable
 		{
 			try
 			{
-				Thread.sleep(1000);
+				Thread.sleep(1000L);
 			}
 				catch (InterruptedException e)
 			{
@@ -77,8 +77,7 @@ public class GameMatch implements Runnable
 			}
 
 			boolean isTimeoutExpired =
-					System.currentTimeMillis() > timeStamp + timeOut;;
-
+					System.currentTimeMillis() > timeStamp + timeOut;
 
 			boolean isGameFull = playerCounter == maxPlayersNumber;
 
@@ -151,21 +150,19 @@ public class GameMatch implements Runnable
 		for (int currentRoundNumber=0; currentRoundNumber < 24; currentRoundNumber++)
 		{
 			if (isNewTurn(currentRoundNumber)) 
-				{
+			{
 				addDices();
 				addTowerCards(getEra(currentRoundNumber));
-				//Controlla il council palace 
+				//Controlla il council palace
 				//ordina l'array in base a player.priority
-				}
+			}
 			
 			for(Player player : players)
 			{
-				
-				
 				//pensare a timeout
 
-				while(true)
-				{
+				//while(true)
+				//{
 
 					//stampa gameBoard
 
@@ -190,7 +187,7 @@ public class GameMatch implements Runnable
 
 					//if (exectuted) continue;
 
-				}
+				//}
 			}
 
 			//if (currentRoundNumber % 8|6) gestionefineEra()
@@ -243,6 +240,8 @@ public class GameMatch implements Runnable
 		cards = CardLoader.loadCards(jsonCards);
 		
 		Collections.shuffle(cards);
+
+		System.out.println(cards);
 	}
 
 	private void loadExcommunicationCards()
@@ -365,9 +364,7 @@ public class GameMatch implements Runnable
 		
 	}
 		
-		
-	
-	
+
 	private int getEra(int currentRoundNumber)
 	{
 		//Valori di currentRoundNumber associati alle ere:
