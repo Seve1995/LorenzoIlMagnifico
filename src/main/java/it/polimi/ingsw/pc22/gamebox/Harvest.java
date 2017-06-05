@@ -38,10 +38,13 @@ public class Harvest
 	}
 	
 	public String toString() {
-		String output = "HARVEST\n"
-				+ "FamilyMembers already in harvest area:\n";
-		for (int i=0; i<firstCellFree(); i++)
-			output += i + ") " + harvestCells[i].getFamilyMember().toString();
+		String output = "HARVEST\n";
+		if (firstCellFree()!=0)
+			{
+			 output += "FamilyMembers already in harvest area:\n";
+			for (int i=0; i<firstCellFree(); i++)
+				output += i + ") " + harvestCells[i].getFamilyMember().toString();
+			}
 		return output;
 	}
 
