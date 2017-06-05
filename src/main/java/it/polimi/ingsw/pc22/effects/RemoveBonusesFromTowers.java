@@ -9,7 +9,7 @@ import it.polimi.ingsw.pc22.player.Player;
  * effect of another card).
  */
 
-public class RemoveBonusesFromTowers extends Effect
+public class RemoveBonusesFromTowers implements Effect
 {
 
 	@Override

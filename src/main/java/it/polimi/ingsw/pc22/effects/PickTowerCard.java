@@ -5,7 +5,7 @@ import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 
-public class PickTowerCard extends Effect
+public class PickTowerCard implements Effect
 
 {
 	private int floor;

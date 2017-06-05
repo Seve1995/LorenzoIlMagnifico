@@ -9,7 +9,7 @@ import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 
-public class EndGameMalus extends Effect{
+public class EndGameMalus implements Effect{
 	
 	private CardTypeEnum noCardVictoryPoint;
 	private List<Asset> assetsMalus; //Per ogni asset della lista in possesso del giocatore perdi un punto vittoria 

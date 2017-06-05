@@ -6,7 +6,7 @@ import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 
-public class FromAssetToAssetOrEffect extends Effect{
+public class FromAssetToAssetOrEffect implements Effect{
 
 	private List<Asset> paidAssets;
 	private List<Asset> gainedAssets;

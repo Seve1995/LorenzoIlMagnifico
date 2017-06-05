@@ -4,7 +4,7 @@ import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class AddAssetMalus extends Effect{
+public class AddAssetMalus implements Effect{
 
 	private Asset asset;
 

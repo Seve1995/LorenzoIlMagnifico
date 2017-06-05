@@ -8,7 +8,7 @@ import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 
-public class AddTowerCardDiscount extends Effect{
+public class AddTowerCardDiscount implements Effect{
 
 	private CardTypeEnum cardType;
 	private int diceValueDiscount;

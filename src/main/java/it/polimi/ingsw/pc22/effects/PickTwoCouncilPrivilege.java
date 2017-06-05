@@ -5,7 +5,7 @@ import it.polimi.ingsw.pc22.gamebox.AssetType;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class PickTwoCouncilPrivilege extends Effect{
+public class PickTwoCouncilPrivilege implements Effect{
 
 	private Asset choosenAsset1;
 	private Asset choosenAsset2;

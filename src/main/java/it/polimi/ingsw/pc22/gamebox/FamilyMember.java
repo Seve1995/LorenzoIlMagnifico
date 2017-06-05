@@ -1,12 +1,12 @@
 package it.polimi.ingsw.pc22.gamebox;
 
-import it.polimi.ingsw.pc22.player.Player;
-
 public class FamilyMember 
 {
 	private ColorsEnum color;
 	private PlayerColorsEnum playerColor;
 	private int familiarValue;
+	private boolean isPlayed; //TRUE = Il familyMember è stato giocato del player nel turno corrente
+	private int valueModifier; //Tiene traccia dei bonus/malus
 	
 	public PlayerColorsEnum getPlayerColor() {
 		return playerColor;
@@ -26,12 +26,32 @@ public class FamilyMember
 	public void setFamiliarValue(int familiarValue) {
 		this.familiarValue = familiarValue;
 	}
+	public boolean isPlayed() {
+		return isPlayed;
+	}
+	public void setPlayed(boolean isPlayed) {
+		this.isPlayed = isPlayed;
+	}
+	public int getValueModifier() {
+		return valueModifier;
+	}
+	public void setValueModifier(int valueModifier) {
+		this.valueModifier = valueModifier;
+	}
+	@Override
+	public String toString() {
+		return "FamilyMember [color=" + color + ", playerColor=" + playerColor + ", familiarValue=" + familiarValue
+				+ ", isPlayed=" + isPlayed + ", valueModifier=" + valueModifier + "]";
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((color == null) ? 0 : color.hashCode());
 		result = prime * result + familiarValue;
+		result = prime * result + (isPlayed ? 1231 : 1237);
+		result = prime * result + ((playerColor == null) ? 0 : playerColor.hashCode());
+		result = prime * result + valueModifier;
 		return result;
 	}
 	@Override
@@ -40,18 +60,20 @@ public class FamilyMember
 			return true;
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof FamilyMember))
 			return false;
 		FamilyMember other = (FamilyMember) obj;
 		if (color != other.color)
 			return false;
 		if (familiarValue != other.familiarValue)
 			return false;
+		if (isPlayed != other.isPlayed)
+			return false;
+		if (playerColor != other.playerColor)
+			return false;
+		if (valueModifier != other.valueModifier)
+			return false;
 		return true;
 	}
 	
-	@Override
-	public String toString() {
-		return "FamilyMember [color=" + color + ", value=" + familiarValue + "]";
-	}
 }

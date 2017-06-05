@@ -3,10 +3,10 @@ package it.polimi.ingsw.pc22.effects;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class DontPay3CoinsForOccupiedTower extends Effect {
+public class DontPay3CoinsForOccupiedTower implements Effect {
 
 	@Override
-	protected boolean isLegal(Player player, GameBoard gameBoard) {
+	public boolean isLegal(Player player, GameBoard gameBoard) {
 		return true;
 	}
 

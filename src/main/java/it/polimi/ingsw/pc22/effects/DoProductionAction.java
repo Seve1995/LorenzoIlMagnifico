@@ -4,7 +4,7 @@ import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.gamebox.TerritoryCard;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class DoProductionAction extends Effect {
+public class DoProductionAction implements Effect {
 
 	private int value;
 

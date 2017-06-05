@@ -5,7 +5,7 @@ import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class FamilyMemberModifier extends Effect
+public class FamilyMemberModifier implements Effect
 {
 
 	private ColorsEnum familyMemberColor;

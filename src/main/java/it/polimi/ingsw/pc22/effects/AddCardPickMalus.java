@@ -5,7 +5,7 @@ import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.CardModifier;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class AddCardPickMalus extends Effect{
+public class AddCardPickMalus implements Effect{
 
 	private CardTypeEnum cardType;
 	private int malusValue;
