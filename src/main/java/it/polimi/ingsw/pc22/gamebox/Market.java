@@ -1,6 +1,10 @@
 package it.polimi.ingsw.pc22.gamebox;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import it.polimi.ingsw.pc22.effects.AddAsset;
+import it.polimi.ingsw.pc22.effects.Effect;
 
 public class Market {
 	
@@ -17,16 +21,21 @@ public class Market {
 		this.marketCells = marketCells;
 	}
 
+	public String toString() {
+		String output = "MARKET\n";
+		for (int i=0; i<marketCells.size(); i++) 
+		{
+			if (!marketCells.get(i).isABlockedCell())
+				output += "Zone " + i + " : " + marketCells.get(i).toString().toLowerCase() + "\n";
+		}		
+		return output;
+	}
+	
 	public String gainInfo() {
 		String output = "There are 4 action spaces in the Market."
 				+ "Each space may contain only 1 Family Member."
 				+ "There can be any number of Family Members of the same color in the market area." 
 				+ "Every action space has a different effect.";
-		for (int i=0; i<marketCells.size(); i++) 
-		{
-			if (!marketCells.get(i).isABlockedCell())
-				output += "On cell " + (i+1) + " " + marketCells.get(i).toString().toLowerCase() + "\n";
-		}
 		return output;
 	}
 		
@@ -35,10 +44,14 @@ public class Market {
 		Asset asset = new Asset(3, AssetType.COIN);
 		Asset asset2 = new Asset(3, AssetType.FAITHPOINT);
 		List<Effect> effects = new ArrayList<Effect>();
-		effects.add(new GainAsset(asset));
-		effects.add(new GainAsset(asset2));
+		AddAsset add1= new AddAsset();
+		add1.setAsset(asset);
+		effects.add(add1);
+		AddAsset add2= new AddAsset();
+		add2.setAsset(asset);
+		effects.add(add2);
 		List<Effect> effects2 = new ArrayList<Effect>();
-		effects2.add(new GainAsset(asset));
+		effects2.add(add1);
 		List<MarketCell> marketCells = new ArrayList<MarketCell>();
 		marketCells.add(new MarketCell(3, effects));
 		marketCells.add(new MarketCell(5, effects2));

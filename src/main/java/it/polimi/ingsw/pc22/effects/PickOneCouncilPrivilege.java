@@ -21,5 +21,12 @@ public class PickOneCouncilPrivilege implements Effect{
 		player.addAsset(choosenAsset);
 		
 	}
+
+	@Override
+	public String toString() {
+		return "Pick One Council Privilege";
+	}
+	
+	
 	
 }

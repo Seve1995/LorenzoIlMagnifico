@@ -4,39 +4,46 @@ import it.polimi.ingsw.pc22.player.Player;
 
 public class Production
 {
-	private ProductionCell productionCell[];
+	private ProductionCell[] productionCells;
 
 	public Production(ProductionCell[] productionCell)
 	{
-		this.productionCell = productionCell;
+		this.productionCells = productionCell;
 	}
 
 	public ProductionCell[] getProductionCell() {
-		return productionCell;
+		return productionCells;
 	}
 
 	public void setProductionCell(ProductionCell[] productionCell) {
-		this.productionCell = productionCell;
+		this.productionCells = productionCell;
 	}
-
-	public String gainInfo() {
-		String output = "Production activates the corresponding personal bonus and the" +
-				"permanent effects of all Buildings on your Personal Board, but only of those Buildings" +
-				"that have a value equal to or lower than your Production action value.";
-		return output;
-	}
-
 	
 	public int firstCellFree() {
 		int i=0;
-		while ( i < this.productionCell.length)
+		while ( i < this.productionCells.length)
 		{
-			if (!(productionCell[i].isEmpty()))
+			if (!(productionCells[i].isEmpty()))
 			{
 				i++;
 			}
 		}
 		return i;
 	}
-
+	
+	public String toString() {
+		String output = "PRODUCTION\n"
+				+ "FamilyMembers already in production area:\n";
+		for (int i=0; i<firstCellFree(); i++)
+			output += i + ") " + productionCells[i].getFamilyMember().toString();
+		return output;
+	}
+	
+	public String gainInfo() {
+		String output = "Production activates the corresponding personal bonus and the" +
+				"permanent effects of all Buildings on your Personal Board, but only of those Buildings" +
+				"that have a value equal to or lower than your Production action value.";
+		return output;
+	}
+	
 }

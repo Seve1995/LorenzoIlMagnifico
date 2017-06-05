@@ -39,10 +39,11 @@ public class FamilyMember
 		this.valueModifier = valueModifier;
 	}
 	@Override
-	public String toString() {
-		return "FamilyMember [color=" + color + ", playerColor=" + playerColor + ", familiarValue=" + familiarValue
-				+ ", isPlayed=" + isPlayed + ", valueModifier=" + valueModifier + "]";
+	public String toString() 
+	{
+		return "PlayerColor: " + playerColor.toString() + ", FamiliarColor: " + color.toString();
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

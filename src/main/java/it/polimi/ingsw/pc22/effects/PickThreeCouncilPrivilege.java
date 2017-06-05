@@ -33,4 +33,9 @@ public class PickThreeCouncilPrivilege implements Effect{
 
 		}
 	}
+	
+	@Override
+	public String toString() {
+		return "Pick Three Council Privilege";
+	}
 }

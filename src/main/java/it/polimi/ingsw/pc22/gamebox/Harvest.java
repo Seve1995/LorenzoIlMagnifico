@@ -1,22 +1,33 @@
 package it.polimi.ingsw.pc22.gamebox;
 
-import it.polimi.ingsw.pc22.player.Player;
-
 public class Harvest
 {
-	private HarvestCell harvestCell[];
+	private HarvestCell[] harvestCells;
 
-	public Harvest(HarvestCell[] harvestCell)
+	public Harvest(HarvestCell[] harvestCells)
 	{
-		this.harvestCell = harvestCell;
+		this.harvestCells = harvestCells;
 	}
 
 	public HarvestCell[] getHarvestCell() {
-		return harvestCell;
+		return harvestCells;
 	}
 
-	public void setHarvestCell(HarvestCell[] harvestCell) {
-		this.harvestCell = harvestCell;
+	public void setHarvestCell(HarvestCell[] harvestCells) {
+		this.harvestCells = harvestCells;
+	}
+	
+
+	public int firstCellFree() {
+		int i=0;
+		while ( i < this.harvestCells.length)
+		{
+			if (!(harvestCells[i].isEmpty()))
+			{
+				i++;
+			}
+		}
+		return i;
 	}
 	
 	public String gainInfo() {
@@ -26,16 +37,12 @@ public class Harvest
 		return output;
 	}
 	
-	public int firstCellFree() {
-		int i=0;
-		while ( i < this.harvestCell.length)
-		{
-			if (!(harvestCell[i].isEmpty()))
-			{
-				i++;
-			}
-		}
-		return i;
+	public String toString() {
+		String output = "HARVEST\n"
+				+ "FamilyMembers already in harvest area:\n";
+		for (int i=0; i<firstCellFree(); i++)
+			output += i + ") " + harvestCells[i].getFamilyMember().toString();
+		return output;
 	}
 
 }

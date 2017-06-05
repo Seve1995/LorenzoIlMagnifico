@@ -40,4 +40,12 @@ public class CouncilPalace
 		}
 		return -1;
 	}
+	
+	public String toString() {
+		String output = "COUNCIL PALACE\n"
+				+ "FamilyMembers already in council palace:\n";
+		for (int i=0; i<firstCellFree(); i++)
+			output += i + ") " + councilPalaceCells[i].getFamilyMember().toString() + "\n";
+		return output;
+	}
 }
