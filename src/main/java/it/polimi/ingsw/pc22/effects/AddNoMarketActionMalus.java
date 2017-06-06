@@ -15,6 +15,7 @@ public class AddNoMarketActionMalus implements Effect{
 	public void executeEffect(Player player, GameBoard gameBoard) {
 		
 		if (isLegal(player,gameBoard))
+			
 			player.setDisableMarket(true);
 		
 	}

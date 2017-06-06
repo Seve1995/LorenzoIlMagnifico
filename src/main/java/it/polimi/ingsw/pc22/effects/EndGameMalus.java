@@ -10,7 +10,7 @@ public class EndGameMalus implements Effect{
 	private CardTypeEnum noCardVictoryPoint;
 	private List<Asset> assetsMalus; //Per ogni asset della lista in possesso del giocatore perdi un punto vittoria 
 	private boolean loseOneVictoryPointEveryFiveVictoryPoints;
-	private boolean territoryCardsMalus; //TRUE = Perdi un punto vittoria per ogni legno e pietra raffigurata sui costi delle carte edificio in possesso
+	private boolean buildingCardsMalus; //TRUE = Perdi un punto vittoria per ogni legno e pietra raffigurata sui costi delle carte edificio in possesso
 
 	public List<Asset> getAssetsMalus() {
 		return assetsMalus;
@@ -31,12 +31,12 @@ public class EndGameMalus implements Effect{
 		this.loseOneVictoryPointEveryFiveVictoryPoints = loseOneVictoryPointEveryFiveVictoryPoints;
 	}
 
-	public boolean isTerritoryCardsMalus() {
-		return territoryCardsMalus;
+	public boolean isBuildingCardsMalus() {
+		return buildingCardsMalus;
 	}
 
-	public void setTerritoryCardsMalus(boolean territoryCardsMalus) {
-		this.territoryCardsMalus = territoryCardsMalus;
+	public void setBuildingCardsMalus(boolean buildingCardsMalus) {
+		this.buildingCardsMalus = buildingCardsMalus;
 	}
 
 	@Override
@@ -66,7 +66,7 @@ public class EndGameMalus implements Effect{
 			player.setVictoryPoints(player.getVictoryPoints() - sum);
 		}
 		
-		if (territoryCardsMalus)
+		if (buildingCardsMalus)
 		{
 			int sum = 0;
 			for (BuildingCard b : player.getPlayerBoard().getBuildings())

@@ -274,9 +274,9 @@ public class GenericLoader
             endGameMalus.setLoseOneVictoryPointEveryFiveVictoryPoints
                     (loseOneVictoryPointEveryFiveVictoryPoints);
 
-            boolean territoryCardsMalus = jsonEffect.getBoolean("territoryCardsMalus");
+            boolean buildingCardsMalus = jsonEffect.getBoolean("buildingCardsMalus");
 
-            endGameMalus.setTerritoryCardsMalus(territoryCardsMalus);
+            endGameMalus.setBuildingCardsMalus(buildingCardsMalus);
 
             if (!jsonEffect.isNull("noCardVictoryPoint"))
             {

@@ -26,8 +26,7 @@ public class AddEndGameVictoryPoints implements Effect{
 	public void executeEffect(Player player, GameBoard gameBoard) {
 		
 		if (isLegal(player,gameBoard))
-		// TODO: Aggiungere controllo di fine partita. Questo metodo viene evocato solo al termine dell partita!
-			player.addAsset(asset);
+			player.setEndGameVictoryPoints(player.getEndGameVictoryPoints()+asset.getValue());
 	}
 
 	@Override
