@@ -39,13 +39,13 @@ public class GameMatch implements Runnable
 
 	private List<ExcommunicationCard> excommunicationCards;
 
-	private Long timeOut;
+	private Long timeout;
 
 	private static final String BOARD_PATH = "boards/";
 	
 	public GameMatch(Long timeOut, int maxPlayersNumber)
 	{
-		this.timeOut = timeOut;
+		this.timeout = timeOut;
 		this.maxPlayersNumber = maxPlayersNumber;
 	}
 	
@@ -66,7 +66,7 @@ public class GameMatch implements Runnable
 			}
 
 			boolean isTimeoutExpired =
-					System.currentTimeMillis() > timeStamp + timeOut;
+					System.currentTimeMillis() > timeStamp + timeout;
 
 			boolean isGameFull = playerCounter == maxPlayersNumber;
 
@@ -76,7 +76,7 @@ public class GameMatch implements Runnable
 		}
 
 		System.out.println("Inizio partita");
-		
+
 		startGame();
 
 		endGame();
@@ -94,48 +94,70 @@ public class GameMatch implements Runnable
 
 		//loadLeaderCards();
 		
-        //int turnNumber = 6 * currentmembers
-
-		//loadresourcestoplayers
-
-		//loadBonusTilestoplayers
+        int turnNumber = 6 * playerCounter;
 
 		//setDellecartescomunica
 
-		//INIZIO PARTITA SU BASE CONNESSIONE
+		setUpPlayers();
 
-		/*for (int currentRoundNumber=0; currentRoundNumber < 24; currentRoundNumber++)
+		for (int currentRoundNumber=0; currentRoundNumber < turnNumber; currentRoundNumber++)
 		{
 			if (isNewTurn(currentRoundNumber))
 			{
-
 				addDices();
 
 				addTowerCards(getEra(currentRoundNumber));
 
-				CheckOrderTurn(players, gameBoard);
+				checkOrderTurn();
 
+				//resetLeaderCards(players);
+
+				epurateGameBoard(gameBoard);
+
+				resetFamiliars(players);
 			}
 
-			
 			for(Player player : players)
 			{
+				if (isNewTurn(currentRoundNumber))
+				{
+					player.setFamiliarToPlayer(gameBoard.getDices());
+				}
+
 				GameAdapter adapter = player.getAdapter();
 
-				FamilyMember familyMember = adapter.askFamiliarMember(player, timeOut);
+				adapter.printMessage(gameBoard.toString());
 
-				if (familyMember == null) continue;
+				adapter.printMessage(player.getPlayerBoard().toString());
 
-				Asset servants = adapter.askServants(player, timeOut);
+				Long timestamp = System.currentTimeMillis();
 
-				if (servants == null) continue;
+				while (System.currentTimeMillis() < timestamp + timeout)
+				{
+					FamilyMember familyMember = adapter.askFamiliarMember(player, timeout);
+
+					System.out.println("Familiar: " + familyMember);
+
+					if (familyMember == null) continue;
+
+					Asset servants = adapter.askServants(player, timeout);
+
+					System.out.println("Familiar: " + servants);
+
+					if (servants == null) continue;
+
+					Action action = adapter.askAction(familyMember, servants, timeout);
+
+					System.out.println("Familiar: " + action);
+
+					boolean executed = action.executeAction(player, gameBoard);
+
+					if (!executed) continue;
+				}
+
+				adapter.printMessage(player.getPlayerBoard().toString());
 			}
-			
-			resetLeaderCards(players);
 
-			epurateGameBoard(gameBoard);
-			
-			resetFamiliars(players);
 
 			// se é la fine di una era
 			if (((playerCounter < 5) && ((currentRoundNumber==8)) || ((playerCounter == 5) && (currentRoundNumber) == 6)))
@@ -160,12 +182,10 @@ public class GameMatch implements Runnable
 							//excommunicate(p, )
 						}
 					}
-					
 				}
-			
 			}
 
-			if ((playerCounter < 5 && currentRoundNumber == 16) ||  (playerCounter == 5 && currentRoundNumber == 6))
+			if ((playerCounter < 5 && currentRoundNumber == 16) ||  (playerCounter == 5 && currentRoundNumber == 12))
 			{
 				for (Player p : players)
 				{
@@ -218,8 +238,6 @@ public class GameMatch implements Runnable
 		
 		selectWinner(players);
 
-		*/
-
 		endGame();
 		
 	}
@@ -233,6 +251,10 @@ public class GameMatch implements Runnable
 		{
 			Player player = players.get(i);
 			player.setCoins(coins);
+
+			PlayerBoard playerBoard = player.getPlayerBoard();
+
+			playerBoard.setBonusTile(tiles.get(i));
 
 			player.setPriority(i);
 
@@ -312,6 +334,8 @@ public class GameMatch implements Runnable
 		JSONObject bonusTiles = new JSONObject(bonusTilesString);
 
 		tiles = BonusTileLoader.loadBonusTiles(bonusTiles);
+
+		System.out.println(tiles);
 	}
 
 	private String fileLoader(String path)
@@ -375,19 +399,25 @@ public class GameMatch implements Runnable
 		List<DevelopmentCard> territoryCards = cards.parallelStream()
 				.filter(devCard -> (devCard.getRoundNumber() == roundNumber && devCard instanceof TerritoryCard))
 				.collect(Collectors.toList())
-				.subList(0, 3);
+				.subList(0, 4);
+
 		cards.removeAll(territoryCards);
+
 		List<TowerCell> territoryTowerCells = towers[0].getTowerCells();
-		for (int i=0; i<territoryTowerCells.size(); i++)
-			{
+
+		for (int i=0; i < territoryTowerCells.size(); i++)
+		{
 			territoryTowerCells.get(i).setDevelopmentCard(territoryCards.get(i));
-			}
+		}
 		
 		List<DevelopmentCard> characterCards = cards.parallelStream()
 				.filter(devCard -> (devCard.getRoundNumber() == roundNumber && devCard instanceof CharacterCard))
-				.collect(Collectors.toList());;
+				.collect(Collectors.toList())
+				.subList(0, 4);
+
 		cards.removeAll(characterCards);
-		List<TowerCell> characterTowerCells = towers[0].getTowerCells();
+
+		List<TowerCell> characterTowerCells = towers[1].getTowerCells();
 		for (int i=0; i<characterTowerCells.size(); i++)
 			{
 			characterTowerCells.get(i).setDevelopmentCard(characterCards.get(i));
@@ -395,9 +425,12 @@ public class GameMatch implements Runnable
 
 		List<DevelopmentCard> buildingCards = cards.parallelStream()
 				.filter(devCard -> (devCard.getRoundNumber() == roundNumber && devCard instanceof BuildingCard))
-				.collect(Collectors.toList());;
+				.collect(Collectors.toList())
+				.subList(0, 4);
+
 		cards.removeAll(buildingCards);
-		List<TowerCell> buildingTowerCells = towers[0].getTowerCells();
+
+		List<TowerCell> buildingTowerCells = towers[2].getTowerCells();
 		for (int i=0; i<buildingTowerCells.size(); i++)
 			{
 			buildingTowerCells.get(i).setDevelopmentCard(buildingCards.get(i));
@@ -405,9 +438,12 @@ public class GameMatch implements Runnable
 		
 		List<DevelopmentCard> ventureCards = cards.parallelStream()
 				.filter(devCard -> (devCard.getRoundNumber() == roundNumber && devCard instanceof VentureCard))
-				.collect(Collectors.toList());;
+				.collect(Collectors.toList())
+				.subList(0, 4);
+
 		cards.removeAll(ventureCards);
-		List<TowerCell> ventureTowerCells = towers[0].getTowerCells();
+
+		List<TowerCell> ventureTowerCells = towers[3].getTowerCells();
 		for (int i=0; i<ventureTowerCells.size(); i++)
 			{
 			ventureTowerCells.get(i).setDevelopmentCard(ventureCards.get(i));
@@ -474,6 +510,8 @@ public class GameMatch implements Runnable
 		{
 			cp.setFamilyMember(null);
 		}
+
+		gameBoard.getCouncilPalace().setPlayersInCouncilPalace(new ArrayList<>());
 	
 	}
 	
@@ -627,46 +665,22 @@ public class GameMatch implements Runnable
 		}
 	}
 
-	private void CheckOrderTurn(List<Player> players, GameBoard gameBoard)
+	private void checkOrderTurn()
 	{
-		for (Player p : players)
+		CouncilPalace palace = gameBoard.getCouncilPalace();
+
+		List<Player> tempPlayers = palace.getPlayersInCouncilPalace();
+
+		for (Player player : players)
 		{
-			p.setPriority(16);
+			if(tempPlayers.contains(player)) continue;
+
+			tempPlayers.add(player);
 		}
 
-		for (int i=0;  i < gameBoard.getCouncilPalace().getCouncilPalaceCells().length; i++)
-		{
-			for (Player p : players)
-			{
-				if (gameBoard.getCouncilPalace().getCouncilPalaceCells()[i].getFamilyMember().getPlayerColor() == p.getPlayerColorsEnum())
-				{
-					p.setPriority(gameBoard.getCouncilPalace().getCouncilPalaceCells().length - i);
-				}
-			}
-
-		}
-
-		List<Player> players1 = null;
-
-		for (Player p : players)
-		{
-			for (Player p1 : players)
-			{
-				if (p.getPriority() <= p1.getPriority())
-				{
-					players1.add(p);
-
-				}
-			}
-
-		}
-
-		players = players1;
-
+		players = tempPlayers;
 	}
 
-
-	
 	private String selectWinner(List<Player> players)
 	{
 		int winner=0;

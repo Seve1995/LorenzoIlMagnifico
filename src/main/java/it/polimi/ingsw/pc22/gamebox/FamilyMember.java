@@ -50,7 +50,9 @@ public class FamilyMember
 	@Override
 	public String toString() 
 	{
-		return "PlayerColor: " + playerColor.toString() + ", FamiliarColor: " + color.toString();
+		return "PlayerColor: " + playerColor.toString() + '\n'
+				+ "FamiliarColor: " + color.toString() + '\n'
+				+ "Value: " + familiarValue;
 	}
 	
 	@Override

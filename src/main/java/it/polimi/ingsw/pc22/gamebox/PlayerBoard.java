@@ -1,13 +1,14 @@
 package it.polimi.ingsw.pc22.gamebox;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerBoard {
-	private List<TerritoryCard> territories;
-	private List<BuildingCard> buildings;
-	private List<CharacterCard> characters;
-	private List<VentureCard> ventures;
-	private List<LeaderCard> leaderCards;
+	private List<TerritoryCard> territories = new ArrayList<>();
+	private List<BuildingCard> buildings = new ArrayList<>();
+	private List<CharacterCard> characters= new ArrayList<>();
+	private List<VentureCard> ventures = new ArrayList<>();
+	private List<LeaderCard> leaderCards = new ArrayList<>();
 	private int typeOfBonusTile;
 	private BonusTile bonusTile;
 	
@@ -69,13 +70,6 @@ public class PlayerBoard {
 	public void setBonusTile(BonusTile bonusTile) {
 		this.bonusTile = bonusTile;
 	}
-	
-
-
-	public void getBonus (BonusTile bonusTile){
-		
-	}
-
 
 	public List<LeaderCard> getLeaderCards() {
 		return leaderCards;

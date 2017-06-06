@@ -68,7 +68,7 @@ public class BonusTileLoader extends GenericLoader
 
         tile.setProductionServantBonus(productionServantBonus);
         tile.setProductionCoinsBonus(productionCoinsBonus);
-        tile.setHarvestMilitaryPointsBonus(productionMilitaryPointsBonus);
+        tile.setProductionMilitaryPointsBonus(productionMilitaryPointsBonus);
         tile.setHarvestServantBonus(harvestServantBonus);
         tile.setHarvestCoinsBonus(harvestCoinsBonus);
         tile.setHarvestStonesBonus(harvestStoneBonus);

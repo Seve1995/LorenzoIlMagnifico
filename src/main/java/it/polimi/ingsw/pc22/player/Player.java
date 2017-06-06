@@ -22,7 +22,7 @@ public class Player
 	private int victoryPoints;
 	private int priority;
 	private int endGameVictoryPoints;
-	private List<LeaderCard> leaderCards;
+	private List<LeaderCard> leaderCards = new ArrayList<>();
 	private List<CardModifier> cardModifiers;
 	private List<AddEndGameVictoryPoints> addEndGameVictoryPoints;
 	private int harvestValueModifier; //Serve per gestire l'effetto AddHarvestValueBonus
@@ -45,49 +45,23 @@ public class Player
 	private boolean newAction;
 	private boolean removeTowerBonus;
 	private List<FamilyMember> familyMembers = new ArrayList<>();
-	private PlayerBoard playerBoard;
+	private PlayerBoard playerBoard = new PlayerBoard();
 	private GameAdapter adapter;
 
 
 	@Override
 	public String toString() {
 		return "Player{" +
-				"name='" + name + '\'' +
-				", numberOfMatch=" + numberOfMatch +
-				", woods=" + woods +
-				", stones=" + stones +
-				", servants=" + servants +
-				", coins=" + coins +
-				", militaryPoints=" + militaryPoints +
-				", faithPoints=" + faithPoints +
-				", victoryPoints=" + victoryPoints +
-				", priority=" + priority +
-				", leaderCards=" + leaderCards +
-				", cardModifiers=" + cardModifiers +
-				", addEndGameVictoryPoints=" + addEndGameVictoryPoints +
-				", haverstValueModifier=" + harvestValueModifier +
-				", productionValueModifier=" + productionValueModifier +
-				", militaryPointsMalus=" + militaryPointsMalus +
-				", coinMalus=" + coinMalus +
-				", servantMalus=" + servantMalus +
-				", woodMalus=" + woodMalus +
-				", stoneMalus=" + stoneMalus +
-				", familyMemberMalus=" + familyMemberMalus +
-				", disableMarket=" + disableMarket +
-				", servantsHandlerMalus=" + servantsHandlerMalus +
-				", noFirstAction=" + noFirstAction +
-				", noMilitaryPointsForTerritories=" + noMilitaryPointsForTerritories +
-				", dontCareOccupiedPlaces=" + dontCareOccupiedPlaces +
-				", dontPayThreeCoinsInTowers=" + dontPayThreeCoinsInTowers +
-				", playWithThePope=" + playWithThePope +
-				", santaRita=" + santaRita +
-				", sistoIV=" + sistoIV +
-				", newAction=" + newAction +
-				", removeTowerBonus=" + removeTowerBonus +
-				", familyMembers=" + familyMembers +
-				", playerBoard=" + playerBoard +
-				", adapter=" + adapter +
-				'}';
+				"name='" + name + '\n' +
+				", numberOfMatch=" + numberOfMatch + '\n' +
+				", woods=" + woods +'\n' +
+				", stones=" + stones +'\n' +
+				", servants=" + servants +'\n' +
+				", coins=" + coins +'\n' +
+				", militaryPoints=" + militaryPoints +'\n' +
+				", faithPoints=" + faithPoints +'\n' +
+				", victoryPoints=" + victoryPoints +'\n' +
+				" }";
 	}
 
 	@Override

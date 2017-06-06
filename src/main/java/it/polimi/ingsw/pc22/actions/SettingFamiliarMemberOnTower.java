@@ -89,7 +89,6 @@ public class SettingFamiliarMemberOnTower extends Action {
 	@Override
 	protected boolean isLegal (Player player, GameBoard gameBoard)
 	{
-		
 		Tower tower = selectedTower(cardTypeEnum, gameBoard.getTowers()); 
 		
 		PickTowerCard pickTowerCard = new PickTowerCard(floor, tower.getTowerType(), familyMember.getValue());
@@ -120,34 +119,28 @@ public class SettingFamiliarMemberOnTower extends Action {
 		
 		PickTowerCard pickTowerCard = new PickTowerCard(floor, tower.getTowerType(), familyMember.getValue());
 		
-		if (isLegal(player, gameBoard))
+		if (!isLegal(player, gameBoard))
+			return false;
+
+		if (PayThreeCoins(player, tower))
 		{
-			if (PayThreeCoins(player, tower))
-			{
-				player.setCoins(player.getCoins() - 3);
-			}
-			
-			tower.getTowerCells().get(floor).setFamilyMember(this.getFamilyMember());
-			
-			familyMember.setPlayed(true);
-			
-			currEffects = tower.getTowerCells().get(floor).getEffects();
-				
-			for (Effect e : currEffects)
-			{
-				e.executeEffect(player, gameBoard);
-			}
-			
-			pickTowerCard.executeEffect(player, gameBoard);
-			
-			return true;
+			player.setCoins(player.getCoins() - 3);
 		}
 
-		else
+		tower.getTowerCells().get(floor).setFamilyMember(this.getFamilyMember());
+
+		familyMember.setPlayed(true);
+
+		currEffects = tower.getTowerCells().get(floor).getEffects();
+
+		for (Effect e : currEffects)
 		{
-			
-			return false;
+			e.executeEffect(player, gameBoard);
 		}
+
+		pickTowerCard.executeEffect(player, gameBoard);
+
+		return true;
 		
 	}
 	

@@ -43,7 +43,9 @@ public class ActionFactory
     public static Action createAction
         (FamilyMember familyMember, String userCommand)
     {
-        String actionName = ActionFactory.parseAction(userCommand);
+        String actionName = parseAction(userCommand);
+
+        System.out.println("String action name: " + actionName);
 
         if (actionName == null) return null;
 
@@ -51,7 +53,9 @@ public class ActionFactory
 
         try
         {
-            Class actionClass = Class.forName(actionName);
+            String className = ACTION_PATH + actionName;
+
+            Class actionClass = Class.forName(className);
 
             action = (Action) actionClass.newInstance();
         }
@@ -59,6 +63,8 @@ public class ActionFactory
         {
             return null;
         }
+
+        System.out.println("ActionFactory" + action);
 
         action.setFamilyMember(familyMember);
 
@@ -75,7 +81,14 @@ public class ActionFactory
 
             Matcher matcher = pattern.matcher(action);
 
-            if (matcher.find()) return parsers.get(regEx);
+            System.out.println("pattern " + pattern);
+
+            System.out.println(parsers.get(regEx));
+
+            if (matcher.find())
+            {
+                return parsers.get(regEx);
+            }
         }
 
         return null;
@@ -93,6 +106,8 @@ public class ActionFactory
 
             Matcher matcher = pattern.matcher(userCommand);
 
+            matcher.find();
+
             CardTypeEnum type = CardTypeEnum.valueOf(matcher.group(0));
 
             tower.setCardTypeEnum(type);
@@ -100,6 +115,8 @@ public class ActionFactory
             Pattern floorPattern = Pattern.compile("[0-3]$");
 
             Matcher floorMatcher = floorPattern.matcher(userCommand);
+
+            floorMatcher.find();
 
             Integer floor = Integer.parseInt(floorMatcher.group(0));
 
@@ -114,6 +131,8 @@ public class ActionFactory
             Pattern pattern = Pattern.compile("[0-3]$");
 
             Matcher matcher = pattern.matcher(userCommand);
+
+            matcher.find();
 
             Integer zone = Integer.parseInt(matcher.group(0));
 
