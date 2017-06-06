@@ -160,15 +160,18 @@ public class GameMatch implements Runnable
 				{
 					addDices();
 					addTowerCards(getEra(currentRoundNumber));
-					//Controlla il council palace 
-					//ordina l'array in base a player.priority
+					
+					
 				}
 
 			{
+				
 				addDices();
+				
 				addTowerCards(getEra(currentRoundNumber));
-				//Controlla il council palace
-				//ordina l'array in base a player.priority
+				
+				CheckOrderTurn(players, gameBoard);
+				
 			}
 
 			
@@ -209,13 +212,10 @@ public class GameMatch implements Runnable
 			
 			resetLeaderCards(players);
 			
-			//manca ordine di turno
-			
 			epurateGameBoard(gameBoard);
 			
 			resetFamiliars(players);
-			
-			
+		
 			// se é la fine di una era
 			if (((playerCounter < 5) && ((currentRoundNumber+1) % 8==0)) || ((playerCounter == 5) && (currentRoundNumber+1) %6==0)) 
 			{
@@ -233,7 +233,7 @@ public class GameMatch implements Runnable
 						{
 							p.setFaithPoints(0);	
 						}
-						
+					
 						else 
 						{
 							//excommunicate(p, )
@@ -245,18 +245,22 @@ public class GameMatch implements Runnable
 			}
 			 
 		}
+		
+		for (Player p : players)
+		{
+			excommunicate(p, excommunicationCards, 3);
+		}
+		
+		
 	
-		sumFinalPoints(players);
+		sumFinalPoints(players); //check excommunication
 		
 		selectWinner(players);
 		
 		endGame();
 		
 	}
-
-
 	
-
 	private void endGame()
 	{
 		for (Player player : players)
@@ -527,64 +531,150 @@ public class GameMatch implements Runnable
 	
 	private void sumFinalPoints(List<Player> players)
 	{
+		int militaryPoints1 = 0;
+		
+		int militaryPoints2 = 0;
+		
+		List<Player> p1 = null;
+		
 		for (Player p : players)
 		{
-			if (p.getPlayerBoard().getTerritories().size() == 3)
-				
-				p.setVictoryPoints(p.getVictoryPoints() + 1);
 			
-			if (p.getPlayerBoard().getTerritories().size() == 4)
-				
-				p.setVictoryPoints(p.getVictoryPoints() + 4);
-			
-			if (p.getPlayerBoard().getTerritories().size() == 5)
-				
-				p.setVictoryPoints(p.getVictoryPoints() + 10);
-			
-			if (p.getPlayerBoard().getTerritories().size() == 6)
-				
-				p.setVictoryPoints(p.getVictoryPoints() + 20);
-			
-			if (p.getPlayerBoard().getCharacters().size() == 1)
-				
-				p.setVictoryPoints(p.getVictoryPoints() + 1);
-			
-			if (p.getPlayerBoard().getCharacters().size() == 2)
-				
-				p.setVictoryPoints(p.getVictoryPoints() + 3);
-			
-			if (p.getPlayerBoard().getCharacters().size() == 3)
-				
-				p.setVictoryPoints(p.getVictoryPoints() +6);
-			
-			if (p.getPlayerBoard().getCharacters().size() == 4)
-				
-				p.setVictoryPoints(p.getVictoryPoints() + 10);
-			
-			if (p.getPlayerBoard().getCharacters().size() == 5)
-				
-				p.setVictoryPoints(p.getVictoryPoints() + 15);
-			
-			if (p.getPlayerBoard().getCharacters().size() == 6)
-				
-				p.setVictoryPoints(p.getVictoryPoints() + 21);
-			
-			for (VentureCard v : p.getPlayerBoard().getVentures())
+			if (p.getPlayerBoard().getTerritories() != null )
 			{
-				for (Effect e : v.getPermanentEffects())
-				{
-					e.executeEffect(p, gameBoard);
-				}
-
+			
+				if (p.getPlayerBoard().getTerritories().size() == 3)
+					
+					p.setVictoryPoints(p.getVictoryPoints() + 1);
+				
+				if (p.getPlayerBoard().getTerritories().size() == 4)
+					
+					p.setVictoryPoints(p.getVictoryPoints() + 4);
+				
+				if (p.getPlayerBoard().getTerritories().size() == 5)
+					
+					p.setVictoryPoints(p.getVictoryPoints() + 10);
+				
+				if (p.getPlayerBoard().getTerritories().size() == 6)
+					
+					p.setVictoryPoints(p.getVictoryPoints() + 20);
+		
 			}
 			
-			p.setVictoryPoints(p.getVictoryPoints()+(sumFinalResources(p)/5));
+			if (p.getPlayerBoard().getCharacters() != null)
+			{
 			
-			//mancano i punti vittoria associati alla forza militare
+				if (p.getPlayerBoard().getCharacters().size() == 1)
+					
+					p.setVictoryPoints(p.getVictoryPoints() + 1);
 				
+				if (p.getPlayerBoard().getCharacters().size() == 2)
+					
+					p.setVictoryPoints(p.getVictoryPoints() + 3);
+				
+				if (p.getPlayerBoard().getCharacters().size() == 3)
+					
+					p.setVictoryPoints(p.getVictoryPoints() +6);
+				
+				if (p.getPlayerBoard().getCharacters().size() == 4)
+					
+					p.setVictoryPoints(p.getVictoryPoints() + 10);
+				
+				if (p.getPlayerBoard().getCharacters().size() == 5)
+					
+					p.setVictoryPoints(p.getVictoryPoints() + 15);
+				
+				if (p.getPlayerBoard().getCharacters().size() == 6)
+					
+					p.setVictoryPoints(p.getVictoryPoints() + 21);
+			}
+			
+			if (p.getPlayerBoard().getVentures() != null)
+			{
+			
+				for (VentureCard v : p.getPlayerBoard().getVentures())
+				{
+					for (Effect e : v.getPermanentEffects())
+					{
+						e.executeEffect(p, gameBoard);
+					}
+	
+				}
+			
+			}
+			
+			p.setVictoryPoints(p.getVictoryPoints() + p.getEndGameVictoryPoints());
+			
+			p.setVictoryPoints(p.getVictoryPoints()+(sumFinalResources(p)/5));
+ 			
+			if (p.getMilitaryPoints() >= militaryPoints1)
+				
+				militaryPoints1 = p.getMilitaryPoints(); 
+			
+			if (p.getMilitaryPoints() >= militaryPoints2 && p.getMilitaryPoints() < militaryPoints1)
+				
+				militaryPoints2 = p.getMilitaryPoints();
 		}
 		
+		AssignMilitaryBonus(players, militaryPoints1, militaryPoints2);
+			
 	}
+	
+	private void AssignMilitaryBonus(List <Player> players, int m1, int m2)
+	{
+		for (Player p : players)
+		{
+			if (p.getMilitaryPoints() == m1)
+			{
+				p.setVictoryPoints(p.getVictoryPoints() + 5);
+			}
+			
+			if (p.getMilitaryPoints() == m2)
+			{
+				p.setVictoryPoints(p.getVictoryPoints() + 2);
+			}
+			
+		}
+	}
+	
+	private void CheckOrderTurn(List<Player> players, GameBoard gameBoard)
+	{
+		for (Player p : players)
+		{
+			p.setPriority(16);
+		}
+		
+		for (int i=0;  i < gameBoard.getCouncilPalace().getCouncilPalaceCells().length; i++)
+		{
+			for (Player p : players)
+			{
+				if (gameBoard.getCouncilPalace().getCouncilPalaceCells()[i].getFamilyMember().getPlayerColor() == p.getPlayerColorsEnum())
+				{
+					p.setPriority(gameBoard.getCouncilPalace().getCouncilPalaceCells().length - i);
+				}
+			}
+			
+		}
+		
+		List<Player> players1 = null;
+		
+		for (Player p : players)
+		{
+			for (Player p1 : players)
+			{
+				if (p.getPriority() <= p1.getPriority())
+				{	
+					players1.add(p);
+					
+				}
+			}
+
+		}
+		
+		players = players1;
+		
+	}
+	
 	
 	
 	private String selectWinner(List<Player> players)
