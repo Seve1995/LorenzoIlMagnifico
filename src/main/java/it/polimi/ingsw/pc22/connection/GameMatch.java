@@ -27,6 +27,8 @@ import it.polimi.ingsw.pc22.utils.BoardLoader;
 import it.polimi.ingsw.pc22.utils.BonusTileLoader;
 import it.polimi.ingsw.pc22.utils.CardLoader;
 import it.polimi.ingsw.pc22.utils.ExcommunicationCardLoader;
+import it.polimi.ingsw.pc22.utils.GameBoardUtils;
+
 import org.json.JSONObject;
 
 import java.io.File;
@@ -217,19 +219,19 @@ public class GameMatch implements Runnable
 			resetFamiliars(players);
 		
 			// se é la fine di una era
-			if (((playerCounter < 5) && ((currentRoundNumber+1) % 8==0)) || ((playerCounter == 5) && (currentRoundNumber+1) %6==0)) 
+			if (((playerCounter < 5) && ((currentRoundNumber==8)) || ((playerCounter == 5) && (currentRoundNumber) == 6)))
 			{
 				for (Player p : players)
 				{
-					if (true)
+					if ((p.getFaithPoints() < 3))
 						
-						excommunicate(p, excommunicationCards, getEra(currentRoundNumber+1) -1);
+						excommunicate(p, excommunicationCards, 1);
 					
 					else 
 					{
 						//ask if they want to be excommunicated
 						
-						if (true)
+						if (true) //se accetta la scomunica
 						{
 							p.setFaithPoints(0);	
 						}
@@ -243,15 +245,55 @@ public class GameMatch implements Runnable
 				}
 			
 			}
-			 
+			
+			if ((playerCounter < 5 && currentRoundNumber == 16) ||  (playerCounter == 5 && currentRoundNumber == 6))
+			{
+				for (Player p : players)
+				{
+					if (p.getFaithPoints() < 4)
+						
+						excommunicate(p, excommunicationCards, 2);
+					
+					else 
+					{
+						//ask if they want to be excommunicated
+						
+						if (true) //se accetta la scomunica
+						{
+							p.setFaithPoints(0);	
+						}
+					
+						else 
+						{
+							//excommunicate(p, )
+						}
+					}		
+				}
+			}
 		}
 		
 		for (Player p : players)
 		{
-			excommunicate(p, excommunicationCards, 3);
+			if (p.getFaithPoints() < 5)
+				
+				excommunicate(p, excommunicationCards, 3);
+			
+			else //ask if you want to be excommunicated
+			{
+				if (true) //se accetta la scomunica
+				{
+					p.setFaithPoints(0);
+				}
+				
+				else
+				{
+					//excommunicate..
+					
+				}
+				
+			}
+			
 		}
-		
-		
 	
 		sumFinalPoints(players); //check excommunication
 		
@@ -535,8 +577,6 @@ public class GameMatch implements Runnable
 		
 		int militaryPoints2 = 0;
 		
-		List<Player> p1 = null;
-		
 		for (Player p : players)
 		{
 			
@@ -614,10 +654,13 @@ public class GameMatch implements Runnable
 			if (p.getMilitaryPoints() >= militaryPoints2 && p.getMilitaryPoints() < militaryPoints1)
 				
 				militaryPoints2 = p.getMilitaryPoints();
+			
+			p.setVictoryPoints(p.getVictoryPoints() +  GameBoardUtils.CalculateVictoryPointsForFaithPoints(p.getFaithPoints()));
+			
 		}
 		
 		AssignMilitaryBonus(players, militaryPoints1, militaryPoints2);
-			
+		
 	}
 	
 	private void AssignMilitaryBonus(List <Player> players, int m1, int m2)
@@ -695,6 +738,8 @@ public class GameMatch implements Runnable
 		}
 		
 		return winnerName;
+		
+		//stampalo a tutti i giocatori
 		
 	}
 	
