@@ -1,21 +1,23 @@
 package it.polimi.ingsw.pc22.actions;
 
-import java.util.List;
-
 import it.polimi.ingsw.pc22.gamebox.CouncilPalace;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
+import java.util.List;
+
 public class SettingFamiliarMemberOnCouncilPalace extends Action {
-	
-	
 
 	public SettingFamiliarMemberOnCouncilPalace(FamilyMember familyMember) {
 		super(familyMember);
 	}
 
-	@Override
+    public SettingFamiliarMemberOnCouncilPalace() {
+
+    }
+
+    @Override
 	protected boolean isLegal(Player player, GameBoard gameBoard) {
 		
 		if (super.getFamilyMember().getValue()<1) 

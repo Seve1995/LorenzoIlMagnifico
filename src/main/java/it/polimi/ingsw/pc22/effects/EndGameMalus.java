@@ -1,10 +1,6 @@
 package it.polimi.ingsw.pc22.effects;
 
-import it.polimi.ingsw.pc22.gamebox.Asset;
-import it.polimi.ingsw.pc22.gamebox.AssetType;
-import it.polimi.ingsw.pc22.gamebox.BuildingCard;
-import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
-import it.polimi.ingsw.pc22.gamebox.GameBoard;
+import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;

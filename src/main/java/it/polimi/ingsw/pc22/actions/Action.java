@@ -8,8 +8,7 @@ public abstract class Action
 {
 	protected FamilyMember familyMember;
 	protected GameBoard gameBoard;
-	
-	
+
 	public Action(){}
 
 	public Action(FamilyMember familyMember) {
@@ -27,4 +26,6 @@ public abstract class Action
 	protected abstract boolean isLegal(Player player, GameBoard gameBoard);
 
 	public abstract boolean executeAction(Player player, GameBoard gameBoard);
+
+
 }

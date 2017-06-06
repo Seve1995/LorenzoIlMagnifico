@@ -32,13 +32,7 @@ public class GameServer
 		
 		gameMatchMap = new ConcurrentHashMap<>();
 
-		GameMatch gameMatch = new GameMatch(1000L, 5);
-
-		gameMatch.setPlayerCounter(3);
-
-		new Thread(gameMatch).start();
-
-		/*try
+		try
 		{
 			Registry registry = LocateRegistry.createRegistry(RMI_PORT);
 
@@ -81,7 +75,7 @@ public class GameServer
 			catch (IOException | JSONException e)
 		{
 			e.printStackTrace();
-		}*/
+		}
 	}
 	
 	protected static Map<String, User> loadUsers() throws IOException, JSONException

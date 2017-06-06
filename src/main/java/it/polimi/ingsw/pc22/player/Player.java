@@ -4,16 +4,18 @@ import it.polimi.ingsw.pc22.adapters.GameAdapter;
 import it.polimi.ingsw.pc22.effects.AddEndGameVictoryPoints;
 import it.polimi.ingsw.pc22.gamebox.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Player 
 {	
 	private String name;
 	private PlayerColorsEnum playerColorsEnum;
 	private int numberOfMatch;
-	private int woods;
-	private int stones;
-	private int servants;
+	private int woods = 2;
+	private int stones = 2;
+	private int servants = 3;
 	private int coins;
 	private int militaryPoints;
 	private int faithPoints;
@@ -41,7 +43,7 @@ public class Player
 	private boolean sistoIV;
 	private boolean newAction;
 	private boolean removeTowerBonus;
-	private List<FamilyMember> familyMember;
+	private List<FamilyMember> familyMembers = new ArrayList<>();
 	private PlayerBoard playerBoard;
 	private GameAdapter adapter;
 
@@ -81,7 +83,7 @@ public class Player
 				", sistoIV=" + sistoIV +
 				", newAction=" + newAction +
 				", removeTowerBonus=" + removeTowerBonus +
-				", familyMember=" + familyMember +
+				", familyMembers=" + familyMembers +
 				", playerBoard=" + playerBoard +
 				", adapter=" + adapter +
 				'}';
@@ -128,7 +130,7 @@ public class Player
 			return false;
 		if (addEndGameVictoryPoints != null ? !addEndGameVictoryPoints.equals(player.addEndGameVictoryPoints) : player.addEndGameVictoryPoints != null)
 			return false;
-		if (familyMember != null ? !familyMember.equals(player.familyMember) : player.familyMember != null)
+		if (familyMembers != null ? !familyMembers.equals(player.familyMembers) : player.familyMembers!= null)
 			return false;
 		if (playerBoard != null ? !playerBoard.equals(player.playerBoard) : player.playerBoard != null) return false;
 		return adapter != null ? adapter.equals(player.adapter) : player.adapter == null;
@@ -168,7 +170,7 @@ public class Player
 		result = 31 * result + (sistoIV ? 1 : 0);
 		result = 31 * result + (newAction ? 1 : 0);
 		result = 31 * result + (removeTowerBonus ? 1 : 0);
-		result = 31 * result + (familyMember != null ? familyMember.hashCode() : 0);
+		result = 31 * result + (familyMembers != null ? familyMembers.hashCode() : 0);
 		result = 31 * result + (playerBoard != null ? playerBoard.hashCode() : 0);
 		result = 31 * result + (adapter != null ? adapter.hashCode() : 0);
 		return result;
@@ -355,11 +357,11 @@ public class Player
 		this.removeTowerBonus = removeTowerBonus;
 	}
 	
-	public List<FamilyMember> getFamilyMember() {
-		return familyMember;
+	public List<FamilyMember> getFamilyMembers() {
+		return familyMembers;
 	}
-	public void setFamilyMember(List<FamilyMember> familyMember) {
-		this.familyMember = familyMember;
+	public void setFamilyMembers(List<FamilyMember> familyMembers) {
+		this.familyMembers = familyMembers;
 	}
 	public PlayerBoard getPlayerBoard() {
 		return playerBoard;
@@ -495,19 +497,54 @@ public class Player
 		
 	}
 
+	public List<FamilyMember> getUnusedFamiliarMembers()
+	{
+		return familyMembers.parallelStream().
+			filter(familyMember -> familyMember.isPlayed() == false)
+			.collect(Collectors.toList());
+	}
+
+	public FamilyMember getUnusedFamilyMemberByColor(ColorsEnum color)
+	{
+		List<FamilyMember> unusedFamilyMembers = getUnusedFamiliarMembers();
+
+		for (FamilyMember familyMember : unusedFamilyMembers)
+		{
+			if (familyMember.getColor() == color)
+				return familyMember;
+		}
+
+		return null;
+	}
+
+	public void setFamiliarToPlayer(List<Dice> dices)
+	{
+		for (Dice dice : dices)
+		{
+			FamilyMember familyMember = new FamilyMember();
+
+			familyMember.setFamiliarValue(dice.getNumber());
+			familyMember.setColor(dice.getColor());
+			familyMember.setPlayerColor(playerColorsEnum);
+
+			familyMember.setPlayed(false);
+
+			familyMembers.add(familyMember);
+		}
+	}
 
 	public void removeFamilyMember (FamilyMember f)
 	
 	{
 	
-		for(int i=0; i < familyMember.size(); i++)
+		for(int i=0; i < familyMembers.size(); i++)
 		{
 		
-			if (this.familyMember.get(i).getColor().equals(f.getColor()))
+			if (this.familyMembers.get(i).getColor().equals(f.getColor()))
 				
 			{
 			
-				this.familyMember.remove(i);
+				this.familyMembers.remove(i);
 				
 			}
 		

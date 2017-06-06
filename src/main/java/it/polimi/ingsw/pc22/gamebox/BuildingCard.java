@@ -1,7 +1,6 @@
 package it.polimi.ingsw.pc22.gamebox;
 
 import it.polimi.ingsw.pc22.effects.Effect;
-import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 

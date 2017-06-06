@@ -1,13 +1,11 @@
 package it.polimi.ingsw.pc22.adapters;
 
 import it.polimi.ingsw.pc22.actions.Action;
-import it.polimi.ingsw.pc22.actions.SettingFamiliarMemberOnCouncilPalace;
-import it.polimi.ingsw.pc22.actions.SettingFamiliarMemberOnMarket;
 import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.connection.User;
+import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
-import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.rmi.RMIClientStreamService;
 
@@ -37,6 +35,16 @@ public class RMIGameAdapter implements GameAdapter
         {
                 e.printStackTrace();
         }
+    }
+
+    @Override
+    public FamilyMember askFamiliarMember(Player player, Long timeout) {
+        return null;
+    }
+
+    @Override
+    public Asset askServants(Player player, Long timeout) {
+        return null;
     }
 
     @Override
@@ -78,40 +86,10 @@ public class RMIGameAdapter implements GameAdapter
 
         return message;
     }
-
-	
-	//public Action askAction(FamilyMember familyMember, Player p, GameBoard gameBoard) {
-		/*
-		 * [PARTE IL TIMEOUT]
-		OPERAZIONE 1:
-		0) FamilyMember White, Value: x
-		1) FamilyMember Blue, Value: 
-		...
-		
-		da 0 a massimo valore
-		[CONTROLLA IL TIMEOUT]
-		
-		
-		OPERAZIONE 2:
-		-> Inserire numero di servitori da scartare (0-> Nessun servitore, nMaxServitori)
-		
-		OPERAZIONE 3:
-		Seleziona operazione:
-		- Metti familiare su torre (es: set tower BUILDING 3 con numberOfFloor tra 0 e 3)
-		- Metti familiare su market (es: set market ZONA con zona tra 0 e 3)
-		- Metti familiare nella produzione (es: set production)
-		- Metti familiare nella raccolto (es: set harvest)
-		- Metti familiare nel concilio (es: set council)
-		 */
-		
-		//this.printMessage("WE ZIO DIMMI L'AZIONE!");
-		//String risposta = getMessage();
-		//if (risposta.equalsIgnoreCase("set market"))
-		//	return new SettingFamiliarMemberOnMarket(familyMember, gameBoard.getMarket(), zone) ;
-	//}
-
+    
 	@Override
-	public Action askAction() {
+	public Action askAction(FamilyMember familyMember, Asset servant ,Long timeout)
+    {
 		// TODO Auto-generated method stub
 		return null;
 	}

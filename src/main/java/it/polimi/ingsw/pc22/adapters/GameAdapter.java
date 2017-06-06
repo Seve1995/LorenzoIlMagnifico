@@ -1,7 +1,9 @@
 package it.polimi.ingsw.pc22.adapters;
 
 import it.polimi.ingsw.pc22.actions.Action;
+import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
+import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.player.Player;
 
 import java.io.IOException;
@@ -17,9 +19,13 @@ public interface GameAdapter
 
     String getMessage();
     
-    Action askAction();
+    Action askAction(FamilyMember familyMember, Asset servant ,Long timeout);
     
     int askFloor();
     
     CardTypeEnum askForCardType();
+
+    FamilyMember askFamiliarMember(Player player, Long timeout);
+
+    Asset askServants(Player player, Long timeout);
 }

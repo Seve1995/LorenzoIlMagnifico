@@ -1,27 +1,9 @@
 package it.polimi.ingsw.pc22.connection;
 
+import it.polimi.ingsw.pc22.actions.Action;
 import it.polimi.ingsw.pc22.adapters.GameAdapter;
 import it.polimi.ingsw.pc22.effects.Effect;
-import it.polimi.ingsw.pc22.gamebox.BonusTile;
-import it.polimi.ingsw.pc22.gamebox.BuildingCard;
-import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
-import it.polimi.ingsw.pc22.gamebox.CharacterCard;
-import it.polimi.ingsw.pc22.gamebox.ColorsEnum;
-import it.polimi.ingsw.pc22.gamebox.CouncilPalaceCell;
-import it.polimi.ingsw.pc22.gamebox.DevelopmentCard;
-import it.polimi.ingsw.pc22.gamebox.Dice;
-import it.polimi.ingsw.pc22.gamebox.ExcommunicationCard;
-import it.polimi.ingsw.pc22.gamebox.FamilyMember;
-import it.polimi.ingsw.pc22.gamebox.GameBoard;
-import it.polimi.ingsw.pc22.gamebox.HarvestCell;
-import it.polimi.ingsw.pc22.gamebox.LeaderCard;
-import it.polimi.ingsw.pc22.gamebox.MarketCell;
-import it.polimi.ingsw.pc22.gamebox.PlayerColorsEnum;
-import it.polimi.ingsw.pc22.gamebox.ProductionCell;
-import it.polimi.ingsw.pc22.gamebox.TerritoryCard;
-import it.polimi.ingsw.pc22.gamebox.Tower;
-import it.polimi.ingsw.pc22.gamebox.TowerCell;
-import it.polimi.ingsw.pc22.gamebox.VentureCard;
+import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.BoardLoader;
 import it.polimi.ingsw.pc22.utils.BonusTileLoader;
@@ -36,14 +18,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class GameMatch implements Runnable
 {	
 	private String gameName;
 
 	private List<Player> players;
-	
+
 	private int playerCounter = 0;
 	
 	private int maxPlayersNumber;
@@ -110,6 +91,30 @@ public class GameMatch implements Runnable
 		loadBonusTiles();
 
 		//loadLeaderCards();
+
+		setUpPlayers();
+
+		addDices();
+
+		Player player = players.get(0);
+
+		player.setFamiliarToPlayer(gameBoard.getDices());
+
+		GameAdapter adapter = player.getAdapter();
+
+		FamilyMember familyMember = adapter.askFamiliarMember(player, timeOut);
+
+		if (familyMember == null) return;
+
+		Asset servants = adapter.askServants(player, timeOut);
+
+		if (servants == null) return;
+
+		Action action = adapter.askAction(familyMember, servants, timeOut);
+
+		boolean executed = action.executeAction(player, gameBoard);
+
+		System.out.println(executed);
 		
         //int turnNumber = 6 * currentmembers
 
@@ -120,50 +125,10 @@ public class GameMatch implements Runnable
 		//setDellecartescomunica
 
 		//INIZIO PARTITA SU BASE CONNESSIONE
-		
-		int coins = 5;
-		for (int i=0; i<playerCounter; i++)
-		{
-			Player p = players.get(i);
-			p.setCoins(coins);
-			p.setWoods(2);
-			p.setStones(2);
-			p.setServants(3);
-			p.setFamilyMember(new ArrayList<FamilyMember>());
-			p.setPriority(i);
-			coins++;
-			switch (i) {
-			case 0:
-				p.setPlayerColorsEnum(PlayerColorsEnum.RED);
-				break;
-			case 1:
-				p.setPlayerColorsEnum(PlayerColorsEnum.BLUE);
-				break;
-			case 2:
-				p.setPlayerColorsEnum(PlayerColorsEnum.YELLOW);
-				break;
-			case 3:
-				p.setPlayerColorsEnum(PlayerColorsEnum.GREEN);
-				break;
-			case 4:
-				p.setPlayerColorsEnum(PlayerColorsEnum.BROWN);
-				break;
-			default:
-				break;
-			}
-		}
-		
-		for (int currentRoundNumber=0; currentRoundNumber < 24; currentRoundNumber++)
-		{
-			if (isNewTurn(currentRoundNumber)) 
 
-				{
-					addDices();
-					addTowerCards(getEra(currentRoundNumber));
-					//Controlla il council palace 
-					//ordina l'array in base a player.priority
-				}
-
+		/*for (int currentRoundNumber=0; currentRoundNumber < 24; currentRoundNumber++)
+		{
+			if (isNewTurn(currentRoundNumber))
 			{
 				addDices();
 				addTowerCards(getEra(currentRoundNumber));
@@ -174,37 +139,15 @@ public class GameMatch implements Runnable
 			
 			for(Player player : players)
 			{
-				//pensare a timeout
+				GameAdapter adapter = player.getAdapter();
 
-				//while(true)
-				//{
+				FamilyMember familyMember = adapter.askFamiliarMember(player, timeOut);
 
-					//stampa gameBoard
+				if (familyMember == null) continue;
 
-					//stampa plancia
+				Asset servants = adapter.askServants(player, timeOut);
 
-					player.getAdapter().askAction(); //Richiesta: che razza di azione vuoi fare??
-					
-					//aggiungere le tre azioni leader: scarta, gioca, attiva
-
-					//vuoi sacrificare i servitori??
-
-					//scegli dove metterti? mercato-concilio-torre-produzione-raccolto
-
-					//se player dice "setFamiliarOnTower WHITE tipo floor"
-					//se player dice "setFamiliarOnmarket BLACK position"
-					//se player dice "setFamiliarOnCouncil ORANGE"
-					//se player dice "setFamiliarOnHarvest NEUTER"
-					//se player dice "setFamiliarOnProduction "
-
-					//new decorator(new Action(), numServitori);
-					//boolean  executed = decorator.execute(player);
-					//else
-					//boolean executed =  action.execute(player);
-
-					//if (exectuted) continue;
-
-				//}
+				if (servants == null) continue;
 			}
 			
 			resetLeaderCards(players);
@@ -249,13 +192,35 @@ public class GameMatch implements Runnable
 		sumFinalPoints(players);
 		
 		selectWinner(players);
+
+		*/
 		
 		endGame();
 		
 	}
 
+	private void setUpPlayers()
+	{
+		int coins = 5;
 
-	
+		for (int i=0; i < playerCounter; i++)
+		{
+			Player player = players.get(i);
+			player.setCoins(coins);
+
+			player.setPriority(i);
+
+			PlayerColorsEnum color =
+					PlayerColorsEnum.getColorByValue(i);
+
+			player.setPlayerColorsEnum(color);
+
+			System.out.println(color.toString());
+
+			coins++;
+		}
+	}
+
 
 	private void endGame()
 	{
@@ -298,8 +263,6 @@ public class GameMatch implements Runnable
 		cards = CardLoader.loadCards(jsonCards);
 		
 		Collections.shuffle(cards);
-
-		System.out.println(cards);
 	}
 
 	private void loadExcommunicationCards()
@@ -358,19 +321,23 @@ public class GameMatch implements Runnable
 	
 	private void addDices() 
 	{
-		ArrayList<Dice> dices = new ArrayList<Dice>();
+		ArrayList<Dice> dices = new ArrayList<>();
+
 		Dice blackDice = new Dice(ColorsEnum.BLACK);
 		blackDice.rollingDice();
+
 		dices.add(blackDice);
 		Dice whiteDice = new Dice(ColorsEnum.WHITE);
+
 		whiteDice.rollingDice();
 		dices.add(whiteDice);
-		if(this.playerCounter<5)
-			{
+
+		if(this.playerCounter < 5)
+		{
 			Dice orangeDice = new Dice(ColorsEnum.ORANGE);
 			dices.add(orangeDice);
 			orangeDice.rollingDice();
-			}
+		}
 		gameBoard.setDices(dices);
 	}
 	
@@ -488,7 +455,7 @@ public class GameMatch implements Runnable
 	{
 		for (Player p : players)
 		{
-			for (FamilyMember f : p.getFamilyMember())
+			for (FamilyMember f : p.getFamilyMembers())
 			{
 				f.setPlayed(false);
 			}

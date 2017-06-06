@@ -26,7 +26,7 @@ public class AddFamilyMembersMalus implements Effect{
 	public void executeEffect(Player player, GameBoard gameBoard) {
 		
 		if (isLegal(player,gameBoard))
-			for(FamilyMember f : player.getFamilyMember())
+			for(FamilyMember f : player.getFamilyMembers())
 			{
 				f.setValueModifier(diceValueMalus);
 			}

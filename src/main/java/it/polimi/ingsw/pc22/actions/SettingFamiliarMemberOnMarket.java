@@ -13,8 +13,18 @@ public class SettingFamiliarMemberOnMarket extends Action{
 	
 	private int zone;
 
+	public SettingFamiliarMemberOnMarket(){}
+
 	public SettingFamiliarMemberOnMarket(FamilyMember familyMember, int zone) {
 		super(familyMember);
+		this.zone = zone;
+	}
+
+	public int getZone() {
+		return zone;
+	}
+
+	public void setZone(int zone) {
 		this.zone = zone;
 	}
 

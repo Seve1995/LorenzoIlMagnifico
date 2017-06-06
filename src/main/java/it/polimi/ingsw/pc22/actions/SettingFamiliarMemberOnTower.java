@@ -3,12 +3,7 @@ package it.polimi.ingsw.pc22.actions;
 
 import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.effects.PickTowerCard;
-import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
-import it.polimi.ingsw.pc22.gamebox.ColorsEnum;
-import it.polimi.ingsw.pc22.gamebox.FamilyMember;
-import it.polimi.ingsw.pc22.gamebox.GameBoard;
-import it.polimi.ingsw.pc22.gamebox.Tower;
-import it.polimi.ingsw.pc22.gamebox.TowerCell;
+import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
@@ -16,14 +11,30 @@ import java.util.List;
 public class SettingFamiliarMemberOnTower extends Action {
 	private int floor;
 	private CardTypeEnum cardTypeEnum;
-	
-	
-	public SettingFamiliarMemberOnTower (FamilyMember familyMember, CardTypeEnum cardTypeEnum, int floor) 
+
+	public SettingFamiliarMemberOnTower(){}
+
+	public int getFloor() {
+		return floor;
+	}
+
+	public void setFloor(int floor) {
+		this.floor = floor;
+	}
+
+	public CardTypeEnum getCardTypeEnum() {
+		return cardTypeEnum;
+	}
+
+	public void setCardTypeEnum(CardTypeEnum cardTypeEnum) {
+		this.cardTypeEnum = cardTypeEnum;
+	}
+
+	public SettingFamiliarMemberOnTower (FamilyMember familyMember, CardTypeEnum cardTypeEnum, int floor)
 	{
 		super(familyMember);
 		this.floor = floor;
 		this.cardTypeEnum = cardTypeEnum;
-
 	}
 	
 	private boolean PayThreeCoins (Player p, Tower t)

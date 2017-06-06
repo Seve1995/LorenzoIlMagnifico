@@ -1,10 +1,6 @@
 package it.polimi.ingsw.pc22.gamebox;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import it.polimi.ingsw.pc22.effects.AddAsset;
-import it.polimi.ingsw.pc22.effects.Effect;
 
 public class Market {
 	

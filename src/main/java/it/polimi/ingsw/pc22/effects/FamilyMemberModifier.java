@@ -32,7 +32,7 @@ public class FamilyMemberModifier implements Effect
 	@Override
 	public void executeEffect(Player player, GameBoard gameBoard) {
 		if (!toColoured){
-			for (FamilyMember f : player.getFamilyMember())
+			for (FamilyMember f : player.getFamilyMembers())
 			{
 				if (f.getColor().equals(ColorsEnum.NEUTER))
 				{
@@ -45,7 +45,7 @@ public class FamilyMemberModifier implements Effect
 		}
 		
 		if (toColoured && toAll){
-			for (FamilyMember f : player.getFamilyMember())
+			for (FamilyMember f : player.getFamilyMembers())
 			{
 				if (!(f.getColor().equals(ColorsEnum.NEUTER)))
 				{
@@ -89,7 +89,7 @@ public class FamilyMemberModifier implements Effect
 					}*/
 					
 					
-					for (FamilyMember f : player.getFamilyMember())
+					for (FamilyMember f : player.getFamilyMembers())
 					{
 						if (f.getColor().equals(familyMemberColor))
 							

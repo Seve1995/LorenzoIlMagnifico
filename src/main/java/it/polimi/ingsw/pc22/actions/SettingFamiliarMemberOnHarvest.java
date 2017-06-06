@@ -1,21 +1,20 @@
 package it.polimi.ingsw.pc22.actions;
 
 import it.polimi.ingsw.pc22.effects.DoHarvestAction;
-import it.polimi.ingsw.pc22.gamebox.ColorsEnum;
-import it.polimi.ingsw.pc22.gamebox.FamilyMember;
-import it.polimi.ingsw.pc22.gamebox.GameBoard;
-import it.polimi.ingsw.pc22.gamebox.Harvest;
-import it.polimi.ingsw.pc22.gamebox.HarvestCell;
+import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class SettingFamiliarMemberOnHarvest extends Action{
 
-	
 	public SettingFamiliarMemberOnHarvest(FamilyMember familyMember) {
 		super(familyMember);
 	}
 
-	@Override
+    public SettingFamiliarMemberOnHarvest() {
+
+    }
+
+    @Override
 	protected boolean isLegal (Player player, GameBoard gameBoard) {
 		
 		Harvest harvest = this.gameBoard.getHarvest(); 
@@ -37,7 +36,7 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 			)
 				break;
 			
-			if (player.getFamilyMember().contains(currFamilyMember))
+			if (player.getFamilyMembers().contains(currFamilyMember))
 				
 				return false;
 			
@@ -55,8 +54,7 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 		
 		if (isLegal(player, gameBoard) && !(player.isDontCareOccupiedPlaces()))
 		{
-			
-			
+
 			harvest.getHarvestCell()[harvest.firstCellFree()].setFamilyMember(this.getFamilyMember());
 
 			familyMember.setPlayed(true);

@@ -1,22 +1,21 @@
 package it.polimi.ingsw.pc22.actions;
 
 import it.polimi.ingsw.pc22.effects.DoProductionAction;
-import it.polimi.ingsw.pc22.gamebox.ColorsEnum;
-import it.polimi.ingsw.pc22.gamebox.FamilyMember;
-import it.polimi.ingsw.pc22.gamebox.GameBoard;
-import it.polimi.ingsw.pc22.gamebox.Production;
-import it.polimi.ingsw.pc22.gamebox.ProductionCell;
+import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class SettingFamiliarMemberOnProduction extends Action {
 
-	
-	public SettingFamiliarMemberOnProduction(FamilyMember familyMember) {
+	public SettingFamiliarMemberOnProduction(FamilyMember familyMember)
+	{
 		super(familyMember);
-		
 	}
 
-	@Override
+    public SettingFamiliarMemberOnProduction() {
+
+    }
+
+    @Override
 	protected boolean isLegal(Player player, GameBoard gameBoard) {
 		
 		Production production = this.gameBoard.getProduction();
@@ -32,12 +31,12 @@ public class SettingFamiliarMemberOnProduction extends Action {
 			
 			if
 			(
-					currFamilyMember.getColor()==ColorsEnum.NEUTER ||
-					super.getFamilyMember().getColor() == ColorsEnum.NEUTER
+				currFamilyMember.getColor()==ColorsEnum.NEUTER ||
+				super.getFamilyMember().getColor() == ColorsEnum.NEUTER
 			)
 				break;
 			
-			if (player.getFamilyMember().contains(currFamilyMember))
+			if (player.getFamilyMembers().contains(currFamilyMember))
 				return false;
 		}
 		

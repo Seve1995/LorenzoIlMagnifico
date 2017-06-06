@@ -1,9 +1,9 @@
 package it.polimi.ingsw.pc22.gamebox;
 
+import it.polimi.ingsw.pc22.player.Player;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import it.polimi.ingsw.pc22.player.Player;
 
 //TODO: Nel gameMatch va controllata la lista di playersInCouncilPalace all'inizio di ogni nuovo turno e va SVUOTATA all'inizio del nuovo turno.
 public class CouncilPalace

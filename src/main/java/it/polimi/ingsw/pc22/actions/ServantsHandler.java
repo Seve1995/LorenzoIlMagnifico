@@ -1,5 +1,6 @@
 package it.polimi.ingsw.pc22.actions;
 
+import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
@@ -13,23 +14,22 @@ public class ServantsHandler extends Action
 
     private Action action;
 
-    private int sacrifiedServantsNumber;
+    private Asset servants;
 
-    public ServantsHandler(Action action, int sacrifiedServantsNumber)
+    public ServantsHandler(Action action, Asset servants)
     {
         super();
         this.action = action;
-        this.sacrifiedServantsNumber = sacrifiedServantsNumber;
+        this.servants = servants;
     }
 
     @Override
     public boolean isLegal(Player player, GameBoard gameBoard)
     {
-    	if(this.sacrifiedServantsNumber > player.getServants()){
+    	int servantsNumber = servants.getValue();
 
-    		return false;
-
-    	}
+    	if(servantsNumber > player.getServants())
+			return false;
 
         return true;
     }
@@ -37,8 +37,9 @@ public class ServantsHandler extends Action
     @Override
     public boolean executeAction(Player player, GameBoard gameBoard)
     {
-    	
-    	double multiplier;
+		int servantsNumber = servants.getValue();
+
+		double multiplier;
     	
     	if (player.isServantMalus())
     		multiplier=1;
@@ -46,24 +47,20 @@ public class ServantsHandler extends Action
     	else
     		multiplier=0.5;
     	
-    	if (isLegal(player, gameBoard)) {
-    		
-    		   int familiarValue =  action.getFamilyMember().getFamiliarValue();
+    	if (!isLegal(player, gameBoard)) return false;
 
-    	       familiarValue = (int) (familiarValue + this.sacrifiedServantsNumber/(2*multiplier));
+		int familiarValue =  action.getFamilyMember().getFamiliarValue();
 
-    	       action.getFamilyMember().setFamiliarValue(familiarValue);
+		familiarValue = (int) (familiarValue + servantsNumber/(2*multiplier));
 
-    	       int servantsNumber = player.getServants();
+		action.getFamilyMember().setFamiliarValue(familiarValue);
 
-    	       servantsNumber = (int) (servantsNumber - 2*multiplier*this.sacrifiedServantsNumber);
+		int currServants = player.getServants();
 
-    	       player.setServants(servantsNumber);
+		servantsNumber = (int) (currServants - 2 * multiplier * servantsNumber);
 
-    	       return true;
-    	}
+		player.setServants(servantsNumber);
 
-    	return false;
-
+		return true;
     }
 }
