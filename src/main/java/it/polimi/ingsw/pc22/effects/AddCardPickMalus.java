@@ -32,7 +32,7 @@ public class AddCardPickMalus implements Effect{
 	}
 
 	@Override
-	public void executeEffect(Player player, GameBoard gameBoard) {
+	public boolean executeEffect(Player player, GameBoard gameBoard) {
 		
 		if (isLegal(player,gameBoard))
 		{
@@ -41,7 +41,11 @@ public class AddCardPickMalus implements Effect{
 			currCardModifier.setCardType(cardType);
 		
 			player.getCardModifier().add(currCardModifier);
+			
+			return true;
 		}
+		
+		return false;
 		
 	}
 	

@@ -23,15 +23,18 @@ public class PickThreeCouncilPrivilege implements Effect{
 	}
 
 	@Override
-	public void executeEffect(Player player, GameBoard gameBoard) 
+	public boolean executeEffect(Player player, GameBoard gameBoard) 
 	{
 		if (isLegal(player, gameBoard))
 		{
 			player.addAsset(choosenAsset1);
 			player.addAsset(choosenAsset2);
 			player.addAsset(choosenAsset3);
+			return true;
 
 		}
+		
+		return false;
 	}
 	
 	@Override

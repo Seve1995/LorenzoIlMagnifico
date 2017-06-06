@@ -23,12 +23,14 @@ public class AddProductionValueModifier implements Effect{
 	}
 
 	@Override
-	public void executeEffect(Player player, GameBoard gameBoard) {
+	public boolean executeEffect(Player player, GameBoard gameBoard) {
 		
 		if (isLegal(player,gameBoard))
 		{
 			player.setProductionValueModifier(player.getProductionValueModifier() + value);
+			return true;
 		}
+		return false;
 		
 	}
 

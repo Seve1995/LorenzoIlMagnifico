@@ -23,10 +23,14 @@ public class AddEndGameVictoryPoints implements Effect{
 	}
 
 	@Override
-	public void executeEffect(Player player, GameBoard gameBoard) {
+	public boolean executeEffect(Player player, GameBoard gameBoard) {
 		
 		if (isLegal(player,gameBoard))
+		{
 			player.setEndGameVictoryPoints(player.getEndGameVictoryPoints()+asset.getValue());
+			return true;
+		}
+		return false;
 	}
 
 	@Override

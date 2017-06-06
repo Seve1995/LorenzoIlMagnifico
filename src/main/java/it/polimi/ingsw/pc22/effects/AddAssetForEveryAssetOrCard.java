@@ -37,7 +37,7 @@ public class AddAssetForEveryAssetOrCard implements Effect{
 	}
 	
 	@Override
-	public void executeEffect(Player player, GameBoard gameBoard) {
+	public boolean executeEffect(Player player, GameBoard gameBoard) {
 		
 		if (isLegal(player,gameBoard))
 		{
@@ -74,6 +74,8 @@ public class AddAssetForEveryAssetOrCard implements Effect{
 					break;
 				
 				}
+				
+				return true;
 			}
 		}
 		
@@ -86,7 +88,12 @@ public class AddAssetForEveryAssetOrCard implements Effect{
 			//coin ogni 2 miltary point! Quindi faccio, nell'esempio, 10/2 = 5 
 			for (int i=0; i<totalAsset; i++)
 				player.addAsset(gainedAsset);
+			
+			return true;
+			
 		}
+		
+		return false;
 	}
 	
 	@Override

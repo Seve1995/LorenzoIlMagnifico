@@ -12,11 +12,16 @@ public class AddNoMarketActionMalus implements Effect{
 	}
 
 	@Override
-	public void executeEffect(Player player, GameBoard gameBoard) {
+	public boolean executeEffect(Player player, GameBoard gameBoard) {
 		
-		if (isLegal(player,gameBoard))
+		if (isLegal(player,gameBoard)){
 			
 			player.setDisableMarket(true);
+		
+			return true;
+		}
+		
+		return false;
 		
 	}
 

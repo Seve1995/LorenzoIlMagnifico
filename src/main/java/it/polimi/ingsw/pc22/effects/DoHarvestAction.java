@@ -26,7 +26,7 @@ public class DoHarvestAction implements Effect {
 	}
 
 	@Override
-	public void executeEffect(Player player, GameBoard gameBoard) {
+	public boolean executeEffect(Player player, GameBoard gameBoard) {
 		
 		if (isLegal(player,gameBoard))
 		{
@@ -35,18 +35,25 @@ public class DoHarvestAction implements Effect {
 				player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestMilitaryPointsBonus());
 				player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestStonesBonus());
 				player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestWoodsBonus());
-			}
-			
-			for (BuildingCard b : player.getPlayerBoard().getBuildings()){
 				
-				if(value >= b.getPermanentEffectActivationCost()){
+				for (BuildingCard b : player.getPlayerBoard().getBuildings()){
 					
-					for (Effect e : b.getPermanentEffects())
-					{
-						e.executeEffect(player, gameBoard);
+					if(value >= b.getPermanentEffectActivationCost()){
+						
+						for (Effect e : b.getPermanentEffects())
+						{
+							e.executeEffect(player, gameBoard);
+						}
+					
 					}
-					
 				}
-			}
+			
+			return true;
 		}
+		
+		return false;
+	}
+		
+	
+	
 }

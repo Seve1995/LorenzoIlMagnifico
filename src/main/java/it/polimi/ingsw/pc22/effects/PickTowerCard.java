@@ -61,29 +61,34 @@ public class PickTowerCard implements Effect
 	
 	private void ApplyDiceChanges (Player p)
 	{
-		for (CardModifier cm : p.getCardModifiers())
+		
+		if (p.getCardModifiers() != null)
 		{
-			if (cm.getCardType().equals(CardTypeEnum.CHARACTER))
+		
+			for (CardModifier cm : p.getCardModifiers())
 			{
-				diceValueCharacter = diceValue + cm.getValueModifier();
-			}
-			
-			if (cm.getCardType().equals(CardTypeEnum.TERRITORY))
-			{
-				diceValueTerritory = diceValue + cm.getValueModifier();
-			}
-			
-			if (cm.getCardType().equals(CardTypeEnum.VENTURE))
-			{
-				diceValueVenture = diceValue + cm.getValueModifier();
+				if (cm.getCardType().equals(CardTypeEnum.CHARACTER))
+				{
+					diceValueCharacter = diceValue + cm.getValueModifier();
+				}
+				
+				if (cm.getCardType().equals(CardTypeEnum.TERRITORY))
+				{
+					diceValueTerritory = diceValue + cm.getValueModifier();
+				}
+				
+				if (cm.getCardType().equals(CardTypeEnum.VENTURE))
+				{
+					diceValueVenture = diceValue + cm.getValueModifier();
+					
+				}
+				
+				if (cm.getCardType().equals(CardTypeEnum.BUILDING))
+				{
+					diceValueBuilding = diceValue + cm.getValueModifier();
+				}
 				
 			}
-			
-			if (cm.getCardType().equals(CardTypeEnum.BUILDING))
-			{
-				diceValueBuilding = diceValue + cm.getValueModifier();
-			}
-			
 		}
 	}
 	
@@ -91,7 +96,9 @@ public class PickTowerCard implements Effect
 	private void ApplyChanges (DevelopmentCard d, Player p, CardTypeEnum ct)
 	
 	{
-
+		if (p.getCardModifiers() != null)
+		{
+			
 		if (ct.equals(CardTypeEnum.BUILDING))
 			
 		{
@@ -116,8 +123,9 @@ public class PickTowerCard implements Effect
 					
 				}
 			
+				}	
+				
 			}
-			
 		}
 		
 		if (ct.equals(CardTypeEnum.CHARACTER))
@@ -374,7 +382,7 @@ public class PickTowerCard implements Effect
 	
 	
 	@Override
-	public void executeEffect(Player player, GameBoard gameBoard) 
+	public boolean executeEffect(Player player, GameBoard gameBoard) 
 	{
 		if (floor == -1)
 			
@@ -424,7 +432,10 @@ public class PickTowerCard implements Effect
 						
 					}
 				}
+				return true;
 		}
+		
+		return false;
 	
 	}
 	

@@ -25,7 +25,12 @@ public class DoProductionAction implements Effect {
 	}
 
 	@Override
-	public void executeEffect(Player player, GameBoard gameBoard) {
+	public boolean executeEffect(Player player, GameBoard gameBoard) {
+		
+		if (isLegal(player, gameBoard))
+		{
+	
+	
 			
 			if (value >= player.getPlayerBoard().getBonusTile().getProductionActivationValue())
 			{
@@ -45,6 +50,11 @@ public class DoProductionAction implements Effect {
 					}
 				}
 			}
+			
+			return true;
+		}
+		
+		return false;
 	}
 	
 	

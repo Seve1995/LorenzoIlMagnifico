@@ -11,10 +11,15 @@ public class AddServantsHandlerMalus implements Effect{
 	}
 
 	@Override
-	public void executeEffect(Player player, GameBoard gameBoard) {
+	public boolean executeEffect(Player player, GameBoard gameBoard) {
 		
 		if (isLegal(player,gameBoard))
+		{
 			player.setServantMalus(true);
+			return true;
+		}
+		
+		return false;
 		
 	}
 

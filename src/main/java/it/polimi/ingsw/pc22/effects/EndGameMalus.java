@@ -45,54 +45,63 @@ public class EndGameMalus implements Effect{
 	}
 	
 	@Override
-	public void executeEffect(Player player, GameBoard gameBoard) {
+	public boolean executeEffect(Player player, GameBoard gameBoard) {
 		
-		if (loseOneVictoryPointEveryFiveVictoryPoints)
+		if (isLegal(player, gameBoard))
 		{
-			player.setVictoryPoints(player.getVictoryPoints() - player.getVictoryPoints() % 5);
-		}
 		
-		if (assetsMalus != null)
-		{
-			int sum=0;
-			
-			for (Asset a : assetsMalus)
+			if (loseOneVictoryPointEveryFiveVictoryPoints)
 			{
-					
-					sum += player.getAsset(a.getType());
-					
+				player.setVictoryPoints(player.getVictoryPoints() - player.getVictoryPoints() % 5);
 			}
 			
-			player.setVictoryPoints(player.getVictoryPoints() - sum);
-		}
-		
-		if (buildingCardsMalus)
-		{
-			int sum = 0;
-			for (BuildingCard b : player.getPlayerBoard().getBuildings())
+			if (assetsMalus != null)
 			{
-				for (Asset a : b.getCosts())
-					
-					if (a.getType().equals(AssetType.WOOD) || a.getType().equals(AssetType.STONE))
+				int sum=0;
+				
+				for (Asset a : assetsMalus)
+				{
 						
-						sum += a.getValue();
+						sum += player.getAsset(a.getType());
+						
+				}
+				
+				player.setVictoryPoints(player.getVictoryPoints() - sum);
 			}
 			
-			player.setVictoryPoints(player.getVictoryPoints() - sum);
+			if (buildingCardsMalus)
+			{
+				int sum = 0;
+				for (BuildingCard b : player.getPlayerBoard().getBuildings())
+				{
+					for (Asset a : b.getCosts())
+						
+						if (a.getType().equals(AssetType.WOOD) || a.getType().equals(AssetType.STONE))
+							
+							sum += a.getValue();
+				}
+				
+				player.setVictoryPoints(player.getVictoryPoints() - sum);
+				
+			}
 			
+			if (noCardVictoryPoint.equals(CardTypeEnum.CHARACTER))
+			
+				player.getPlayerBoard().setCharacters(null);
+				
+			if (noCardVictoryPoint.equals(CardTypeEnum.VENTURE))
+				
+				player.getPlayerBoard().setVentures(null);
+				
+			if (noCardVictoryPoint.equals(CardTypeEnum.TERRITORY))
+				
+				player.getPlayerBoard().setTerritories(null);
+		
+		return true;
+		
 		}
 		
-		if (noCardVictoryPoint.equals(CardTypeEnum.CHARACTER))
-		
-			player.getPlayerBoard().setCharacters(null);
-			
-		if (noCardVictoryPoint.equals(CardTypeEnum.VENTURE))
-			
-			player.getPlayerBoard().setVentures(null);
-			
-		if (noCardVictoryPoint.equals(CardTypeEnum.TERRITORY))
-			
-			player.getPlayerBoard().setTerritories(null);
+		return false;
 			
 	}
 }

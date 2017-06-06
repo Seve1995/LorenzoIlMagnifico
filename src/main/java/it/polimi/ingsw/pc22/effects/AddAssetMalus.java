@@ -26,10 +26,13 @@ public class AddAssetMalus implements Effect{
 	}
 
 	@Override
-	public void executeEffect(Player player, GameBoard gameBoard) {
+	public boolean executeEffect(Player player, GameBoard gameBoard) {
 		
-		if (isLegal(player,gameBoard))
+		if (isLegal(player,gameBoard)){
 			player.addAsset(asset);
+			return true;
+		}
+		return false;
 		
 	}
 

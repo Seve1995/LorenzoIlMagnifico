@@ -30,75 +30,85 @@ public class FamilyMemberModifier implements Effect
 	}
 
 	@Override
-	public void executeEffect(Player player, GameBoard gameBoard) {
-		if (!toColoured){
-			for (FamilyMember f : player.getFamilyMembers())
-			{
-				if (f.getColor().equals(ColorsEnum.NEUTER))
+	public boolean executeEffect(Player player, GameBoard gameBoard) {
+		
+		
+		if (isLegal(player, gameBoard))
+		{
+		
+			if (!toColoured){
+				for (FamilyMember f : player.getFamilyMembers())
 				{
-					if (isABonus)
+					if (f.getColor().equals(ColorsEnum.NEUTER))
 					{
-						f.setValueModifier(f.getValueModifier() + this.diceValueBonus);
+						if (isABonus)
+						{
+							f.setValueModifier(f.getValueModifier() + this.diceValueBonus);
+						}
 					}
 				}
 			}
-		}
-		
-		if (toColoured && toAll){
-			for (FamilyMember f : player.getFamilyMembers())
-			{
-				if (!(f.getColor().equals(ColorsEnum.NEUTER)))
-				{
-					if (!isABonus && toAll)
-					{
-						f.setFamiliarValue(diceValueSet); 
-					}
-					
-					if(isABonus && toAll)
-					{
-						f.setValueModifier(f.getValueModifier() + this.diceValueBonus);
-					}
-					
-					
-				}	
-			}
-		}
 			
-		if (toColoured && !isABonus && !toAll)
-			{
-				if(isLegal(player, gameBoard))
+			if (toColoured && toAll){
+				for (FamilyMember f : player.getFamilyMembers())
 				{
-					
-					player.getAdapter().printMessage("Which Familiar Color Do You Want?");
-					
-					player.getAdapter().getMessage();
-					
-					/*if (player.getAdapter().getMessage().equals("B"))
+					if (!(f.getColor().equals(ColorsEnum.NEUTER)))
 					{
-						this.familyMemberColor = ColorsEnum.BLACK;
-					}
-					
-					if (player.getAdapter().getMessage().equals("W"))
-					{
-						this.familyMemberColor = ColorsEnum.WHITE;
-					}
-					
-					if (player.getAdapter().getMessage().equals("O"))
-					{
-						this.familyMemberColor = ColorsEnum.ORANGE;
-					}*/
-					
-					
-					for (FamilyMember f : player.getFamilyMembers())
-					{
-						if (f.getColor().equals(familyMemberColor))
-							
-							f.setFamiliarValue(diceValueSet);
+						if (!isABonus && toAll)
+						{
+							f.setFamiliarValue(diceValueSet); 
+						}
 						
-					}
-		
+						if(isABonus && toAll)
+						{
+							f.setValueModifier(f.getValueModifier() + this.diceValueBonus);
+						}
+						
+						
+					}	
 				}
 			}
+				
+			if (toColoured && !isABonus && !toAll)
+				{
+					if(isLegal(player, gameBoard))
+					{
+						
+						player.getAdapter().printMessage("Which Familiar Color Do You Want?");
+						
+						player.getAdapter().getMessage();
+						
+						/*if (player.getAdapter().getMessage().equals("B"))
+						{
+							this.familyMemberColor = ColorsEnum.BLACK;
+						}
+						
+						if (player.getAdapter().getMessage().equals("W"))
+						{
+							this.familyMemberColor = ColorsEnum.WHITE;
+						}
+						
+						if (player.getAdapter().getMessage().equals("O"))
+						{
+							this.familyMemberColor = ColorsEnum.ORANGE;
+						}*/
+						
+						
+						for (FamilyMember f : player.getFamilyMembers())
+						{
+							if (f.getColor().equals(familyMemberColor))
+								
+								f.setFamiliarValue(diceValueSet);
+							
+						}
+			
+					}
+				}
+			
+			return true;
+		}
+		
+		return false;
 	}
 }
 			

@@ -2,7 +2,7 @@ package it.polimi.ingsw.pc22.gamebox;
 
 public class Harvest
 {
-	private HarvestCell[] harvestCells;
+	private HarvestCell[] harvestCells = new HarvestCell[16];
 
 	public Harvest(HarvestCell[] harvestCells)
 	{

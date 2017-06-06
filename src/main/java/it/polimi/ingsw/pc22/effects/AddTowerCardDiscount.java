@@ -45,7 +45,7 @@ public class AddTowerCardDiscount implements Effect{
 		return true;
 	}
 	@Override
-	public void executeEffect(Player player, GameBoard gameBoard) {
+	public boolean executeEffect(Player player, GameBoard gameBoard) {
 		
 		if (isLegal(player,gameBoard))
 		{
@@ -56,7 +56,10 @@ public class AddTowerCardDiscount implements Effect{
 			cardModifier.setAssetDiscount(assetDiscounts);
 			cardModifier.setOnlyOneAsset(onlyOneAsset);
 			playerCardModifiers.add(cardModifier);
+			return true;
 		}
+		
+		return false;
 	}
 	
 	@Override

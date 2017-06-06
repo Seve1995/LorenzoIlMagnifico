@@ -2,7 +2,7 @@ package it.polimi.ingsw.pc22.gamebox;
 
 public class Production
 {
-	private ProductionCell[] productionCells;
+	private ProductionCell[] productionCells = new ProductionCell[16];
 
 	public Production(ProductionCell[] productionCell)
 	{

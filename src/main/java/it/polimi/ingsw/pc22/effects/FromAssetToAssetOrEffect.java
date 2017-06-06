@@ -52,7 +52,7 @@ public class FromAssetToAssetOrEffect implements Effect{
 	}
 	
 	@Override
-	public void executeEffect(Player player, GameBoard gameBoard) 
+	public boolean executeEffect(Player player, GameBoard gameBoard) 
 	{
 		if (isLegal(player, gameBoard)){
 			if (gainedEffect != null)
@@ -66,7 +66,10 @@ public class FromAssetToAssetOrEffect implements Effect{
 					player.addAsset(a);
 				}
 			}
+			return true;
 		}
+		
+		return false;
 				
 	}
 	
