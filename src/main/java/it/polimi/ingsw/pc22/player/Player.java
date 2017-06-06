@@ -19,6 +19,7 @@ public class Player
 	private int faithPoints;
 	private int victoryPoints;
 	private int priority;
+	private int endGameVictoryPoints;
 	private List<LeaderCard> leaderCards;
 	private List<CardModifier> cardModifiers;
 	private List<AddEndGameVictoryPoints> addEndGameVictoryPoints;
@@ -268,6 +269,14 @@ public class Player
 	public void setPriority(int priority) {
 		this.priority = priority;
 	}
+	public int getEndGameVictoryPoints() {
+		return endGameVictoryPoints;
+	}
+
+	public void setEndGameVictoryPoints(int endGameVictoryPoints) {
+		this.endGameVictoryPoints = endGameVictoryPoints;
+	}
+
 	public List<CardModifier> getCardModifier() {
 		return cardModifiers;
 	}
