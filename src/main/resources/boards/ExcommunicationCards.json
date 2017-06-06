@@ -169,7 +169,7 @@
           "noCardVictoryPoint": "CHARACTER",
           "assetsMalus": null,
           "loseOneVictoryPointEveryFiveVictoryPoints": false,
-          "territoryCardsMalus": false
+          "buildingCardsMalus": false
         }
       ]
     },
@@ -182,7 +182,7 @@
           "noCardVictoryPoint": "VENTURE",
           "assetsMalus": null,
           "loseOneVictoryPointEveryFiveVictoryPoints": false,
-          "territoryCardsMalus": false
+          "buildingCardsMalus": false
         }
       ]
     },
@@ -195,7 +195,7 @@
           "noCardVictoryPoint": "TERRITORY",
           "assetsMalus": null,
           "loseOneVictoryPointEveryFiveVictoryPoints": false,
-          "territoryCardsMalus": false
+          "buildingCardsMalus": false
         }
       ]
     },
@@ -208,7 +208,7 @@
           "noCardVictoryPoint": null,
           "assetsMalus": null,
           "loseOneVictoryPointEveryFiveVictoryPoints": true,
-          "territoryCardsMalus": false
+          "buildingCardsMalus": false
         }
       ]
     },
@@ -226,7 +226,7 @@
             }
           ],
           "loseOneVictoryPointEveryFiveVictoryPoints": false,
-          "territoryCardsMalus": false
+          "buildingCardsMalus": false
         }
       ]
     },
@@ -239,7 +239,7 @@
           "noCardVictoryPoint": null,
           "assetsMalus": null,
           "loseOneVictoryPointEveryFiveVictoryPoints": false,
-          "territoryCardsMalus": true
+          "buildingCardsMalus": true
         }
       ]
     },
@@ -269,7 +269,7 @@
             }
           ],
           "loseOneVictoryPointEveryFiveVictoryPoints": false,
-          "territoryCardsMalus": false
+          "buildingCardsMalus": false
         }
       ]
     }
