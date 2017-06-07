@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Market {
 	
-	private List<MarketCell> marketCells = new ArrayList<MarketCell>();
+	private List<MarketCell> marketCells = new ArrayList<>();
 	
 	public Market(List<MarketCell> marketCells) {
 		this.marketCells = marketCells;

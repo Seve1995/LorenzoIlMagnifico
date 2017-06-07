@@ -6,7 +6,7 @@ import java.util.List;
 public class Tower {
 	private CardTypeEnum towerType;
 	private List<TowerCell> towerCells;
-	private List<PlayerColorsEnum> listPlayers;
+	private List<PlayerColorsEnum> listPlayers = new ArrayList<>();
 	
 	public List<PlayerColorsEnum> getListPlayers() {
 		return listPlayers;

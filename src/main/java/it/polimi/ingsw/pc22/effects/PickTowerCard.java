@@ -7,7 +7,6 @@ import it.polimi.ingsw.pc22.player.Player;
 import java.util.List;
 
 public class PickTowerCard implements Effect
-
 {
 	private int floor;
 	private CardTypeEnum cardType;
@@ -217,14 +216,9 @@ public class PickTowerCard implements Effect
 		}
 		
 	}
-	
-	
-	
-	
-	
-	
+
 	@Override
-	public boolean isLegal(Player player, GameBoard gameBoard) 
+	public boolean isLegal(Player player, GameBoard gameBoard)
 	{
 		Tower tower = null;
 		
@@ -296,7 +290,9 @@ public class PickTowerCard implements Effect
 			}
 			
 			VentureCard currVentureCard = (VentureCard) tower.getTowerCells().get(floor).getDevelopmentCard();
-			
+
+			if (currVentureCard.getMilitaryPointsRequired() == null) return true;
+
 			if (currVentureCard.getMilitaryPointsRequired().getValue() < player.getMilitaryPoints())
 			
 				return false;
@@ -369,7 +365,11 @@ public class PickTowerCard implements Effect
 	
 	private void activeEffects(DevelopmentCard d, Player p, GameBoard gb)
 	{
-		for (Effect e : d.getImmediateEffects())
+		List<Effect> immediateEffects = d.getImmediateEffects();
+
+		if (immediateEffects == null) return;
+
+		for (Effect e : immediateEffects)
 		{
 				e.executeEffect(p, null);
 				

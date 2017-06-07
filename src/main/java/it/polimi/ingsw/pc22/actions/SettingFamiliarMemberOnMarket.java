@@ -56,11 +56,11 @@ public class SettingFamiliarMemberOnMarket extends Action{
 	@Override
 	public boolean executeAction(Player player, GameBoard gameBoard) {
 		
-		List<Effect> currEffects = new ArrayList<Effect>();
+		List<Effect> currEffects = new ArrayList<>();
 		
 		Market market = gameBoard.getMarket();
 		
-		if (isLegal(player, gameBoard) )
+		if (isLegal(player, gameBoard))
 		{
 			market.getMarketCells().get(zone).setFamilyMember(familyMember);
 			

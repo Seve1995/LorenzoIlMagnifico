@@ -40,19 +40,16 @@ public class SettingFamiliarMemberOnTower extends Action {
 	private boolean payThreeCoins(Player p, Tower t)
 	{
 	
-		if (t.getListPlayers() != null)
+		if (t.getListPlayers().isEmpty()) return false;
+
+		for (PlayerColorsEnum pc : t.getListPlayers())
 		{
-			for (PlayerColorsEnum pc : t.getListPlayers())
+			if(!(p.getPlayerColorsEnum().equals(pc)));
 			{
-				
-				if(!(p.getPlayerColorsEnum().equals(pc)));
-				{
-					return true;
-				}
-				
+				return true;
 			}
 		}
-		
+
 		return false;
 			
 	}
@@ -60,19 +57,18 @@ public class SettingFamiliarMemberOnTower extends Action {
 	private boolean alreadySetAMember(Player p, Tower t)
 	{
 		
-		if (t.getListPlayers() != null)
+		if (t.getListPlayers().isEmpty()) return false;
+
+		for (PlayerColorsEnum pc : t.getListPlayers())
 		{
-			for (PlayerColorsEnum pc : t.getListPlayers())
+
+			if(p.getPlayerColorsEnum().equals(pc));
 			{
-				
-				if(p.getPlayerColorsEnum().equals(pc));
-				{
-					return true;
-				}
-				
+				return true;
 			}
+
 		}
-		
+
 		return false;
 		
 	}
@@ -141,15 +137,15 @@ public class SettingFamiliarMemberOnTower extends Action {
 		
 		currEffects = tower.getTowerCells().get(floor).getEffects();
 
-		for (Effect e : currEffects)
+		if (currEffects != null)
 		{
-			e.executeEffect(player, gameBoard);
+			for (Effect e : currEffects)
+			{
+				e.executeEffect(player, gameBoard);
+			}
 		}
 
-		pickTowerCard.executeEffect(player, gameBoard);
-
-		return true;
-		
+		return pickTowerCard.executeEffect(player, gameBoard);
 	}
 	
 }
