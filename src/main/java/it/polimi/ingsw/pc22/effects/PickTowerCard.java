@@ -133,88 +133,144 @@ public class PickTowerCard implements Effect
 		{
 			CharacterCard currCharacterCard = (CharacterCard) d;
 			
+			if (p.getCardModifier() != null)
+			{
+				for (CardModifier cm : p.getCardModifiers())
+				{
+					if (cm.getCardType().equals(ct))
+					
+						for (Asset a : cm.getAssetDiscount())
+						{
+					
+							if (a.getType().equals(AssetType.COIN))
+							{
+								currCharacterCard.getCoinsCost().setValue(currCharacterCard.getCoinsCost().getValue() - a.getValue());
+							}
+					
+						}
+			
+				}
+			}
+	
+		}
+		
+		if (ct.equals(CardTypeEnum.VENTURE))
+			
+		{
+			VentureCard currVentureCard = (VentureCard) d;
+			
 			for (CardModifier cm : p.getCardModifiers())
 			{
 				if (cm.getCardType().equals(ct))
-					
-				for (Asset a : cm.getAssetDiscount())
 				{
 					
-					if (a.getType().equals(AssetType.COIN))
+					for (Asset a : cm.getAssetDiscount())
 					{
-						currCharacterCard.getCoinsCost().setValue(currCharacterCard.getCoinsCost().getValue() - a.getValue());
+						for (Asset a1 : currVentureCard.getResourcesCost())
+						{
+						
+							if (a1.getType().equals(a.getType()))
+							
+								a1.setValue(a1.getValue() - a.getValue());	
+						}
+					
 					}
 					
 				}
 			
+				}	
+				
 			}
-	
-		}
+		
+		
+		
 		
 	}
 	
 	
 	private void RemoveChanges(DevelopmentCard d, Player p, CardTypeEnum ct)
 	{
+		if (p.getCardModifiers() != null)
+		{
 
-		if (ct.equals(CardTypeEnum.BUILDING))
-			
-		{
-			BuildingCard currBuildingCard = (BuildingCard) d;
-			
-			for (CardModifier cm : p.getCardModifiers())
+			if (ct.equals(CardTypeEnum.BUILDING))
+				
 			{
-				if (cm.getCardType().equals(ct) && !(cm.isOnlyOneAsset()))
+				BuildingCard currBuildingCard = (BuildingCard) d;
+				
+				for (CardModifier cm : p.getCardModifiers())
 				{
-					
-					for (Asset a : cm.getAssetDiscount())
+					if (cm.getCardType().equals(ct) && !(cm.isOnlyOneAsset()))
 					{
-						for (Asset a1 : currBuildingCard.getCosts())
-						{
 						
-							if (a1.getType().equals(a.getType()))
+						for (Asset a : cm.getAssetDiscount())
+						{
+							for (Asset a1 : currBuildingCard.getCosts())
+							{
 							
-								a1.setValue(a1.getValue() + a.getValue());	
+								if (a1.getType().equals(a.getType()))
+								
+									a1.setValue(a1.getValue() + a.getValue());	
+							}
+						
 						}
-					
+						
 					}
 					
-				}
-				
-				else if (cm.getCardType().equals(ct) && !(cm.isOnlyOneAsset()))
-				{
-					//stampa a video l'elenco degli asset, selezionane uno 
-					
-				}
-				
-			
-			}
-			
-		}
-		
-		if (ct.equals(CardTypeEnum.CHARACTER))
-			
-		{
-			CharacterCard currCharacterCard = (CharacterCard) d;
-			
-			for (CardModifier cm : p.getCardModifiers())
-			{
-				if (cm.getCardType().equals(ct))
-					
-				for (Asset a : cm.getAssetDiscount())
-				{
-					
-					if (a.getType().equals(AssetType.COIN))
+					else if (cm.getCardType().equals(ct) && !(cm.isOnlyOneAsset()))
 					{
-						currCharacterCard.getCoinsCost().setValue(currCharacterCard.getCoinsCost().getValue() + a.getValue());
+						//stampa a video l'elenco degli asset, selezionane uno 
+						
 					}
-					
+				
 				}
-			
+				
+				
+				
 			}
-	
+			
+			if (ct.equals(CardTypeEnum.CHARACTER))
+				
+			{
+				CharacterCard currCharacterCard = (CharacterCard) d;
+				
+				for (CardModifier cm : p.getCardModifiers())
+				{
+					if (cm.getCardType().equals(ct))
+					{
+						for (Asset a : cm.getAssetDiscount())
+						{
+							if (a.getType().equals(AssetType.COIN))
+							{
+								currCharacterCard.getCoinsCost().setValue(currCharacterCard.getCoinsCost().getValue() + a.getValue());
+							}	
+						}
+					}
+				}
+			}
+			
+			if (ct.equals(CardTypeEnum.VENTURE))
+			{
+				VentureCard currVentureCard = (VentureCard) d;
+				
+				for (CardModifier cm : p.getCardModifiers())
+				{
+					if (cm.getCardType().equals(ct) && !(cm.isOnlyOneAsset()))
+					{
+						
+						for (Asset a : cm.getAssetDiscount())
+						{
+							for (Asset a1 : currVentureCard.getResourcesCost())
+							{
+								if (a1.getType().equals(a.getType()))
+								
+									a1.setValue(a1.getValue() + a.getValue());	
+							}
+						}
+					}
+				}
+			}
 		}
-		
 	}
 
 	@Override
@@ -245,7 +301,7 @@ public class PickTowerCard implements Effect
 			
 			applyChanges(currCharacterCard, player, CardTypeEnum.CHARACTER);
 			
-			if (currCharacterCard.getCoinsCost().getValue() < player.getCoins())
+			if (currCharacterCard.getCoinsCost().getValue() > player.getCoins())
 			{
 				
 				RemoveChanges(currCharacterCard, player, CardTypeEnum.CHARACTER);
@@ -272,13 +328,16 @@ public class PickTowerCard implements Effect
 			for (Asset a : currBuildingCard.getCosts())
 			{
 				if (player.getAsset(a.getType()) < a.getValue())
+				{
 					
 					RemoveChanges(currBuildingCard, player, CardTypeEnum.BUILDING);
 					
 					return false;
+					
+				}
 			}
 			
-			RemoveChanges(currBuildingCard, player, CardTypeEnum.CHARACTER);
+			RemoveChanges(currBuildingCard, player, CardTypeEnum.BUILDING);
 	
 		}
 		
@@ -290,13 +349,35 @@ public class PickTowerCard implements Effect
 			}
 			
 			VentureCard currVentureCard = (VentureCard) tower.getTowerCells().get(floor).getDevelopmentCard();
-
-			if (currVentureCard.getMilitaryPointsRequired() == null) return true;
-
-			if (currVentureCard.getMilitaryPointsRequired().getValue() < player.getMilitaryPoints())
 			
+			applyChanges(currVentureCard, player, CardTypeEnum.CHARACTER);
+
+			//if (choice == true)
+			//ask if the player wants to spent military points or resources
+			
+			
+			if ((currVentureCard.getMilitaryPointsRequired() == null)) 
+			{
+				for (Asset a : currVentureCard.getResourcesCost())
+				{
+					if (player.getAsset(a.getType()) < a.getValue())
+					{
+						
+						RemoveChanges(currVentureCard, player, CardTypeEnum.BUILDING);
+						
+						return false;
+						
+					}
+				}
+			}
+
+			if (currVentureCard.getMilitaryPointsRequired().getValue() > player.getMilitaryPoints())
+			{
 				return false;
-		
+			}
+			
+			applyChanges(currVentureCard, player, CardTypeEnum.CHARACTER);
+			
 		}
 		
 		if (this.cardType.equals(CardTypeEnum.TERRITORY)) 
@@ -374,6 +455,7 @@ public class PickTowerCard implements Effect
 				e.executeEffect(p, null);
 				
 				if ((e instanceof AddAsset) && p.isSantaRita())
+					
 					e.executeEffect(p, gb);
 		}
 			
@@ -409,6 +491,10 @@ public class PickTowerCard implements Effect
 						if (cardType.equals(CardTypeEnum.BUILDING))
 						{
 							player.getPlayerBoard().getBuildings().add((BuildingCard) t.getTowerCells().get(floor).getDevelopmentCard());
+							
+							//applyChanges(currCharacterCard, player, CardTypeEnum.CHARACTER);
+							
+							//payCosts()
 							
 						}
 						
