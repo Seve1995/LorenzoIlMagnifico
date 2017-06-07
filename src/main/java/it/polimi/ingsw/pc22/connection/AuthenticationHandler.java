@@ -26,6 +26,13 @@ public abstract class AuthenticationHandler
 
                 String answer = adapter.getMessage();
 
+                if (answer == null)
+                {
+                    adapter.endConnection(null);
+
+                    return;
+                }
+
                 switch (answer)
                 {
                     case "login":
@@ -46,7 +53,6 @@ public abstract class AuthenticationHandler
                         break;
                 }
             }
-
 
             String playerName = user.getUsername();
 
@@ -95,6 +101,13 @@ public abstract class AuthenticationHandler
     private void checkPassword(User user, GameAdapter adapter) throws IOException
     {
         String password = adapter.getMessage();
+
+        if (password == null)
+        {
+            adapter.printMessage("Timeout expired retry");
+
+            user.setLogged(false);
+        }
 
         if (user.getPassword().equals(password))
         {
@@ -159,6 +172,8 @@ public abstract class AuthenticationHandler
 
         String gameName = adapter.getMessage();
 
+        if (gameName == null) return false;
+
         adapter.printMessage("Game name: " + gameName);
 
         boolean existingGameMatch =
@@ -183,6 +198,8 @@ public abstract class AuthenticationHandler
         adapter.printMessage("Type the name of the chosen game match:");
 
         String gameName = adapter.getMessage();
+
+        if (gameName == null) return false;
 
         adapter.printMessage("Game name: " + gameName);
 

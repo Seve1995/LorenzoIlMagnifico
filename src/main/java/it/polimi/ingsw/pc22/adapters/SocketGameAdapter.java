@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.util.List;
 
 /**
@@ -45,13 +47,12 @@ public class SocketGameAdapter implements GameAdapter
     @Override
     public FamilyMember askFamiliarMember(Player player, Long timeout)
     {
-        Long timestamp = System.currentTimeMillis();
-
         List<FamilyMember> unusedFamiliarMembers =
                 player.getUnusedFamiliarMembers();
 
-        //TODO CALCORARLO MEGLIO
-        while(System.currentTimeMillis() < timestamp + timeout)
+        Long maxTimeStamp = System.currentTimeMillis() + timeout;
+
+        while(System.currentTimeMillis() < maxTimeStamp)
         {
             this.printMessage("Scegli un familiare tra quelli disponibili:");
 
@@ -60,6 +61,8 @@ public class SocketGameAdapter implements GameAdapter
             this.printMessage(unusedFamiliarMembers.toString());
 
             String choice = this.getMessage();
+
+            if (choice == null) continue;
 
             ColorsEnum color = ColorsEnum.getColorFromString(choice);
 
@@ -70,8 +73,9 @@ public class SocketGameAdapter implements GameAdapter
             if (member == null) continue;
 
             return member;
-
         }
+
+        printMessage("Timeout Azione terminato");
 
         return null;
     }
@@ -79,21 +83,22 @@ public class SocketGameAdapter implements GameAdapter
     @Override
     public Asset askServants(Player player, Long timeout)
     {
-        Long timestamp = System.currentTimeMillis();
+        Long maxTimeStamp = System.currentTimeMillis() + timeout;
 
-        while (System.currentTimeMillis() < timestamp + timeout)
+        while (System.currentTimeMillis() < maxTimeStamp)
         {
             this.printMessage("Voi sacrificare servitori per aumentare il valore dell'azione? \n" +
                     "Indica un numero da 0 a " + player.getServants());
 
             String value = getMessage();
 
+            if (value == null) continue;
+
             Integer servantNumber;
 
             try
             {
                 servantNumber = Integer.parseInt(value);
-
             }
             catch (NumberFormatException e)
             {
@@ -107,17 +112,55 @@ public class SocketGameAdapter implements GameAdapter
             return new Asset(servantNumber, AssetType.SERVANT);
         }
 
+        printMessage("Timeout Azione terminato");
+
+        return null;
+    }
+
+    @Override
+    public Action askAction(FamilyMember familyMember, Asset servant ,Long timeout)
+    {
+        Long maxTimeStamp = System.currentTimeMillis() + timeout;
+
+        while (System.currentTimeMillis() < maxTimeStamp)
+        {
+            this.printMessage("Che azione vuoi eseguire?");
+
+            this.printMessage("Seleziona operazione:\n" +
+                    "- Metti familiare su torre (es: set tower BUILDING 3 con numberOfFloor tra 0 e 3)\n" +
+                    "- Metti familiare su market (es: set market ZONA con zona tra 0 e 3)\n" +
+                    "- Metti familiare nella produzione (es: set production)\n" +
+                    "- Metti familiare nella raccolto (es: set harvest)\n" +
+                    "- Metti familiare nel concilio (es: set council)");
+
+            String choice = getMessage();
+
+            if (choice == null) continue;
+
+            Action action = ActionFactory.createAction(familyMember, choice);
+
+            if (servant.getValue() > 0)
+                return new ServantsHandler(action, servant);
+
+            return action;
+        }
+
+        printMessage("Timeout Azione terminato");
+
         return null;
     }
 
     @Override
     public void endConnection(Player player) throws IOException
     {
-        String userName = player.getName();
+        if (player != null)
+        {
+            String userName = player.getName();
 
-        User user = GameServer.getUsersMap().get(userName);
+            User user = GameServer.getUsersMap().get(userName);
 
-        user.setLogged(false);
+            user.setLogged(false);
+        }
 
         PrintWriter printWriter =
                 new PrintWriter(socket.getOutputStream(), true);
@@ -136,7 +179,7 @@ public class SocketGameAdapter implements GameAdapter
     @Override
     public String getMessage()
     {
-        String answer = null;
+        String answer;
 
         try
         {
@@ -145,42 +188,14 @@ public class SocketGameAdapter implements GameAdapter
         }
             catch (IOException e)
         {
+
             e.printStackTrace();
+
+            return null;
         }
 
         return  answer;
     }
-
-	@Override
-	public Action askAction(FamilyMember familyMember, Asset servant ,Long timeout)
-    {
-        Long timestamp = System.currentTimeMillis();
-
-        Action action = null;
-
-        while (System.currentTimeMillis() < timestamp + timeout)
-        {
-            this.printMessage("Che azione vuoi eseguire?");
-
-            this.printMessage("Seleziona operazione:\n" +
-                    "- Metti familiare su torre (es: set tower BUILDING 3 con numberOfFloor tra 0 e 3)\n" +
-                    "- Metti familiare su market (es: set market ZONA con zona tra 0 e 3)\n" +
-                    "- Metti familiare nella produzione (es: set production)\n" +
-                    "- Metti familiare nella raccolto (es: set harvest)\n" +
-                    "- Metti familiare nel concilio (es: set council)");
-
-            String choice = getMessage();
-
-            action = ActionFactory.createAction(familyMember, choice);
-
-            break;
-        }
-
-        if (servant.getValue() > 0)
-            return new ServantsHandler(action, servant);
-
-        return action;
-	}
 
 	@Override
 	public int askFloor() {

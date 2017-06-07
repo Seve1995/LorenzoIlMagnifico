@@ -64,6 +64,7 @@ public class GameServer
 			{
 				Socket socket = serverSocket.accept();
 
+				socket.setSoTimeout(60000);
 
 				SocketAuthenticationHandler handler
 						= new SocketAuthenticationHandler(socket);

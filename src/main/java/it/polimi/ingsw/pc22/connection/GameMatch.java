@@ -152,6 +152,8 @@ public class GameMatch implements Runnable
 
 					boolean executed = action.executeAction(player, gameBoard);
 
+					System.out.println(executed);
+
 					if (!executed) continue;
 				}
 
@@ -394,6 +396,7 @@ public class GameMatch implements Runnable
 	private void addTowerCards(int era) 
 	{   
 		Tower[] towers = gameBoard.getTowers();
+
 		final int roundNumber = era;
 		
 		List<DevelopmentCard> territoryCards = cards.parallelStream()
@@ -701,10 +704,8 @@ public class GameMatch implements Runnable
 		return winnerName;
 		
 		//stampalo a tutti i giocatori
-
 	}
-	
-	
+
 	public String getGameName() {
 		return gameName;
 	}
