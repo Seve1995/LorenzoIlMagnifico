@@ -7,7 +7,6 @@ import it.polimi.ingsw.pc22.player.Player;
 public abstract class Action 
 {
 	protected FamilyMember familyMember;
-	protected GameBoard gameBoard;
 
 	public Action(){}
 

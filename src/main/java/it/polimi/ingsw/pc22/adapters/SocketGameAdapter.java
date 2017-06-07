@@ -56,6 +56,7 @@ public class SocketGameAdapter implements GameAdapter
             this.printMessage("Scegli un familiare tra quelli disponibili:");
 
             //TODO SISTEMARE STA COSA; BISOGNA CHIAMARE UNA FUNZIONE STATICA ESTERNA!!
+            
             this.printMessage(unusedFamiliarMembers.toString());
 
             String choice = this.getMessage();

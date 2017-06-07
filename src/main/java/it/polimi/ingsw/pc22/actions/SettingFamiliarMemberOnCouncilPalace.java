@@ -29,7 +29,7 @@ public class SettingFamiliarMemberOnCouncilPalace extends Action {
 	@Override
 	public boolean executeAction(Player player, GameBoard gameBoard) {
 		
-		CouncilPalace councilPalace = this.gameBoard.getCouncilPalace(); 
+		CouncilPalace councilPalace = gameBoard.getCouncilPalace(); 
 		
 		if (isLegal(player, gameBoard))
 		{

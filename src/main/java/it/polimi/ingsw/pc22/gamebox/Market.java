@@ -1,10 +1,11 @@
 package it.polimi.ingsw.pc22.gamebox;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Market {
 	
-	private List<MarketCell> marketCells;
+	private List<MarketCell> marketCells = new ArrayList<MarketCell>();
 	
 	public Market(List<MarketCell> marketCells) {
 		this.marketCells = marketCells;

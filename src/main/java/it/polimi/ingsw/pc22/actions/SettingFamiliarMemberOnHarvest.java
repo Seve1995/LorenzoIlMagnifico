@@ -17,7 +17,7 @@ public class SettingFamiliarMemberOnHarvest extends Action{
     @Override
 	protected boolean isLegal (Player player, GameBoard gameBoard) {
 		
-		Harvest harvest = this.gameBoard.getHarvest(); 
+		Harvest harvest = gameBoard.getHarvest(); 
 		
 		if (super.getFamilyMember().getValue() < 1)
 			
@@ -48,7 +48,7 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 	@Override
 	public boolean executeAction(Player player, GameBoard gameBoard) {
 		
-		Harvest harvest = this.gameBoard.getHarvest(); 
+		Harvest harvest = gameBoard.getHarvest(); 
 		
 		DoHarvestAction doHarvestAction = new DoHarvestAction();
 		

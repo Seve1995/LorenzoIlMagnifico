@@ -18,7 +18,7 @@ public class SettingFamiliarMemberOnProduction extends Action {
     @Override
 	protected boolean isLegal(Player player, GameBoard gameBoard) {
 		
-		Production production = this.gameBoard.getProduction();
+		Production production = gameBoard.getProduction();
 		
 		if (super.getFamilyMember().getFamiliarValue() < 1)
 			return false;
@@ -47,7 +47,7 @@ public class SettingFamiliarMemberOnProduction extends Action {
 	@Override
 	public boolean executeAction(Player player, GameBoard gameBoard) {
 		
-		Production production = this.gameBoard.getProduction();
+		Production production = gameBoard.getProduction();
 		
 		DoProductionAction doProductionAction = new DoProductionAction();
 		

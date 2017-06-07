@@ -7,6 +7,7 @@ import it.polimi.ingsw.pc22.gamebox.Market;
 import it.polimi.ingsw.pc22.gamebox.MarketCell;
 import it.polimi.ingsw.pc22.player.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SettingFamiliarMemberOnMarket extends Action{
@@ -31,7 +32,7 @@ public class SettingFamiliarMemberOnMarket extends Action{
 	@Override
 	protected boolean isLegal(Player player, GameBoard gameBoard) {
 		
-		Market market = this.gameBoard.getMarket(); 
+		Market market = gameBoard.getMarket(); 
 		
 		List<MarketCell> currMarketCells = market.getMarketCells();
 		
@@ -53,9 +54,9 @@ public class SettingFamiliarMemberOnMarket extends Action{
 	@Override
 	public boolean executeAction(Player player, GameBoard gameBoard) {
 		
-		List<Effect> currEffects;
+		List<Effect> currEffects = new ArrayList<Effect>();
 		
-		Market market = this.gameBoard.getMarket(); 
+		Market market = gameBoard.getMarket();
 		
 		if (isLegal(player, gameBoard) )
 		{
