@@ -6,7 +6,16 @@ import java.util.List;
 public class Tower {
 	private CardTypeEnum towerType;
 	private List<TowerCell> towerCells;
+	private List<PlayerColorsEnum> listPlayers = new ArrayList<PlayerColorsEnum>();
 	
+	public List<PlayerColorsEnum> getListPlayers() {
+		return listPlayers;
+	}
+
+	public void setListPlayers(List<PlayerColorsEnum> listPlayers) {
+		this.listPlayers = listPlayers;
+	}
+
 	public Tower(CardTypeEnum towerType)
 	{
 		this.towerType = towerType;

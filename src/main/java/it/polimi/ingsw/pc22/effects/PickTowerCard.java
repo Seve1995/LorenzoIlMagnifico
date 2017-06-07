@@ -384,6 +384,9 @@ public class PickTowerCard implements Effect
 	@Override
 	public boolean executeEffect(Player player, GameBoard gameBoard) 
 	{
+		
+		System.out.println("entering the execution");
+		
 		if (floor == -1)
 			
 			//ask for floor 
@@ -398,6 +401,8 @@ public class PickTowerCard implements Effect
 			
 		if (isLegal(player, gameBoard))
 		{
+			System.out.println("it is legal");
+			
 				for (Tower t : gameBoard.getTowers())
 				{
 					if (t.getTowerType().equals(cardType))
@@ -431,9 +436,13 @@ public class PickTowerCard implements Effect
 						removeCards(t, floor);
 						
 					}
+					
 				}
 				return true;
+				
 		}
+		
+		System.out.println("it is not legal");
 		
 		return false;
 	
