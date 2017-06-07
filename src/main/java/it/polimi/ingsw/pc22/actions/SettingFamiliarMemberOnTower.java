@@ -37,7 +37,7 @@ public class SettingFamiliarMemberOnTower extends Action {
 		this.cardTypeEnum = cardTypeEnum;
 	}
 	
-	private boolean PayThreeCoins (Player p, Tower t)
+	private boolean payThreeCoins(Player p, Tower t)
 	{
 	
 		if (t.getListPlayers() != null)
@@ -57,7 +57,7 @@ public class SettingFamiliarMemberOnTower extends Action {
 			
 	}
 	
-	private boolean AlreadySetAMember(Player p, Tower t)
+	private boolean alreadySetAMember(Player p, Tower t)
 	{
 		
 		if (t.getListPlayers() != null)
@@ -67,13 +67,13 @@ public class SettingFamiliarMemberOnTower extends Action {
 				
 				if(p.getPlayerColorsEnum().equals(pc));
 				{
-					return false;
+					return true;
 				}
 				
 			}
 		}
 		
-		return true;
+		return false;
 		
 	}
 	
@@ -105,9 +105,9 @@ public class SettingFamiliarMemberOnTower extends Action {
 		
 		if (tower.getTowerCells().get(floor).getRequiredDiceValue() > familiarValue) return false;
 		
-		if(AlreadySetAMember(player, tower)) return false;
+		if(alreadySetAMember(player, tower)) return false;
 		
-		if(PayThreeCoins(player, tower) && player.getCoins() < 3 && !(player.isDontPayThreeCoinsInTowers())) return false;
+		if(payThreeCoins(player, tower) && player.getCoins() < 3 && !(player.isDontPayThreeCoinsInTowers())) return false;
 		
 		if (!(pickTowerCard.isLegal(player, gameBoard))) return false;
 		
@@ -128,7 +128,7 @@ public class SettingFamiliarMemberOnTower extends Action {
 		if (!isLegal(player, gameBoard))
 			return false;
 
-		if (PayThreeCoins(player, tower))
+		if (payThreeCoins(player, tower))
 		{
 			player.setCoins(player.getCoins() - 3);
 		}

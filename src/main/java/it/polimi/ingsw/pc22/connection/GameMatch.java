@@ -153,8 +153,6 @@ public class GameMatch implements Runnable
 					System.out.println("Familiar: " + action);
 
 					boolean executed = action.executeAction(player, gameBoard);
-					
-					
 
 					System.out.println(executed);
 

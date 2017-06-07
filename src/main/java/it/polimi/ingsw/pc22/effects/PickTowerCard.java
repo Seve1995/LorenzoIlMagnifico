@@ -59,41 +59,42 @@ public class PickTowerCard implements Effect
 		this.diceValue = diceValue;
 	}
 	
-	private void ApplyDiceChanges (Player p)
+	private void applyDiceChanges(Player p)
 	{
-		
-		if (p.getCardModifiers() != null)
+		diceValueCharacter = diceValue;
+		diceValueTerritory = diceValue;
+		diceValueVenture = diceValue;
+		diceValueBuilding = diceValue;
+
+		if (p.getCardModifiers() == null) return;
+
+		for (CardModifier cm : p.getCardModifiers())
 		{
-		
-			for (CardModifier cm : p.getCardModifiers())
+			if (cm.getCardType().equals(CardTypeEnum.CHARACTER))
 			{
-				if (cm.getCardType().equals(CardTypeEnum.CHARACTER))
-				{
-					diceValueCharacter = diceValue + cm.getValueModifier();
-				}
-				
-				if (cm.getCardType().equals(CardTypeEnum.TERRITORY))
-				{
-					diceValueTerritory = diceValue + cm.getValueModifier();
-				}
-				
-				if (cm.getCardType().equals(CardTypeEnum.VENTURE))
-				{
-					diceValueVenture = diceValue + cm.getValueModifier();
-					
-				}
-				
-				if (cm.getCardType().equals(CardTypeEnum.BUILDING))
-				{
-					diceValueBuilding = diceValue + cm.getValueModifier();
-				}
-				
+				diceValueCharacter += cm.getValueModifier();
 			}
+
+			if (cm.getCardType().equals(CardTypeEnum.TERRITORY))
+			{
+				diceValueTerritory += cm.getValueModifier();
+			}
+
+			if (cm.getCardType().equals(CardTypeEnum.VENTURE))
+			{
+				diceValueVenture += cm.getValueModifier();
+			}
+
+			if (cm.getCardType().equals(CardTypeEnum.BUILDING))
+			{
+				diceValueBuilding += cm.getValueModifier();
+			}
+
 		}
 	}
 	
 	
-	private void ApplyChanges (DevelopmentCard d, Player p, CardTypeEnum ct)
+	private void applyChanges(DevelopmentCard d, Player p, CardTypeEnum ct)
 	
 	{
 		if (p.getCardModifiers() != null)
@@ -236,12 +237,10 @@ public class PickTowerCard implements Effect
 			
 		}
 		
-		ApplyDiceChanges(player);
+		applyDiceChanges(player);
 		
 		if (this.cardType.equals(CardTypeEnum.CHARACTER))
 		{
-			
-			
 			if (player.getPlayerBoard().getCharacters().size() > 6 || diceValueCharacter < tower.getTowerCells().get(floor).getRequiredDiceValue())
 			{
 				
@@ -250,7 +249,7 @@ public class PickTowerCard implements Effect
 			
 			CharacterCard currCharacterCard = (CharacterCard) tower.getTowerCells().get(floor).getDevelopmentCard();
 			
-			ApplyChanges (currCharacterCard, player, CardTypeEnum.CHARACTER);
+			applyChanges(currCharacterCard, player, CardTypeEnum.CHARACTER);
 			
 			if (currCharacterCard.getCoinsCost().getValue() < player.getCoins())
 			{
@@ -274,7 +273,7 @@ public class PickTowerCard implements Effect
 	
 			BuildingCard currBuildingCard = (BuildingCard) tower.getTowerCells().get(floor).getDevelopmentCard();
 			
-			ApplyChanges (currBuildingCard, player, CardTypeEnum.BUILDING);
+			applyChanges(currBuildingCard, player, CardTypeEnum.BUILDING);
 			
 			for (Asset a : currBuildingCard.getCosts())
 			{
