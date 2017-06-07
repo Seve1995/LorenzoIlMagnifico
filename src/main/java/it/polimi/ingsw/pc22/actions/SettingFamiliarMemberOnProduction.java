@@ -20,7 +20,7 @@ public class SettingFamiliarMemberOnProduction extends Action {
 		
 		Production production = gameBoard.getProduction();
 		
-		if (super.getFamilyMember().getFamiliarValue() < 1)
+		if (familyMember.getFamiliarValue() < 1)
 			return false;
 		
 		for (ProductionCell productionCell : production.getProductionCell()){
@@ -32,7 +32,7 @@ public class SettingFamiliarMemberOnProduction extends Action {
 			if
 			(
 				currFamilyMember.getColor()==ColorsEnum.NEUTER ||
-				super.getFamilyMember().getColor() == ColorsEnum.NEUTER
+						familyMember.getColor() == ColorsEnum.NEUTER
 			)
 				break;
 			
@@ -55,7 +55,7 @@ public class SettingFamiliarMemberOnProduction extends Action {
 		{
 			
 			
-			production.getProductionCell()[production.firstCellFree()].setFamilyMember(this.getFamilyMember());
+			production.getProductionCell()[production.firstCellFree()].setFamilyMember(familyMember);
 			
 			familyMember.setPlayed(true);
 			
@@ -74,7 +74,7 @@ public class SettingFamiliarMemberOnProduction extends Action {
 		
 		else if (isLegal(player, gameBoard) && player.isDontCareOccupiedPlaces())
 		{
-			production.getProductionCell()[0].setFamilyMember(this.getFamilyMember());
+			production.getProductionCell()[0].setFamilyMember(familyMember);
 
 			familyMember.setPlayed(true);
 			

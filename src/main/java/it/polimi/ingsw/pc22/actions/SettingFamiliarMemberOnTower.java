@@ -40,14 +40,17 @@ public class SettingFamiliarMemberOnTower extends Action {
 	private boolean PayThreeCoins (Player p, Tower t)
 	{
 	
-		for (TowerCell tc : t.getTowerCells())
+		if (t.getListPlayers() != null)
 		{
-			FamilyMember currFM = tc.getFamilyMember();
-		
-			if(currFM !=null && !(currFM.getPlayerColor().equals(p.getPlayerColorsEnum())))
+			for (PlayerColorsEnum pc : t.getListPlayers())
 			{
-				return true;
-			}	
+				
+				if(!(p.getPlayerColorsEnum().equals(pc)));
+				{
+					return true;
+				}
+				
+			}
 		}
 		
 		return false;
@@ -56,15 +59,18 @@ public class SettingFamiliarMemberOnTower extends Action {
 	
 	private boolean AlreadySetAMember(Player p, Tower t)
 	{
-		for (TowerCell tc : t.getTowerCells())
-		{
-			FamilyMember currFM = tc.getFamilyMember();
 		
-			if(currFM !=null && (currFM.getPlayerColor().equals(p.getPlayerColorsEnum())) && currFM.getColor().equals(ColorsEnum.NEUTER) 
-					|| super.getFamilyMember().getColor().equals(ColorsEnum.NEUTER))
+		if (t.getListPlayers() != null)
+		{
+			for (PlayerColorsEnum pc : t.getListPlayers())
 			{
-				return false;
-			}	 
+				
+				if(p.getPlayerColorsEnum().equals(pc));
+				{
+					return false;
+				}
+				
+			}
 		}
 		
 		return true;
@@ -95,7 +101,7 @@ public class SettingFamiliarMemberOnTower extends Action {
 		
 		if (!tower.getTowerCells().get(floor).isEmpty() && !(player.isDontCareOccupiedPlaces())) return false;
 		
-		int familiarValue = super.getFamilyMember().getValue();
+		int familiarValue = familyMember.getValue();
 		
 		if (tower.getTowerCells().get(floor).getRequiredDiceValue() > familiarValue) return false;
 		
@@ -127,10 +133,12 @@ public class SettingFamiliarMemberOnTower extends Action {
 			player.setCoins(player.getCoins() - 3);
 		}
 
-		tower.getTowerCells().get(floor).setFamilyMember(this.getFamilyMember());
+		tower.getTowerCells().get(floor).setFamilyMember(familyMember);
 
 		familyMember.setPlayed(true);
-
+		
+		tower.getListPlayers().add(player.getPlayerColorsEnum());
+		
 		currEffects = tower.getTowerCells().get(floor).getEffects();
 
 		for (Effect e : currEffects)

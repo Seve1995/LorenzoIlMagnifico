@@ -17,8 +17,10 @@ public class SettingFamiliarMemberOnMarket extends Action{
 	public SettingFamiliarMemberOnMarket(){}
 
 	public SettingFamiliarMemberOnMarket(FamilyMember familyMember, int zone) {
+		
 		super(familyMember);
 		this.zone = zone;
+		
 	}
 
 	public int getZone() {
@@ -36,7 +38,7 @@ public class SettingFamiliarMemberOnMarket extends Action{
 		
 		List<MarketCell> currMarketCells = market.getMarketCells();
 		
-		if(currMarketCells.get(zone).getRequiredDiceValue() > super.getFamilyMember().getValue())
+		if(currMarketCells.get(zone).getRequiredDiceValue() > familyMember.getValue())
 			return false;
 		
 		if(!currMarketCells.get(zone).isEmpty())
@@ -60,7 +62,7 @@ public class SettingFamiliarMemberOnMarket extends Action{
 		
 		if (isLegal(player, gameBoard) )
 		{
-			market.getMarketCells().get(zone).setFamilyMember(this.getFamilyMember());
+			market.getMarketCells().get(zone).setFamilyMember(familyMember);
 			
 			familyMember.setPlayed(true);
 			
@@ -68,7 +70,9 @@ public class SettingFamiliarMemberOnMarket extends Action{
 			
 			for (Effect e : currEffects)
 			{
+				
 				e.executeEffect(player, gameBoard);
+				
 			}
 			
 			return true;

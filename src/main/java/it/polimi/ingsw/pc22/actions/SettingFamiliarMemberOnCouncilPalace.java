@@ -20,7 +20,8 @@ public class SettingFamiliarMemberOnCouncilPalace extends Action {
     @Override
 	protected boolean isLegal(Player player, GameBoard gameBoard) {
 		
-		if (super.getFamilyMember().getValue()<1) 
+		if (familyMember.getValue()<1) 
+			
 			return false;
 		
 		return true;
@@ -36,7 +37,7 @@ public class SettingFamiliarMemberOnCouncilPalace extends Action {
 			List<Player> playersInCouncilPalace = councilPalace.getPlayersInCouncilPalace();
 			if(!playersInCouncilPalace.contains(player)) //Aggiunge il player alla lista se non aveva ancora messo alcun familiare all'interno del council palace
 				playersInCouncilPalace.add(player);
-			councilPalace.getCouncilPalaceCells()[councilPalace.firstCellFree()].setFamilyMember(this.getFamilyMember());
+			councilPalace.getCouncilPalaceCells()[councilPalace.firstCellFree()].setFamilyMember(familyMember);
 			familyMember.setPlayed(true);
 			councilPalace.getCouncilPalaceCells()[councilPalace.firstCellFree()].executeEffect(player);
 			

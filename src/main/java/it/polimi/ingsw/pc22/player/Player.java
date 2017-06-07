@@ -532,7 +532,7 @@ public class Player
 			}
 		
 		}
-	
+
 	}
 
 }

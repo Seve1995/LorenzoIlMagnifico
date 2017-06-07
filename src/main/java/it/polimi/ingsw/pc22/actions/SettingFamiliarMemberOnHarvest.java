@@ -19,7 +19,7 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 		
 		Harvest harvest = gameBoard.getHarvest(); 
 		
-		if (super.getFamilyMember().getValue() < 1)
+		if (familyMember.getValue() < 1)
 			
 			return false;
 		
@@ -32,7 +32,7 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 			if
 			(
 					currFamilyMember.getColor()==ColorsEnum.NEUTER ||
-					super.getFamilyMember().getColor() == ColorsEnum.NEUTER
+					super.familyMember.getColor() == ColorsEnum.NEUTER
 			)
 				break;
 			
@@ -55,7 +55,7 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 		if (isLegal(player, gameBoard) && !(player.isDontCareOccupiedPlaces()))
 		{
 
-			harvest.getHarvestCell()[harvest.firstCellFree()].setFamilyMember(this.getFamilyMember());
+			harvest.getHarvestCell()[harvest.firstCellFree()].setFamilyMember(familyMember);
 
 			familyMember.setPlayed(true);
 			
@@ -74,7 +74,7 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 		
 		else if (isLegal(player, gameBoard) && player.isDontCareOccupiedPlaces())
 		{
-			harvest.getHarvestCell()[0].setFamilyMember(this.getFamilyMember());
+			harvest.getHarvestCell()[0].setFamilyMember(familyMember);
 			
 			familyMember.setPlayed(true);
 			

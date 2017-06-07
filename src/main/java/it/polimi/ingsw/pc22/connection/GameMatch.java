@@ -129,6 +129,8 @@ public class GameMatch implements Runnable
 				adapter.printMessage(gameBoard.toString());
 
 				adapter.printMessage(player.getPlayerBoard().toString());
+				
+				adapter.printMessage(player.toString());
 
 				Long timestamp = System.currentTimeMillis();
 
@@ -151,6 +153,8 @@ public class GameMatch implements Runnable
 					System.out.println("Familiar: " + action);
 
 					boolean executed = action.executeAction(player, gameBoard);
+					
+					
 
 					System.out.println(executed);
 
