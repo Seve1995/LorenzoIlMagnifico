@@ -36,18 +36,20 @@ public class DoHarvestAction implements Effect {
 				player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestStonesBonus());
 				player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestWoodsBonus());
 				
-				for (BuildingCard b : player.getPlayerBoard().getBuildings()){
-					
-					if(value >= b.getPermanentEffectActivationCost()){
+				if (player.getPlayerBoard().getBuildings()!=null)
+				{
+					for (BuildingCard b : player.getPlayerBoard().getBuildings()){
 						
-						for (Effect e : b.getPermanentEffects())
-						{
-							e.executeEffect(player, gameBoard);
+						if(value >= b.getPermanentEffectActivationCost()){
+							
+							for (Effect e : b.getPermanentEffects())
+							{
+								e.executeEffect(player, gameBoard);
+							}
+						
 						}
-					
 					}
 				}
-			
 			return true;
 		}
 		
