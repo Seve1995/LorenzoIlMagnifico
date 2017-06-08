@@ -34,20 +34,18 @@ public class DoProductionAction implements Effect {
 				player.addAsset(player.getPlayerBoard().getBonusTile().getProductionServantBonus());
 			
 			
-			if (player.getPlayerBoard().getTerritories()!=null)
+			for (TerritoryCard t : player.getPlayerBoard().getTerritories())
+			
 			{
-				for (TerritoryCard t : player.getPlayerBoard().getTerritories())
-				
+				if (value >= t.getPermanentEffectActivationCost())
 				{
-					if (value >= t.getPermanentEffectActivationCost())
+					for (Effect e : t.getPermanentEffects())
 					{
-						for (Effect e : t.getPermanentEffects())
-						{
-							e.executeEffect(player, gameBoard);
-						}
+						e.executeEffect(player, gameBoard);
 					}
 				}
 			}
+			
 			return true;
 		}
 		
