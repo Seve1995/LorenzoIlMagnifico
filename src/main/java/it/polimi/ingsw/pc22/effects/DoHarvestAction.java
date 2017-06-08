@@ -20,8 +20,11 @@ public class DoHarvestAction implements Effect {
 
 	@Override
 	public boolean isLegal(Player player, GameBoard gameBoard) {
+		
 		if (value < player.getPlayerBoard().getBonusTile().getHarvestActivationValue())
+			
 				return false;
+		
 		return true;
 	}
 

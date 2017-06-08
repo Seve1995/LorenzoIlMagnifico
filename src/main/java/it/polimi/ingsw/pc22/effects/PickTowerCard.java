@@ -391,7 +391,7 @@ public class PickTowerCard implements Effect
 			else if (!(player.isNoMilitaryPointsForTerritories())) 
 			
 			{
-					if (player.getPlayerBoard().getTerritories().size() + 1 == 3)
+					if (player.getPlayerBoard().getTerritories().size()  == 2)
 					{
 						if (player.getMilitaryPoints() < 3)
 						{
@@ -399,7 +399,7 @@ public class PickTowerCard implements Effect
 						}
 					}
 						
-					else if (player.getPlayerBoard().getTerritories().size() + 1 == 4)
+					else if (player.getPlayerBoard().getTerritories().size()  == 3)
 					{
 						if (player.getMilitaryPoints() < 7)
 						{
@@ -407,7 +407,7 @@ public class PickTowerCard implements Effect
 						}
 					}
 						
-					else if (player.getPlayerBoard().getTerritories().size() + 1 == 5)
+					else if (player.getPlayerBoard().getTerritories().size()  == 4)
 					{
 						if (player.getMilitaryPoints() < 12)
 						{
@@ -416,7 +416,7 @@ public class PickTowerCard implements Effect
 						}
 					}
 					
-					else if  (player.getPlayerBoard().getTerritories().size() + 1 == 6)
+					else if  (player.getPlayerBoard().getTerritories().size()  == 5)
 					{
 		
 						if (player.getMilitaryPoints() < 18)
