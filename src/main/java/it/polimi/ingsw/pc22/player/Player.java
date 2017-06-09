@@ -23,7 +23,7 @@ public class Player
 	private int priority;
 	private int endGameVictoryPoints;
 	private List<LeaderCard> leaderCards = new ArrayList<>();
-	private List<CardModifier> cardModifiers;
+	private List<CardModifier> cardModifiers = new ArrayList<>();
 	private List<AddEndGameVictoryPoints> addEndGameVictoryPoints;
 	private int harvestValueModifier; //Serve per gestire l'effetto AddHarvestValueBonus
 	private int productionValueModifier; //Serve per gestire l'effetto AddProductionValueBonus
