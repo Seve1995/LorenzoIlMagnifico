@@ -11,7 +11,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Scanner;
 
-public class Client 
+public class Client
 {
 	private static final int RMI_PORT = 5252;
 
@@ -21,12 +21,7 @@ public class Client
 	{
 		while (true)
 		{
-			System.out.println("Scegli tipologia inizializzazione gioco:" +
-					"1) SOCKET CLI" + '\n' +
-					"2) SOCKET GUI" +'\n' +
-					"3) RMI CLI" +'\n' +
-					"4) RMI GUI" +'\n' +
-					"5) EXIT per terminare");
+			System.out.println("Scelgi tipologia di connessione: rmi o socket");
 
 			Scanner scanner = new Scanner(System.in);
 
@@ -42,13 +37,6 @@ public class Client
 			if (choice.equals("socket"))
 			{
 				loadSocketConnection();
-
-				break;
-			}
-
-			if (choice.equals("EXIT"))
-			{
-				System.out.println("Client STOPPED.");
 
 				break;
 			}
@@ -74,9 +62,7 @@ public class Client
 
 			registry.rebind("client", stub);
 
-			Scanner in = new Scanner(System.in);
-
-
+			authenticationService.login();
 
 		} catch (RemoteException | NotBoundException e)
 		{

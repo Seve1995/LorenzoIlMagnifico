@@ -5,16 +5,35 @@ package it.polimi.ingsw.pc22.utils;
  */
 public enum TerritoriesCalc
 {
-    ONE(1,3),
+    ZERO(0,0),
+    ONE(3,1),
     FOUR(4,4),
     TEN(5,10),
     TWENTY(6,20);
 
     private int value;
-    private int viAvictorypoints;
+    private int victoryPoints;
 
-    TerritoriesCalc(int value, int victorypoints)
+    TerritoriesCalc(int value, int victoryPoints)
     {
+        this.value = value;
+        this.victoryPoints = victoryPoints;
+    }
 
+    public int getVictoryPoints()
+    {
+        return victoryPoints;
+    }
+
+    public static TerritoriesCalc getTerritoryCalcByValue(int value)
+    {
+        if (value < 3) return TerritoriesCalc.ZERO;
+
+        for (TerritoriesCalc territoriesCalc : TerritoriesCalc.values())
+        {
+            if (value == territoriesCalc.value) return territoriesCalc;
+        }
+
+        return null;
     }
 }

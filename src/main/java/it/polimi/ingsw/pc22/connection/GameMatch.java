@@ -5,11 +5,7 @@ import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
-import it.polimi.ingsw.pc22.utils.BoardLoader;
-import it.polimi.ingsw.pc22.utils.BonusTileLoader;
-import it.polimi.ingsw.pc22.utils.CardLoader;
-import it.polimi.ingsw.pc22.utils.ExcommunicationCardLoader;
-import it.polimi.ingsw.pc22.utils.GameBoardUtils;
+import it.polimi.ingsw.pc22.utils.*;
 
 import org.json.JSONObject;
 
@@ -574,28 +570,17 @@ public class GameMatch implements Runnable
 
 		for (Player p : players)
 		{
-
-			if (p.getPlayerBoard().getTerritories() != null )
+			if (p.getPlayerBoard().getTerritories() != null)
 			{
+				int value = p.getPlayerBoard().getTerritories().size();
 
-				if (p.getPlayerBoard().getTerritories().size() == 3)
+				TerritoriesCalc territoriesCalc = TerritoriesCalc.getTerritoryCalcByValue(value);
 
-					p.setVictoryPoints(p.getVictoryPoints() + 1);
+				int victoryPoints =  territoriesCalc.getVictoryPoints();
 
-				if (p.getPlayerBoard().getTerritories().size() == 4)
-
-					p.setVictoryPoints(p.getVictoryPoints() + 4);
-
-				if (p.getPlayerBoard().getTerritories().size() == 5)
-
-					p.setVictoryPoints(p.getVictoryPoints() + 10);
-
-				if (p.getPlayerBoard().getTerritories().size() == 6)
-
-					p.setVictoryPoints(p.getVictoryPoints() + 20);
-
+				p.setVictoryPoints(p.getVictoryPoints() + victoryPoints);
 			}
-			
+
 			if (p.getPlayerBoard().getCharacters() != null)
 			{
 

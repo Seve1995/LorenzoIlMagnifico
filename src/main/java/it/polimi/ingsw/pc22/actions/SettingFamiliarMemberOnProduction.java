@@ -108,7 +108,7 @@ public class SettingFamiliarMemberOnProduction extends Action {
 				doProductionAction.setValue(familyMember.getValue());
 			}
 			
-			doProductionAction.executeEffect(player, gameBoard);
+			doProductionAction.executeEffects(player, gameBoard);
 
 			return true;
 
@@ -131,7 +131,7 @@ public class SettingFamiliarMemberOnProduction extends Action {
 
 			
 
-			doProductionAction.executeEffect(player, gameBoard);
+			doProductionAction.executeEffects(player, gameBoard);
 
 			
 

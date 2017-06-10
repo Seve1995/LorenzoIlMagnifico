@@ -56,7 +56,7 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
         //TODO GESTIRE TIMEOUT
         while (true)
         {
-            this.printMessage("Scegli un familiare tra quelli disponibili:" + '\n'
+            this.printMessage("Choose one asset among the available //one's:" + '\n'
             + "1) one stone & one wood" + '\n'
             + "2) two servants" + '\n'
             + "3) two coins" + '\n'
