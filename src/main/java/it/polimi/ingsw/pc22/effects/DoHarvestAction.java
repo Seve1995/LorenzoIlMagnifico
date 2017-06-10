@@ -26,7 +26,7 @@ public class DoHarvestAction implements Effect {
 	}
 
 	@Override
-	public boolean executeEffect(Player player, GameBoard gameBoard) {
+	public boolean executeEffects(Player player, GameBoard gameBoard) {
 		
 		if (isLegal(player,gameBoard))
 		{
@@ -42,7 +42,7 @@ public class DoHarvestAction implements Effect {
 						
 						for (Effect e : b.getPermanentEffects())
 						{
-							e.executeEffect(player, gameBoard);
+							e.executeEffects(player, gameBoard);
 						}
 					
 					}

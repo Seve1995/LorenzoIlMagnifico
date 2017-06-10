@@ -66,7 +66,7 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 			
 			doHarvestAction.setValue(familyMember.getValue());
 			
-			doHarvestAction.executeEffect(player, gameBoard);
+			doHarvestAction.executeEffects(player, gameBoard);
 			
 			return true;
 			
@@ -80,7 +80,7 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 			
 			doHarvestAction.setValue(familyMember.getValue());
 			
-			doHarvestAction.executeEffect(player, gameBoard);
+			doHarvestAction.executeEffects(player, gameBoard);
 			
 			return true;
 		}

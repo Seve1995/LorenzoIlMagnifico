@@ -21,7 +21,12 @@ public class Client
 	{
 		while (true)
 		{
-			System.out.println("Scelgi tipologia di connessione: rmi o socket");
+			System.out.println("Scegli tipologia inizializzazione gioco:" +
+					"1) SOCKET CLI" + '\n' +
+					"2) SOCKET GUI" +'\n' +
+					"3) RMI CLI" +'\n' +
+					"4) RMI GUI" +'\n' +
+					"5) EXIT per terminare");
 
 			Scanner scanner = new Scanner(System.in);
 
@@ -37,6 +42,13 @@ public class Client
 			if (choice.equals("socket"))
 			{
 				loadSocketConnection();
+
+				break;
+			}
+
+			if (choice.equals("EXIT"))
+			{
+				System.out.println("Client STOPPED.");
 
 				break;
 			}
@@ -62,7 +74,9 @@ public class Client
 
 			registry.rebind("client", stub);
 
-			authenticationService.login();
+			Scanner in = new Scanner(System.in);
+
+
 
 		} catch (RemoteException | NotBoundException e)
 		{

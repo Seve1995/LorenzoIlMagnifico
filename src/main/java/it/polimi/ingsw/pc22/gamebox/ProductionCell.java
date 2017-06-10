@@ -13,7 +13,7 @@ public class ProductionCell extends Cell
 	}
 	
 	@Override
-	public void executeEffect(Player player) {
+	public void executeEffects(Player player) {
 		// TODO Auto-generated method stub
 	}
 

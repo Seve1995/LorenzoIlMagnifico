@@ -1,7 +1,7 @@
 package it.polimi.ingsw.pc22.connection;
 
 import it.polimi.ingsw.pc22.actions.Action;
-import it.polimi.ingsw.pc22.adapters.GameAdapter;
+import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
@@ -100,7 +100,7 @@ public class GameMatch implements Runnable
 
 		setUpPlayers();
 
-		for (int currentRoundNumber=0; currentRoundNumber < turnNumber; currentRoundNumber++)
+		for (int currentRoundNumber = 0; currentRoundNumber < turnNumber; currentRoundNumber++)
 		{
 			if (isNewTurn(currentRoundNumber))
 			{
@@ -124,13 +124,15 @@ public class GameMatch implements Runnable
 					player.setFamiliarToPlayer(gameBoard.getDices());
 				}
 
-				GameAdapter adapter = player.getAdapter();
+				IOAdapter adapter = player.getAdapter();
 
 				adapter.printMessage(gameBoard.toString());
 
 				adapter.printMessage(player.getPlayerBoard().toString());
 				
 				adapter.printMessage(player.toString());
+
+				adapter.printMessage(player.getPlayerBoard().toString());
 
 				Long timestamp = System.currentTimeMillis();
 
@@ -150,7 +152,9 @@ public class GameMatch implements Runnable
 
 					Action action = adapter.askAction(familyMember, servants, timeout);
 
-					System.out.println("Familiar: " + action);
+					System.out.println("Action: " + action);
+
+					if (action == null) continue;
 
 					boolean executed = action.executeAction(player, gameBoard);
 
@@ -278,7 +282,7 @@ public class GameMatch implements Runnable
 	{
 		for (Player player : players)
 		{
-			GameAdapter playerAdapter = player.getAdapter();
+			IOAdapter playerAdapter = player.getAdapter();
 
 			try
 			{
@@ -548,7 +552,7 @@ public class GameMatch implements Runnable
 		
 		for (Effect eff : e.get(era-1).getEffects())
 		{
-			eff.executeEffect(p, gameBoard);
+			eff.executeEffects(p, gameBoard);
 		}
 	
 	}
@@ -556,7 +560,7 @@ public class GameMatch implements Runnable
 	private int sumFinalResources(Player p)
 	{
 		
-		return p.getCoins()+p.getServants()+p.getWoods()+p.getStones();
+		return p.getCoins() + p.getServants() + p.getWoods() + p.getStones();
 		
 	}
 	
@@ -604,7 +608,7 @@ public class GameMatch implements Runnable
 
 				if (p.getPlayerBoard().getCharacters().size() == 3)
 
-					p.setVictoryPoints(p.getVictoryPoints() +6);
+					p.setVictoryPoints(p.getVictoryPoints() + 6);
 
 				if (p.getPlayerBoard().getCharacters().size() == 4)
 
@@ -617,6 +621,8 @@ public class GameMatch implements Runnable
 				if (p.getPlayerBoard().getCharacters().size() == 6)
 
 					p.setVictoryPoints(p.getVictoryPoints() + 21);
+
+
 			}
 
 			if (p.getPlayerBoard().getVentures() != null)
@@ -626,7 +632,7 @@ public class GameMatch implements Runnable
 				{
 					for (Effect e : v.getPermanentEffects())
 					{
-						e.executeEffect(p, gameBoard);
+						e.executeEffects(p, gameBoard);
 					}
 
 				}

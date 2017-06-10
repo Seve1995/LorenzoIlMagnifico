@@ -22,7 +22,7 @@ public class DiscardLeaderCard extends Action{
 		
 		PickOneCouncilPrivilege currCouncilPrivilege=new PickOneCouncilPrivilege();
 		
-		currCouncilPrivilege.executeEffect(player, gameBoard);
+		currCouncilPrivilege.executeEffects(player, gameBoard);
 		
 		return true;
 		

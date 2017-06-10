@@ -20,7 +20,7 @@ public abstract class Cell
 
 	public Cell() {}
 
-	public abstract void executeEffect(Player player);
+	public abstract void executeEffects(Player player);
 
 	public int getRequiredDiceValue() {
 		return requiredDiceValue;

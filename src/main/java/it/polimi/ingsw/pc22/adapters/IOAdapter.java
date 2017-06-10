@@ -1,6 +1,12 @@
-package it.polimi.ingsw.pc22.connection;
+package it.polimi.ingsw.pc22.adapters;
 
-import it.polimi.ingsw.pc22.adapters.GameAdapter;
+import it.polimi.ingsw.pc22.actions.Action;
+import it.polimi.ingsw.pc22.connection.GameMatch;
+import it.polimi.ingsw.pc22.connection.GameServer;
+import it.polimi.ingsw.pc22.connection.User;
+import it.polimi.ingsw.pc22.gamebox.Asset;
+import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
+import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.UserLoader;
 
@@ -12,9 +18,27 @@ import java.util.Map;
 /**
  * Created by fandroid95 on 30/05/2017.
  */
-public abstract class AuthenticationHandler
+public abstract class IOAdapter
 {
-    protected void authentication(GameAdapter adapter)
+    public abstract void endConnection(Player player) throws IOException;
+
+    public abstract void  printMessage(String message);
+
+    public abstract String getMessage();
+
+    public abstract Action askAction(FamilyMember familyMember, Asset servant ,Long timeout);
+
+    public abstract int askFloor();
+
+    public abstract CardTypeEnum askForCardType();
+
+    public abstract FamilyMember askFamiliarMember(Player player, Long timeout);
+
+    public abstract Asset askServants(Player player, Long timeout);
+
+    public abstract List<Asset> chooseOneAsset();
+
+    protected void authentication()
     {
         try
         {
@@ -22,13 +46,13 @@ public abstract class AuthenticationHandler
 
             while (user == null)
             {
-                adapter.printMessage("Sign up or Login?");
+                printMessage("Sign up or Login?");
 
-                String answer = adapter.getMessage();
+                String answer = getMessage();
 
                 if (answer == null)
                 {
-                    adapter.endConnection(null);
+                    endConnection(null);
 
                     return;
                 }
@@ -37,18 +61,18 @@ public abstract class AuthenticationHandler
                 {
                     case "login":
 
-                        user = loginUser(adapter);
+                        user = loginUser();
 
                         break;
                     case "sign up":
 
-                        user = signUp(adapter);
+                        user = signUp();
 
                         break;
 
                     default:
 
-                        adapter.printMessage("Non-valid input. Please retry... ");
+                        printMessage("Non-valid input. Please retry... ");
 
                         break;
                 }
@@ -65,22 +89,22 @@ public abstract class AuthenticationHandler
 
             while (!gameHandling)
             {
-                adapter.printMessage("Choose an operation:\n"
+                printMessage("Choose an operation:\n"
                         + "(1) Create new game match\n"
                         + "(2) Join a friend's game match\n"
                         + "(3) Join a random game match"
                 );
 
-                String userChoice = adapter.getMessage();
+                String userChoice = getMessage();
 
                 if ("1".equals(userChoice))
                 {
-                    gameHandling = createNewGame(player, adapter);
+                    gameHandling = createNewGame(player);
                 }
 
                 if ("2".equals(userChoice))
                 {
-                    gameHandling = checkExistingGame(player, adapter);
+                    gameHandling = checkExistingGame(player);
                 }
 
                 if ("3".equals(userChoice))
@@ -98,146 +122,146 @@ public abstract class AuthenticationHandler
         }
     }
 
-    private void checkPassword(User user, GameAdapter adapter) throws IOException
+    protected void checkPassword(User user) throws IOException
     {
-        String password = adapter.getMessage();
+        String password = getMessage();
 
         if (password == null)
         {
-            adapter.printMessage("Timeout expired retry");
+            printMessage("Timeout expired retry");
 
             user.setLogged(false);
         }
 
         if (user.getPassword().equals(password))
         {
-            adapter.printMessage("Successful logged in!");
+            printMessage("Successful logged in!");
 
             user.setLogged(true);
 
             return;
         }
 
-        adapter.printMessage("Error: wrong password! Please retry.");
+        printMessage("Error: wrong password! Please retry.");
 
         user.setLogged(false);
     }
 
-    private User getUserFromUserName(GameAdapter adapter) throws IOException
+    protected User getUserFromUserName() throws IOException
     {
-        adapter.printMessage("Type an existing username:");
+        printMessage("Type an existing username:");
 
-        String username = adapter.getMessage();
+        String username = getMessage();
 
         User user = existingUsername(username);
 
         if (user != null)
         {
-            adapter.printMessage("Username OK. Now type the password:");
+            printMessage("Username OK. Now type the password:");
 
             return user;
         }
 
-        adapter.printMessage("Error: username not found! Please retry.");
+        printMessage("Error: username not found! Please retry.");
 
         return null;
     }
 
-    private User registerNewUser(GameAdapter adapter) throws IOException
+    protected User registerNewUser() throws IOException
     {
-        adapter.printMessage("Type an username:");
-        String username = adapter.getMessage();
+        printMessage("Type an username:");
+        String username = getMessage();
 
-        adapter.printMessage("Type a password");
+        printMessage("Type a password");
 
-        String password = adapter.getMessage();
+        String password = getMessage();
 
         Boolean invalidUsername =
                 GameServer.getUsersMap().containsKey(username);
 
         if (invalidUsername)
         {
-            adapter.printMessage("The specified username already exist! Please type a new username.");
+            printMessage("The specified username already exist! Please type a new username.");
             return null;
         }
 
-        adapter.printMessage("User created!");
+        printMessage("User created!");
 
         return new User(username, password, true);
     }
 
-    private boolean createNewGame(Player player, GameAdapter adapter) throws IOException
+    protected boolean createNewGame(Player player) throws IOException
     {
-        adapter.printMessage("Type a name for the new game match:");
+        printMessage("Type a name for the new game match:");
 
-        String gameName = adapter.getMessage();
+        String gameName = getMessage();
 
         if (gameName == null) return false;
 
-        adapter.printMessage("Game name: " + gameName);
+        printMessage("Game name: " + gameName);
 
         boolean existingGameMatch =
                 GameServer.getGameMatchMap().containsKey(gameName);
 
         if (existingGameMatch)
         {
-            adapter.printMessage("A game match with the specified name already exists.");
+            printMessage("A game match with the specified name already exists.");
 
             return false;
         }
 
-        startNewGameMatch(gameName, player, adapter);
+        startNewGameMatch(gameName, player);
 
-        adapter.printMessage("Player: " + player.getName() + " created GameMatch - " + gameName);
+        printMessage("Player: " + player.getName() + " created GameMatch - " + gameName);
 
         return true;
     }
 
-    private boolean checkExistingGame(Player player, GameAdapter adapter) throws IOException
+    protected boolean checkExistingGame(Player player) throws IOException
     {
-        adapter.printMessage("Type the name of the chosen game match:");
+        printMessage("Type the name of the chosen game match:");
 
-        String gameName = adapter.getMessage();
+        String gameName = getMessage();
 
         if (gameName == null) return false;
 
-        adapter.printMessage("Game name: " + gameName);
+        printMessage("Game name: " + gameName);
 
         boolean existingGameMatch =
                 GameServer.getGameMatchMap().containsKey(gameName);
 
         if (!existingGameMatch) {
-            adapter.printMessage("Game match not found.");
+            printMessage("Game match not found.");
 
             return false;
         }
 
-        insertIntoExistingGameMatch(gameName, player, adapter);
+        insertIntoExistingGameMatch(gameName, player);
 
-        adapter.printMessage("Player: " + player.getName() + " joined GameMatch - " + gameName);
+        printMessage("Player: " + player.getName() + " joined GameMatch - " + gameName);
 
         return true;
     }
 
 
-    private User loginUser(GameAdapter adapter) throws IOException
+    protected User loginUser() throws IOException
     {
         User user = null;
 
         while(user == null)
         {
-            user = getUserFromUserName(adapter);
+            user = getUserFromUserName();
         }
 
         while(!user.isLogged())
         {
-            checkPassword(user, adapter);
+            checkPassword(user);
         }
 
         return user;
     }
 
-    synchronized private User existingUsername(String username)
+    synchronized protected User existingUsername(String username)
     {
         Map<String, User> usersMap = GameServer.getUsersMap();
 
@@ -250,13 +274,13 @@ public abstract class AuthenticationHandler
         return  user;
     }
 
-    private User signUp(GameAdapter adapter) throws IOException
+    protected User signUp() throws IOException
     {
         User user = null;
 
         while (user == null)
         {
-            user = registerNewUser(adapter);
+            user = registerNewUser();
         }
 
         Map<String, User> usersMap = GameServer.getUsersMap();
@@ -270,7 +294,7 @@ public abstract class AuthenticationHandler
     }
 
     //TODO FAR SI CHE I VALORI VENGANO GESTITI DAL PARSER JSON
-    private void startNewGameMatch(String gameName, Player player, GameAdapter gameAdapter)
+    protected void startNewGameMatch(String gameName, Player player)
     {
         GameMatch gameMatch = new GameMatch(15000L, 4);
 
@@ -278,7 +302,7 @@ public abstract class AuthenticationHandler
 
         gameMatchMap.put(gameName, gameMatch);
 
-        player.setAdapter(gameAdapter);
+        player.setAdapter(this);
 
         List<Player> players = new ArrayList<>();
 
@@ -292,14 +316,14 @@ public abstract class AuthenticationHandler
     }
 
 
-    synchronized private void insertIntoExistingGameMatch
-            (String gameName, Player player, GameAdapter gameAdapter)
+    synchronized protected void insertIntoExistingGameMatch
+            (String gameName, Player player)
     {
         Map<String, GameMatch> gameMatchMap = GameServer.getGameMatchMap();
 
         GameMatch gameMatch = gameMatchMap.get(gameName);
 
-        player.setAdapter(gameAdapter);
+        player.setAdapter(this);
 
         List<Player> players = gameMatch.getPlayers();
 
@@ -316,11 +340,10 @@ public abstract class AuthenticationHandler
 
     }
 
-    synchronized private void updateJson() throws IOException
+    synchronized protected void updateJson() throws IOException
     {
         Map<String, User> usersMap = GameServer.getUsersMap();
 
         UserLoader.refreshJson(usersMap);
     }
-
 }

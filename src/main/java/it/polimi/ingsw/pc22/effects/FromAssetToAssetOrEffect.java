@@ -52,12 +52,12 @@ public class FromAssetToAssetOrEffect implements Effect{
 	}
 	
 	@Override
-	public boolean executeEffect(Player player, GameBoard gameBoard) 
+	public boolean executeEffects(Player player, GameBoard gameBoard)
 	{
 		if (isLegal(player, gameBoard)){
 			if (gainedEffect != null)
 			{
-				gainedEffect.executeEffect(player, gameBoard);
+				gainedEffect.executeEffects(player, gameBoard);
 				
 			}
 			if (gainedAssets != null){

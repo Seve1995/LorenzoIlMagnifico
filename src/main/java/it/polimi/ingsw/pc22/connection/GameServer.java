@@ -1,5 +1,7 @@
 package it.polimi.ingsw.pc22.connection;
 
+import it.polimi.ingsw.pc22.adapters.RMIIOAdapter;
+import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.rmi.RMIAuthenticationService;
 import it.polimi.ingsw.pc22.utils.UserLoader;
@@ -36,11 +38,10 @@ public class GameServer
 		{
 			Registry registry = LocateRegistry.createRegistry(RMI_PORT);
 
-			RMIAuthenticationServiceImpl rmiAuthenticationHandler
-					= new RMIAuthenticationServiceImpl(registry);
+			RMIIOAdapter rmiIoAdapter = new RMIIOAdapter(registry);
 
 			RMIAuthenticationService stub = (RMIAuthenticationService)
-					UnicastRemoteObject.exportObject(rmiAuthenticationHandler, 0);
+					UnicastRemoteObject.exportObject(rmiIoAdapter, 0);
 
 			registry.rebind("auth", stub);
 
@@ -66,10 +67,10 @@ public class GameServer
 
 				socket.setSoTimeout(60000);
 
-				SocketAuthenticationHandler handler
-						= new SocketAuthenticationHandler(socket);
+				SocketIOAdapter socketIOAdapter
+						= new SocketIOAdapter(socket);
 
-				new Thread(handler).start();
+				new Thread(socketIOAdapter).start();
 			}
 			
 		} 

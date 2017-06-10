@@ -13,21 +13,20 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.net.SocketException;
-import java.net.SocketTimeoutException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by fandroid95 on 30/05/2017.
  */
-public class SocketGameAdapter implements GameAdapter
+public class SocketIOAdapter extends IOAdapter implements Runnable
 {
     public Socket socket;
 
     private BufferedReader in;
     private PrintWriter out;
 
-    public SocketGameAdapter(Socket socket)
+    public SocketIOAdapter(Socket socket)
     {
         this.socket = socket;
 
@@ -42,6 +41,80 @@ public class SocketGameAdapter implements GameAdapter
         {
             e.printStackTrace();
         }
+    }
+
+    public void run()
+    {
+        authentication();
+    }
+
+    @Override
+    public List<Asset> chooseOneAsset()
+    {
+        List<Asset> assets = new ArrayList<>();
+
+        //TODO GESTIRE TIMEOUT
+        while (true)
+        {
+            this.printMessage("Scegli un familiare tra quelli disponibili:" + '\n'
+            + "1) one stone & one wood" + '\n'
+            + "2) two servants" + '\n'
+            + "3) two coins" + '\n'
+            + "4) two military points" + '\n'
+            + "5) two faith points");
+
+            String choice = getMessage();
+
+            if ("1".equals(choice))
+            {
+                Asset wood = new Asset(1, AssetType.WOOD);
+                Asset stone = new Asset(1, AssetType.STONE);
+
+                assets.add(wood);
+                assets.add(stone);
+
+                break;
+            }
+
+            if ("2".equals(choice))
+            {
+                Asset servants = new Asset(1, AssetType.SERVANT);
+
+                assets.add(servants);
+
+                break;
+            }
+
+            if ("3".equals(choice))
+            {
+                Asset coins = new Asset(1, AssetType.COIN);
+
+                assets.add(coins);
+
+                break;
+            }
+
+            if ("4".equals(choice))
+            {
+                Asset military = new Asset(1, AssetType.MILITARYPOINT);
+
+                assets.add(military);
+
+                break;
+            }
+
+            if ("5".equals(choice))
+            {
+                Asset faith = new Asset(1, AssetType.FAITHPOINT);
+
+                assets.add(faith);
+
+                break;
+            }
+
+        }
+
+        return assets;
     }
 
     @Override

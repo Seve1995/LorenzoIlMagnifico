@@ -13,11 +13,12 @@ public class CouncilPalaceCell extends Cell
 	}
 	
 	@Override
-	public void executeEffect(Player player) {
+	public void executeEffects(Player player)
+	{
 		
 		for(Effect e : this.getEffects())
 		{
-			e.executeEffect(player, null);
+			e.executeEffects(player, null);
 		}
 		
 	}

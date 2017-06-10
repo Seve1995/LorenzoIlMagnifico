@@ -30,7 +30,7 @@ public class AddAsset implements Effect
 	}
 
 	@Override
-	public boolean executeEffect(Player player, GameBoard gameBoard) {
+	public boolean executeEffects(Player player, GameBoard gameBoard) {
 		
 		if (isLegal(player,gameBoard))
 		{
@@ -47,7 +47,7 @@ public class AddAsset implements Effect
 		AddAsset add = new AddAsset();
 		add.setAsset(new Asset(3, AssetType.COIN));
 		Player p1 = new Player();
-		add.executeEffect(p1);
+		add.executeEffects(p1);
 		System.out.println(p1.getAsset(AssetType.COIN));
 	}
 	*/

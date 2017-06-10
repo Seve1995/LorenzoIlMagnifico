@@ -1,6 +1,7 @@
 package it.polimi.ingsw.pc22.actions;
 
 import it.polimi.ingsw.pc22.gamebox.CouncilPalace;
+import it.polimi.ingsw.pc22.gamebox.CouncilPalaceCell;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
@@ -28,26 +29,31 @@ public class SettingFamiliarMemberOnCouncilPalace extends Action {
 	}
 
 	@Override
-	public boolean executeAction(Player player, GameBoard gameBoard) {
-		
+	public boolean executeAction(Player player, GameBoard gameBoard)
+	{
 		CouncilPalace councilPalace = gameBoard.getCouncilPalace(); 
 		
-		if (isLegal(player, gameBoard))
-		{
-			List<Player> playersInCouncilPalace = councilPalace.getPlayersInCouncilPalace();
-			if(!playersInCouncilPalace.contains(player)) //Aggiunge il player alla lista se non aveva ancora messo alcun familiare all'interno del council palace
-				playersInCouncilPalace.add(player);
-			councilPalace.getCouncilPalaceCells()[councilPalace.firstCellFree()].setFamilyMember(familyMember);
-			familyMember.setPlayed(true);
-			councilPalace.getCouncilPalaceCells()[councilPalace.firstCellFree()].executeEffect(player);
-			
-			return true;
-		}
-		
-		else {
-			
-			return false;
-		}
+		if (!isLegal(player, gameBoard)) return false;
+
+		List<Player> playersInCouncilPalace = councilPalace.getPlayersInCouncilPalace();
+
+		//Aggiunge il player alla lista se non aveva ancora
+		//messo alcun familiare all'interno del council palace
+
+		if(!playersInCouncilPalace.contains(player))
+			playersInCouncilPalace.add(player);
+
+		int firstCellFree = councilPalace.firstCellFree();
+
+		CouncilPalaceCell cell = councilPalace.getCouncilPalaceCells()[firstCellFree];
+
+		cell.setFamilyMember(familyMember);
+
+		familyMember.setPlayed(true);
+
+		cell.executeEffects(player);
+
+		return true;
 
 	}
 	

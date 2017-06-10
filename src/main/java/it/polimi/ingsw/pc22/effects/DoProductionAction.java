@@ -25,7 +25,7 @@ public class DoProductionAction implements Effect {
 	}
 
 	@Override
-	public boolean executeEffect(Player player, GameBoard gameBoard) {
+	public boolean executeEffects(Player player, GameBoard gameBoard) {
 		
 		if (isLegal(player, gameBoard))
 		{
@@ -46,7 +46,7 @@ public class DoProductionAction implements Effect {
 				{
 					for (Effect e : t.getPermanentEffects())
 					{
-						e.executeEffect(player, gameBoard);
+						e.executeEffects(player, gameBoard);
 					}
 				}
 			}

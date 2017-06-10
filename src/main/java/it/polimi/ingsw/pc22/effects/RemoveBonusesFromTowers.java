@@ -13,7 +13,7 @@ public class RemoveBonusesFromTowers implements Effect
 {
 
 	@Override
-	public boolean executeEffect(Player player, GameBoard gameBoard) 
+	public boolean executeEffects(Player player, GameBoard gameBoard)
 	{
 		player.setRemoveTowerBonus(true);
 		return true;

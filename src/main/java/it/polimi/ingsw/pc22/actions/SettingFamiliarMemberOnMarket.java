@@ -71,7 +71,7 @@ public class SettingFamiliarMemberOnMarket extends Action{
 			for (Effect e : currEffects)
 			{
 				
-				e.executeEffect(player, gameBoard);
+				e.executeEffects(player, gameBoard);
 				
 			}
 			

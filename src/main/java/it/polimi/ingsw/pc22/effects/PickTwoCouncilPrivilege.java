@@ -23,7 +23,7 @@ public class PickTwoCouncilPrivilege implements Effect{
 	}
 
 	@Override
-	public boolean executeEffect(Player player, GameBoard gameBoard) 
+	public boolean executeEffects(Player player, GameBoard gameBoard)
 	{
 		this.choosenAsset1.setType(AssetType.COIN);
 		this.choosenAsset1.setValue(0);

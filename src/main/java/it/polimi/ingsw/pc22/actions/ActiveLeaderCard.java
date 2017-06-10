@@ -33,7 +33,7 @@ public class ActiveLeaderCard extends Action
 		
 		for (Effect e : player.getPlayerBoard().getLeaderCards().get(index).getEffects())
 		{
-			e.executeEffect(player, gameBoard);
+			e.executeEffects(player, gameBoard);
 		}
 		
 		return true;

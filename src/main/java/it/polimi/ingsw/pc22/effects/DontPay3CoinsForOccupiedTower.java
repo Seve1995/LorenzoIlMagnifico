@@ -11,7 +11,7 @@ public class DontPay3CoinsForOccupiedTower implements Effect {
 	}
 
 	@Override
-	public boolean executeEffect(Player player, GameBoard gameBoard) {
+	public boolean executeEffects(Player player, GameBoard gameBoard) {
 	
 		player.setDontPayThreeCoinsInTowers(true);
 		

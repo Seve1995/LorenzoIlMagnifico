@@ -371,17 +371,17 @@ public class PickTowerCard implements Effect
 
 		for (Effect e : immediateEffects)
 		{
-				e.executeEffect(p, null);
+				e.executeEffects(p, null);
 				
 				if ((e instanceof AddAsset) && p.isSantaRita())
-					e.executeEffect(p, gb);
+					e.executeEffects(p, gb);
 		}
 			
 	}
 	
 	
 	@Override
-	public boolean executeEffect(Player player, GameBoard gameBoard) 
+	public boolean executeEffects(Player player, GameBoard gameBoard)
 	{
 		
 		System.out.println("entering the execution");

@@ -11,7 +11,7 @@ public class NoMilitaryPointsForTerritories implements Effect {
 	}
 
 	@Override
-	public boolean executeEffect(Player player, GameBoard gameBoard) {
+	public boolean executeEffects(Player player, GameBoard gameBoard) {
 		
 		player.setNoMilitaryPointsForTerritories(true);
 		return true;

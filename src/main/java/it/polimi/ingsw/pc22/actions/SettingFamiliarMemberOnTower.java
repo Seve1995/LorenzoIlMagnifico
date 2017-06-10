@@ -141,11 +141,11 @@ public class SettingFamiliarMemberOnTower extends Action {
 		{
 			for (Effect e : currEffects)
 			{
-				e.executeEffect(player, gameBoard);
+				e.executeEffects(player, gameBoard);
 			}
 		}
 
-		return pickTowerCard.executeEffect(player, gameBoard);
+		return pickTowerCard.executeEffects(player, gameBoard);
 	}
 	
 }

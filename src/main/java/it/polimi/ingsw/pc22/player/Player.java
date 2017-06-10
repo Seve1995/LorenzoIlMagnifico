@@ -1,6 +1,6 @@
 package it.polimi.ingsw.pc22.player;
 
-import it.polimi.ingsw.pc22.adapters.GameAdapter;
+import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.effects.AddEndGameVictoryPoints;
 import it.polimi.ingsw.pc22.gamebox.*;
 
@@ -46,7 +46,7 @@ public class Player
 	private boolean removeTowerBonus;
 	private List<FamilyMember> familyMembers = new ArrayList<>();
 	private PlayerBoard playerBoard = new PlayerBoard();
-	private GameAdapter adapter;
+	private IOAdapter adapter;
 
 
 	@Override
@@ -151,12 +151,12 @@ public class Player
 		return result;
 	}
 
-	public GameAdapter getAdapter() {
+	public IOAdapter getAdapter() {
 
 		return adapter;
 	}
 
-	public void setAdapter(GameAdapter adapter) {
+	public void setAdapter(IOAdapter adapter) {
 		this.adapter = adapter;
 	}
 
