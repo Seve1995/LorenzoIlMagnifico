@@ -65,8 +65,6 @@ public class PickTowerCard implements Effect
 		diceValueVenture = diceValue;
 		diceValueBuilding = diceValue;
 
-		if (p.getCardModifiers() == null) return;
-
 		for (CardModifier cm : p.getCardModifiers())
 		{
 			if (cm.getCardType().equals(CardTypeEnum.CHARACTER))
@@ -96,9 +94,6 @@ public class PickTowerCard implements Effect
 	private void applyChanges(DevelopmentCard d, Player p, CardTypeEnum ct)
 	
 	{
-		if (p.getCardModifiers() != null)
-		{
-			
 		if (ct.equals(CardTypeEnum.BUILDING))
 			
 		{
@@ -126,7 +121,6 @@ public class PickTowerCard implements Effect
 				}	
 				
 			}
-		}
 		
 		if (ct.equals(CardTypeEnum.CHARACTER))
 			
@@ -190,9 +184,7 @@ public class PickTowerCard implements Effect
 	
 	private void RemoveChanges(DevelopmentCard d, Player p, CardTypeEnum ct)
 	{
-		if (p.getCardModifiers() != null)
-		{
-
+		
 			if (ct.equals(CardTypeEnum.BUILDING))
 				
 			{
@@ -270,7 +262,6 @@ public class PickTowerCard implements Effect
 					}
 				}
 			}
-		}
 	}
 
 	@Override
