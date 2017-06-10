@@ -70,11 +70,12 @@ public class RMIIOAdapter extends IOAdapter implements RMIAuthenticationService
         return null;
     }
 
+    /* DEPRECATED
     @Override
     public List<Asset> chooseOneAsset() {
         return null;
     }
-
+     */
     @Override
     public void endConnection(Player player) throws IOException
     {
@@ -130,6 +131,12 @@ public class RMIIOAdapter extends IOAdapter implements RMIAuthenticationService
 
 	@Override
 	public CardTypeEnum askForCardType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Asset> chooseAssets(int numberOfAssets) {
 		// TODO Auto-generated method stub
 		return null;
 	}

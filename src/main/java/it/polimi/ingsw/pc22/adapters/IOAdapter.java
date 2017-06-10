@@ -36,8 +36,8 @@ public abstract class IOAdapter
 
     public abstract Asset askServants(Player player, Long timeout);
 
-    public abstract List<Asset> chooseOneAsset();
-
+    public abstract List<Asset> chooseAssets(int numberOfAssets);
+    
     protected void authentication()
     {
         try

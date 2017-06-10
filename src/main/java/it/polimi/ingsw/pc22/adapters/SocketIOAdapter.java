@@ -7,6 +7,7 @@ import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.connection.User;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
+import it.polimi.ingsw.pc22.utils.CouncilPrivilege;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -47,7 +48,74 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
     {
         authentication();
     }
+    
+    
+    //TODO GESTIRE TIMEOUT
+    @Override
+    public List<Asset> chooseAssets(int numberOfAssets)
+    {
+        CouncilPrivilege councilPrivilege = new CouncilPrivilege();
+        List<Asset> chosenAssets = new ArrayList<Asset>();
+        
+    	int i = 0;
 
+        while (i<numberOfAssets)
+        {
+            this.printMessage("Choose one asset:" + '\n' + councilPrivilege);
+           
+            String choice = getMessage();
+            
+            if ("1".equals(choice) && councilPrivilege.getBonus1()!=null)
+            {
+            	chosenAssets.addAll(councilPrivilege.getBonus1());
+            	
+            	councilPrivilege.setBonus1(null);
+            	
+            	i++;
+            }
+
+            if ("2".equals(choice) && councilPrivilege.getBonus2()!=null)
+            {
+            	chosenAssets.addAll(councilPrivilege.getBonus2());
+            	
+            	councilPrivilege.setBonus2(null);
+            	
+            	i++;
+            }
+
+            if ("3".equals(choice) && councilPrivilege.getBonus3()!=null)
+            {
+            	chosenAssets.addAll(councilPrivilege.getBonus3());
+            	
+            	councilPrivilege.setBonus3(null);
+            	
+            	i++;
+            }
+
+            if ("4".equals(choice) && councilPrivilege.getBonus4()!=null)
+            {
+            	chosenAssets.addAll(councilPrivilege.getBonus4());
+            	
+            	councilPrivilege.setBonus4(null);
+            	
+            	i++;
+            }
+
+            if ("5".equals(choice) && councilPrivilege.getBonus5()!=null)
+            {
+            	chosenAssets.addAll(councilPrivilege.getBonus5());
+            	
+            	councilPrivilege.setBonus5(null);
+            	
+            	i++;
+            }
+
+        }
+
+        return chosenAssets;
+    }
+    
+    /* DA TOGLIERE?, era la vecchia implementazione del chooseOneAsset fatta da fabio 
     @Override
     public List<Asset> chooseOneAsset()
     {
@@ -57,14 +125,14 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
         while (true)
         {
             this.printMessage("Choose one asset among the available //one's:" + '\n'
-            + "1) one stone & one wood" + '\n'
-            + "2) two servants" + '\n'
-            + "3) two coins" + '\n'
-            + "4) two military points" + '\n'
-            + "5) two faith points");
+            + "1) One stone & One wood" + '\n'
+            + "2) Two servants" + '\n'
+            + "3) Two coins" + '\n'
+            + "4) Two military points" + '\n'
+            + "5) Two faith points");
 
             String choice = getMessage();
-
+            
             if ("1".equals(choice))
             {
                 Asset wood = new Asset(1, AssetType.WOOD);
@@ -116,7 +184,9 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
 
         return assets;
     }
-
+     */
+    
+    
     @Override
     public FamilyMember askFamiliarMember(Player player, Long timeout)
     {

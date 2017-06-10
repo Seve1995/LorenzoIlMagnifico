@@ -1,5 +1,8 @@
 package it.polimi.ingsw.pc22.effects;
 
+import java.util.List;
+
+import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.AssetType;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
@@ -7,34 +10,27 @@ import it.polimi.ingsw.pc22.player.Player;
 
 public class PickTwoCouncilPrivilege implements Effect{
 
-	private Asset choosenAsset1;
-	private Asset choosenAsset2;
-	
-	
+	private List<Asset> chosenAsset;
 
 	@Override
 	public boolean isLegal(Player player, GameBoard gameBoard) 
 	{
-		if (choosenAsset1.getType().equals(choosenAsset2.getType()))
-		{
-			return false;
-		}
 		return true;
 	}
 
 	@Override
 	public boolean executeEffects(Player player, GameBoard gameBoard)
 	{
-		this.choosenAsset1.setType(AssetType.COIN);
-		this.choosenAsset1.setValue(0);
-		if (isLegal(player, gameBoard))
-		{
-			player.addAsset(choosenAsset1);
-			player.addAsset(choosenAsset2);
-			return true;
-		}
-		return false;
-		
+		IOAdapter adapter = player.getAdapter();
+
+		chosenAsset = adapter.chooseAssets(2);
+
+		if (chosenAsset.isEmpty()) return false;
+
+		for (Asset asset : chosenAsset)
+			player.addAsset(asset);
+
+		return true;
 	}
 
 	@Override

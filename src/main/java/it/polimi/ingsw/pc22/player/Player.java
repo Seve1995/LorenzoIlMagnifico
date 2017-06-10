@@ -463,15 +463,15 @@ public class Player
 			this.servants += value;
 			break;
 			
-		case "faithPoint":
+		case "faithpoint":
 			this.faithPoints += value;
 			break;
 			
-		case "victoryPoint":
+		case "victorypoint":
 			this.faithPoints += value;
 			break;
 			
-		case "militaryPoint":
+		case "militarypoint":
 			this.militaryPoints += value;
 			
 		default:

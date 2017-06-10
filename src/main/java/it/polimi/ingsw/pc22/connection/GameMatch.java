@@ -131,7 +131,7 @@ public class GameMatch implements Runnable
 				adapter.printMessage(player.getPlayerBoard().toString());
 
 				Long timestamp = System.currentTimeMillis();
-
+				
 				while (System.currentTimeMillis() < timestamp + timeout)
 				{
 					FamilyMember familyMember = adapter.askFamiliarMember(player, timeout);
@@ -155,11 +155,17 @@ public class GameMatch implements Runnable
 					boolean executed = action.executeAction(player, gameBoard);
 
 					System.out.println(executed);
-
-					if (!executed) continue;
+					
+					//Modifica del 10 giugno by Seve: Prima c'era "if (!executed) continue;", ma era inutile perchè non faceva uscire dal ciclo while!
+					//Così ho modificato e ho fatto in modo che se l'azione restituisce true il giocatore esce dal ciclo, altrimenti accadeva che poteva fare
+					//2 azioni di fila se non era scaduto il timeout
+					if (executed) break; 
 				}
 
 				adapter.printMessage(player.getPlayerBoard().toString());
+				
+				adapter.printMessage(player.toString());
+
 			}
 
 
