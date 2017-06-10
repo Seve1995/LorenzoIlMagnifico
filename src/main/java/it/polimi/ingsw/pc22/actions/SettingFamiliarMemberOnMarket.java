@@ -41,11 +41,11 @@ public class SettingFamiliarMemberOnMarket extends Action{
 		if(currMarketCells.get(zone).getRequiredDiceValue() > familyMember.getValue())
 			return false;
 		
-		if(!currMarketCells.get(zone).isEmpty())
-			return false;
-		
 		if (!currMarketCells.get(zone).isEmpty() && player.isDontCareOccupiedPlaces())
 			return true;
+
+		if(!currMarketCells.get(zone).isEmpty())
+			return false;		
 		
 		if (player.isDisableMarket())
 			return false;

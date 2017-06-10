@@ -29,18 +29,13 @@ public class DoProductionAction implements Effect {
 		
 		if (isLegal(player, gameBoard))
 		{
-	
-	
-			
-			if (value >= player.getPlayerBoard().getBonusTile().getProductionActivationValue())
-			{
-				
 				player.addAsset(player.getPlayerBoard().getBonusTile().getProductionCoinsBonus());
 				player.addAsset(player.getPlayerBoard().getBonusTile().getProductionMilitaryPointsBonus());
 				player.addAsset(player.getPlayerBoard().getBonusTile().getProductionServantBonus());
-			}
+			
 			
 			for (TerritoryCard t : player.getPlayerBoard().getTerritories())
+			
 			{
 				if (value >= t.getPermanentEffectActivationCost())
 				{

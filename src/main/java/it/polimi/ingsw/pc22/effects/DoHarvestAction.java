@@ -20,8 +20,11 @@ public class DoHarvestAction implements Effect {
 
 	@Override
 	public boolean isLegal(Player player, GameBoard gameBoard) {
+		
 		if (value < player.getPlayerBoard().getBonusTile().getHarvestActivationValue())
+			
 				return false;
+		
 		return true;
 	}
 
@@ -36,6 +39,7 @@ public class DoHarvestAction implements Effect {
 				player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestStonesBonus());
 				player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestWoodsBonus());
 				
+		
 				for (BuildingCard b : player.getPlayerBoard().getBuildings()){
 					
 					if(value >= b.getPermanentEffectActivationCost()){
@@ -47,7 +51,7 @@ public class DoHarvestAction implements Effect {
 					
 					}
 				}
-			
+				
 			return true;
 		}
 		

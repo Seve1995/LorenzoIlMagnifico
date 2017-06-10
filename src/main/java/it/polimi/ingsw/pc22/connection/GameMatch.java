@@ -258,6 +258,7 @@ public class GameMatch implements Runnable
 		for (int i=0; i < playerCounter; i++)
 		{
 			Player player = players.get(i);
+			
 			player.setCoins(coins);
 
 			PlayerBoard playerBoard = player.getPlayerBoard();
