@@ -28,7 +28,7 @@ public abstract class IOAdapter
 
     public abstract void  printMessage(String message);
 
-    public abstract String getMessage() throws IOException;
+    public abstract String getMessage();
 
     public Long getTimeout()
     {
@@ -117,49 +117,85 @@ public abstract class IOAdapter
         return null;
     }
 
-    public Asset askServants(Player player)
+    public FamilyMember askFamiliarMemberForBonus(Player player) 
     {
+        List<FamilyMember> familyMembers =
+                player.getFamilyMembers();
+        
         Long maxTimeStamp = System.currentTimeMillis() + timeout;
 
-        while (System.currentTimeMillis() < maxTimeStamp)
+        while(System.currentTimeMillis() < maxTimeStamp)
         {
-            this.printMessage("Voi sacrificare servitori per aumentare il valore dell'azione? \n" +
-                    "Indica un numero da 0 a " + player.getServants());
+        	   this.printMessage("Choose the familiar member for the bonus:");
 
-            String value = getMessage();
-
-            if (value == null) continue;
-
-            Integer servantNumber;
-
-            try
-            {
-                servantNumber = Integer.parseInt(value);
-            }
-            catch (NumberFormatException e)
-            {
-                this.printMessage("inserire numero valido");
-
-                continue;
-            }
-
-            if (servantNumber > player.getServants()) continue;
-
-            return new Asset(servantNumber, AssetType.SERVANT);
+	            //TODO SISTEMARE STA COSA; BISOGNA CHIAMARE UNA FUNZIONE STATICA ESTERNA!!
+	            
+	            this.printMessage(familyMembers.toString());
+	
+	            String choice = this.getMessage();
+	
+	            if (choice == null) continue;
+	
+	            ColorsEnum color = ColorsEnum.getColorFromString(choice);
+	
+	            if (color == null) continue;
+	
+	            FamilyMember member = player.getFamilyMemberByColor(color);
+	
+	            if (member == null) continue;
+	
+	            return member;
+        
         }
-
+        
         printMessage("Timeout Azione terminato");
 
         return null;
     }
+    
+    public Asset askServants(Player player)
+    {
 
+        Long maxTimeStamp = System.currentTimeMillis() + timeout;
+
+        while(System.currentTimeMillis() < maxTimeStamp)
+        {
+	            this.printMessage("Voi sacrificare servitori per aumentare il valore dell'azione? \n" +
+	                    "Indica un numero da 0 a " + player.getServants());
+	
+	            String value = getMessage();
+	
+	            if (value == null) continue;
+	
+	            Integer servantNumber;
+	
+	            try
+	            {
+	                servantNumber = Integer.parseInt(value);
+	            }
+	            catch (NumberFormatException e)
+	            {
+	                this.printMessage("Inserire numero valido");
+	
+	                continue;
+	            }
+	
+	            if (servantNumber > player.getServants()) continue;
+	
+	            return new Asset(servantNumber, AssetType.SERVANT);
+        }
+        
+        printMessage("Timeout Azione terminato");
+
+        return null;
+    }
 
     //SISTEMARE IL CONCETTO DI PRIVILEGIO DEL CONSIGLIO, MEGLIO GESTIRE CON UNA MAPPA
     // O UNA ENUM INVECE CHE CON I NULL IN QUESTO MODO SI VA ANCHE A TOGLIERE LA NECESSITÀ
     // DEGLI IF, POI VISTO CHE VIENE USATO SOLO QUI MEGLIO CREARE UNA CLASSE
     // UTILIÀ CHE GESTISCA IL PRIVILEGIO INVECE CHE UN OGGETTO DA INSTANZIARE OGNI VOLTA,
     //PS COMUNQUE E GIUSTA L'IDEA, NON MI RICORDAVO PIÙ CHE CI FOSSE DA SCEGLIERE TRAI PRIVILEGI
-    public List<Asset> chooseAssets(int numberOfAssets)
+    public List<Asset> chooseCouncilPrivileges(int numberOfAssets)
     {
         CouncilPrivilege councilPrivilege = new CouncilPrivilege();
         List<Asset> chosenAssets = new ArrayList<>();
@@ -221,6 +257,46 @@ public abstract class IOAdapter
 
         return chosenAssets;
     }
+    
+    public List<Asset> chooseAssets(int numberOfAssets, List<Asset> assets)
+    {
+        List<Asset> chosenAssets = new ArrayList<Asset>();
+        
+    	int i = 0;
+
+        while (i<numberOfAssets)
+        {
+            this.printMessage("Choose one asset:" + '\n');
+            for (int j=0; j<assets.size(); j++)
+            {
+            	this.printMessage(j + ")" + assets.get(j).toString());
+            }
+            
+            try{
+            	String choice = getMessage();
+            	
+            	int choiceInt = Integer.parseInt(choice);
+            	
+                if (choiceInt<0 || choiceInt>assets.size()) throw new NumberFormatException();
+                
+                chosenAssets.add(assets.get(choiceInt));
+                
+                assets.remove(choiceInt);
+                
+                i++;
+            
+            } catch(NumberFormatException e) {
+            	
+            	this.printMessage("You must provide a valid input!");
+            	
+            	continue;
+            }
+
+        }
+
+        return chosenAssets;
+    }
+    
     
     void authentication()
     {
@@ -294,7 +370,6 @@ public abstract class IOAdapter
                 //TODO
                 /*if ("3".equals(userChoice))
                 {
-
                 }*/
             }
 

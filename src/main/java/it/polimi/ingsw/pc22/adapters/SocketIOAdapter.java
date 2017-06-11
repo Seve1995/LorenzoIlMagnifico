@@ -9,7 +9,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.lang.reflect.MalformedParametersException;
 import java.net.Socket;
 import java.util.concurrent.*;
 
@@ -73,7 +72,7 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
     }
 
     @Override
-    public String getMessage() throws IOException 
+    public String getMessage() 
     {
         ExecutorService ex = Executors.newSingleThreadExecutor();
 
