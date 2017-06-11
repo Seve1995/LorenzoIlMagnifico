@@ -10,16 +10,16 @@ import java.util.List;
 
 public class FromAssetToAssetOrEffect implements Effect{
 
-	private List<Asset> paidAssets;
+	private List<Asset> paiedAssets;
 	private List<Asset> gainedAssets;
 	private boolean onlyOneAsset;
 	private Effect gainedEffect;
 	
 	public List<Asset> getPaiedAssets() {
-		return paidAssets;
+		return paiedAssets;
 	}
 	public void setPaiedAssets(List<Asset> paiedAssets) {
-		this.paidAssets = paiedAssets;
+		this.paiedAssets = paiedAssets;
 	}
 	public List<Asset> getGainedAssets() {
 		return gainedAssets;
@@ -43,7 +43,7 @@ public class FromAssetToAssetOrEffect implements Effect{
 	@Override
 	public boolean isLegal(Player player, GameBoard gameBoard) 
 	{
-		for (Asset a : paidAssets){
+		for (Asset a : paiedAssets){
 			if(a.getValue() > player.getAsset(a.getType()))
 			{
 				return false;
@@ -61,9 +61,9 @@ public class FromAssetToAssetOrEffect implements Effect{
 				
 			IOAdapter adapter = player.getAdapter();
 				
-			paidAssets = adapter.chooseAssets(1, paidAssets);
+			paiedAssets = adapter.chooseAssets(1, paiedAssets);
 			
-			if (paidAssets==null) return false;
+			if (paiedAssets==null) return false;
 		}
 		
 		if (isLegal(player, gameBoard))
@@ -93,7 +93,7 @@ public class FromAssetToAssetOrEffect implements Effect{
 		result = prime * result + ((gainedAssets == null) ? 0 : gainedAssets.hashCode());
 		result = prime * result + ((gainedEffect == null) ? 0 : gainedEffect.hashCode());
 		result = prime * result + (onlyOneAsset ? 1231 : 1237);
-		result = prime * result + ((paidAssets == null) ? 0 : paidAssets.hashCode());
+		result = prime * result + ((paiedAssets == null) ? 0 : paiedAssets.hashCode());
 		return result;
 	}
 	@Override
@@ -117,17 +117,17 @@ public class FromAssetToAssetOrEffect implements Effect{
 			return false;
 		if (onlyOneAsset != other.onlyOneAsset)
 			return false;
-		if (paidAssets == null) {
-			if (other.paidAssets != null)
+		if (paiedAssets == null) {
+			if (other.paiedAssets != null)
 				return false;
-		} else if (!paidAssets.equals(other.paidAssets))
+		} else if (!paiedAssets.equals(other.paiedAssets))
 			return false;
 		return true;
 	}
 	
 	@Override
 	public String toString() {
-		return "FromAssetToAssetOrEffect [paiedAssets=" + paidAssets + ", gainedAssets=" + gainedAssets
+		return "FromAssetToAssetOrEffect [paiedAssets=" + paiedAssets + ", gainedAssets=" + gainedAssets
 				+ ", onlyOneAsset=" + onlyOneAsset + ", gainedEffect=" + gainedEffect + "]";
 	} 
 	
