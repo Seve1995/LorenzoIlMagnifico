@@ -37,9 +37,11 @@ public class AddCardPickMalus implements Effect{
 		if (isLegal(player,gameBoard))
 		{
 			CardModifier currCardModifier = new CardModifier();
+			
 			currCardModifier.setValueModifier(malusValue);
+			
 			currCardModifier.setCardType(cardType);
-		
+			
 			player.getCardModifier().add(currCardModifier);
 			
 			return true;

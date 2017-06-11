@@ -500,6 +500,18 @@ public class Player
 		return null;
 	}
 
+	public FamilyMember getFamilyMemberByColor(ColorsEnum color)
+	{
+
+		for (FamilyMember familyMember : familyMembers)
+		{
+			if (familyMember.getColor() == color)
+				return familyMember;
+		}
+
+		return null;
+	}
+	
 	public void setFamiliarToPlayer(List<Dice> dices)
 	{
 		for (Dice dice : dices)

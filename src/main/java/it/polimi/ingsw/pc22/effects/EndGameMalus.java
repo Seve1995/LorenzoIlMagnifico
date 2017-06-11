@@ -52,7 +52,7 @@ public class EndGameMalus implements Effect{
 		
 			if (loseOneVictoryPointEveryFiveVictoryPoints)
 			{
-				player.setVictoryPoints(player.getVictoryPoints() - player.getVictoryPoints() % 5);
+				player.setVictoryPoints(player.getVictoryPoints() - (player.getVictoryPoints() / 5));
 			}
 			
 			if (assetsMalus != null)

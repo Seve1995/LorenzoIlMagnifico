@@ -1,9 +1,11 @@
 package it.polimi.ingsw.pc22.effects;
 
+import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FromAssetToAssetOrEffect implements Effect{
@@ -54,19 +56,30 @@ public class FromAssetToAssetOrEffect implements Effect{
 	@Override
 	public boolean executeEffects(Player player, GameBoard gameBoard)
 	{
-		if (isLegal(player, gameBoard)){
-			if (gainedEffect != null)
-			{
-				gainedEffect.executeEffects(player, gameBoard);
+		if (isOnlyOneAsset())
+		{
 				
-			}
-			if (gainedAssets != null){
-				for (Asset a : gainedAssets)
+			IOAdapter adapter = player.getAdapter();
+				
+			paidAssets = adapter.chooseAssets(1, paidAssets);
+			
+			if (paidAssets==null) return false;
+		}
+		
+		if (isLegal(player, gameBoard))
+			{
+				if (gainedEffect != null)
 				{
-					player.addAsset(a);
+					gainedEffect.executeEffects(player, gameBoard);
+					
 				}
-			}
-			return true;
+				if (gainedAssets != null){
+					for (Asset a : gainedAssets)
+					{
+						player.addAsset(a);
+					}
+				}
+				return true;
 		}
 		
 		return false;

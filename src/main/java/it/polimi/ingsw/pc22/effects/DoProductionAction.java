@@ -27,12 +27,13 @@ public class DoProductionAction implements Effect {
 	@Override
 	public boolean executeEffects(Player player, GameBoard gameBoard) {
 		
+		value += player.getProductionValueModifier(); //Serve per gestire il malus dell'excommunication card
+
 		if (isLegal(player, gameBoard))
 		{
 				player.addAsset(player.getPlayerBoard().getBonusTile().getProductionCoinsBonus());
 				player.addAsset(player.getPlayerBoard().getBonusTile().getProductionMilitaryPointsBonus());
 				player.addAsset(player.getPlayerBoard().getBonusTile().getProductionServantBonus());
-			
 			
 			for (TerritoryCard t : player.getPlayerBoard().getTerritories())
 			

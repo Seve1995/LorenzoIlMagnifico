@@ -12,6 +12,7 @@ import it.polimi.ingsw.pc22.utils.CouncilPrivilege;
 import it.polimi.ingsw.pc22.utils.UserLoader;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +28,7 @@ public abstract class IOAdapter
 
     public abstract void  printMessage(String message);
 
-    public abstract String getMessage();
+    public abstract String getMessage() throws IOException;
 
     public Long getTimeout()
     {
@@ -527,4 +528,5 @@ public abstract class IOAdapter
 
         UserLoader.refreshJson(usersMap);
     }
+
 }

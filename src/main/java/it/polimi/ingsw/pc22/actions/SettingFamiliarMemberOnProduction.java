@@ -31,7 +31,7 @@ public class SettingFamiliarMemberOnProduction extends Action {
 
 		Production production = gameBoard.getProduction();
 
-		if (familyMember.getFamiliarValue() < 1)
+		if (familyMember.getValue() < 1)
 
 			return false;
 
@@ -53,7 +53,7 @@ public class SettingFamiliarMemberOnProduction extends Action {
 
 				break;
 
-			if (familyMember.getColor().equals(currFamilyMember.getColor())) //TODO: L'ho sistemata, va bene?
+			if (familyMember.getColor().equals(currFamilyMember.getColor()) && !player.isDontCareOccupiedPlaces()) 
 
 				return false;
 
@@ -84,18 +84,12 @@ public class SettingFamiliarMemberOnProduction extends Action {
 			familyMember.setPlayed(true);
 
 
-			{
-
-				familyMember.setFamiliarValue(familyMember.getFamiliarValue() - 3);
-
-			}
-			
-			
 			if (production.firstCellFree()>0)
 			{
-			
+				familyMember.setValueModifier(familyMember.getValueModifier()-3);
+				
 				doProductionAction.setValue(familyMember.getValue()-3);
-			
+				
 			}
 			
 			else
@@ -118,19 +112,12 @@ public class SettingFamiliarMemberOnProduction extends Action {
 		{
 
 			production.getProductionCell()[production.firstCellFree()].setFamilyMember(familyMember);
-
-
+			
 			familyMember.setPlayed(true);
 
-			
-
 			doProductionAction.setValue(familyMember.getValue());
-
 			
-
 			doProductionAction.executeEffects(player, gameBoard);
-
-			
 
 			return true;
 

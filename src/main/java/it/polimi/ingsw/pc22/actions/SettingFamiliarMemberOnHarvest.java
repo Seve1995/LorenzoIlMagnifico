@@ -36,7 +36,7 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 			)
 				break;
 			
-			if (familyMember.getColor().equals(currFamilyMember.getColor())) //TODO: L'ho sistemata, va bene?
+			if (familyMember.getColor().equals(currFamilyMember.getColor()) && !player.isDontCareOccupiedPlaces())
 
 				return false;
 
@@ -62,8 +62,9 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 			
 			if (harvest.firstCellFree()>0)
 			{
+				familyMember.setValueModifier(familyMember.getValueModifier()-3);
 				
-				doHarvestAction.setValue(familyMember.getValue()-3);
+				doHarvestAction.setValue(familyMember.getValue());
 				
 			}
 			

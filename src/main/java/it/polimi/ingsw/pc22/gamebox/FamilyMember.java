@@ -7,7 +7,14 @@ public class FamilyMember
 	private int familiarValue;
 	private boolean isPlayed; //TRUE = Il familyMember è stato giocato del player nel turno corrente
 	private int valueModifier; //Tiene traccia dei bonus/malus
+	private int familiarPermanentValue=0;
 	
+	public int getFamiliarPermanentValue() {
+		return familiarPermanentValue;
+	}
+	public void setFamiliarPermanentValue(int familiarPermanentValue) {
+		this.familiarPermanentValue = familiarPermanentValue;
+	}
 	public PlayerColorsEnum getPlayerColor() {
 		return playerColor;
 	}
@@ -41,9 +48,10 @@ public class FamilyMember
 	
 	public int getValue()
 	{
-		if (familiarValue + valueModifier < 0 )
-			return 0;
+		if (familiarPermanentValue>0) familiarValue=familiarPermanentValue;
 		
+		if (familiarValue + valueModifier < 0 ) return 0;
+					
 		return familiarValue + valueModifier;
 		
 	}
@@ -52,7 +60,7 @@ public class FamilyMember
 	{
 		return "PlayerColor: " + playerColor.toString() + '\n'
 				+ "FamiliarColor: " + color.toString() + '\n'
-				+ "Value: " + familiarValue;
+				+ "Value: " + getValue();
 	}
 	
 	@Override

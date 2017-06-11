@@ -31,8 +31,12 @@ public class DoHarvestAction implements Effect {
 	@Override
 	public boolean executeEffects(Player player, GameBoard gameBoard) {
 		
+		value += player.getHarvestValueModifier(); //Serve per gestire il malus dell'excommunication card
+
 		if (isLegal(player,gameBoard))
 		{
+			
+				
 				player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestServantBonus());
 				player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestCoinsBonus());
 				player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestMilitaryPointsBonus());

@@ -131,8 +131,6 @@ public class GameMatch implements Runnable
 				
 				adapter.printMessage(player.toString());
 
-				adapter.printMessage(player.getPlayerBoard().toString());
-
 				Long timestamp = System.currentTimeMillis();
 				
 				while (System.currentTimeMillis() < timestamp + timeout)
@@ -145,7 +143,7 @@ public class GameMatch implements Runnable
 
 					Asset servants = adapter.askServants(player);
 
-					System.out.println("Familiar: " + servants);
+					System.out.println("Servants: " + servants);
 
 					if (servants == null) continue;
 

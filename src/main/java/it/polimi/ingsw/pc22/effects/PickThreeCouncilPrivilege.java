@@ -23,9 +23,9 @@ public class PickThreeCouncilPrivilege implements Effect{
 	{
 		IOAdapter adapter = player.getAdapter();
 
-		chosenAsset = adapter.chooseAssets(3);
+		chosenAsset = adapter.chooseCouncilPrivileges(3);
 
-		if (chosenAsset.isEmpty()) return false;
+		if (chosenAsset==null) return false;
 
 		for (Asset asset : chosenAsset)
 			player.addAsset(asset);

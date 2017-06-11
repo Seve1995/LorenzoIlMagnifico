@@ -29,7 +29,25 @@ public class AddAssetMalus implements Effect{
 	public boolean executeEffects(Player player, GameBoard gameBoard) {
 		
 		if (isLegal(player,gameBoard)){
-			player.addAsset(asset);
+			switch (asset.getType()) {
+			case MILITARYPOINT:
+				player.setMilitaryPointsMalus(true);
+				break;
+			case COIN:
+				player.setCoinMalus(true);
+				break;
+			case SERVANT:
+				player.setServantMalus(true);
+				break;
+			case STONE:
+				player.setStoneMalus(true);
+				break;
+			case WOOD:
+				player.setWoodMalus(true);
+				break;
+			default:
+				break;
+			}
 			return true;
 		}
 		return false;
