@@ -130,7 +130,6 @@ public class SettingFamiliarMemberOnTower extends Action {
 		
 		if (!(pickTowerCard.isLegal(player, gameBoard))) return false;
 		
-		
 		return true;
 	}
 	

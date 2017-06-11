@@ -73,13 +73,64 @@ public abstract class IOAdapter
     }
 
     public int askFloor() {
-        // TODO Auto-generated method stub
-        return 0;
+    	
+        Long maxTimeStamp = System.currentTimeMillis() + timeout;
+
+        while(System.currentTimeMillis() < maxTimeStamp)
+        {
+	            this.printMessage("Ok, now select the tower floor:");
+	
+	            String value = getMessage();
+	
+	            if (value == null) continue;
+	
+	            Integer floor;
+	
+	            try
+	            {
+	                floor = Integer.parseInt(value);
+	            }
+	            catch (NumberFormatException e)
+	            {
+	                this.printMessage("ERROR! You must enter a valid input");
+	
+	                continue;
+	            }
+	
+	            if (floor <0 || floor > 3) continue;
+	
+	            return floor;
+        }
+        
+        printMessage("Timeout Azione terminato");
+
+        return -1;
+    
     }
 
     public CardTypeEnum askForCardType() {
-        // TODO Auto-generated method stub
+    	
+        Long maxTimeStamp = System.currentTimeMillis() + timeout;
+
+        while(System.currentTimeMillis() < maxTimeStamp)
+        {
+	            this.printMessage("Select a Card Type to pick:");
+	
+	            String value = getMessage();
+	            
+	            if (value == null) continue;
+	
+	            CardTypeEnum cardType = CardTypeEnum.valueOf(value);
+	            
+	            if (cardType == null) continue;
+	            
+	            return cardType;
+        }
+        
+        printMessage("Timeout expired");
+
         return null;
+    
     }
 
     public FamilyMember askFamiliarMember(Player player)
@@ -175,7 +226,7 @@ public abstract class IOAdapter
 	            }
 	            catch (NumberFormatException e)
 	            {
-	                this.printMessage("Inserire numero valido");
+	                this.printMessage("ERROR! You must enter a valid input");
 	
 	                continue;
 	            }
@@ -201,8 +252,9 @@ public abstract class IOAdapter
         List<Asset> chosenAssets = new ArrayList<>();
 
         int i = 0;
+        Long maxTimeStamp = System.currentTimeMillis() + timeout;
 
-        while (i < numberOfAssets)
+        while(System.currentTimeMillis() < maxTimeStamp || i < numberOfAssets)
         {
             this.printMessage("Choose one asset:" + '\n' + councilPrivilege);
 
@@ -251,11 +303,17 @@ public abstract class IOAdapter
                 councilPrivilege.setBonus5(null);
 
                 i++;
+
+                if (i==numberOfAssets)
+                	
+                	return chosenAssets;
             }
-
         }
+        
+        printMessage("Timeout Azione terminato");
+        
+        return null;
 
-        return chosenAssets;
     }
     
     public List<Asset> chooseAssets(int numberOfAssets, List<Asset> assets)
@@ -263,8 +321,10 @@ public abstract class IOAdapter
         List<Asset> chosenAssets = new ArrayList<Asset>();
         
     	int i = 0;
+    	
+        Long maxTimeStamp = System.currentTimeMillis() + timeout;
 
-        while (i<numberOfAssets)
+        while(System.currentTimeMillis() < maxTimeStamp || i < numberOfAssets)
         {
             this.printMessage("Choose one asset:" + '\n');
             for (int j=0; j<assets.size(); j++)
@@ -284,19 +344,56 @@ public abstract class IOAdapter
                 assets.remove(choiceInt);
                 
                 i++;
-            
+                
+                if (i==numberOfAssets)
+                	
+                	return chosenAssets;
+                
             } catch(NumberFormatException e) {
             	
-            	this.printMessage("You must provide a valid input!");
+            	this.printMessage("ERROR! You must enter a valid input");
             	
             	continue;
             }
 
         }
 
-        return chosenAssets;
+        printMessage("Timeout Azione terminato");
+
+        return null;
     }
     
+    public int chooseCost(Asset militaryPointsRequired, Asset militaryPointsCost, List<Asset> resourcesCost){
+    	this.printMessage("You have to choose one cost between:");
+    	this.printMessage("1) You must have" + militaryPointsRequired.getValue() + "and you will pay" + militaryPointsCost.getValue());	
+    	this.printMessage("2) Pay these resources:" + resourcesCost.toString());		
+        Long maxTimeStamp = System.currentTimeMillis() + timeout;
+
+        while(System.currentTimeMillis() < maxTimeStamp)
+	    {
+	    	try{
+	        	String choice = getMessage();
+	        	
+	        	int choiceInt = Integer.parseInt(choice);
+	        	
+	            if (choiceInt!=1 || choiceInt!=2) throw new NumberFormatException();
+	            
+		    	return choiceInt;
+
+	    	} catch(NumberFormatException e) {
+	        	
+	        	this.printMessage("ERROR! You must enter a valid input");
+	        	
+	        	continue;
+	        }
+	    	
+	    }
+        
+        printMessage("Timeout Azione terminato");
+
+        return -1;
+
+    }
     
     void authentication()
     {
@@ -332,7 +429,7 @@ public abstract class IOAdapter
 
                     default:
 
-                        printMessage("Non-valid input. Please retry... ");
+                        printMessage("ERROR! You must enter a valid input");
 
                         break;
                 }
@@ -382,6 +479,7 @@ public abstract class IOAdapter
         }
     }
 
+    
     private void checkPassword(User user) throws IOException
     {
         String password = getMessage();
@@ -551,9 +649,10 @@ public abstract class IOAdapter
     }
 
     //TODO FAR SI CHE I VALORI VENGANO GESTITI DAL PARSER JSON
+    //TODO2 DISTINGUERE IL TIMEOUT DELL'AVVIO PARTITA DAL TIMEOUT DELL'AZIONE (ce ne vogliono 2 distinti)
     private void startNewGameMatch(String gameName, Player player)
     {
-        GameMatch gameMatch = new GameMatch(10000L, 4);
+        GameMatch gameMatch = new GameMatch(15000L, 4);
 
         Map<String, GameMatch> gameMatchMap = GameServer.getGameMatchMap();
 

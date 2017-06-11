@@ -5,5 +5,18 @@ public enum CardTypeEnum {
 	VENTURE,
 	BUILDING,
 	CHARACTER,
-	ANY
+	ANY;
+
+	public static CardTypeEnum getCardTypeFromString(String string)
+	{
+		for (CardTypeEnum colorsEnum : CardTypeEnum.values())
+		{
+			if (!colorsEnum.toString().equalsIgnoreCase(string))
+				continue;
+
+			return colorsEnum;
+		}
+
+		return null;
+	}
 }

@@ -252,13 +252,6 @@ public class Player
 	public void setEndGameVictoryPoints(int endGameVictoryPoints) {
 		this.endGameVictoryPoints = endGameVictoryPoints;
 	}
-
-	public List<CardModifier> getCardModifier() {
-		return cardModifiers;
-	}
-	public void setCardModifier(List<CardModifier> cardModifiers) {
-		this.cardModifiers = cardModifiers;
-	}
 	public int getHaverstValueModifier() {
 		return harvestValueModifier;
 	}
