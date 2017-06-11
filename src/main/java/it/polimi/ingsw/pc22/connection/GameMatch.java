@@ -409,57 +409,60 @@ public class GameMatch implements Runnable
 
 		final int roundNumber = era;
 		
+		List<TowerCell> territoryTowerCells = towers[0].getTowerCells();
+		
 		List<DevelopmentCard> territoryCards = cards.parallelStream()
 				.filter(devCard -> (devCard.getRoundNumber() == roundNumber && devCard instanceof TerritoryCard))
 				.collect(Collectors.toList())
-				.subList(0, 4);
+				.subList(0, territoryTowerCells.size());
 
 		cards.removeAll(territoryCards);
-
-		List<TowerCell> territoryTowerCells = towers[0].getTowerCells();
 
 		for (int i=0; i < territoryTowerCells.size(); i++)
 		{
 			territoryTowerCells.get(i).setDevelopmentCard(territoryCards.get(i));
 		}
+	
+		List<TowerCell> characterTowerCells = towers[1].getTowerCells();
 		
 		List<DevelopmentCard> characterCards = cards.parallelStream()
 				.filter(devCard -> (devCard.getRoundNumber() == roundNumber && devCard instanceof CharacterCard))
 				.collect(Collectors.toList())
-				.subList(0, 4);
+				.subList(0, characterTowerCells.size());
 
 		cards.removeAll(characterCards);
 
-		List<TowerCell> characterTowerCells = towers[1].getTowerCells();
 		for (int i=0; i<characterTowerCells.size(); i++)
 			{
-			characterTowerCells.get(i).setDevelopmentCard(characterCards.get(i));
+				characterTowerCells.get(i).setDevelopmentCard(characterCards.get(i));
 			}
 
+		List<TowerCell> buildingTowerCells = towers[2].getTowerCells();
+		
 		List<DevelopmentCard> buildingCards = cards.parallelStream()
 				.filter(devCard -> (devCard.getRoundNumber() == roundNumber && devCard instanceof BuildingCard))
 				.collect(Collectors.toList())
-				.subList(0, 4);
+				.subList(0, buildingTowerCells.size());
 
 		cards.removeAll(buildingCards);
 
-		List<TowerCell> buildingTowerCells = towers[2].getTowerCells();
 		for (int i=0; i<buildingTowerCells.size(); i++)
 			{
 			buildingTowerCells.get(i).setDevelopmentCard(buildingCards.get(i));
 			}
 		
+		List<TowerCell> ventureTowerCells = towers[3].getTowerCells();
+		
 		List<DevelopmentCard> ventureCards = cards.parallelStream()
 				.filter(devCard -> (devCard.getRoundNumber() == roundNumber && devCard instanceof VentureCard))
 				.collect(Collectors.toList())
-				.subList(0, 4);
+				.subList(0, ventureTowerCells.size());
 
 		cards.removeAll(ventureCards);
-
-		List<TowerCell> ventureTowerCells = towers[3].getTowerCells();
+		
 		for (int i=0; i<ventureTowerCells.size(); i++)
 			{
-			ventureTowerCells.get(i).setDevelopmentCard(ventureCards.get(i));
+				ventureTowerCells.get(i).setDevelopmentCard(ventureCards.get(i));
 			}
 		
 	}
@@ -498,12 +501,14 @@ public class GameMatch implements Runnable
 	
 	private void epurateGameBoard(GameBoard gameBoard)
 	{
-		for (Tower t : gameBoard.getTowers())
-			for(TowerCell tc : t.getTowerCells())
-			{
+		for (Tower t : gameBoard.getTowers()) {
+
+			for (TowerCell tc : t.getTowerCells()) {
 				tc.setFamilyMember(null);
 			}
-		
+
+		}
+
 		for (HarvestCell hc : gameBoard.getHarvest().getHarvestCell())
 		{
 			hc.setFamilyMember(null);
@@ -590,31 +595,13 @@ public class GameMatch implements Runnable
 
 			if (p.getPlayerBoard().getCharacters() != null)
 			{
+				int value = p.getPlayerBoard().getCharacters().size();
 
-				if (p.getPlayerBoard().getCharacters().size() == 1)
+				CharactersCalc charactersCalc = CharactersCalc.getCharacterCalcByValue(value);
 
-					p.setVictoryPoints(p.getVictoryPoints() + 1);
+				int victoryPoints = charactersCalc.getVictoryPoints();
 
-				if (p.getPlayerBoard().getCharacters().size() == 2)
-
-					p.setVictoryPoints(p.getVictoryPoints() + 3);
-
-				if (p.getPlayerBoard().getCharacters().size() == 3)
-
-					p.setVictoryPoints(p.getVictoryPoints() + 6);
-
-				if (p.getPlayerBoard().getCharacters().size() == 4)
-
-					p.setVictoryPoints(p.getVictoryPoints() + 10);
-
-				if (p.getPlayerBoard().getCharacters().size() == 5)
-
-					p.setVictoryPoints(p.getVictoryPoints() + 15);
-
-				if (p.getPlayerBoard().getCharacters().size() == 6)
-
-					p.setVictoryPoints(p.getVictoryPoints() + 21);
-
+				p.setVictoryPoints(p.getVictoryPoints() + victoryPoints);
 
 			}
 

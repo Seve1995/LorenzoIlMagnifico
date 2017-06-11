@@ -54,6 +54,29 @@ public class SettingFamiliarMemberOnTower extends Action {
 			
 	}
 	
+	private ColorsEnum whichColorIs(Player p, Tower t)
+	{
+		if (t.getListPlayers() == null) return null;
+		
+		for (TowerCell tc : t.getTowerCells())
+		{
+			FamilyMember currFamilyMember = new FamilyMember();
+			
+			if (tc.getFamilyMember().getPlayerColor().equals(p.getPlayerColorsEnum()))
+				
+			{
+				currFamilyMember = tc.getFamilyMember();
+				
+				return currFamilyMember.getColor();
+				
+			}
+					
+		}
+		return null;
+		
+	}
+	
+	
 	private boolean alreadySetAMember(Player p, Tower t)
 	{
 		
@@ -62,7 +85,7 @@ public class SettingFamiliarMemberOnTower extends Action {
 		for (PlayerColorsEnum pc : t.getListPlayers())
 		{
 
-			if(p.getPlayerColorsEnum().equals(pc));
+			if(p.getPlayerColorsEnum().equals(pc) && !(whichColorIs(p, t).equals(ColorsEnum.NEUTER)))
 			{
 				return true;
 			}
@@ -101,7 +124,7 @@ public class SettingFamiliarMemberOnTower extends Action {
 		
 		if (tower.getTowerCells().get(floor).getRequiredDiceValue() > familiarValue) return false;
 		
-		if(alreadySetAMember(player, tower)) return false;
+		if(alreadySetAMember(player, tower) && !(familyMember.getColor().equals(ColorsEnum.NEUTER))) return false;
 		
 		if(payThreeCoins(player, tower) && player.getCoins() < 3 && !(player.isDontPayThreeCoinsInTowers())) return false;
 		

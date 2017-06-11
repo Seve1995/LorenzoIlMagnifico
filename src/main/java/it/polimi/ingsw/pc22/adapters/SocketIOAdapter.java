@@ -72,7 +72,7 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
     }
 
     @Override
-    public String getMessage() 
+    public String getMessage()
     {
         ExecutorService ex = Executors.newSingleThreadExecutor();
 

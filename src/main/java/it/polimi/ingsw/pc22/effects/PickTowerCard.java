@@ -3,6 +3,8 @@ package it.polimi.ingsw.pc22.effects;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.CardModifier;
 import it.polimi.ingsw.pc22.player.Player;
+import it.polimi.ingsw.pc22.utils.CharactersCalc;
+import it.polimi.ingsw.pc22.utils.MilitaryPointsCalc;
 
 import java.util.List;
 
@@ -382,40 +384,17 @@ public class PickTowerCard implements Effect
 			else if (!(player.isNoMilitaryPointsForTerritories())) 
 			
 			{
-					if (player.getPlayerBoard().getTerritories().size()  == 2)
-					{
-						if (player.getMilitaryPoints() < 3)
-						{
-							return false;
-						}
-					}
+				int value = player.getPlayerBoard().getTerritories().size();
 						
-					else if (player.getPlayerBoard().getTerritories().size()  == 3)
-					{
-						if (player.getMilitaryPoints() < 7)
-						{
-							return false;
-						}
-					}
-						
-					else if (player.getPlayerBoard().getTerritories().size()  == 4)
-					{
-						if (player.getMilitaryPoints() < 12)
-						{
-							
-							return false;
-						}
-					}
-					
-					else if  (player.getPlayerBoard().getTerritories().size()  == 5)
-					{
-		
-						if (player.getMilitaryPoints() < 18)
-						{
-							
-							return false;
-						}
-					}
+				MilitaryPointsCalc militaryPointsCalc = MilitaryPointsCalc.getMilitaryPointsCalcByValue(value);
+
+				int militaryPoints = militaryPointsCalc.getMilitaryPoints();
+
+				if (player.getMilitaryPoints() < militaryPoints)
+				{
+					return false;
+				}
+				
 			}
 			
 			else if (player.isNoMilitaryPointsForTerritories())

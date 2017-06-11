@@ -511,7 +511,7 @@ public class Player
 
 		return null;
 	}
-	
+
 	public void setFamiliarToPlayer(List<Dice> dices)
 	{
 		for (Dice dice : dices)
@@ -526,6 +526,16 @@ public class Player
 
 			familyMembers.add(familyMember);
 		}
+
+		FamilyMember familiarNeuter = new FamilyMember();
+
+		familiarNeuter.setFamiliarValue(0);
+		familiarNeuter.setColor(ColorsEnum.NEUTER);
+		familiarNeuter.setPlayerColor(playerColorsEnum);
+
+		familiarNeuter.setPlayed(false);
+
+		familyMembers.add(familiarNeuter);
 	}
 
 	public void removeFamilyMember (FamilyMember f)
