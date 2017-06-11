@@ -5,12 +5,12 @@ import java.util.List;
 public class GameBoard
 {
 	
-	Tower[] towers;
-	Harvest harvest;
-	Production production;
-	Market market;
-	CouncilPalace councilPalace;
-	List<Dice> dices;
+	private Tower[] towers;
+	private Harvest harvest;
+	private Production production;
+	private Market market;
+	private CouncilPalace councilPalace;
+	private List<Dice> dices;
 	
 	public GameBoard() 
 	{
@@ -70,7 +70,7 @@ public class GameBoard
 	{
 		String output = "GAMEBOARD\n";
 		for(Tower t : towers)
-			output+=t.toString() + "\n";
+			output += t.toString() + "\n";
 		output += harvest.toString();
 		output += production.toString();
 		output += market.toString();

@@ -1,13 +1,14 @@
 package it.polimi.ingsw.pc22.adapters;
 
 import it.polimi.ingsw.pc22.actions.Action;
+import it.polimi.ingsw.pc22.actions.ActionFactory;
+import it.polimi.ingsw.pc22.actions.ServantsHandler;
 import it.polimi.ingsw.pc22.connection.GameMatch;
 import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.connection.User;
-import it.polimi.ingsw.pc22.gamebox.Asset;
-import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
-import it.polimi.ingsw.pc22.gamebox.FamilyMember;
+import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
+import it.polimi.ingsw.pc22.utils.CouncilPrivilege;
 import it.polimi.ingsw.pc22.utils.UserLoader;
 
 import java.io.IOException;
@@ -20,25 +21,207 @@ import java.util.Map;
  */
 public abstract class IOAdapter
 {
+    private Long timeout;
+
     public abstract void endConnection(Player player) throws IOException;
 
     public abstract void  printMessage(String message);
 
     public abstract String getMessage();
 
-    public abstract Action askAction(FamilyMember familyMember, Asset servant ,Long timeout);
+    public Long getTimeout()
+    {
+        return timeout;
+    }
 
-    public abstract int askFloor();
+    public void setTimeout(Long timeout)
+    {
+        this.timeout = timeout;
+    }
 
-    public abstract CardTypeEnum askForCardType();
+    public Action askAction(FamilyMember familyMember, Asset servant)
+    {
+        Long maxTimeStamp = System.currentTimeMillis() + timeout;
 
-    public abstract FamilyMember askFamiliarMember(Player player, Long timeout);
+        while (System.currentTimeMillis() < maxTimeStamp)
+        {
+            this.printMessage("Che azione vuoi eseguire?");
 
-    public abstract Asset askServants(Player player, Long timeout);
+            this.printMessage("Seleziona operazione:\n" +
+                    "- Metti familiare su torre (es: set tower BUILDING 3 con numberOfFloor tra 0 e 3)\n" +
+                    "- Metti familiare su market (es: set market ZONA con zona tra 0 e 3)\n" +
+                    "- Metti familiare nella produzione (es: set production)\n" +
+                    "- Metti familiare nella raccolto (es: set harvest)\n" +
+                    "- Metti familiare nel concilio (es: set council)");
 
-    public abstract List<Asset> chooseAssets(int numberOfAssets);
+            String choice = getMessage();
+
+            if (choice == null) continue;
+
+            Action action = ActionFactory.createAction(familyMember, choice);
+
+            if (servant.getValue() > 0 && action != null)
+                return new ServantsHandler(action, servant);
+
+            return action;
+        }
+
+        printMessage("Timeout Azione terminato");
+
+        return null;
+    }
+
+    public int askFloor() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    public CardTypeEnum askForCardType() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    public FamilyMember askFamiliarMember(Player player)
+    {
+        List<FamilyMember> unusedFamiliarMembers =
+                player.getUnusedFamiliarMembers();
+
+        Long maxTimeStamp = System.currentTimeMillis() + timeout;
+
+        while(System.currentTimeMillis() < maxTimeStamp)
+        {
+            this.printMessage("Scegli un familiare tra quelli disponibili:");
+
+            //TODO SISTEMARE STA COSA; BISOGNA CHIAMARE UNA FUNZIONE STATICA ESTERNA!!
+
+            this.printMessage(unusedFamiliarMembers.toString());
+
+            String choice = this.getMessage();
+
+            if (choice == null) continue;
+
+            ColorsEnum color = ColorsEnum.getColorFromString(choice);
+
+            if (color == null) continue;
+
+            FamilyMember member = player.getUnusedFamilyMemberByColor(color);
+
+            if (member == null) continue;
+
+            return member;
+        }
+
+        printMessage("Timeout Azione terminato");
+
+        return null;
+    }
+
+    public Asset askServants(Player player)
+    {
+        Long maxTimeStamp = System.currentTimeMillis() + timeout;
+
+        while (System.currentTimeMillis() < maxTimeStamp)
+        {
+            this.printMessage("Voi sacrificare servitori per aumentare il valore dell'azione? \n" +
+                    "Indica un numero da 0 a " + player.getServants());
+
+            String value = getMessage();
+
+            if (value == null) continue;
+
+            Integer servantNumber;
+
+            try
+            {
+                servantNumber = Integer.parseInt(value);
+            }
+            catch (NumberFormatException e)
+            {
+                this.printMessage("inserire numero valido");
+
+                continue;
+            }
+
+            if (servantNumber > player.getServants()) continue;
+
+            return new Asset(servantNumber, AssetType.SERVANT);
+        }
+
+        printMessage("Timeout Azione terminato");
+
+        return null;
+    }
+
+
+    //SISTEMARE IL CONCETTO DI PRIVILEGIO DEL CONSIGLIO, MEGLIO GESTIRE CON UNA MAPPA
+    // O UNA ENUM INVECE CHE CON I NULL IN QUESTO MODO SI VA ANCHE A TOGLIERE LA NECESSITÀ
+    // DEGLI IF, POI VISTO CHE VIENE USATO SOLO QUI MEGLIO CREARE UNA CLASSE
+    // UTILIÀ CHE GESTISCA IL PRIVILEGIO INVECE CHE UN OGGETTO DA INSTANZIARE OGNI VOLTA,
+    //PS COMUNQUE E GIUSTA L'IDEA, NON MI RICORDAVO PIÙ CHE CI FOSSE DA SCEGLIERE TRAI PRIVILEGI
+    public List<Asset> chooseAssets(int numberOfAssets)
+    {
+        CouncilPrivilege councilPrivilege = new CouncilPrivilege();
+        List<Asset> chosenAssets = new ArrayList<>();
+
+        int i = 0;
+
+        while (i < numberOfAssets)
+        {
+            this.printMessage("Choose one asset:" + '\n' + councilPrivilege);
+
+            String choice = getMessage();
+
+            if ("1".equals(choice) && councilPrivilege.getBonus1()!=null)
+            {
+                chosenAssets.addAll(councilPrivilege.getBonus1());
+
+                councilPrivilege.setBonus1(null);
+
+                i++;
+            }
+
+            if ("2".equals(choice) && councilPrivilege.getBonus2()!=null)
+            {
+                chosenAssets.addAll(councilPrivilege.getBonus2());
+
+                councilPrivilege.setBonus2(null);
+
+                i++;
+            }
+
+            if ("3".equals(choice) && councilPrivilege.getBonus3()!=null)
+            {
+                chosenAssets.addAll(councilPrivilege.getBonus3());
+
+                councilPrivilege.setBonus3(null);
+
+                i++;
+            }
+
+            if ("4".equals(choice) && councilPrivilege.getBonus4()!=null)
+            {
+                chosenAssets.addAll(councilPrivilege.getBonus4());
+
+                councilPrivilege.setBonus4(null);
+
+                i++;
+            }
+
+            if ("5".equals(choice) && councilPrivilege.getBonus5()!=null)
+            {
+                chosenAssets.addAll(councilPrivilege.getBonus5());
+
+                councilPrivilege.setBonus5(null);
+
+                i++;
+            }
+
+        }
+
+        return chosenAssets;
+    }
     
-    protected void authentication()
+    void authentication()
     {
         try
         {
@@ -46,7 +229,7 @@ public abstract class IOAdapter
 
             while (user == null)
             {
-                printMessage("Sign up or Login?");
+                this.printMessage("Sign up or Login?");
 
                 String answer = getMessage();
 
@@ -107,10 +290,11 @@ public abstract class IOAdapter
                     gameHandling = checkExistingGame(player);
                 }
 
-                if ("3".equals(userChoice))
+                //TODO
+                /*if ("3".equals(userChoice))
                 {
 
-                }
+                }*/
             }
 
             updateJson();
@@ -122,7 +306,7 @@ public abstract class IOAdapter
         }
     }
 
-    protected void checkPassword(User user) throws IOException
+    private void checkPassword(User user) throws IOException
     {
         String password = getMessage();
 
@@ -147,7 +331,7 @@ public abstract class IOAdapter
         user.setLogged(false);
     }
 
-    protected User getUserFromUserName() throws IOException
+    private User getUserFromUserName() throws IOException
     {
         printMessage("Type an existing username:");
 
@@ -167,7 +351,7 @@ public abstract class IOAdapter
         return null;
     }
 
-    protected User registerNewUser() throws IOException
+    private User registerNewUser() throws IOException
     {
         printMessage("Type an username:");
         String username = getMessage();
@@ -190,7 +374,7 @@ public abstract class IOAdapter
         return new User(username, password, true);
     }
 
-    protected boolean createNewGame(Player player) throws IOException
+    private boolean createNewGame(Player player) throws IOException
     {
         printMessage("Type a name for the new game match:");
 
@@ -217,7 +401,7 @@ public abstract class IOAdapter
         return true;
     }
 
-    protected boolean checkExistingGame(Player player) throws IOException
+    private boolean checkExistingGame(Player player) throws IOException
     {
         printMessage("Type the name of the chosen game match:");
 
@@ -244,7 +428,7 @@ public abstract class IOAdapter
     }
 
 
-    protected User loginUser() throws IOException
+    private User loginUser() throws IOException
     {
         User user = null;
 
@@ -261,7 +445,7 @@ public abstract class IOAdapter
         return user;
     }
 
-    synchronized protected User existingUsername(String username)
+    synchronized private User existingUsername(String username)
     {
         Map<String, User> usersMap = GameServer.getUsersMap();
 
@@ -274,7 +458,7 @@ public abstract class IOAdapter
         return  user;
     }
 
-    protected User signUp() throws IOException
+    private User signUp() throws IOException
     {
         User user = null;
 
@@ -285,18 +469,15 @@ public abstract class IOAdapter
 
         Map<String, User> usersMap = GameServer.getUsersMap();
 
-        synchronized (usersMap)
-        {
-            usersMap.put(user.getUsername(), user);
-        }
+        usersMap.put(user.getUsername(), user);
 
         return user;
     }
 
     //TODO FAR SI CHE I VALORI VENGANO GESTITI DAL PARSER JSON
-    protected void startNewGameMatch(String gameName, Player player)
+    private void startNewGameMatch(String gameName, Player player)
     {
-        GameMatch gameMatch = new GameMatch(15000L, 4);
+        GameMatch gameMatch = new GameMatch(60000L, 4);
 
         Map<String, GameMatch> gameMatchMap = GameServer.getGameMatchMap();
 
@@ -316,7 +497,7 @@ public abstract class IOAdapter
     }
 
 
-    synchronized protected void insertIntoExistingGameMatch
+    synchronized private void insertIntoExistingGameMatch
             (String gameName, Player player)
     {
         Map<String, GameMatch> gameMatchMap = GameServer.getGameMatchMap();
@@ -340,7 +521,7 @@ public abstract class IOAdapter
 
     }
 
-    synchronized protected void updateJson() throws IOException
+    synchronized private void updateJson() throws IOException
     {
         Map<String, User> usersMap = GameServer.getUsersMap();
 

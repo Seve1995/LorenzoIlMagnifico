@@ -32,7 +32,9 @@ public class TowerCell extends Cell
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
+
 		if (super.getEffects() == null && this.developmentCard != null)
 
 			return "(Required Value: " + this.getRequiredDiceValue() + ") " + this.developmentCard.getName();

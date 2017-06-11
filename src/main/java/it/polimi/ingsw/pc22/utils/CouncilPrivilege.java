@@ -1,17 +1,17 @@
 package it.polimi.ingsw.pc22.utils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.AssetType;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CouncilPrivilege {
-	List<Asset> bonus1;
-    List<Asset> bonus2;
-    List<Asset> bonus3;
-    List<Asset> bonus4;
-    List<Asset> bonus5;
+	private List<Asset> bonus1;
+    private List<Asset> bonus2;
+    private List<Asset> bonus3;
+    private List<Asset> bonus4;
+    private List<Asset> bonus5;
     
     public CouncilPrivilege()
     {

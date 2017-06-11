@@ -55,7 +55,10 @@ public class Client
 			RMIAuthenticationService authenticationService = (RMIAuthenticationService)
 					registry.lookup("auth");
 
-			RMIClientStreamServiceImpl streamService = new RMIClientStreamServiceImpl();
+			//TODO TIMEOUT
+
+			RMIClientStreamServiceImpl streamService =
+					new RMIClientStreamServiceImpl(30000L);
 
 			RMIClientStreamService stub = (RMIClientStreamService)
 					UnicastRemoteObject.exportObject(streamService, 0);

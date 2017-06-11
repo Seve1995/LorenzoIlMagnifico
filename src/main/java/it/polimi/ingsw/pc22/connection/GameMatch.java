@@ -6,15 +6,12 @@ import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.*;
-
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class GameMatch implements Runnable
@@ -49,36 +46,42 @@ public class GameMatch implements Runnable
 	public void run()
 	{
 		Long timeStamp = System.currentTimeMillis();
-		
-		while(true)
+
+		Timer timer = new Timer();
+
+		timer.schedule(new TimerTask()
 		{
-			try
+			public void run()
 			{
-				Thread.sleep(1000L);
+				boolean isGameFull = playerCounter == maxPlayersNumber;
+
+				System.out.println("isGameFull " + isGameFull);
+
+				boolean isTimeoutExpired =
+						System.currentTimeMillis() > timeStamp + timeout;
+
+				System.out.println("isTimeoutExpired " + isTimeoutExpired);
+
+				if (isTimeoutExpired || isGameFull)
+				{
+					startGame();
+
+					timer.cancel();
+				}
 			}
-				catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			}
+		}, 5000, 5000);
+	}
 
-			boolean isTimeoutExpired =
-					System.currentTimeMillis() > timeStamp + timeout;
-
-			boolean isGameFull = playerCounter == maxPlayersNumber;
-
-			if (!isTimeoutExpired && !isGameFull) continue;
-			
-			break;
-		}
-
+	private void startGame()
+	{
 		System.out.println("Inizio partita");
 
-		startGame();
+		handleGame();
 
 		endGame();
 	}
 
-	private void startGame()
+	private void handleGame()
 	{
 		loadGameBoard();
 
@@ -134,19 +137,19 @@ public class GameMatch implements Runnable
 				
 				while (System.currentTimeMillis() < timestamp + timeout)
 				{
-					FamilyMember familyMember = adapter.askFamiliarMember(player, timeout);
+					FamilyMember familyMember = adapter.askFamiliarMember(player);
 
 					System.out.println("Familiar: " + familyMember);
 
 					if (familyMember == null) continue;
 
-					Asset servants = adapter.askServants(player, timeout);
+					Asset servants = adapter.askServants(player);
 
 					System.out.println("Familiar: " + servants);
 
 					if (servants == null) continue;
 
-					Action action = adapter.askAction(familyMember, servants, timeout);
+					Action action = adapter.askAction(familyMember, servants);
 
 					System.out.println("Action: " + action);
 
@@ -706,12 +709,9 @@ public class GameMatch implements Runnable
 		//stampalo a tutti i giocatori
 	}
 
-	public String getGameName() {
-		return gameName;
-	}
-
-	public void setGameName(String gameName) {
-		this.gameName = gameName;
+	public int getMaxPlayersNumber()
+	{
+		return maxPlayersNumber;
 	}
 
 	public List<Player> getPlayers() {

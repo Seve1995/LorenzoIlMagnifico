@@ -34,11 +34,13 @@ public class GameServer
 		
 		gameMatchMap = new ConcurrentHashMap<>();
 
+		Long timeout = 30000L;
+
 		try
 		{
 			Registry registry = LocateRegistry.createRegistry(RMI_PORT);
 
-			RMIIOAdapter rmiIoAdapter = new RMIIOAdapter(registry);
+			RMIIOAdapter rmiIoAdapter = new RMIIOAdapter(registry, timeout);
 
 			RMIAuthenticationService stub = (RMIAuthenticationService)
 					UnicastRemoteObject.exportObject(rmiIoAdapter, 0);
@@ -65,10 +67,8 @@ public class GameServer
 			{
 				Socket socket = serverSocket.accept();
 
-				socket.setSoTimeout(60000);
-
 				SocketIOAdapter socketIOAdapter
-						= new SocketIOAdapter(socket);
+						= new SocketIOAdapter(socket, timeout);
 
 				new Thread(socketIOAdapter).start();
 			}

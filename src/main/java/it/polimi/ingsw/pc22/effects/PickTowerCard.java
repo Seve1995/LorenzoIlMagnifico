@@ -341,7 +341,7 @@ public class PickTowerCard implements Effect
 			
 			VentureCard currVentureCard = (VentureCard) tower.getTowerCells().get(floor).getDevelopmentCard();
 			
-			applyChanges(currVentureCard, player, CardTypeEnum.CHARACTER);
+			applyChanges(currVentureCard, player, CardTypeEnum.VENTURE);
 
 			//if (choice == true)
 			//ask if the player wants to spent military points or resources
@@ -354,7 +354,7 @@ public class PickTowerCard implements Effect
 					if (player.getAsset(a.getType()) < a.getValue())
 					{
 						
-						RemoveChanges(currVentureCard, player, CardTypeEnum.BUILDING);
+						RemoveChanges(currVentureCard, player, CardTypeEnum.VENTURE);
 						
 						return false;
 						
