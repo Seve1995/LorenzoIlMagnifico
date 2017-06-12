@@ -82,30 +82,30 @@ public class PlayerBoard {
 	
 	
 	public String toString() {
-		String output ="";
-		output += "(PLAYER BUILDINGS) ";
+		StringBuilder output = new StringBuilder();
+		output.append("(PLAYER BUILDINGS) ");
 		for (BuildingCard b : buildings)
-			output += b.getName() + "|";
-		output += "\nProduction Bonus: " 
+			output.append(b.getName() + "|");
+		output.append("\nProduction Bonus: " 
 			+ bonusTile.getProductionCoinsBonus().toString() + ", " 
 			+ bonusTile.getProductionMilitaryPointsBonus().toString() + ", " 
-			+ bonusTile.getProductionServantBonus().toString() + "\n";
-		output += "\n(PLAYER TERRITORIES) ";
+			+ bonusTile.getProductionServantBonus().toString() + "\n");
+		output.append("\n(PLAYER TERRITORIES) ");
 		for (TerritoryCard t : territories)
-			output += t.getName() + "|";
-		output += "\nHarvest Bonus: "
+			output.append(t.getName() + "|");
+		output.append("\nHarvest Bonus: "
 			+ bonusTile.getHarvestCoinsBonus().toString() + ", " 
 			+ bonusTile.getHarvestMilitaryPointsBonus().toString() + ", " 
 			+ bonusTile.getHarvestServantBonus().toString() + ", " 
 			+ bonusTile.getHarvestStonesBonus().toString() + ", " 
-			+ bonusTile.getHarvestWoodsBonus() + "\n";
-		output += "\n(PLAYER CHARACTERS) ";
+			+ bonusTile.getHarvestWoodsBonus() + "\n");
+		output.append("\n(PLAYER CHARACTERS) ");
 		for (CharacterCard c : characters)
-			output += c.getName() + "|";
-		output += "\n(PLAYER VENTURES) ";
+			output.append(c.getName() + "|");
+		output.append("\n(PLAYER VENTURES) ");
 		for (VentureCard v: ventures)
-			output += v.getName() + "|";
-		return output;
+			output.append(v.getName() + "|");
+		return output.toString();
 	}
 	
 }
