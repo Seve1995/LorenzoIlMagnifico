@@ -9,6 +9,7 @@ public class ExcommunicationCard {
 	private int age;
 	private int number;
 	private List<Effect> effects;
+	private String description;
 	
 	public int getAge() {
 		return age;
@@ -28,7 +29,17 @@ public class ExcommunicationCard {
 	public void setEffects(List<Effect> effects) {
 		this.effects = effects;
 	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	
+	@Override 
+	public String toString() {
+		return description;
+	}
 }
 
 

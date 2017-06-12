@@ -72,6 +72,44 @@ public abstract class IOAdapter
         return null;
     }
 
+    public int askExcommunication() {
+    	
+        Long maxTimeStamp = System.currentTimeMillis() + timeout;
+
+        while(System.currentTimeMillis() < maxTimeStamp)
+        {
+	            this.printMessage("Choose an action:\n"
+	            		+ "1) Show your support to the Church (you'll lose all yours faith points & you'll gain victory points)\n"
+	            		+ "2) Take the excommunication (you won't lose your faith points)");
+	            
+	            String value = getMessage();
+	
+	            if (value == null) continue;
+	
+	            Integer choice;
+	
+	            try
+	            {
+	            	choice = Integer.parseInt(value);
+	            }
+	            catch (NumberFormatException e)
+	            {
+	                this.printMessage("ERROR! You must enter a valid input");
+	
+	                continue;
+	            }
+	
+	            if (choice !=1 || choice !=2) continue;
+	
+	            return choice;
+        }
+        
+        printMessage("Timeout Azione terminato");
+
+        return -1;
+    
+    }
+    
     public int askFloor() {
     	
         Long maxTimeStamp = System.currentTimeMillis() + timeout;
@@ -365,7 +403,7 @@ public abstract class IOAdapter
     
     public int chooseCost(Asset militaryPointsRequired, Asset militaryPointsCost, List<Asset> resourcesCost){
     	this.printMessage("You have to choose one cost between:");
-    	this.printMessage("1) You must have" + militaryPointsRequired.getValue() + "and you will pay" + militaryPointsCost.getValue());	
+    	this.printMessage("1) You must have" + militaryPointsRequired.getValue() + ", and you will pay" + militaryPointsCost.getValue());	
     	this.printMessage("2) Pay these resources:" + resourcesCost.toString());		
         Long maxTimeStamp = System.currentTimeMillis() + timeout;
 

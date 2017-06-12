@@ -46,12 +46,15 @@ public class ExcommunicationCardLoader extends GenericLoader
 
         List<Effect> effects = loadEffectList(jsonCard.getJSONArray("effects"));
 
+        String description = jsonCard.getString("description");
+
         ExcommunicationCard card = new ExcommunicationCard();
 
         card.setAge(age);
         card.setNumber(number);
         card.setEffects(effects);
-
+        card.setDescription(description);
+        
         return card;
     }
 }

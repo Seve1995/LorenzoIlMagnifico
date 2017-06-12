@@ -11,7 +11,8 @@
             "value": 1
           }
         }
-      ]
+      ],
+      "toString": "Each time you gain Military Points, gain 1 fewer Military Point."
     },
     {
       "age": 1,
@@ -24,7 +25,8 @@
             "value": 1
           }
         }
-      ]
+      ],
+      "toString": "Each time you receive coins, gain 1 fewer coin."
     },
     {
       "age": 1,
@@ -37,7 +39,8 @@
             "value": 1
           }
         }
-      ]
+      ],
+      "toString": "Each time you receive servants, gain 1 fewer servant."
     },
     {
       "age": 1,
@@ -57,7 +60,8 @@
             "value": 1
           }
         }
-      ]
+      ],
+      "toString": "Each time you receive wood or stone, you receive 1 fewer wood or stone."
     },
     {
       "age": 1,
@@ -67,7 +71,8 @@
           "name": "AddHarvestValueModifier",
           "value": -3
         }
-      ]
+      ],
+      "toString": "Each time you perform a Harvest action, decrease its value by 3."
     },
     {
       "age": 1,
@@ -77,7 +82,8 @@
           "name": "AddProductionValueModifier",
           "value": -3
         }
-      ]
+      ],
+      "toString": "Each time you perform a Production action, decrease its value by 3."
     },
     {
       "age": 1,
@@ -87,7 +93,8 @@
           "name": "AddFamilyMembersMalus",
           "value": -1
         }
-      ]
+      ],
+      "toString": "All your colored Family Members receive a -1 reduction of their value each time you place them"
     },
     {
       "age": 2,
@@ -98,7 +105,8 @@
           "cardType": "TERRITORY",
           "value": -4
         }
-      ]
+      ],
+      "toString": "Each time you take a Territory Card, your action receives a -4 reduction of its value."
     },
     {
       "age": 2,
@@ -109,7 +117,8 @@
           "cardType": "BUILDING",
           "value": -4
         }
-      ]
+      ],
+      "toString": "Each time you take a Building Card, your action receives a -4 reduction of its value."
     },
     {
       "age": 2,
@@ -120,7 +129,8 @@
           "cardType": "CHARACTER",
           "value": -4
         }
-      ]
+      ],
+      "toString": "Each time you take a Character Card, your action receives a -4 reduction of its value."
     },
     {
       "age": 2,
@@ -131,7 +141,8 @@
           "cardType": "VENTURE",
           "value": -4
         }
-      ]
+      ],
+      "toString": "Each time you take a Venture Card, your action receives a -4 reduction of its value."
     },
     {
       "age": 2,
@@ -140,7 +151,8 @@
         {
           "name": "AddNoMarketActionMalus"
         }
-      ]
+      ],
+      "toString": "You can’t place your Family Members in the Market action spaces."
     },
     {
       "age": 2,
@@ -149,7 +161,8 @@
         {
           "name": "AddServantsHandlerMalus"
         }
-      ]
+      ],
+      "toString": "You have to spend 2 servants to increase your action value by 1."
     },
     {
       "age": 2,
@@ -158,7 +171,8 @@
         {
           "name": "AddNoFirstActionMalus"
         }
-      ]
+      ],
+      "toString": "Each round, you skip your first turn. You start taking actions from the second turn."
     },
     {
       "age": 3,
@@ -171,7 +185,8 @@
           "loseOneVictoryPointEveryFiveVictoryPoints": false,
           "buildingCardsMalus": false
         }
-      ]
+      ],
+      "toString": "At the end of the game, you don’t score points for any of your Infuenced Characters"
     },
     {
       "age": 3,
@@ -184,7 +199,8 @@
           "loseOneVictoryPointEveryFiveVictoryPoints": false,
           "buildingCardsMalus": false
         }
-      ]
+      ],
+      "toString": "At the end of the game, you don’t score points for any of your Encouraged Ventures."
     },
     {
       "age": 3,
@@ -197,7 +213,8 @@
           "loseOneVictoryPointEveryFiveVictoryPoints": false,
           "buildingCardsMalus": false
         }
-      ]
+      ],
+      "toString": "At the end of the game, you don’t score points for any of your Conquered Territories."
     },
     {
       "age": 3,
@@ -210,7 +227,8 @@
           "loseOneVictoryPointEveryFiveVictoryPoints": true,
           "buildingCardsMalus": false
         }
-      ]
+      ],
+      "toString": "At the end of the game, before the Final Scoring, you lose 1 Victory Point for every 5 Victory Points you have."
     },
     {
       "age": 3,
@@ -228,7 +246,8 @@
           "loseOneVictoryPointEveryFiveVictoryPoints": false,
           "buildingCardsMalus": false
         }
-      ]
+      ],
+      "toString": "At the end of the game, you lose 1 Victory Point for every Military Point you have. "
     },
     {
       "age": 3,
@@ -241,7 +260,8 @@
           "loseOneVictoryPointEveryFiveVictoryPoints": false,
           "buildingCardsMalus": true
         }
-      ]
+      ],
+      "toString": "At the end of the game, you lose 1 Victory Point for every wood and stone on your Building Cards’ costs."
     },
     {
       "age": 3,
@@ -271,7 +291,8 @@
           "loseOneVictoryPointEveryFiveVictoryPoints": false,
           "buildingCardsMalus": false
         }
-      ]
+      ],
+      "toString": "At the end of the game, you lose 1 Victory Point for every resource (wood, stone, coin, servant) in your supply on your Personal Board."
     }
   ]
 }
