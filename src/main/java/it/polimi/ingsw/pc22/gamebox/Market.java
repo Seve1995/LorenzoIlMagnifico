@@ -23,7 +23,7 @@ public class Market {
 		for (int i=0; i<marketCells.size(); i++) 
 		{
 			if (!marketCells.get(i).isABlockedCell())
-				output.append("Zone " + i + " : " + marketCells.get(i).toString().toLowerCase() + "\n");
+				output.append("Zone " + i + " : " + marketCells.get(i).toString() + "\n");
 		}		
 		return output.toString();
 	}

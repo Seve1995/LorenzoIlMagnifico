@@ -35,6 +35,7 @@ public class Production
 						+ "FamilyMembers already in production area:\n");
 		for (int i=0; i<firstCellFree(); i++)
 			output.append(i + ") " + productionCells[i].getFamilyMember().toString());
+		if (firstCellFree()>0 && firstCellFree()%4==0) output.append("\n");
 		return output.toString();
 	}
 	

@@ -514,17 +514,15 @@ public class Player
 
 	@Override
 	public String toString() {
-		return "Player{" +
-				"name='" + name + '\n' +
-				", numberOfMatch=" + numberOfMatch + '\n' +
-				", woods=" + woods +'\n' +
-				", stones=" + stones +'\n' +
-				", servants=" + servants +'\n' +
-				", coins=" + coins +'\n' +
-				", militaryPoints=" + militaryPoints +'\n' +
-				", faithPoints=" + faithPoints +'\n' +
-				", victoryPoints=" + victoryPoints +'\n' +
-				" }";
+		return "Name:" + name + '|' 
+				+ "NumOfMatch:" + numberOfMatch +'|'
+				+ "Woods:" + woods + '|'
+				+ "Stones:" + stones + '|'
+				+ "Servants:" + servants + '|'
+				+ "Coins:" + coins + '|'
+				+ "MilPoints:" + militaryPoints + '|'
+				+ "FaithPoints:" + faithPoints + '|'
+				+ "VicPoints:" + victoryPoints + '|';
 	}
 
 	@Override

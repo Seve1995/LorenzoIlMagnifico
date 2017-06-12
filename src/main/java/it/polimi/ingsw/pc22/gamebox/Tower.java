@@ -42,7 +42,8 @@ public class Tower {
 	
 	public List<TowerCell> getAvailableCells()
 	{
-		return towerCells.stream()
+		return towerCells
+				.stream()
 				.filter(cell -> cell.isEmpty())
 				.collect(Collectors.toList());
 	}
@@ -52,7 +53,7 @@ public class Tower {
 		StringBuilder output = new StringBuilder(this.towerType.toString()+" Tower\n");
 		for(TowerCell t : towerCells)
 		{
-			output.append(t.toString()+"\n");
+			output.append(t.toString());
 		}
 		return output.toString();
 	}

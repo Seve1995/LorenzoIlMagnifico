@@ -46,6 +46,7 @@ public class CouncilPalace
 				+ "FamilyMembers already in council palace:\n");
 		for (int i=0; i<firstCellFree(); i++)
 			output.append(i + ") " + councilPalaceCells[i].getFamilyMember().toString() + "\n");
+		if (firstCellFree()>0 && firstCellFree()%4==0) output.append("\n");
 		return output.toString();
 	}
 }
