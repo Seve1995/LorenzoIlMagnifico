@@ -42,7 +42,7 @@ public class AddCardPickMalus implements Effect{
 			
 			currCardModifier.setCardType(cardType);
 			
-			player.getCardModifier().add(currCardModifier);
+			player.getCardModifiers().add(currCardModifier);
 			
 			return true;
 		}

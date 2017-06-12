@@ -3,9 +3,9 @@ package it.polimi.ingsw.pc22.effects;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.CardModifier;
 import it.polimi.ingsw.pc22.player.Player;
-import it.polimi.ingsw.pc22.utils.CharactersCalc;
 import it.polimi.ingsw.pc22.utils.MilitaryPointsCalc;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PickTowerCard implements Effect
@@ -14,12 +14,9 @@ public class PickTowerCard implements Effect
 	private CardTypeEnum cardType;
 	private int diceValue;
 	private List<Asset> assetsDiscount;
-
-	private int diceValueCharacter;
-	private int diceValueBuilding;
-	private int diceValueVenture;
-	private int diceValueTerritory;
 	
+	private List<Asset> costs = new ArrayList<Asset>();
+
 	public int getFloor() {
 		return floor;
 	}
@@ -60,109 +57,318 @@ public class PickTowerCard implements Effect
 		this.diceValue = diceValue;
 	}
 	
-	private void applyDiceChanges(Player p)
+	@Override
+	public boolean isLegal(Player player, GameBoard gameBoard)
 	{
-		diceValueCharacter = diceValue;
-		diceValueTerritory = diceValue;
-		diceValueVenture = diceValue;
-		diceValueBuilding = diceValue;
-
-		for (CardModifier cm : p.getCardModifiers())
+		
+		if (floor==-1 || cardType==null) return false;
+		
+		Tower tower = null;
+		
+		for (Tower t : gameBoard.getTowers())
 		{
-			if (cm.getCardType().equals(CardTypeEnum.CHARACTER))
+			if (t.getTowerType().equals(cardType))
 			{
-				diceValueCharacter += cm.getValueModifier();
+				tower=t;
 			}
-
-			if (cm.getCardType().equals(CardTypeEnum.TERRITORY))
-			{
-				diceValueTerritory += cm.getValueModifier();
-			}
-
-			if (cm.getCardType().equals(CardTypeEnum.VENTURE))
-			{
-				diceValueVenture += cm.getValueModifier();
-			}
-
-			if (cm.getCardType().equals(CardTypeEnum.BUILDING))
-			{
-				diceValueBuilding += cm.getValueModifier();
-			}
-
+			
 		}
+		
+		if(tower.getTowerCells().get(floor).getDevelopmentCard() == null) return false;
+		
+		for(CardModifier c : player.getCardModifiers())
+		{
+			if (c.getCardType().equals(cardType)) 
+				diceValue += c.getValueModifier();
+		}
+		
+		//applyDiceChanges(player);
+		
+		if (this.cardType.equals(CardTypeEnum.CHARACTER))
+		{
+			if (player.getPlayerBoard().getCharacters().size() > 6 || diceValue < tower.getTowerCells().get(floor).getRequiredDiceValue())
+				return false;
+			
+			CharacterCard currCharacterCard = (CharacterCard) tower.getTowerCells().get(floor).getDevelopmentCard();
+			
+			costs.add(currCharacterCard.getCoinsCost());
+			
+			if (assetsDiscount!=null)
+			{
+				for (Asset asset : assetsDiscount)
+					if (asset.getType().equals(costs.get(0).getType()))
+							costs.get(0).setValue(costs.get(0).getValue() - asset.getValue());
+			}
+			
+			if (applyCardModifiers(player)==false) 
+				return false;
+			
+			if (costs.get(0).getValue() > player.getCoins())
+				return false;
+			
+			return true;
+		}
+		
+		if (this.cardType.equals(CardTypeEnum.BUILDING)) 
+		{
+			if (player.getPlayerBoard().getBuildings().size() > 6 || diceValue < tower.getTowerCells().get(floor).getRequiredDiceValue())
+				return false;
+	
+			BuildingCard currBuildingCard = (BuildingCard) tower.getTowerCells().get(floor).getDevelopmentCard();
+			
+			costs.addAll(currBuildingCard.getCosts());
+			
+			if (assetsDiscount!=null)
+			{
+				for (Asset asset : assetsDiscount)
+					for (Asset asset1 : costs)
+						if (asset.getType().equals(asset1.getType()))
+							asset1.setValue(asset1.getValue() - asset.getValue());
+			}
+			
+			if (applyCardModifiers(player)==false) return false;
+			
+			for (Asset a : costs)
+			{
+				if (a.getValue() > player.getAsset(a.getType()))
+				{
+					return false;
+					
+				}
+			}
+			
+			return true;
+		}
+		
+		if (this.cardType.equals(CardTypeEnum.VENTURE))
+		{
+			if (player.getPlayerBoard().getBuildings().size() > 6 || diceValue < tower.getTowerCells().get(floor).getRequiredDiceValue())
+				return false;
+			
+			VentureCard currVentureCard = (VentureCard) tower.getTowerCells().get(floor).getDevelopmentCard();
+			
+			if (currVentureCard.isRequiredCostChoice())
+			{
+				int choice = player.getAdapter().chooseCost(currVentureCard.getMilitaryPointsRequired(), currVentureCard.getMilitaryPointsCost(), currVentureCard.getResourcesCost());
+			
+				switch (choice) {
+				case 1:
+					costs.add(currVentureCard.getMilitaryPointsCost());
+					break;
+				case 2:
+					costs.addAll(currVentureCard.getResourcesCost());
+					break;
+				default:
+					return false;
+				}
+				
+			}
+			
+			if (assetsDiscount!=null)
+			{
+				for (Asset asset : assetsDiscount)
+					for (Asset asset1 : costs)
+						if (asset.getType().equals(asset1.getType()))
+							asset1.setValue(asset1.getValue() - asset.getValue());
+			}
+			
+			if (currVentureCard.getMilitaryPointsRequired() == null)
+				costs.addAll(currVentureCard.getResourcesCost());
+			
+			if (currVentureCard.getResourcesCost() == null)
+				costs.add(currVentureCard.getMilitaryPointsCost());
+				
+			if (applyCardModifiers(player)==false) return false;
+
+			for (Asset a : costs)
+			{
+				if (a.getValue() > player.getAsset(a.getType()))
+				{
+					return false;
+					
+				}
+			
+			}
+			
+			return true;
+			
+		}
+		
+		if (this.cardType.equals(CardTypeEnum.TERRITORY)) 
+		{
+			
+			if (player.getPlayerBoard().getTerritories().size() > 6 || diceValue < tower.getTowerCells().get(floor).getRequiredDiceValue())
+			{
+				return false;
+			}
+			
+			if (!(player.isNoMilitaryPointsForTerritories())) 
+			
+			{
+				int value = player.getPlayerBoard().getTerritories().size();
+						
+				MilitaryPointsCalc militaryPointsCalc = MilitaryPointsCalc.getMilitaryPointsCalcByValue(value);
+
+				int militaryPoints = militaryPointsCalc.getMilitaryPoints();
+
+				if (player.getMilitaryPoints() < militaryPoints)
+				{
+					return false;
+				}
+				
+			}
+			
+			return true;
+		}
+		
+		return true;
+	
 	}
 	
 	
-	private void applyChanges(DevelopmentCard d, Player p, CardTypeEnum ct)
+	@Override
+	public boolean executeEffects(Player player, GameBoard gameBoard)
+	{		
+		if (cardType.equals(CardTypeEnum.ANY))
+			
+			cardType = player.getAdapter().askForCardType();
+
+		if (floor == -1)
+			
+			floor = player.getAdapter().askFloor();
+			
+		if (isLegal(player, gameBoard))
+		{
+				for (Tower t : gameBoard.getTowers())
+				{
+					if (t.getTowerType().equals(cardType))
+					{   
+						if (cardType.equals(CardTypeEnum.BUILDING))
+						{
+							player.getPlayerBoard().getBuildings().add((BuildingCard) t.getTowerCells().get(floor).getDevelopmentCard());
+							
+						}
+						
+						if (cardType.equals(CardTypeEnum.CHARACTER))
+						{
+							player.getPlayerBoard().getCharacters().add((CharacterCard) t.getTowerCells().get(floor).getDevelopmentCard());
+							
+						}
+						
+						if (cardType.equals(CardTypeEnum.TERRITORY))
+						{
+							player.getPlayerBoard().getTerritories().add((TerritoryCard) t.getTowerCells().get(floor).getDevelopmentCard());
+				
+						}
+						
+						if (cardType.equals(CardTypeEnum.VENTURE))
+						{
+							player.getPlayerBoard().getVentures().add((VentureCard) t.getTowerCells().get(floor).getDevelopmentCard());
+							
+						}
+						
+						activeEffects(t.getTowerCells().get(floor).getDevelopmentCard(), player, gameBoard);
+						
+						t.getTowerCells().get(floor).setDevelopmentCard(null);
+						
+					}
+					
+				}
+				return true;
+				
+		}
+				
+		return false;
+	
+	}
+	
+	
+	
+	
+	private boolean applyCardModifiers(Player p)
 	
 	{
-		if (ct.equals(CardTypeEnum.BUILDING))
+		if (cardType.equals(CardTypeEnum.BUILDING))
 			
-		{
-			BuildingCard currBuildingCard = (BuildingCard) d;
-			
+		{			
 			for (CardModifier cm : p.getCardModifiers())
 			{
-				if (cm.getCardType().equals(ct))
+				if (cm.getCardType().equals(cardType))
 				{
-					
-					for (Asset a : cm.getAssetDiscount())
-					{
-						for (Asset a1 : currBuildingCard.getCosts())
+					if (cm.isOnlyOneAsset())
 						{
 						
+						List<Asset> chosenAssets = p.getAdapter().chooseAssets(1, cm.getAssetDiscount());
+						
+						if (chosenAssets==null) return false;
+
+						Asset chosenAsset = chosenAssets.get(0);
+						
+						for (Asset a1 : costs)
+						{
+						
+							if (a1.getType().equals(chosenAsset.getType()))
+							
+								costs.add(new Asset(a1.getValue() - chosenAsset.getValue(), a1.getType()));
+						}
+						
+						continue;
+						
+						}
+						
+					for (Asset a : cm.getAssetDiscount())
+					{
+						for (Asset a1 : costs)
+						{
 							if (a1.getType().equals(a.getType()))
 							
-								a1.setValue(a1.getValue() - a.getValue());	
+								a1.setValue((a1.getValue() - a.getValue()));
+							
 						}
 					
 					}
 					
 				}
 			
-				}	
+			}	
 				
-			}
+		}
 		
-		if (ct.equals(CardTypeEnum.CHARACTER))
+		if (cardType.equals(CardTypeEnum.CHARACTER))
 			
-		{
-			CharacterCard currCharacterCard = (CharacterCard) d;
-			
-			if (p.getCardModifier() != null)
-			{
+		{			
+				Asset coinsCost = costs.get(0);
+				
 				for (CardModifier cm : p.getCardModifiers())
 				{
-					if (cm.getCardType().equals(ct))
+					if (cm.getCardType().equals(cardType))
 					
 						for (Asset a : cm.getAssetDiscount())
 						{
 					
 							if (a.getType().equals(AssetType.COIN))
 							{
-								currCharacterCard.getCoinsCost().setValue(currCharacterCard.getCoinsCost().getValue() - a.getValue());
+								costs.get(0).setValue(coinsCost.getValue() - a.getValue());
 							}
 					
 						}
 			
 				}
-			}
 	
 		}
 		
-		if (ct.equals(CardTypeEnum.VENTURE))
+		if (cardType.equals(CardTypeEnum.VENTURE))
 			
 		{
-			VentureCard currVentureCard = (VentureCard) d;
 			
 			for (CardModifier cm : p.getCardModifiers())
 			{
-				if (cm.getCardType().equals(ct))
+				if (cm.getCardType().equals(cardType))
 				{
 					
 					for (Asset a : cm.getAssetDiscount())
 					{
-						for (Asset a1 : currVentureCard.getResourcesCost())
+						for (Asset a1 : costs)
 						{
 						
 							if (a1.getType().equals(a.getType()))
@@ -178,12 +384,12 @@ public class PickTowerCard implements Effect
 				
 			}
 		
-		
-		
+		return true;
 		
 	}
+
 	
-	
+	/*
 	private void RemoveChanges(DevelopmentCard d, Player p, CardTypeEnum ct)
 	{
 		
@@ -211,7 +417,7 @@ public class PickTowerCard implements Effect
 						
 					}
 					
-					else if (cm.getCardType().equals(ct) && !(cm.isOnlyOneAsset()))
+					else if (cm.getCardType().equals(ct) && (cm.isOnlyOneAsset()))
 					{
 						//stampa a video l'elenco degli asset, selezionane uno 
 						
@@ -265,153 +471,8 @@ public class PickTowerCard implements Effect
 				}
 			}
 	}
+	 */
 
-	@Override
-	public boolean isLegal(Player player, GameBoard gameBoard)
-	{
-		Tower tower = null;
-		
-		for (Tower t : gameBoard.getTowers())
-		{
-			if (t.getTowerType().equals(cardType))
-			{
-				tower=t;
-			}
-			
-		}
-		
-		applyDiceChanges(player);
-		
-		if (this.cardType.equals(CardTypeEnum.CHARACTER))
-		{
-			if (player.getPlayerBoard().getCharacters().size() > 6 || diceValueCharacter < tower.getTowerCells().get(floor).getRequiredDiceValue())
-			{
-				
-				return false;
-			}
-			
-			CharacterCard currCharacterCard = (CharacterCard) tower.getTowerCells().get(floor).getDevelopmentCard();
-			
-			applyChanges(currCharacterCard, player, CardTypeEnum.CHARACTER);
-			
-			if (currCharacterCard.getCoinsCost().getValue() > player.getCoins())
-			{
-				
-				RemoveChanges(currCharacterCard, player, CardTypeEnum.CHARACTER);
-				
-				return false;
-			}
-			
-			RemoveChanges(currCharacterCard, player, CardTypeEnum.CHARACTER);
-				
-		}
-		
-		if (this.cardType.equals(CardTypeEnum.BUILDING)) 
-		{
-			if (player.getPlayerBoard().getBuildings().size() > 6 || diceValueBuilding < tower.getTowerCells().get(floor).getRequiredDiceValue())
-			{
-				
-				return false;
-			}
-	
-			BuildingCard currBuildingCard = (BuildingCard) tower.getTowerCells().get(floor).getDevelopmentCard();
-			
-			applyChanges(currBuildingCard, player, CardTypeEnum.BUILDING);
-			
-			for (Asset a : currBuildingCard.getCosts())
-			{
-				if (player.getAsset(a.getType()) < a.getValue())
-				{
-					
-					RemoveChanges(currBuildingCard, player, CardTypeEnum.BUILDING);
-					
-					return false;
-					
-				}
-			}
-			
-			RemoveChanges(currBuildingCard, player, CardTypeEnum.BUILDING);
-	
-		}
-		
-		if (this.cardType.equals(CardTypeEnum.VENTURE))
-		{
-			if (player.getPlayerBoard().getBuildings().size() > 6 || diceValueVenture < tower.getTowerCells().get(floor).getRequiredDiceValue())
-			{				
-				return false;
-			}
-			
-			VentureCard currVentureCard = (VentureCard) tower.getTowerCells().get(floor).getDevelopmentCard();
-			
-			applyChanges(currVentureCard, player, CardTypeEnum.VENTURE);
-
-			//if (choice == true)
-			//ask if the player wants to spent military points or resources
-			
-			
-			if ((currVentureCard.getMilitaryPointsRequired() == null)) 
-			{
-				for (Asset a : currVentureCard.getResourcesCost())
-				{
-					if (player.getAsset(a.getType()) < a.getValue())
-					{
-						
-						RemoveChanges(currVentureCard, player, CardTypeEnum.VENTURE);
-						
-						return false;
-						
-					}
-				}
-			}
-
-			if (currVentureCard.getMilitaryPointsRequired().getValue() > player.getMilitaryPoints())
-			{
-				return false;
-			}
-			
-			applyChanges(currVentureCard, player, CardTypeEnum.CHARACTER);
-			
-		}
-		
-		if (this.cardType.equals(CardTypeEnum.TERRITORY)) 
-		{
-			
-			if (player.getPlayerBoard().getTerritories().size() > 6 || diceValueTerritory < tower.getTowerCells().get(floor).getRequiredDiceValue())
-			{
-				return false;
-			}
-			
-			else if (!(player.isNoMilitaryPointsForTerritories())) 
-			
-			{
-				int value = player.getPlayerBoard().getTerritories().size();
-						
-				MilitaryPointsCalc militaryPointsCalc = MilitaryPointsCalc.getMilitaryPointsCalcByValue(value);
-
-				int militaryPoints = militaryPointsCalc.getMilitaryPoints();
-
-				if (player.getMilitaryPoints() < militaryPoints)
-				{
-					return false;
-				}
-				
-			}
-			
-			else if (player.isNoMilitaryPointsForTerritories())
-				
-				
-				return true;
-		}
-
-		return true;
-	}
-	
-	
-	
-	private void removeCards(Tower t, int floor)
-	{
-		t.getTowerCells().get(floor).setDevelopmentCard(null);
-	}
 	
 	
 	private void activeEffects(DevelopmentCard d, Player p, GameBoard gb)
@@ -429,78 +490,6 @@ public class PickTowerCard implements Effect
 					e.executeEffects(p, gb);
 		}
 			
-	}
-	
-	
-	@Override
-	public boolean executeEffects(Player player, GameBoard gameBoard)
-	{
-		
-		System.out.println("entering the execution");
-		
-		if (floor == -1)
-			
-			//ask for floor 
-			
-			floor = player.getAdapter().askFloor();
-
-		if (cardType.equals(CardTypeEnum.ANY))
-			
-			//ask for card type
-			
-			cardType = player.getAdapter().askForCardType();
-			
-		if (isLegal(player, gameBoard))
-		{
-			System.out.println("it is legal");
-			
-				for (Tower t : gameBoard.getTowers())
-				{
-					if (t.getTowerType().equals(cardType))
-					{   
-						if (cardType.equals(CardTypeEnum.BUILDING))
-						{
-							player.getPlayerBoard().getBuildings().add((BuildingCard) t.getTowerCells().get(floor).getDevelopmentCard());
-							
-							//applyChanges(currCharacterCard, player, CardTypeEnum.CHARACTER);
-							
-							//payCosts()
-							
-						}
-						
-						if (cardType.equals(CardTypeEnum.CHARACTER))
-						{
-							player.getPlayerBoard().getCharacters().add((CharacterCard) t.getTowerCells().get(floor).getDevelopmentCard());
-							
-						}
-						
-						if (cardType.equals(CardTypeEnum.TERRITORY))
-						{
-							player.getPlayerBoard().getTerritories().add((TerritoryCard) t.getTowerCells().get(floor).getDevelopmentCard());
-				
-						}
-						
-						if (cardType.equals(CardTypeEnum.VENTURE))
-						{
-							player.getPlayerBoard().getVentures().add((VentureCard) t.getTowerCells().get(floor).getDevelopmentCard());
-							
-						}
-						
-						activeEffects(t.getTowerCells().get(floor).getDevelopmentCard(), player, gameBoard);
-						
-						removeCards(t, floor);
-						
-					}
-					
-				}
-				return true;
-				
-		}
-		
-		System.out.println("it is not legal");
-		
-		return false;
-	
 	}
 	
 }

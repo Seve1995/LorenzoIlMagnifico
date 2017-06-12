@@ -1,5 +1,6 @@
 package it.polimi.ingsw.pc22.effects;
 
+import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.gamebox.TerritoryCard;
 import it.polimi.ingsw.pc22.player.Player;
@@ -31,6 +32,9 @@ public class DoProductionAction implements Effect {
 
 		if (isLegal(player, gameBoard))
 		{
+				Asset servants = player.getAdapter().askServants(player);
+				if (servants==null) return false;
+				value += servants.getValue();
 				player.addAsset(player.getPlayerBoard().getBonusTile().getProductionCoinsBonus());
 				player.addAsset(player.getPlayerBoard().getBonusTile().getProductionMilitaryPointsBonus());
 				player.addAsset(player.getPlayerBoard().getBonusTile().getProductionServantBonus());

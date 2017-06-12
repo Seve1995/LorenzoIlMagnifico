@@ -50,7 +50,7 @@ public class AddTowerCardDiscount implements Effect{
 		if (isLegal(player,gameBoard))
 		{
 			List<CardModifier> playerCardModifiers;
-			playerCardModifiers = player.getCardModifier();
+			playerCardModifiers = player.getCardModifiers();
 			CardModifier cardModifier = new CardModifier();
 			cardModifier.setValueModifier(diceValueDiscount);
 			cardModifier.setAssetDiscount(assetDiscounts);
