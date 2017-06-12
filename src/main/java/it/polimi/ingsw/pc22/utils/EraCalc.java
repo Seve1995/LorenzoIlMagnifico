@@ -31,9 +31,12 @@ public enum EraCalc
 
     public static int getEraNumber(int playerCounter, int round)
     {
+    	int counter = 4;
+    	if (playerCounter==5) 
+    		counter = 5;
         for (EraCalc eraCalc : EraCalc.values())
         {
-            if (eraCalc.playerCounter == playerCounter && eraCalc.round == round)
+            if (eraCalc.playerCounter == counter && eraCalc.round == round)
                 return eraCalc.era;
         }
 
