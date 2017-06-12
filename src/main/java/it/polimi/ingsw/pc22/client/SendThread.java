@@ -31,7 +31,7 @@ public class SendThread implements Runnable
 			{
 				if (socket.isClosed()) break;
 
-				if (!inKeyboard.ready()) continue;
+				if (!inKeyboard.ready()) Thread.sleep(100);
 
 				String msgToServerString = inKeyboard.readLine();
 

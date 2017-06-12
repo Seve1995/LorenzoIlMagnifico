@@ -25,7 +25,7 @@ public class ReceiveThread implements Runnable
 
 			while(true)
 			{
-				if (!inSocket.ready()) continue;
+				if (!inSocket.ready()) Thread.sleep(100);
 
 				String msgReceived = inSocket.readLine();
 
