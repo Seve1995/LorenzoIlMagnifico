@@ -40,9 +40,10 @@ public class Harvest
 	
 	public String toString() {
 		StringBuilder output = new StringBuilder("HARVEST\n" 
-						+"FamilyMembers already in harvest area:\n");
+						+"FamiliarMembers already in harvest area:\n");
 		for (int i=0; i<firstCellFree(); i++)
 			output.append(i + ") " + harvestCells[i].getFamilyMember().toString());
+		if (firstCellFree()>0 && firstCellFree()%4==0) output.append("\n");
 		return output.toString();
 	}
 

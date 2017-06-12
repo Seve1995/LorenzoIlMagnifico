@@ -295,7 +295,8 @@ public class GameMatch implements Runnable
 
 		tiles = BonusTileLoader.loadBonusTiles(bonusTiles);
 
-		System.out.println(tiles);
+		for (BonusTile b : tiles)
+			System.out.println(b.toString());
 	}
 
 	private void loadLeaderCards()

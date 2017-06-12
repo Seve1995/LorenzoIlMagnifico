@@ -37,25 +37,17 @@ public class TowerCell extends Cell
 
 		if (super.getEffects() == null && this.developmentCard != null)
 
-			return "(Required Value: " + this.getRequiredDiceValue() + ") " + this.developmentCard.getName();
+			return "(Req. Value:" + this.getRequiredDiceValue() + ") " + this.developmentCard.getName() + "\n";
 
 		if (super.getEffects() == null && this.developmentCard == null)
 
-			return "(Required Value: " + this.getRequiredDiceValue() + ")";
+			return "(Req. Value:" + this.getRequiredDiceValue() + ")\n";
 
-		StringBuilder output = new StringBuilder();
+		if (this.developmentCard == null)
+				return "(Req. Value:" + this.getRequiredDiceValue() + "|" + "Bonus: " + super.getEffects().get(0).toString() + ")\n";
 
-		for (int i=0; i<super.getEffects().size(); i++)
-		{
-			if (this.developmentCard == null)
-				output.append("(Required Value: " + this.getRequiredDiceValue() + " + " + "Bonus: " + super.getEffects().get(i).toString() + ") ");
-
-			else
-				output.append("Required Value: " + this.getRequiredDiceValue() + " + " + "Bonus: " + super.getEffects().get(i).toString() + ") " + this.developmentCard.getName());
-
-		}
-			
-		return output.toString();
+		return "(Req. Value:" + this.getRequiredDiceValue() + "|" + "Bonus:" + super.getEffects().get(0).toString() + ") " + this.developmentCard.getName() + "\n";	
+		
 	}
 	
 	/*public static void main(String[] args) {

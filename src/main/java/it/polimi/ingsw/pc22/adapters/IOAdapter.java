@@ -52,10 +52,14 @@ public abstract class IOAdapter
             if (!player.isFamiliarPositioned())
             {
                 this.printMessage("Available servants: " + player.getServants());
-
-                this.printMessage("Familiari disponibili: " +
-                        player.getUnusedFamiliarMembers().toString());
-
+                
+                StringBuilder availableFamiliarsString = new StringBuilder("Available familiars: ");
+                
+                for (FamilyMember f : player.getUnusedFamiliarMembers())
+                	availableFamiliarsString.append(f.toString() + " ");
+                
+                this.printMessage(availableFamiliarsString.toString());
+                
                 String actions = PositionUtils.getActionAvailableString(gameBoard);
 
                 this.printMessage(actions);

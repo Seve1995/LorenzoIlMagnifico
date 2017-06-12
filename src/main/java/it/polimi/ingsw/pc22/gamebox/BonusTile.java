@@ -135,17 +135,14 @@ public class BonusTile {
 
 	@Override
 	public String toString() {
-		return "BonusTile{" +
-				"productionServantBonus=" + productionServantBonus +
-				", productionCoinsBonus=" + productionCoinsBonus +
-				", productionMilitaryPointsBonus=" + productionMilitaryPointsBonus +
-				", productionActivationValue=" + productionActivationValue +
-				", harvestServantBonus=" + harvestServantBonus +
-				", harvestCoinsBonus=" + harvestCoinsBonus +
-				", harvestMilitaryPointsBonus=" + harvestMilitaryPointsBonus +
-				", harvestWoodsBonus=" + harvestWoodsBonus +
-				", harvestStonesBonus=" + harvestStonesBonus +
-				", harvestActivationValue=" + harvestActivationValue +
-				'}';
+		return "BonusTile:" +
+				"[PROD.]ServantBonus:" + productionServantBonus +
+				"|CoinsBonus:" + productionCoinsBonus +
+				"|MilPointsBonus:" + productionMilitaryPointsBonus + "\n" +
+				"|[HARV.]ServantBonus:" + harvestServantBonus +
+				"|CoinsBonus:" + harvestCoinsBonus +
+				"|MilPointsBonus:" + harvestMilitaryPointsBonus +
+				"|WoodsBonus:" + harvestWoodsBonus +
+				"|StonesBonus:" + harvestStonesBonus;
 	}
 }
