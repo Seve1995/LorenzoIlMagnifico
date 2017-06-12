@@ -18,6 +18,8 @@ public class GameMatch implements Runnable
 {	
 	private String gameName;
 
+	private Boolean started = false;
+
 	private List<Player> players;
 
 	private int playerCounter = 0;
@@ -75,6 +77,8 @@ public class GameMatch implements Runnable
 	private void startGame()
 	{
 		System.out.println("Inizio partita");
+
+		this.started = true;
 
 		handleGame();
 
@@ -135,19 +139,7 @@ public class GameMatch implements Runnable
 				
 				while (System.currentTimeMillis() < timestamp + timeout)
 				{
-					FamilyMember familyMember = adapter.askFamiliarMember(player);
-
-					System.out.println("Familiar: " + familyMember);
-
-					if (familyMember == null) continue;
-
-					Asset servants = adapter.askServants(player);
-
-					System.out.println("Servants: " + servants);
-
-					if (servants == null) continue;
-
-					Action action = adapter.askAction(familyMember, servants);
+					Action action = adapter.askAction(gameBoard, player);
 
 					System.out.println("Action: " + action);
 
@@ -155,12 +147,9 @@ public class GameMatch implements Runnable
 
 					boolean executed = action.executeAction(player, gameBoard);
 
-					System.out.println(executed);
-					
-					//Modifica del 10 giugno by Seve: Prima c'era "if (!executed) continue;", ma era inutile perchè non faceva uscire dal ciclo while!
-					//Così ho modificato e ho fatto in modo che se l'azione restituisce true il giocatore esce dal ciclo, altrimenti accadeva che poteva fare
-					//2 azioni di fila se non era scaduto il timeout
-					if (executed) break; 
+					player.setFamiliarPositioned(executed);
+
+					if (player.isHasPassed()) break;
 				}
 
 				adapter.printMessage(player.getPlayerBoard().toString());
@@ -697,6 +686,14 @@ public class GameMatch implements Runnable
 	public int getMaxPlayersNumber()
 	{
 		return maxPlayersNumber;
+	}
+
+	public Boolean getStarted() {
+		return started;
+	}
+
+	public void setStarted(Boolean started) {
+		this.started = started;
 	}
 
 	public List<Player> getPlayers() {

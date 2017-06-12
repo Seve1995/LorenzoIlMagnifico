@@ -48,131 +48,111 @@ public class Player
 	private PlayerBoard playerBoard = new PlayerBoard();
 	private IOAdapter adapter;
 
-
-	@Override
-	public String toString() {
-		return "Player{" +
-				"name='" + name + '\n' +
-				", numberOfMatch=" + numberOfMatch + '\n' +
-				", woods=" + woods +'\n' +
-				", stones=" + stones +'\n' +
-				", servants=" + servants +'\n' +
-				", coins=" + coins +'\n' +
-				", militaryPoints=" + militaryPoints +'\n' +
-				", faithPoints=" + faithPoints +'\n' +
-				", victoryPoints=" + victoryPoints +'\n' +
-				" }";
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-
-		Player player = (Player) o;
-
-		if (numberOfMatch != player.numberOfMatch) return false;
-		if (woods != player.woods) return false;
-		if (stones != player.stones) return false;
-		if (servants != player.servants) return false;
-		if (coins != player.coins) return false;
-		if (militaryPoints != player.militaryPoints) return false;
-		if (faithPoints != player.faithPoints) return false;
-		if (victoryPoints != player.victoryPoints) return false;
-		if (priority != player.priority) return false;
-		if (harvestValueModifier != player.harvestValueModifier) return false;
-		if (productionValueModifier != player.productionValueModifier) return false;
-		if (militaryPointsMalus != player.militaryPointsMalus) return false;
-		if (coinMalus != player.coinMalus) return false;
-		if (servantMalus != player.servantMalus) return false;
-		if (woodMalus != player.woodMalus) return false;
-		if (stoneMalus != player.stoneMalus) return false;
-		if (familyMemberMalus != player.familyMemberMalus) return false;
-		if (disableMarket != player.disableMarket) return false;
-		if (servantsHandlerMalus != player.servantsHandlerMalus) return false;
-		if (noFirstAction != player.noFirstAction) return false;
-		if (noMilitaryPointsForTerritories != player.noMilitaryPointsForTerritories) return false;
-		if (dontCareOccupiedPlaces != player.dontCareOccupiedPlaces) return false;
-		if (dontPayThreeCoinsInTowers != player.dontPayThreeCoinsInTowers) return false;
-		if (playWithThePope != player.playWithThePope) return false;
-		if (santaRita != player.santaRita) return false;
-		if (sistoIV != player.sistoIV) return false;
-		if (newAction != player.newAction) return false;
-		if (removeTowerBonus != player.removeTowerBonus) return false;
-		if (name != null ? !name.equals(player.name) : player.name != null) return false;
-		if (leaderCards != null ? !leaderCards.equals(player.leaderCards) : player.leaderCards != null) return false;
-		if (cardModifiers != null ? !cardModifiers.equals(player.cardModifiers) : player.cardModifiers != null)
-			return false;
-		if (addEndGameVictoryPoints != null ? !addEndGameVictoryPoints.equals(player.addEndGameVictoryPoints) : player.addEndGameVictoryPoints != null)
-			return false;
-		if (familyMembers != null ? !familyMembers.equals(player.familyMembers) : player.familyMembers!= null)
-			return false;
-		if (playerBoard != null ? !playerBoard.equals(player.playerBoard) : player.playerBoard != null) return false;
-		return adapter != null ? adapter.equals(player.adapter) : player.adapter == null;
-	}
-
-	@Override
-	public int hashCode() {
-		int result = name != null ? name.hashCode() : 0;
-		result = 31 * result + numberOfMatch;
-		result = 31 * result + woods;
-		result = 31 * result + stones;
-		result = 31 * result + servants;
-		result = 31 * result + coins;
-		result = 31 * result + militaryPoints;
-		result = 31 * result + faithPoints;
-		result = 31 * result + victoryPoints;
-		result = 31 * result + priority;
-		result = 31 * result + (leaderCards != null ? leaderCards.hashCode() : 0);
-		result = 31 * result + (cardModifiers != null ? cardModifiers.hashCode() : 0);
-		result = 31 * result + (addEndGameVictoryPoints != null ? addEndGameVictoryPoints.hashCode() : 0);
-		result = 31 * result + harvestValueModifier;
-		result = 31 * result + productionValueModifier;
-		result = 31 * result + (militaryPointsMalus ? 1 : 0);
-		result = 31 * result + (coinMalus ? 1 : 0);
-		result = 31 * result + (servantMalus ? 1 : 0);
-		result = 31 * result + (woodMalus ? 1 : 0);
-		result = 31 * result + (stoneMalus ? 1 : 0);
-		result = 31 * result + (familyMemberMalus ? 1 : 0);
-		result = 31 * result + (disableMarket ? 1 : 0);
-		result = 31 * result + (servantsHandlerMalus ? 1 : 0);
-		result = 31 * result + (noFirstAction ? 1 : 0);
-		result = 31 * result + (noMilitaryPointsForTerritories ? 1 : 0);
-		result = 31 * result + (dontCareOccupiedPlaces ? 1 : 0);
-		result = 31 * result + (dontPayThreeCoinsInTowers ? 1 : 0);
-		result = 31 * result + (playWithThePope ? 1 : 0);
-		result = 31 * result + (santaRita ? 1 : 0);
-		result = 31 * result + (sistoIV ? 1 : 0);
-		result = 31 * result + (newAction ? 1 : 0);
-		result = 31 * result + (removeTowerBonus ? 1 : 0);
-		result = 31 * result + (familyMembers != null ? familyMembers.hashCode() : 0);
-		result = 31 * result + (playerBoard != null ? playerBoard.hashCode() : 0);
-		result = 31 * result + (adapter != null ? adapter.hashCode() : 0);
-		return result;
-	}
-
-	public IOAdapter getAdapter() {
-
-		return adapter;
-	}
-
-	public void setAdapter(IOAdapter adapter) {
-		this.adapter = adapter;
-	}
+	private boolean hasPassed = false;
+	private boolean familiarPositioned = false;
 
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public PlayerColorsEnum getPlayerColorsEnum() {
 		return playerColorsEnum;
 	}
 
 	public void setPlayerColorsEnum(PlayerColorsEnum playerColorsEnum) {
 		this.playerColorsEnum = playerColorsEnum;
+	}
+
+	public int getNumberOfMatch() {
+		return numberOfMatch;
+	}
+
+	public void setNumberOfMatch(int numberOfMatch) {
+		this.numberOfMatch = numberOfMatch;
+	}
+
+	public int getWoods() {
+		return woods;
+	}
+
+	public void setWoods(int woods) {
+		this.woods = woods;
+	}
+
+	public int getStones() {
+		return stones;
+	}
+
+	public void setStones(int stones) {
+		this.stones = stones;
+	}
+
+	public int getServants() {
+		return servants;
+	}
+
+	public void setServants(int servants) {
+		this.servants = servants;
+	}
+
+	public int getCoins() {
+		return coins;
+	}
+
+	public void setCoins(int coins) {
+		this.coins = coins;
+	}
+
+	public int getMilitaryPoints() {
+		return militaryPoints;
+	}
+
+	public void setMilitaryPoints(int militaryPoints) {
+		this.militaryPoints = militaryPoints;
+	}
+
+	public int getFaithPoints() {
+		return faithPoints;
+	}
+
+	public void setFaithPoints(int faithPoints) {
+		this.faithPoints = faithPoints;
+	}
+
+	public int getVictoryPoints() {
+		return victoryPoints;
+	}
+
+	public void setVictoryPoints(int victoryPoints) {
+		this.victoryPoints = victoryPoints;
+	}
+
+	public int getPriority() {
+		return priority;
+	}
+
+	public void setPriority(int priority) {
+		this.priority = priority;
+	}
+
+	public int getEndGameVictoryPoints() {
+		return endGameVictoryPoints;
+	}
+
+	public void setEndGameVictoryPoints(int endGameVictoryPoints) {
+		this.endGameVictoryPoints = endGameVictoryPoints;
+	}
+
+	public List<LeaderCard> getLeaderCards() {
+		return leaderCards;
+	}
+
+	public void setLeaderCards(List<LeaderCard> leaderCards) {
+		this.leaderCards = leaderCards;
 	}
 
 	public List<CardModifier> getCardModifiers() {
@@ -183,6 +163,14 @@ public class Player
 		this.cardModifiers = cardModifiers;
 	}
 
+	public List<AddEndGameVictoryPoints> getAddEndGameVictoryPoints() {
+		return addEndGameVictoryPoints;
+	}
+
+	public void setAddEndGameVictoryPoints(List<AddEndGameVictoryPoints> addEndGameVictoryPoints) {
+		this.addEndGameVictoryPoints = addEndGameVictoryPoints;
+	}
+
 	public int getHarvestValueModifier() {
 		return harvestValueModifier;
 	}
@@ -191,184 +179,98 @@ public class Player
 		this.harvestValueModifier = harvestValueModifier;
 	}
 
-	public int getNumberOfMatch() {
-		return numberOfMatch;
-	}
-	public void setNumberOfMatch(int numberOfMatch) {
-		this.numberOfMatch = numberOfMatch;
-	}
-	public int getWoods() {
-		return woods;
-	}
-	public void setWoods(int woods) {
-		this.woods = woods;
-	}
-	public int getStones() {
-		return stones;
-	}
-	public void setStones(int stones) {
-		this.stones = stones;
-	}
-	public int getServants() {
-		return servants;
-	}
-	public void setServants(int servants) {
-		this.servants = servants;
-	}
-	public int getCoins() {
-		return coins;
-	}
-	public void setCoins(int coins) {
-		this.coins = coins;
-	}
-	public int getMilitaryPoints() {
-		return militaryPoints;
-	}
-	public void setMilitaryPoints(int militaryPoints) {
-		this.militaryPoints = militaryPoints;
-	}
-	public int getFaithPoints() {
-		return faithPoints;
-	}
-	public void setFaithPoints(int faithPoints) {
-		this.faithPoints = faithPoints;
-	}
-	public int getVictoryPoints() {
-		return victoryPoints;
-	}
-	public void setVictoryPoints(int victoryPoints) {
-		this.victoryPoints = victoryPoints;
-	}
-	public int getPriority() {
-		return priority;
-	}
-	public void setPriority(int priority) {
-		this.priority = priority;
-	}
-	public int getEndGameVictoryPoints() {
-		return endGameVictoryPoints;
-	}
-
-	public void setEndGameVictoryPoints(int endGameVictoryPoints) {
-		this.endGameVictoryPoints = endGameVictoryPoints;
-	}
-
-	public List<CardModifier> getCardModifier() {
-		return cardModifiers;
-	}
-	public void setCardModifier(List<CardModifier> cardModifiers) {
-		this.cardModifiers = cardModifiers;
-	}
-	public int getHaverstValueModifier() {
-		return harvestValueModifier;
-	}
-	public void setHaverstValueModifier(int haverstValueModifier) {
-		this.harvestValueModifier = haverstValueModifier;
-	}
 	public int getProductionValueModifier() {
 		return productionValueModifier;
 	}
+
 	public void setProductionValueModifier(int productionValueModifier) {
 		this.productionValueModifier = productionValueModifier;
 	}
+
 	public boolean isMilitaryPointsMalus() {
 		return militaryPointsMalus;
 	}
+
 	public void setMilitaryPointsMalus(boolean militaryPointsMalus) {
 		this.militaryPointsMalus = militaryPointsMalus;
 	}
+
 	public boolean isCoinMalus() {
 		return coinMalus;
 	}
+
 	public void setCoinMalus(boolean coinMalus) {
 		this.coinMalus = coinMalus;
 	}
+
 	public boolean isServantMalus() {
 		return servantMalus;
 	}
+
 	public void setServantMalus(boolean servantMalus) {
 		this.servantMalus = servantMalus;
 	}
+
 	public boolean isWoodMalus() {
 		return woodMalus;
 	}
+
 	public void setWoodMalus(boolean woodMalus) {
 		this.woodMalus = woodMalus;
 	}
+
 	public boolean isStoneMalus() {
 		return stoneMalus;
 	}
+
 	public void setStoneMalus(boolean stoneMalus) {
 		this.stoneMalus = stoneMalus;
 	}
+
 	public boolean isFamilyMemberMalus() {
 		return familyMemberMalus;
 	}
+
 	public void setFamilyMemberMalus(boolean familyMemberMalus) {
 		this.familyMemberMalus = familyMemberMalus;
 	}
+
 	public boolean isDisableMarket() {
 		return disableMarket;
 	}
+
 	public void setDisableMarket(boolean disableMarket) {
 		this.disableMarket = disableMarket;
 	}
+
 	public boolean isServantsHandlerMalus() {
 		return servantsHandlerMalus;
 	}
+
 	public void setServantsHandlerMalus(boolean servantsHandlerMalus) {
 		this.servantsHandlerMalus = servantsHandlerMalus;
 	}
+
 	public boolean isNoFirstAction() {
 		return noFirstAction;
 	}
+
 	public void setNoFirstAction(boolean noFirstAction) {
 		this.noFirstAction = noFirstAction;
 	}
-	public boolean isNewAction() {
-		return newAction;
+
+	public boolean isNoMilitaryPointsForTerritories() {
+		return noMilitaryPointsForTerritories;
 	}
-	public void setNewAction(boolean newAction) {
-		this.newAction = newAction;
+
+	public void setNoMilitaryPointsForTerritories(boolean noMilitaryPointsForTerritories) {
+		this.noMilitaryPointsForTerritories = noMilitaryPointsForTerritories;
 	}
-	
-	public boolean isRemoveTowerBonus() {
-		return removeTowerBonus;
-	}
-	
-	public void setRemoveTowerBonus(boolean removeTowerBonus) {
-		this.removeTowerBonus = removeTowerBonus;
-	}
-	
-	public List<FamilyMember> getFamilyMembers() {
-		return familyMembers;
-	}
-	public void setFamilyMembers(List<FamilyMember> familyMembers) {
-		this.familyMembers = familyMembers;
-	}
-	public PlayerBoard getPlayerBoard() {
-		return playerBoard;
-	}
-	public void setPlayerBoard(PlayerBoard playerBoard) {
-		this.playerBoard = playerBoard;
-	}
-	
-	public List<LeaderCard> getLeaderCards() {
-		return leaderCards;
-	}
-	public void setLeaderCards(List<LeaderCard> leaderCards) {
-		this.leaderCards = leaderCards;
-	}
-	
-	public boolean isSistoIV() {
-		return sistoIV;
-	}
-	public void setSistoIV (boolean sistoIV) {
-		this.sistoIV = sistoIV;
-	}
+
 	public boolean isDontCareOccupiedPlaces() {
 		return dontCareOccupiedPlaces;
 	}
+
 	public void setDontCareOccupiedPlaces(boolean dontCareOccupiedPlaces) {
 		this.dontCareOccupiedPlaces = dontCareOccupiedPlaces;
 	}
@@ -376,41 +278,97 @@ public class Player
 	public boolean isDontPayThreeCoinsInTowers() {
 		return dontPayThreeCoinsInTowers;
 	}
+
 	public void setDontPayThreeCoinsInTowers(boolean dontPayThreeCoinsInTowers) {
 		this.dontPayThreeCoinsInTowers = dontPayThreeCoinsInTowers;
 	}
-	
-	public boolean isNoMilitaryPointsForTerritories() {
-		return noMilitaryPointsForTerritories;
-	}
-	public void setNoMilitaryPointsForTerritories(boolean noMilitaryPointsForTerritories) {
-		this.noMilitaryPointsForTerritories = noMilitaryPointsForTerritories;
-	}
+
 	public boolean isPlayWithThePope() {
 		return playWithThePope;
 	}
+
 	public void setPlayWithThePope(boolean playWithThePope) {
 		this.playWithThePope = playWithThePope;
 	}
+
 	public boolean isSantaRita() {
 		return santaRita;
 	}
+
 	public void setSantaRita(boolean santaRita) {
 		this.santaRita = santaRita;
 	}
-	
-	public List<AddEndGameVictoryPoints> getAddEndGameVictoryPoints() {
-		return addEndGameVictoryPoints;
+
+	public boolean isSistoIV() {
+		return sistoIV;
 	}
-	public void setAddEndGameVictoryPoints(List<AddEndGameVictoryPoints> addEndGameVictoryPoints) {
-		this.addEndGameVictoryPoints = addEndGameVictoryPoints;
+
+	public void setSistoIV(boolean sistoIV) {
+		this.sistoIV = sistoIV;
 	}
-	
-	public int getAsset(AssetType assetType) 
+
+	public boolean isNewAction() {
+		return newAction;
+	}
+
+	public void setNewAction(boolean newAction) {
+		this.newAction = newAction;
+	}
+
+	public boolean isRemoveTowerBonus() {
+		return removeTowerBonus;
+	}
+
+	public void setRemoveTowerBonus(boolean removeTowerBonus) {
+		this.removeTowerBonus = removeTowerBonus;
+	}
+
+	public List<FamilyMember> getFamilyMembers() {
+		return familyMembers;
+	}
+
+	public void setFamilyMembers(List<FamilyMember> familyMembers) {
+		this.familyMembers = familyMembers;
+	}
+
+	public PlayerBoard getPlayerBoard() {
+		return playerBoard;
+	}
+
+	public void setPlayerBoard(PlayerBoard playerBoard) {
+		this.playerBoard = playerBoard;
+	}
+
+	public IOAdapter getAdapter() {
+		return adapter;
+	}
+
+	public void setAdapter(IOAdapter adapter) {
+		this.adapter = adapter;
+	}
+
+	public boolean isHasPassed() {
+		return hasPassed;
+	}
+
+	public void setHasPassed(boolean hasPassed) {
+		this.hasPassed = hasPassed;
+	}
+
+	public boolean isFamiliarPositioned() {
+		return familiarPositioned;
+	}
+
+	public void setFamiliarPositioned(boolean familiarPositioned) {
+		this.familiarPositioned = familiarPositioned;
+	}
+
+	public int getAsset(AssetType assetType)
 	{
 		String assetTypeString = assetType.toString().toLowerCase();
 		
-		switch (assetTypeString) {
+		switch (assetTypeString)
+		{
 		
 		case "coin":
 			return this.coins;
@@ -538,23 +496,113 @@ public class Player
 		familyMembers.add(familiarNeuter);
 	}
 
-	public void removeFamilyMember (FamilyMember f)
-	
-	{
-	
-		for(int i=0; i < familyMembers.size(); i++)
-		{
-		
-			if (this.familyMembers.get(i).getColor().equals(f.getColor()))
-				
-			{
-			
-				this.familyMembers.remove(i);
-				
-			}
-		
-		}
-
+	@Override
+	public String toString() {
+		return "Player{" +
+				"name='" + name + '\n' +
+				", numberOfMatch=" + numberOfMatch + '\n' +
+				", woods=" + woods +'\n' +
+				", stones=" + stones +'\n' +
+				", servants=" + servants +'\n' +
+				", coins=" + coins +'\n' +
+				", militaryPoints=" + militaryPoints +'\n' +
+				", faithPoints=" + faithPoints +'\n' +
+				", victoryPoints=" + victoryPoints +'\n' +
+				" }";
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Player player = (Player) o;
+
+		if (numberOfMatch != player.numberOfMatch) return false;
+		if (woods != player.woods) return false;
+		if (stones != player.stones) return false;
+		if (servants != player.servants) return false;
+		if (coins != player.coins) return false;
+		if (militaryPoints != player.militaryPoints) return false;
+		if (faithPoints != player.faithPoints) return false;
+		if (victoryPoints != player.victoryPoints) return false;
+		if (priority != player.priority) return false;
+		if (endGameVictoryPoints != player.endGameVictoryPoints) return false;
+		if (harvestValueModifier != player.harvestValueModifier) return false;
+		if (productionValueModifier != player.productionValueModifier) return false;
+		if (militaryPointsMalus != player.militaryPointsMalus) return false;
+		if (coinMalus != player.coinMalus) return false;
+		if (servantMalus != player.servantMalus) return false;
+		if (woodMalus != player.woodMalus) return false;
+		if (stoneMalus != player.stoneMalus) return false;
+		if (familyMemberMalus != player.familyMemberMalus) return false;
+		if (disableMarket != player.disableMarket) return false;
+		if (servantsHandlerMalus != player.servantsHandlerMalus) return false;
+		if (noFirstAction != player.noFirstAction) return false;
+		if (noMilitaryPointsForTerritories != player.noMilitaryPointsForTerritories) return false;
+		if (dontCareOccupiedPlaces != player.dontCareOccupiedPlaces) return false;
+		if (dontPayThreeCoinsInTowers != player.dontPayThreeCoinsInTowers) return false;
+		if (playWithThePope != player.playWithThePope) return false;
+		if (santaRita != player.santaRita) return false;
+		if (sistoIV != player.sistoIV) return false;
+		if (newAction != player.newAction) return false;
+		if (removeTowerBonus != player.removeTowerBonus) return false;
+		if (hasPassed != player.hasPassed) return false;
+		if (familiarPositioned != player.familiarPositioned) return false;
+		if (name != null ? !name.equals(player.name) : player.name != null) return false;
+		if (playerColorsEnum != player.playerColorsEnum) return false;
+		if (leaderCards != null ? !leaderCards.equals(player.leaderCards) : player.leaderCards != null) return false;
+		if (cardModifiers != null ? !cardModifiers.equals(player.cardModifiers) : player.cardModifiers != null)
+			return false;
+		if (addEndGameVictoryPoints != null ? !addEndGameVictoryPoints.equals(player.addEndGameVictoryPoints) : player.addEndGameVictoryPoints != null)
+			return false;
+		if (familyMembers != null ? !familyMembers.equals(player.familyMembers) : player.familyMembers != null)
+			return false;
+		if (playerBoard != null ? !playerBoard.equals(player.playerBoard) : player.playerBoard != null) return false;
+		return adapter != null ? adapter.equals(player.adapter) : player.adapter == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = name != null ? name.hashCode() : 0;
+		result = 31 * result + (playerColorsEnum != null ? playerColorsEnum.hashCode() : 0);
+		result = 31 * result + numberOfMatch;
+		result = 31 * result + woods;
+		result = 31 * result + stones;
+		result = 31 * result + servants;
+		result = 31 * result + coins;
+		result = 31 * result + militaryPoints;
+		result = 31 * result + faithPoints;
+		result = 31 * result + victoryPoints;
+		result = 31 * result + priority;
+		result = 31 * result + endGameVictoryPoints;
+		result = 31 * result + (leaderCards != null ? leaderCards.hashCode() : 0);
+		result = 31 * result + (cardModifiers != null ? cardModifiers.hashCode() : 0);
+		result = 31 * result + (addEndGameVictoryPoints != null ? addEndGameVictoryPoints.hashCode() : 0);
+		result = 31 * result + harvestValueModifier;
+		result = 31 * result + productionValueModifier;
+		result = 31 * result + (militaryPointsMalus ? 1 : 0);
+		result = 31 * result + (coinMalus ? 1 : 0);
+		result = 31 * result + (servantMalus ? 1 : 0);
+		result = 31 * result + (woodMalus ? 1 : 0);
+		result = 31 * result + (stoneMalus ? 1 : 0);
+		result = 31 * result + (familyMemberMalus ? 1 : 0);
+		result = 31 * result + (disableMarket ? 1 : 0);
+		result = 31 * result + (servantsHandlerMalus ? 1 : 0);
+		result = 31 * result + (noFirstAction ? 1 : 0);
+		result = 31 * result + (noMilitaryPointsForTerritories ? 1 : 0);
+		result = 31 * result + (dontCareOccupiedPlaces ? 1 : 0);
+		result = 31 * result + (dontPayThreeCoinsInTowers ? 1 : 0);
+		result = 31 * result + (playWithThePope ? 1 : 0);
+		result = 31 * result + (santaRita ? 1 : 0);
+		result = 31 * result + (sistoIV ? 1 : 0);
+		result = 31 * result + (newAction ? 1 : 0);
+		result = 31 * result + (removeTowerBonus ? 1 : 0);
+		result = 31 * result + (familyMembers != null ? familyMembers.hashCode() : 0);
+		result = 31 * result + (playerBoard != null ? playerBoard.hashCode() : 0);
+		result = 31 * result + (adapter != null ? adapter.hashCode() : 0);
+		result = 31 * result + (hasPassed ? 1 : 0);
+		result = 31 * result + (familiarPositioned ? 1 : 0);
+		return result;
+	}
 }

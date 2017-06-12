@@ -1,9 +1,10 @@
 package it.polimi.ingsw.pc22.actions;
 
-import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
-import it.polimi.ingsw.pc22.gamebox.FamilyMember;
+import it.polimi.ingsw.pc22.gamebox.*;
+import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,29 +20,34 @@ public class ActionFactory
 
     static
     {
-        String tower = "set tower (TERRITORY|VENTURE|BUILDING|CHARACTER) [0-3]$";
+        //TODO SI POSSONO TEORICAMENTE SACRIFICARE INFINITI SERVITORI?
+
+        String tower = "set tower (BLACK|ORANGE|NEUTER|WHITE) [0-9] (TERRITORY|VENTURE|BUILDING|CHARACTER) [0-3]$";
 
         parsers.put(tower, "SettingFamiliarMemberOnTower");
 
-        String market = "set market [0-3]$";
+        String market = "set market (BLACK|ORANGE|NEUTER|WHITE) [0-9] [0-3]$";
 
         parsers.put(market, "SettingFamiliarMemberOnMarket");
 
-        String production = "set production$";
+        String production = "set production (BLACK|ORANGE|NEUTER|WHITE) [0-9]$";
 
         parsers.put(production, "SettingFamiliarMemberOnProduction");
 
-        String harvest = "set harvest$";
+        String harvest = "set harvest (BLACK|ORANGE|NEUTER|WHITE) [0-9]$";
 
         parsers.put(harvest, "SettingFamiliarMemberOnHarvest");
 
-        String council = "set council$";
+        String council = "set council (BLACK|ORANGE|NEUTER|WHITE) [0-9]$";
 
         parsers.put(council, "SettingFamiliarMemberOnCouncilPalace");
+
+        String pass = "^pass$";
+
+        parsers.put(pass, "PassTurn");
     }
 
-    public static Action createAction
-        (FamilyMember familyMember, String userCommand)
+    public static Action createAction(String userCommand, Player player)
     {
         String actionName = parseAction(userCommand);
 
@@ -66,11 +72,51 @@ public class ActionFactory
 
         System.out.println("ActionFactory" + action);
 
-        action.setFamilyMember(familyMember);
+        FamilyMember member = getParsedFamiliar(userCommand, player);
+
+        if (member == null) return null;
+
+        action.setFamilyMember(member);
 
         setActionParameter(action, userCommand);
 
-        return action;
+        Asset servants = getParsedServants(userCommand, player);
+
+        if (servants == null || servants.getValue() == 0) return action;
+
+        return new ServantsHandler(action, servants);
+    }
+
+    private static Asset getParsedServants(String userCommand, Player player)
+    {
+        Pattern servantsPattern = Pattern.compile("[0-9]");
+
+        Matcher matcher = servantsPattern.matcher(userCommand);
+
+        if (!matcher.find()) return null;
+
+        Integer servantNumber;
+
+        servantNumber = Integer.parseInt(matcher.group(0));
+
+        if (servantNumber > player.getServants()) return null;
+
+        return new Asset(servantNumber, AssetType.SERVANT);
+    }
+
+    private static FamilyMember getParsedFamiliar(String userCommand, Player player)
+    {
+        Pattern familiarPattern = Pattern.compile("(BLACK|ORANGE|NEUTER|WHITE)");
+
+        Matcher matcher = familiarPattern.matcher(userCommand);
+
+        if (!matcher.find()) return null;
+
+        ColorsEnum color = ColorsEnum.getColorFromString(matcher.group(0));
+
+        FamilyMember member = player.getUnusedFamilyMemberByColor(color);
+
+        return member;
     }
 
     public static String parseAction(String action)

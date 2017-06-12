@@ -42,7 +42,15 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
 
     public void run()
     {
-        authentication();
+        try
+        {
+            authenticate();
+
+        }
+            catch (IOException e)
+        {
+            System.out.println("Cannot authenticate client");
+        }
     }
 
     @Override

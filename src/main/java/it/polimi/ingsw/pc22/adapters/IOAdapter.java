@@ -9,13 +9,15 @@ import it.polimi.ingsw.pc22.connection.User;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.CouncilPrivilege;
+import it.polimi.ingsw.pc22.utils.PositionUtils;
 import it.polimi.ingsw.pc22.utils.UserLoader;
 
 import java.io.IOException;
-import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by fandroid95 on 30/05/2017.
@@ -40,29 +42,40 @@ public abstract class IOAdapter
         this.timeout = timeout;
     }
 
-    public Action askAction(FamilyMember familyMember, Asset servant)
+    public Action askAction(GameBoard gameBoard, Player player)
     {
         Long maxTimeStamp = System.currentTimeMillis() + timeout;
 
         while (System.currentTimeMillis() < maxTimeStamp)
         {
-            this.printMessage("Che azione vuoi eseguire?");
+            this.printMessage("Choose an action to execute:");
 
-            this.printMessage("Seleziona operazione:\n" +
-                    "- Metti familiare su torre (es: set tower BUILDING 3 con numberOfFloor tra 0 e 3)\n" +
-                    "- Metti familiare su market (es: set market ZONA con zona tra 0 e 3)\n" +
-                    "- Metti familiare nella produzione (es: set production)\n" +
-                    "- Metti familiare nella raccolto (es: set harvest)\n" +
-                    "- Metti familiare nel concilio (es: set council)");
+            if (player.isFamiliarPositioned())
+            {
+                String actions = PositionUtils.getActionAvailableString(gameBoard);
+
+                this.printMessage(actions);
+
+                this.printMessage("Voi sacrificare servitori per aumentare il valore dell'azione? \n" +
+                        "Indica un numero da 0 a " + player.getServants());
+
+                this.printMessage("Familiari disponibili: " +
+                        player.getUnusedFamiliarMembers().toString());
+            }
+
+            this.printMessage("- play card" + '\n' +
+                "- discard card" + '\n' +
+                "- turn card" + '\n' +
+                "- pass" + '\n' +
+                "- show cards" + '\n' + //questa in realtà si può sempre fare
+                "- end game / exit game" + '\n'+
+                "- show board"); //questa in realtà si può sempre fare
 
             String choice = getMessage();
 
             if (choice == null) continue;
 
-            Action action = ActionFactory.createAction(familyMember, choice);
-
-            if (servant.getValue() > 0 && action != null)
-                return new ServantsHandler(action, servant);
+            Action action = ActionFactory.createAction(choice, player);
 
             return action;
         }
@@ -79,41 +92,6 @@ public abstract class IOAdapter
 
     public CardTypeEnum askForCardType() {
         // TODO Auto-generated method stub
-        return null;
-    }
-
-    public FamilyMember askFamiliarMember(Player player)
-    {
-        List<FamilyMember> unusedFamiliarMembers =
-                player.getUnusedFamiliarMembers();
-
-        Long maxTimeStamp = System.currentTimeMillis() + timeout;
-
-        while(System.currentTimeMillis() < maxTimeStamp)
-        {
-            this.printMessage("Scegli un familiare tra quelli disponibili:");
-
-            //TODO SISTEMARE STA COSA; BISOGNA CHIAMARE UNA FUNZIONE STATICA ESTERNA!!
-
-            this.printMessage(unusedFamiliarMembers.toString());
-
-            String choice = this.getMessage();
-
-            if (choice == null) continue;
-
-            ColorsEnum color = ColorsEnum.getColorFromString(choice);
-
-            if (color == null) continue;
-
-            FamilyMember member = player.getUnusedFamilyMemberByColor(color);
-
-            if (member == null) continue;
-
-            return member;
-        }
-
-        printMessage("Timeout Azione terminato");
-
         return null;
     }
 
@@ -146,43 +124,6 @@ public abstract class IOAdapter
 	
 	            return member;
         
-        }
-        
-        printMessage("Timeout Azione terminato");
-
-        return null;
-    }
-    
-    public Asset askServants(Player player)
-    {
-
-        Long maxTimeStamp = System.currentTimeMillis() + timeout;
-
-        while(System.currentTimeMillis() < maxTimeStamp)
-        {
-	            this.printMessage("Voi sacrificare servitori per aumentare il valore dell'azione? \n" +
-	                    "Indica un numero da 0 a " + player.getServants());
-	
-	            String value = getMessage();
-	
-	            if (value == null) continue;
-	
-	            Integer servantNumber;
-	
-	            try
-	            {
-	                servantNumber = Integer.parseInt(value);
-	            }
-	            catch (NumberFormatException e)
-	            {
-	                this.printMessage("Inserire numero valido");
-	
-	                continue;
-	            }
-	
-	            if (servantNumber > player.getServants()) continue;
-	
-	            return new Asset(servantNumber, AssetType.SERVANT);
         }
         
         printMessage("Timeout Azione terminato");
@@ -264,7 +205,7 @@ public abstract class IOAdapter
         
     	int i = 0;
 
-        while (i<numberOfAssets)
+        while (i < numberOfAssets)
         {
             this.printMessage("Choose one asset:" + '\n');
             for (int j=0; j<assets.size(); j++)
@@ -297,171 +238,128 @@ public abstract class IOAdapter
         return chosenAssets;
     }
     
-    
-    void authentication()
+    void authenticate() throws IOException
     {
-        try
+        User user = null;
+
+        while (user == null)
         {
-            User user = null;
+            this.printMessage("Write: <username> <password> l/s");
 
-            while (user == null)
+            String answer = getMessage();
+
+            if (answer == null)
             {
-                this.printMessage("Sign up or Login?");
+                endConnection(null);
 
-                String answer = getMessage();
-
-                if (answer == null)
-                {
-                    endConnection(null);
-
-                    return;
-                }
-
-                switch (answer)
-                {
-                    case "login":
-
-                        user = loginUser();
-
-                        break;
-                    case "sign up":
-
-                        user = signUp();
-
-                        break;
-
-                    default:
-
-                        printMessage("Non-valid input. Please retry... ");
-
-                        break;
-                }
+                return;
             }
 
-            String playerName = user.getUsername();
+            Pattern loginPattern = Pattern.compile("(^(\\w+) (\\w+) (L|S)$)");
 
-            Player player = new Player();
+            Matcher matcher = loginPattern.matcher(answer);
 
-            player.setName(playerName);
-
-
-            boolean gameHandling = false;
-
-            while (!gameHandling)
+            if (!matcher.find())
             {
-                printMessage("Choose an operation:\n"
-                        + "(1) Create new game match\n"
-                        + "(2) Join a friend's game match\n"
-                        + "(3) Join a random game match"
-                );
+                printMessage("Invalid INPUT");
 
-                String userChoice = getMessage();
-
-                if ("1".equals(userChoice))
-                {
-                    gameHandling = createNewGame(player);
-                }
-
-                if ("2".equals(userChoice))
-                {
-                    gameHandling = checkExistingGame(player);
-                }
-
-                //TODO
-                /*if ("3".equals(userChoice))
-                {
-                }*/
+                continue;
             }
 
-            updateJson();
+            String[] login = answer.split(" ");
 
+            switch (login[2])
+            {
+                case "L":
+
+                    user = loginUser(login[0],login[1]);
+
+                    break;
+                case "S":
+
+                    user = signUp(login[0], login[1]);
+
+                    break;
+
+                default:
+
+                    printMessage("Non-valid input. Please retry... ");
+
+                    break;
+            }
         }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+
+        gameHandling(user);
     }
 
-    private void checkPassword(User user) throws IOException
+    private void gameHandling(User user) throws IOException
     {
-        String password = getMessage();
+        String playerName = user.getUsername();
 
-        if (password == null)
+        Player player = new Player();
+
+        player.setName(playerName);
+
+        boolean gameHandling = false;
+
+        while (!gameHandling)
         {
-            printMessage("Timeout expired retry");
+            printMessage("Write: <gamename> C|J|R");
+            printMessage
+            (
+                "C to create a new Game" + '\n' +
+                "J to join an existing Game" + '\n' +
+                "R to join a random Game" + '\n'
+            );
 
-            user.setLogged(false);
+            String answer = getMessage();
+
+            Pattern gameMatcher = Pattern.compile("(^(\\w+) (C|J|R)$)");
+
+            Matcher matcher = gameMatcher.matcher(answer);
+
+            if (!matcher.find()) continue;
+
+            String[] choice = answer.split(" ");
+
+            Map<String, GameMatch> gameMatchMap = GameServer.getGameMatchMap();
+
+            switch (choice[1])
+            {
+                case "C":
+
+                    gameHandling = createNewGame
+                            (gameMatchMap, choice[0], player);
+
+                    break;
+                case "J":
+
+                    gameHandling = addToExistingGame
+                            (gameMatchMap, choice[0], player);
+
+                    break;
+
+                case "R":
+
+
+                    break;
+
+                default:
+
+                    printMessage("Non-valid input. Please retry... ");
+
+                    break;
+            }
         }
 
-        if (user.getPassword().equals(password))
-        {
-            printMessage("Successful logged in!");
-
-            user.setLogged(true);
-
-            return;
-        }
-
-        printMessage("Error: wrong password! Please retry.");
-
-        user.setLogged(false);
+        updateJson();
     }
 
-    private User getUserFromUserName() throws IOException
+    private synchronized boolean createNewGame
+        (Map<String, GameMatch> gameMatchMap, String gameName, Player player)
+            throws IOException
     {
-        printMessage("Type an existing username:");
-
-        String username = getMessage();
-
-        User user = existingUsername(username);
-
-        if (user != null)
-        {
-            printMessage("Username OK. Now type the password:");
-
-            return user;
-        }
-
-        printMessage("Error: username not found! Please retry.");
-
-        return null;
-    }
-
-    private User registerNewUser() throws IOException
-    {
-        printMessage("Type an username:");
-        String username = getMessage();
-
-        printMessage("Type a password");
-
-        String password = getMessage();
-
-        Boolean invalidUsername =
-                GameServer.getUsersMap().containsKey(username);
-
-        if (invalidUsername)
-        {
-            printMessage("The specified username already exist! Please type a new username.");
-            return null;
-        }
-
-        printMessage("User created!");
-
-        return new User(username, password, true);
-    }
-
-    private boolean createNewGame(Player player) throws IOException
-    {
-        printMessage("Type a name for the new game match:");
-
-        String gameName = getMessage();
-
-        if (gameName == null) return false;
-
-        printMessage("Game name: " + gameName);
-
-        boolean existingGameMatch =
-                GameServer.getGameMatchMap().containsKey(gameName);
+        boolean existingGameMatch = gameMatchMap.containsKey(gameName);
 
         if (existingGameMatch)
         {
@@ -477,26 +375,52 @@ public abstract class IOAdapter
         return true;
     }
 
-    private boolean checkExistingGame(Player player) throws IOException
+    private synchronized boolean addToExistingGame
+        (Map<String, GameMatch> gameMatchMap, String gameName, Player player)
+            throws IOException
     {
-        printMessage("Type the name of the chosen game match:");
+        boolean existingGameMatch = gameMatchMap.containsKey(gameName);
 
-        String gameName = getMessage();
-
-        if (gameName == null) return false;
-
-        printMessage("Game name: " + gameName);
-
-        boolean existingGameMatch =
-                GameServer.getGameMatchMap().containsKey(gameName);
-
-        if (!existingGameMatch) {
+        if (!existingGameMatch)
+        {
             printMessage("Game match not found.");
 
             return false;
         }
 
-        insertIntoExistingGameMatch(gameName, player);
+        GameMatch gameMatch = gameMatchMap.get(gameName);
+
+        //TODO FARE IN MODO CHE SI POSSA RILOGGARE
+
+        if (gameMatch.getStarted())
+        {
+            printMessage("Game already started");
+
+            return false;
+        }
+
+        if (gameMatch.getMaxPlayersNumber() == gameMatch.getPlayerCounter())
+        {
+            printMessage("Game is full");
+
+            return false;
+        }
+
+        player.setAdapter(this);
+
+        List<Player> players = gameMatch.getPlayers();
+
+        players.add(player);
+
+        gameMatch.setPlayers(players);
+
+        int counter = gameMatch.getPlayerCounter() + 1;
+
+        gameMatch.setPlayerCounter(counter);
+
+        if (gameMatch.getPlayerCounter() == 2)
+            new Thread(gameMatch).start();
+        if (existingGameMatch)
 
         printMessage("Player: " + player.getName() + " joined GameMatch - " + gameName);
 
@@ -504,47 +428,51 @@ public abstract class IOAdapter
     }
 
 
-    private User loginUser() throws IOException
-    {
-        User user = null;
-
-        while(user == null)
-        {
-            user = getUserFromUserName();
-        }
-
-        while(!user.isLogged())
-        {
-            checkPassword(user);
-        }
-
-        return user;
-    }
-
-    synchronized private User existingUsername(String username)
+    private synchronized User loginUser(String username, String password)
     {
         Map<String, User> usersMap = GameServer.getUsersMap();
 
         User user = usersMap.get(username);
 
-        if (user == null) return null;
-
-        if (user.isLogged()) return null;
-
-        return  user;
-    }
-
-    private User signUp() throws IOException
-    {
-        User user = null;
-
-        while (user == null)
+        if (user == null)
         {
-            user = registerNewUser();
+            printMessage("User not found");
+
+            return null;
         }
 
+        if (!user.getPassword().equals(password))
+        {
+            printMessage("Wrong password");
+
+            return null;
+        }
+
+        if (user.isLogged())
+        {
+            printMessage("Invalid login");
+
+            return null;
+        }
+
+        return user;
+    }
+
+    private synchronized User signUp(String username, String password) throws IOException
+    {
         Map<String, User> usersMap = GameServer.getUsersMap();
 
+        User user = usersMap.get(username);
+
+        if (user != null)
+        {
+            printMessage("Invalid login");
+
+            return null;
+        }
+
+        user = new User(username, password, false);
+        
         usersMap.put(user.getUsername(), user);
 
         return user;
@@ -570,31 +498,6 @@ public abstract class IOAdapter
         int counter = gameMatch.getPlayerCounter() + 1;
 
         gameMatch.setPlayerCounter(counter);
-    }
-
-
-    synchronized private void insertIntoExistingGameMatch
-            (String gameName, Player player)
-    {
-        Map<String, GameMatch> gameMatchMap = GameServer.getGameMatchMap();
-
-        GameMatch gameMatch = gameMatchMap.get(gameName);
-
-        player.setAdapter(this);
-
-        List<Player> players = gameMatch.getPlayers();
-
-        players.add(player);
-
-        gameMatch.setPlayers(players);
-
-        int counter = gameMatch.getPlayerCounter() + 1;
-
-        gameMatch.setPlayerCounter(counter);
-
-        if (gameMatch.getPlayerCounter() == 2)
-            new Thread(gameMatch).start();
-
     }
 
     synchronized private void updateJson() throws IOException

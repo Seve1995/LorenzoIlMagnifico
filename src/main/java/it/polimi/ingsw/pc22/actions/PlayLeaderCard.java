@@ -12,7 +12,6 @@ public class PlayLeaderCard extends Action {
 	
 	private LeaderCard leaderCard;
 
-	
 	protected boolean isLegal(Player player, GameBoard gameBoard) 
 	{	
 		if (player.getPlayerBoard().getLeaderCards().size() > 4)
@@ -89,7 +88,8 @@ public class PlayLeaderCard extends Action {
 	@Override
 	public boolean executeAction(Player player, GameBoard gameBoard) 
 	{
-		if (isLegal(player, gameBoard)){
+		if (isLegal(player, gameBoard))
+		{
 			player.getPlayerBoard().getLeaderCards().add(leaderCard);
 			leaderCard.setPlayed(true);
 			

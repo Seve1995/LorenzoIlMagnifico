@@ -61,7 +61,7 @@ public class ServantsHandler extends Action
 
 		player.setServants(servantsNumber);
 
-		if (action==null) return true;
+		if (action == null) return false;
 		
 		return action.executeAction(player, gameBoard);
     }

@@ -32,13 +32,14 @@ public class RMIIOAdapter extends IOAdapter implements RMIAuthenticationService
         try
         {
             streamService = (RMIClientStreamService) registry.lookup("client");
+
+            authenticate();
         }
-        catch (RemoteException | NotBoundException e)
+        catch (NotBoundException | IOException e)
         {
-            e.printStackTrace();
+            System.out.println("Cannot find client in registry");
         }
 
-        authentication();
     }
 
     @Override
@@ -50,7 +51,7 @@ public class RMIIOAdapter extends IOAdapter implements RMIAuthenticationService
         }
         catch (RemoteException | NotBoundException e)
         {
-            e.printStackTrace();
+            System.out.println("Cannot find client in registry");
         }
     }
 
