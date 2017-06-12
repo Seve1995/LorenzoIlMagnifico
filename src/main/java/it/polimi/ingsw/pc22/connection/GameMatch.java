@@ -305,8 +305,10 @@ public class GameMatch implements Runnable
 
 		final int roundNumber = era;
 		
-		List<TowerCell> territoryTowerCells = towers[0].getTowerCells();
+		System.out.println(roundNumber);
 		
+		List<TowerCell> territoryTowerCells = towers[0].getTowerCells();
+				
 		List<DevelopmentCard> territoryCards = cards.parallelStream()
 				.filter(devCard -> (devCard.getRoundNumber() == roundNumber && devCard instanceof TerritoryCard))
 				.collect(Collectors.toList())

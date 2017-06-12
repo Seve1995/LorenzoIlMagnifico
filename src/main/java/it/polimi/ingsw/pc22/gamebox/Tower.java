@@ -49,12 +49,12 @@ public class Tower {
 	
 	@Override
 	public String toString(){
-		String output=this.towerType.toString()+" Tower\n";
+		StringBuilder output = new StringBuilder(this.towerType.toString()+" Tower\n");
 		for(TowerCell t : towerCells)
 		{
-			output += t.toString()+"\n";
+			output.append(t.toString()+"\n");
 		}
-		return output;
+		return output.toString();
 	}
 	
 	public static String gainInfo(){
