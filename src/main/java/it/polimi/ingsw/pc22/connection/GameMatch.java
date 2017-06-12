@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class GameMatch implements Runnable
@@ -36,6 +38,8 @@ public class GameMatch implements Runnable
 	private Long timeout;
 
 	private static final String BOARD_PATH = "boards/";
+
+	private static final Logger LOGGER = Logger.getLogger(GameMatch.class.getName());
 	
 	public GameMatch(Long timeOut, int maxPlayersNumber)
 	{
@@ -186,7 +190,7 @@ public class GameMatch implements Runnable
 			}
 				catch (IOException e)
 			{
-				e.printStackTrace();
+				LOGGER.log(Level.INFO, "CANNOT CLOSE CONNECTION", e);
 			}
 		}
 	}
@@ -226,7 +230,7 @@ public class GameMatch implements Runnable
 		JSONObject cards = new JSONObject(excommunicationString);
 
 		excommunicationCards =
-				ExcommunicationCardLoader.loadExcomunicationCards(cards);
+				ExcommunicationCardLoader.loadExcommunicationCards(cards);
 	}
 
 	private void loadBonusTiles()
@@ -256,7 +260,7 @@ public class GameMatch implements Runnable
 		}
 		catch (IOException e)
 		{
-			e.printStackTrace();
+			LOGGER.log(Level.INFO, "Cannot import file loaded", e);
 		}
 
 		return builder.toString();

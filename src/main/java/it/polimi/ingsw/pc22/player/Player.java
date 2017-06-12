@@ -426,12 +426,13 @@ public class Player
 			break;
 			
 		case "victorypoint":
-			this.faithPoints += value;
+			this.victoryPoints += value;
 			break;
 			
 		case "militarypoint":
 			this.militaryPoints += value;
-			
+			break;
+
 		default:
 			break;
 		}

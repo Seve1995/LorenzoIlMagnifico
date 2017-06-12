@@ -1,18 +1,23 @@
 package it.polimi.ingsw.pc22.utils;
 
 import it.polimi.ingsw.pc22.effects.Effect;
+import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.gamebox.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by fandroid95 on 31/05/2017.
  */
 public class CardLoader extends GenericLoader
 {
+    private static final Logger LOGGER = Logger.getLogger(CardLoader.class.getName());
+
     public static List<DevelopmentCard> loadCards(JSONObject jsonCardsObject)
     {
         List<DevelopmentCard> cards = new ArrayList<>();
@@ -31,7 +36,7 @@ public class CardLoader extends GenericLoader
         }
             catch (ClassNotFoundException | InstantiationException | IllegalAccessException e)
         {
-            e.printStackTrace();
+            LOGGER.log(Level.INFO, "Cards not loaded", e);
         }
 
         return cards;

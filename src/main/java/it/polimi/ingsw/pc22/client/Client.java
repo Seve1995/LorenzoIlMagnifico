@@ -1,5 +1,6 @@
 package it.polimi.ingsw.pc22.client;
 
+import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.rmi.RMIAuthenticationService;
 import it.polimi.ingsw.pc22.rmi.RMIClientStreamService;
 
@@ -69,7 +70,7 @@ public class Client
 
 		} catch (RemoteException | NotBoundException e)
 		{
-			e.printStackTrace();
+			throw new GenericException(e);
 		}
 	}
 
@@ -95,7 +96,7 @@ public class Client
 		}
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			throw new GenericException(e);
 		}
 	}
 }

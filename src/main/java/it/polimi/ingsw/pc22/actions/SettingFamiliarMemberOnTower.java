@@ -39,7 +39,8 @@ public class SettingFamiliarMemberOnTower extends Action {
 	
 	private boolean payThreeCoins(Player p, Tower t)
 	{
-		if (t.getListPlayers().isEmpty()) return false;
+		if (t.getListPlayers().isEmpty())
+			return false;
 
 		for (PlayerColorsEnum pc : t.getListPlayers())
 		{
@@ -52,36 +53,12 @@ public class SettingFamiliarMemberOnTower extends Action {
 		return false;
 			
 	}
-	
-	/*
-	private ColorsEnum whichColorIs(Player p, Tower t)
-	{
-		if (t.getListPlayers() == null) return null;
-		
-		for (TowerCell tc : t.getTowerCells())
-		{
-			FamilyMember currFamilyMember = tc.getFamilyMember();
-
-			if (currFamilyMember.getPlayerColor().equals(p.getPlayerColorsEnum()))
-			FamilyMember currFamilyMember = new FamilyMember();
-
-			if (tc.getFamilyMember()==null) continue;
-
-			if (tc.getFamilyMember().getPlayerColor().equals(p.getPlayerColorsEnum()))
-
-			{
-				return currFamilyMember.getColor();
-			}
-		}
-
-		return null;
-	}
-	*/
 
     private boolean alreadySetAMember(Player p, Tower t)
     {
 
-        if (t.getListPlayers().isEmpty()) return false;
+        if (t.getListPlayers().isEmpty())
+        	return false;
 
         for (PlayerColorsEnum pc : t.getListPlayers())
         {
@@ -112,20 +89,27 @@ public class SettingFamiliarMemberOnTower extends Action {
 	protected boolean isLegal (Player player, GameBoard gameBoard)
 	{
 		Tower tower = selectedTower(gameBoard.getTowers());
-		
+
+		if (tower == null) return false;
+
 		PickTowerCard pickTowerCard = new PickTowerCard(floor, tower.getTowerType(), familyMember.getValue());
 		
-		if (!tower.getTowerCells().get(floor).isEmpty() && !(player.isDontCareOccupiedPlaces())) return false;
+		if (!tower.getTowerCells().get(floor).isEmpty() && !(player.isDontCareOccupiedPlaces()))
+			return false;
 		
 		int familiarValue = familyMember.getValue();
 		
-		if (tower.getTowerCells().get(floor).getRequiredDiceValue() > familiarValue) return false;
+		if (tower.getTowerCells().get(floor).getRequiredDiceValue() > familiarValue)
+			return false;
 		
-		if(alreadySetAMember(player, tower) && !(familyMember.getColor().equals(ColorsEnum.NEUTER))) return false;
+		if(alreadySetAMember(player, tower) && !(familyMember.getColor().equals(ColorsEnum.NEUTER)))
+			return false;
 		
-		if((payThreeCoins(player, tower) && player.getCoins() < 3) && !(player.isDontPayThreeCoinsInTowers())) return false;
+		if((payThreeCoins(player, tower) && player.getCoins() < 3) && !(player.isDontPayThreeCoinsInTowers()))
+			return false;
 		
-		if (!(pickTowerCard.isLegal(player, gameBoard))) return false;
+		if (!(pickTowerCard.isLegal(player, gameBoard)))
+			return false;
 		
 		return true;
 	}
@@ -137,7 +121,9 @@ public class SettingFamiliarMemberOnTower extends Action {
 		Tower tower = selectedTower(gameBoard.getTowers());
 		
 		List<Effect> currEffects;
-		
+
+		if (tower == null) return false;
+
 		PickTowerCard pickTowerCard = new PickTowerCard(floor, tower.getTowerType(), familyMember.getValue());
 		
 		if (!isLegal(player, gameBoard))
@@ -167,7 +153,8 @@ public class SettingFamiliarMemberOnTower extends Action {
 
 		boolean executed = pickTowerCard.executeEffects(player, gameBoard);
 
-		if (!executed) return false;
+		if (!executed)
+			return false;
 
 		player.setFamiliarPositioned(true);
 

@@ -72,7 +72,8 @@ public abstract class IOAdapter
 
             String choice = getMessage();
 
-            if (choice == null) continue;
+            if (choice == null)
+                continue;
 
             //COMMMENTO AI POSTERI V2 QUESTA COSA MI FA CACARE MA SINCERCAMENTE
             //PER ORA NON HA SENSO CREAE DELLE ACTIONS CHE FACCIANO STE COSE
@@ -122,7 +123,8 @@ public abstract class IOAdapter
 
 	            String value = getMessage();
 
-	            if (value == null) continue;
+	            if (value == null)
+	                continue;
 
 	            Integer floor;
 
@@ -137,7 +139,8 @@ public abstract class IOAdapter
 	                continue;
 	            }
 
-	            if (floor <0 || floor > 3) continue;
+	            if (floor <0 || floor > 3)
+	                continue;
 
 	            return floor;
         }
@@ -158,11 +161,13 @@ public abstract class IOAdapter
 
 	            String value = getMessage();
 
-	            if (value == null) continue;
+	            if (value == null)
+	                continue;
 
 	            CardTypeEnum cardType = CardTypeEnum.valueOf(value);
 
-	            if (cardType == null) continue;
+	            if (cardType == null)
+	                continue;
 
 	            return cardType;
         }
@@ -183,7 +188,8 @@ public abstract class IOAdapter
 
             String value = getMessage();
 
-            if (value == null) continue;
+            if (value == null)
+                continue;
 
             Integer servantNumber;
 
@@ -198,7 +204,8 @@ public abstract class IOAdapter
                 continue;
             }
 
-            if (servantNumber > player.getServants()) continue;
+            if (servantNumber > player.getServants())
+                continue;
 
             return new Asset(servantNumber, AssetType.SERVANT);
         }
@@ -226,15 +233,18 @@ public abstract class IOAdapter
 	
 	            String choice = this.getMessage();
 	
-	            if (choice == null) continue;
+	            if (choice == null)
+	                continue;
 	
 	            ColorsEnum color = ColorsEnum.getColorFromString(choice);
 	
-	            if (color == null) continue;
+	            if (color == null)
+	                continue;
 	
 	            FamilyMember member = player.getFamilyMemberByColor(color);
 	
-	            if (member == null) continue;
+	            if (member == null)
+	                continue;
 	
 	            return member;
         
@@ -257,7 +267,8 @@ public abstract class IOAdapter
 
             String value = getMessage();
 
-            if (value == null) continue;
+            if (value == null)
+                continue;
 
             Integer choice;
 
@@ -272,7 +283,8 @@ public abstract class IOAdapter
                 continue;
             }
 
-            if (choice !=1 || choice !=2) continue;
+            if (choice !=1 || choice !=2)
+                continue;
 
             return choice;
         }
@@ -379,7 +391,8 @@ public abstract class IOAdapter
             	
             	int choiceInt = Integer.parseInt(choice);
             	
-                if (choiceInt<0 || choiceInt>assets.size()) throw new NumberFormatException();
+                if (choiceInt<0 || choiceInt>assets.size())
+                    throw new NumberFormatException();
                 
                 chosenAssets.add(assets.get(choiceInt));
                 
@@ -418,7 +431,8 @@ public abstract class IOAdapter
 
 	        	int choiceInt = Integer.parseInt(choice);
 
-	            if (choiceInt!=1 || choiceInt!=2) throw new NumberFormatException();
+	            if (choiceInt!=1 || choiceInt!=2)
+	                throw new NumberFormatException();
 
 		    	return choiceInt;
 

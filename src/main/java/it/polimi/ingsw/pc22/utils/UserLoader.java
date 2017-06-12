@@ -11,10 +11,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class UserLoader
 {
 	private static final String FILEPATH = "users/UsersJson.json";
+
+	private static final Logger LOGGER = Logger.getLogger(UserLoader.class.getName());
 
 	public static Map<String, User> generateUserMap() throws IOException, JSONException
 	{
@@ -30,7 +34,7 @@ public class UserLoader
 		}
 		catch (IOException e)
 		{
-			e.printStackTrace();
+			LOGGER.log(Level.INFO, "User not loaded", e);
 		}
 
 		JSONArray usersList = new JSONArray(builder.toString());

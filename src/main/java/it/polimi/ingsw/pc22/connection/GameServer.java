@@ -2,6 +2,7 @@ package it.polimi.ingsw.pc22.connection;
 
 import it.polimi.ingsw.pc22.adapters.RMIIOAdapter;
 import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
+import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.rmi.RMIAuthenticationService;
 import it.polimi.ingsw.pc22.utils.UserLoader;
@@ -48,9 +49,9 @@ public class GameServer
 			registry.rebind("auth", stub);
 
 		}
-			catch (RemoteException e )
+			catch (RemoteException e)
 		{
-			e.printStackTrace();
+			throw new GenericException(e);
 		}
 
 		System.out.println("Authentication Service running at " + RMI_PORT + " port");
@@ -72,11 +73,10 @@ public class GameServer
 
 				new Thread(socketIOAdapter).start();
 			}
-			
 		} 
 			catch (IOException | JSONException e)
 		{
-			e.printStackTrace();
+			throw new GenericException(e);
 		}
 	}
 	

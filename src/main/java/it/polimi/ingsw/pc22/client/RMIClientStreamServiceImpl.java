@@ -7,6 +7,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.rmi.RemoteException;
 import java.util.concurrent.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by fandroid95 on 30/05/2017.
@@ -14,6 +16,8 @@ import java.util.concurrent.*;
 public class RMIClientStreamServiceImpl implements RMIClientStreamService
 {
     private Long timeout;
+
+    private static final Logger LOGGER = Logger.getLogger(RMIClientStreamServiceImpl.class.getName());
 
     public RMIClientStreamServiceImpl(Long timeout)
     {
@@ -36,25 +40,20 @@ public class RMIClientStreamServiceImpl implements RMIClientStreamService
             message = result.get(this.timeout, TimeUnit.MILLISECONDS);
 
         }
-        catch (ExecutionException e)
+        catch (ExecutionException | InterruptedException e)
         {
-            System.out.println("Exception");
+            message = null;
 
-            return null;
+            LOGGER.log(Level.INFO, "Cancelling reading task", e);
+
         }
         catch (TimeoutException e)
         {
-            System.out.println("Cancelling reading task");
-
             result.cancel(true);
 
-            return null;
-        }
-        catch (InterruptedException e)
-        {
-            System.out.println("ConsoleInputReadTask() cancelled");
+            message = null;
 
-            return null;
+            LOGGER.log(Level.INFO, "Timeout EXPIRED", e);
         }
 
         return message;

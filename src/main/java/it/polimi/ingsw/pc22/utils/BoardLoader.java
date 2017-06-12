@@ -8,9 +8,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BoardLoader extends GenericLoader
 {
+    private static final Logger LOGGER = Logger.getLogger(BoardLoader.class.getName());
+
     public static GameBoard loadGameBoard(JSONObject board)
     {
         GameBoard gameBoard = null;
@@ -47,7 +51,7 @@ public class BoardLoader extends GenericLoader
                     InstantiationException | ClassNotFoundException e
         )
         {
-            e.printStackTrace();
+            LOGGER.log(Level.INFO, "Board not loaded", e);
         }
 
         return gameBoard;
@@ -70,8 +74,6 @@ public class BoardLoader extends GenericLoader
             JSONArray cells = tower.getJSONArray("towerCells");
 
             Tower loadedTower = loadTower(cells, towerType);
-
-            if (loadedTower == null) continue;
 
             towersArray[i] = loadedTower;
         }

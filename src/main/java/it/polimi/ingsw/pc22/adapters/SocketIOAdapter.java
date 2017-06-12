@@ -2,6 +2,7 @@ package it.polimi.ingsw.pc22.adapters;
 
 import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.connection.User;
+import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.ConsoleReader;
 
@@ -11,16 +12,20 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.concurrent.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by fandroid95 on 30/05/2017.
  */
 public class SocketIOAdapter extends IOAdapter implements Runnable
 {
-    public Socket socket;
+    private Socket socket;
 
     private BufferedReader in;
     private PrintWriter out;
+
+    private static final Logger LOGGER = Logger.getLogger(SocketIOAdapter.class.getName());
 
     public SocketIOAdapter(Socket socket, Long timeout)
     {
@@ -36,10 +41,11 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
         }
             catch (IOException e)
         {
-            e.printStackTrace();
+            throw new GenericException(e);
         }
     }
 
+    @Override
     public void run()
     {
         try
@@ -49,7 +55,7 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
         }
             catch (IOException e)
         {
-            System.out.println("Cannot authenticate client");
+            throw new GenericException("Cannot authenticate client", e);
         }
     }
 
@@ -93,27 +99,21 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
             answer = result.get(this.getTimeout(), TimeUnit.MILLISECONDS);
 
         }
-            catch (ExecutionException e)
+            catch (ExecutionException | InterruptedException e)
         {
-            System.out.println("Exception");
+            answer = null;
 
-            return null;
+            LOGGER.log(Level.INFO, "Cannot read from input", e);
+
         }
             catch (TimeoutException e)
         {
-            System.out.println("Cancelling reading task");
-
             result.cancel(true);
 
-            return null;
-        }
-            catch (InterruptedException e)
-        {
-            System.out.println("ConsoleInputReadTask() cancelled");
+            answer = null;
 
-            return null;
+            LOGGER.log(Level.INFO, "Timeout EXPIRED", e);
         }
-
 
         return  answer;
     }

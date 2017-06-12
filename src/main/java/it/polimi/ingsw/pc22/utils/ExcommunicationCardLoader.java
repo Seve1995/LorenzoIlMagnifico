@@ -7,13 +7,17 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by fandroid95 on 31/05/2017.
  */
 public class ExcommunicationCardLoader extends GenericLoader
 {
-    public static List<ExcommunicationCard> loadExcomunicationCards
+    private static final Logger LOGGER = Logger.getLogger(ExcommunicationCardLoader.class.getName());
+
+    public static List<ExcommunicationCard> loadExcommunicationCards
             (JSONObject jsonCardsObject)
     {
         List<ExcommunicationCard> cards = new ArrayList<>();
@@ -32,7 +36,7 @@ public class ExcommunicationCardLoader extends GenericLoader
         }
         catch (ClassNotFoundException | InstantiationException | IllegalAccessException e)
         {
-            e.printStackTrace();
+            LOGGER.log(Level.INFO, "Cards not loaded", e);
         }
 
         return cards;

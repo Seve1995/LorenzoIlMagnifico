@@ -5,6 +5,8 @@ import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,6 +18,8 @@ public class ActionFactory
     private static Map<String, String> parsers = new HashMap<>();
 
     private static String ACTION_PATH = "it.polimi.ingsw.pc22.actions.";
+
+    private static final Logger LOGGER = Logger.getLogger(ActionFactory.class.getName());
 
     static
     {
@@ -67,6 +71,8 @@ public class ActionFactory
         }
         catch (ClassNotFoundException | InstantiationException | IllegalAccessException e)
         {
+            LOGGER.log(Level.INFO, "Class not found", e);
+
             return null;
         }
 
@@ -74,7 +80,8 @@ public class ActionFactory
 
         FamilyMember member = getParsedFamiliar(userCommand, player);
 
-        if (member == null) return null;
+        if (member == null)
+            return null;
 
         action.setFamilyMember(member);
 
@@ -82,7 +89,8 @@ public class ActionFactory
 
         Asset servants = getParsedServants(userCommand, player);
 
-        if (servants == null || servants.getValue() == 0) return action;
+        if (servants == null || servants.getValue() == 0)
+            return action;
 
         return new ServantsHandler(action, servants);
     }
@@ -93,13 +101,15 @@ public class ActionFactory
 
         Matcher matcher = servantsPattern.matcher(userCommand);
 
-        if (!matcher.find()) return null;
+        if (!matcher.find())
+            return null;
 
         Integer servantNumber;
 
         servantNumber = Integer.parseInt(matcher.group(0));
 
-        if (servantNumber > player.getServants()) return null;
+        if (servantNumber > player.getServants())
+            return null;
 
         return new Asset(servantNumber, AssetType.SERVANT);
     }
@@ -110,19 +120,20 @@ public class ActionFactory
 
         Matcher matcher = familiarPattern.matcher(userCommand);
 
-        if (!matcher.find()) return null;
+        if (!matcher.find())
+            return null;
 
         ColorsEnum color = ColorsEnum.getColorFromString(matcher.group(0));
 
-        FamilyMember member = player.getUnusedFamilyMemberByColor(color);
-
-        return member;
+        return player.getUnusedFamilyMemberByColor(color);
     }
 
     public static String parseAction(String action)
     {
-        for (String regEx : parsers.keySet())
+        for (Map.Entry<String,String> entry : parsers.entrySet())
         {
+            String regEx = entry.getKey();
+
             Pattern pattern = Pattern.compile(regEx);
 
             Matcher matcher = pattern.matcher(action);
