@@ -43,19 +43,19 @@ public class TowerCell extends Cell
 
 			return "(Required Value: " + this.getRequiredDiceValue() + ")";
 
-		String output="";
+		StringBuilder output = new StringBuilder();
 
 		for (int i=0; i<super.getEffects().size(); i++)
 		{
 			if (this.developmentCard == null)
-				output += "(Required Value: " + this.getRequiredDiceValue() + " + " + "Bonus: " + super.getEffects().get(i).toString() + ") ";
+				output.append("(Required Value: " + this.getRequiredDiceValue() + " + " + "Bonus: " + super.getEffects().get(i).toString() + ") ");
 
 			else
-				output += "(Required Value: " + this.getRequiredDiceValue() + " + " + "Bonus: " + super.getEffects().get(i).toString() + ") " + this.developmentCard.getName();
+				output.append("Required Value: " + this.getRequiredDiceValue() + " + " + "Bonus: " + super.getEffects().get(i).toString() + ") " + this.developmentCard.getName());
 
 		}
 			
-		return output;
+		return output.toString();
 	}
 	
 	/*public static void main(String[] args) {
