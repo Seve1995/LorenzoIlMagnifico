@@ -8,6 +8,16 @@ public abstract class Action
 {
 	protected FamilyMember familyMember;
 
+	private boolean familiarNeeded = true;
+
+	public boolean isFamiliarNeeded() {
+		return familiarNeeded;
+	}
+
+	public void setFamiliarNeeded(boolean familiarNeeded) {
+		this.familiarNeeded = familiarNeeded;
+	}
+
 	public Action(){}
 
 	public Action(FamilyMember familyMember) {

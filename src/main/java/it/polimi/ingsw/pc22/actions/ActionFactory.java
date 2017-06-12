@@ -49,6 +49,18 @@ public class ActionFactory
         String pass = "^pass$";
 
         parsers.put(pass, "PassTurn");
+
+        String playCard = "^play card [0-9]$";
+
+        parsers.put(playCard, "PlayLeaderCard");
+
+        String activateCard = "^activate card [0-9]$";
+
+        parsers.put(activateCard, "ActiveLoaderCard");
+
+        String discardCard = "^discard card [0-9]$";
+
+        parsers.put(discardCard, "DiscardLeaderCard");
     }
 
     public static Action createAction(String userCommand, Player player)
@@ -78,14 +90,16 @@ public class ActionFactory
 
         System.out.println("ActionFactory" + action);
 
+        setActionParameter(action, userCommand);
+
+        if (!action.isFamiliarNeeded()) return action;
+
         FamilyMember member = getParsedFamiliar(userCommand, player);
 
         if (member == null)
             return null;
 
         action.setFamilyMember(member);
-
-        setActionParameter(action, userCommand);
 
         Asset servants = getParsedServants(userCommand, player);
 
@@ -194,6 +208,56 @@ public class ActionFactory
             Integer zone = Integer.parseInt(matcher.group(0));
 
             market.setZone(zone);
+        }
+
+        if (action instanceof ActiveLeaderCard)
+        {
+            Pattern pattern = Pattern.compile("[0-9]$");
+
+            Matcher matcher = pattern.matcher(userCommand);
+
+            matcher.find();
+
+            Integer index = Integer.parseInt(matcher.group(0));
+
+            ((ActiveLeaderCard) action).setIndex(index);
+
+            action.setFamiliarNeeded(false);
+        }
+
+        if (action instanceof DiscardLeaderCard)
+        {
+            Pattern pattern = Pattern.compile("[0-9]$");
+
+            Matcher matcher = pattern.matcher(userCommand);
+
+            matcher.find();
+
+            Integer index = Integer.parseInt(matcher.group(0));
+
+            ((DiscardLeaderCard) action).setIndex(index);
+
+            action.setFamiliarNeeded(false);
+        }
+
+        if (action instanceof PlayLeaderCard)
+        {
+            Pattern pattern = Pattern.compile("[0-9]$");
+
+            Matcher matcher = pattern.matcher(userCommand);
+
+            matcher.find();
+
+            Integer index = Integer.parseInt(matcher.group(0));
+
+            ((PlayLeaderCard) action).setIndex(index);
+
+            action.setFamiliarNeeded(false);
+        }
+
+        if (action instanceof PassTurn)
+        {
+            action.setFamiliarNeeded(false);
         }
     }
 

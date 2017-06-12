@@ -12,9 +12,19 @@ import java.util.Set;
 
 public class PlayLeaderCard extends Action {
 	
-	int index;
+	private int index;
 
-	protected boolean isLegal(Player player, GameBoard gameBoard) 
+	public int getIndex()
+	{
+		return index;
+	}
+
+	public void setIndex(int index)
+	{
+		this.index = index;
+	}
+
+	protected boolean isLegal(Player player, GameBoard gameBoard)
 	{
 
 		LeaderCard leaderCard = player.getLeaderCards().get(index);
