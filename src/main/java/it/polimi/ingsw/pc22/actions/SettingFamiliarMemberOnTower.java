@@ -40,20 +40,19 @@ public class SettingFamiliarMemberOnTower extends Action {
 	private boolean payThreeCoins(Player p, Tower t)
 	{
 	
-		if (t.getListPlayers().isEmpty()) return false;
-
-		for (PlayerColorsEnum pc : t.getListPlayers())
+		for (TowerCell tc : t.getTowerCells())
 		{
-			if(!(p.getPlayerColorsEnum().equals(pc)));
-			{
+			if (tc.getFamilyMember()!=null)
+				
 				return true;
-			}
+			
 		}
-
+		
 		return false;
 			
 	}
 	
+	/*
 	private ColorsEnum whichColorIs(Player p, Tower t)
 	{
 		if (t.getListPlayers() == null) return null;
@@ -61,6 +60,8 @@ public class SettingFamiliarMemberOnTower extends Action {
 		for (TowerCell tc : t.getTowerCells())
 		{
 			FamilyMember currFamilyMember = new FamilyMember();
+			
+			if (tc.getFamilyMember()==null) continue;
 			
 			if (tc.getFamilyMember().getPlayerColor().equals(p.getPlayerColorsEnum()))
 				
@@ -75,7 +76,7 @@ public class SettingFamiliarMemberOnTower extends Action {
 		return null;
 		
 	}
-	
+	*/
 	
 	private boolean alreadySetAMember(Player p, Tower t)
 	{
@@ -85,7 +86,8 @@ public class SettingFamiliarMemberOnTower extends Action {
 		for (PlayerColorsEnum pc : t.getListPlayers())
 		{
 
-			if(p.getPlayerColorsEnum().equals(pc) && !(whichColorIs(p, t).equals(ColorsEnum.NEUTER)))
+			if(p.getPlayerColorsEnum().equals(pc))
+				
 			{
 				return true;
 			}
@@ -126,7 +128,7 @@ public class SettingFamiliarMemberOnTower extends Action {
 		
 		if(alreadySetAMember(player, tower) && !(familyMember.getColor().equals(ColorsEnum.NEUTER))) return false;
 		
-		if(payThreeCoins(player, tower) && player.getCoins() < 3 && !(player.isDontPayThreeCoinsInTowers())) return false;
+		if((payThreeCoins(player, tower) && player.getCoins() < 3) && !(player.isDontPayThreeCoinsInTowers())) return false;
 		
 		if (!(pickTowerCard.isLegal(player, gameBoard))) return false;
 		
@@ -155,7 +157,8 @@ public class SettingFamiliarMemberOnTower extends Action {
 
 		familyMember.setPlayed(true);
 		
-		tower.getListPlayers().add(player.getPlayerColorsEnum());
+		if(familyMember.getColor()!=ColorsEnum.NEUTER)
+			tower.getListPlayers().add(player.getPlayerColorsEnum());
 		
 		currEffects = tower.getTowerCells().get(floor).getEffects();
 
