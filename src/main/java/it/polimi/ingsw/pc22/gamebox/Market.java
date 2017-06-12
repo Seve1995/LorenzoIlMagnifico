@@ -19,13 +19,13 @@ public class Market {
 	}
 
 	public String toString() {
-		String output = "MARKET\n";
+		StringBuilder output = new StringBuilder("MARKET\n");
 		for (int i=0; i<marketCells.size(); i++) 
 		{
 			if (!marketCells.get(i).isABlockedCell())
-				output += "Zone " + i + " : " + marketCells.get(i).toString().toLowerCase() + "\n";
+				output.append("Zone " + i + " : " + marketCells.get(i).toString().toLowerCase() + "\n");
 		}		
-		return output;
+		return output.toString();
 	}
 	
 	public String gainInfo() {

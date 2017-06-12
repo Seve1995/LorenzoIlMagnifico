@@ -60,8 +60,6 @@ public class ServantsHandler extends Action
 		servantsNumber = (int) (currServants - 2 * multiplier * servantsNumber);
 
 		player.setServants(servantsNumber);
-
-		if (action==null) return true;
 		
 		return action.executeAction(player, gameBoard);
     }
