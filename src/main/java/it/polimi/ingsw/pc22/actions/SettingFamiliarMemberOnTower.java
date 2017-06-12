@@ -39,18 +39,10 @@ public class SettingFamiliarMemberOnTower extends Action {
 	
 	private boolean payThreeCoins(Player p, Tower t)
 	{
-		if (t.getListPlayers().isEmpty()) return false;
-
-		for (PlayerColorsEnum pc : t.getListPlayers())
-		{
-			if(!(p.getPlayerColorsEnum().equals(pc)))
-			{
-				return true;
-			}
-		}
+		for (TowerCell tc : t.getTowerCells())
+			if (!tc.isEmpty()) return true;
 
 		return false;
-			
 	}
 	
 	/*
