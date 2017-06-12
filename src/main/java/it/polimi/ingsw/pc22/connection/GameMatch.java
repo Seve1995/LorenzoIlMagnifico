@@ -309,13 +309,14 @@ public class GameMatch implements Runnable
 		
 		List<TowerCell> territoryTowerCells = towers[0].getTowerCells();
 				
-		List<DevelopmentCard> territoryCards = cards.parallelStream()
-				.filter(devCard -> (devCard.getRoundNumber() == roundNumber && devCard instanceof TerritoryCard))
+		List<DevelopmentCard> territoryCards = cards.stream()
+				.filter(devCard -> ((devCard.getRoundNumber() == roundNumber) && (devCard instanceof TerritoryCard)))
 				.collect(Collectors.toList())
 				.subList(0, territoryTowerCells.size());
-
-		cards.removeAll(territoryCards);
-
+		
+		for (DevelopmentCard t : territoryCards)
+			cards.remove(t);
+		
 		for (int i=0; i < territoryTowerCells.size(); i++)
 		{
 			territoryTowerCells.get(i).setDevelopmentCard(territoryCards.get(i));
@@ -328,7 +329,8 @@ public class GameMatch implements Runnable
 				.collect(Collectors.toList())
 				.subList(0, characterTowerCells.size());
 
-		cards.removeAll(characterCards);
+		for (DevelopmentCard t : characterCards)
+			cards.remove(t);
 
 		for (int i=0; i<characterTowerCells.size(); i++)
 		{
@@ -342,7 +344,8 @@ public class GameMatch implements Runnable
 				.collect(Collectors.toList())
 				.subList(0, buildingTowerCells.size());
 
-		cards.removeAll(buildingCards);
+		for (DevelopmentCard t : buildingCards)
+			cards.remove(t);
 
 		for (int i=0; i<buildingTowerCells.size(); i++)
 		{
@@ -356,12 +359,14 @@ public class GameMatch implements Runnable
 				.collect(Collectors.toList())
 				.subList(0, ventureTowerCells.size());
 
-		cards.removeAll(ventureCards);
+		for (DevelopmentCard t : ventureCards)
+			cards.remove(t);
 		
 		for (int i=0; i<ventureTowerCells.size(); i++)
 		{
 			ventureTowerCells.get(i).setDevelopmentCard(ventureCards.get(i));
 		}
+				
 	}
 
 	private void resetFamiliars(List<Player> players)
@@ -379,7 +384,7 @@ public class GameMatch implements Runnable
 	{
 		for (Player p : players)
 		{
-			for (LeaderCard l : p.getLeaderCards())
+			for (LeaderCard l : p.getPlayerBoard().getLeaderCards())
 			{
 				l.setFaceUp(true);
 			}
