@@ -34,17 +34,17 @@ public class MarketCell extends Cell
 
 	@Override
 	public String toString() {
-		String output = "You will gain ";
+		StringBuilder output = new StringBuilder("You will gain ");
 
 		List<Effect> effects = super.getEffects();
 
 		for (Effect e : effects) {
 			if (!e.equals(effects.get(effects.size()-1)))
-				output += e.toString() + " & ";
+				output.append(e.toString() + " & ");
 			else 
-				output += e.toString() + ".";
+				output.append(e.toString() + ".");
 		}
-		return output;
+		return output.toString();
 	}
 	
 	/*
