@@ -12,19 +12,19 @@ public class PositionUtils
         String actions = "";
 
         if (areTowersAvailable(gameBoard.getTowers()))
-            actions = "- Metti familiare su torre (es: set tower BUILDING 3 con numberOfFloor tra 0 e 3)\n";
+            actions = "- Metti familiare su torre (es: set tower <familiar> <servants> <type> <floor>)\n";
 
         if (isMarketAvailable(gameBoard.getMarket()))
-            actions += "- Metti familiare su market (es: set market ZONA con zona tra 0 e 3)\n";
+            actions += "- Metti familiare su market (es: set market <familiar> <servants> <zone>)\n";
 
         if (isProductionAvailable(gameBoard.getProduction()))
-            actions += "- Metti familiare nella produzione (es: set production)\n";
+            actions += "- Metti familiare nella produzione (es: set production <familiar> <servants>)\n";
 
         if (isHarvestAvailable(gameBoard.getHarvest()))
-            actions += "- Metti familiare nella raccolto (es: set harvest)\n";
+            actions += "- Metti familiare nella raccolto (es: set harvest <familiar> <servants>)\n";
 
-        if (isCounclAvailable(gameBoard.getCouncilPalace()))
-            actions += "- Metti familiare nel concilio (es: set council)";
+        if (isCouncilAvailable(gameBoard.getCouncilPalace()))
+            actions += "- Metti familiare nel concilio (es: set council <familiar> <servants>)";
 
         return actions;
     }
@@ -43,39 +43,39 @@ public class PositionUtils
     {
         for (MarketCell cell : market.getMarketCells())
         {
-            if (cell.getFamilyMember() != null) return true;
+            if (cell.getFamilyMember() != null) return false;
         }
 
         return false;
     }
 
-    public static boolean isCounclAvailable(CouncilPalace councilPalace)
+    public static boolean isCouncilAvailable(CouncilPalace councilPalace)
     {
         for (CouncilPalaceCell cell : councilPalace.getCouncilPalaceCells())
         {
-            if (cell.getFamilyMember() != null) return true;
+            if (cell.getFamilyMember() != null) return false;
         }
 
-        return false;
+        return true;
     }
 
     public static boolean isHarvestAvailable(Harvest harvest)
     {
         for (HarvestCell cell : harvest.getHarvestCell())
         {
-            if (cell.getFamilyMember() != null) return true;
+            if (cell.getFamilyMember() != null) return false;
         }
 
-        return false;
+        return true;
     }
 
     public static boolean isProductionAvailable(Production production)
     {
         for (ProductionCell cell : production.getProductionCell())
         {
-            if (cell.getFamilyMember() != null) return true;
+            if (cell.getFamilyMember() != null) return false;
         }
 
-        return false;
+        return true;
     }
 }

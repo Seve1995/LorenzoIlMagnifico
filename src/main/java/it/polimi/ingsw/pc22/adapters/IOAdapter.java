@@ -51,20 +51,19 @@ public abstract class IOAdapter
 
             if (!player.isFamiliarPositioned())
             {
-                String actions = PositionUtils.getActionAvailableString(gameBoard);
-
-                this.printMessage(actions);
-
-                this.printMessage("Voi sacrificare servitori per aumentare il valore dell'azione? \n" +
-                        "Indica un numero da 0 a " + player.getServants());
+                this.printMessage("Available servants: " + player.getServants());
 
                 this.printMessage("Familiari disponibili: " +
                         player.getUnusedFamiliarMembers().toString());
+
+                String actions = PositionUtils.getActionAvailableString(gameBoard);
+
+                this.printMessage(actions);
             }
 
-            this.printMessage("- play card" + '\n' +
-                "- discard card" + '\n' +
-                "- turn card" + '\n' +
+            this.printMessage("- play card <index>" + '\n' +
+                "- discard card <index>" + '\n' +
+                "- turn card <index>" + '\n' +
                 "- pass" + '\n' +
                 "- show cards" + '\n' + //questa in realtà si può sempre fare
                 "- end game / exit game" + '\n'+
