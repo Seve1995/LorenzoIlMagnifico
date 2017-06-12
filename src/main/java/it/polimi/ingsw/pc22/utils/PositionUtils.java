@@ -46,7 +46,7 @@ public class PositionUtils
             if (cell.getFamilyMember() != null) return false;
         }
 
-        return false;
+        return true;
     }
 
     public static boolean isCouncilAvailable(CouncilPalace councilPalace)
