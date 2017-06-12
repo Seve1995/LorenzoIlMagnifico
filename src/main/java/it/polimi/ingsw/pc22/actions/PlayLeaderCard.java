@@ -40,10 +40,12 @@ public class PlayLeaderCard extends Action {
 
 		List<RequiredCard> requiredCards = leaderCard.getRequiredCards();
 
-		for (RequiredCard key : requiredCards)
+		for (RequiredCard requiredCard : requiredCards)
 		{
 
-			int value = key.getValue();
+			int value = requiredCard.getValue();
+
+			CardTypeEnum key = requiredCard.getType();
 
 			if (key.equals(CardTypeEnum.BUILDING))
 			{
