@@ -122,7 +122,6 @@ public class GameMatch implements Runnable
 
 				GameBoardUtils.purgeGameBoard(gameBoard);
 
-				resetFamiliars(players);
 			}
 
 			for(Player player : players)
@@ -369,17 +368,6 @@ public class GameMatch implements Runnable
 				
 	}
 
-	private void resetFamiliars(List<Player> players)
-	{
-		for (Player p : players)
-		{
-			for (FamilyMember f : p.getFamilyMembers())
-			{
-				f.setPlayed(false);
-			}
-		}
-	}
-	
 	private void resetLeaderCards(List<Player> players)
 	{
 		for (Player p : players)

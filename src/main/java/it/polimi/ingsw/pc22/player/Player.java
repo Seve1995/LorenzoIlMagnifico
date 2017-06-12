@@ -473,28 +473,43 @@ public class Player
 
 	public void setFamiliarToPlayer(List<Dice> dices)
 	{
-		for (Dice dice : dices)
+		if (familyMembers.isEmpty())
 		{
-			FamilyMember familyMember = new FamilyMember();
+			for (Dice dice : dices)
+			{
+				FamilyMember familyMember = new FamilyMember();
+	
+				familyMember.setFamiliarValue(dice.getNumber());
+				familyMember.setColor(dice.getColor());
+				familyMember.setPlayerColor(playerColorsEnum);
+	
+				familyMember.setPlayed(false);
+	
+				familyMembers.add(familyMember);
+			}
 
-			familyMember.setFamiliarValue(dice.getNumber());
-			familyMember.setColor(dice.getColor());
-			familyMember.setPlayerColor(playerColorsEnum);
-
-			familyMember.setPlayed(false);
-
-			familyMembers.add(familyMember);
+			FamilyMember familiarNeuter = new FamilyMember();
+	
+			familiarNeuter.setFamiliarValue(0);
+			familiarNeuter.setColor(ColorsEnum.NEUTER);
+			familiarNeuter.setPlayerColor(playerColorsEnum);
+	
+			familiarNeuter.setPlayed(false);
+	
+			familyMembers.add(familiarNeuter);
 		}
-
-		FamilyMember familiarNeuter = new FamilyMember();
-
-		familiarNeuter.setFamiliarValue(0);
-		familiarNeuter.setColor(ColorsEnum.NEUTER);
-		familiarNeuter.setPlayerColor(playerColorsEnum);
-
-		familiarNeuter.setPlayed(false);
-
-		familyMembers.add(familiarNeuter);
+		
+		else
+		{
+			for(int i=0; i<dices.size(); i++)
+			{//HANDLE THE COLOURED:
+				familyMembers.get(i).setFamiliarValue(dices.get(i).getNumber());
+				familyMembers.get(i).setPlayed(false);
+			}
+			//Handle the NEUTER:
+			familyMembers.get(3).setFamiliarValue(0);
+			familyMembers.get(3).setPlayed(false);
+		}
 	}
 
 	@Override
