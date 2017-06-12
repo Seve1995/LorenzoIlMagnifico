@@ -74,43 +74,32 @@ public class SettingFamiliarMemberOnProduction extends Action {
 		DoProductionAction doProductionAction = new DoProductionAction();
 
 
-		if (isLegal(player, gameBoard) && !(player.isDontCareOccupiedPlaces())) 
-
+		if (isLegal(player, gameBoard) && !(player.isDontCareOccupiedPlaces()))
 		{
-
-
 			production.getProductionCell()[production.firstCellFree()].setFamilyMember(familyMember);
 
 			familyMember.setPlayed(true);
-
 
 			if (production.firstCellFree()>0)
 			{
 				familyMember.setValueModifier(familyMember.getValueModifier()-3);
 				
 				doProductionAction.setValue(familyMember.getValue()-3);
-				
 			}
-			
 			else
-			
-			{	
-				
+			{
 				doProductionAction.setValue(familyMember.getValue());
 			}
 			
 			doProductionAction.executeEffects(player, gameBoard);
 
+			player.setFamiliarPositioned(true);
+
 			return true;
 
 		}
-
-		
-
 		else if (isLegal(player, gameBoard) && player.isDontCareOccupiedPlaces())
-
 		{
-
 			production.getProductionCell()[production.firstCellFree()].setFamilyMember(familyMember);
 			
 			familyMember.setPlayed(true);
@@ -119,18 +108,13 @@ public class SettingFamiliarMemberOnProduction extends Action {
 			
 			doProductionAction.executeEffects(player, gameBoard);
 
+			player.setFamiliarPositioned(true);
+
 			return true;
-
 		}
-
-		
-
 		else
-
 		{
-
 			return false;
-
 		}
 
 	}

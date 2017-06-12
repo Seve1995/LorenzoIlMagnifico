@@ -39,12 +39,11 @@ public class SettingFamiliarMemberOnTower extends Action {
 	
 	private boolean payThreeCoins(Player p, Tower t)
 	{
-	
 		if (t.getListPlayers().isEmpty()) return false;
 
 		for (PlayerColorsEnum pc : t.getListPlayers())
 		{
-			if(!(p.getPlayerColorsEnum().equals(pc)));
+			if(!(p.getPlayerColorsEnum().equals(pc)))
 			{
 				return true;
 			}
@@ -60,32 +59,29 @@ public class SettingFamiliarMemberOnTower extends Action {
 		
 		for (TowerCell tc : t.getTowerCells())
 		{
-			FamilyMember currFamilyMember = new FamilyMember();
-			
-			if (tc.getFamilyMember().getPlayerColor().equals(p.getPlayerColorsEnum()))
-				
+			FamilyMember currFamilyMember = tc.getFamilyMember();
+
+			if (currFamilyMember.getPlayerColor().equals(p.getPlayerColorsEnum()))
 			{
-				currFamilyMember = tc.getFamilyMember();
-				
 				return currFamilyMember.getColor();
-				
 			}
-					
 		}
+
 		return null;
-		
 	}
 	
 	
 	private boolean alreadySetAMember(Player p, Tower t)
 	{
-		
 		if (t.getListPlayers().isEmpty()) return false;
 
 		for (PlayerColorsEnum pc : t.getListPlayers())
 		{
+			ColorsEnum color = whichColorIs(p,t);
 
-			if(p.getPlayerColorsEnum().equals(pc) && !(whichColorIs(p, t).equals(ColorsEnum.NEUTER)))
+			if (color == null) continue;
+
+			if(p.getPlayerColorsEnum().equals(pc) && !color.equals(ColorsEnum.NEUTER))
 			{
 				return true;
 			}
@@ -93,12 +89,10 @@ public class SettingFamiliarMemberOnTower extends Action {
 		}
 
 		return false;
-		
 	}
 	
-	private Tower selectedTower(CardTypeEnum c, Tower[] ts)
+	private Tower selectedTower(Tower[] ts)
 	{
-		
 		for (Tower t : ts)
 		{
 			if (t.getTowerType().equals(cardTypeEnum))
@@ -114,7 +108,7 @@ public class SettingFamiliarMemberOnTower extends Action {
 	@Override
 	protected boolean isLegal (Player player, GameBoard gameBoard)
 	{
-		Tower tower = selectedTower(cardTypeEnum, gameBoard.getTowers()); 
+		Tower tower = selectedTower(gameBoard.getTowers());
 		
 		PickTowerCard pickTowerCard = new PickTowerCard(floor, tower.getTowerType(), familyMember.getValue());
 		
@@ -137,7 +131,7 @@ public class SettingFamiliarMemberOnTower extends Action {
 	@Override
 	public boolean executeAction (Player player, GameBoard gameBoard) {
 		
-		Tower tower = selectedTower(cardTypeEnum, gameBoard.getTowers()); 
+		Tower tower = selectedTower(gameBoard.getTowers());
 		
 		List<Effect> currEffects;
 		
@@ -167,7 +161,13 @@ public class SettingFamiliarMemberOnTower extends Action {
 			}
 		}
 
-		return pickTowerCard.executeEffects(player, gameBoard);
+		boolean executed = pickTowerCard.executeEffects(player, gameBoard);
+
+		if (!executed) return false;
+
+		player.setFamiliarPositioned(true);
+
+		return true;
 	}
 	
 }

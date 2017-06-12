@@ -5,7 +5,6 @@ import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FromAssetToAssetOrEffect implements Effect{

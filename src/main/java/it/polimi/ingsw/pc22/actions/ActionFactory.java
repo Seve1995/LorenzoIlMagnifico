@@ -4,7 +4,6 @@ import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,6 +20,7 @@ public class ActionFactory
     static
     {
         //TODO SI POSSONO TEORICAMENTE SACRIFICARE INFINITI SERVITORI?
+        //TODO 2 GESTIRE ABBANDONO PARTITA E PERSISTENZA
 
         String tower = "set tower (BLACK|ORANGE|NEUTER|WHITE) [0-9] (TERRITORY|VENTURE|BUILDING|CHARACTER) [0-3]$";
 

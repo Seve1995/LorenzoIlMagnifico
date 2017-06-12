@@ -49,7 +49,7 @@ public abstract class IOAdapter
         {
             this.printMessage("Choose an action to execute:");
 
-            if (player.isFamiliarPositioned())
+            if (!player.isFamiliarPositioned())
             {
                 String actions = PositionUtils.getActionAvailableString(gameBoard);
 
@@ -73,6 +73,34 @@ public abstract class IOAdapter
             String choice = getMessage();
 
             if (choice == null) continue;
+
+            //COMMMENTO AI POSTERI V2 QUESTA COSA MI FA CACARE MA SINCERCAMENTE
+            //PER ORA NON HA SENSO CREAE DELLE ACTIONS CHE FACCIANO STE COSE
+            if ("show board".equals(choice))
+            {
+                PlayerBoard board = player.getPlayerBoard();
+
+                player.getAdapter().printMessage(board.toString());
+
+                continue;
+            }
+
+
+            if ("show cards".equals(choice))
+            {
+                PlayerBoard board = player.getPlayerBoard();
+
+                IOAdapter adapter = player.getAdapter();
+
+                adapter.printMessage(board.getTerritories().toString());
+                adapter.printMessage(board.getBuildings().toString());
+                adapter.printMessage(board.getCharacters().toString());
+                adapter.printMessage(board.getVentures().toString());
+
+                //adapter.printMessage(board.getLeaderCards().toString());
+
+                continue;
+            }
 
             Action action = ActionFactory.createAction(choice, player);
 
@@ -143,6 +171,43 @@ public abstract class IOAdapter
 
         return null;
     }
+
+    public Asset askServants(Player player)
+    {
+        Long maxTimeStamp = System.currentTimeMillis() + timeout;
+
+        while(System.currentTimeMillis() < maxTimeStamp)
+        {
+            this.printMessage("Voi sacrificare servitori per aumentare il valore dell'azione? \n" +
+                    "Indica un numero da 0 a " + player.getServants());
+
+            String value = getMessage();
+
+            if (value == null) continue;
+
+            Integer servantNumber;
+
+            try
+            {
+                servantNumber = Integer.parseInt(value);
+            }
+            catch (NumberFormatException e)
+            {
+                this.printMessage("ERROR! You must enter a valid input");
+
+                continue;
+            }
+
+            if (servantNumber > player.getServants()) continue;
+
+            return new Asset(servantNumber, AssetType.SERVANT);
+        }
+
+        printMessage("Timeout Azione terminato");
+
+        return null;
+    }
+
 
     public FamilyMember askFamiliarMemberForBonus(Player player) 
     {
@@ -516,7 +581,6 @@ public abstract class IOAdapter
 
         if (gameMatch.getPlayerCounter() == 2)
             new Thread(gameMatch).start();
-        if (existingGameMatch)
 
         printMessage("Player: " + player.getName() + " joined GameMatch - " + gameName);
 

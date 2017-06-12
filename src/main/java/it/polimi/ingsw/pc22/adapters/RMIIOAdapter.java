@@ -38,6 +38,8 @@ public class RMIIOAdapter extends IOAdapter implements RMIAuthenticationService
         catch (NotBoundException | IOException e)
         {
             System.out.println("Cannot find client in registry");
+
+            throw new RuntimeException(e);
         }
 
     }
@@ -52,6 +54,8 @@ public class RMIIOAdapter extends IOAdapter implements RMIAuthenticationService
         catch (RemoteException | NotBoundException e)
         {
             System.out.println("Cannot find client in registry");
+
+            throw new RuntimeException(e);
         }
     }
 
@@ -75,7 +79,9 @@ public class RMIIOAdapter extends IOAdapter implements RMIAuthenticationService
         }
             catch (RemoteException e)
         {
-            e.printStackTrace();
+            System.out.println("cannot write from RMI");
+
+            throw new RuntimeException(e);
         }
     }
 
@@ -90,7 +96,9 @@ public class RMIIOAdapter extends IOAdapter implements RMIAuthenticationService
         }
         catch (RemoteException e)
         {
-            e.printStackTrace();
+            System.out.println("cannot read from RMI");
+
+            throw new RuntimeException(e);
         }
 
         return message;

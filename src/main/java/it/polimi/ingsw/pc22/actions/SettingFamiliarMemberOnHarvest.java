@@ -76,7 +76,9 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 			}
 			
 			doHarvestAction.executeEffects(player, gameBoard);
-			
+
+			player.setFamiliarPositioned(true);
+
 			return true;
 			
 		}
@@ -90,7 +92,9 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 			doHarvestAction.setValue(familyMember.getValue());
 			
 			doHarvestAction.executeEffects(player, gameBoard);
-			
+
+			player.setFamiliarPositioned(true);
+
 			return true;
 		}
 		

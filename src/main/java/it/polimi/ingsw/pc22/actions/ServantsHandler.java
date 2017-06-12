@@ -49,7 +49,7 @@ public class ServantsHandler extends Action
     	
     	if (!isLegal(player, gameBoard)) return false;
 
-		int familiarValue =  action.getFamilyMember().getFamiliarValue();
+		int familiarValue = action.getFamilyMember().getFamiliarValue();
 
 		familiarValue = (int) (familiarValue + servantsNumber/(2*multiplier));
 
@@ -61,8 +61,6 @@ public class ServantsHandler extends Action
 
 		player.setServants(servantsNumber);
 
-		if (action == null) return false;
-		
 		return action.executeAction(player, gameBoard);
     }
 }

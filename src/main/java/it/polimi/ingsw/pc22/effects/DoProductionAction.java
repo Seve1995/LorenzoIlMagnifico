@@ -33,7 +33,9 @@ public class DoProductionAction implements Effect {
 		if (isLegal(player, gameBoard))
 		{
 				Asset servants = player.getAdapter().askServants(player);
+
 				if (servants==null) return false;
+
 				value += servants.getValue();
 				player.addAsset(player.getPlayerBoard().getBonusTile().getProductionCoinsBonus());
 				player.addAsset(player.getPlayerBoard().getBonusTile().getProductionMilitaryPointsBonus());

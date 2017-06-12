@@ -2,7 +2,6 @@ package it.polimi.ingsw.pc22.connection;
 
 import it.polimi.ingsw.pc22.actions.Action;
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
-import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.*;
@@ -101,7 +100,7 @@ public class GameMatch implements Runnable
 
 		//setDellecartescomunica
 
-		setUpPlayers();
+		GameBoardUtils.setUpPlayers(players, playerCounter, tiles);
 
 		for (int currentRoundNumber = 0; currentRoundNumber < turnNumber; currentRoundNumber++)
 		{
@@ -109,13 +108,15 @@ public class GameMatch implements Runnable
 			{
 				addDices();
 
-				addTowerCards(getEra(currentRoundNumber));
+				int era = GameBoardUtils.getEra(currentRoundNumber, playerCounter);
+
+				addTowerCards(era);
 
 				checkOrderTurn();
 
 				//resetLeaderCards(players);
 
-				epurateGameBoard(gameBoard);
+				GameBoardUtils.purgeGameBoard(gameBoard);
 
 				resetFamiliars(players);
 			}
@@ -147,129 +148,31 @@ public class GameMatch implements Runnable
 
 					boolean executed = action.executeAction(player, gameBoard);
 
-					player.setFamiliarPositioned(executed);
-
 					if (player.isHasPassed()) break;
+
+					if (executed) break;
 				}
 
 				adapter.printMessage(player.getPlayerBoard().toString());
 				
 				adapter.printMessage(player.toString());
-
 			}
 
+			GameBoardUtils.resetPlayerStatus(players);
 
-			// se é la fine di una era
-			if (((playerCounter < 5) && ((currentRoundNumber==8)) || ((playerCounter == 5) && (currentRoundNumber) == 6)))
-			{
-				for (Player p : players)
-				{
-					if ((p.getFaithPoints() < 3))
-						
-						excommunicate(p, excommunicationCards, 1);
-					
-					else 
-					{
-						//ask if they want to be excommunicated
-						
-						if (true) //se accetta la scomunica
-						{
-							p.setFaithPoints(0);	
-						}
+			GameBoardUtils.excommunicationHandling();
 
-						else 
-						{
-							//excommunicate(p, )
-						}
-					}
-				}
-			}
-
-			if ((playerCounter < 5 && currentRoundNumber == 16) ||  (playerCounter == 5 && currentRoundNumber == 12))
-			{
-				for (Player p : players)
-				{
-					if (p.getFaithPoints() < 4)
-
-						excommunicate(p, excommunicationCards, 2);
-
-					else
-					{
-						//ask if they want to be excommunicated
-
-						if (true) //se accetta la scomunica
-						{
-							p.setFaithPoints(0);
-						}
-
-						else
-						{
-							//excommunicate(p, )
-						}
-					}
-				}
-			}
 		}
 
-		for (Player p : players)
-		{
-			if (p.getFaithPoints() < 5)
+		GameBoardUtils.endGameExcommunicatonHandling();
 
-				excommunicate(p, excommunicationCards, 3);
+		GameBoardUtils.sumFinalPoints(players, gameBoard); //check excommunication
 
-			else //ask if you want to be excommunicated
-			{
-				if (true) //se accetta la scomunica
-				{
-					p.setFaithPoints(0);
-				}
-
-				else
-				{
-					//excommunicate..
-
-				}
-
-			}
-
-		}
-	
-		sumFinalPoints(players); //check excommunication
-		
 		selectWinner(players);
 
 		endGame();
 		
 	}
-
-
-	private void setUpPlayers()
-	{
-		int coins = 5;
-
-		for (int i=0; i < playerCounter; i++)
-		{
-			Player player = players.get(i);
-			
-			player.setCoins(coins);
-
-			PlayerBoard playerBoard = player.getPlayerBoard();
-
-			playerBoard.setBonusTile(tiles.get(i));
-
-			player.setPriority(i);
-
-			PlayerColorsEnum color =
-					PlayerColorsEnum.getColorByValue(i);
-
-			player.setPlayerColorsEnum(color);
-
-			System.out.println(color.toString());
-
-			coins++;
-		}
-	}
-
 
 	private void endGame()
 	{
@@ -422,9 +325,9 @@ public class GameMatch implements Runnable
 		cards.removeAll(characterCards);
 
 		for (int i=0; i<characterTowerCells.size(); i++)
-			{
-				characterTowerCells.get(i).setDevelopmentCard(characterCards.get(i));
-			}
+		{
+			characterTowerCells.get(i).setDevelopmentCard(characterCards.get(i));
+		}
 
 		List<TowerCell> buildingTowerCells = towers[2].getTowerCells();
 		
@@ -436,9 +339,9 @@ public class GameMatch implements Runnable
 		cards.removeAll(buildingCards);
 
 		for (int i=0; i<buildingTowerCells.size(); i++)
-			{
+		{
 			buildingTowerCells.get(i).setDevelopmentCard(buildingCards.get(i));
-			}
+		}
 		
 		List<TowerCell> ventureTowerCells = towers[3].getTowerCells();
 		
@@ -450,78 +353,11 @@ public class GameMatch implements Runnable
 		cards.removeAll(ventureCards);
 		
 		for (int i=0; i<ventureTowerCells.size(); i++)
-			{
-				ventureTowerCells.get(i).setDevelopmentCard(ventureCards.get(i));
-			}
-		
+		{
+			ventureTowerCells.get(i).setDevelopmentCard(ventureCards.get(i));
+		}
 	}
-		
 
-	private int getEra(int currentRoundNumber)
-	{
-		//Valori di currentRoundNumber associati alle ere:
-		//FINO A 4 GIOCATORI:
-		//0,4 = 1^ era
-		//8, 12 = 2^ era
-		//16, 20 = 3^ era
-		//A 5 GIOCATORI:
-		//0,3 = 1^ era
-		//6,9 = 2^ era
-		//12,15 = 3^ era
-		if(playerCounter < 5)
-			{
-			if(currentRoundNumber==0 || currentRoundNumber==4)
-				return 1;
-			if(currentRoundNumber==8 || currentRoundNumber==12)
-				return 2;
-			if(currentRoundNumber==16 || currentRoundNumber==20)
-				return 3;
-			}
-		else
-			if(currentRoundNumber==0 || currentRoundNumber==3)
-				return 1;
-			if(currentRoundNumber==6 || currentRoundNumber==9)
-				return 2;
-			if(currentRoundNumber==12 || currentRoundNumber==15)
-				return 3;
-		return -1;
-	}
-	
-	
-	private void epurateGameBoard(GameBoard gameBoard)
-	{
-		for (Tower t : gameBoard.getTowers()) {
-
-			for (TowerCell tc : t.getTowerCells()) {
-				tc.setFamilyMember(null);
-			}
-
-		}
-
-		for (HarvestCell hc : gameBoard.getHarvest().getHarvestCell())
-		{
-			hc.setFamilyMember(null);
-		}
-		
-		for (ProductionCell p : gameBoard.getProduction().getProductionCell())
-		{
-			p.setFamilyMember(null);
-		}
-		
-		for (MarketCell m : gameBoard.getMarket().getMarketCells())
-		{
-			m.setFamilyMember(null);
-		}
-		
-		for (CouncilPalaceCell cp : gameBoard.getCouncilPalace().getCouncilPalaceCells())
-		{
-			cp.setFamilyMember(null);
-		}
-
-		gameBoard.getCouncilPalace().setPlayersInCouncilPalace(new ArrayList<>());
-	
-	}
-	
 	private void resetFamiliars(List<Player> players)
 	{
 		for (Player p : players)
@@ -542,106 +378,6 @@ public class GameMatch implements Runnable
 				l.setFaceUp(true);
 			}
 		
-		}
-	}
-	
-	private void excommunicate(Player p, List<ExcommunicationCard> e, int era)
-	{
-		
-		for (Effect eff : e.get(era-1).getEffects())
-		{
-			eff.executeEffects(p, gameBoard);
-		}
-	
-	}
-	
-	private int sumFinalResources(Player p)
-	{
-		
-		return p.getCoins() + p.getServants() + p.getWoods() + p.getStones();
-		
-	}
-	
-	
-	private void sumFinalPoints(List<Player> players)
-	{
-		int militaryPoints1 = 0;
-
-		int militaryPoints2 = 0;
-
-		for (Player p : players)
-		{
-			if (p.getPlayerBoard().getTerritories() != null)
-			{
-				int value = p.getPlayerBoard().getTerritories().size();
-
-				TerritoriesCalc territoriesCalc = TerritoriesCalc.getTerritoryCalcByValue(value);
-
-				int victoryPoints =  territoriesCalc.getVictoryPoints();
-
-				p.setVictoryPoints(p.getVictoryPoints() + victoryPoints);
-			}
-
-			if (p.getPlayerBoard().getCharacters() != null)
-			{
-				int value = p.getPlayerBoard().getCharacters().size();
-
-				CharactersCalc charactersCalc = CharactersCalc.getCharacterCalcByValue(value);
-
-				int victoryPoints = charactersCalc.getVictoryPoints();
-
-				p.setVictoryPoints(p.getVictoryPoints() + victoryPoints);
-
-			}
-
-			if (p.getPlayerBoard().getVentures() != null)
-			{
-			
-				for (VentureCard v : p.getPlayerBoard().getVentures())
-				{
-					for (Effect e : v.getPermanentEffects())
-					{
-						e.executeEffects(p, gameBoard);
-					}
-
-				}
-			
-			}
-
-			p.setVictoryPoints(p.getVictoryPoints() + p.getEndGameVictoryPoints());
-
-			p.setVictoryPoints(p.getVictoryPoints()+(sumFinalResources(p)/5));
-
-			if (p.getMilitaryPoints() >= militaryPoints1)
-
-				militaryPoints1 = p.getMilitaryPoints();
-
-			if (p.getMilitaryPoints() >= militaryPoints2 && p.getMilitaryPoints() < militaryPoints1)
-				
-				militaryPoints2 = p.getMilitaryPoints();
-
-			p.setVictoryPoints(p.getVictoryPoints() +  GameBoardUtils.CalculateVictoryPointsForFaithPoints(p.getFaithPoints()));
-
-		}
-		
-		AssignMilitaryBonus(players, militaryPoints1, militaryPoints2);
-
-	}
-
-	private void AssignMilitaryBonus(List <Player> players, int m1, int m2)
-	{
-		for (Player p : players)
-		{
-			if (p.getMilitaryPoints() == m1)
-			{
-				p.setVictoryPoints(p.getVictoryPoints() + 5);
-			}
-
-			if (p.getMilitaryPoints() == m2)
-			{
-				p.setVictoryPoints(p.getVictoryPoints() + 2);
-			}
-
 		}
 	}
 

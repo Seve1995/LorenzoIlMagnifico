@@ -53,6 +53,8 @@ public class SettingFamiliarMemberOnCouncilPalace extends Action {
 
 		cell.executeEffects(player);
 
+		player.setFamiliarPositioned(true);
+
 		return true;
 
 	}
