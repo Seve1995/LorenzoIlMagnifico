@@ -356,11 +356,12 @@ public abstract class IOAdapter
                 councilPrivilege.setBonus5(null);
 
                 i++;
-
-                if (i==numberOfAssets)
-
-                	return chosenAssets;
             }
+            
+            if (i==numberOfAssets)
+
+            	return chosenAssets;
+            
         }
 
         printMessage("Timeout Azione terminato");
