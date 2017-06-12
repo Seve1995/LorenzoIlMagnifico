@@ -5,22 +5,28 @@ import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.gamebox.LeaderCard;
 import it.polimi.ingsw.pc22.player.Player;
+import it.polimi.ingsw.pc22.utils.RequiredCard;
 
+import java.util.List;
 import java.util.Set;
 
 public class PlayLeaderCard extends Action {
 	
-	private LeaderCard leaderCard;
+	int index;
 
 	protected boolean isLegal(Player player, GameBoard gameBoard) 
-	{	
+	{
+
+		LeaderCard leaderCard = player.getLeaderCards().get(index);
+
 		if (player.getPlayerBoard().getLeaderCards().size() > 4)
 		{
 			return false;
 		}
-		if (this.leaderCard.getRequiredAssets() != null)
+
+		if (player.getLeaderCards().get(index).getRequiredAssets() != null)
 		{
-			for (Asset a : this.leaderCard.getRequiredAssets())
+			for (Asset a : leaderCard.getRequiredAssets())
 			{
 				if (player.getAsset(a.getType()) < a.getValue())
 				{
@@ -29,15 +35,15 @@ public class PlayLeaderCard extends Action {
 			}	
 		}
 		
-		if (this.leaderCard.getRequiredCard() == null)
+		if (leaderCard.getRequiredCards() == null)
 			return true;
 
-		Set<CardTypeEnum> currCardType = this.leaderCard.getRequiredCard().keySet();
+		List<RequiredCard> requiredCards = leaderCard.getRequiredCards();
 
-		for (CardTypeEnum key : currCardType)
+		for (RequiredCard key : requiredCards)
 		{
 
-			Integer value = this.leaderCard.getRequiredCard().get(key);
+			int value = key.getValue();
 
 			if (key.equals(CardTypeEnum.BUILDING))
 			{
@@ -90,11 +96,15 @@ public class PlayLeaderCard extends Action {
 	{
 		if (isLegal(player, gameBoard))
 		{
+			LeaderCard leaderCard = player.getLeaderCards().get(index);
+
 			player.getPlayerBoard().getLeaderCards().add(leaderCard);
+
 			leaderCard.setPlayed(true);
 			
 			return true;
 		}
+
 		return false;
 	}
 }

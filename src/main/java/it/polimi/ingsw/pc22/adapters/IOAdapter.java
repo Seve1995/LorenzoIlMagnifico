@@ -299,6 +299,14 @@ public abstract class IOAdapter
     // DEGLI IF, POI VISTO CHE VIENE USATO SOLO QUI MEGLIO CREARE UNA CLASSE
     // UTILIÀ CHE GESTISCA IL PRIVILEGIO INVECE CHE UN OGGETTO DA INSTANZIARE OGNI VOLTA,
     //PS COMUNQUE E GIUSTA L'IDEA, NON MI RICORDAVO PIÙ CHE CI FOSSE DA SCEGLIERE TRAI PRIVILEGI
+
+    public void printWinnerNameToSingleUser(String playerName)
+    {
+        this.printMessage("The winner is: " + playerName);
+
+    }
+
+
     public List<Asset> chooseCouncilPrivileges(int numberOfAssets)
     {
         CouncilPrivilege councilPrivilege = new CouncilPrivilege();

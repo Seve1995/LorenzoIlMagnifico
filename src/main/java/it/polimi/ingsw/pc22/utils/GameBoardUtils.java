@@ -41,6 +41,23 @@ public class GameBoardUtils {
 		return fromFaithToVictory.get(faithPoint);
 	}
 
+	private static final Map<Integer, Integer> fromEraToFaithPoints = new HashMap<>();
+
+	static
+	{
+		fromEraToFaithPoints.put(1,3);
+		fromEraToFaithPoints.put(2,4);
+		fromEraToFaithPoints.put(3,5);
+	}
+
+	public static int calculateFaithPointsFromEra(int era)
+	{
+		if (era < 1 || era > 3)
+			return -1;
+
+		return fromEraToFaithPoints.get(era);
+	}
+
 	public static void resetPlayerStatus(List<Player> players)
 	{
 		for (Player player : players)
@@ -50,32 +67,56 @@ public class GameBoardUtils {
 		}
 	}
 
-	public static void excommunicationHandling()
+
+	private static void chooseExcommunication(Player player, int currentRoundNumber, int playerCounter, List<ExcommunicationCard> excommunicationCards,
+									   GameBoard gameBoard)
 	{
-		/*
-		// se é la fine di una era
+
+		int era = getEra(currentRoundNumber, playerCounter);
+
+		int faithPoints = calculateFaithPointsFromEra(era);
+
+		if (player.getFaithPoints() < faithPoints)
+		{
+			excommunicate(player, excommunicationCards, era, gameBoard);
+		}
+
+		else
+		{
+			int choice = player.getAdapter().askExcommunication();
+
+			if (choice == 1)
+			{
+				player.setFaithPoints(0);
+
+				if (player.isSistoIV())
+				{
+					Asset victoryBonus = new Asset(5, AssetType.VICTORYPOINT);
+
+					player.addAsset(victoryBonus);
+				}
+
+			}
+
+			else
+			{
+				excommunicate(player, excommunicationCards, era, gameBoard);
+			}
+		}
+
+	}
+
+	public static void excommunicationHandling(List<Player> players,
+											   int playerCounter, int currentRoundNumber, List<ExcommunicationCard> excommunicationCards,
+												GameBoard gameBoard)
+	{
+
+
 		if (((playerCounter < 5) && ((currentRoundNumber==8)) || ((playerCounter == 5) && (currentRoundNumber) == 6)))
 		{
 			for (Player p : players)
 			{
-				if ((p.getFaithPoints() < 3))
-
-					excommunicate(p, excommunicationCards, 1);
-
-				else
-				{
-					//ask if they want to be excommunicated
-
-					if (true) //se accetta la scomunica
-					{
-						p.setFaithPoints(0);
-					}
-
-					else
-					{
-						//excommunicate(p, )
-					}
-				}
+				chooseExcommunication(p, currentRoundNumber, playerCounter, excommunicationCards, gameBoard);
 			}
 		}
 
@@ -83,52 +124,26 @@ public class GameBoardUtils {
 		{
 			for (Player p : players)
 			{
-				if (p.getFaithPoints() < 4)
-
-					excommunicate(p, excommunicationCards, 2);
-
-				else
-				{
-					//ask if they want to be excommunicated
-
-					if (true) //se accetta la scomunica
-					{
-						p.setFaithPoints(0);
-					}
-
-					else
-					{
-						//excommunicate(p, )
-					}
-				}
+				chooseExcommunication(p, currentRoundNumber, playerCounter, excommunicationCards, gameBoard);
 			}
-		}*/
+		}
 	}
 
-	public static void endGameExcommunicatonHandling()
+	public static void endGameExcommunicatonHandling(List<Player> players, List<ExcommunicationCard> excommunicationCards,
+													 GameBoard gameBoard, int playerCounter)
 	{
-		/*for (Player p : players)
+
+		int currentRoundNumber = 20;
+
+		if (playerCounter == 5)
+
+			currentRoundNumber=15;
+
+		for (Player p : players)
 		{
-			if (p.getFaithPoints() < 5)
+			chooseExcommunication(p, currentRoundNumber, playerCounter, excommunicationCards, gameBoard);
+		}
 
-				excommunicate(p, excommunicationCards, 3);
-
-			else //ask if you want to be excommunicated
-			{
-				if (true) //se accetta la scomunica
-				{
-					p.setFaithPoints(0);
-				}
-
-				else
-				{
-					//excommunicate..
-
-				}
-
-			}
-
-		}*/
 	}
 
 	public static void setUpPlayers
@@ -152,6 +167,8 @@ public class GameBoardUtils {
 					PlayerColorsEnum.getColorByValue(i);
 
 			player.setPlayerColorsEnum(color);
+
+
 
 			System.out.println(color.toString());
 
@@ -198,15 +215,15 @@ public class GameBoardUtils {
 		gameBoard.getCouncilPalace().setPlayersInCouncilPalace(new ArrayList<>());
 	}
 
-	/*private static void excommunicate(Player p, List<ExcommunicationCard> e, int era)
+	private static void excommunicate(Player p, List<ExcommunicationCard> e, int era, GameBoard gameBoard)
 	{
 
-		for (Effect eff : e.get(era-1).getEffects())
+		for (Effect eff : e.get(era).getEffects())
 		{
 			eff.executeEffects(p, gameBoard);
 		}
 
-	}*/
+	}
 
 	public static void sumFinalPoints(List<Player> players, GameBoard gameBoard)
 	{

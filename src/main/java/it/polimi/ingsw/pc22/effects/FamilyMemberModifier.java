@@ -14,6 +14,54 @@ public class FamilyMemberModifier implements Effect
 	private boolean toColoured;
 	private boolean isABonus;
 	private boolean toAll;
+
+	public ColorsEnum getFamilyMemberColor() {
+		return familyMemberColor;
+	}
+
+	public void setFamilyMemberColor(ColorsEnum familyMemberColor) {
+		this.familyMemberColor = familyMemberColor;
+	}
+
+	public int getDiceValueSet() {
+		return diceValueSet;
+	}
+
+	public void setDiceValueSet(int diceValueSet) {
+		this.diceValueSet = diceValueSet;
+	}
+
+	public int getDiceValueBonus() {
+		return diceValueBonus;
+	}
+
+	public void setDiceValueBonus(int diceValueBonus) {
+		this.diceValueBonus = diceValueBonus;
+	}
+
+	public boolean isToColoured() {
+		return toColoured;
+	}
+
+	public void setToColoured(boolean toColoured) {
+		this.toColoured = toColoured;
+	}
+
+	public boolean isABonus() {
+		return isABonus;
+	}
+
+	public void setABonus(boolean ABonus) {
+		isABonus = ABonus;
+	}
+
+	public boolean isToAll() {
+		return toAll;
+	}
+
+	public void setToAll(boolean toAll) {
+		this.toAll = toAll;
+	}
 	
 	//se toCOloured=true && toAll=false richiede un input-> familyMemberColor
 

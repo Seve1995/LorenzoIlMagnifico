@@ -7,7 +7,7 @@ import it.polimi.ingsw.pc22.player.Player;
 
 public class DiscardLeaderCard extends Action{
 	
-	private LeaderCard leaderCard;
+	int index;
 
 	@Override
 	protected boolean isLegal(Player player, GameBoard gameBoard) {
@@ -18,7 +18,7 @@ public class DiscardLeaderCard extends Action{
 	@Override
 	public boolean executeAction(Player player, GameBoard gameBoard) {
 		
-		leaderCard = null;
+		player.getLeaderCards().set(index, null);
 		
 		PickOneCouncilPrivilege currCouncilPrivilege=new PickOneCouncilPrivilege();
 		

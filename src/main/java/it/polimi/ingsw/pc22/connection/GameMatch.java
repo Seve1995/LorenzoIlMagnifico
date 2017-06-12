@@ -35,6 +35,8 @@ public class GameMatch implements Runnable
 
 	private List<ExcommunicationCard> excommunicationCards;
 
+	private List<LeaderCard> leaderCards;
+
 	private Long timeout;
 
 	private static final String BOARD_PATH = "boards/";
@@ -98,11 +100,13 @@ public class GameMatch implements Runnable
 
 		loadBonusTiles();
 
-		//loadLeaderCards();
+		loadLeaderCards();
+
+		assignLeaderCards();
+
+		assignExcommunicationCards();
 		
         int turnNumber = 6 * playerCounter;
-
-		//setDellecartescomunica
 
 		GameBoardUtils.setUpPlayers(players, playerCounter, tiles);
 
@@ -118,7 +122,7 @@ public class GameMatch implements Runnable
 
 				checkOrderTurn();
 
-				//resetLeaderCards(players);
+				resetLeaderCards(players);
 
 				GameBoardUtils.purgeGameBoard(gameBoard);
 
@@ -163,15 +167,17 @@ public class GameMatch implements Runnable
 
 			GameBoardUtils.resetPlayerStatus(players);
 
-			GameBoardUtils.excommunicationHandling();
+			GameBoardUtils.excommunicationHandling(players, playerCounter, currentRoundNumber, excommunicationCards, gameBoard);
 
 		}
 
-		GameBoardUtils.endGameExcommunicatonHandling();
+		GameBoardUtils.endGameExcommunicatonHandling(players, excommunicationCards, gameBoard, playerCounter);
 
 		GameBoardUtils.sumFinalPoints(players, gameBoard); //check excommunication
 
-		selectWinner(players);
+		String winnerName = selectWinner(players);
+
+		printWinnerNameToAll(players, winnerName);
 
 		endGame();
 		
@@ -220,6 +226,53 @@ public class GameMatch implements Runnable
 		Collections.shuffle(cards);
 	}
 
+	private void assignLeaderCards()
+	{
+		Collections.shuffle(leaderCards);
+
+		int i=0;
+
+		while(i<players.size())
+		{
+
+			Player player = players.get(i);
+
+			for (int j=4*i; j<(4*(i+1)); j++)
+			{
+				LeaderCard currLeaderCard = leaderCards.get(j);
+
+				player.getLeaderCards().add(currLeaderCard);
+			}
+
+			i++;
+		}
+	}
+
+	private void assignExcommunicationCards()
+	{
+
+		ExcommunicationCard firstEraExcommunication =
+				excommunicationCards.stream().filter(excommunicationCard -> (excommunicationCard.getAge()==1))
+						.collect(Collectors.toList()).get(0);
+
+		ExcommunicationCard secondEraExcommunication =
+				excommunicationCards.stream().filter(excommunicationCard -> (excommunicationCard.getAge()==2))
+						.collect(Collectors.toList()).get(0);
+
+		ExcommunicationCard thirdEraExcommunication =
+				excommunicationCards.stream().filter(excommunicationCard -> (excommunicationCard.getAge()==3))
+						.collect(Collectors.toList()).get(0);
+
+
+		List<ExcommunicationCard> tempExcCards = new ArrayList<>();
+
+		tempExcCards.add(firstEraExcommunication);
+		tempExcCards.add(secondEraExcommunication);
+		tempExcCards.add(thirdEraExcommunication);
+
+		excommunicationCards = tempExcCards;
+	}
+
 	private void loadExcommunicationCards()
 	{
 		String path = BOARD_PATH + "ExcommunicationCards.json";
@@ -243,6 +296,17 @@ public class GameMatch implements Runnable
 		tiles = BonusTileLoader.loadBonusTiles(bonusTiles);
 
 		System.out.println(tiles);
+	}
+
+	private void loadLeaderCards()
+	{
+		String path = BOARD_PATH + "LeaderCards.json";
+
+		String leaderCardsString = fileLoader(path);
+
+		JSONObject leaders = new JSONObject(leaderCardsString);
+
+		leaderCards = LeaderCardLoader.loadLeaderCards(leaders);
 	}
 
 	private String fileLoader(String path)
@@ -372,11 +436,13 @@ public class GameMatch implements Runnable
 	{
 		for (Player p : players)
 		{
+			if (p.getPlayerBoard().getLeaderCards().isEmpty()) return;
+
 			for (LeaderCard l : p.getPlayerBoard().getLeaderCards())
 			{
 				l.setFaceUp(true);
 			}
-		
+
 		}
 	}
 
@@ -412,10 +478,20 @@ public class GameMatch implements Runnable
 				winnerName = p.getName(); 
 			}
 		}
-		
+
 		return winnerName;
-		
-		//stampalo a tutti i giocatori
+
+	}
+
+
+	private void printWinnerNameToAll(List<Player>  players, String winnerName)
+
+	{
+		for (Player p : players)
+		{
+			p.getAdapter().printWinnerNameToSingleUser(winnerName);
+		}
+
 	}
 
 	public int getMaxPlayersNumber()

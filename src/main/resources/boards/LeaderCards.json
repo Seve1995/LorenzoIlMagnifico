@@ -1,18 +1,19 @@
 {
-  "LeaderCard": [
+  "LeaderCards": [
     {
       "name": "Francesco Sforza",
+      "number": 1,
       "faceUp": false,
       "requiredAssets": [
         {
-          "AssetType": null,
-          "Value": 0
+          "type": "COIN",
+          "value": 0
         }
       ],
       "requiredCard": [
         {
-          "CardTypeEnum": "VENTURE",
-          "Value": 5
+          "cardType": "VENTURE",
+          "value": 5
         }
       ],
       "effects": [
@@ -24,17 +25,18 @@
     },
     {
       "name": "Ludovico Ariosto",
+      "number": 2,
       "faceUp": false,
       "requiredAssets": [
         {
-          "AssetType": null,
-          "Value": 0
+          "type": "COIN",
+          "value": 0
         }
       ],
       "requiredCard": [
         {
-          "CardTypeEnum": "CHARACTER",
-          "Value": 5
+          "cardType": "CHARACTER",
+          "value": 5
         }
       ],
       "effects": [
@@ -45,47 +47,48 @@
     },
     {
       "name": "Filippo Brunelleschi",
+      "number": 3,
       "faceUp": false,
       "requiredAssets": [
         {
-          "AssetType": null,
-          "Value": 0
+          "type": "COIN",
+          "value": 0
         }
       ],
       "requiredCard": [
         {
-          "CardTypeEnum": "BUILDING",
-          "Value": 5
+          "cardType": "BUILDING",
+          "value": 5
         }
       ],
       "effects": [
         {
-          "name": null,
-          "value": 0
+          "name": "AddAsset",
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 5
+          }
         }
       ]
     },
     {
       "name": "Sigismondo Malatesta",
+      "number": 4,
       "faceUp": false,
       "requiredAssets": [
         {
-          "AssetType": "MILITARYPOINT",
-          "Value": 7
+          "type": "MILITARYPOINT",
+          "value": 7
         },
         {
-          "AssetType": "FAITHPOINT",
-          "Value": 3
+          "type": "FAITHPOINT",
+          "value": 3
         }
       ],
       "requiredCard": [
         {
-          "CardTypeEnum": "FamilyMemberModifier",
-          "diceValueSet": 0,
-          "diceValueBonus": 3,
-          "toColoured": false,
-          "isABonus": true,
-          "toAll": false
+          "cardType": "ANY",
+          "value": 0
         }
       ],
       "effects": [
@@ -93,7 +96,7 @@
           "name": "FamilyMemberModifier",
           "diceValueBonus": 3,
           "diceValueSet": 0,
-          "isColoured": false,
+          "toColoured": false,
           "isABonus": true,
           "toAll": true
         }
@@ -101,100 +104,114 @@
     },
     {
       "name": "Girolamo Savonarola",
+      "number": 5,
       "faceUp": false,
       "requiredAssets": [
         {
-          "AssetType": "COIN",
-          "Value": 18
+          "type": "COIN",
+          "value": 18
         }
       ],
       "requiredCard": [
         {
-          "CardTypeEnum": null,
-          "Value": 0
+          "cardType": "ANY",
+          "value": 0
         }
       ],
       "effects": [
         {
           "name": "AddAsset",
-          "assetType": "FAITHPOINT",
-          "value": 1
+          "asset": {
+            "type": "COIN",
+            "value": 1
+          }
         }
       ]
     },
     {
       "name": "Michelangelo Buonarroti",
+      "number": 6,
       "faceUp": false,
       "requiredAssets": [
         {
-          "AssetType": "STONE",
-          "Value": 10
+          "type": "STONE",
+          "value": 10
         }
       ],
       "requiredCard": [
         {
-          "CardTypeEnum": null,
-          "Value": 0
+          "cardType": "ANY",
+          "value": 0
         }
       ],
       "effects": [
         {
           "name": "AddAsset",
-          "assetType": "COIN",
-          "value": 3
+          "asset": {
+            "type": "COIN",
+            "value": 3
+          }
         }
       ]
     },
     {
       "name": "Giovanni dalle Bande Nere",
+      "number": 7,
       "faceUp": false,
       "requiredAssets": [
         {
-          "AssetType": "MILITARYPOINT",
-          "Value": 12
+          "type": "MILITARYPOINT",
+          "value": 12
         }
       ],
       "requiredCard": [
         {
-          "CardTypeEnum": null,
-          "Value": 0
+          "cardType": "ANY",
+          "value": 0
         }
       ],
       "effects": [
         {
           "name": "AddAsset",
-          "assetType": "WOOD",
-          "value": 1
+          "asset": {
+            "type": "WOOD",
+            "value": 1
+          }
         },
         {
           "name": "AddAsset",
-          "assetType": "STONE",
-          "value": 1
+          "asset": {
+            "type": "STONE",
+            "value": 1
+          }
         },
         {
           "name": "AddAsset",
-          "assetType": "COIN",
-          "value": 1
+          "asset": {
+            "type": "COIN",
+            "value": 1
+          }
         }
       ]
     },
     {
       "name": "Leonardo da Vinci",
+      "number": 8,
       "faceUp": false,
       "requiredAssets": [
         {
-          "AssetType": null,
-          "Value": 0
+          "type": "COIN",
+          "value": 0
         }
       ],
       "requiredCard": [
         {
-          "CardTypeEnum": "CARACHTER",
-          "Value": 4
+          "cardType": "CHARACTER",
+          "value": 4
         },
         {
-          "CardTypeEnum": "TERRITORY",
-          "Value": 2
+          "cardType": "TERRITORY",
+          "value": 2
         }
       ],
       "effects": [
@@ -206,56 +223,62 @@
     },
     {
       "name": "Sandro Botticelli",
+      "number": 9,
       "faceUp": false,
       "requiredAssets": [
         {
-          "AssetType": "WOOD",
-          "Value": 10
+          "type": "WOOD",
+          "value": 10
         }
       ],
       "requiredCard": [
         {
-          "CardTypeEnum": null,
+          "cardType": "ANY",
           "value": 0
         }
       ],
       "effects": [
         {
           "name": "AddAsset",
-          "assetType": "MILITARYPOINT",
-          "value": 2
+          "asset": {
+            "type": "MILITARYPOINT",
+            "value": 2
+          }
         },
         {
           "name": "AddAsset",
-          "assetType": "VICTORYPOINT",
-          "value": 1
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 1
+          }
         }
       ]
     },
     {
       "name": "Ludovico il Moro",
+      "number": 10,
       "faceUp": false,
       "requiredAssets": [
         {
-          "AssetType": null,
-          "Value": 0
+          "type": "COIN",
+          "value": 0
         }
       ],
       "requiredCard": [
         {
-          "CardTypeEnum": "TERRITORY",
+          "cardType": "TERRITORY",
           "value": 2
         },
         {
-          "CardTypeEnum": "CHARACTER",
+          "cardType": "CHARACTER",
           "value": 2
         },
         {
-          "CardTypeEnum": "BUILDING",
+          "cardType": "BUILDING",
           "value": 2
         },
         {
-          "CardTypeEnum": "VENTURE",
+          "cardType": "VENTURE",
           "value": 2
         }
       ],
@@ -272,16 +295,17 @@
     },
     {
       "name": "Lucrezia Borgia",
+      "number": 11,
       "faceUp": false,
       "requiredAssets": [
         {
-          "AssetType": null,
-          "Value": 0
+          "type": "COIN",
+          "value": 0
         }
       ],
       "requiredCard": [
         {
-          "CardTypeEnum": "ANY",
+          "cardType": "ANY",
           "value": 6
         }
       ],
@@ -298,16 +322,17 @@
     },
     {
       "name": "Federico da Montefeltro",
+      "number": 12,
       "faceUp": false,
       "requiredAssets": [
         {
-          "AssetType": null,
-          "Value": 0
+          "type": "COIN",
+          "value": 0
         }
       ],
       "requiredCard": [
         {
-          "CardTypeEnum": "TERRITORY",
+          "cardType": "TERRITORY",
           "value": 5
         }
       ],
@@ -324,78 +349,85 @@
     },
     {
       "name": "Lorenzo de'Medici",
+      "number": 13,
       "faceUp": false,
       "requiredAssets": [
         {
-          "AssetType": "VICTORYPOINT",
-          "Value": 35
+          "type": "VICTORYPOINT",
+          "value": 35
         }
       ],
       "requiredCard": [
         {
-          "CardTypeEnum": null,
+          "cardType": "ANY",
           "value": 0
         }
       ],
       "effects": [
         {
           "name": "AddAsset",
-	  "assetType": "VICTORYPOINTS",
-	  "value": 99
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 99
+          }
         }
       ]
     },
     {
       "name": "Sisto IV",
+      "number": 14,
       "faceUp": false,
       "requiredAssets": [
         {
-          "AssetType": "WOOD",
-          "Value": 6
+          "type": "WOOD",
+          "value": 6
         },
         {
-          "AssetType": "STONE",
-          "Value": 6
+          "type": "STONE",
+          "value": 6
         },
         {
-          "AssetType": "SERVANT",
-          "Value": 6
+          "type": "SERVANT",
+          "value": 6
         },
         {
-          "AssetType": "COIN",
-          "Value": 6
+          "type": "COIN",
+          "value": 6
         }
       ],
       "requiredCard": [
         {
-          "CardTypeEnum": null,
+          "cardType": "ANY",
           "value": 0
         }
       ],
       "effects": [
         {
           "name": "AddAsset",
-          "assetType": "VICTORYPOINTS",
-          "value": 5
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 5
+          }
         }
       ]
     },
     {
       "name": "Cesare Borgia",
+      "number": 15,
       "faceUp": false,
       "requiredAssets": [
         {
-          "AssetType": "FAITHPOINT",
-          "Value": 2
+          "type": "FAITHPOINT",
+          "value": 2
         },
         {
-          "AssetType": "COIN",
-          "Value": 12
+          "type": "COIN",
+          "value": 12
         }
       ],
       "requiredCard": [
         {
-          "CardTypeEnum": "BUILDING",
+          "cardType": "BUILDING",
           "value": 3
         }
       ],
@@ -407,16 +439,17 @@
     },
     {
       "name": "Santa Rita",
+      "number": 16,
       "faceUp": false,
       "requiredAssets": [
         {
-          "AssetType": "FAITHPOINT",
-          "Value": 8
+          "type": "FAITHPOINT",
+          "value": 8
         }
       ],
       "requiredCard": [
         {
-          "CardTypeEnum": null,
+          "cardType": "ANY",
           "value": 0
         }
       ],
@@ -428,49 +461,55 @@
     },
     {
       "name": "Cosimo de' Medici",
+      "number": 17,
       "faceUp": false,
       "requiredAssets": [
         {
-          "AssetType": null,
-          "Value": 0
+          "type": "COIN",
+          "value": 0
         }
       ],
       "requiredCard": [
         {
-          "CardTypeEnum": "BUILDING",
+          "cardType": "BUILDING",
           "value": 4
         },
         {
-          "CardTypeEnum": "VENTURE",
+          "cardType": "VENTURE",
           "value": 2
         }
       ],
       "effects": [
         {
           "name": "AddAsset",
-          "AssetType" : "SERVANT",
-          "value": 3
-          
+          "asset": {
+            "type": "SERVANT",
+            "value": 1
+          }
+
         },
         {
           "name": "AddAsset",
-          "AssetType":"VICTORYPOINT",
-          "value": 1
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 1
+          }
         }
       ]
     },
     {
       "name": "Ludovico III Gonzaga",
+      "number": 18,
       "faceUp": false,
       "requiredAssets": [
         {
-          "AssetType": "SERVANT",
-          "Value": 15
+          "type": "SERVANT",
+          "value": 15
         }
       ],
       "requiredCard": [
         {
-          "CardTypeEnum": null,
+          "cardType": "ANY",
           "value": 0
         }
       ],
@@ -482,47 +521,51 @@
     },
     {
       "name": "Bartolomeo Celloni",
+      "number": 19,
       "faceUp": false,
       "requiredAssets": [
         {
-          "AssetType": null,
-          "Value": 0
+          "type": "COIN",
+          "value": 0
         }
       ],
       "requiredCard": [
         {
-          "CardTypeEnum": "TERRITORY",
+          "cardType": "TERRITORY",
           "value": 4
         },
         {
-          "CardTypeEnum": "VENTURE",
+          "cardType": "VENTURE",
           "value": 2
         }
       ],
       "effects": [
         {
           "name": "AddAsset",
-          "Asset": "VICTORYPOINT",
-          "Value": 4
+          "asset": {
+            "type": "VICTORYPOINT",
+            "value": 4
+          }
         }
       ]
     },
     {
       "name": "Pico della Mirandola",
+      "number": 20,
       "faceUp": false,
       "requiredAssets": [
         {
-          "AssetType": null,
-          "Value": 0
+          "type": "COIN",
+          "value": 0
         }
       ],
       "requiredCard": [
         {
-          "CardTypeEnum": "VENTURE",
+          "cardType": "VENTURE",
           "value": 4
         },
         {
-          "CardTypeEnum": "BUILDING",
+          "cardType": "BUILDING",
           "value": 2
         }
       ],

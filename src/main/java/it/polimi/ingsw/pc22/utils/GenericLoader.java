@@ -294,6 +294,52 @@ public class GenericLoader
 
                 endGameMalus.setAssetsMalus(assets);
             }
+
+
+        }
+
+        if (effect instanceof  FamilyMemberModifier)
+        {
+            FamilyMemberModifier familyMemberModifier = ((FamilyMemberModifier) effect);
+
+            int diceValueBonus = jsonEffect.getInt("diceValueBonus");
+
+            int diceValueSet = jsonEffect.getInt("diceValueSet");
+
+            boolean isColoured = jsonEffect.getBoolean("toColoured");
+
+            boolean toAll = jsonEffect.getBoolean("toAll");
+
+            boolean isABonus = jsonEffect.getBoolean("isABonus");
+
+            familyMemberModifier.setDiceValueBonus(diceValueBonus);
+
+            familyMemberModifier.setDiceValueSet(diceValueSet);
+
+            familyMemberModifier.setABonus(isABonus);
+
+            familyMemberModifier.setToAll(toAll);
+
+            familyMemberModifier.setToColoured(isColoured);
+
+        }
+
+        if (effect instanceof DoProductionAction)
+        {
+            DoProductionAction doProductionAction = ((DoProductionAction) effect);
+
+            int value = jsonEffect.getInt("value");
+
+            doProductionAction.setValue(value);
+        }
+
+        if (effect instanceof DoHarvestAction)
+        {
+            DoHarvestAction doHarvestAction = ((DoHarvestAction) effect);
+
+            int value = jsonEffect.getInt("value");
+
+            doHarvestAction.setValue(value);
         }
 
     }
@@ -325,4 +371,36 @@ public class GenericLoader
 
         return assets;
     }
+
+    protected static List<RequiredCard> loadRequiredCards (JSONArray jsonRequiredCards)
+            throws  JSONException
+    {
+        List<RequiredCard> requiredCards = new ArrayList<>();
+
+        for(int i = 0; i < jsonRequiredCards.length(); i++)
+        {
+            JSONObject jsonRequiredCard = jsonRequiredCards.getJSONObject(i);
+
+            RequiredCard requiredCard = loadRequiredCard(jsonRequiredCard);
+
+            requiredCards.add(requiredCard);
+        }
+
+        return requiredCards;
+
+    }
+
+    protected static RequiredCard loadRequiredCard(JSONObject jsonRequiredCard)
+            throws JSONException
+
+    {
+        String type = jsonRequiredCard.getString("cardType");
+
+        int value = jsonRequiredCard.getInt("value");
+
+        CardTypeEnum cardTypeEnum = CardTypeEnum.valueOf(type);
+
+        return new RequiredCard(value, cardTypeEnum);
+    }
+
 }

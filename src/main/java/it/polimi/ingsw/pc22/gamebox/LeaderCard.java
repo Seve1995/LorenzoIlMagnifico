@@ -1,30 +1,39 @@
 package it.polimi.ingsw.pc22.gamebox;
 
 import it.polimi.ingsw.pc22.effects.Effect;
+import it.polimi.ingsw.pc22.utils.RequiredCard;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
 public class LeaderCard {
 	private String name;
+	private int number;
 	private List<Asset> requiredAssets;
-	private Map <CardTypeEnum, Integer> requiredCard = new EnumMap<>(CardTypeEnum.class);
+	private List<RequiredCard> requiredCards = new ArrayList<RequiredCard>();
 	private boolean faceUp;
 	private boolean isPlayed;
+	private List<Effect> effects;
+
 	public boolean isPlayed() {
 		return isPlayed;
 	}
 	public void setPlayed(boolean isPlayed) {
 		this.isPlayed = isPlayed;
 	}
-	private List<Effect> effects;
-	
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public int getNumber() {
+		return number;
+	}
+	public void setNumber(int number) {
+		this.number = number;
 	}
 	public List<Asset> getRequiredAssets() {
 		return requiredAssets;
@@ -32,11 +41,11 @@ public class LeaderCard {
 	public void setRequiredAssets(List<Asset> requiredAssets) {
 		this.requiredAssets = requiredAssets;
 	}
-	public Map<CardTypeEnum, Integer> getRequiredCard() {
-		return requiredCard;
+	public List<RequiredCard> getRequiredCards() {
+		return requiredCards;
 	}
-	public void setRequiredCard(Map<CardTypeEnum, Integer> requiredCard) {
-		this.requiredCard = requiredCard;
+	public void setRequiredCards(List<RequiredCard> requiredCards) {
+		this.requiredCards = requiredCards;
 	}
 	public boolean isFaceUp() {
 		return faceUp;
