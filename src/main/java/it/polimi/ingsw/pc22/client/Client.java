@@ -28,14 +28,14 @@ public class Client
 
 			String choice = scanner.nextLine();
 
-			if (choice.equals("rmi"))
+			if ("rmi".equals(choice))
 			{
 				loadRMIConnection();
 
 				break;
 			}
 
-			if (choice.equals("socket"))
+			if ("socket".equals(choice))
 			{
 				loadSocketConnection();
 

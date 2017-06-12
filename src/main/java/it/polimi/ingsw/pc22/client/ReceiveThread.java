@@ -3,11 +3,15 @@ package it.polimi.ingsw.pc22.client;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ReceiveThread implements Runnable
 {
 	private Socket socket=null;
 	private BufferedReader inSocket=null;
+
+	private static final Logger LOGGER = Logger.getLogger(ReceiveThread.class.getName());
 	
 	public ReceiveThread(Socket socket) {
 		this.socket = socket;
@@ -27,7 +31,7 @@ public class ReceiveThread implements Runnable
 
 				System.out.println("From Server: " + msgReceived);
 
-				if(!msgReceived.equalsIgnoreCase("EXIT")) continue;
+				if(!"EXIT".equalsIgnoreCase(msgReceived)) continue;
 
 				System.out.println("Shutting down input");
 
@@ -39,7 +43,7 @@ public class ReceiveThread implements Runnable
 		}
 		catch(Exception e)
 		{
-			System.out.println(e.getMessage());
+			LOGGER.log(Level.INFO, "ERROR RECEIVE THREAD", e);
 		}
 	}
 }

@@ -54,12 +54,12 @@ public class FamilyMemberModifier implements Effect
 				{
 					if (!(f.getColor().equals(ColorsEnum.NEUTER)))
 					{
-						if (!isABonus && toAll)
+						if (!isABonus)
 						{
 							f.setFamiliarValue(diceValueSet); 
 						}
 						
-						if(isABonus && toAll)
+						if(isABonus)
 						{
 							f.setValueModifier(f.getValueModifier() + this.diceValueBonus);
 						}

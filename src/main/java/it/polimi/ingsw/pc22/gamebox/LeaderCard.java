@@ -2,6 +2,7 @@ package it.polimi.ingsw.pc22.gamebox;
 
 import it.polimi.ingsw.pc22.effects.Effect;
 
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +10,7 @@ import java.util.Map;
 public class LeaderCard {
 	private String name;
 	private List<Asset> requiredAssets;
-	private Map <CardTypeEnum, Integer> requiredCard = new HashMap<CardTypeEnum, Integer>();
+	private Map <CardTypeEnum, Integer> requiredCard = new EnumMap<>(CardTypeEnum.class);
 	private boolean faceUp;
 	private boolean isPlayed;
 	public boolean isPlayed() {
