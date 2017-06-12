@@ -119,28 +119,28 @@ public abstract class DevelopmentCard
 	
 	public String toString() {
 		
-		String output="";
+		StringBuilder output = new StringBuilder();
 		
-		if (!((this.getImmediateEffects())==null)){
-			output += "It has the following Immediate Effects ";
+		if ((this.getImmediateEffects())!=null){
+			output.append("It has the following Immediate Effects ");
 			for (Effect e: this.immediateEffects){
-				output += e.toString() + "\n";
+				output.append(e.toString() + "\n");
 			}
 		}
 		
-		if (!((this.getPermanentEffects())==null))
+		if ((this.getPermanentEffects())!=null)
 		{
-			output += "It has the following Permanent Effects " ;
+			output.append("It has the following Permanent Effects ");
 			for (Effect e: this.permanentEffects){ 
-				 output += e.toString() + "\n";
+				output.append(e.toString() + "\n");
 				 if (permanentEffectChoice && !(e.equals(permanentEffects.get(permanentEffects.size()-1))))
 				 {
-					 output += "or";
+					 output.append("or");
 				 }
 			}
 		}
 		
-		return output;
+		return output.toString();
 	}
 	
 	

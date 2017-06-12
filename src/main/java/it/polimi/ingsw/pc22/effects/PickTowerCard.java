@@ -13,9 +13,9 @@ public class PickTowerCard implements Effect
 	private int floor;
 	private CardTypeEnum cardType;
 	private int diceValue;
-	private List<Asset> assetsDiscount;
-	
-	private List<Asset> costs = new ArrayList<Asset>();
+	private List<Asset> assetsDiscount; //This contains the assets 
+	private List<Asset> costs = new ArrayList<Asset>(); //Auxiliary arraylist that storage the card's cost
+	private List<CardModifier> currentCardModifiers = new ArrayList<CardModifier>(); //Auxiliary arraylist that storage the card modifiers associated with the cardType
 
 	public int getFloor() {
 		return floor;
@@ -78,8 +78,11 @@ public class PickTowerCard implements Effect
 		
 		for(CardModifier c : player.getCardModifiers())
 		{
-			if (c.getCardType().equals(cardType)) 
+			if (c.getCardType().equals(cardType))
+			{
+				currentCardModifiers.add(c);
 				diceValue += c.getValueModifier();
+			}
 		}
 		
 		//applyDiceChanges(player);
@@ -291,67 +294,61 @@ public class PickTowerCard implements Effect
 		if (cardType.equals(CardTypeEnum.BUILDING))
 			
 		{			
-			for (CardModifier cm : p.getCardModifiers())
-			{
-				if (cm.getCardType().equals(cardType))
+			for (CardModifier cm : currentCardModifiers)
+			{		
+				if (cm.isOnlyOneAsset())
 				{
-					if (cm.isOnlyOneAsset())
-						{
 						
-						List<Asset> chosenAssets = p.getAdapter().chooseAssets(1, cm.getAssetDiscount());
-						
-						if (chosenAssets==null) return false;
-
-						Asset chosenAsset = chosenAssets.get(0);
-						
-						for (Asset a1 : costs)
-						{
-						
-							if (a1.getType().equals(chosenAsset.getType()))
-							
-								costs.add(new Asset(a1.getValue() - chosenAsset.getValue(), a1.getType()));
-						}
-						
-						continue;
-						
-						}
-						
-					for (Asset a : cm.getAssetDiscount())
-					{
-						for (Asset a1 : costs)
-						{
-							if (a1.getType().equals(a.getType()))
-							
-								a1.setValue((a1.getValue() - a.getValue()));
-							
-						}
+					List<Asset> chosenAssets = p.getAdapter().chooseAssets(1, cm.getAssetDiscount());
 					
+					if (chosenAssets==null) return false;
+
+					Asset chosenAsset = chosenAssets.get(0);
+					
+					for (Asset a1 : costs)
+					{
+					
+						if (a1.getType().equals(chosenAsset.getType()))
+						
+							costs.add(new Asset(a1.getValue() - chosenAsset.getValue(), a1.getType()));
 					}
 					
+					continue;
+					
+				}
+					
+				for (Asset a : cm.getAssetDiscount())
+				{
+					for (Asset a1 : costs)
+					{
+						if (a1.getType().equals(a.getType()))
+						
+							a1.setValue((a1.getValue() - a.getValue()));
+						
+					}
+				
+				}
+				
 				}
 			
-			}	
-				
-		}
+			}
 		
 		if (cardType.equals(CardTypeEnum.CHARACTER))
 			
 		{			
 				Asset coinsCost = costs.get(0);
 				
-				for (CardModifier cm : p.getCardModifiers())
+				for (CardModifier cm : currentCardModifiers)
 				{
-					if (cm.getCardType().equals(cardType))
-					
-						for (Asset a : cm.getAssetDiscount())
+					for (Asset a : cm.getAssetDiscount())
+					{
+				
+						if (a.getType().equals(AssetType.COIN))
 						{
-					
-							if (a.getType().equals(AssetType.COIN))
-							{
-								costs.get(0).setValue(coinsCost.getValue() - a.getValue());
-							}
-					
+							costs.get(0).setValue(coinsCost.getValue() - a.getValue());
 						}
+				
+					}
 			
 				}
 	
@@ -361,29 +358,23 @@ public class PickTowerCard implements Effect
 			
 		{
 			
-			for (CardModifier cm : p.getCardModifiers())
+			for (CardModifier cm : currentCardModifiers)
 			{
-				if (cm.getCardType().equals(cardType))
+				for (Asset a : cm.getAssetDiscount())
 				{
-					
-					for (Asset a : cm.getAssetDiscount())
+					for (Asset a1 : costs)
 					{
-						for (Asset a1 : costs)
-						{
+					
+						if (a1.getType().equals(a.getType()))
 						
-							if (a1.getType().equals(a.getType()))
-							
-								a1.setValue(a1.getValue() - a.getValue());	
-						}
-					
+							a1.setValue(a1.getValue() - a.getValue());	
 					}
-					
+				
 				}
-			
-				}	
 				
 			}
 		
+		}	
 		return true;
 		
 	}

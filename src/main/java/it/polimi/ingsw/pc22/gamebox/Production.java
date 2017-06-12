@@ -31,11 +31,11 @@ public class Production
 	}
 	
 	public String toString() {
-		String output = "PRODUCTION\n"
-						+ "FamilyMembers already in production area:\n";
+		StringBuilder output = new StringBuilder("PRODUCTION\n"
+						+ "FamilyMembers already in production area:\n");
 		for (int i=0; i<firstCellFree(); i++)
-			output += i + ") " + productionCells[i].getFamilyMember().toString();
-		return output;
+			output.append(i + ") " + productionCells[i].getFamilyMember().toString());
+		return output.toString();
 	}
 	
 	public String gainInfo() {

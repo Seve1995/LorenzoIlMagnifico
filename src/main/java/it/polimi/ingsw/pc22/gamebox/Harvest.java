@@ -39,11 +39,11 @@ public class Harvest
 	}
 	
 	public String toString() {
-		String output = "HARVEST\n" 
-						+"FamilyMembers already in harvest area:\n";
+		StringBuilder output = new StringBuilder("HARVEST\n" 
+						+"FamilyMembers already in harvest area:\n");
 		for (int i=0; i<firstCellFree(); i++)
-			output += i + ") " + harvestCells[i].getFamilyMember().toString();
-		return output;
+			output.append(i + ") " + harvestCells[i].getFamilyMember().toString());
+		return output.toString();
 	}
 
 }
