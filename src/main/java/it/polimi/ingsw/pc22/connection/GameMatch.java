@@ -308,11 +308,12 @@ public class GameMatch implements Runnable
 		
 		List<TowerCell> territoryTowerCells = towers[0].getTowerCells();
 				
-		List<DevelopmentCard> territoryCards = cards.stream()
+		List<DevelopmentCard> territoryCards = cards
+				.parallelStream()
 				.filter(devCard -> ((devCard.getRoundNumber() == roundNumber) && (devCard instanceof TerritoryCard)))
-				.collect(Collectors.toList())
-				.subList(0, territoryTowerCells.size());
-		
+				.limit(4)
+				.collect(Collectors.toList());
+
 		for (DevelopmentCard t : territoryCards)
 			cards.remove(t);
 		
@@ -323,10 +324,11 @@ public class GameMatch implements Runnable
 	
 		List<TowerCell> characterTowerCells = towers[1].getTowerCells();
 		
-		List<DevelopmentCard> characterCards = cards.parallelStream()
+		List<DevelopmentCard> characterCards = cards
+				.parallelStream()
 				.filter(devCard -> (devCard.getRoundNumber() == roundNumber && devCard instanceof CharacterCard))
-				.collect(Collectors.toList())
-				.subList(0, characterTowerCells.size());
+				.limit(4)
+				.collect(Collectors.toList());
 
 		for (DevelopmentCard t : characterCards)
 			cards.remove(t);
@@ -338,10 +340,11 @@ public class GameMatch implements Runnable
 
 		List<TowerCell> buildingTowerCells = towers[2].getTowerCells();
 		
-		List<DevelopmentCard> buildingCards = cards.parallelStream()
+		List<DevelopmentCard> buildingCards = cards
+				.parallelStream()
 				.filter(devCard -> (devCard.getRoundNumber() == roundNumber && devCard instanceof BuildingCard))
-				.collect(Collectors.toList())
-				.subList(0, buildingTowerCells.size());
+				.limit(4)
+				.collect(Collectors.toList());
 
 		for (DevelopmentCard t : buildingCards)
 			cards.remove(t);
@@ -353,10 +356,11 @@ public class GameMatch implements Runnable
 		
 		List<TowerCell> ventureTowerCells = towers[3].getTowerCells();
 		
-		List<DevelopmentCard> ventureCards = cards.parallelStream()
+		List<DevelopmentCard> ventureCards = cards
+				.parallelStream()
 				.filter(devCard -> (devCard.getRoundNumber() == roundNumber && devCard instanceof VentureCard))
-				.collect(Collectors.toList())
-				.subList(0, ventureTowerCells.size());
+				.limit(4)
+				.collect(Collectors.toList());
 
 		for (DevelopmentCard t : ventureCards)
 			cards.remove(t);
@@ -365,7 +369,7 @@ public class GameMatch implements Runnable
 		{
 			ventureTowerCells.get(i).setDevelopmentCard(ventureCards.get(i));
 		}
-				
+		System.out.println(cards.size());		
 	}
 
 	private void resetLeaderCards(List<Player> players)
