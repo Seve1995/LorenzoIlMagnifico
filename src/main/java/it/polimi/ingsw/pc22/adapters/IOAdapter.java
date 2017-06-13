@@ -67,7 +67,7 @@ public abstract class IOAdapter
 
             this.printMessage("- play card <index>" + '\n' +
                 "- discard card <index>" + '\n' +
-                "- turn card <index>" + '\n' +
+                "- activate card <index>" + '\n' +
                 "- pass" + '\n' +
                 "- show cards" + '\n' + //questa in realtà si può sempre fare
                 "- end game / exit game" + '\n'+
@@ -534,7 +534,7 @@ public abstract class IOAdapter
             (
                 "C to create a new Game" + '\n' +
                 "J to join an existing Game" + '\n' +
-                "R to join a random Game" + '\n'
+                "R to join a random Game"
             );
 
             String answer = getMessage();

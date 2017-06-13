@@ -50,15 +50,15 @@ public class ActionFactory
 
         parsers.put(pass, "PassTurn");
 
-        String playCard = "^play card [0-9]$";
+        String playCard = "^play card [0-3]$";
 
         parsers.put(playCard, "PlayLeaderCard");
 
-        String activateCard = "^activate card [0-9]$";
+        String activateCard = "^activate card [0-3]$";
 
         parsers.put(activateCard, "ActiveLoaderCard");
 
-        String discardCard = "^discard card [0-9]$";
+        String discardCard = "^discard card [0-3]$";
 
         parsers.put(discardCard, "DiscardLeaderCard");
     }
@@ -151,11 +151,7 @@ public class ActionFactory
             Pattern pattern = Pattern.compile(regEx);
 
             Matcher matcher = pattern.matcher(action);
-
-            System.out.println("pattern " + pattern);
-
-            System.out.println(parsers.get(regEx));
-
+            
             if (matcher.find())
             {
                 return parsers.get(regEx);

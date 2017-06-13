@@ -155,6 +155,8 @@ public class GameMatch implements Runnable
 
 					boolean executed = action.executeAction(player, gameBoard);
 
+					System.out.println(executed + " - " +  player.isHasPassed());
+
 					if (player.isHasPassed()) break;
 
 					if (executed) break;
