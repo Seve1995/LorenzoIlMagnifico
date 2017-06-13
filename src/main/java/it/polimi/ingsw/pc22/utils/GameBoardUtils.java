@@ -107,13 +107,12 @@ public class GameBoardUtils {
 	}
 
 	public static void excommunicationHandling(List<Player> players,
-											   int era, List<ExcommunicationCard> excommunicationCards,
+			 int playerCounter, int currentRoundNumber, int era, List<ExcommunicationCard> excommunicationCards,
 												GameBoard gameBoard)
 	{
 
 
-		//if (((playerCounter < 5) && ((currentRoundNumber==8)) || ((playerCounter == 5) && (currentRoundNumber) == 6)))
-		if (era==2)
+		if (((playerCounter < 5) && ((currentRoundNumber==8)) || ((playerCounter == 5) && (currentRoundNumber) == 6)))
 		{
 			for (Player p : players)
 			{
@@ -121,7 +120,7 @@ public class GameBoardUtils {
 			}
 		}
 
-		if (era==4)
+		if ((playerCounter < 5 && currentRoundNumber == 16) ||  (playerCounter == 5 && currentRoundNumber == 12))
 		{
 			for (Player p : players)
 			{
@@ -130,6 +129,7 @@ public class GameBoardUtils {
 		}
 	}
 
+	
 	public static void endGameExcommunicatonHandling(List<Player> players, List<ExcommunicationCard> excommunicationCards,
 													 GameBoard gameBoard, int era)
 	{

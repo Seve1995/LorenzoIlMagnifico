@@ -171,7 +171,7 @@ public class GameMatch implements Runnable
 
 			GameBoardUtils.resetPlayerStatus(players);
 
-			GameBoardUtils.excommunicationHandling(players, era, excommunicationCards, gameBoard);
+			GameBoardUtils.excommunicationHandling(players, playerCounter, currentRoundNumber, era, excommunicationCards, gameBoard);
 
 		}
 
