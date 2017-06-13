@@ -407,30 +407,37 @@ public class Player
 		
 		case "coin":
 			this.coins += value;
+			if (coins<0) coins=0;
 			break;
 			
 		case "wood":
 			this.woods += value;
+			if (woods<0) woods=0;
 			break;
 			
 		case "stone":
 			this.stones += value;
+			if (stones<0) stones=0;
 			break;
 			
 		case "servant":
 			this.servants += value;
+			if (servants<0) servants=0;
 			break;
 			
 		case "faithpoint":
 			this.faithPoints += value;
+			if (faithPoints<0) faithPoints=0;
 			break;
 			
 		case "victorypoint":
 			this.victoryPoints += value;
+			if (victoryPoints<0) victoryPoints=0;
 			break;
 			
 		case "militarypoint":
 			this.militaryPoints += value;
+			if (militaryPoints<0) militaryPoints=0;
 			break;
 
 		default:
