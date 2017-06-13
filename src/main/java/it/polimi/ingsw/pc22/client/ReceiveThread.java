@@ -38,7 +38,6 @@ public class ReceiveThread implements Runnable
 				socket.close();
 
 				break;
-
 			}
 		}
 		catch(Exception e)

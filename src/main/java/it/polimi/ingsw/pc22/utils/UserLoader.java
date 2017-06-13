@@ -65,22 +65,35 @@ public class UserLoader
 
 		File usersFile = new File(classLoader.getResource(FILEPATH).getFile());
 
-		FileWriter fileWriter = new FileWriter(usersFile);
+		FileWriter fileWriter = null;
 
-		JSONArray userArray = new JSONArray();
-
-		for(User user : users.values())
+		try
 		{
-			JSONObject jsonUser = new JSONObject();
+			fileWriter = new FileWriter(usersFile);
 
-			jsonUser.put("username", user.getUsername());
-			jsonUser.put("password", user.getPassword());
+			JSONArray userArray = new JSONArray();
 
-			userArray.put(jsonUser);
+			for(User user : users.values())
+			{
+				JSONObject jsonUser = new JSONObject();
+
+				jsonUser.put("username", user.getUsername());
+				jsonUser.put("password", user.getPassword());
+
+				userArray.put(jsonUser);
+			}
+
+			fileWriter.write(userArray.toString());
+			fileWriter.close();
+		}
+		finally
+		{
+			if (fileWriter != null)
+			{
+				fileWriter.close();
+			}
 		}
 
-		fileWriter.write(userArray.toString());
-		fileWriter.close();
 	}
 	
 	

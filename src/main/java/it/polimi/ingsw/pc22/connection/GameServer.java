@@ -17,7 +17,9 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Comparator;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GameServer 
 {
@@ -28,6 +30,8 @@ public class GameServer
 	private static final int RMI_PORT = 5252;
 
 	private static Map<String, User> usersMap;
+
+    private static final Logger LOGGER = Logger.getLogger(GameServer.class.getName());
 
 	public static void main(String[] args)
 	{
@@ -56,7 +60,13 @@ public class GameServer
 
 		System.out.println("Authentication Service running at " + RMI_PORT + " port");
 
-		ServerSocket serverSocket;
+		ServerSocket serverSocket = null;
+
+		ExecutorService games = Executors.newCachedThreadPool();
+
+		ExecutorService executor = Executors.newSingleThreadExecutor();
+
+		Future<Boolean> exit = executor.submit(new ExitThread());
 
 		try 
 		{
@@ -66,19 +76,37 @@ public class GameServer
 
 			while(true)
 			{
+
+                if (exit.isDone())
+                {
+                    break;
+                }
+
 				Socket socket = serverSocket.accept();
 
 				SocketIOAdapter socketIOAdapter
 						= new SocketIOAdapter(socket, timeout);
 
-				new Thread(socketIOAdapter).start();
+				games.submit(socketIOAdapter);
 			}
 		} 
-			catch (IOException | JSONException e)
+		catch (IOException | JSONException e)
 		{
 			throw new GenericException(e);
 		}
-	}
+		finally
+        {
+            try
+            {
+                if (serverSocket != null)
+                    serverSocket.close();
+            }
+                catch(IOException e)
+            {
+                LOGGER.log(Level.INFO, "User not loaded", e);
+            }
+        }
+    }
 	
 	protected static Map<String, User> loadUsers() throws IOException, JSONException
 	{

@@ -8,12 +8,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by matteo on 11/06/17.
  */
 public class LeaderCardLoader extends GenericLoader
 {
+    private static final Logger LOGGER = Logger.getLogger(LeaderCardLoader.class.getName());
+
     public static List<LeaderCard> loadLeaderCards
             (JSONObject jsonCardsObject) {
         List<LeaderCard> leaderCards = new ArrayList<>();
@@ -29,8 +33,9 @@ public class LeaderCardLoader extends GenericLoader
 
                 leaderCards.add(leaderCard);
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e)
+        {
+            LOGGER.log(Level.INFO, "Cards not loaded", e);
         }
 
         return leaderCards;

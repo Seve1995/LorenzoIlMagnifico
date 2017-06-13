@@ -9,7 +9,7 @@ import java.util.List;
 
 public class PickTwoCouncilPrivilege implements Effect{
 
-	private List<Asset> chosenAsset;
+	private List<Asset> chosenTwoAsset;
 
 	@Override
 	public boolean isLegal(Player player, GameBoard gameBoard) 
@@ -22,11 +22,11 @@ public class PickTwoCouncilPrivilege implements Effect{
 	{
 		IOAdapter adapter = player.getAdapter();
 
-		chosenAsset = adapter.chooseCouncilPrivileges(2);
+		chosenTwoAsset = adapter.chooseCouncilPrivileges(2);
 
-		if (chosenAsset==null) return false;
+		if (chosenTwoAsset==null) return false;
 
-		for (Asset asset : chosenAsset)
+		for (Asset asset : chosenTwoAsset)
 			player.addAsset(asset);
 
 		return true;
