@@ -49,7 +49,7 @@ public class BuildingCard extends DevelopmentCard
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((costs == null) ? 0 : costs.hashCode());
 		result = prime * result + permanentEffectActivationCost;
 		return result;
@@ -59,9 +59,9 @@ public class BuildingCard extends DevelopmentCard
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof BuildingCard))
 			return false;
 		BuildingCard other = (BuildingCard) obj;
 		if (costs == null) {

@@ -39,18 +39,20 @@ public class TerritoryCard extends DevelopmentCard
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + permanentEffectActivationCost;
 		return result;
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof TerritoryCard))
 			return false;
 		TerritoryCard other = (TerritoryCard) obj;
 		if (permanentEffectActivationCost != other.permanentEffectActivationCost)

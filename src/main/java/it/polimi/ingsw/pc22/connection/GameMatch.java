@@ -38,6 +38,10 @@ public class GameMatch implements Runnable
 	private List<LeaderCard> leaderCards;
 
 	private Long timeout;
+	
+	private int turn=0;
+	
+	private int era=0;
 
 	private static final String BOARD_PATH = "boards/";
 
@@ -112,11 +116,16 @@ public class GameMatch implements Runnable
 
 		for (int currentRoundNumber = 0; currentRoundNumber < turnNumber; currentRoundNumber++)
 		{
+			
+			//int era = GameBoardUtils.getEra(currentRoundNumber, playerCounter);
+			
 			if (isNewTurn(currentRoundNumber))
 			{
-				addDices();
+				turn++;
 
-				int era = GameBoardUtils.getEra(currentRoundNumber, playerCounter);
+				if (turn%2==1) era++;
+				
+				addDices();
 
 				addTowerCards(era);
 
@@ -132,7 +141,7 @@ public class GameMatch implements Runnable
 			
 			for(Player player : players)
 			{
-				GameBoardUtils.printToPlayers(player, players, gameBoard);
+				GameBoardUtils.printToPlayers(player, players, gameBoard, era, turn);
 				
 				IOAdapter adapter = player.getAdapter();
 
@@ -162,11 +171,11 @@ public class GameMatch implements Runnable
 
 			GameBoardUtils.resetPlayerStatus(players);
 
-			GameBoardUtils.excommunicationHandling(players, playerCounter, currentRoundNumber, excommunicationCards, gameBoard);
+			GameBoardUtils.excommunicationHandling(players, era, excommunicationCards, gameBoard);
 
 		}
 
-		GameBoardUtils.endGameExcommunicatonHandling(players, excommunicationCards, gameBoard, playerCounter);
+		GameBoardUtils.endGameExcommunicatonHandling(players, excommunicationCards, gameBoard, era);
 
 		GameBoardUtils.sumFinalPoints(players, gameBoard); //check excommunication
 
@@ -328,12 +337,21 @@ public class GameMatch implements Runnable
 	private boolean isNewTurn(int currentNumber)
 	{
 		if (currentNumber==0) 
+		{
 			return true;
+		}
 		
-		if (this.playerCounter==5)
-			return currentNumber%3==0;
+		if (this.playerCounter==5 && currentNumber%3==0)
+		{
+			return true;
+		}
 		
-		return currentNumber%4==0;
+		if (this.playerCounter<=4 && currentNumber%4==0) 
+		{
+			return true;
+		}
+		
+		return false;
 	}
 	
 	private void addDices() 
@@ -364,7 +382,7 @@ public class GameMatch implements Runnable
 
 		final int roundNumber = era;
 		
-		System.out.println(roundNumber);
+		System.out.println(turn);
 		
 		List<TowerCell> territoryTowerCells = towers[0].getTowerCells();
 				

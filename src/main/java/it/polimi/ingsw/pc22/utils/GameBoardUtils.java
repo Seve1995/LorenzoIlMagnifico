@@ -69,11 +69,10 @@ public class GameBoardUtils {
 	}
 
 
-	private static void chooseExcommunication(Player player, int currentRoundNumber, int playerCounter, List<ExcommunicationCard> excommunicationCards,
+	private static void chooseExcommunication(Player player, int era, List<ExcommunicationCard> excommunicationCards,
 									   GameBoard gameBoard)
 	{
 
-		int era = getEra(currentRoundNumber, playerCounter);
 
 		int faithPoints = calculateFaithPointsFromEra(era);
 
@@ -108,41 +107,36 @@ public class GameBoardUtils {
 	}
 
 	public static void excommunicationHandling(List<Player> players,
-											   int playerCounter, int currentRoundNumber, List<ExcommunicationCard> excommunicationCards,
+											   int era, List<ExcommunicationCard> excommunicationCards,
 												GameBoard gameBoard)
 	{
 
 
-		if (((playerCounter < 5) && ((currentRoundNumber==8)) || ((playerCounter == 5) && (currentRoundNumber) == 6)))
+		//if (((playerCounter < 5) && ((currentRoundNumber==8)) || ((playerCounter == 5) && (currentRoundNumber) == 6)))
+		if (era==2)
 		{
 			for (Player p : players)
 			{
-				chooseExcommunication(p, currentRoundNumber, playerCounter, excommunicationCards, gameBoard);
+				chooseExcommunication(p, era, excommunicationCards, gameBoard);
 			}
 		}
 
-		if ((playerCounter < 5 && currentRoundNumber == 16) ||  (playerCounter == 5 && currentRoundNumber == 12))
+		if (era==4)
 		{
 			for (Player p : players)
 			{
-				chooseExcommunication(p, currentRoundNumber, playerCounter, excommunicationCards, gameBoard);
+				chooseExcommunication(p, era, excommunicationCards, gameBoard);
 			}
 		}
 	}
 
 	public static void endGameExcommunicatonHandling(List<Player> players, List<ExcommunicationCard> excommunicationCards,
-													 GameBoard gameBoard, int playerCounter)
+													 GameBoard gameBoard, int era)
 	{
-
-		int currentRoundNumber = 20;
-
-		if (playerCounter == 5)
-
-			currentRoundNumber=15;
 
 		for (Player p : players)
 		{
-			chooseExcommunication(p, currentRoundNumber, playerCounter, excommunicationCards, gameBoard);
+			chooseExcommunication(p, era, excommunicationCards, gameBoard);
 		}
 
 	}
@@ -177,12 +171,12 @@ public class GameBoardUtils {
 		}
 	}
 
-	public static int getEra(int currentRoundNumber, int playerCounter)
+	/*public static int getEra(int currentRoundNumber, int playerCounter)
 	{
 		return EraCalc.getEraNumber(playerCounter, currentRoundNumber);
 	}
-	
-	public static void printToPlayers(Player currPlayer, List<Player> players, GameBoard gameBoard)
+	*/
+	public static void printToPlayers(Player currPlayer, List<Player> players, GameBoard gameBoard, int era, int currentRoundNumber)
 	{
 		for (Player player : players)
 		{
@@ -196,7 +190,9 @@ public class GameBoardUtils {
 
 			adapter.printMessage(player.toString());
 			
+			adapter.printMessage("Number of round:" + currentRoundNumber + "|Number of era:" + era);
 			adapter.printMessage("It's " + currPlayer.getName() + " turn.");
+			
 		}
 	}
 
