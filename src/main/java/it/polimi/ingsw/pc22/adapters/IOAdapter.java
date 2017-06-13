@@ -228,28 +228,31 @@ public abstract class IOAdapter
 
         while(System.currentTimeMillis() < maxTimeStamp)
         {
-        	   this.printMessage("Choose the familiar member for the bonus:");
-
-	            //TODO SISTEMARE STA COSA; BISOGNA CHIAMARE UNA FUNZIONE STATICA ESTERNA!!
-	            
-	            this.printMessage(familyMembers.toString());
-	
-	            String choice = this.getMessage();
-	
-	            if (choice == null)
-	                continue;
-	
-	            ColorsEnum color = ColorsEnum.getColorFromString(choice);
-	
-	            if (color == null)
-	                continue;
-	
-	            FamilyMember member = player.getFamilyMemberByColor(color);
-	
-	            if (member == null)
-	                continue;
-	
-	            return member;
+		   this.printMessage("Choose the familiar member for the bonus:");
+		
+		   //TODO SISTEMARE STA COSA; BISOGNA CHIAMARE UNA FUNZIONE STATICA ESTERNA!!
+		   StringBuilder sb = new StringBuilder();
+		   for (FamilyMember f : familyMembers)
+			   sb.append(f.toString());
+		    
+		   this.printMessage(sb.toString());
+		
+		    String choice = this.getMessage();
+		
+		    if (choice == null)
+		        continue;
+		
+		    ColorsEnum color = ColorsEnum.getColorFromString(choice);
+		
+		    if (color == null)
+		        continue;
+		
+		    FamilyMember member = player.getFamilyMemberByColor(color);
+		
+		    if (member == null)
+		        continue;
+		
+		    return member;
         
         }
         

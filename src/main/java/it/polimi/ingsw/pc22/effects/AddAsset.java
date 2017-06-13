@@ -34,7 +34,6 @@ public class AddAsset implements Effect
 		
 		if (isLegal(player,gameBoard))
 		{
-			
 			player.addAsset(asset);
 			return true;
 		}

@@ -514,8 +514,8 @@ public class Player
 				familyMembers.get(i).setPlayed(false);
 			}
 			//Handle the NEUTER:
-			familyMembers.get(3).setFamiliarValue(0);
-			familyMembers.get(3).setPlayed(false);
+			familyMembers.get(familyMembers.size()-1).setFamiliarValue(0);
+			familyMembers.get(familyMembers.size()-1).setPlayed(false);
 		}
 	}
 
