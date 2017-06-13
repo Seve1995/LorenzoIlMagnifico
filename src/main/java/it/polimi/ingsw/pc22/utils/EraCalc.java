@@ -11,6 +11,7 @@ public enum EraCalc
     SECONDFIVEPLAYERSNINE(5,9,2),
     THIRDFIVEPLAYERSTWELVE(5,12,3),
     THIRDFIVEPLAYERSTFIFTEEN(5,15,3),
+    
     FIRSTERAFOURPLAYERSZERO(4,0,1),
     FIRSTERAFOURPLAYERSFOUR(4,4,1),
     SECONDFOURPLAYERSEIGHT(4,8,2),
@@ -36,7 +37,7 @@ public enum EraCalc
     		counter = 5;
         for (EraCalc eraCalc : EraCalc.values())
         {
-            if (eraCalc.playerCounter == counter && eraCalc.round == round)
+            if (eraCalc.playerCounter == counter && eraCalc.round>=round)
                 return eraCalc.era;
         }
 

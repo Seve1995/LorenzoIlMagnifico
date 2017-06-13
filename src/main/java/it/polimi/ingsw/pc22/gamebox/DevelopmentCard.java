@@ -76,6 +76,7 @@ public abstract class DevelopmentCard
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + cardNumber;
 		result = prime * result + ((immediateEffects == null) ? 0 : immediateEffects.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + (permanentEffectChoice ? 1231 : 1237);
@@ -90,9 +91,11 @@ public abstract class DevelopmentCard
 			return true;
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof DevelopmentCard))
 			return false;
 		DevelopmentCard other = (DevelopmentCard) obj;
+		if (cardNumber != other.cardNumber)
+			return false;
 		if (immediateEffects == null) {
 			if (other.immediateEffects != null)
 				return false;

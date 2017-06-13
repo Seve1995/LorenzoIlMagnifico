@@ -38,7 +38,7 @@ public class CharacterCard extends DevelopmentCard
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((coinsCost == null) ? 0 : coinsCost.hashCode());
 		return result;
 	}
@@ -47,9 +47,9 @@ public class CharacterCard extends DevelopmentCard
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof CharacterCard))
 			return false;
 		CharacterCard other = (CharacterCard) obj;
 		if (coinsCost == null) {
