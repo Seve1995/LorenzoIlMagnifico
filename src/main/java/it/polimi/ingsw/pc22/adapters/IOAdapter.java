@@ -679,6 +679,8 @@ public abstract class IOAdapter
             return null;
         }
 
+        user.setLogged(true);
+
         return user;
     }
 
@@ -695,7 +697,7 @@ public abstract class IOAdapter
             return null;
         }
 
-        user = new User(username, password, false);
+        user = new User(username, password, true);
 
         usersMap.put(user.getUsername(), user);
 

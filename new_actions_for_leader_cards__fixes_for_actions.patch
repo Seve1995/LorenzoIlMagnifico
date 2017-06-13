@@ -1,0 +1,80 @@
+Index: src/main/java/it/polimi/ingsw/pc22/adapters/IOAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/it/polimi/ingsw/pc22/adapters/IOAdapter.java	(revision 34f2f302fe72e67207863b52cd6b48e03dc3ebc4)
++++ src/main/java/it/polimi/ingsw/pc22/adapters/IOAdapter.java	(revision )
+@@ -67,7 +67,7 @@
+ 
+             this.printMessage("- play card <index>" + '\n' +
+                 "- discard card <index>" + '\n' +
+-                "- turn card <index>" + '\n' +
++                "- activate card <index>" + '\n' +
+                 "- pass" + '\n' +
+                 "- show cards" + '\n' + //questa in realtà si può sempre fare
+                 "- end game / exit game" + '\n'+
+@@ -534,7 +534,7 @@
+             (
+                 "C to create a new Game" + '\n' +
+                 "J to join an existing Game" + '\n' +
+-                "R to join a random Game" + '\n'
++                "R to join a random Game"
+             );
+ 
+             String answer = getMessage();
+Index: src/main/java/it/polimi/ingsw/pc22/actions/ActionFactory.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/it/polimi/ingsw/pc22/actions/ActionFactory.java	(revision 34f2f302fe72e67207863b52cd6b48e03dc3ebc4)
++++ src/main/java/it/polimi/ingsw/pc22/actions/ActionFactory.java	(revision )
+@@ -50,15 +50,15 @@
+ 
+         parsers.put(pass, "PassTurn");
+ 
+-        String playCard = "^play card [0-9]$";
++        String playCard = "^play card [0-3]$";
+ 
+         parsers.put(playCard, "PlayLeaderCard");
+ 
+-        String activateCard = "^activate card [0-9]$";
++        String activateCard = "^activate card [0-3]$";
+ 
+         parsers.put(activateCard, "ActiveLoaderCard");
+ 
+-        String discardCard = "^discard card [0-9]$";
++        String discardCard = "^discard card [0-3]$";
+ 
+         parsers.put(discardCard, "DiscardLeaderCard");
+     }
+@@ -151,11 +151,7 @@
+             Pattern pattern = Pattern.compile(regEx);
+ 
+             Matcher matcher = pattern.matcher(action);
+-
+-            System.out.println("pattern " + pattern);
+-
+-            System.out.println(parsers.get(regEx));
+-
++            
+             if (matcher.find())
+             {
+                 return parsers.get(regEx);
+Index: src/main/java/it/polimi/ingsw/pc22/connection/GameMatch.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/it/polimi/ingsw/pc22/connection/GameMatch.java	(revision 34f2f302fe72e67207863b52cd6b48e03dc3ebc4)
++++ src/main/java/it/polimi/ingsw/pc22/connection/GameMatch.java	(revision )
+@@ -155,6 +155,8 @@
+ 
+ 					boolean executed = action.executeAction(player, gameBoard);
+ 
++					System.out.println(executed + " - " +  player.isHasPassed());
++
+ 					if (player.isHasPassed()) break;
+ 
+ 					if (executed) break;
