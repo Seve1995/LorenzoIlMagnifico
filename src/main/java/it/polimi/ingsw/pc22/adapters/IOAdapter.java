@@ -463,7 +463,7 @@ public abstract class IOAdapter
 
     }
 
-    void authenticate() throws IOException
+    void authenticate(String chioce) throws IOException
     {
         User user = null;
 
@@ -471,7 +471,7 @@ public abstract class IOAdapter
         {
             this.printMessage("Write: <username> <password> l/s");
 
-            String answer = getMessage();
+            String answer = chioce;
 
             if (answer == null)
             {
@@ -514,7 +514,7 @@ public abstract class IOAdapter
             }
         }
 
-        gameHandling(user);
+        //gameHandling(user);
     }
 
     private void gameHandling(User user) throws IOException

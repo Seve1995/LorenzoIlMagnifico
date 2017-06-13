@@ -50,7 +50,11 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
     {
         try
         {
-            authenticate();
+            String choice = getMessage();
+
+            authenticate(choice);
+
+            printMessage("true");
 
         }
             catch (IOException e)

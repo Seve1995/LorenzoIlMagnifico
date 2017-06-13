@@ -84,6 +84,8 @@ public class GameServer
 
 				Socket socket = serverSocket.accept();
 
+                System.out.println("CIAO");
+
 				SocketIOAdapter socketIOAdapter
 						= new SocketIOAdapter(socket, timeout);
 
