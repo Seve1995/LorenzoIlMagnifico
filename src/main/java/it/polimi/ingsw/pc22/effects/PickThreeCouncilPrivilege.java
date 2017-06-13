@@ -7,11 +7,11 @@ import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 
-public class PickThreeCouncilPrivilege implements Effect{
+public class PickThreeCouncilPrivilege implements Effect
+{
 
-	private List<Asset> chosenAsset;
+	private List<Asset> chosenThreeAssets;
 
-	
 	@Override
 	public boolean isLegal(Player player, GameBoard gameBoard) 
 	{
@@ -23,11 +23,11 @@ public class PickThreeCouncilPrivilege implements Effect{
 	{
 		IOAdapter adapter = player.getAdapter();
 
-		chosenAsset = adapter.chooseCouncilPrivileges(3);
+		chosenThreeAssets = adapter.chooseCouncilPrivileges(3);
 
-		if (chosenAsset==null) return false;
+		if (chosenThreeAssets==null) return false;
 
-		for (Asset asset : chosenAsset)
+		for (Asset asset : chosenThreeAssets)
 			player.addAsset(asset);
 
 		return true;

@@ -6,14 +6,14 @@ import it.polimi.ingsw.pc22.player.Player;
 public class AddProductionValueModifier implements Effect{
 	
 
-	private int value;
+	private int productionValue;
 
 	public int getValue() {
-		return value;
+		return productionValue;
 	}
 
 	public void setValue(int value) {
-		this.value = value;
+		this.productionValue = value;
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class AddProductionValueModifier implements Effect{
 		
 		if (isLegal(player,gameBoard))
 		{
-			player.setProductionValueModifier(player.getProductionValueModifier() + value);
+			player.setProductionValueModifier(player.getProductionValueModifier() + productionValue);
 			return true;
 		}
 		return false;
@@ -38,7 +38,7 @@ public class AddProductionValueModifier implements Effect{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + value;
+		result = prime * result + productionValue;
 		return result;
 	}
 
@@ -51,14 +51,14 @@ public class AddProductionValueModifier implements Effect{
 		if (getClass() != obj.getClass())
 			return false;
 		AddProductionValueModifier other = (AddProductionValueModifier) obj;
-		if (value != other.value)
+		if (productionValue != other.productionValue)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "AddProductionBonus [value=" + value + "]";
+		return "AddProductionBonus [value=" + productionValue + "]";
 	}
 	
 	
