@@ -3,6 +3,8 @@ package it.polimi.ingsw.pc22.utils;
 /**
  * Created by fandroid95 on 12/06/2017.
  */
+
+//ADESSO E' INUTILE, SE FUNZIONA IL NUOVO METODO DI CALCOLO DELL'ERA VA E L I M I N A T A
 public enum EraCalc
 {
     FIRSTERAFIVEPLAYERSZERO(5,0,1),
