@@ -228,10 +228,8 @@ public abstract class IOAdapter
 
         while(System.currentTimeMillis() < maxTimeStamp)
         {
-		   this.printMessage("Choose the familiar member for the bonus:");
-		
+ 		   StringBuilder sb = new StringBuilder("Choose the familiar member for the bonus:\n");
 		   //TODO SISTEMARE STA COSA; BISOGNA CHIAMARE UNA FUNZIONE STATICA ESTERNA!!
-		   StringBuilder sb = new StringBuilder();
 		   for (FamilyMember f : familyMembers)
 			   sb.append(f.toString());
 		    
