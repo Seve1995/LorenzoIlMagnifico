@@ -125,23 +125,16 @@ public class GameMatch implements Runnable
 				resetLeaderCards(players);
 
 				GameBoardUtils.purgeGameBoard(gameBoard);
-
+				
+				addFamiliarsValue();
+				
 			}
-
+			
 			for(Player player : players)
 			{
-				if (isNewTurn(currentRoundNumber))
-				{
-					player.setFamiliarToPlayer(gameBoard.getDices());
-				}
-
-				IOAdapter adapter = player.getAdapter();
-
-				adapter.printMessage(gameBoard.toString());
-
-				adapter.printMessage(player.getPlayerBoard().toString());
+				GameBoardUtils.printToPlayers(player, players, gameBoard);
 				
-				adapter.printMessage(player.toString());
+				IOAdapter adapter = player.getAdapter();
 
 				Long timestamp = System.currentTimeMillis();
 				
@@ -469,6 +462,13 @@ public class GameMatch implements Runnable
 		players = tempPlayers;
 	}
 
+	
+	private void addFamiliarsValue()
+	{
+		for (Player player : players)
+			player.setFamiliarToPlayer(gameBoard.getDices());
+	}
+	
 	private String selectWinner(List<Player> players)
 	{
 		int winner=0;

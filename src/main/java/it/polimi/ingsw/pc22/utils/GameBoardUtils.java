@@ -1,5 +1,6 @@
 package it.polimi.ingsw.pc22.utils;
 
+import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
@@ -180,7 +181,24 @@ public class GameBoardUtils {
 	{
 		return EraCalc.getEraNumber(playerCounter, currentRoundNumber);
 	}
+	
+	public static void printToPlayers(Player currPlayer, List<Player> players, GameBoard gameBoard)
+	{
+		for (Player player : players)
+		{
+			IOAdapter adapter = player.getAdapter();
+			
+			adapter.printMessage(currPlayer.toString());
+			
+			adapter.printMessage(gameBoard.toString());
+			
+			adapter.printMessage(player.getPlayerBoard().toString());
 
+			adapter.printMessage(player.toString());
+			
+			adapter.printMessage("It's " + currPlayer.getName() + " turn.");
+		}
+	}
 
 	public static void purgeGameBoard(GameBoard gameBoard)
 	{
