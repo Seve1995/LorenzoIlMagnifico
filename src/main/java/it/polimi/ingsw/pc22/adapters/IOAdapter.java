@@ -464,61 +464,39 @@ public abstract class IOAdapter
 
     }
 
-    void authenticate() throws IOException
+    public User authenticate(String authentication) throws IOException
     {
-        User user = null;
+        Pattern loginPattern = Pattern.compile("(^(\\w+) (\\w+) (L|S|l|s)$)");
 
-        while (user == null)
+        Matcher matcher = loginPattern.matcher(authentication);
+
+        if (!matcher.find())
         {
-            this.printMessage("Write: <username> <password> l/s");
+            printMessage("Invalid INPUT");
 
-            String answer = getMessage();
-
-            if (answer == null)
-            {
-                endConnection(null);
-
-                return;
-            }
-
-            Pattern loginPattern = Pattern.compile("(^(\\w+) (\\w+) (L|S)$)");
-
-            Matcher matcher = loginPattern.matcher(answer);
-
-            if (!matcher.find())
-            {
-                printMessage("Invalid INPUT");
-
-                continue;
-            }
-
-            String[] login = answer.split(" ");
-
-            switch (login[2])
-            {
-                case "L":
-
-                    user = loginUser(login[0],login[1]);
-
-                    break;
-                case "S":
-
-                    user = signUp(login[0], login[1]);
-
-                    break;
-
-                default:
-
-                        printMessage("ERROR! You must enter a valid input");
-
-                    break;
-            }
+            return null;
         }
 
-        gameHandling(user);
+        String[] login = authentication.split(" ");
+
+        User user = null;
+
+        if ("L".equalsIgnoreCase(login[2]))
+        {
+            user = loginUser(login[0],login[1]);
+        }
+
+        if ("S".equalsIgnoreCase(login[2]))
+        {
+            user = signUp(login[0], login[1]);
+
+            updateJson();
+        }
+
+       return user;
     }
 
-    private void gameHandling(User user) throws IOException
+    public boolean gameHandling(User user, String choice) throws IOException
     {
         String playerName = user.getUsername();
 
@@ -526,59 +504,41 @@ public abstract class IOAdapter
 
         player.setName(playerName);
 
-        boolean gameHandling = false;
+        Pattern gameMatcher = Pattern.compile("(^(\\w+) (C|J|R)$)");
 
-        while (!gameHandling)
+        Matcher matcher = gameMatcher.matcher(choice);
+
+        if (!matcher.find())
         {
-            printMessage("Write: <gamename> C|J|R");
-            printMessage
-            (
-                "C to create a new Game" + '\n' +
-                "J to join an existing Game" + '\n' +
-                "R to join a random Game"
-            );
+            printMessage("Invalid INPUT");
 
-            String answer = getMessage();
-
-            Pattern gameMatcher = Pattern.compile("(^(\\w+) (C|J|R)$)");
-
-            Matcher matcher = gameMatcher.matcher(answer);
-
-            if (!matcher.find()) continue;
-
-            String[] choice = answer.split(" ");
-
-            Map<String, GameMatch> gameMatchMap = GameServer.getGameMatchMap();
-
-            switch (choice[1])
-            {
-                case "C":
-
-                    gameHandling = createNewGame
-                            (gameMatchMap, choice[0], player);
-
-                    break;
-                case "J":
-
-                    gameHandling = addToExistingGame
-                            (gameMatchMap, choice[0], player);
-
-                    break;
-
-                case "R":
-
-
-                    break;
-
-                default:
-
-                    printMessage("Non-valid input. Please retry... ");
-
-                    break;
-            }
+            return false;
         }
 
-        updateJson();
+        String[] matchStrings = choice.split(" ");
+
+        Map<String, GameMatch> gameMatchMap = GameServer.getGameMatchMap();
+
+        if("C".equalsIgnoreCase(matchStrings[1]))
+        {
+            return createNewGame
+                    (gameMatchMap, matchStrings[0], player);
+        }
+
+        if("J".equalsIgnoreCase(matchStrings[1]))
+        {
+            return addToExistingGame
+                    (gameMatchMap, matchStrings[0], player);
+        }
+
+        if ("R".equalsIgnoreCase(matchStrings[1]))
+        {
+            System.out.println("DA COMPLETARE");
+        }
+
+        printMessage("Non-valid input. Please retry... ");
+
+       return false;
     }
 
     private synchronized boolean createNewGame

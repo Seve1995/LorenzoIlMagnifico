@@ -3,6 +3,8 @@ package it.polimi.ingsw.pc22.client;
 import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.rmi.RMIAuthenticationService;
 import it.polimi.ingsw.pc22.rmi.RMIClientStreamService;
+import it.polimi.ingsw.pc22.states.GenericState;
+import it.polimi.ingsw.pc22.states.LoginState;
 
 import java.net.Socket;
 import java.rmi.NotBoundException;
@@ -11,12 +13,17 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Client
 {
 	private static final int RMI_PORT = 5252;
 
 	private static final int SOCKET_PORT = 9001;
+
+	private static GenericState genericState;
+
+	private static boolean stateChanged = true;
 
 	public static void main(String[] args)
 	{
@@ -84,6 +91,8 @@ public class Client
 
 			socket = new Socket("localhost", SOCKET_PORT);
 
+			genericState = new LoginState();
+
 			SendThread sendThread = new SendThread(socket);
 			Thread thread = new Thread(sendThread);
 			thread.start();
@@ -98,5 +107,24 @@ public class Client
 		{
 			throw new GenericException(e);
 		}
+	}
+
+	public static GenericState getGenericState()
+	{
+		return genericState;
+	}
+
+	public static synchronized void setGenericState(GenericState genericState)
+	{
+		Client.genericState = genericState;
+	}
+
+	public static boolean isStateChanged() {
+		return stateChanged;
+	}
+
+	public static synchronized void setStateChanged(boolean stateChanged)
+	{
+		Client.stateChanged = stateChanged;
 	}
 }

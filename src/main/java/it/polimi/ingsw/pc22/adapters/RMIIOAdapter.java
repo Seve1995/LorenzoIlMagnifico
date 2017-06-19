@@ -38,7 +38,7 @@ public class RMIIOAdapter extends IOAdapter implements RMIAuthenticationService
         {
             streamService = (RMIClientStreamService) registry.lookup("client");
 
-            authenticate();
+            authenticate("prova");
         }
         catch (NotBoundException | IOException e)
         {

@@ -6,10 +6,7 @@ import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.ConsoleReader;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.util.concurrent.*;
 import java.util.logging.Level;
@@ -25,6 +22,8 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
     private BufferedReader in;
     private PrintWriter out;
 
+    private ObjectOutputStream objectOut;
+
     private static final Logger LOGGER = Logger.getLogger(SocketIOAdapter.class.getName());
 
     public SocketIOAdapter(Socket socket, Long timeout)
@@ -32,12 +31,13 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
         this.socket = socket;
         super.setTimeout(timeout);
 
-        try {
-
+        try
+        {
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
             out = new PrintWriter(socket.getOutputStream(), true);
 
+            //objectOut = new ObjectOutputStream(socket.getOutputStream());
         }
             catch (IOException e)
         {
@@ -48,9 +48,38 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
     @Override
     public void run()
     {
+        User user = null;
+
+        boolean started = false;
+
         try
         {
-            authenticate();
+            while (user == null)
+            {
+                String authentication = getMessage();
+
+                user = authenticate(authentication);
+
+                if (user == null)
+                    printMessage("invalid Input - wrong password");
+            }
+
+
+            //DA SOSTITUIRE CON OBJECT
+            printMessage("logged");
+
+            while (!started)
+            {
+                String match = getMessage();
+
+                started = gameHandling(user, match);
+
+                if (!started)
+                    printMessage("invalid Input");
+            }
+
+            //DA SOSTITUIRE CON OBJECT
+            printMessage("started");
 
         }
             catch (IOException e)
@@ -83,6 +112,13 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
     public void printMessage(String message)
     {
         out.println(message);
+    }
+
+    public void printObject(Object object) throws IOException
+    {
+        objectOut.writeObject(object);
+
+        objectOut.flush();
     }
 
     @Override

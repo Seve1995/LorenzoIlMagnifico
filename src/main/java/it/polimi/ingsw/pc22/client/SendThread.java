@@ -13,6 +13,8 @@ public class SendThread implements Runnable
 	private PrintWriter outSocket = null;
 	private BufferedReader inKeyboard = null;
 
+	private boolean printed = false;
+
 	private static final Logger LOGGER = Logger.getLogger(SendThread.class.getName());
 	
 	public SendThread(Socket socket)
@@ -29,13 +31,28 @@ public class SendThread implements Runnable
 
 			while(true)
 			{
+				if (Client.isStateChanged())
+				{
+					Client.getGenericState().printState();
+
+					Client.setStateChanged(false);
+				}
+
 				if (socket.isClosed()) break;
 
-				if (!inKeyboard.ready()) Thread.sleep(100);
+				if (!inKeyboard.ready())
+				{
+					Thread.sleep(100);
 
-				String msgToServerString = inKeyboard.readLine();
+					continue;
+				}
 
-				outSocket.println(msgToServerString);
+				String msgToServer = inKeyboard.readLine();
+
+				if (!Client.getGenericState().validate(msgToServer))
+					continue;
+
+				outSocket.println(msgToServer);
 			}
 
 			System.out.println("Shutting down output");
@@ -48,5 +65,6 @@ public class SendThread implements Runnable
 			LOGGER.log(Level.INFO, "ERROR RECEIVE THREAD", e);
 		}
 	}
+
 }
 
