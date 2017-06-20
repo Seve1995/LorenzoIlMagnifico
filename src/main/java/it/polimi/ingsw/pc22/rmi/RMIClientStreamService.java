@@ -11,4 +11,6 @@ public interface RMIClientStreamService extends Remote
     String getMessage() throws RemoteException;
 
     void printMessage(String message) throws RemoteException;
+
+    void changeState(String state) throws RemoteException;
 }

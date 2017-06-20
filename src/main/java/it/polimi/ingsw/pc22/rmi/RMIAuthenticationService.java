@@ -9,6 +9,4 @@ import java.rmi.RemoteException;
 public interface RMIAuthenticationService extends Remote
 {
     void login() throws RemoteException;
-
-    void register() throws RemoteException;
 }

@@ -154,5 +154,9 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
         return  answer;
     }
 
+    @Override
+    public void changeState(String state)
+    {
 
+    }
 }

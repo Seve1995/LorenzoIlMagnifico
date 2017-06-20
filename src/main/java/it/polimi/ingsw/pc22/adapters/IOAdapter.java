@@ -29,6 +29,8 @@ public abstract class IOAdapter
 
     public abstract void  printMessage(String message);
 
+    public abstract void changeState(String state);
+
     public abstract String getMessage();
 
     public Long getTimeout()

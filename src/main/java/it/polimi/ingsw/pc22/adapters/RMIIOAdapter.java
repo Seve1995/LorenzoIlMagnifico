@@ -34,32 +34,48 @@ public class RMIIOAdapter extends IOAdapter implements RMIAuthenticationService
     @Override
     public void login() throws RemoteException
     {
+        User user = null;
+
+        boolean started = false;
+
         try
         {
             streamService = (RMIClientStreamService) registry.lookup("client");
 
-            authenticate("prova");
+            System.out.println(streamService);
+
+            while (user == null)
+            {
+                String authentication = this.getMessage();
+
+                user = authenticate(authentication);
+
+                if (user == null)
+                    printMessage("invalid Input - wrong password");
+            }
+
+            //DA SOSTITUIRE CON OBJECT
+            changeState("logged");
+
+            while (!started)
+            {
+                String match = this.getMessage();
+
+                started = gameHandling(user, match);
+
+                if (!started)
+                    printMessage("invalid Input");
+            }
+
+            //DA SOSTITUIRE CON OBJECT
+            changeState("started");
+
         }
         catch (NotBoundException | IOException e)
         {
             throw new GenericException("Cannot find client in registry", e);
         }
-
     }
-
-    @Override
-    public void register() throws RemoteException
-    {
-        try
-        {
-            streamService = (RMIClientStreamService) registry.lookup("client");
-        }
-        catch (RemoteException | NotBoundException e)
-        {
-            throw new GenericException("Cannot find client in registry",e);
-        }
-    }
-
 
     @Override
     public void endConnection(Player player) throws IOException
@@ -80,7 +96,20 @@ public class RMIIOAdapter extends IOAdapter implements RMIAuthenticationService
         }
             catch (RemoteException e)
         {
-            throw new GenericException("cannot write from RMI", e);
+            throw new GenericException("cannot write to RMI", e);
+        }
+    }
+
+    @Override
+    public void changeState(String state)
+    {
+        try
+        {
+            streamService.changeState(state);
+        }
+            catch (RemoteException e)
+        {
+            throw new GenericException("cannot write to RMI", e);
         }
     }
 
@@ -93,7 +122,7 @@ public class RMIIOAdapter extends IOAdapter implements RMIAuthenticationService
         {
             message = streamService.getMessage();
         }
-        catch (RemoteException e)
+            catch (RemoteException e)
         {
             message = null;
 

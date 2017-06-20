@@ -15,7 +15,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
 
-public class StartingChoicheController {
+public class StartingChoiceController {
 
 	@FXML
     private RadioButton GUI;
@@ -53,28 +53,6 @@ public class StartingChoicheController {
     		loadSocketConnection();
     		choice = "socket";
     	}
-    	
-    	if (CLI.isSelected())
-    	{
-    		//Client client = new Client(choice);
-    		//Thread thread = new Thread(client);
-    		//thread.start();
-    		//System.exit(0);
-    		
-    	}
-    	
-    	client.launchStartingChoice(choice);
-    	/*Stage primaryStage = main.getPrimaryStage();
-    	primaryStage.close();
-    	LoginGUI loginGUI = new LoginGUI();
-    	loginGUI.start(primaryStage);*/
-    	//primaryStage.setTitle("Prova");
-    	//main.initStartingChoiche();
-    	//primaryStage.show();
-    	
-    	//else 
-    		//Vai su Login
-    	
     }
     
     private void loadSocketConnection()
@@ -101,8 +79,11 @@ public class StartingChoicheController {
 				Stage stage = (Stage) client.getPrimaryStage().getScene().getWindow();
 				stage.close();
 			}
-			
-			
+
+			if (GUI.isSelected())
+			{
+				client.launchStartingChoice(choice);
+			}
 
 		}
 		catch (Exception e)
@@ -130,13 +111,17 @@ public class StartingChoicheController {
 
 			registry.rebind("client", stub);
 
-			//authenticationService.login();
-			
 			if (CLI.isSelected())
 			{
-				authenticationService.login();
 				Stage stage = (Stage) client.getPrimaryStage().getScene().getWindow();
 				stage.close();
+
+				authenticationService.login();
+			}
+
+			if (GUI.isSelected())
+			{
+				client.launchStartingChoice(choice);
 			}
 
 		} catch (RemoteException | NotBoundException e)

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="199.0" prefWidth="449.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.pc22.client.StartingChoicheController">
+<AnchorPane prefHeight="199.0" prefWidth="449.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.pc22.client.StartingChoiceController">
    <children>
       <RadioButton fx:id="CLI" layoutX="202.0" layoutY="117.0" mnemonicParsing="false" text="CLI">
          <toggleGroup>

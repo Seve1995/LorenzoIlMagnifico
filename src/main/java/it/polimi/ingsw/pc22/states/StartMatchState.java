@@ -23,7 +23,7 @@ public class StartMatchState implements GenericState
     @Override
     public boolean validate(String string)
     {
-        Pattern gameMatcher = Pattern.compile("(^(\\w+) (C|J|R)$)");
+        Pattern gameMatcher = Pattern.compile("(^(\\w+) (C|c|J|j|R|r)$)");
 
         Matcher matcher = gameMatcher.matcher(string);
 
