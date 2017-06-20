@@ -33,7 +33,7 @@ public class RMIClientStreamServiceImpl implements RMIClientStreamService
         ExecutorService ex = Executors.newSingleThreadExecutor();
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
+        
         String message;
 
         while (true)

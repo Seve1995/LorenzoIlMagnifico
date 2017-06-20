@@ -18,7 +18,7 @@
             <Button fx:id="register" mnemonicParsing="false" onAction="#handleRegisterButton" text="Register" />
         </buttons>
       </ButtonBar>
-      <Label fx:id="output" layoutX="224.0" layoutY="418.0" text="OUTPUT FROM SERVER" />
+      <Label fx:id="output" layoutX="34.0" layoutY="288.0" prefHeight="132.0" prefWidth="338.0" text="OUTPUT FROM SERVER" />
       <Label layoutX="32.0" layoutY="81.0" text="Type your credential:" />
    </children>
 </AnchorPane>
