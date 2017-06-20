@@ -6,9 +6,11 @@ import it.polimi.ingsw.pc22.connection.GameMatch;
 import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.connection.User;
 import it.polimi.ingsw.pc22.gamebox.*;
+import it.polimi.ingsw.pc22.messages.CommunicationMessage;
+import it.polimi.ingsw.pc22.messages.ErrorMessage;
+import it.polimi.ingsw.pc22.messages.Message;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.CouncilPrivilege;
-import it.polimi.ingsw.pc22.utils.PositionUtils;
 import it.polimi.ingsw.pc22.utils.UserLoader;
 
 import java.io.IOException;
@@ -27,7 +29,7 @@ public abstract class IOAdapter
 
     public abstract void endConnection(Player player) throws IOException;
 
-    public abstract void  printMessage(String message);
+    public abstract void  printMessage(Message message);
 
     public abstract void changeState(String state);
 
@@ -49,71 +51,17 @@ public abstract class IOAdapter
 
         while (System.currentTimeMillis() < maxTimeStamp)
         {
-            this.printMessage("Choose an action to execute:");
-
-            if (!player.isFamiliarPositioned())
-            {
-                this.printMessage("Available servants: " + player.getServants());
-                
-                StringBuilder availableFamiliarsString = new StringBuilder("Available familiars: ");
-                
-                for (FamilyMember f : player.getUnusedFamiliarMembers())
-                	availableFamiliarsString.append(f.toString() + " ");
-                
-                this.printMessage(availableFamiliarsString.toString());
-                
-                String actions = PositionUtils.getActionAvailableString(gameBoard);
-
-                this.printMessage(actions);
-            }
-
-            this.printMessage("- play card <index>" + '\n' +
-                "- discard card <index>" + '\n' +
-                "- activate card <index>" + '\n' +
-                "- pass" + '\n' +
-                "- show cards" + '\n' + //questa in realtà si può sempre fare
-                "- end game / exit game" + '\n'+
-                "- show board"); //questa in realtà si può sempre fare
-
             String choice = getMessage();
 
             if (choice == null)
                 continue;
-
-            //COMMMENTO AI POSTERI V2 QUESTA COSA MI FA CACARE MA SINCERCAMENTE
-            //PER ORA NON HA SENSO CREAE DELLE ACTIONS CHE FACCIANO STE COSE
-            if ("show board".equals(choice))
-            {
-                PlayerBoard board = player.getPlayerBoard();
-
-                player.getAdapter().printMessage(board.toString());
-
-                continue;
-            }
-
-
-            if ("show cards".equals(choice))
-            {
-                PlayerBoard board = player.getPlayerBoard();
-
-                IOAdapter adapter = player.getAdapter();
-
-                adapter.printMessage(board.getTerritories().toString());
-                adapter.printMessage(board.getBuildings().toString());
-                adapter.printMessage(board.getCharacters().toString());
-                adapter.printMessage(board.getVentures().toString());
-
-                //adapter.printMessage(board.getLeaderCards().toString());
-
-                continue;
-            }
 
             Action action = ActionFactory.createAction(choice, player);
 
             return action;
         }
 
-        printMessage("Timeout Azione terminato");
+        printMessage(new ErrorMessage("Timeout Azione terminato"));
 
         return null;
     }
@@ -124,7 +72,7 @@ public abstract class IOAdapter
 
         while(System.currentTimeMillis() < maxTimeStamp)
         {
-	            this.printMessage("Ok, now select the tower floor:");
+	            //this.printMessage("Ok, now select the tower floor:");
 
 	            String value = getMessage();
 
@@ -139,7 +87,7 @@ public abstract class IOAdapter
 	            }
 	            catch (NumberFormatException e)
 	            {
-	                this.printMessage("ERROR! You must enter a valid input");
+	                this.printMessage(new ErrorMessage("ERROR! You must enter a valid input"));
 
 	                continue;
 	            }
@@ -150,7 +98,7 @@ public abstract class IOAdapter
 	            return floor;
         }
 
-        printMessage("Timeout Azione terminato");
+        printMessage(new ErrorMessage("Timeout Azione terminato"));
 
         return -1;
 
@@ -474,7 +422,7 @@ public abstract class IOAdapter
 
         if (!matcher.find())
         {
-            printMessage("Invalid INPUT");
+            printMessage(new ErrorMessage("Invalid INPUT"));
 
             return null;
         }
@@ -512,7 +460,7 @@ public abstract class IOAdapter
 
         if (!matcher.find())
         {
-            printMessage("Invalid INPUT");
+            printMessage(new ErrorMessage("Invalid INPUT"));
 
             return false;
         }
@@ -538,7 +486,7 @@ public abstract class IOAdapter
             System.out.println("DA COMPLETARE");
         }
 
-        printMessage("Non-valid input. Please retry... ");
+        printMessage(new ErrorMessage("Non-valid input. Please retry... "));
 
        return false;
     }
@@ -551,14 +499,14 @@ public abstract class IOAdapter
 
         if (existingGameMatch)
         {
-            printMessage("A game match with the specified name already exists.");
+            printMessage(new ErrorMessage("A game match with the specified name already exists."));
 
             return false;
         }
 
         startNewGameMatch(gameName, player);
 
-        printMessage("Player: " + player.getName() + " created GameMatch - " + gameName);
+        printMessage(new CommunicationMessage("Player: " + player.getName() + " created GameMatch - " + gameName));
 
         return true;
     }
@@ -571,7 +519,7 @@ public abstract class IOAdapter
 
         if (!existingGameMatch)
         {
-            printMessage("Game match not found.");
+            printMessage(new ErrorMessage("Game match not found."));
 
             return false;
         }
@@ -582,14 +530,14 @@ public abstract class IOAdapter
 
         if (gameMatch.getStarted())
         {
-            printMessage("Game already started");
+            printMessage(new ErrorMessage("Game already started"));
 
             return false;
         }
 
         if (gameMatch.getMaxPlayersNumber() == gameMatch.getPlayerCounter())
         {
-            printMessage("Game is full");
+            printMessage(new ErrorMessage("Game is full"));
 
             return false;
         }
@@ -609,7 +557,7 @@ public abstract class IOAdapter
         if (gameMatch.getPlayerCounter() == 2)
             new Thread(gameMatch).start();
 
-        printMessage("Player: " + player.getName() + " joined GameMatch - " + gameName);
+        printMessage(new CommunicationMessage("Player: " + player.getName() + " joined GameMatch - " + gameName));
 
         return true;
     }
@@ -623,21 +571,21 @@ public abstract class IOAdapter
 
         if (user == null)
         {
-            printMessage("User not found");
+            printMessage((new ErrorMessage("User not found"));
 
             return null;
         }
 
         if (!user.getPassword().equals(password))
         {
-            printMessage("Wrong password");
+            printMessage((new ErrorMessage("Wrong password"));
 
             return null;
         }
 
         if (user.isLogged())
         {
-            printMessage("Invalid login");
+            printMessage((new ErrorMessage("Invalid login"));
 
             return null;
         }
@@ -655,7 +603,7 @@ public abstract class IOAdapter
 
         if (user != null)
         {
-            printMessage("Invalid login");
+            printMessage(new ErrorMessage("Invalid login"));
 
             return null;
         }

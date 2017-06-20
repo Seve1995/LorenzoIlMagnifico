@@ -1,10 +1,10 @@
 package it.polimi.ingsw.pc22.gamebox;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class GameBoard
+public class GameBoard implements Serializable
 {
-	
 	private Tower[] towers;
 	private Harvest harvest;
 	private Production production;

@@ -4,11 +4,12 @@ import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.effects.AddEndGameVictoryPoints;
 import it.polimi.ingsw.pc22.gamebox.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Player 
+public class Player implements Serializable
 {	
 	private String name;
 	private PlayerColorsEnum playerColorsEnum;

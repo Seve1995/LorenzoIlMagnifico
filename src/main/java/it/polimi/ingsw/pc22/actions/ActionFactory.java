@@ -2,6 +2,7 @@ package it.polimi.ingsw.pc22.actions;
 
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
+import it.polimi.ingsw.pc22.utils.ParseEnum;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,57 +16,13 @@ import java.util.regex.Pattern;
  */
 public class ActionFactory
 {
-    private static Map<String, String> parsers = new HashMap<>();
-
     private static String ACTION_PATH = "it.polimi.ingsw.pc22.actions.";
 
     private static final Logger LOGGER = Logger.getLogger(ActionFactory.class.getName());
 
-    static
-    {
-        //TODO SI POSSONO TEORICAMENTE SACRIFICARE INFINITI SERVITORI?
-        //TODO 2 GESTIRE ABBANDONO PARTITA E PERSISTENZA
-
-        String tower = "set tower (BLACK|ORANGE|NEUTER|WHITE) [0-9] (TERRITORY|VENTURE|BUILDING|CHARACTER) [0-3]$";
-
-        parsers.put(tower, "SettingFamiliarMemberOnTower");
-
-        String market = "set market (BLACK|ORANGE|NEUTER|WHITE) [0-9] [0-3]$";
-
-        parsers.put(market, "SettingFamiliarMemberOnMarket");
-
-        String production = "set production (BLACK|ORANGE|NEUTER|WHITE) [0-9]$";
-
-        parsers.put(production, "SettingFamiliarMemberOnProduction");
-
-        String harvest = "set harvest (BLACK|ORANGE|NEUTER|WHITE) [0-9]$";
-
-        parsers.put(harvest, "SettingFamiliarMemberOnHarvest");
-
-        String council = "set council (BLACK|ORANGE|NEUTER|WHITE) [0-9]$";
-
-        parsers.put(council, "SettingFamiliarMemberOnCouncilPalace");
-
-        String pass = "^pass$";
-
-        parsers.put(pass, "PassTurn");
-
-        String playCard = "^play card [0-3]$";
-
-        parsers.put(playCard, "PlayLeaderCard");
-
-        String activateCard = "^activate card [0-3]$";
-
-        parsers.put(activateCard, "ActiveLoaderCard");
-
-        String discardCard = "^discard card [0-3]$";
-
-        parsers.put(discardCard, "DiscardLeaderCard");
-    }
-
     public static Action createAction(String userCommand, Player player)
     {
-        String actionName = parseAction(userCommand);
+        String actionName = ParseEnum.parseAction(userCommand);
 
         System.out.println("String action name: " + actionName);
 
@@ -140,25 +97,6 @@ public class ActionFactory
         ColorsEnum color = ColorsEnum.getColorFromString(matcher.group(0));
 
         return player.getUnusedFamilyMemberByColor(color);
-    }
-
-    public static String parseAction(String action)
-    {
-        for (Map.Entry<String,String> entry : parsers.entrySet())
-        {
-            String regEx = entry.getKey();
-
-            Pattern pattern = Pattern.compile(regEx);
-
-            Matcher matcher = pattern.matcher(action);
-            
-            if (matcher.find())
-            {
-                return parsers.get(regEx);
-            }
-        }
-
-        return null;
     }
 
     private static void setActionParameter

@@ -3,6 +3,8 @@ package it.polimi.ingsw.pc22.adapters;
 import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.connection.User;
 import it.polimi.ingsw.pc22.exceptions.GenericException;
+import it.polimi.ingsw.pc22.messages.ErrorMessage;
+import it.polimi.ingsw.pc22.messages.Message;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.rmi.RMIAuthenticationService;
 import it.polimi.ingsw.pc22.rmi.RMIClientStreamService;
@@ -51,10 +53,9 @@ public class RMIIOAdapter extends IOAdapter implements RMIAuthenticationService
                 user = authenticate(authentication);
 
                 if (user == null)
-                    printMessage("invalid Input - wrong password");
+                    printMessage(new ErrorMessage("invalid Input - wrong password"));
             }
 
-            //DA SOSTITUIRE CON OBJECT
             changeState("logged");
 
             while (!started)
@@ -64,7 +65,7 @@ public class RMIIOAdapter extends IOAdapter implements RMIAuthenticationService
                 started = gameHandling(user, match);
 
                 if (!started)
-                    printMessage("invalid Input");
+                    printMessage(new ErrorMessage("invalid Input"));
             }
 
             //DA SOSTITUIRE CON OBJECT
@@ -88,7 +89,7 @@ public class RMIIOAdapter extends IOAdapter implements RMIAuthenticationService
     }
 
     @Override
-    public void printMessage(String message)
+    public void printMessage(Message message)
     {
         try
         {

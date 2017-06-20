@@ -1,5 +1,7 @@
 package it.polimi.ingsw.pc22.client;
 
+import it.polimi.ingsw.pc22.adapters.IOAdapter;
+import it.polimi.ingsw.pc22.gamebox.PlayerBoard;
 import it.polimi.ingsw.pc22.states.StartMatchState;
 import it.polimi.ingsw.pc22.states.WaitingState;
 
@@ -51,6 +53,32 @@ public class ReceiveThread implements Runnable
 					Client.setGenericState(new WaitingState());
 
 					Client.setStateChanged(true);
+				}
+
+				if ("show board".equals(msgReceived))
+				{
+					//PlayerBoard board = player.getPlayerBoard();
+
+					//player.getAdapter().printMessage(board.toString());
+
+					//continue;
+				}
+
+
+				if ("show cards".equals(msgReceived))
+				{
+					//PlayerBoard board = player.getPlayerBoard();
+
+					//IOAdapter adapter = player.getAdapter();
+
+					//adapter.printMessage(board.getTerritories().toString());
+					//adapter.printMessage(board.getBuildings().toString());
+					//adapter.printMessage(board.getCharacters().toString());
+					//adapter.printMessage(board.getVentures().toString());
+
+					//adapter.printMessage(board.getLeaderCards().toString());
+
+					continue;
 				}
 
 				if("EXIT".equalsIgnoreCase(msgReceived))

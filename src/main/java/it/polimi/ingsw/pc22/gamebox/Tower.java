@@ -1,10 +1,12 @@
 package it.polimi.ingsw.pc22.gamebox;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Tower {
+public class Tower implements Serializable
+{
 	private CardTypeEnum towerType;
 	private List<TowerCell> towerCells;
 	private List<PlayerColorsEnum> listPlayers = new ArrayList<>();

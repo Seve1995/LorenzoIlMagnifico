@@ -3,6 +3,9 @@ package it.polimi.ingsw.pc22.adapters;
 import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.connection.User;
 import it.polimi.ingsw.pc22.exceptions.GenericException;
+import it.polimi.ingsw.pc22.messages.ErrorMessage;
+import it.polimi.ingsw.pc22.messages.LoginMessage;
+import it.polimi.ingsw.pc22.messages.Message;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.ConsoleReader;
 
@@ -20,9 +23,7 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
     private Socket socket;
 
     private BufferedReader in;
-    private PrintWriter out;
-
-    private ObjectOutputStream objectOut;
+    private ObjectOutputStream out;
 
     private static final Logger LOGGER = Logger.getLogger(SocketIOAdapter.class.getName());
 
@@ -35,7 +36,7 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
         {
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
-            out = new PrintWriter(socket.getOutputStream(), true);
+            out = new ObjectOutputStream(socket.getOutputStream());
 
             //objectOut = new ObjectOutputStream(socket.getOutputStream());
         }
@@ -61,12 +62,10 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
                 user = authenticate(authentication);
 
                 if (user == null)
-                    printMessage("invalid Input - wrong password");
+                    printMessage(new ErrorMessage("invalid Input - wrong password"));
             }
 
-
-            //DA SOSTITUIRE CON OBJECT
-            printMessage("logged");
+            printMessage(new LoginMessage(true, false));
 
             while (!started)
             {
@@ -75,11 +74,10 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
                 started = gameHandling(user, match);
 
                 if (!started)
-                    printMessage("invalid Input");
+                    printMessage(new ErrorMessage("invalid Input"));
             }
 
-            //DA SOSTITUIRE CON OBJECT
-            printMessage("started");
+            printMessage(new LoginMessage(true, true));
 
         }
             catch (IOException e)
@@ -109,16 +107,16 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
     }
 
     @Override
-    public void printMessage(String message)
+    public void printMessage(Message message)
     {
-        out.println(message);
-    }
-
-    public void printObject(Object object) throws IOException
-    {
-        objectOut.writeObject(object);
-
-        objectOut.flush();
+        try
+        {
+            out.writeObject(message);
+        }
+            catch (IOException e)
+        {
+            LOGGER.log(Level.INFO, "CANNOT WRITE OBJECT", e);
+        }
     }
 
     @Override

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.pc22.client;
 
+import it.polimi.ingsw.pc22.messages.Message;
 import it.polimi.ingsw.pc22.rmi.RMIClientStreamService;
 import it.polimi.ingsw.pc22.states.StartMatchState;
 import it.polimi.ingsw.pc22.states.WaitingState;
@@ -99,7 +100,7 @@ public class RMIClientStreamServiceImpl implements RMIClientStreamService
     }
 
     @Override
-    public void printMessage(String message) throws RemoteException
+    public void printMessage(Message message) throws RemoteException
     {
         System.out.println(message);
     }

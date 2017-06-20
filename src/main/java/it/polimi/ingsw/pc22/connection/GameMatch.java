@@ -152,6 +152,8 @@ public class GameMatch implements Runnable
 				
 				while (System.currentTimeMillis() < timestamp + timeout)
 				{
+					adapter.changeState("IS YOUR TURN");
+
 					Action action = adapter.askAction(gameBoard, player);
 
 					System.out.println("Action: " + action);
