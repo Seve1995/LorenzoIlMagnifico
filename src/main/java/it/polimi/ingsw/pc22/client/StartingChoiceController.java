@@ -26,7 +26,7 @@ public class StartingChoiceController {
     @FXML
     private RadioButton RMI;
 
-    private static final int RMI_PORT = 5252;
+    private static final int RMI_PORT = 5439;
 
 	private static final int SOCKET_PORT = 9001;
 	
@@ -40,7 +40,9 @@ public class StartingChoiceController {
     
     //Predefinito: GUI + Socket
     @FXML
-    private void handleConfirmButton() {
+    private void handleConfirmButton()
+	{
+		Client.setGenericState(new LoginState());
     	
     	if (RMI.isSelected())
     	{
@@ -65,8 +67,6 @@ public class StartingChoiceController {
 
 			socket = new Socket("localhost", SOCKET_PORT);
 
-			Client.setGenericState(new LoginState());
-			
 			ReceiveThread receiveThread = new ReceiveThread(socket);
 			Thread thread2 = new Thread(receiveThread);
 			thread2.start();

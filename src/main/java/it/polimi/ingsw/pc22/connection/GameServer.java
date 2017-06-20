@@ -27,7 +27,7 @@ public class GameServer
 
 	private static final int SOCKET_PORT = 9001;
 
-	private static final int RMI_PORT = 5252;
+	private static final int RMI_PORT = 5439;
 
 	private static Map<String, User> usersMap;
 
