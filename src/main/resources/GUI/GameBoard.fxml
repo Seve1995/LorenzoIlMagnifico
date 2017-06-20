@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="1700.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ScrollPane layoutX="10.0" layoutY="10.0" prefHeight="950.0" prefWidth="678.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="950.0" fitWidth="678.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <image>
+                        <Image url="@../resources/GameBoard.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="116.0" fitWidth="75.0" layoutX="48.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Google%20Drive/PoliMi/Terzo%20Anno/PROVA%20FINALE/Images%20of%20Game%20Components/lorenzo_materiale_grafico_compr/LorenzoCards_compressed_png/devcards_f_en_c_1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="116.0" fitWidth="75.0" layoutX="48.0" layoutY="289.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Google%20Drive/PoliMi/Terzo%20Anno/PROVA%20FINALE/Images%20of%20Game%20Components/lorenzo_materiale_grafico_compr/LorenzoCards_compressed_png/devcards_f_en_c_1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="116.0" fitWidth="75.0" layoutX="48.0" layoutY="408.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Google%20Drive/PoliMi/Terzo%20Anno/PROVA%20FINALE/Images%20of%20Game%20Components/lorenzo_materiale_grafico_compr/LorenzoCards_compressed_png/devcards_f_en_c_1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="116.0" fitWidth="75.0" layoutX="48.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Google%20Drive/PoliMi/Terzo%20Anno/PROVA%20FINALE/Images%20of%20Game%20Components/lorenzo_materiale_grafico_compr/LorenzoCards_compressed_png/devcards_f_en_c_1.png" />
+                     </image>
+                  </ImageView>
+                  <ToggleButton layoutX="48.0" layoutY="50.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="73.0" text="ToggleButton" visible="false">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="GameBoardButtons" />
+                     </toggleGroup>
+                  </ToggleButton>
+                  <ToggleButton layoutX="48.0" layoutY="167.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="73.0" text="ToggleButton" toggleGroup="$GameBoardButtons" visible="false" />
+                  <ToggleButton layoutX="48.0" layoutY="287.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="73.0" text="ToggleButton" toggleGroup="$GameBoardButtons" visible="false" />
+                  <ToggleButton layoutX="48.0" layoutY="406.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="73.0" text="ToggleButton" toggleGroup="$GameBoardButtons" visible="false" />
+                  <ToggleButton layoutX="177.0" layoutY="48.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="73.0" text="ToggleButton" toggleGroup="$GameBoardButtons" visible="false" />
+                  <ToggleButton layoutX="177.0" layoutY="167.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="73.0" text="ToggleButton" visible="false">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="GameBoardButtons31" />
+                     </toggleGroup>
+                  </ToggleButton>
+                  <ToggleButton layoutX="177.0" layoutY="287.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="73.0" text="ToggleButton" toggleGroup="$GameBoardButtons" visible="false" />
+                  <ToggleButton layoutX="177.0" layoutY="406.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="73.0" text="ToggleButton" toggleGroup="$GameBoardButtons" visible="false" />
+                  <ToggleButton layoutX="304.0" layoutY="48.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="73.0" text="ToggleButton" toggleGroup="$GameBoardButtons" visible="false" />
+                  <ToggleButton layoutX="304.0" layoutY="167.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="73.0" text="ToggleButton" toggleGroup="$GameBoardButtons" visible="false" />
+                  <ToggleButton layoutX="304.0" layoutY="287.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="73.0" text="ToggleButton" toggleGroup="$GameBoardButtons" visible="false" />
+                  <ToggleButton layoutX="304.0" layoutY="406.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="73.0" text="ToggleButton" toggleGroup="$GameBoardButtons" visible="false" />
+                  <ToggleButton layoutX="434.0" layoutY="48.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="73.0" text="ToggleButton" toggleGroup="$GameBoardButtons" visible="false" />
+                  <ToggleButton layoutX="434.0" layoutY="167.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="73.0" text="ToggleButton" toggleGroup="$GameBoardButtons" visible="false" />
+                  <ToggleButton layoutX="434.0" layoutY="287.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="73.0" text="ToggleButton" toggleGroup="$GameBoardButtons" visible="false" />
+                  <ToggleButton layoutX="434.0" layoutY="406.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="73.0" text="ToggleButton" toggleGroup="$GameBoardButtons" visible="false" />
+                  <ToggleButton layoutX="307.0" layoutY="521.0" mnemonicParsing="false" prefHeight="76.0" prefWidth="182.0" text="ToggleButton" toggleGroup="$GameBoardButtons" visible="false" />
+                  <ToggleButton layoutX="41.0" layoutY="762.0" mnemonicParsing="false" prefHeight="76.0" prefWidth="214.0" text="ToggleButton" toggleGroup="$GameBoardButtons" visible="false" />
+                  <ToggleButton layoutX="41.0" layoutY="838.0" mnemonicParsing="false" prefHeight="76.0" prefWidth="214.0" text="ToggleButton" toggleGroup="$GameBoardButtons" visible="false" />
+                  <ToggleButton layoutX="353.0" layoutY="746.0" mnemonicParsing="false" prefHeight="76.0" prefWidth="63.0" text="ToggleButton" toggleGroup="$GameBoardButtons" visible="false" />
+                  <ToggleButton layoutX="416.0" layoutY="746.0" mnemonicParsing="false" prefHeight="76.0" prefWidth="59.0" text="ToggleButton" toggleGroup="$GameBoardButtons" visible="false" />
+                  <ToggleButton layoutX="475.0" layoutY="762.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="52.0" text="ToggleButton" toggleGroup="$GameBoardButtons" visible="false" />
+                  <ToggleButton layoutX="514.0" layoutY="808.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="57.0" text="ToggleButton" toggleGroup="$GameBoardButtons" visible="false" />
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+      <Label layoutX="746.0" layoutY="450.0" text="Choose your Familiar" />
+      <Label layoutX="746.0" layoutY="490.0" text="Choose a Leader Action" />
+      <Label layoutX="746.0" layoutY="533.0" text="Choose a utility action" />
+      <ButtonBar layoutX="940.0" layoutY="438.0" prefHeight="40.0" prefWidth="200.0">
+         <buttons>
+            <Button mnemonicParsing="false" text="BLACK" />
+            <Button mnemonicParsing="false" text="NEUTER" />
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" text="WHITE" />
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" text="ORANGE" />
+         </buttons>
+      </ButtonBar>
+      <ButtonBar layoutX="940.0" layoutY="478.0" prefHeight="40.0" prefWidth="512.0">
+         <buttons>
+            <Button mnemonicParsing="false" text="SHOW LEADERS" />
+            <Button mnemonicParsing="false" text="DISCARD LEADER" />
+            <Button mnemonicParsing="false" text="PLAY LEADER" />
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="157.0" text="ACTIVATE LEADER" />
+         </buttons>
+      </ButtonBar>
+      <ButtonBar layoutX="940.0" layoutY="522.0" prefHeight="40.0" prefWidth="184.0">
+         <buttons>
+            <Button mnemonicParsing="false" text="Exit" />
+            <Button mnemonicParsing="false" text="Pass" />
+         </buttons>
+      </ButtonBar>
+      <ImageView fitHeight="221.0" fitWidth="27.0" layoutX="718.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@bonus%20tile.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="281.0" fitWidth="562.0" layoutX="746.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@pboard.jpg" />
+         </image>
+      </ImageView>
+      <GridPane layoutX="755.0" layoutY="59.0" prefHeight="201.0" prefWidth="390.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <ImageView fitHeight="69.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+               <image>
+                  <Image url="@devcards_f_en_c_1.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="5.0" top="10.0" />
+               </GridPane.margin>
+            </ImageView>
+         </children>
+      </GridPane>
+      <ImageView fitHeight="151.0" fitWidth="390.0" layoutX="1167.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@ventures.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="99.0" fitWidth="392.0" layoutX="1163.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@ventures.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

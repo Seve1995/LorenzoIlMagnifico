@@ -7,7 +7,7 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SendThread implements Runnable
+public class ViewThread implements Runnable
 {	
 	private Socket socket = null;
 	private PrintWriter outSocket = null;
@@ -15,9 +15,9 @@ public class SendThread implements Runnable
 
 	private boolean printed = false;
 
-	private static final Logger LOGGER = Logger.getLogger(SendThread.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(ViewThread.class.getName());
 	
-	public SendThread(Socket socket)
+	public ViewThread(Socket socket)
 	{
 		this.socket = socket;
 	}

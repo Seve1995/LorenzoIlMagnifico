@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.pc22.client.ClientAccessController">
+   <children>
+      <Label layoutX="34.0" layoutY="131.0" text="Username:" />
+      <Label layoutX="34.0" layoutY="217.0" text="Password:" />
+      <TextField fx:id="username" layoutX="34.0" layoutY="158.0" />
+      <TextField fx:id="password" layoutX="34.0" layoutY="250.0" />
+      <ButtonBar layoutX="186.0" layoutY="446.0" prefHeight="40.0" prefWidth="200.0">
+        <buttons>
+          <Button fx:id="login" mnemonicParsing="false" onAction="#handleLoginButton" text="Login" />
+            <Button fx:id="register" mnemonicParsing="false" onAction="#handleRegisterButton" text="Register" />
+        </buttons>
+      </ButtonBar>
+      <Label fx:id="output" layoutX="224.0" layoutY="418.0" text="OUTPUT FROM SERVER" />
+      <Label layoutX="32.0" layoutY="81.0" text="Type your credential:" />
+   </children>
+</AnchorPane>

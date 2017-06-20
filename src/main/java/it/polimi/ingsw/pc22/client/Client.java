@@ -5,7 +5,14 @@ import it.polimi.ingsw.pc22.rmi.RMIAuthenticationService;
 import it.polimi.ingsw.pc22.rmi.RMIClientStreamService;
 import it.polimi.ingsw.pc22.states.GenericState;
 import it.polimi.ingsw.pc22.states.LoginState;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.Socket;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -15,7 +22,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class Client
+public class Client extends Application
 {
 	private static final int RMI_PORT = 5252;
 
@@ -25,9 +32,71 @@ public class Client
 
 	private static boolean stateChanged = true;
 
+	private Stage primaryStage;
+	
+	private AnchorPane anchorPane;
+	
+	private BorderPane border;
+		
+	private ClassLoader classLoader = this.getClass().getClassLoader();
+
+	@Override
+	public void start(Stage primaryStage) {
+		 this.primaryStage = primaryStage;
+	     this.primaryStage.setTitle("Main");
+	     initStartingChoiche();
+	}
+	
+	public void initStartingChoiche()
+	{ 
+		try {
+			// Load root layout from fxml file.
+			FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(classLoader.getResource("GUI/StartingChoiche.fxml"));
+	        anchorPane = (AnchorPane) loader.load();
+			Scene scene = new Scene(anchorPane);
+	        primaryStage.setScene(scene);
+		    primaryStage.show();
+		    
+			
+			/*FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(Main.class.getResource("GameBoard.fxml"));
+	        anchorPane = (AnchorPane) loader.load();
+	        Scene scene = new Scene(anchorPane);
+	        primaryStage.setScene(scene);
+		    primaryStage.show();*/
+	        // Give the controller access to the main app.
+	        StartingChoicheController controller = loader.getController();
+	        controller.setClient(this);
+		} catch (IOException e)
+		{
+			 e.printStackTrace();
+		}
+	}
+	
+	public void launchStartingChoice(String choice)
+	{
+		try {
+			// Load root layout from fxml file.
+			this.primaryStage.setTitle(choice);
+	        FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(classLoader.getResource("GUI/ClientAccess.fxml"));
+	        anchorPane = (AnchorPane) loader.load();
+			Scene scene = new Scene(anchorPane);
+	        primaryStage.setScene(scene);
+	        // Give the controller access to the main app.
+	        ClientAccessController controller = loader.getController();
+	        controller.setClient(this);
+		} catch (IOException e)
+		{
+			 e.printStackTrace();
+		}
+	}
+	
 	public static void main(String[] args)
 	{
-		while (true)
+		launch(args);
+		/*while (true)
 		{
 			System.out.println("Scelgi tipologia di connessione: rmi o socket");
 
@@ -107,8 +176,9 @@ public class Client
 		{
 			throw new GenericException(e);
 		}
+*/
 	}
-
+	
 	public static GenericState getGenericState()
 	{
 		return genericState;
@@ -126,5 +196,13 @@ public class Client
 	public static synchronized void setStateChanged(boolean stateChanged)
 	{
 		Client.stateChanged = stateChanged;
+	}
+	
+	public Stage getPrimaryStage() {
+		return primaryStage;
+	}
+
+	public void setPrimaryStage(Stage primaryStage) {
+		this.primaryStage = primaryStage;
 	}
 }
