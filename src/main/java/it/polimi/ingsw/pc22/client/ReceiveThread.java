@@ -2,6 +2,8 @@ package it.polimi.ingsw.pc22.client;
 
 import it.polimi.ingsw.pc22.states.StartMatchState;
 import it.polimi.ingsw.pc22.states.WaitingState;
+import javafx.application.Platform;
+import javafx.scene.Scene;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -13,13 +15,13 @@ public class ReceiveThread implements Runnable
 {
 	private Socket socket=null;
 	private BufferedReader inSocket=null;
-
+	
 	private static final Logger LOGGER = Logger.getLogger(ReceiveThread.class.getName());
 	
 	public ReceiveThread(Socket socket) {
 		this.socket = socket;
 	}
-	
+
 	public void run() 
 	{
 		try
@@ -31,13 +33,17 @@ public class ReceiveThread implements Runnable
 				if (!inSocket.ready()) Thread.sleep(100);
 
 				String msgReceived = inSocket.readLine();
-
+				
+				Platform.runLater(() -> {
+					Client.getController().updateScene(msgReceived);		
+	            });
+				
 				System.out.println("Server: " + msgReceived);
 
 				//TODO SISTEMARE STO SCHIFO
 				if ("logged".equalsIgnoreCase(msgReceived))
 				{
-					System.out.println("prova andata");
+					System.out.println("prova avndata");
 
 					Client.setGenericState(new StartMatchState());
 
@@ -67,6 +73,10 @@ public class ReceiveThread implements Runnable
 		{
 			LOGGER.log(Level.INFO, "ERROR RECEIVE THREAD", e);
 		}
+	}
+	
+	public void updateScene(String testo) {
+		
 	}
 }
 

@@ -15,7 +15,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
 
-public class StartingChoiceController {
+public class StartingChoiceController implements Controller {
 
 	@FXML
     private RadioButton GUI;
@@ -66,7 +66,9 @@ public class StartingChoiceController {
 			System.out.println("Client running.");
 
 			socket = new Socket("localhost", SOCKET_PORT);
-
+			
+			Client.setSocket(socket);
+			
 			ReceiveThread receiveThread = new ReceiveThread(socket);
 			Thread thread2 = new Thread(receiveThread);
 			thread2.start();
@@ -97,6 +99,8 @@ public class StartingChoiceController {
 		try
 		{
 			Registry registry = LocateRegistry.getRegistry(RMI_PORT);
+			
+			Client.setRegistry(registry);
 
 			RMIAuthenticationService authenticationService = (RMIAuthenticationService)
 					registry.lookup("auth");
@@ -105,19 +109,19 @@ public class StartingChoiceController {
 
 			RMIClientStreamServiceImpl streamService =
 					new RMIClientStreamServiceImpl(30000L);
-
+			
 			RMIClientStreamService stub = (RMIClientStreamService)
 					UnicastRemoteObject.exportObject(streamService, 0);
 
 			registry.rebind("client", stub);
-
+			
 			if (CLI.isSelected())
 			{
 				Stage stage = (Stage) client.getPrimaryStage().getScene().getWindow();
 				stage.close();
-
-				authenticationService.login();
 			}
+			
+			authenticationService.login();
 
 			if (GUI.isSelected())
 			{
@@ -128,6 +132,12 @@ public class StartingChoiceController {
 		{
 			throw new GenericException(e);
 		}
+	}
+
+	@Override
+	public void updateScene(String string) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
