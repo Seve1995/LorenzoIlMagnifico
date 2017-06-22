@@ -3,12 +3,14 @@ package it.polimi.ingsw.pc22.gamebox;
 import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.utils.RequiredCard;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-public class LeaderCard {
+public class LeaderCard implements Serializable
+{
 	private String name;
 	private int number;
 	private List<Asset> requiredAssets;

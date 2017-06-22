@@ -1,8 +1,10 @@
 package it.polimi.ingsw.pc22.states;
 
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
+import it.polimi.ingsw.pc22.client.Client;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.gamebox.PlayerBoard;
+import it.polimi.ingsw.pc22.utils.ParseEnum;
 import it.polimi.ingsw.pc22.utils.PositionUtils;
 
 /**
@@ -15,24 +17,21 @@ public class PlayState implements GenericState
     {
         System.out.println("Choose an action to execute:");
 
-        //if (!player.isFamiliarPositioned())
-        /*
+        if (!Client.getPlayer().isFamiliarPositioned())
         {
-
-            this.printMessage("Available servants: " + player.getServants());
+            System.out.println("Available servants: " + Client.getPlayer().getServants());
 
             StringBuilder availableFamiliarsString = new StringBuilder("Available familiars: ");
 
-            for (FamilyMember f : player.getUnusedFamiliarMembers())
+            for (FamilyMember f : Client.getPlayer().getUnusedFamiliarMembers())
                 availableFamiliarsString.append(f.toString() + " ");
 
-            this.printMessage(availableFamiliarsString.toString());
+           System.out.println(availableFamiliarsString.toString());
 
-            String actions = PositionUtils.getActionAvailableString(gameBoard);
+            String actions = PositionUtils.getActionAvailableString(Client.getGameBoard());
 
-            this.printMessage(actions);
+            System.out.println(actions);
         }
-        */
 
         System.out.println
                 ("- play card <index>" + '\n' +
@@ -42,16 +41,17 @@ public class PlayState implements GenericState
                 "- show cards" + '\n' + //questa in realtà si può sempre fare
                 "- end game / exit game" + '\n'+
                 "- show board"); //questa in realtà si può sempre fare
-
-        //COMMMENTO AI POSTERI V2 QUESTA COSA MI FA CACARE MA SINCERCAMENTE
-        //PER ORA NON HA SENSO CREAE DELLE ACTIONS CHE FACCIANO STE COSE
-
-
     }
 
     @Override
     public boolean validate(String string)
     {
-        return false;
+        String actionName = ParseEnum.parseAction(string);
+
+        System.out.println("String action name: " + actionName);
+
+        if (actionName == null) return false;
+
+        return true;
     }
 }

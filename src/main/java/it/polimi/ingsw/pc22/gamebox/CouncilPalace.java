@@ -2,11 +2,12 @@ package it.polimi.ingsw.pc22.gamebox;
 
 import it.polimi.ingsw.pc22.player.Player;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 //TODO: Nel gameMatch va controllata la lista di playersInCouncilPalace all'inizio di ogni nuovo turno e va SVUOTATA all'inizio del nuovo turno.
-public class CouncilPalace
+public class CouncilPalace implements Serializable
 {
 
 	private CouncilPalaceCell[] councilPalaceCells;

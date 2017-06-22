@@ -2,11 +2,13 @@ package it.polimi.ingsw.pc22.utils;
 
 import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
 
+import java.io.Serializable;
+
 /**
  * Created by matteo on 12/06/17.
  */
-public class RequiredCard {
-
+public class RequiredCard implements Serializable
+{
     private int value;
     private CardTypeEnum type;
 

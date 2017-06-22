@@ -2,10 +2,11 @@ package it.polimi.ingsw.pc22.gamebox;
 
 import it.polimi.ingsw.pc22.effects.Effect;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ExcommunicationCard {
-	
+public class ExcommunicationCard implements Serializable
+{
 	private int age;
 	private int number;
 	private List<Effect> effects;

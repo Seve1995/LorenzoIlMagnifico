@@ -1,6 +1,8 @@
 package it.polimi.ingsw.pc22.gamebox;
 
-public class Asset 
+import java.io.Serializable;
+
+public class Asset implements Serializable
 {
 	private int value;
 	private AssetType type;

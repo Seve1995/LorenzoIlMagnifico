@@ -1,6 +1,8 @@
 package it.polimi.ingsw.pc22.gamebox;
 
-public class Production
+import java.io.Serializable;
+
+public class Production implements Serializable
 {
 	private ProductionCell[] productionCells = new ProductionCell[16];
 

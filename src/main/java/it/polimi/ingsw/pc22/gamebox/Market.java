@@ -1,10 +1,11 @@
 package it.polimi.ingsw.pc22.gamebox;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Market {
-	
+public class Market implements Serializable
+{
 	private List<MarketCell> marketCells = new ArrayList<>();
 	
 	public Market(List<MarketCell> marketCells) {

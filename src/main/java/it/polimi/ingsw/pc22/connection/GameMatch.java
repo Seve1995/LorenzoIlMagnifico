@@ -4,6 +4,7 @@ import it.polimi.ingsw.pc22.actions.Action;
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.messages.CommunicationMessage;
+import it.polimi.ingsw.pc22.messages.StartTurnMessage;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.*;
 import org.json.JSONObject;
@@ -145,11 +146,13 @@ public class GameMatch implements Runnable
 			
 			for(Player player : players)
 			{
-				GameBoardUtils.printToPlayers(player, players, gameBoard, era, turn);
+				//GameBoardUtils.printToPlayers(player, players, gameBoard, era, turn);
 
 				IOAdapter adapter = player.getAdapter();
 
 				adapter.printMessage(new CommunicationMessage("IS YOUR TURN"));
+
+				adapter.printMessage(new StartTurnMessage(gameBoard, player));
 
 				Long timestamp = System.currentTimeMillis();
 				

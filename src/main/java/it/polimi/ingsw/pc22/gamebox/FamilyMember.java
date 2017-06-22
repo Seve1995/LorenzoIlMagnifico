@@ -1,6 +1,8 @@
 package it.polimi.ingsw.pc22.gamebox;
 
-public class FamilyMember 
+import java.io.Serializable;
+
+public class FamilyMember implements Serializable
 {
 	private ColorsEnum color;
 	private PlayerColorsEnum playerColor;

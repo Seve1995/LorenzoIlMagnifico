@@ -47,7 +47,7 @@ public class Player implements Serializable
 	private boolean removeTowerBonus;
 	private List<FamilyMember> familyMembers = new ArrayList<>();
 	private PlayerBoard playerBoard = new PlayerBoard();
-	private IOAdapter adapter;
+	private transient IOAdapter adapter;
 
 	private boolean hasPassed = false;
 	private boolean familiarPositioned = false;

@@ -1,6 +1,9 @@
 package it.polimi.ingsw.pc22.gamebox;
 
-public class BonusTile {
+import java.io.Serializable;
+
+public class BonusTile  implements Serializable
+{
 	private Asset productionServantBonus;
 	private Asset productionCoinsBonus;
 	private Asset productionMilitaryPointsBonus;

@@ -58,9 +58,6 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
                 String authentication = getMessage();
 
                 user = authenticate(authentication);
-
-                //if (user == null)
-                //    printMessage(new ErrorMessage("invalid Input - wrong password"));
             }
 
             printMessage(new LoginMessage(true, false));
@@ -70,9 +67,6 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
                 String match = getMessage();
 
                 started = gameHandling(user, match);
-
-                //if (!started)
-                   // printMessage(new ErrorMessage("invalid Input"));
             }
 
             printMessage(new LoginMessage(true, true));

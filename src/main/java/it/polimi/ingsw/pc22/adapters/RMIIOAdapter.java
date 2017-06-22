@@ -52,9 +52,6 @@ public class RMIIOAdapter extends IOAdapter implements RMIAuthenticationService
                 String authentication = this.getMessage();
 
                 user = authenticate(authentication);
-
-                //if (user == null)
-                //    printMessage(new ErrorMessage("invalid Input - wrong password"));
             }
 
             printMessage(new LoginMessage(true, false));
@@ -64,9 +61,6 @@ public class RMIIOAdapter extends IOAdapter implements RMIAuthenticationService
                 String match = this.getMessage();
 
                 started = gameHandling(user, match);
-
-                //if (!started)
-                 //   printMessage(new ErrorMessage("invalid Input"));
             }
 
             printMessage(new LoginMessage(true, true));

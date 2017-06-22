@@ -1,6 +1,8 @@
 package it.polimi.ingsw.pc22.gamebox;
 
-public class Harvest
+import java.io.Serializable;
+
+public class Harvest implements Serializable
 {
 	private HarvestCell[] harvestCells = new HarvestCell[16];
 

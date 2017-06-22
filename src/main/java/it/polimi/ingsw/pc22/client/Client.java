@@ -1,5 +1,7 @@
 package it.polimi.ingsw.pc22.client;
 
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
+import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.states.GenericState;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -35,7 +37,11 @@ public class Client extends Application
 	
 	private static String interfaceChoice;
 	
-	private static PrintWriter outSocket = null;
+	private static PrintWriter outSocket;
+
+	private static GameBoard gameBoard;
+
+	private static Player player;
 
 	@Override
 	public void start(Stage primaryStage)
@@ -179,5 +185,20 @@ public class Client extends Application
 	public static PrintWriter getOutSocket() {
 		return outSocket;
 	}
-	
+
+	public static GameBoard getGameBoard() {
+		return gameBoard;
+	}
+
+	public static void setGameBoard(GameBoard gameBoard) {
+		Client.gameBoard = gameBoard;
+	}
+
+	public static Player getPlayer() {
+		return player;
+	}
+
+	public static void setPlayer(Player player) {
+		Client.player = player;
+	}
 }

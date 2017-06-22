@@ -3,9 +3,10 @@ package it.polimi.ingsw.pc22.gamebox;
 import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.player.Player;
 
+import java.io.Serializable;
 import java.util.List;
 
-public abstract class Cell
+public abstract class Cell implements Serializable
 {
 	private int requiredDiceValue;
 	private FamilyMember familyMember;

@@ -2,10 +2,8 @@ package it.polimi.ingsw.pc22.client;
 
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.gamebox.PlayerBoard;
-import it.polimi.ingsw.pc22.messages.ErrorMessage;
-import it.polimi.ingsw.pc22.messages.LoginMessage;
-import it.polimi.ingsw.pc22.messages.Message;
-import it.polimi.ingsw.pc22.messages.TimerMessage;
+import it.polimi.ingsw.pc22.messages.*;
+import it.polimi.ingsw.pc22.states.PlayState;
 import it.polimi.ingsw.pc22.states.StartMatchState;
 import it.polimi.ingsw.pc22.states.WaitingState;
 import javafx.application.Platform;
@@ -14,6 +12,7 @@ import javafx.scene.Scene;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,8 +44,9 @@ public class ReceiveThread implements Runnable
 
 					continue;
 				}
-				
-				printOnClient(message.toString());
+
+				//TODO sistemare questa cosa, non tutti hanno qualcosa da visualizzzare
+				//printOnClient(message.toString());
 				
 				if (message instanceof LoginMessage)
 				{
@@ -54,7 +54,7 @@ public class ReceiveThread implements Runnable
 
 					if (login.isUserLogged())
 					{
-						//printOnClient("Logged");
+						printOnClient("Logged");
 
 						Client.setGenericState(new StartMatchState());
 				    	
@@ -80,7 +80,21 @@ public class ReceiveThread implements Runnable
 
 				if (message instanceof ErrorMessage)
 				{
-					//printOnClient(((ErrorMessage) message).getMessage());
+					printOnClient(((ErrorMessage) message).getMessage());
+				}
+
+				if (message instanceof StartTurnMessage)
+				{
+					printOnClient(((StartTurnMessage) message).getPlayer().toString());
+					printOnClient(((StartTurnMessage) message).getGameBoard().toString());
+
+					Client.setPlayer(((StartTurnMessage) message).getPlayer());
+
+					Client.setGameBoard(((StartTurnMessage) message).getGameBoard());
+
+					Client.setGenericState(new PlayState());
+
+					Client.setStateChanged(true);
 				}
 
 				/*if ("started".equalsIgnoreCase(msgReceived))
@@ -137,9 +151,10 @@ public class ReceiveThread implements Runnable
 	public void printOnClient(String string)
 	{
 		if ("GUI".equals(Client.getInterfaceChoice()))
-			Platform.runLater(() -> { 
+			Platform.runLater(() ->
+			{
 				Client.getController().updateScene(string);
-		              }); 
+			});
 		else
 			System.out.println("Server: " + string);
 		

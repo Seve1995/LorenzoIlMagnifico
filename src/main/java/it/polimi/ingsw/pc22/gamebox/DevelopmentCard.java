@@ -2,18 +2,19 @@ package it.polimi.ingsw.pc22.gamebox;
 
 import it.polimi.ingsw.pc22.effects.Effect;
 
+import java.io.Serializable;
 import java.util.List;
 
-public abstract class DevelopmentCard 
+public abstract class DevelopmentCard implements Serializable
 {
 	private String name;
 	private int cardNumber;
 	private int roundNumber;
 	private boolean permanentEffectChoice = false;
 	
-	
-	private List<Effect> immediateEffects;
-	private List<Effect> permanentEffects;
+	//TODO SISTEMARE QUESTO
+	private transient List<Effect> immediateEffects;
+	private transient List<Effect> permanentEffects;
 
 	public DevelopmentCard(){}
 

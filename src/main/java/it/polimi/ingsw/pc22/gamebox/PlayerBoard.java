@@ -1,9 +1,11 @@
 package it.polimi.ingsw.pc22.gamebox;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerBoard {
+public class PlayerBoard implements Serializable
+{
 	private List<TerritoryCard> territories = new ArrayList<>();
 	private List<BuildingCard> buildings = new ArrayList<>();
 	private List<CharacterCard> characters= new ArrayList<>();

@@ -1,8 +1,10 @@
 package it.polimi.ingsw.pc22.gamebox;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Dice {
+public class Dice implements Serializable
+{
 	private int diceValue;
 	private ColorsEnum color;
 	
