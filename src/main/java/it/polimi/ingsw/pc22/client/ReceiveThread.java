@@ -57,7 +57,10 @@ public class ReceiveThread implements Runnable
 						printOnClient("Logged");
 
 						Client.setGenericState(new StartMatchState());
-				    	
+
+						Platform.runLater(() -> {
+							Client.launchCreationMatch();
+					              });
 					}
 
 					if (login.isMatchStarted())

@@ -16,7 +16,6 @@ public class DoubleYourBonuses implements Effect{
 		player.setSantaRita(true);
 		
 		return true;
-		
 	}
 	
 

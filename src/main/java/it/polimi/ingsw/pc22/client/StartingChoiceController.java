@@ -30,16 +30,11 @@ public class StartingChoiceController implements Controller {
 
 	private static final int SOCKET_PORT = 9001;
 	
-    private Client client;
-    
     private String networkChoice;
     
     private String interfaceChoice;
     
-    public void setClient(Client client) {
-        this.client = client;
-    }
-    
+
     //Predefinito: GUI + Socket
     @FXML
     private void handleConfirmButton()
@@ -78,7 +73,7 @@ public class StartingChoiceController implements Controller {
 				ViewThread viewThread = new ViewThread(socket);
 				Thread thread = new Thread(viewThread);
 				thread.start();
-				Stage stage = (Stage) client.getPrimaryStage().getScene().getWindow();
+				Stage stage = (Stage) Client.getPrimaryStage().getScene().getWindow();
 				stage.close();
 		    	Client.setInterfaceChoice(interfaceChoice);
 			}
@@ -86,7 +81,7 @@ public class StartingChoiceController implements Controller {
 			if (GUI.isSelected())
 			{
 				interfaceChoice = "GUI";
-				client.launchStartingChoice(networkChoice);
+				Client.launchClientAccess(networkChoice);
 		    	Client.setInterfaceChoice(interfaceChoice);
 			}
 
@@ -120,7 +115,7 @@ public class StartingChoiceController implements Controller {
 			
 			if (CLI.isSelected())
 			{
-				Stage stage = (Stage) client.getPrimaryStage().getScene().getWindow();
+				Stage stage = (Stage) Client.getPrimaryStage().getScene().getWindow();
 				stage.close();
 			}
 			
@@ -128,7 +123,7 @@ public class StartingChoiceController implements Controller {
 
 			if (GUI.isSelected())
 			{
-				client.launchStartingChoice(networkChoice);
+				Client.launchClientAccess(networkChoice);
 			}
 
 		} catch (RemoteException | NotBoundException e)

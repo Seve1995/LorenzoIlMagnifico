@@ -32,21 +32,14 @@ public class ClientAccessController implements Controller {
     @FXML 
     private Label output;
     
-    private Client client;
-    
     private PrintWriter printWriter;
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
     
     @FXML
     private void handleLoginButton() throws InterruptedException {
     	String output = username.getText() + " " + password.getText() + " L";
     	Client.getOutSocket().println(output);
-    	//TODO: SISTEMARE, PERCHE' NON FUNZIONA AL PRIMO CLICK!
-    	if (Client.getGenericState() instanceof StartMatchState)
-    		client.launchCreationMatch();
+    	//if (Client.getGenericState() instanceof StartMatchState)
+    	//	Client.launchCreationMatch();
     }
     
     @FXML

@@ -10,14 +10,8 @@ public class CreationMatchController implements Controller{
 	private Label Label;
 	@FXML
 	private TextField Text;
-	
-    private Client client;
-    
+	    
     private String textString;
-    
-    public void setClient(Client client) {
-        this.client = client;
-    }
     
     @FXML
     private void handleCreateButton()
