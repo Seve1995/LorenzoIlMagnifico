@@ -57,7 +57,10 @@ public class ReceiveThread implements Runnable
 						//printOnClient("Logged");
 
 						Client.setGenericState(new StartMatchState());
-				    	
+						
+						Platform.runLater(() -> { 
+							Client.launchCreationMatch();
+					              }); 
 					}
 
 					if (login.isMatchStarted())
@@ -82,7 +85,7 @@ public class ReceiveThread implements Runnable
 				{
 					//printOnClient(((ErrorMessage) message).getMessage());
 				}
-
+				
 				/*if ("started".equalsIgnoreCase(msgReceived))
 				{
 
@@ -139,11 +142,9 @@ public class ReceiveThread implements Runnable
 		if ("GUI".equals(Client.getInterfaceChoice()))
 			Platform.runLater(() -> { 
 				Client.getController().updateScene(string);
-		              }); 
+		              });
 		else
 			System.out.println("Server: " + string);
-		
-		
 	}
 }
 

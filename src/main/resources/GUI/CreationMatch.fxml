@@ -19,6 +19,6 @@
       <Button layoutX="20.0" layoutY="174.0" mnemonicParsing="false" onAction="#handleCreateButton" prefHeight="26.0" prefWidth="73.0" text="Create" />
       <Button layoutX="20.0" layoutY="218.0" mnemonicParsing="false" onAction="#handleJoinButton" prefHeight="26.0" prefWidth="73.0" text="Join" />
       <Button layoutX="20.0" layoutY="262.0" mnemonicParsing="false" onAction="#handleRandomButton" text="Random" />
-      <Label fx:id="Label" layoutX="20.0" layoutY="356.0" />
+      <Label fx:id="Label" layoutX="20.0" layoutY="356.0" prefHeight="17.0" prefWidth="190.0" />
    </children>
 </AnchorPane>

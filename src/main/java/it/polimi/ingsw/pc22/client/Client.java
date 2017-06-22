@@ -19,13 +19,13 @@ public class Client extends Application
 
 	private static boolean stateChanged = true;
 
-	private Stage primaryStage;
+	private static Stage primaryStage;
 	
-	private AnchorPane anchorPane;
+	private static AnchorPane anchorPane;
 	
-	private BorderPane border;
+	private static BorderPane border;
 		
-	private ClassLoader classLoader = this.getClass().getClassLoader();
+	private static ClassLoader classLoader = Client.class.getClassLoader();
 
 	private static Registry registry;
 	
@@ -40,12 +40,12 @@ public class Client extends Application
 	@Override
 	public void start(Stage primaryStage)
 	{
-		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("Main");
+		Client.primaryStage = primaryStage;
+		primaryStage.setTitle("Main");
 		initStartingChoice();
 	}
 	
-	public void initStartingChoice()
+	public static void initStartingChoice()
 	{ 
 		try
 		{	
@@ -58,7 +58,7 @@ public class Client extends Application
 		    primaryStage.show();		    
 	        StartingChoiceController controller = loader.getController();
 	        Client.controller = controller;
-	        controller.setClient(this);
+	        //controller.setClient(this);
 
 		} catch (IOException e)
 		{
@@ -66,11 +66,11 @@ public class Client extends Application
 		}
 	}
 	
-	public void launchStartingChoice(String choice)
+	public static void launchClientAccess(String choice)
 	{
 		try {
 			// Load root layout from fxml file.
-			this.primaryStage.setTitle("Starting Choice");
+			primaryStage.setTitle("Starting Choice");
 	        FXMLLoader loader = new FXMLLoader();
 	        loader.setLocation(classLoader.getResource("GUI/ClientAccess.fxml"));
 	        anchorPane = loader.load();
@@ -79,18 +79,17 @@ public class Client extends Application
 	        // Give the controller access to the main app.
 	        ClientAccessController controller = loader.getController();
 	        Client.controller = controller;
-	        controller.setClient(this);
 		} catch (IOException e)
 		{
 			 e.printStackTrace();
 		}
 	}
 	
-	public void launchCreationMatch()
+	public static void launchCreationMatch()
 	{
 		try {
 			// Load root layout from fxml file.
-			this.primaryStage.setTitle("Creation Match");
+			primaryStage.setTitle("Creation Match");
 	        FXMLLoader loader = new FXMLLoader();
 	        loader.setLocation(classLoader.getResource("GUI/CreationMatch.fxml"));
 	        anchorPane = loader.load();
@@ -99,7 +98,6 @@ public class Client extends Application
 	        // Give the controller access to the main app.
 	        CreationMatchController controller = loader.getController();
 	        Client.controller = controller;
-	        controller.setClient(this);
 		} catch (IOException e)
 		{
 			 e.printStackTrace();
@@ -131,12 +129,12 @@ public class Client extends Application
 		Client.stateChanged = stateChanged;
 	}
 	
-	public Stage getPrimaryStage() {
+	public static Stage getPrimaryStage() {
 		return primaryStage;
 	}
 
-	public void setPrimaryStage(Stage primaryStage) {
-		this.primaryStage = primaryStage;
+	public static void setPrimaryStage(Stage primaryStage) {
+		Client.primaryStage = primaryStage;
 	}
 
 	public static Registry getRegistry() {
