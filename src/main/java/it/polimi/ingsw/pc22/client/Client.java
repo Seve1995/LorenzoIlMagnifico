@@ -9,6 +9,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.rmi.registry.Registry;
 
@@ -33,6 +34,9 @@ public class Client extends Application
 	private static Controller controller;
 	
 	private static String interfaceChoice;
+	
+	private static PrintWriter outSocket = null;
+
 	@Override
 	public void start(Stage primaryStage)
 	{
@@ -47,7 +51,7 @@ public class Client extends Application
 		{	
 			// Load root layout from fxml file.
 			FXMLLoader loader = new FXMLLoader();
-	        loader.setLocation(classLoader.getResource("GUI/StartingChoiche.fxml"));
+	        loader.setLocation(classLoader.getResource("GUI/StartingChoice.fxml"));
 	        anchorPane = loader.load();
 			Scene scene = new Scene(anchorPane);
 	        primaryStage.setScene(scene);
@@ -66,7 +70,7 @@ public class Client extends Application
 	{
 		try {
 			// Load root layout from fxml file.
-			this.primaryStage.setTitle(choice);
+			this.primaryStage.setTitle("Starting Choice");
 	        FXMLLoader loader = new FXMLLoader();
 	        loader.setLocation(classLoader.getResource("GUI/ClientAccess.fxml"));
 	        anchorPane = loader.load();
@@ -82,6 +86,26 @@ public class Client extends Application
 		}
 	}
 	
+	public void launchCreationMatch()
+	{
+		try {
+			// Load root layout from fxml file.
+			this.primaryStage.setTitle("Creation Match");
+	        FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(classLoader.getResource("GUI/CreationMatch.fxml"));
+	        anchorPane = loader.load();
+			Scene scene = new Scene(anchorPane);
+	        primaryStage.setScene(scene);
+	        // Give the controller access to the main app.
+	        CreationMatchController controller = loader.getController();
+	        Client.controller = controller;
+	        controller.setClient(this);
+		} catch (IOException e)
+		{
+			 e.printStackTrace();
+		}
+	}
+
 	public static void main(String[] args)
 	{
 		launch(args);
@@ -95,6 +119,7 @@ public class Client extends Application
 	public static synchronized void setGenericState(GenericState genericState)
 	{
 		Client.genericState = genericState;
+		
 	}
 
 	public static boolean isStateChanged() {
@@ -128,6 +153,11 @@ public class Client extends Application
 
 	public static void setSocket(Socket socket) {
 		Client.socket = socket;
+		try {
+			Client.outSocket = new PrintWriter(Client.getSocket().getOutputStream(), true);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static Controller getController() {
@@ -145,6 +175,9 @@ public class Client extends Application
 	public static void setInterfaceChoice(String interfaceChoice) {
 		Client.interfaceChoice = interfaceChoice;
 	}
-	
+
+	public static PrintWriter getOutSocket() {
+		return outSocket;
+	}
 	
 }

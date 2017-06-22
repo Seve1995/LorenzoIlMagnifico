@@ -71,8 +71,8 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
 
                 started = gameHandling(user, match);
 
-                if (!started)
-                    printMessage(new ErrorMessage("invalid Input"));
+                //if (!started)
+                   // printMessage(new ErrorMessage("invalid Input"));
             }
 
             printMessage(new LoginMessage(true, true));

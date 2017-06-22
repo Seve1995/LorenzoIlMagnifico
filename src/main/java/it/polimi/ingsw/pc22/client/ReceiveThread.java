@@ -57,7 +57,7 @@ public class ReceiveThread implements Runnable
 						//printOnClient("Logged");
 
 						Client.setGenericState(new StartMatchState());
-
+				    	
 					}
 
 					if (login.isMatchStarted())

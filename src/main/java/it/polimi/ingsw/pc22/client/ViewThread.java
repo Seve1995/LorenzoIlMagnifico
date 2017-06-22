@@ -10,9 +10,8 @@ import java.util.logging.Logger;
 public class ViewThread implements Runnable
 {	
 	private Socket socket = null;
-	private PrintWriter outSocket = null;
 	private BufferedReader inKeyboard = null;
-
+	private PrintWriter outSocket = null;
 	private boolean printed = false;
 
 	private static final Logger LOGGER = Logger.getLogger(ViewThread.class.getName());
@@ -27,7 +26,7 @@ public class ViewThread implements Runnable
 		try
 		{
 			inKeyboard = new BufferedReader(new InputStreamReader(System.in));
-			outSocket = new PrintWriter(socket.getOutputStream(), true);
+			outSocket = Client.getOutSocket();
 
 			while(true)
 			{

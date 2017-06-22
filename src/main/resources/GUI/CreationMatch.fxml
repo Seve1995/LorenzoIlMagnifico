@@ -7,7 +7,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="437.0" prefWidth="273.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CreationMatch">
+<AnchorPane prefHeight="437.0" prefWidth="273.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.pc22.client.CreationMatchController">
    <children>
       <ImageView fitHeight="437.0" fitWidth="327.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -15,10 +15,10 @@
          </image>
       </ImageView>
       <Label layoutX="26.0" layoutY="77.0" text="Type a name of a Match" />
-      <TextField layoutX="20.0" layoutY="109.0" />
-      <Button layoutX="20.0" layoutY="174.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="73.0" text="Create" />
-      <Button layoutX="20.0" layoutY="218.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="73.0" text="Join" />
-      <Button layoutX="20.0" layoutY="262.0" mnemonicParsing="false" text="Random" />
-      <Label layoutX="20.0" layoutY="356.0" text="Error! Retry" />
+      <TextField fx:id="Text" layoutX="20.0" layoutY="109.0" />
+      <Button layoutX="20.0" layoutY="174.0" mnemonicParsing="false" onAction="#handleCreateButton" prefHeight="26.0" prefWidth="73.0" text="Create" />
+      <Button layoutX="20.0" layoutY="218.0" mnemonicParsing="false" onAction="#handleJoinButton" prefHeight="26.0" prefWidth="73.0" text="Join" />
+      <Button layoutX="20.0" layoutY="262.0" mnemonicParsing="false" onAction="#handleRandomButton" text="Random" />
+      <Label fx:id="Label" layoutX="20.0" layoutY="356.0" />
    </children>
 </AnchorPane>

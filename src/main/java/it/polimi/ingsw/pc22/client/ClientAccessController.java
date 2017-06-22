@@ -12,6 +12,7 @@ import java.rmi.server.UnicastRemoteObject;
 import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.rmi.RMIAuthenticationService;
 import it.polimi.ingsw.pc22.rmi.RMIClientStreamService;
+import it.polimi.ingsw.pc22.states.StartMatchState;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
@@ -34,34 +35,24 @@ public class ClientAccessController implements Controller {
     private Client client;
     
     private PrintWriter printWriter;
-    
-    @FXML
-    private void initialize() {
-		try {
-			printWriter = new PrintWriter(Client.getSocket().getOutputStream(), true);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-    }
 
     public void setClient(Client client) {
-    	
         this.client = client;
-        
     }
     
     @FXML
-    private void handleLoginButton() {
+    private void handleLoginButton() throws InterruptedException {
     	String output = username.getText() + " " + password.getText() + " L";
-    	printWriter.println(output);
+    	Client.getOutSocket().println(output);
+    	//TODO: SISTEMARE, PERCHE' NON FUNZIONA AL PRIMO CLICK!
+    	if (Client.getGenericState() instanceof StartMatchState)
+    		client.launchCreationMatch();
     }
     
     @FXML
     private void handleRegisterButton() {
     	String output = username.getText() + " " + password.getText() + " R";
-    	printWriter.println(output);
+    	Client.getOutSocket().println(output);
         
     }
 

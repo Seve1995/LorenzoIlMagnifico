@@ -65,8 +65,8 @@ public class RMIIOAdapter extends IOAdapter implements RMIAuthenticationService
 
                 started = gameHandling(user, match);
 
-                if (!started)
-                    printMessage(new ErrorMessage("invalid Input"));
+                //if (!started)
+                 //   printMessage(new ErrorMessage("invalid Input"));
             }
 
             printMessage(new LoginMessage(true, true));
