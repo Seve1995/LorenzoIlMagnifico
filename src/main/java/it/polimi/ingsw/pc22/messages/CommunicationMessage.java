@@ -13,4 +13,8 @@ public class CommunicationMessage extends Message implements Serializable
     {
         this.message = message;
     }
+
+    public String getMessage() {
+        return message;
+    }
 }

@@ -9,6 +9,7 @@ import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.messages.CommunicationMessage;
 import it.polimi.ingsw.pc22.messages.ErrorMessage;
 import it.polimi.ingsw.pc22.messages.Message;
+import it.polimi.ingsw.pc22.messages.TimerMessage;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.CouncilPrivilege;
 import it.polimi.ingsw.pc22.utils.UserLoader;
@@ -61,7 +62,7 @@ public abstract class IOAdapter
             return action;
         }
 
-        printMessage(new ErrorMessage("Timeout Azione terminato"));
+        printMessage(new TimerMessage("Timeout Azione terminato"));
 
         return null;
     }
@@ -92,13 +93,13 @@ public abstract class IOAdapter
 	                continue;
 	            }
 
-	            if (floor <0 || floor > 3)
+	            if (floor < 0 || floor > 3)
 	                continue;
 
 	            return floor;
         }
 
-        printMessage(new ErrorMessage("Timeout Azione terminato"));
+        printMessage(new TimerMessage("Timeout Azione terminato"));
 
         return -1;
 
@@ -110,7 +111,7 @@ public abstract class IOAdapter
 
         while(System.currentTimeMillis() < maxTimeStamp)
         {
-	            this.printMessage("Select a Card Type to pick:");
+	            //this.printMessage(new Com"Select a Card Type to pick:");
 
 	            String value = getMessage();
 
@@ -125,7 +126,7 @@ public abstract class IOAdapter
 	            return cardType;
         }
 
-        printMessage("Timeout expired");
+        printMessage(new TimerMessage("Timeout expired"));
 
         return null;
     }
@@ -136,8 +137,8 @@ public abstract class IOAdapter
 
         while(System.currentTimeMillis() < maxTimeStamp)
         {
-            this.printMessage("Voi sacrificare servitori per aumentare il valore dell'azione? \n" +
-                    "Indica un numero da 0 a " + player.getServants());
+            //this.printMessage("Voi sacrificare servitori per aumentare il valore dell'azione? \n" +
+                    //"Indica un numero da 0 a " + player.getServants());
 
             String value = getMessage();
 
@@ -152,7 +153,7 @@ public abstract class IOAdapter
             }
             catch (NumberFormatException e)
             {
-                this.printMessage("ERROR! You must enter a valid input");
+                this.printMessage(new ErrorMessage("ERROR! You must enter a valid input"));
 
                 continue;
             }
@@ -163,7 +164,7 @@ public abstract class IOAdapter
             return new Asset(servantNumber, AssetType.SERVANT);
         }
 
-        printMessage("Timeout Azione terminato");
+        printMessage(new TimerMessage("Timeout Azione terminato"));
 
         return null;
     }
@@ -179,11 +180,12 @@ public abstract class IOAdapter
         while(System.currentTimeMillis() < maxTimeStamp)
         {
  		   StringBuilder sb = new StringBuilder("Choose the familiar member for the bonus:\n");
-		   //TODO SISTEMARE STA COSA; BISOGNA CHIAMARE UNA FUNZIONE STATICA ESTERNA!!
+
+ 		   //TODO SISTEMARE STA COSA; BISOGNA CHIAMARE UNA FUNZIONE STATICA ESTERNA!!
 		   for (FamilyMember f : familyMembers)
 			   sb.append(f.toString());
 		    
-		   this.printMessage(sb.toString());
+		   //this.printMessage(sb.toString());
 		
 		    String choice = this.getMessage();
 		
@@ -204,7 +206,7 @@ public abstract class IOAdapter
         
         }
         
-        printMessage("Timeout Azione terminato");
+        printMessage(new TimerMessage("Timeout Azione terminato"));
 
         return null;
     }
@@ -215,9 +217,10 @@ public abstract class IOAdapter
 
         while(System.currentTimeMillis() < maxTimeStamp)
         {
-            this.printMessage("Choose an action:\n"
+            /*this.printMessage("Choose an action:\n"
                     + "1) Show your support to the Church (you'll lose all yours faith points & you'll gain victory points)\n"
                     + "2) Take the excommunication (you won't lose your faith points)");
+                    */
 
             String value = getMessage();
 
@@ -232,7 +235,7 @@ public abstract class IOAdapter
             }
             catch (NumberFormatException e)
             {
-                this.printMessage("ERROR! You must enter a valid input");
+                this.printMessage(new ErrorMessage("ERROR! You must enter a valid input"));
 
                 continue;
             }
@@ -243,7 +246,7 @@ public abstract class IOAdapter
             return choice;
         }
 
-        printMessage("Timeout Azione terminato");
+        printMessage(new TimerMessage("Timeout Azione terminato"));
 
         return -1;
 
@@ -257,7 +260,7 @@ public abstract class IOAdapter
 
     public void printWinnerNameToSingleUser(String playerName)
     {
-        this.printMessage("The winner is: " + playerName);
+        this.printMessage(new CommunicationMessage("The winner is: " + playerName));
 
     }
 
@@ -272,7 +275,7 @@ public abstract class IOAdapter
 
         while(System.currentTimeMillis() < maxTimeStamp || i < numberOfAssets)
         {
-            this.printMessage("Choose one asset:" + '\n' + councilPrivilege);
+            //this.printMessage("Choose one asset:" + '\n' + councilPrivilege);
 
             String choice = getMessage();
 
@@ -327,7 +330,7 @@ public abstract class IOAdapter
             
         }
 
-        printMessage("Timeout Azione terminato");
+        printMessage(new TimerMessage("Timeout Azione terminato"));
 
         return null;
 
@@ -343,11 +346,11 @@ public abstract class IOAdapter
 
         while(System.currentTimeMillis() < maxTimeStamp || i < numberOfAssets)
         {
-            this.printMessage("Choose one asset:" + '\n');
+            /*this.printMessage("Choose one asset:" + '\n');
             for (int j=0; j<assets.size(); j++)
             {
             	this.printMessage(j + ")" + assets.get(j).toString());
-            }
+            }*/
             
             try{
             	String choice = getMessage();
@@ -369,22 +372,23 @@ public abstract class IOAdapter
 
             } catch(NumberFormatException e) {
             	
-            	this.printMessage("ERROR! You must enter a valid input");
+            	this.printMessage(new ErrorMessage("ERROR! You must enter a valid input"));
             	
             	continue;
             }
 
         }
 
-        printMessage("Timeout Azione terminato");
+        printMessage(new ErrorMessage("Timeout Azione terminato"));
 
         return null;
     }
     
-    public int chooseCost(Asset militaryPointsRequired, Asset militaryPointsCost, List<Asset> resourcesCost){
-    	this.printMessage("You have to choose one cost between:");
-    	this.printMessage("1) You must have" + militaryPointsRequired.getValue() + "and you will pay" + militaryPointsCost.getValue());
-    	this.printMessage("2) Pay these resources:" + resourcesCost.toString());
+    public int chooseCost(Asset militaryPointsRequired, Asset militaryPointsCost, List<Asset> resourcesCost)
+    {
+    	//this.printMessage("You have to choose one cost between:");
+    	//this.printMessage("1) You must have" + militaryPointsRequired.getValue() + "and you will pay" + militaryPointsCost.getValue());
+    	//this.printMessage("2) Pay these resources:" + resourcesCost.toString());
         Long maxTimeStamp = System.currentTimeMillis() + timeout;
 
         while(System.currentTimeMillis() < maxTimeStamp)
@@ -401,14 +405,14 @@ public abstract class IOAdapter
 
 	    	} catch(NumberFormatException e) {
 
-	        	this.printMessage("ERROR! You must enter a valid input");
+	        	this.printMessage(new ErrorMessage("ERROR! You must enter a valid input"));
 
 	        	continue;
 	        }
 
 	    }
 
-        printMessage("Timeout Azione terminato");
+        printMessage(new TimerMessage("Timeout Azione terminato"));
 
         return -1;
 
@@ -571,21 +575,21 @@ public abstract class IOAdapter
 
         if (user == null)
         {
-            printMessage((new ErrorMessage("User not found"));
+            printMessage(new ErrorMessage("User not found"));
 
             return null;
         }
 
         if (!user.getPassword().equals(password))
         {
-            printMessage((new ErrorMessage("Wrong password"));
+            printMessage(new ErrorMessage("Wrong password"));
 
             return null;
         }
 
         if (user.isLogged())
         {
-            printMessage((new ErrorMessage("Invalid login"));
+            printMessage(new ErrorMessage("Invalid login"));
 
             return null;
         }

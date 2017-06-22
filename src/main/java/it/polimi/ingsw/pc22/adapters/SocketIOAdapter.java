@@ -37,8 +37,6 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
             out = new ObjectOutputStream(socket.getOutputStream());
-
-            //objectOut = new ObjectOutputStream(socket.getOutputStream());
         }
             catch (IOException e)
         {

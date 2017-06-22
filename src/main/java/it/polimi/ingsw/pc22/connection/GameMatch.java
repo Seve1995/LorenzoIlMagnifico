@@ -3,6 +3,7 @@ package it.polimi.ingsw.pc22.connection;
 import it.polimi.ingsw.pc22.actions.Action;
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.gamebox.*;
+import it.polimi.ingsw.pc22.messages.CommunicationMessage;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.*;
 import org.json.JSONObject;
@@ -145,15 +146,15 @@ public class GameMatch implements Runnable
 			for(Player player : players)
 			{
 				GameBoardUtils.printToPlayers(player, players, gameBoard, era, turn);
-				
+
 				IOAdapter adapter = player.getAdapter();
+
+				adapter.printMessage(new CommunicationMessage("IS YOUR TURN"));
 
 				Long timestamp = System.currentTimeMillis();
 				
 				while (System.currentTimeMillis() < timestamp + timeout)
 				{
-					adapter.changeState("IS YOUR TURN");
-
 					Action action = adapter.askAction(gameBoard, player);
 
 					System.out.println("Action: " + action);
@@ -169,9 +170,9 @@ public class GameMatch implements Runnable
 					if (executed) break;
 				}
 
-				adapter.printMessage(player.getPlayerBoard().toString());
+				adapter.printMessage(new CommunicationMessage(player.getPlayerBoard().toString()));
 				
-				adapter.printMessage(player.toString());
+				adapter.printMessage(new CommunicationMessage(player.toString()));
 			}
 
 			GameBoardUtils.resetPlayerStatus(players);

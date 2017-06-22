@@ -182,7 +182,7 @@ public class GameBoardUtils {
 		{
 			IOAdapter adapter = player.getAdapter();
 			
-			adapter.printMessage(currPlayer.toString());
+			/*adapter.printMessage(currPlayer.toString());
 			
 			adapter.printMessage(gameBoard.toString());
 			
@@ -192,6 +192,7 @@ public class GameBoardUtils {
 			
 			adapter.printMessage("Number of round:" + currentRoundNumber + "|Number of era:" + era);
 			adapter.printMessage("It's " + currPlayer.getName() + " turn.");
+			*/
 			
 		}
 	}

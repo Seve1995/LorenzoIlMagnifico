@@ -18,4 +18,12 @@ public class StartTurnMessage extends  Message implements Serializable
         this.gameBoard = gameBoard;
         this.player = player;
     }
+
+    public GameBoard getGameBoard() {
+        return gameBoard;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
 }

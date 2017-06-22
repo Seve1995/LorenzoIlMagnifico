@@ -2,6 +2,10 @@ package it.polimi.ingsw.pc22.client;
 
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.gamebox.PlayerBoard;
+import it.polimi.ingsw.pc22.messages.ErrorMessage;
+import it.polimi.ingsw.pc22.messages.LoginMessage;
+import it.polimi.ingsw.pc22.messages.Message;
+import it.polimi.ingsw.pc22.messages.TimerMessage;
 import it.polimi.ingsw.pc22.states.StartMatchState;
 import it.polimi.ingsw.pc22.states.WaitingState;
 import javafx.application.Platform;
@@ -9,6 +13,7 @@ import javafx.scene.Scene;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +21,7 @@ import java.util.logging.Logger;
 public class ReceiveThread implements Runnable
 {
 	private Socket socket=null;
-	private BufferedReader inSocket=null;
+	private ObjectInputStream inSocket=null;
 	
 	private static final Logger LOGGER = Logger.getLogger(ReceiveThread.class.getName());
 	
@@ -28,35 +33,61 @@ public class ReceiveThread implements Runnable
 	{
 		try
 		{
-			inSocket = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+			inSocket = new ObjectInputStream(this.socket.getInputStream());
 
 			while(true)
 			{
-				if (!inSocket.ready()) Thread.sleep(100);
+				Message message = (Message) inSocket.readObject();
 
-				String msgReceived = inSocket.readLine();
-				
-				Platform.runLater(() -> {
-					Client.getController().updateScene(msgReceived);		
-	            });
-				
-				System.out.println("Server: " + msgReceived);
-
-				//TODO SISTEMARE STO SCHIFO
-				if ("logged".equalsIgnoreCase(msgReceived))
+				if (message == null)
 				{
-					System.out.println("prova avndata");
+					Thread.sleep(100);
 
-					Client.setGenericState(new StartMatchState());
+					continue;
+				}
+
+				System.out.println("Server: " + message);
+
+				if (message instanceof LoginMessage)
+				{
+					LoginMessage login = (LoginMessage) message;
+
+					if (login.isUserLogged())
+					{
+						System.out.println("Loggato");
+
+						Client.setGenericState(new StartMatchState());
+
+					}
+
+					if (login.isMatchStarted())
+					{
+						Client.setGenericState(new WaitingState());
+					}
+
 
 					Client.setStateChanged(true);
 				}
 
-				if ("started".equalsIgnoreCase(msgReceived))
+				if (message instanceof TimerMessage)
 				{
-					System.out.println("prova andata");
+					System.out.println(((TimerMessage) message).getMessage());
 
 					Client.setGenericState(new WaitingState());
+
+					Client.setStateChanged(true);
+				}
+
+				if (message instanceof ErrorMessage)
+				{
+					System.out.println(((ErrorMessage) message).getMessage());
+				}
+
+				/*if ("started".equalsIgnoreCase(msgReceived))
+				{
+
+
+
 
 					Client.setStateChanged(true);
 				}
@@ -94,17 +125,13 @@ public class ReceiveThread implements Runnable
 					socket.close();
 
 					break;
-				}
+				}*/
 			}
 		}
 		catch(Exception e)
 		{
 			LOGGER.log(Level.INFO, "ERROR RECEIVE THREAD", e);
 		}
-	}
-	
-	public void updateScene(String testo) {
-		
 	}
 }
 

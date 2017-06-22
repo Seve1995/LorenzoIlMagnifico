@@ -122,7 +122,7 @@ public class FamilyMemberModifier implements Effect
 					if(isLegal(player, gameBoard))
 					{
 						
-						player.getAdapter().printMessage("Which familiar color do you want?");
+						//player.getAdapter().printMessage("Which familiar color do you want?");
 						
 						FamilyMember familyMember = player.getAdapter().askFamiliarMemberForBonus(player);
 						

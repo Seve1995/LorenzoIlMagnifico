@@ -15,4 +15,12 @@ public class LoginMessage extends Message implements Serializable
         this.userLogged = userLogged;
         this.matchStarted = matchStarted;
     }
+
+    public boolean isUserLogged() {
+        return userLogged;
+    }
+
+    public boolean isMatchStarted() {
+        return matchStarted;
+    }
 }

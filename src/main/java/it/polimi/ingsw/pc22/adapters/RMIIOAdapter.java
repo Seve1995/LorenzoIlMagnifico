@@ -4,6 +4,7 @@ import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.connection.User;
 import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.messages.ErrorMessage;
+import it.polimi.ingsw.pc22.messages.LoginMessage;
 import it.polimi.ingsw.pc22.messages.Message;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.rmi.RMIAuthenticationService;
@@ -56,7 +57,7 @@ public class RMIIOAdapter extends IOAdapter implements RMIAuthenticationService
                     printMessage(new ErrorMessage("invalid Input - wrong password"));
             }
 
-            changeState("logged");
+            printMessage(new LoginMessage(true, false));
 
             while (!started)
             {
@@ -68,8 +69,7 @@ public class RMIIOAdapter extends IOAdapter implements RMIAuthenticationService
                     printMessage(new ErrorMessage("invalid Input"));
             }
 
-            //DA SOSTITUIRE CON OBJECT
-            changeState("started");
+            printMessage(new LoginMessage(true, true));
 
         }
         catch (NotBoundException | IOException e)
