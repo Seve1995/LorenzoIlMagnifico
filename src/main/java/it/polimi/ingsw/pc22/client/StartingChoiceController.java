@@ -32,7 +32,9 @@ public class StartingChoiceController implements Controller {
 	
     private Client client;
     
-    private String choice;
+    private String networkChoice;
+    
+    private String interfaceChoice;
     
     public void setClient(Client client) {
         this.client = client;
@@ -43,17 +45,16 @@ public class StartingChoiceController implements Controller {
     private void handleConfirmButton()
 	{
 		Client.setGenericState(new LoginState());
-    	
     	if (RMI.isSelected())
     	{
     		loadRMIConnection();
-    		choice = "rmi";
+    		networkChoice = "rmi";
     	}
     	
     	if (Socket.isSelected())
     	{
     		loadSocketConnection();
-    		choice = "socket";
+    		networkChoice = "socket";
     	}
     }
     
@@ -63,8 +64,6 @@ public class StartingChoiceController implements Controller {
 
 		try
 		{
-			System.out.println("Client running.");
-
 			socket = new Socket("localhost", SOCKET_PORT);
 			
 			Client.setSocket(socket);
@@ -75,16 +74,20 @@ public class StartingChoiceController implements Controller {
 
 			if (CLI.isSelected())
 			{
+				interfaceChoice = "CLI";
 				ViewThread viewThread = new ViewThread(socket);
 				Thread thread = new Thread(viewThread);
 				thread.start();
 				Stage stage = (Stage) client.getPrimaryStage().getScene().getWindow();
 				stage.close();
+		    	Client.setInterfaceChoice(interfaceChoice);
 			}
 
 			if (GUI.isSelected())
 			{
-				client.launchStartingChoice(choice);
+				interfaceChoice = "GUI";
+				client.launchStartingChoice(networkChoice);
+		    	Client.setInterfaceChoice(interfaceChoice);
 			}
 
 		}
@@ -125,7 +128,7 @@ public class StartingChoiceController implements Controller {
 
 			if (GUI.isSelected())
 			{
-				client.launchStartingChoice(choice);
+				client.launchStartingChoice(networkChoice);
 			}
 
 		} catch (RemoteException | NotBoundException e)

@@ -45,16 +45,16 @@ public class ReceiveThread implements Runnable
 
 					continue;
 				}
-
-				System.out.println("Server: " + message);
-
+				
+				printOnClient(message.toString());
+				
 				if (message instanceof LoginMessage)
 				{
 					LoginMessage login = (LoginMessage) message;
 
 					if (login.isUserLogged())
 					{
-						System.out.println("Loggato");
+						//printOnClient("Logged");
 
 						Client.setGenericState(new StartMatchState());
 
@@ -71,7 +71,7 @@ public class ReceiveThread implements Runnable
 
 				if (message instanceof TimerMessage)
 				{
-					System.out.println(((TimerMessage) message).getMessage());
+					printOnClient(((TimerMessage) message).getMessage());
 
 					Client.setGenericState(new WaitingState());
 
@@ -80,7 +80,7 @@ public class ReceiveThread implements Runnable
 
 				if (message instanceof ErrorMessage)
 				{
-					System.out.println(((ErrorMessage) message).getMessage());
+					//printOnClient(((ErrorMessage) message).getMessage());
 				}
 
 				/*if ("started".equalsIgnoreCase(msgReceived))
@@ -132,6 +132,18 @@ public class ReceiveThread implements Runnable
 		{
 			LOGGER.log(Level.INFO, "ERROR RECEIVE THREAD", e);
 		}
+	}
+	
+	public void printOnClient(String string)
+	{
+		if ("GUI".equals(Client.getInterfaceChoice()))
+			Platform.runLater(() -> { 
+				Client.getController().updateScene(string);
+		              }); 
+		else
+			System.out.println("Server: " + string);
+		
+		
 	}
 }
 

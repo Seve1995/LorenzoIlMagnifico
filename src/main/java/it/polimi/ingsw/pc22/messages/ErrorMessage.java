@@ -18,4 +18,11 @@ public class ErrorMessage extends Message implements Serializable
     public String getMessage() {
         return message;
     }
+
+	@Override
+	public String toString() {
+		return message;
+	}
+    
+    
 }

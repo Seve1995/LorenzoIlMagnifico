@@ -23,4 +23,15 @@ public class LoginMessage extends Message implements Serializable
     public boolean isMatchStarted() {
         return matchStarted;
     }
+
+	@Override
+	public String toString() {
+		if (userLogged)
+			return "Logged";
+		if (matchStarted)
+			return "Match Started";
+		return "Error, try again.";
+	}
+    
+    
 }

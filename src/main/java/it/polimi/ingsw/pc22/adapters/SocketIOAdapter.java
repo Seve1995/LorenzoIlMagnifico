@@ -59,8 +59,8 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
 
                 user = authenticate(authentication);
 
-                if (user == null)
-                    printMessage(new ErrorMessage("invalid Input - wrong password"));
+                //if (user == null)
+                //    printMessage(new ErrorMessage("invalid Input - wrong password"));
             }
 
             printMessage(new LoginMessage(true, false));

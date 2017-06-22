@@ -17,4 +17,9 @@ public class TimerMessage extends Message implements Serializable
     public String getMessage() {
         return message;
     }
+    
+	@Override
+	public String toString() {
+		return message;
+	}
 }

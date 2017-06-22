@@ -32,6 +32,7 @@ public class Client extends Application
 	
 	private static Controller controller;
 	
+	private static String interfaceChoice;
 	@Override
 	public void start(Stage primaryStage)
 	{
@@ -136,5 +137,14 @@ public class Client extends Application
 	public static void setController(Controller controller) {
 		Client.controller = controller;
 	}
+
+	public static String getInterfaceChoice() {
+		return interfaceChoice;
+	}
+
+	public static void setInterfaceChoice(String interfaceChoice) {
+		Client.interfaceChoice = interfaceChoice;
+	}
+	
 	
 }
