@@ -10,6 +10,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 import it.polimi.ingsw.pc22.exceptions.GenericException;
+import it.polimi.ingsw.pc22.messages.Message;
 import it.polimi.ingsw.pc22.rmi.RMIAuthenticationService;
 import it.polimi.ingsw.pc22.rmi.RMIClientStreamService;
 import it.polimi.ingsw.pc22.states.StartMatchState;
@@ -52,7 +53,7 @@ public class ClientAccessController implements Controller {
     }
 
 	@Override
-	public void updateScene(String string) {
-		output.setText(string);
+	public void updateScene(Object message) {
+		output.setText(message.toString());
 	}
 }

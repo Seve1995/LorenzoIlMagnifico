@@ -4,8 +4,11 @@ import it.polimi.ingsw.pc22.actions.Action;
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.messages.CommunicationMessage;
+import it.polimi.ingsw.pc22.messages.GameStatusMessage;
+import it.polimi.ingsw.pc22.messages.StartMatchMessage;
 import it.polimi.ingsw.pc22.messages.StartTurnMessage;
 import it.polimi.ingsw.pc22.player.Player;
+import it.polimi.ingsw.pc22.states.StartMatchState;
 import it.polimi.ingsw.pc22.utils.*;
 import org.json.JSONObject;
 
@@ -89,6 +92,13 @@ public class GameMatch implements Runnable
 	{
 		System.out.println("Inizio partita");
 
+		for(Player player : players)
+		{
+			player.getAdapter();
+			IOAdapter adapter = player.getAdapter();
+			adapter.printMessage(new StartMatchMessage());
+
+		}
 		this.started = true;
 
 		handleGame();
@@ -141,16 +151,21 @@ public class GameMatch implements Runnable
 				GameBoardUtils.purgeGameBoard(gameBoard);
 				
 				addFamiliarsValue();
-				
 			}
 			
 			for(Player player : players)
 			{
+				for (Player p : players)
+				{
+					IOAdapter adapter = p.getAdapter();
+					adapter.printMessage(new GameStatusMessage(gameBoard, p));
+				}
+				
 				//GameBoardUtils.printToPlayers(player, players, gameBoard, era, turn);
 
 				IOAdapter adapter = player.getAdapter();
 
-				adapter.printMessage(new CommunicationMessage("IS YOUR TURN"));
+				adapter.printMessage(new CommunicationMessage("Is your turn!"));
 
 				adapter.printMessage(new StartTurnMessage(gameBoard, player));
 

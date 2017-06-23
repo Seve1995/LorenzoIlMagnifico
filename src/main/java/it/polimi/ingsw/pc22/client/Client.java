@@ -1,6 +1,8 @@
 package it.polimi.ingsw.pc22.client;
 
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
+import it.polimi.ingsw.pc22.messages.CommunicationMessage;
+import it.polimi.ingsw.pc22.messages.Message;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.states.GenericState;
 import javafx.application.Application;
@@ -120,15 +122,19 @@ public class Client extends Application
 			Scene scene = new Scene(anchorPane);
 			primaryStage.setScene(scene);
 			// Give the controller access to the main app.
-			GameBoardController controller = loader.getController();
-			Client.controller = controller;
+			//TODO:
+			//GameBoardController controller = loader.getController();
+			//Client.controller = controller;
 		} catch (IOException e)
 		{
 			e.printStackTrace();
 		}
 	}
 
-
+	public static void launchWaitingForTheMatch() {
+		Message message = new CommunicationMessage("Match is starting. Please wait...");
+		controller.updateScene(message);
+	}
 
 	public static void main(String[] args)
 	{

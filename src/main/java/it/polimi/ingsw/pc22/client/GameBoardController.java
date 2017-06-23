@@ -9,6 +9,8 @@ import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.pc22.messages.Message;
+
 /**
  * Created by matteo on 22/06/17.
  */
@@ -56,23 +58,8 @@ public class GameBoardController implements Controller {
     @FXML
     private Label labelFaithPoints;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     @Override
-    public void updateScene(String string) {
-
-
+    public void updateScene(Object message) {
 
 
     }

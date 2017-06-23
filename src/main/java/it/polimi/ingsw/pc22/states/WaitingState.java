@@ -8,7 +8,7 @@ public class WaitingState implements GenericState
     @Override
     public void printState()
     {
-        System.out.println("I?M WAITIN' FOR THE MATCH YA");
+        System.out.println("I'M WAITIN' FOR THE MATCH YA");
     }
 
     @Override

@@ -8,6 +8,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 import it.polimi.ingsw.pc22.exceptions.GenericException;
+import it.polimi.ingsw.pc22.messages.Message;
 import it.polimi.ingsw.pc22.rmi.RMIAuthenticationService;
 import it.polimi.ingsw.pc22.rmi.RMIClientStreamService;
 import it.polimi.ingsw.pc22.states.LoginState;
@@ -133,7 +134,7 @@ public class StartingChoiceController implements Controller {
 	}
 
 	@Override
-	public void updateScene(String string) {
+	public void updateScene(Object message) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -3,6 +3,7 @@ package it.polimi.ingsw.pc22.client;
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.gamebox.PlayerBoard;
 import it.polimi.ingsw.pc22.messages.*;
+import it.polimi.ingsw.pc22.states.IdleState;
 import it.polimi.ingsw.pc22.states.PlayState;
 import it.polimi.ingsw.pc22.states.StartMatchState;
 import it.polimi.ingsw.pc22.states.WaitingState;
@@ -68,6 +69,10 @@ public class ReceiveThread implements Runnable
 						printOnClient("Match is starting. Please wait...");
 						
 						Client.setGenericState(new WaitingState());
+						
+						Platform.runLater(() -> {
+							Client.launchWaitingForTheMatch();
+					              });
 					}
 
 
@@ -90,9 +95,6 @@ public class ReceiveThread implements Runnable
 
 				if (message instanceof StartTurnMessage)
 				{
-					printOnClient(((StartTurnMessage) message).getPlayer().toString());
-					printOnClient(((StartTurnMessage) message).getGameBoard().toString());
-
 					Client.setPlayer(((StartTurnMessage) message).getPlayer());
 
 					Client.setGameBoard(((StartTurnMessage) message).getGameBoard());
@@ -101,7 +103,30 @@ public class ReceiveThread implements Runnable
 
 					Client.setStateChanged(true);
 				}
+				
+				if (message instanceof StartMatchMessage)
+				{
+					Platform.runLater(() -> {
+						Client.launchGameBoard();
+				              });
+				}
 
+				if (message instanceof GameStatusMessage)
+				{
+					printOnClient(((GameStatusMessage) message).getPlayer().toString());
+					
+					printOnClient(((GameStatusMessage) message).getGameBoard().toString());
+
+					Client.setGenericState(new IdleState());
+
+					Client.setStateChanged(true);
+				}
+				
+				if (message instanceof CommunicationMessage)
+				{
+					printOnClient(((CommunicationMessage) message).getMessage());
+				}
+				
 				/*if ("started".equalsIgnoreCase(msgReceived))
 				{
 
@@ -153,17 +178,25 @@ public class ReceiveThread implements Runnable
 		}
 	}
 	
-	public void printOnClient(String string)
+	public void printOnClient(Object message)
 	{
 		if ("GUI".equals(Client.getInterfaceChoice()))
 			Platform.runLater(() ->
 			{
-				Client.getController().updateScene(string);
+				Client.getController().updateScene(message);
 			});
 		else
-			System.out.println("Server: " + string);
-		
-		
+			{
+				if (message instanceof StartTurnMessage)
+					
+					{
+						System.out.println("Server: " + ((StartTurnMessage) message).getPlayer().toString());
+						System.out.println("Server: " + ((StartTurnMessage) message).getGameBoard().toString());			
+					}
+				
+				System.out.println("Server: " + message.toString());
+
+			}
 	}
 }
 
