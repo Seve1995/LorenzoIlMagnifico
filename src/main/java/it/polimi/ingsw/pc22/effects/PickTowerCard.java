@@ -239,55 +239,57 @@ public class PickTowerCard implements Effect
 		if (floor == -1)
 			
 			floor = player.getAdapter().askFloor();
-			
+
+		Tower currTower = new Tower(CardTypeEnum.ANY);
+
+		for (Tower t : gameBoard.getTowers())
+		{
+			if (t.getTowerType().equals(cardType))
+			{
+				currTower = t;
+			}
+		}
+
 		if (isLegal(player, gameBoard))
 		{
-				for (Tower t : gameBoard.getTowers())
-				{
-					if (t.getTowerType().equals(cardType))
-					{   
-						if (cardType.equals(CardTypeEnum.BUILDING))
-						{
-							player.getPlayerBoard().getBuildings().add((BuildingCard) t.getTowerCells().get(floor).getDevelopmentCard());
-							
-						}
-						
-						if (cardType.equals(CardTypeEnum.CHARACTER))
-						{
-							player.getPlayerBoard().getCharacters().add((CharacterCard) t.getTowerCells().get(floor).getDevelopmentCard());
-							
-						}
-						
-						if (cardType.equals(CardTypeEnum.TERRITORY))
-						{
-							player.getPlayerBoard().getTerritories().add((TerritoryCard) t.getTowerCells().get(floor).getDevelopmentCard());
-				
-						}
-						
-						if (cardType.equals(CardTypeEnum.VENTURE))
-						{
-							player.getPlayerBoard().getVentures().add((VentureCard) t.getTowerCells().get(floor).getDevelopmentCard());
-							
-						}
-						
-						activeEffects(t.getTowerCells().get(floor).getDevelopmentCard(), player, gameBoard);
-						
-						t.getTowerCells().get(floor).setDevelopmentCard(null);
-						
-					}
-					
-				}
-				return true;
-				
+
+			if (cardType.equals(CardTypeEnum.BUILDING))
+			{
+				player.getPlayerBoard().getBuildings().add((BuildingCard) currTower.getTowerCells().get(floor).getDevelopmentCard());
+
+			}
+
+			if (cardType.equals(CardTypeEnum.CHARACTER))
+			{
+				player.getPlayerBoard().getCharacters().add((CharacterCard) currTower.getTowerCells().get(floor).getDevelopmentCard());
+
+			}
+
+			if (cardType.equals(CardTypeEnum.TERRITORY))
+			{
+				player.getPlayerBoard().getTerritories().add((TerritoryCard) currTower.getTowerCells().get(floor).getDevelopmentCard());
+
+			}
+
+			if (cardType.equals(CardTypeEnum.VENTURE))
+			{
+				player.getPlayerBoard().getVentures().add((VentureCard) currTower.getTowerCells().get(floor).getDevelopmentCard());
+
+			}
+
+			activeEffects(currTower.getTowerCells().get(floor).getDevelopmentCard(), player, gameBoard);
+
+			currTower.getTowerCells().get(floor).setDevelopmentCard(null);
+
+			return true;
 		}
-				
+
+
 		return false;
 	
 	}
 	
-	
-	
-	
+
 	private boolean applyCardModifiers(Player p)
 	
 	{

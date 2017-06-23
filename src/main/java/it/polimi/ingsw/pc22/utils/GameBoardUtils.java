@@ -232,7 +232,7 @@ public class GameBoardUtils {
 
 	private static void excommunicate(Player p, List<ExcommunicationCard> e, int era, GameBoard gameBoard)
 	{
-		
+
 		for (Effect eff : e.get(era).getEffects())
 		{
 			eff.executeEffects(p, gameBoard);

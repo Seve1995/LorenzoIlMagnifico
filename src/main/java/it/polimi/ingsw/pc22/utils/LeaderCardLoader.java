@@ -20,11 +20,13 @@ public class LeaderCardLoader extends GenericLoader
 
     public static List<LeaderCard> loadLeaderCards
             (JSONObject jsonCardsObject) {
+        
         List<LeaderCard> leaderCards = new ArrayList<>();
 
         JSONArray jsonCards = jsonCardsObject.getJSONArray("LeaderCards");
 
         try {
+
             for (int i = 0; i < jsonCards.length(); i++)
             {
                 JSONObject jsonLeaderCard = jsonCards.getJSONObject(i);

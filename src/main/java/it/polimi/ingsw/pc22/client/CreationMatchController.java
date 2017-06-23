@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import static it.polimi.ingsw.pc22.client.Client.getOutSocket;
+
 public class CreationMatchController implements Controller{
 
 	@FXML
@@ -17,19 +19,23 @@ public class CreationMatchController implements Controller{
     private void handleCreateButton()
 	{
     	textString = Text.getText();
-    	Client.getOutSocket().println(textString + " C");
+    	getOutSocket().println(textString + " C");
+		updateScene("The Match is starting...");
 	}
     
     @FXML
     private void handleJoinButton()
 	{
-    	Client.getOutSocket().println(textString + " J");
+		textString = Text.getText();
+    	getOutSocket().println(textString + " J");
+		updateScene("The Match is starting...");
 	}
     
     @FXML
     private void handleRandomButton()
 	{
-    	Client.getOutSocket().println("R");
+    	getOutSocket().println("R");
+    	updateScene("The Match is starting...");
 
 	}
 

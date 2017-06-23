@@ -4,28 +4,35 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="199.0" prefWidth="449.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.pc22.client.StartingChoiceController">
+<AnchorPane prefHeight="371.0" prefWidth="219.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.pc22.client.StartingChoiceController">
    <children>
-      <RadioButton fx:id="CLI" layoutX="202.0" layoutY="117.0" mnemonicParsing="false" text="CLI">
+      <ImageView fitHeight="432.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@background1.jpg" />
+         </image>
+      </ImageView>
+      <RadioButton fx:id="CLI" layoutX="30.0" layoutY="242.0" mnemonicParsing="false" text="CLI">
          <toggleGroup>
             <ToggleGroup fx:id="InterfaceGroup" />
          </toggleGroup></RadioButton>
-      <Label layoutX="14.0" layoutY="14.0" text="Choose type of interface and connection:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+      <Label layoutX="14.0" layoutY="14.0" text="Choose your &#10;settings:" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font size="23.0" />
          </font>
       </Label>
-      <Button layoutX="372.0" layoutY="160.0" mnemonicParsing="false" onAction="#handleConfirmButton" text="Confirm" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="18.0" />
-      <RadioButton fx:id="GUI" layoutX="202.0" layoutY="87.0" mnemonicParsing="false" text="GUI" toggleGroup="$InterfaceGroup" />
-      <RadioButton fx:id="Socket" layoutX="30.0" layoutY="87.0" mnemonicParsing="false" text="Socket">
+      <Button layoutX="148.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleConfirmButton" text="Confirm" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="16.0" />
+      <RadioButton fx:id="GUI" layoutX="29.0" layoutY="209.0" mnemonicParsing="false" text="GUI" toggleGroup="$InterfaceGroup" />
+      <RadioButton fx:id="Socket" layoutX="24.0" layoutY="113.0" mnemonicParsing="false" text="Socket">
          <toggleGroup>
             <ToggleGroup fx:id="ConnectionGroup" />
          </toggleGroup></RadioButton>
-      <RadioButton fx:id="RMI" layoutX="30.0" layoutY="117.0" mnemonicParsing="false" text="RMI" toggleGroup="$ConnectionGroup" />
-      <Label layoutX="34.0" layoutY="61.0" text="Interface:" />
-      <Label layoutX="202.0" layoutY="61.0" text="Connection:" />
+      <RadioButton fx:id="RMI" layoutX="24.0" layoutY="139.0" mnemonicParsing="false" text="RMI" toggleGroup="$ConnectionGroup" />
+      <Label layoutX="18.0" layoutY="88.0" text="Interface:" />
+      <Label layoutX="13.0" layoutY="180.0" text="Connection:" />
    </children>
 </AnchorPane>

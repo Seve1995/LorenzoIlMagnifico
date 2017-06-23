@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -487,12 +488,33 @@ public abstract class IOAdapter
 
         if ("R".equalsIgnoreCase(matchStrings[1]))
         {
-            System.out.println("DA COMPLETARE");
+            if (firstMatchFree(gameMatchMap).equals(null))
+            {
+                printMessage(new ErrorMessage("No matches available."));
+            }
+
+            return addToExistingGame(gameMatchMap, this.firstMatchFree(gameMatchMap), player);
         }
 
         printMessage(new ErrorMessage("Non-valid input. Please retry... "));
 
        return false;
+    }
+
+    private synchronized String firstMatchFree(Map<String, GameMatch> gameMatchMap)
+
+    {
+
+        for (Map.Entry<String, GameMatch> entry : gameMatchMap.entrySet())
+        {
+            if (entry.getValue().getPlayerCounter() < 5)
+            {
+                return entry.getKey();
+            }
+
+        }
+
+        return null;
     }
 
     private synchronized boolean createNewGame

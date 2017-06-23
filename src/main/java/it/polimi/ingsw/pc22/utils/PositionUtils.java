@@ -43,19 +43,15 @@ public class PositionUtils
     {
         for (MarketCell cell : market.getMarketCells())
         {
-            if (cell.getFamilyMember() != null) return false;
+            if (cell.getFamilyMember() == null && !(cell.isABlockedCell()))
+                return true;
         }
 
-        return true;
+        return false;
     }
 
     public static boolean isCouncilAvailable(CouncilPalace councilPalace)
     {
-        for (CouncilPalaceCell cell : councilPalace.getCouncilPalaceCells())
-        {
-            if (cell.getFamilyMember() != null) return false;
-        }
-
         return true;
     }
 
@@ -63,19 +59,23 @@ public class PositionUtils
     {
         for (HarvestCell cell : harvest.getHarvestCell())
         {
-            if (cell.getFamilyMember() != null) return false;
+            if (cell.getFamilyMember() == null && !(cell.isABlockedCell()))
+                return true;
         }
 
-        return true;
+        return false;
     }
 
     public static boolean isProductionAvailable(Production production)
     {
         for (ProductionCell cell : production.getProductionCell())
         {
-            if (cell.getFamilyMember() != null) return false;
+            if (cell.getFamilyMember() == null && !(cell.isABlockedCell()))
+            {
+                return true;
+            }
         }
 
-        return true;
+        return false;
     }
 }

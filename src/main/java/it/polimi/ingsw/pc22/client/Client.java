@@ -110,6 +110,26 @@ public class Client extends Application
 		}
 	}
 
+	public static void launchGameBoard(){
+		try {
+			// Load root layout from fxml file.
+			primaryStage.setTitle("Lorenzo il Magnifico");
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(classLoader.getResource("GUI/GameBoard.fxml"));
+			anchorPane = loader.load();
+			Scene scene = new Scene(anchorPane);
+			primaryStage.setScene(scene);
+			// Give the controller access to the main app.
+			GameBoardController controller = loader.getController();
+			Client.controller = controller;
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+
+
 	public static void main(String[] args)
 	{
 		launch(args);

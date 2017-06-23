@@ -403,6 +403,8 @@ public class Player implements Serializable
 		String assetType = asset.getType().toString().toLowerCase();
 		
 		int value = asset.getValue();
+
+
 		
 		switch (assetType) {
 		

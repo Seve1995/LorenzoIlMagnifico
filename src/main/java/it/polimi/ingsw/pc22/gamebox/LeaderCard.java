@@ -61,4 +61,12 @@ public class LeaderCard implements Serializable
 	public void setEffects(List<Effect> effects) {
 		this.effects = effects;
 	}
+
+	public String toString(){
+
+		String output = name + " |";
+
+		return output;
+
+	}
 }

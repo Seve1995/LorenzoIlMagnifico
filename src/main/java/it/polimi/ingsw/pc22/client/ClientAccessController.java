@@ -20,6 +20,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
+import static it.polimi.ingsw.pc22.client.Client.getOutSocket;
+
 public class ClientAccessController implements Controller {
 	@FXML
     private Button login;
@@ -37,7 +39,7 @@ public class ClientAccessController implements Controller {
     @FXML
     private void handleLoginButton() throws InterruptedException {
     	String output = username.getText() + " " + password.getText() + " L";
-    	Client.getOutSocket().println(output);
+    	getOutSocket().println(output);
     	//if (Client.getGenericState() instanceof StartMatchState)
     	//	Client.launchCreationMatch();
     }
@@ -45,7 +47,7 @@ public class ClientAccessController implements Controller {
     @FXML
     private void handleRegisterButton() {
     	String output = username.getText() + " " + password.getText() + " R";
-    	Client.getOutSocket().println(output);
+    	getOutSocket().println(output);
         
     }
 
