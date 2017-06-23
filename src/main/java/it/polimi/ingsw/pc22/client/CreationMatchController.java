@@ -20,7 +20,6 @@ public class CreationMatchController implements Controller{
 	{
     	textString = Text.getText();
     	getOutSocket().println(textString + " C");
-		updateScene("The Match is starting...");
 	}
     
     @FXML
@@ -28,14 +27,12 @@ public class CreationMatchController implements Controller{
 	{
 		textString = Text.getText();
     	getOutSocket().println(textString + " J");
-		updateScene("The Match is starting...");
 	}
     
     @FXML
     private void handleRandomButton()
 	{
     	getOutSocket().println("R");
-    	updateScene("The Match is starting...");
 
 	}
 

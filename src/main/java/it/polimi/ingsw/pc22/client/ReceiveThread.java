@@ -65,6 +65,8 @@ public class ReceiveThread implements Runnable
 
 					if (login.isMatchStarted())
 					{
+						printOnClient("Match is starting. Please wait...");
+						
 						Client.setGenericState(new WaitingState());
 					}
 
