@@ -123,8 +123,8 @@ public class Client extends Application
 			primaryStage.setScene(scene);
 			// Give the controller access to the main app.
 			//TODO:
-			//GameBoardController controller = loader.getController();
-			//Client.controller = controller;
+			GameBoardController controller = loader.getController();
+			Client.controller = controller;
 		} catch (IOException e)
 		{
 			e.printStackTrace();
@@ -225,4 +225,13 @@ public class Client extends Application
 	public static void setPlayer(Player player) {
 		Client.player = player;
 	}
+
+	public static ClassLoader getClassLoader() {
+		return classLoader;
+	}
+
+	public static void setClassLoader(ClassLoader classLoader) {
+		Client.classLoader = classLoader;
+	}
+	
 }

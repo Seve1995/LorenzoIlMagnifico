@@ -102,6 +102,8 @@ public class ReceiveThread implements Runnable
 					Client.setGenericState(new PlayState());
 
 					Client.setStateChanged(true);
+					
+					printOnClient(((StartTurnMessage) message));
 				}
 				
 				if (message instanceof StartMatchMessage)
