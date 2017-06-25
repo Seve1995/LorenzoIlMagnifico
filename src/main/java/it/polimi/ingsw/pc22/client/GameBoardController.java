@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -151,14 +152,14 @@ public class GameBoardController implements Controller {
         for (int i=0; i<gameboard.getMarket().getMarketCells().size(); i++)
         {
             MarketCell currMarketCell = gameboard.getMarket().getMarketCells().get(i);
-            Button button = (Button) market.getChildren().get(i);
+            ToggleButton toggleButton = (ToggleButton) market.getChildren().get(i);
             if (currMarketCell.getFamilyMember() == null)
             {
-                button.setOpacity(0);
+            	toggleButton.setOpacity(0);
             }
 
             //set family member
-            button.setDisable(true);
+            //toggleButton.setDisable(true);
 
         }
     }
@@ -244,45 +245,47 @@ public class GameBoardController implements Controller {
         }
     }*/
 
-    private void updatePlayerCards()
+    /*private void updatePlayerCards()
     {
         updateCharacters(characterPlayer, player.getPlayerBoard().getCharacters());
 
 
     }
-
+*/
 
 
     private void updateCells(GridPane gridPane, Tower t)
     {
     	for (int i=0; i<=3; i++)
     		{
-                Button button = (Button) gridPane.getChildren().get(i);
+    			ToggleButton toggleButton = (ToggleButton) gridPane.getChildren().get(i);
 
-    		    if (t.getTowerCells().get(i) != null)
+    		    if (t.getTowerCells().get(i).getDevelopmentCard() != null)
     		    {
 
-                    ImageView imageView = new ImageView();
                     int currentCardNumber = t.getTowerCells().get(i).getDevelopmentCard().getCardNumber();
                     ClassLoader classLoader = Client.class.getClassLoader();
                     String path = "GUI/Cards/devcards_f_en_c_" + currentCardNumber + ".png";
                     Image image = new Image(classLoader.getResourceAsStream(path));
-                    imageView.setImage(image);
-
-                    button.setGraphic(imageView);
+                   // BackgroundImage backgroundImage = new BackgroundImage(image, null, null, null, null);
+                   // Background background = new Background(backgroundImage);
+                    ImageView imageView = new ImageView(image);
+                    imageView.setFitHeight(115);
+                    imageView.setFitWidth(73);
+                    toggleButton.setGraphic(imageView);
+                    //toggleButton.setBackground(background);
                 }
 
-                if (t.getTowerCells().get(i) == null
-                        && t.getTowerCells().get(i).getFamilyMember() != null)
+                if (t.getTowerCells().get(i).getFamilyMember() != null)
                 {
                     //todo gestire i family-member images
 
                 }
 
-                else
-                {
-                    button.setOpacity(0);
-                }
+           //     else
+           //     {
+            //        toggleButton.setOpacity(0);
+           //     }
 
     		}
     }
@@ -310,7 +313,7 @@ public class GameBoardController implements Controller {
 
         updateResources();
 
-        updatePlayerCards();
+        //TODO: updatePlayerCards();
 
         //todo: implementa il loader delle carte nella pb
         //implementa i familiars
