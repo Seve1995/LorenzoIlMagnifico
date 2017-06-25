@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="1886.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.pc22.client.GameBoardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="1886.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.pc22.client.GameBoardController">
    <children>
       <ImageView fitHeight="965.0" fitWidth="1299.0" layoutX="585.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -174,16 +174,14 @@
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+                        <ImageView fitHeight="91.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="91.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+                        <ImageView fitHeight="91.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
                      </children>
                   </GridPane>
                   <ToggleButton layoutX="260.0" layoutY="787.0" mnemonicParsing="false" text="Production" toggleGroup="$GameBoardButtons" />
@@ -261,17 +259,23 @@
       <Label layoutX="738.0" layoutY="575.0" text="Choose a utility action" />
       <ButtonBar layoutX="957.0" layoutY="477.0" prefHeight="40.0" prefWidth="200.0">
          <buttons>
-            <Button mnemonicParsing="false" text="BLACK" />
-            <Button mnemonicParsing="false" text="NEUTER" />
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" text="WHITE" />
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="106.0" text="ORANGE" />
+            <ToggleButton mnemonicParsing="false" text="Neuter">
+               <toggleGroup>
+                  <ToggleGroup fx:id="FamiliarChoice" />
+               </toggleGroup></ToggleButton>
+            <ToggleButton mnemonicParsing="false" text="Black" toggleGroup="$FamiliarChoice" />
+            <ToggleButton mnemonicParsing="false" text="White" toggleGroup="$FamiliarChoice" />
+            <ToggleButton mnemonicParsing="false" text="Orange" toggleGroup="$FamiliarChoice" />
          </buttons>
       </ButtonBar>
-      <ButtonBar layoutX="957.0" layoutY="519.0" prefHeight="40.0" prefWidth="309.0">
+      <ButtonBar layoutX="944.0" layoutY="517.0" prefHeight="40.0" prefWidth="309.0">
          <buttons>
-            <Button mnemonicParsing="false" text="DISCARD " />
-            <Button mnemonicParsing="false" text="PLAY" />
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="173.0" text="ACTIVATE" />
+            <ToggleButton mnemonicParsing="false" text="Play">
+               <toggleGroup>
+                  <ToggleGroup fx:id="LeaderActionChoice" />
+               </toggleGroup></ToggleButton>
+            <ToggleButton mnemonicParsing="false" text="Active" toggleGroup="$LeaderActionChoice" />
+            <ToggleButton mnemonicParsing="false" text="Discard" toggleGroup="$LeaderActionChoice" />
          </buttons>
       </ButtonBar>
       <ButtonBar layoutX="957.0" layoutY="559.0" prefHeight="40.0" prefWidth="184.0">
@@ -330,59 +334,28 @@
       <Label id="VictoryPoints" fx:id="labelVictoryPoints" layoutX="1157.0" layoutY="432.0" text="" />
       <Label id="MilitaryPoints" fx:id="labelMilitaryPoints" layoutX="1234.0" layoutY="434.0" text="" />
       <Label id="FaithPoints" fx:id="labelFaithPoints" layoutX="1309.0" layoutY="431.0" text="" />
-      <GridPane id="Player Buildings" layoutX="744.0" layoutY="35.0" prefHeight="113.0" prefWidth="554.0">
+      <GridPane id="Player Buildings" layoutX="720.0" layoutY="182.0" prefHeight="113.0" prefWidth="563.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="99.0" minWidth="10.0" prefWidth="99.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="112.0" minWidth="10.0" prefWidth="92.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="98.0" minWidth="10.0" prefWidth="98.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="96.0" minWidth="10.0" prefWidth="96.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="95.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.0" minWidth="10.0" prefWidth="92.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
+         <children>
+            <ImageView fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+            <ImageView fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+            <ImageView fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
+            <ImageView fx:id="territoryPlayer" fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" />
+            <ImageView fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" />
+         </children>
       </GridPane>
-      <GridPane id="Player Territories" layoutX="737.0" layoutY="193.0" prefHeight="113.0" prefWidth="554.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-      </GridPane>
-      <GridPane id="Player Ventures" layoutX="1312.0" layoutY="24.0" prefHeight="113.0" prefWidth="554.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-      </GridPane>
-      <GridPane id="Player Characters" layoutX="1316.0" layoutY="180.0" prefHeight="113.0" prefWidth="554.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-      </GridPane>
-      <Label layoutX="1746.0" layoutY="885.0" text="Label">
+      <Label layoutX="1488.0" layoutY="869.0" text="Info from Server">
          <font>
             <Font size="29.0" />
          </font>
@@ -397,19 +370,6 @@
             <Image url="@backgroundStoneDark.png" />
          </image>
       </ImageView>
-      <GridPane id="Player Characters" layoutX="1326.0" layoutY="190.0" prefHeight="113.0" prefWidth="544.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-      </GridPane>
       <ImageView fitHeight="243.0" fitWidth="469.0" layoutX="1378.0" layoutY="659.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@backgroundStoneDark.png" />
@@ -431,13 +391,17 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
+            <ToggleButton mnemonicParsing="false" prefHeight="128.0" prefWidth="118.0">
+               <toggleGroup>
+                  <ToggleGroup fx:id="LeadersHand" />
+               </toggleGroup></ToggleButton>
+            <ToggleButton mnemonicParsing="false" prefHeight="128.0" prefWidth="118.0" toggleGroup="$LeadersHand" GridPane.columnIndex="1" />
+            <ToggleButton mnemonicParsing="false" prefHeight="128.0" prefWidth="118.0" toggleGroup="$LeadersHand" GridPane.columnIndex="3" />
+            <ToggleButton mnemonicParsing="false" prefHeight="128.0" prefWidth="118.0" toggleGroup="$LeadersHand" GridPane.columnIndex="2" />
          </children>
       </GridPane>
-      <GridPane id="Leaders" fx:id="leadersPlace" layoutX="1378.0" layoutY="659.0" prefHeight="115.0" prefWidth="469.0">
+      <Button layoutX="1270.0" layoutY="874.0" mnemonicParsing="false" text="Confirm" />
+      <GridPane id="Leaders" fx:id="leadersPlace" layoutX="1376.0" layoutY="659.0" prefHeight="115.0" prefWidth="469.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -448,10 +412,76 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
+            <ToggleButton mnemonicParsing="false" opacity="0" prefHeight="128.0" prefWidth="118.0">
+               <toggleGroup>
+                  <ToggleGroup fx:id="LeadersPlace" />
+               </toggleGroup></ToggleButton>
+            <ToggleButton mnemonicParsing="false" opacity="0" prefHeight="128.0" prefWidth="118.0" toggleGroup="$LeadersPlace" GridPane.columnIndex="1" />
+            <ToggleButton mnemonicParsing="false" opacity="0" prefHeight="128.0" prefWidth="118.0" toggleGroup="$LeadersPlace" GridPane.columnIndex="3" />
+            <ToggleButton mnemonicParsing="false" opacity="0" prefHeight="128.0" prefWidth="118.0" toggleGroup="$LeadersPlace" GridPane.columnIndex="2" />
+         </children>
+      </GridPane>
+      <GridPane id="Player Buildings" layoutX="1311.0" layoutY="182.0" prefHeight="113.0" prefWidth="563.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="99.0" minWidth="10.0" prefWidth="99.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="112.0" minWidth="10.0" prefWidth="92.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="98.0" minWidth="10.0" prefWidth="98.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="96.0" minWidth="10.0" prefWidth="96.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="95.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.0" minWidth="10.0" prefWidth="92.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <ImageView fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+            <ImageView fx:id="characterPlayer" fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+            <ImageView fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
+            <ImageView fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" />
+            <ImageView fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" />
+         </children>
+      </GridPane>
+      <GridPane id="Player Buildings" layoutX="730.0" layoutY="22.0" prefHeight="113.0" prefWidth="563.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="99.0" minWidth="10.0" prefWidth="99.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="112.0" minWidth="10.0" prefWidth="92.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="98.0" minWidth="10.0" prefWidth="98.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="96.0" minWidth="10.0" prefWidth="96.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="95.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.0" minWidth="10.0" prefWidth="92.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <ImageView fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+            <ImageView fx:id="buildingPlayer" fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+            <ImageView fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
+            <ImageView fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" />
+            <ImageView fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" />
+         </children>
+      </GridPane>
+      <GridPane id="Player Buildings" layoutX="1309.0" layoutY="22.0" prefHeight="113.0" prefWidth="563.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="99.0" minWidth="10.0" prefWidth="99.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="112.0" minWidth="10.0" prefWidth="92.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="98.0" minWidth="10.0" prefWidth="98.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="96.0" minWidth="10.0" prefWidth="96.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="95.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="92.0" minWidth="10.0" prefWidth="92.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <ImageView fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" />
+            <ImageView fx:id="venturePlayer" fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
+            <ImageView fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" />
+            <ImageView fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" />
+            <ImageView fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" />
          </children>
       </GridPane>
    </children>

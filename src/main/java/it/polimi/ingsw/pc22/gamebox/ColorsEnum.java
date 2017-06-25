@@ -25,4 +25,5 @@ public enum ColorsEnum
 
 		return null;
 	}
+	
 }
