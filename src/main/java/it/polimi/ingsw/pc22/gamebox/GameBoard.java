@@ -11,6 +11,7 @@ public class GameBoard implements Serializable
 	private Market market;
 	private CouncilPalace councilPalace;
 	private List<Dice> dices;
+	private List<ExcommunicationCard> excommunicationCards;
 	
 	public GameBoard() 
 	{
@@ -63,6 +64,14 @@ public class GameBoard implements Serializable
 
 	public void setDices(List<Dice> dices) {
 		this.dices = dices;
+	}
+
+	public List<ExcommunicationCard> getExcommunicationCards() {
+		return excommunicationCards;
+	}
+
+	public void setExcommunicationCards(List<ExcommunicationCard> excommunicationCards) {
+		this.excommunicationCards = excommunicationCards;
 	}
 
 	@Override

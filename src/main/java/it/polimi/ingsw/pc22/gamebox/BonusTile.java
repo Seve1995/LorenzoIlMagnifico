@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class BonusTile  implements Serializable
 {
+	private int number;
 	private Asset productionServantBonus;
 	private Asset productionCoinsBonus;
 	private Asset productionMilitaryPointsBonus;
@@ -93,6 +94,14 @@ public class BonusTile  implements Serializable
 
 	public void setHarvestActivationValue(int harvestActivationValue) {
 		this.harvestActivationValue = harvestActivationValue;
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
 	}
 	
 	@Override

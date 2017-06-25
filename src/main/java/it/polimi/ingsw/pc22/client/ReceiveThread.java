@@ -113,6 +113,12 @@ public class ReceiveThread implements Runnable
 				              });
 				}
 
+				if (message instanceof ExecutedAction)
+				{
+					printOnClient((ExecutedAction) message);
+
+				}
+
 				if (message instanceof GameStatusMessage)
 				{
 					printOnClient(((GameStatusMessage) message).getPlayer().toString());

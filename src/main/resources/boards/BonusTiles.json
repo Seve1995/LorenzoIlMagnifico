@@ -1,6 +1,7 @@
 {
   "bonusTiles": [
     {
+      "number": 1,
       "productionServantBonus": {
         "type": "SERVANT",
         "value": 0
@@ -37,6 +38,7 @@
       "harvestActivationValue": 1
     },
     {
+      "number": 2,
       "productionServantBonus": {
         "type": "SERVANT",
         "value": 1
@@ -73,6 +75,7 @@
       "harvestActivationValue": 1
     },
     {
+      "number": 3,
       "productionServantBonus": {
         "type": "SERVANT",
         "value": 1
@@ -109,6 +112,7 @@
       "harvestActivationValue": 1
     },
     {
+      "number": 4,
       "productionServantBonus": {
         "type": "SERVANT",
         "value": 2
@@ -145,6 +149,7 @@
       "harvestActivationValue": 1
     },
     {
+      "number": 5,
       "productionServantBonus": {
         "type": "SERVANT",
         "value": 0

@@ -34,6 +34,7 @@ public class BonusTileLoader extends GenericLoader
 
     private static BonusTile loadBonusTile(JSONObject jsonCard)
     {
+        int number = jsonCard.getInt("number");
         Asset productionServantBonus =
                 loadAsset(jsonCard.getJSONObject("productionServantBonus"));
 
@@ -74,6 +75,7 @@ public class BonusTileLoader extends GenericLoader
         tile.setHarvestStonesBonus(harvestStoneBonus);
         tile.setHarvestWoodsBonus(harvestWoodBonus);
         tile.setHarvestMilitaryPointsBonus(harvestMilitaryPointsBonus);
+        tile.setNumber(number);
 
         tile.setHarvestActivationValue(harvestActivationValue);
         tile.setProductionActivationValue(productionActivationValue);

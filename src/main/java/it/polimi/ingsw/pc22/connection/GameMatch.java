@@ -3,10 +3,7 @@ package it.polimi.ingsw.pc22.connection;
 import it.polimi.ingsw.pc22.actions.Action;
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.gamebox.*;
-import it.polimi.ingsw.pc22.messages.CommunicationMessage;
-import it.polimi.ingsw.pc22.messages.GameStatusMessage;
-import it.polimi.ingsw.pc22.messages.StartMatchMessage;
-import it.polimi.ingsw.pc22.messages.StartTurnMessage;
+import it.polimi.ingsw.pc22.messages.*;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.states.StartMatchState;
 import it.polimi.ingsw.pc22.utils.*;
@@ -121,6 +118,8 @@ public class GameMatch implements Runnable
 		assignLeaderCards();
 
 		assignExcommunicationCards();
+
+		gameBoard.setExcommunicationCards(excommunicationCards);
 		
         int turnNumber= 24; //=6 turni da 4 azioni l'una
         
@@ -180,6 +179,8 @@ public class GameMatch implements Runnable
 					if (action == null) continue;
 
 					boolean executed = action.executeAction(player, gameBoard);
+
+					adapter.printMessage(new ExecutedAction());
 
 					System.out.println(executed + " - " +  player.isHasPassed());
 
