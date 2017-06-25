@@ -267,13 +267,14 @@ public class GameBoardController implements Controller {
                     ClassLoader classLoader = Client.class.getClassLoader();
                     String path = "GUI/Cards/devcards_f_en_c_" + currentCardNumber + ".png";
                     Image image = new Image(classLoader.getResourceAsStream(path));
-                   // BackgroundImage backgroundImage = new BackgroundImage(image, null, null, null, null);
-                   // Background background = new Background(backgroundImage);
-                    ImageView imageView = new ImageView(image);
-                    imageView.setFitHeight(115);
-                    imageView.setFitWidth(73);
-                    toggleButton.setGraphic(imageView);
-                    //toggleButton.setBackground(background);
+                    BackgroundSize backgroundSize = new BackgroundSize(73, 115, false, false, true, false);
+                    BackgroundImage backgroundImage = new BackgroundImage(image, null, null, null, backgroundSize);
+                    Background background = new Background(backgroundImage);
+                    //ImageView imageView = new ImageView(image);
+                    //imageView.setFitHeight(115);
+                    //imageView.setFitWidth(73);
+                    //toggleButton.setGraphic(imageView);
+                    toggleButton.setBackground(background);
                 }
 
                 if (t.getTowerCells().get(i).getFamilyMember() != null)
