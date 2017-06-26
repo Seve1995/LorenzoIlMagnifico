@@ -259,6 +259,14 @@ public class GameBoardController implements Controller {
                     imageView.setFitHeight(115);
                     imageView.setFitWidth(73);
                     toggleButton.setGraphic(imageView);
+                    BackgroundSize backgroundSize = new BackgroundSize(73, 115, false, false, true, false);
+                    BackgroundImage backgroundImage = new BackgroundImage(image, null, null, null, backgroundSize);
+                    Background background = new Background(backgroundImage);
+                    //ImageView imageView = new ImageView(image);
+                    //imageView.setFitHeight(115);
+                    //imageView.setFitWidth(73);
+                    //toggleButton.setGraphic(imageView);
+                    toggleButton.setBackground(background);
                 }
 
                 if (t.getTowerCells().get(i).getFamilyMember() != null)

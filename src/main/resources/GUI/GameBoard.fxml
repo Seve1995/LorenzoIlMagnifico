@@ -63,7 +63,7 @@
                               <Insets bottom="2.0" left="7.0" top="2.0" />
                            </GridPane.margin>
                         </ToggleButton>
-                        <ToggleButton mnemonicParsing="false" prefHeight="122.0" prefWidth="73.0" toggleGroup="$GameBoardButtons" GridPane.rowIndex="3">
+                        <ToggleButton mnemonicParsing="false" prefHeight="115.0" prefWidth="73.0" toggleGroup="$GameBoardButtons" GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets left="7.0" />
                            </GridPane.margin>
@@ -96,7 +96,7 @@
                               <Insets bottom="2.0" left="7.0" top="2.0" />
                            </GridPane.margin>
                         </ToggleButton>
-                        <ToggleButton mnemonicParsing="false" prefHeight="122.0" prefWidth="73.0" toggleGroup="$GameBoardButtons" GridPane.rowIndex="3">
+                        <ToggleButton mnemonicParsing="false" prefHeight="115.0" prefWidth="73.0" toggleGroup="$GameBoardButtons" GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets left="7.0" />
                            </GridPane.margin>
@@ -129,7 +129,7 @@
                               <Insets bottom="2.0" left="7.0" top="2.0" />
                            </GridPane.margin>
                         </ToggleButton>
-                        <ToggleButton mnemonicParsing="false" prefHeight="122.0" prefWidth="73.0" toggleGroup="$GameBoardButtons" GridPane.rowIndex="3">
+                        <ToggleButton mnemonicParsing="false" prefHeight="115.0" prefWidth="73.0" toggleGroup="$GameBoardButtons" GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets left="7.0" />
                            </GridPane.margin>
@@ -162,7 +162,7 @@
                               <Insets bottom="2.0" left="7.0" top="2.0" />
                            </GridPane.margin>
                         </ToggleButton>
-                        <ToggleButton mnemonicParsing="false" prefHeight="122.0" prefWidth="73.0" toggleGroup="$GameBoardButtons" GridPane.rowIndex="3">
+                        <ToggleButton mnemonicParsing="false" prefHeight="115.0" prefWidth="73.0" toggleGroup="$GameBoardButtons" GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets left="7.0" />
                            </GridPane.margin>
