@@ -84,7 +84,7 @@ public class ReceiveThread implements Runnable
 					printOnClient(((ErrorMessage) message).getMessage());
 				}
 
-				if (message instanceof StartTurnMessage)
+				if (message instanceof GameStatusMessage)
 				{
 					Client.setPlayer(((StartTurnMessage) message).getPlayer());
 
@@ -128,15 +128,7 @@ public class ReceiveThread implements Runnable
 					printOnClient(((CommunicationMessage) message).getMessage());
 				}
 				
-				/*if ("started".equalsIgnoreCase(msgReceived))
-				{
-
-
-
-
-					Client.setStateChanged(true);
-				}
-
+				/*
 				if ("show board".equals(msgReceived))
 				{
 					//PlayerBoard board = player.getPlayerBoard();

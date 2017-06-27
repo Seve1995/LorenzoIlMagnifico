@@ -515,7 +515,6 @@ public class GameBoardController implements Controller {
 
     		updateGameBoard();
     		updatePlayerBoard();
-
     	}
 
     	if (message instanceof ExecutedAction)

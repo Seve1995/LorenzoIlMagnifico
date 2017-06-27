@@ -1,11 +1,9 @@
 package it.polimi.ingsw.pc22.messages;
 
-import java.io.Serializable;
-
 /**
  * Created by fandroid95 on 21/06/2017.
  */
-public class TimerMessage extends Message implements Serializable
+public class TimerMessage extends Message
 {
     private String message;
 

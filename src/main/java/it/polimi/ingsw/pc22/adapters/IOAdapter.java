@@ -149,7 +149,6 @@ public abstract class IOAdapter
         return null;
     }
 
-
     public FamilyMember askFamiliarMemberForBonus(Player player) 
     {
         List<FamilyMember> familyMembers =
@@ -255,7 +254,6 @@ public abstract class IOAdapter
 
         while(System.currentTimeMillis() < maxTimeStamp || i < numberOfAssets)
         {
-            //this.printMessage("Choose one asset:" + '\n' + councilPrivilege);
 
             String choice = getMessage();
 
@@ -318,7 +316,7 @@ public abstract class IOAdapter
     
     public List<Asset> chooseAssets(int numberOfAssets, List<Asset> assets)
     {
-        List<Asset> chosenAssets = new ArrayList<Asset>();
+        List<Asset> chosenAssets = new ArrayList<>();
         
     	int i = 0;
 
@@ -438,7 +436,7 @@ public abstract class IOAdapter
 
         player.setName(playerName);
 
-        Pattern gameMatcher = Pattern.compile("(^(\\w+) (C|J|R)$)");
+        Pattern gameMatcher = Pattern.compile("(^(\\w+) (C|c|J|j|R|r)$)");
 
         Matcher matcher = gameMatcher.matcher(choice);
 

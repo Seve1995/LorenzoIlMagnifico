@@ -3,6 +3,7 @@ package it.polimi.ingsw.pc22.effects;
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
+import it.polimi.ingsw.pc22.messages.PickPrivilegeMessage;
 import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
@@ -21,6 +22,8 @@ public class PickOneCouncilPrivilege implements Effect{
 	public boolean executeEffects(Player player, GameBoard gameBoard)
 	{
 		IOAdapter adapter = player.getAdapter();
+
+		adapter.printMessage(new PickPrivilegeMessage(1));
 
 		chosenAsset = adapter.chooseCouncilPrivileges(1);
 
