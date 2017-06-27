@@ -2,26 +2,28 @@ package it.polimi.ingsw.pc22.client;
 
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.messages.ExecutedAction;
+import it.polimi.ingsw.pc22.messages.PickPrivilegeMessage;
 import it.polimi.ingsw.pc22.player.Player;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import it.polimi.ingsw.pc22.messages.Message;
 import it.polimi.ingsw.pc22.messages.StartTurnMessage;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import static it.polimi.ingsw.pc22.client.Client.getClassLoader;
 import static it.polimi.ingsw.pc22.client.Client.getOutSocket;
 
 /**
@@ -76,28 +78,35 @@ public class GameBoardController implements Controller {
     @FXML
     private Label labelFaithPoints;
     @FXML
-    private Button black;
+    private ToggleButton black;
     @FXML
-    private Button white;
+    private ToggleButton white;
     @FXML
-    private Button orange;
+    private ToggleButton orange;
     @FXML
-    private Button neuter;
+    private ToggleButton neuter;
     @FXML
     private Button pass;
     @FXML
     private Button confirm;
     @FXML
     private Spinner<Integer> servantsSpinner;
-    
+
     private GameBoard gameboard;
 
     private Player player;
 
     private String output;
-    
+
+    private String idLeader;
+    @FXML
     private ToggleGroup GameBoardButtons;
-    
+    @FXML
+    private ToggleGroup LeadersHand;
+    @FXML
+    private ToggleGroup LeadersPlaceToggle;
+
+
     @FXML
     private void handleBlackButton()
     {
@@ -117,15 +126,21 @@ public class GameBoardController implements Controller {
     }
 
     @FXML
+    private void handleNeuterButton()
+    {
+        output = "neuter";
+    }
+
+    @FXML
     private void handleConfirm()
     {
-    	//TODO: Prelevare servitori scelti, controllare se ha selezionato familiare
     	ToggleButton selectedToggle = (ToggleButton) GameBoardButtons.getSelectedToggle();
     	String id = selectedToggle.getId();
 		String[] idSplitted = id.split(" ");
 		switch (idSplitted[0]) {
 		case "TOWER":
-			getOutSocket().println("set tower " + output.toUpperCase() + " " + servantsSpinner.getValue() + " " + idSplitted[1] + " " + idSplitted[2]);
+			getOutSocket().println("set tower " + output.toUpperCase() +
+                    " " + servantsSpinner.getValue() + " " + idSplitted[1] + " " + idSplitted[2]);
 			break;
 		case "MARKET":
 			getOutSocket().println("set market " + output.toUpperCase() + " " + servantsSpinner.getValue() + " " + idSplitted[1]);
@@ -146,10 +161,44 @@ public class GameBoardController implements Controller {
     }
 
     @FXML
+    private void handlePlay()
+    {
+        ToggleButton selectedLeaderToggle = (ToggleButton) LeadersHand.getSelectedToggle();
+        idLeader = selectedLeaderToggle.getId();
+
+        getOutSocket().println("play card " + idLeader);
+
+    }
+
+    @FXML
+    private void handleDiscard()
+    {
+        ToggleButton selectedLeaderToggle = (ToggleButton) LeadersHand.getSelectedToggle();
+        idLeader = selectedLeaderToggle.getId();
+
+        getOutSocket().println("discard card " + idLeader);
+    }
+
+    @FXML
+    private void handleActivate()
+    {
+        ToggleButton selectedLeaderToggle = (ToggleButton) LeadersPlaceToggle.getSelectedToggle();
+        String id = selectedLeaderToggle.getId();
+
+        getOutSocket().println("activate card " + id);
+    }
+
+    @FXML
     private void handlePassButton()
     {
         output = "pass";
         getOutSocket().println(output);
+    }
+
+    @FXML
+    private void handleExitButton()
+    {
+
     }
 
     //TODO:gestire le azioni
@@ -468,7 +517,7 @@ public class GameBoardController implements Controller {
         if (player.getPlayerBoard().getVentures().size()==0)
             return;
 
-        for (int i=0; i<= player.getPlayerBoard().getVentures().size(); i++)
+        for (int i=0; i< player.getPlayerBoard().getVentures().size(); i++)
         {
             ImageView imageView = (ImageView) venturePlayer.getChildren().get(i);
             int currentCardNumber = player.getPlayerBoard().getVentures().get(i).getCardNumber();
@@ -486,7 +535,7 @@ public class GameBoardController implements Controller {
         if (player.getPlayerBoard().getBuildings().size()==0)
             return;
 
-        for (int i=0; i<= player.getPlayerBoard().getBuildings().size(); i++)
+        for (int i=0; i< player.getPlayerBoard().getBuildings().size(); i++)
         {
             ImageView imageView = (ImageView) buildingPlayer.getChildren().get(i);
             int currentCardNumber = player.getPlayerBoard().getBuildings().get(i).getCardNumber();
@@ -504,7 +553,7 @@ public class GameBoardController implements Controller {
         if (player.getPlayerBoard().getTerritories().size()==0)
             return;
 
-        for (int i=0; i<= player.getPlayerBoard().getTerritories().size(); i++)
+        for (int i=0; i< player.getPlayerBoard().getTerritories().size(); i++)
         {
             ImageView imageView = (ImageView) territoryPlayer.getChildren().get(i);
             int currentCardNumber = player.getPlayerBoard().getTerritories().get(i).getCardNumber();
@@ -619,6 +668,40 @@ public class GameBoardController implements Controller {
 
     }
 
+    public boolean councilPrivilegeDialog() {
+        try {
+
+            FXMLLoader loader = new FXMLLoader();
+
+            loader.setLocation(getClassLoader().getResource("GUI/Privileges.fxml"));
+
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage dialogStage = new Stage();
+
+            dialogStage.setTitle("Privilege");
+
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+
+            Scene scene = new Scene(page);
+
+            dialogStage.setScene(scene);
+
+            PrivilegeDialogController controller = loader.getController();
+
+            controller.setDialogStage(dialogStage);
+
+            dialogStage.showAndWait();
+
+            return controller.isConfirmClicked();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     @Override
     public void updateScene(Object message)
     {
@@ -637,5 +720,12 @@ public class GameBoardController implements Controller {
             updatePlayerBoard();
         }
 
+        if (message instanceof PickPrivilegeMessage)
+        {
+            councilPrivilegeDialog();
+        }
+
     }
+
+
 }

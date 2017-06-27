@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="555.0" prefWidth="337.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.pc22.client.PrivilegeDialogController">
+   <children>
+      <ImageView fitHeight="561.0" fitWidth="352.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@background1.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="40.0" layoutY="50.0" text="You have x more privileges left.">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+      <Label layoutX="40.0" layoutY="82.0" text="Choose a privilege:">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font></Label>
+      <ToggleButton layoutX="40.0" layoutY="135.0" mnemonicParsing="false" text="1 WOOD &amp; 1 STONE" />
+      <ToggleButton layoutX="39.0" layoutY="173.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="149.0" text="2 SERVANTS" />
+      <ToggleButton layoutX="41.0" layoutY="212.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="149.0" text="2 COIN" />
+      <ToggleButton layoutX="42.0" layoutY="249.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="149.0" text="2 MILITARY POINTS" />
+      <ToggleButton layoutX="44.0" layoutY="290.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="143.0" text="1 FAITH POINT" />
+      <Button layoutX="229.0" layoutY="473.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="96.0" text="Confirm" onAction="#handleConfirm"/>
+   </children>
+</AnchorPane>

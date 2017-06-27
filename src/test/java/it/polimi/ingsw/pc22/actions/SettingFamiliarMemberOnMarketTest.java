@@ -7,13 +7,14 @@ import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.AssetType;
 import it.polimi.ingsw.pc22.gamebox.Market;
 import it.polimi.ingsw.pc22.gamebox.MarketCell;
+import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SettingFamiliarMemberOnMarketTest {
+public class SettingFamiliarMemberOnMarketTest extends TestCase{
 	private Market market;
 	private List<MarketCell> marketCells;
 	
