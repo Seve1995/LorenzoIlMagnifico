@@ -8,7 +8,10 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -84,13 +87,17 @@ public class GameBoardController implements Controller {
     private Button pass;
     @FXML
     private Button confirm;
-
+    @FXML
+    private Spinner<Integer> servantsSpinner;
+    
     private GameBoard gameboard;
 
     private Player player;
 
     private String output;
-
+    
+    private ToggleGroup GameBoardButtons;
+    
     @FXML
     private void handleBlackButton()
     {
@@ -110,7 +117,33 @@ public class GameBoardController implements Controller {
     }
 
     @FXML
-    private void handleConfirm(){}
+    private void handleConfirm()
+    {
+    	//TODO: Prelevare servitori scelti, controllare se ha selezionato familiare
+    	ToggleButton selectedToggle = (ToggleButton) GameBoardButtons.getSelectedToggle();
+    	String id = selectedToggle.getId();
+		String[] idSplitted = id.split(" ");
+		switch (idSplitted[0]) {
+		case "TOWER":
+			getOutSocket().println("set tower " + output.toUpperCase() + " " + servantsSpinner.getValue() + " " + idSplitted[1] + " " + idSplitted[2]);
+			break;
+		case "MARKET":
+			getOutSocket().println("set market " + output.toUpperCase() + " " + servantsSpinner.getValue() + " " + idSplitted[1]);
+			break;
+		case "COUNCIL":
+			getOutSocket().println("set council " + output.toUpperCase() + " " + servantsSpinner.getValue());
+			break;
+		case "HARVEST":
+			getOutSocket().println("set harvest " + output.toUpperCase() + " " + servantsSpinner.getValue());
+			break;
+		case "PRODUCTION":
+			getOutSocket().println("set production " + output.toUpperCase() + " " + servantsSpinner.getValue());
+			break;
+		default:
+			break;
+		}
+
+    }
 
     @FXML
     private void handlePassButton()
@@ -154,22 +187,102 @@ public class GameBoardController implements Controller {
         updateButtons();
 
         updateMarket();
+
+        updateProduction();
+
+        updateHarvest();
+
+        updateCouncilPalace();
     }
 
     private void updateCouncilPalace()
     {
+        CouncilPalace councilPalace = gameboard.getCouncilPalace();
+        int x = 362;
+        int delta = 10;
+        int width = 15;
+        int y = 552;
 
+        for (int i = 0; i < councilPalace.getCouncilPalaceCells().length; i++) {
+
+            if (councilPalace.getCouncilPalaceCells()[i].getFamilyMember() != null)
+            {
+                ColorsEnum currFamiliarEnum = councilPalace.getCouncilPalaceCells()[i].getFamilyMember().getColor();
+                PlayerColorsEnum currPlayerEnum = councilPalace.getCouncilPalaceCells()[i].getFamilyMember().getPlayerColor();
+                ClassLoader classLoader = Client.class.getClassLoader();
+                String path = "GUI/familiars/familiar_" + currPlayerEnum + "_" + currFamiliarEnum + ".png";
+                Image image = new Image(classLoader.getResourceAsStream(path));
+                ImageView imageView = new ImageView(image);
+
+                    imageView.setX(x + width + i * delta);
+                    imageView.setY(y);
+            }
+        }
     }
+
 
     private void updateHarvest()
     {
+        Harvest harvest = gameboard.getHarvest();
+        int x = 153;
+        int delta = 10;
+        int width = 15;
+        int y = 865;
+        for (int i = 0; i < harvest.getHarvestCell().length; i++) {
+
+            if (harvest.getHarvestCell()[i].getFamilyMember() != null)
+            {
+                ColorsEnum currFamiliarEnum = harvest.getHarvestCell()[i].getFamilyMember().getColor();
+                PlayerColorsEnum currPlayerEnum = harvest.getHarvestCell()[i].getFamilyMember().getPlayerColor();
+                ClassLoader classLoader = Client.class.getClassLoader();
+                String path = "GUI/familiars/familiar_" + currPlayerEnum + "_" + currFamiliarEnum + ".png";
+                Image image = new Image(classLoader.getResourceAsStream(path));
+                ImageView imageView = new ImageView(image);
+
+                if (i == 0) {
+                    imageView.setX(62);
+                    imageView.setY(865);
+                }
+                else {
+                    imageView.setX(x + width + i * delta);
+                    imageView.setY(y);
+                }
+            }
+        }
 
     }
 
     private void updateProduction()
     {
+        Production production = gameboard.getProduction();
+        int x = 153;
+        int delta = 10;
+        int width = 15;
+        int y = 784;
 
+        for (int i = 0; i < production.getProductionCell().length; i++) {
+
+            if (production.getProductionCell()[i].getFamilyMember() != null)
+            {
+                ColorsEnum currFamiliarEnum = production.getProductionCell()[i].getFamilyMember().getColor();
+                PlayerColorsEnum currPlayerEnum = production.getProductionCell()[i].getFamilyMember().getPlayerColor();
+                ClassLoader classLoader = Client.class.getClassLoader();
+                String path = "GUI/familiars/familiar_" + currPlayerEnum + "_" + currFamiliarEnum + ".png";
+                Image image = new Image(classLoader.getResourceAsStream(path));
+                ImageView imageView = new ImageView(image);
+
+                if (i == 0) {
+                    imageView.setX(62);
+                    imageView.setY(784);
+                }
+                else {
+                    imageView.setX(x + width + i * delta);
+                    imageView.setY(y);
+                }
+            }
+        }
     }
+
 
     private void updateMarket()
     {
@@ -299,6 +412,8 @@ public class GameBoardController implements Controller {
         labelFaithPoints.setText("x " + player.getFaithPoints());
         labelMilitaryPoints.setText("x " + player.getMilitaryPoints());
         labelServant.setText("x " + player.getServants());
+        SpinnerValueFactory<Integer> valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, player.getServants());
+        servantsSpinner.setValueFactory(valueFactory);
         labelStone.setText("x " + player.getStones());
         labelVictoryPoints.setText("x " + player.getVictoryPoints());
         labelWood.setText("x " + player.getWoods());
@@ -315,7 +430,6 @@ public class GameBoardController implements Controller {
         updateResources();
 
         updatePlayerCards();
-
 
     }
 
