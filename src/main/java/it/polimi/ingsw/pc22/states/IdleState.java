@@ -5,16 +5,15 @@ package it.polimi.ingsw.pc22.states;
  */
 public class IdleState implements GenericState
 {
-
 	@Override
-	public void printState() {
+	public void printState()
+	{
 		System.out.println("Please wait your turn");
-		
 	}
 
 	@Override
-	public boolean validate(String string) {
+	public boolean validate(String string)
+	{
 		return true;
 	}
-
 }

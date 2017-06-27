@@ -33,7 +33,8 @@ public class MarketCell extends Cell
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		StringBuilder output = new StringBuilder("You will gain ");
 
 		List<Effect> effects = super.getEffects();
@@ -46,17 +47,4 @@ public class MarketCell extends Cell
 		}
 		return output.toString();
 	}
-	
-	/*
-	 * EXAMPLE:
-		public static void main(String[] args){
-			Asset asset = new Asset(3, AssetType.COIN);
-			Asset asset2 = new Asset(3, AssetType.FAITHPOINT);
-			List<Effect> effects = new ArrayList<Effect>();
-			effects.add(new GainAsset(asset));
-			effects.add(new GainAsset(asset2));
-			MarketCell m1 = new MarketCell(3, effects);
-			System.out.print(m1.toString());
-	}
-	*/
 }

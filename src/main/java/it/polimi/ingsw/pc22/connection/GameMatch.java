@@ -2,6 +2,7 @@ package it.polimi.ingsw.pc22.connection;
 
 import it.polimi.ingsw.pc22.actions.Action;
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
+import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.messages.*;
 import it.polimi.ingsw.pc22.player.Player;
@@ -39,11 +40,15 @@ public class GameMatch implements Runnable
 
 	private List<LeaderCard> leaderCards;
 
-	private Long timeout;
+	private static Long timeout;
 	
-	private int turn=0;
+	private int turn = 0;
 	
-	private int era=0;
+	private int era = 0;
+
+	private static Player currentPlayer;
+
+	private static GameBoard currentGameBoard;
 
 	private static final String BOARD_PATH = "boards/";
 
@@ -89,13 +94,6 @@ public class GameMatch implements Runnable
 	{
 		System.out.println("Inizio partita");
 
-		for(Player player : players)
-		{
-			player.getAdapter();
-			IOAdapter adapter = player.getAdapter();
-			adapter.printMessage(new StartMatchMessage());
-
-		}
 		this.started = true;
 
 		handleGame();
@@ -119,18 +117,13 @@ public class GameMatch implements Runnable
 
 		assignExcommunicationCards();
 
-		gameBoard.setExcommunicationCards(excommunicationCards);
-		
-        int turnNumber= 24; //=6 turni da 4 azioni l'una
-        
-        if(playerCounter==5) 
-        	turnNumber = 18; //=6 turni da 3 azioni l'una
+		//=6 turni da 4 azioni l'una//=6 turni da 3 azioni l'una
+        int turnNumber = playerCounter == 5 ? 24 : 18;
 
 		GameBoardUtils.setUpPlayers(players, playerCounter, tiles);
 
 		for (int currentRoundNumber = 0; currentRoundNumber < turnNumber; currentRoundNumber++)
 		{
-			
 			//int era = GameBoardUtils.getEra(currentRoundNumber, playerCounter);
 			
 			if (isNewTurn(currentRoundNumber))
@@ -154,49 +147,53 @@ public class GameMatch implements Runnable
 			
 			for(Player player : players)
 			{
-				for (Player p : players)
+				//TODO RAGAZZI QUESTO CICLO NON MI PIACE TANTISSIMO AHAHA
+				/*for (Player p : players)
 				{
 					IOAdapter adapter = p.getAdapter();
 					adapter.printMessage(new GameStatusMessage(gameBoard, p));
-				}
-				
-				//GameBoardUtils.printToPlayers(player, players, gameBoard, era, turn);
+				}*/
+
+				currentPlayer = player;
+
+				currentGameBoard = gameBoard;
 
 				IOAdapter adapter = player.getAdapter();
 
 				adapter.printMessage(new CommunicationMessage("Is your turn!"));
 
-				adapter.printMessage(new StartTurnMessage(gameBoard, player));
+				adapter.printMessage(new StartTurnMessage(currentGameBoard, currentPlayer));
+
+				if (adapter instanceof SocketIOAdapter)
+				{
+					new Thread(new ActionThread()).start();
+				}
 
 				Long timestamp = System.currentTimeMillis();
 				
 				while (System.currentTimeMillis() < timestamp + timeout)
 				{
-					Action action = adapter.askAction(gameBoard, player);
+					try
+					{
+						Thread.sleep(100L);
+					} catch (InterruptedException e)
+					{
+						e.printStackTrace();
+					}
 
-					System.out.println("Action: " + action);
+					if (currentPlayer.isHasPassed()) break;
 
-					if (action == null) continue;
-
-					boolean executed = action.executeAction(player, gameBoard);
-
-					adapter.printMessage(new ExecutedAction());
-
-					System.out.println(executed + " - " +  player.isHasPassed());
-
-					if (player.isHasPassed()) break;
-
-					if (executed) break;
+					//if (executed) break;
 				}
 
-				adapter.printMessage(new CommunicationMessage(player.getPlayerBoard().toString()));
-				
-				adapter.printMessage(new CommunicationMessage(player.toString()));
+				adapter.printMessage(new GameStatusMessage(gameBoard, player));
 			}
 
 			GameBoardUtils.resetPlayerStatus(players);
 
-			GameBoardUtils.excommunicationHandling(players, playerCounter, currentRoundNumber, era, excommunicationCards, gameBoard);
+			GameBoardUtils.excommunicationHandling
+					(players, playerCounter, currentRoundNumber, era,
+							excommunicationCards, gameBoard);
 
 		}
 
@@ -238,8 +235,6 @@ public class GameMatch implements Runnable
 		JSONObject jsonBoard = new JSONObject(boardString);
 
 		gameBoard = BoardLoader.loadGameBoard(jsonBoard);
-
-		System.out.println(gameBoard);
 	}
 
 	private void loadCards()
@@ -580,6 +575,17 @@ public class GameMatch implements Runnable
 	public void setGameBoard(GameBoard gameBoard) {
 		this.gameBoard = gameBoard;
 	}
-	
-	
+
+	public static Player getCurrentPlayer() {
+		return currentPlayer;
+	}
+
+	public static GameBoard getCurrentGameBoard() {
+		return currentGameBoard;
+	}
+
+	public static Long getTimeout()
+	{
+		return timeout;
+	}
 }

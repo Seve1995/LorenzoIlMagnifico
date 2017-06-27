@@ -26,4 +26,12 @@ public class StartTurnMessage extends  Message implements Serializable
     public Player getPlayer() {
         return player;
     }
+
+    @Override
+    public String toString() {
+        return "StartTurnMessage{" +
+                "gameBoard=" + gameBoard +
+                ", player=" + player +
+                '}';
+    }
 }

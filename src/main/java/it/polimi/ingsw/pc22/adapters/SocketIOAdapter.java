@@ -103,7 +103,11 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
     {
         try
         {
-            out.writeObject(message);
+            out.writeUnshared(message);
+
+            out.flush();
+
+            out.reset();
         }
             catch (IOException e)
         {

@@ -12,6 +12,9 @@ public class GameStatusMessage extends  Message implements Serializable
 
     public GameStatusMessage(GameBoard gameBoard, Player player)
     {
+        System.out.println(player.toString());
+        System.out.println(gameBoard.toString());
+
         this.gameBoard = gameBoard;
         this.player = player;
     }
@@ -23,4 +26,13 @@ public class GameStatusMessage extends  Message implements Serializable
     public Player getPlayer() {
         return player;
     }
+
+    @Override
+    public String toString()
+    {
+        return "GameStatusMessage{" +
+                "player=" + player +
+                '}';
+    }
+
 }

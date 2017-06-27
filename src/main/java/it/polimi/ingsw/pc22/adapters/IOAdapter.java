@@ -47,27 +47,6 @@ public abstract class IOAdapter
         this.timeout = timeout;
     }
 
-    public Action askAction(GameBoard gameBoard, Player player)
-    {
-        Long maxTimeStamp = System.currentTimeMillis() + timeout;
-
-        while (System.currentTimeMillis() < maxTimeStamp)
-        {
-            String choice = getMessage();
-
-            if (choice == null)
-                continue;
-
-            Action action = ActionFactory.createAction(choice, player);
-
-            return action;
-        }
-
-        printMessage(new TimerMessage("Timeout Azione terminato"));
-
-        return null;
-    }
-
     public int askFloor() {
 
         Long maxTimeStamp = System.currentTimeMillis() + timeout;
@@ -645,7 +624,7 @@ public abstract class IOAdapter
     //TODO2 DISTINGUERE IL TIMEOUT DELL'AVVIO PARTITA DAL TIMEOUT DELL'AZIONE (ce ne vogliono 2 distinti)
     private void startNewGameMatch(String gameName, Player player)
     {
-        GameMatch gameMatch = new GameMatch(15000L, 4);
+        GameMatch gameMatch = new GameMatch(30000L, 4);
 
         Map<String, GameMatch> gameMatchMap = GameServer.getGameMatchMap();
 

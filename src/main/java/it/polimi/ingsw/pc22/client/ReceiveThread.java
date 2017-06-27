@@ -1,19 +1,13 @@
 package it.polimi.ingsw.pc22.client;
 
-import it.polimi.ingsw.pc22.adapters.IOAdapter;
-import it.polimi.ingsw.pc22.gamebox.PlayerBoard;
 import it.polimi.ingsw.pc22.messages.*;
 import it.polimi.ingsw.pc22.states.IdleState;
 import it.polimi.ingsw.pc22.states.PlayState;
 import it.polimi.ingsw.pc22.states.StartMatchState;
 import it.polimi.ingsw.pc22.states.WaitingState;
 import javafx.application.Platform;
-import javafx.scene.Scene;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
-import java.io.Serializable;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,16 +40,13 @@ public class ReceiveThread implements Runnable
 					continue;
 				}
 
-				//TODO sistemare questa cosa, non tutti hanno qualcosa da visualizzzare
-				//printOnClient(message.toString());
-				
 				if (message instanceof LoginMessage)
 				{
 					LoginMessage login = (LoginMessage) message;
 
 					if (login.isUserLogged())
 					{
-						printOnClient("Logged");
+						printOnClient(LoginMessage.getLoggedMessage());
 
 						Client.setGenericState(new StartMatchState());
 
@@ -66,7 +57,7 @@ public class ReceiveThread implements Runnable
 
 					if (login.isMatchStarted())
 					{
-						printOnClient("Match is starting. Please wait...");
+						printOnClient(LoginMessage.getStarded());
 						
 						Client.setGenericState(new WaitingState());
 						
@@ -99,14 +90,14 @@ public class ReceiveThread implements Runnable
 
 					Client.setGameBoard(((StartTurnMessage) message).getGameBoard());
 
+					printOnClient(message);
+
 					Client.setGenericState(new PlayState());
 
 					Client.setStateChanged(true);
-					
-					printOnClient(((StartTurnMessage) message));
 				}
 				
-				if (message instanceof StartMatchMessage)
+				/*if (message instanceof StartMatchMessage)
 				{
 					Platform.runLater(() -> {
 						Client.launchGameBoard();
@@ -117,13 +108,15 @@ public class ReceiveThread implements Runnable
 				{
 					printOnClient((ExecutedAction) message);
 
-				}
+				}*/
 
 				if (message instanceof GameStatusMessage)
 				{
-					printOnClient(((GameStatusMessage) message).getPlayer().toString());
-					
-					printOnClient(((GameStatusMessage) message).getGameBoard().toString());
+					Client.setPlayer(((GameStatusMessage) message).getPlayer());
+
+					Client.setGameBoard(((GameStatusMessage) message).getGameBoard());
+
+					printOnClient(message);
 
 					Client.setGenericState(new IdleState());
 
@@ -195,15 +188,7 @@ public class ReceiveThread implements Runnable
 			});
 		else
 			{
-				if (message instanceof StartTurnMessage)
-					
-					{
-						System.out.println("Server: " + ((StartTurnMessage) message).getPlayer().toString());
-						System.out.println("Server: " + ((StartTurnMessage) message).getGameBoard().toString());			
-					}
-				
 				System.out.println("Server: " + message.toString());
-
 			}
 	}
 }
