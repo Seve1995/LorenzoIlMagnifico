@@ -21,7 +21,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import static it.polimi.ingsw.pc22.client.Client.getClassLoader;
-import static it.polimi.ingsw.pc22.client.Client.getOutSocket;
 
 /**
  * Created by matteo on 22/06/17.
@@ -144,20 +143,20 @@ public class GameBoardController implements Controller {
 		String[] idSplitted = id.split(" ");
 		switch (idSplitted[0]) {
 		case "TOWER":
-			getOutSocket().println("set tower " + output.toUpperCase() +
-                    " " + servantsSpinner.getValue() + " " + idSplitted[1] + " " + idSplitted[2]);
+			//getOutSocket().println("set tower " + output.toUpperCase() +
+              //      " " + servantsSpinner.getValue() + " " + idSplitted[1] + " " + idSplitted[2]);
 			break;
 		case "MARKET":
-			getOutSocket().println("set market " + output.toUpperCase() + " " + servantsSpinner.getValue() + " " + idSplitted[1]);
+			//getOutSocket().println("set market " + output.toUpperCase() + " " + servantsSpinner.getValue() + " " + idSplitted[1]);
 			break;
 		case "COUNCIL":
-			getOutSocket().println("set council " + output.toUpperCase() + " " + servantsSpinner.getValue());
+			//getOutSocket().println("set council " + output.toUpperCase() + " " + servantsSpinner.getValue());
 			break;
 		case "HARVEST":
-			getOutSocket().println("set harvest " + output.toUpperCase() + " " + servantsSpinner.getValue());
+			//getOutSocket().println("set harvest " + output.toUpperCase() + " " + servantsSpinner.getValue());
 			break;
 		case "PRODUCTION":
-			getOutSocket().println("set production " + output.toUpperCase() + " " + servantsSpinner.getValue());
+			//getOutSocket().println("set production " + output.toUpperCase() + " " + servantsSpinner.getValue());
 			break;
 		default:
 			break;
@@ -176,7 +175,7 @@ public class GameBoardController implements Controller {
         	}
         idLeader = selectedLeaderToggle.getId();
 
-        getOutSocket().println("play card " + idLeader);
+        //getOutSocket().println("play card " + idLeader);
 
     }
 
@@ -191,7 +190,7 @@ public class GameBoardController implements Controller {
     	}
         idLeader = selectedLeaderToggle.getId();
 
-        getOutSocket().println("discard card " + idLeader);
+        //getOutSocket().println("discard card " + idLeader);
     }
 
     @FXML
@@ -205,14 +204,14 @@ public class GameBoardController implements Controller {
     	}
         String id = selectedLeaderToggle.getId();
 
-        getOutSocket().println("activate card " + id);
+        //getOutSocket().println("activate card " + id);
     }
 
     @FXML
     private void handlePassButton()
     {
         output = "pass";
-        getOutSocket().println(output);
+        //getOutSocket().println(output);
     }
 
     @FXML
