@@ -98,6 +98,7 @@ public class GameBoardController implements Controller {
     private String output;
 
     private String idLeader;
+
     @FXML
     private ToggleGroup GameBoardButtons;
     @FXML
@@ -271,7 +272,9 @@ public class GameBoardController implements Controller {
         int width = 15;
         int y = 552;
 
-        for (int i = 0; i < councilPalace.getCouncilPalaceCells().length; i++) {
+        for (int i = 0; i < councilPalace.getCouncilPalaceCells().length; i++)
+        {
+
             ImageView imageView = new ImageView();
             imageView.setX(x + width + i * delta);
             imageView.setY(y);
@@ -320,7 +323,7 @@ public class GameBoardController implements Controller {
                 String familiarEnum = currFamiliarEnum.toString();
                 String playerEnum = currPlayerEnum.toString();
                 ClassLoader classLoader = Client.class.getClassLoader();
-                String path = "GUI/familiars/familiar_" + playerEnum.toLowerCase() + "_" + familiarEnum.toLowerCase() + ".png";
+                String path = "GUI/familiars/familiar_blue_neuter.png";
                 Image image = new Image(classLoader.getResourceAsStream(path));
                 imageView.setImage(image);
 
@@ -513,7 +516,7 @@ public class GameBoardController implements Controller {
                     PlayerColorsEnum currPlayerEnum = t.getTowerCells().get(i).getFamilyMember().getPlayerColor();
                     toggleButton.setOpacity(1);
                     ClassLoader classLoader = Client.class.getClassLoader();
-                    String path = "GUI/familiars/familiar_" + currPlayerEnum +"_" + currFamiliarEnum +".png";
+                    String path = "GUI/familiars/familiar_blue_neuter.png";
                     Image image = new Image(classLoader.getResourceAsStream(path));
                     ImageView imageView = new ImageView(image);
                     imageView.setFitHeight(20);
@@ -649,15 +652,17 @@ public class GameBoardController implements Controller {
             LeaderCard currLeaderCard = player.getLeaderCards().get(i);
             ToggleButton toggleButton = (ToggleButton) leaders.getChildren().get(i);
 
-            if (currLeaderCard.isPlayed())
+            if (currLeaderCard == null)
             {
                 ClassLoader classLoader = Client.class.getClassLoader();
-                String path = "GUI/leaders/leaders_f_c_0.jpg";
+                String path = "GUI/leaders/leaders_b_c_0.jpg";
                 Image image = new Image(classLoader.getResourceAsStream(path));
                 ImageView imageView = new ImageView(image);
                 imageView.setFitHeight(115);
                 imageView.setFitWidth(73);
                 toggleButton.setGraphic(imageView);
+                toggleButton.setDisable(true);
+                continue;
             }
 
             int currentLeaderNumber = currLeaderCard.getNumber();
@@ -669,6 +674,7 @@ public class GameBoardController implements Controller {
             imageView.setFitWidth(73);
 
             toggleButton.setGraphic(imageView);
+            toggleButton.setDisable(false);
         }
     }
 
@@ -695,6 +701,7 @@ public class GameBoardController implements Controller {
                 imageView.setFitWidth(73);
                 toggleButton.setOpacity(1);
                 toggleButton.setGraphic(imageView);
+                toggleButton.setDisable(false);
             }
 
             ClassLoader classLoader = Client.class.getClassLoader();
@@ -705,6 +712,7 @@ public class GameBoardController implements Controller {
             imageView.setFitWidth(73);
             toggleButton.setOpacity(1);
             toggleButton.setGraphic(imageView);
+            toggleButton.setDisable(true);
         }
     }
 
@@ -771,7 +779,6 @@ public class GameBoardController implements Controller {
 
             return controller.isConfirmClicked();
 
-
         } catch (IOException e) {
             e.printStackTrace();
             return false;
@@ -793,6 +800,7 @@ public class GameBoardController implements Controller {
     	if (message instanceof ExecutedAction)
         {
             updateGameBoard();
+
             updatePlayerBoard();
         }
 
@@ -802,6 +810,39 @@ public class GameBoardController implements Controller {
 
             updatePlayerBoard();
         }
+
+        if (message instanceof ChooseAssetsMessage)
+        {
+
+        }
+
+        if (message instanceof ChooseCardMessage)
+        {
+
+        }
+
+        if (message instanceof ChooseCostsMessage)
+        {
+
+        }
+
+        if (message instanceof ChooseServantsMessage)
+        {
+
+        }
+
+        if (message instanceof ErrorMessage)
+        {
+            info.setText("OOOPS! Try again!");
+
+
+            councilPrivilegeDialog();
+
+        }
+
+        //if (message instanceof ExcommunicationMessage)
+
+        //if (message instanceof EndGameMessage)
 
     }
 

@@ -48,7 +48,20 @@ public class ActionThread implements Runnable
 
             System.out.println(executed + " - " +  GameMatch.getCurrentPlayer().isHasPassed());
 
-            if (!executed) continue;
+            if (!executed)
+            {
+
+                adapter.printMessage(new ErrorMessage("Action not Performed"));
+
+                continue;
+            }
+
+            if (!GameMatch.getCurrentPlayer().isFamiliarPositioned())
+            {
+                adapter.printMessage(new ErrorMessage("Action not Performed"));
+
+                continue;
+            }
 
             if (GameMatch.getCurrentPlayer().isFamiliarPositioned())
             {

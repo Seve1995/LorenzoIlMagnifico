@@ -28,6 +28,7 @@ public class ReceiveThread implements Runnable
 
 			while(true)
 			{
+
 				Message message = (Message) inSocket.readObject();
 
 				if (message == null)
