@@ -2,8 +2,6 @@ package it.polimi.ingsw.pc22.client;
 
 import it.polimi.ingsw.pc22.messages.Message;
 import it.polimi.ingsw.pc22.rmi.RMIClientStreamService;
-import it.polimi.ingsw.pc22.states.StartMatchState;
-import it.polimi.ingsw.pc22.states.WaitingState;
 import it.polimi.ingsw.pc22.utils.ConsoleReader;
 
 import java.io.BufferedReader;
@@ -76,32 +74,10 @@ public class RMIClientStreamServiceImpl implements RMIClientStreamService
 
     }
 
-    @Override
-    public void changeState(String state) throws RemoteException
-    {
-        //TODO SISTEMARE STO SCHIFO
-        if ("logged".equalsIgnoreCase(state))
-        {
-            System.out.println("prova andata");
-
-            Client.setGenericState(new StartMatchState());
-
-            Client.setStateChanged(true);
-        }
-
-        if ("started".equalsIgnoreCase(state))
-        {
-            System.out.println("prova andata");
-
-            Client.setGenericState(new WaitingState());
-
-            Client.setStateChanged(true);
-        }
-    }
 
     @Override
     public void printMessage(Message message) throws RemoteException
     {
-        System.out.println(message);
+        MessageHandler.handleMessage(message);
     }
 }

@@ -1,7 +1,5 @@
 package it.polimi.ingsw.pc22.adapters;
 
-import it.polimi.ingsw.pc22.actions.Action;
-import it.polimi.ingsw.pc22.actions.ActionFactory;
 import it.polimi.ingsw.pc22.connection.GameMatch;
 import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.connection.User;
@@ -18,7 +16,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,8 +29,6 @@ public abstract class IOAdapter
     public abstract void endConnection(Player player) throws IOException;
 
     public abstract void  printMessage(Message message);
-
-    public abstract void changeState(String state);
 
     public abstract String getMessage();
 
@@ -53,30 +48,30 @@ public abstract class IOAdapter
 
         while(System.currentTimeMillis() < maxTimeStamp)
         {
-	            //this.printMessage("Ok, now select the tower floor:");
+            //this.printMessage("Ok, now select the tower floor:");
 
-	            String value = getMessage();
+            String value = getMessage();
 
-	            if (value == null)
-	                continue;
+            if (value == null)
+                continue;
 
-	            Integer floor;
+            Integer floor;
 
-	            try
-	            {
-	                floor = Integer.parseInt(value);
-	            }
-	            catch (NumberFormatException e)
-	            {
-	                this.printMessage(new ErrorMessage("ERROR! You must enter a valid input"));
+            try
+            {
+                floor = Integer.parseInt(value);
+            }
+            catch (NumberFormatException e)
+            {
+                this.printMessage(new ErrorMessage("ERROR! You must enter a valid input"));
 
-	                continue;
-	            }
+                continue;
+            }
 
-	            if (floor < 0 || floor > 3)
-	                continue;
+            if (floor < 0 || floor > 3)
+                continue;
 
-	            return floor;
+            return floor;
         }
 
         printMessage(new TimerMessage("Timeout Azione terminato"));
@@ -395,7 +390,7 @@ public abstract class IOAdapter
 
     }
 
-    public User authenticate(String authentication) throws IOException
+    public Player authenticate(String authentication) throws IOException
     {
         Pattern loginPattern = Pattern.compile("(^(\\w+) (\\w+) (L|S|l|s)$)");
 
@@ -424,11 +419,32 @@ public abstract class IOAdapter
             updateJson();
         }
 
-       return user;
+        if (user == null) return null;
+
+        Player player = new Player();
+
+        player.setName(user.getUsername());
+
+        return player;
     }
 
-    public boolean gameHandling(User user, String choice) throws IOException
+    public boolean gameHandling(String choice) throws IOException
     {
+        String[] userString = choice.split(":");
+
+        System.out.println(userString[0] + " " + userString[1]);
+
+        Map<String, User> usersMap = GameServer.getUsersMap();
+
+        User user = usersMap.get(userString[0]);
+
+        if (user == null)
+        {
+            printMessage(new ErrorMessage("Invalid INPUT no user found"));
+
+            return false;
+        }
+
         String playerName = user.getUsername();
 
         Player player = new Player();
@@ -437,7 +453,7 @@ public abstract class IOAdapter
 
         Pattern gameMatcher = Pattern.compile("(^(\\w+) (C|c|J|j|R|r)$)");
 
-        Matcher matcher = gameMatcher.matcher(choice);
+        Matcher matcher = gameMatcher.matcher(userString[1]);
 
         if (!matcher.find())
         {
@@ -446,7 +462,7 @@ public abstract class IOAdapter
             return false;
         }
 
-        String[] matchStrings = choice.split(" ");
+        String[] matchStrings = userString[1].split(" ");
 
         Map<String, GameMatch> gameMatchMap = GameServer.getGameMatchMap();
 

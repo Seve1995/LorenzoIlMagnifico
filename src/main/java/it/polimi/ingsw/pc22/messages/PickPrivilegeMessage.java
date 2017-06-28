@@ -1,7 +1,5 @@
 package it.polimi.ingsw.pc22.messages;
 
-import java.io.Serializable;
-
 /**
  * Created by fandroid95 on 27/06/2017.
  */

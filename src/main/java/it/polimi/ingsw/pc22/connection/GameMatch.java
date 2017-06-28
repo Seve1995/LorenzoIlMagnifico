@@ -1,12 +1,11 @@
 package it.polimi.ingsw.pc22.connection;
 
-import it.polimi.ingsw.pc22.actions.Action;
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.gamebox.*;
-import it.polimi.ingsw.pc22.messages.*;
+import it.polimi.ingsw.pc22.messages.CommunicationMessage;
+import it.polimi.ingsw.pc22.messages.GameStatusMessage;
 import it.polimi.ingsw.pc22.player.Player;
-import it.polimi.ingsw.pc22.states.StartMatchState;
 import it.polimi.ingsw.pc22.utils.*;
 import org.json.JSONObject;
 
@@ -93,6 +92,11 @@ public class GameMatch implements Runnable
 	private void startGame()
 	{
 		System.out.println("Inizio partita");
+
+		for (Player player : players)
+		{
+			System.out.println(player.getAdapter());
+		}
 
 		this.started = true;
 

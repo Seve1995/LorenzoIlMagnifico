@@ -15,4 +15,10 @@ public class ChooseServantsState implements GenericState
     public boolean validate(String string) {
         return false;
     }
+
+    @Override
+    public void sendToServer(String string)
+    {
+
+    }
 }

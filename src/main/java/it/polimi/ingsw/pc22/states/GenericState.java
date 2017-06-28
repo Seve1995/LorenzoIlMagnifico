@@ -8,4 +8,6 @@ public interface GenericState
     void printState();
 
     boolean validate(String string);
+
+    void sendToServer(String string);
 }

@@ -3,29 +3,21 @@ package it.polimi.ingsw.pc22.client;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.messages.ExecutedAction;
 import it.polimi.ingsw.pc22.messages.PickPrivilegeMessage;
+import it.polimi.ingsw.pc22.messages.StartTurnMessage;
 import it.polimi.ingsw.pc22.player.Player;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import it.polimi.ingsw.pc22.messages.Message;
-import it.polimi.ingsw.pc22.messages.StartTurnMessage;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import static it.polimi.ingsw.pc22.client.Client.getClassLoader;
-import static it.polimi.ingsw.pc22.client.Client.getOutSocket;
+import java.io.IOException;
 
+import static it.polimi.ingsw.pc22.client.Client.getClassLoader;
 /**
  * Created by matteo on 22/06/17.
  */
@@ -139,20 +131,20 @@ public class GameBoardController implements Controller {
 		String[] idSplitted = id.split(" ");
 		switch (idSplitted[0]) {
 		case "TOWER":
-			getOutSocket().println("set tower " + output.toUpperCase() +
-                    " " + servantsSpinner.getValue() + " " + idSplitted[1] + " " + idSplitted[2]);
+			//getOutSocket().println("set tower " + output.toUpperCase() +
+                    //" " + servantsSpinner.getValue() + " " + idSplitted[1] + " " + idSplitted[2]);
 			break;
 		case "MARKET":
-			getOutSocket().println("set market " + output.toUpperCase() + " " + servantsSpinner.getValue() + " " + idSplitted[1]);
+			//getOutSocket().println("set market " + output.toUpperCase() + " " + servantsSpinner.getValue() + " " + idSplitted[1]);
 			break;
 		case "COUNCIL":
-			getOutSocket().println("set council " + output.toUpperCase() + " " + servantsSpinner.getValue());
+			//getOutSocket().println("set council " + output.toUpperCase() + " " + servantsSpinner.getValue());
 			break;
 		case "HARVEST":
-			getOutSocket().println("set harvest " + output.toUpperCase() + " " + servantsSpinner.getValue());
+			//getOutSocket().println("set harvest " + output.toUpperCase() + " " + servantsSpinner.getValue());
 			break;
 		case "PRODUCTION":
-			getOutSocket().println("set production " + output.toUpperCase() + " " + servantsSpinner.getValue());
+			//getOutSocket().println("set production " + output.toUpperCase() + " " + servantsSpinner.getValue());
 			break;
 		default:
 			break;
@@ -166,7 +158,7 @@ public class GameBoardController implements Controller {
         ToggleButton selectedLeaderToggle = (ToggleButton) LeadersHand.getSelectedToggle();
         idLeader = selectedLeaderToggle.getId();
 
-        getOutSocket().println("play card " + idLeader);
+        //getOutSocket().println("play card " + idLeader);
 
     }
 
@@ -176,7 +168,7 @@ public class GameBoardController implements Controller {
         ToggleButton selectedLeaderToggle = (ToggleButton) LeadersHand.getSelectedToggle();
         idLeader = selectedLeaderToggle.getId();
 
-        getOutSocket().println("discard card " + idLeader);
+        //getOutSocket().println("discard card " + idLeader);
     }
 
     @FXML
@@ -185,14 +177,14 @@ public class GameBoardController implements Controller {
         ToggleButton selectedLeaderToggle = (ToggleButton) LeadersPlaceToggle.getSelectedToggle();
         String id = selectedLeaderToggle.getId();
 
-        getOutSocket().println("activate card " + id);
+        //getOutSocket().println("activate card " + id);
     }
 
     @FXML
     private void handlePassButton()
     {
         output = "pass";
-        getOutSocket().println(output);
+        //getOutSocket().println(output);
     }
 
     @FXML

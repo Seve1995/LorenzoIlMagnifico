@@ -1,16 +1,10 @@
 package it.polimi.ingsw.pc22.client;
 
+import it.polimi.ingsw.pc22.messages.CommunicationMessage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
-import static it.polimi.ingsw.pc22.client.Client.getOutSocket;
-
-import it.polimi.ingsw.pc22.messages.CommunicationMessage;
-import it.polimi.ingsw.pc22.messages.GameStatusMessage;
-import it.polimi.ingsw.pc22.messages.Message;
-import it.polimi.ingsw.pc22.messages.StartTurnMessage;
 
 public class CreationMatchController implements Controller{
 
@@ -31,21 +25,20 @@ public class CreationMatchController implements Controller{
     private void handleCreateButton()
 	{
     	textString = Text.getText();
-    	getOutSocket().println(textString + " C");
+    	//getOutSocket().println(textString + " C");
 	}
     
     @FXML
     private void handleJoinButton()
 	{
 		textString = Text.getText();
-    	getOutSocket().println(textString + " J");
+    	//getOutSocket().println(textString + " J");
 	}
     
     @FXML
     private void handleRandomButton()
 	{
-    	getOutSocket().println("R");
-
+    	//getOutSocket().println("R");
 	}
 
 	@Override

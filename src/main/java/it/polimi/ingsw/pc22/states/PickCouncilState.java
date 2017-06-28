@@ -1,8 +1,5 @@
 package it.polimi.ingsw.pc22.states;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -70,5 +67,11 @@ public class PickCouncilState implements GenericState
         if (duplicates.size() != numberOfPrivileges) return false;
 
         return true;
+    }
+
+    @Override
+    public void sendToServer(String string)
+    {
+
     }
 }

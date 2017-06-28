@@ -1,20 +1,19 @@
 package it.polimi.ingsw.pc22.client;
 
+import it.polimi.ingsw.pc22.exceptions.GenericException;
+import it.polimi.ingsw.pc22.rmi.RMIClientStreamService;
+import it.polimi.ingsw.pc22.rmi.RMIServerInterface;
+import it.polimi.ingsw.pc22.states.AuthenticationState;
+import javafx.fxml.FXML;
+import javafx.scene.control.RadioButton;
+import javafx.stage.Stage;
+
 import java.net.Socket;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-
-import it.polimi.ingsw.pc22.exceptions.GenericException;
-import it.polimi.ingsw.pc22.messages.Message;
-import it.polimi.ingsw.pc22.rmi.RMIAuthenticationService;
-import it.polimi.ingsw.pc22.rmi.RMIClientStreamService;
-import it.polimi.ingsw.pc22.states.LoginState;
-import javafx.fxml.FXML;
-import javafx.scene.control.RadioButton;
-import javafx.stage.Stage;
 
 public class StartingChoiceController implements Controller {
 
@@ -30,27 +29,22 @@ public class StartingChoiceController implements Controller {
     private static final int RMI_PORT = 5439;
 
 	private static final int SOCKET_PORT = 9001;
-	
-    private String networkChoice;
-    
-    private String interfaceChoice;
-    
 
     //Predefinito: GUI + Socket
     @FXML
     private void handleConfirmButton()
 	{
-		Client.setGenericState(new LoginState());
+		Client.setGenericState(new AuthenticationState());
     	if (RMI.isSelected())
     	{
     		loadRMIConnection();
-    		networkChoice = "rmi";
+    		Client.setNetworkChoice("rmi");
     	}
     	
     	if (Socket.isSelected())
     	{
     		loadSocketConnection();
-    		networkChoice = "socket";
+			Client.setNetworkChoice("socket");
     	}
     }
     
@@ -70,20 +64,19 @@ public class StartingChoiceController implements Controller {
 
 			if (CLI.isSelected())
 			{
-				interfaceChoice = "CLI";
-				ViewThread viewThread = new ViewThread(socket);
-				Thread thread = new Thread(viewThread);
-				thread.start();
+				Client.setInterfaceChoice("CLI");
+
+				new Thread(new ViewThread()).start();
+
 				Stage stage = (Stage) Client.getPrimaryStage().getScene().getWindow();
 				stage.close();
-		    	Client.setInterfaceChoice(interfaceChoice);
 			}
 
 			if (GUI.isSelected())
 			{
-				interfaceChoice = "GUI";
-				Client.launchClientAccess(networkChoice);
-		    	Client.setInterfaceChoice(interfaceChoice);
+				Client.setInterfaceChoice("GUI");
+
+				Client.launchClientAccess();
 			}
 
 		}
@@ -98,13 +91,13 @@ public class StartingChoiceController implements Controller {
 		try
 		{
 			Registry registry = LocateRegistry.getRegistry(RMI_PORT);
-			
-			Client.setRegistry(registry);
 
-			RMIAuthenticationService authenticationService = (RMIAuthenticationService)
+			RMIServerInterface rmiServerInterface = (RMIServerInterface)
 					registry.lookup("auth");
 
-			//TODO TIMEOUT
+			System.out.println();
+
+			Client.setRmiServerInterface(rmiServerInterface);
 
 			RMIClientStreamServiceImpl streamService =
 					new RMIClientStreamServiceImpl(30000L);
@@ -113,18 +106,24 @@ public class StartingChoiceController implements Controller {
 					UnicastRemoteObject.exportObject(streamService, 0);
 
 			registry.rebind("client", stub);
-			
+
+			//SISTEMARE QUESTA RIPETIZIONE
+
 			if (CLI.isSelected())
 			{
+				Client.setInterfaceChoice("CLI");
+
+				new Thread(new ViewThread()).start();
+
 				Stage stage = (Stage) Client.getPrimaryStage().getScene().getWindow();
 				stage.close();
 			}
-			
-			authenticationService.login();
 
 			if (GUI.isSelected())
 			{
-				Client.launchClientAccess(networkChoice);
+				Client.setInterfaceChoice("GUI");
+
+				Client.launchClientAccess();
 			}
 
 		} catch (RemoteException | NotBoundException e)

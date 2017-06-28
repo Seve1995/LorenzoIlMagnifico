@@ -16,4 +16,10 @@ public class IdleState implements GenericState
 	{
 		return true;
 	}
+
+	@Override
+	public void sendToServer(String string)
+	{
+
+	}
 }

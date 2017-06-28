@@ -8,7 +8,6 @@ import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.RequiredCard;
 
 import java.util.List;
-import java.util.Set;
 
 public class PlayLeaderCard extends Action {
 	

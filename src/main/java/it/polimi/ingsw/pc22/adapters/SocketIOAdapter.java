@@ -3,7 +3,6 @@ package it.polimi.ingsw.pc22.adapters;
 import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.connection.User;
 import it.polimi.ingsw.pc22.exceptions.GenericException;
-import it.polimi.ingsw.pc22.messages.ErrorMessage;
 import it.polimi.ingsw.pc22.messages.LoginMessage;
 import it.polimi.ingsw.pc22.messages.Message;
 import it.polimi.ingsw.pc22.player.Player;
@@ -47,29 +46,31 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
     @Override
     public void run()
     {
-        User user = null;
+        System.out.println("SOCKET");
+
+        Player player = null;
 
         boolean started = false;
 
         try
         {
-            while (user == null)
+            while (player == null)
             {
                 String authentication = getMessage();
 
-                user = authenticate(authentication);
+                player = authenticate(authentication);
             }
 
-            printMessage(new LoginMessage(true, false));
+            printMessage(new LoginMessage(true, false, player));
 
             while (!started)
             {
                 String match = getMessage();
 
-                started = gameHandling(user, match);
+                started = gameHandling(match);
             }
 
-            printMessage(new LoginMessage(true, true));
+            printMessage(new LoginMessage(true, true, player));
 
         }
             catch (IOException e)
@@ -146,11 +147,5 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
         }
 
         return  answer;
-    }
-
-    @Override
-    public void changeState(String state)
-    {
-
     }
 }

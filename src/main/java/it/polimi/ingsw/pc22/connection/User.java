@@ -2,7 +2,9 @@ package it.polimi.ingsw.pc22.connection;
 
 import com.google.gson.annotations.SerializedName;
 
-public class User
+import java.io.Serializable;
+
+public class User implements Serializable
 {
 	@SerializedName("username")
 	private String username;

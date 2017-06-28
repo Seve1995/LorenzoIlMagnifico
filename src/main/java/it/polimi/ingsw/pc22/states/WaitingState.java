@@ -16,4 +16,10 @@ public class WaitingState implements GenericState
     {
         return false;
     }
+
+    @Override
+    public void sendToServer(String string)
+    {
+
+    }
 }

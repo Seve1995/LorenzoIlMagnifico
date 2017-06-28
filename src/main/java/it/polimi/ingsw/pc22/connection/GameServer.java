@@ -4,7 +4,7 @@ import it.polimi.ingsw.pc22.adapters.RMIIOAdapter;
 import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.player.Player;
-import it.polimi.ingsw.pc22.rmi.RMIAuthenticationService;
+import it.polimi.ingsw.pc22.rmi.RMIServerInterface;
 import it.polimi.ingsw.pc22.utils.UserLoader;
 import org.json.JSONException;
 
@@ -17,7 +17,10 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Comparator;
 import java.util.Map;
-import java.util.concurrent.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -47,7 +50,7 @@ public class GameServer
 
 			RMIIOAdapter rmiIoAdapter = new RMIIOAdapter(registry, timeout);
 
-			RMIAuthenticationService stub = (RMIAuthenticationService)
+			RMIServerInterface stub = (RMIServerInterface)
 					UnicastRemoteObject.exportObject(rmiIoAdapter, 0);
 
 			registry.rebind("auth", stub);

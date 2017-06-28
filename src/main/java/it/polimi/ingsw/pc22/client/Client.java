@@ -4,6 +4,7 @@ import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.messages.CommunicationMessage;
 import it.polimi.ingsw.pc22.messages.Message;
 import it.polimi.ingsw.pc22.player.Player;
+import it.polimi.ingsw.pc22.rmi.RMIServerInterface;
 import it.polimi.ingsw.pc22.states.GenericState;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +16,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.rmi.registry.Registry;
 
 public class Client extends Application 
 {
@@ -31,19 +31,121 @@ public class Client extends Application
 		
 	private static ClassLoader classLoader = Client.class.getClassLoader();
 
-	private static Registry registry;
+	private static RMIServerInterface rmiServerInterface;
 	
 	private static Socket socket;
 	
 	private static Controller controller;
 	
 	private static String interfaceChoice;
-	
-	private static PrintWriter outSocket;
+
+	private static String networkChoice;
 
 	private static GameBoard gameBoard;
 
 	private static Player player;
+
+	private static boolean stopped = false;
+
+	public static GenericState getGenericState()
+	{
+		return genericState;
+	}
+
+	public static synchronized void setGenericState(GenericState genericState)
+	{
+		Client.genericState = genericState;
+	}
+
+	public static boolean isStateChanged() {
+		return stateChanged;
+	}
+
+	public static synchronized void setStateChanged(boolean stateChanged)
+	{
+		Client.stateChanged = stateChanged;
+	}
+
+	public static Stage getPrimaryStage() {
+		return primaryStage;
+	}
+
+	public static void setPrimaryStage(Stage primaryStage) {
+		Client.primaryStage = primaryStage;
+	}
+
+	public static RMIServerInterface getRmiServerInterface() {
+		return rmiServerInterface;
+	}
+
+	public static void setRmiServerInterface(RMIServerInterface rmiServerInterface) {
+		Client.rmiServerInterface = rmiServerInterface;
+	}
+
+	public static String getNetworkChoice() {
+		return networkChoice;
+	}
+
+	public static void setNetworkChoice(String networkChoice) {
+		Client.networkChoice = networkChoice;
+	}
+
+	public static Socket getSocket() {
+		return socket;
+	}
+
+	public static void setSocket(Socket socket)
+	{
+		Client.socket = socket;
+	}
+
+	public static Controller getController() {
+		return controller;
+	}
+
+	public static void setController(Controller controller) {
+		Client.controller = controller;
+	}
+
+	public static String getInterfaceChoice() {
+		return interfaceChoice;
+	}
+
+	public static void setInterfaceChoice(String interfaceChoice) {
+		Client.interfaceChoice = interfaceChoice;
+	}
+
+	public static GameBoard getGameBoard() {
+		return gameBoard;
+	}
+
+	public static void setGameBoard(GameBoard gameBoard) {
+		Client.gameBoard = gameBoard;
+	}
+
+	public static Player getPlayer() {
+		return player;
+	}
+
+	public static void setPlayer(Player player) {
+		Client.player = player;
+	}
+
+	public static ClassLoader getClassLoader() {
+		return classLoader;
+	}
+
+	public static void setClassLoader(ClassLoader classLoader) {
+		Client.classLoader = classLoader;
+	}
+
+	public static boolean isStopped() {
+		return stopped;
+	}
+
+	public static void setStopped(boolean stopped) {
+		Client.stopped = stopped;
+	}
 
 	@Override
 	public void start(Stage primaryStage)
@@ -74,7 +176,7 @@ public class Client extends Application
 		}
 	}
 	
-	public static void launchClientAccess(String choice)
+	public static void launchClientAccess()
 	{
 		try {
 			// Load root layout from fxml file.
@@ -131,7 +233,8 @@ public class Client extends Application
 		}
 	}
 
-	public static void launchWaitingForTheMatch() {
+	public static void launchWaitingForTheMatch()
+	{
 		Message message = new CommunicationMessage("Match is starting. Please wait...");
 		controller.updateScene(message);
 	}
@@ -140,98 +243,4 @@ public class Client extends Application
 	{
 		launch(args);
 	}
-	
-	public static GenericState getGenericState()
-	{
-		return genericState;
-	}
-
-	public static synchronized void setGenericState(GenericState genericState)
-	{
-		Client.genericState = genericState;
-		
-	}
-
-	public static boolean isStateChanged() {
-		return stateChanged;
-	}
-
-	public static synchronized void setStateChanged(boolean stateChanged)
-	{
-		Client.stateChanged = stateChanged;
-	}
-	
-	public static Stage getPrimaryStage() {
-		return primaryStage;
-	}
-
-	public static void setPrimaryStage(Stage primaryStage) {
-		Client.primaryStage = primaryStage;
-	}
-
-	public static Registry getRegistry() {
-		return registry;
-	}
-
-	public static void setRegistry(Registry registry) {
-		Client.registry = registry;
-	}
-	
-	public static Socket getSocket() {
-		return socket;
-	}
-
-	public static void setSocket(Socket socket) {
-		Client.socket = socket;
-		try {
-			Client.outSocket = new PrintWriter(Client.getSocket().getOutputStream(), true);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static Controller getController() {
-		return controller;
-	}
-
-	public static void setController(Controller controller) {
-		Client.controller = controller;
-	}
-
-	public static String getInterfaceChoice() {
-		return interfaceChoice;
-	}
-
-	public static void setInterfaceChoice(String interfaceChoice) {
-		Client.interfaceChoice = interfaceChoice;
-	}
-
-	public static PrintWriter getOutSocket() {
-		return outSocket;
-	}
-
-	public static GameBoard getGameBoard() {
-		return gameBoard;
-	}
-
-	public static void setGameBoard(GameBoard gameBoard) {
-		Client.gameBoard = gameBoard;
-	}
-
-	public static Player getPlayer() {
-		return player;
-	}
-
-	public static void setPlayer(Player player) {
-		Client.player = player;
-	}
-
-	public static ClassLoader getClassLoader() {
-		return classLoader;
-	}
-
-	public static void setClassLoader(ClassLoader classLoader) {
-		Client.classLoader = classLoader;
-	}
-	
 }

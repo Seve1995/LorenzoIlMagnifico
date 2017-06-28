@@ -1,7 +1,5 @@
 package it.polimi.ingsw.pc22.connection;
 
-import it.polimi.ingsw.pc22.client.ReceiveThread;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

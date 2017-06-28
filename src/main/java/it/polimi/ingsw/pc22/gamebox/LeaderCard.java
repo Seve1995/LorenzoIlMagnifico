@@ -5,9 +5,7 @@ import it.polimi.ingsw.pc22.utils.RequiredCard;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 
 public class LeaderCard implements Serializable
 {

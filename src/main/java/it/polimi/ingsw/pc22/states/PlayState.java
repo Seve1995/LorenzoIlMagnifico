@@ -1,11 +1,13 @@
 package it.polimi.ingsw.pc22.states;
 
-import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.client.Client;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
-import it.polimi.ingsw.pc22.gamebox.PlayerBoard;
 import it.polimi.ingsw.pc22.utils.ParseEnum;
 import it.polimi.ingsw.pc22.utils.PositionUtils;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.rmi.RemoteException;
 
 /**
  * Created by fandroid95 on 20/06/2017.
@@ -53,5 +55,36 @@ public class PlayState implements GenericState
         if (actionName == null) return false;
 
         return true;
+    }
+
+    @Override
+    public void sendToServer(String string)
+    {
+        if ("rmi".equals(Client.getNetworkChoice()))
+        {
+            try
+            {
+                Client.getRmiServerInterface().doAction(string);
+            }
+            catch (RemoteException e)
+            {
+                e.printStackTrace();
+            }
+        }
+
+        if ("socket".equals(Client.getNetworkChoice()))
+        {
+            try
+            {
+                PrintWriter outSocket = new PrintWriter(Client.getSocket().getOutputStream());
+
+                outSocket.println(string);
+
+            } catch (IOException e)
+
+            {
+                e.printStackTrace();
+            }
+        }
     }
 }
