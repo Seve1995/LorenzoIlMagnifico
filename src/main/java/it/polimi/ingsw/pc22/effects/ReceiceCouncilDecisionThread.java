@@ -52,6 +52,7 @@ public class ReceiceCouncilDecisionThread implements Runnable
                 continue;
             }
 
+
             String[] bonuses = councilMessage.split("-");
 
             List<Asset> assets = new ArrayList<>();

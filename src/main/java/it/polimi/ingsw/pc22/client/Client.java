@@ -227,6 +227,8 @@ public class Client extends Application
 			//TODO:
 			GameBoardController controller = loader.getController();
 			Client.controller = controller;
+
+
 		} catch (IOException e)
 		{
 			e.printStackTrace();

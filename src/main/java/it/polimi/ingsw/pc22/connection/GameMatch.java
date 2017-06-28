@@ -152,11 +152,12 @@ public class GameMatch implements Runnable
 			for(Player player : players)
 			{
 				//TODO RAGAZZI QUESTO CICLO NON MI PIACE TANTISSIMO AHAHA
-				/*for (Player p : players)
-				{
-					IOAdapter adapter = p.getAdapter();
-					adapter.printMessage(new GameStatusMessage(gameBoard, p));
-				}*/
+
+				//for (Player p : players)
+				//{
+				//	IOAdapter adapter = p.getAdapter();
+				//	adapter.printMessage(new GameStatusMessage(gameBoard, p));
+				//}
 
 				currentPlayer = player;
 
@@ -298,7 +299,7 @@ public class GameMatch implements Runnable
 		tempExcCards.add(secondEraExcommunication);
 		tempExcCards.add(thirdEraExcommunication);
 
-		excommunicationCards = tempExcCards;
+		gameBoard.setExcommunicationCards(tempExcCards);
 	}
 
 	private void loadExcommunicationCards()
