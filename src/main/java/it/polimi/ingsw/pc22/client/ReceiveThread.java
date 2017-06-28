@@ -117,6 +117,9 @@ public class ReceiveThread implements Runnable
 					Client.setGenericState(new PickCouncilState(numberOFPrivileges));
 
 					Client.setStateChanged(true);
+					
+					printOnClient(message);
+
 				}
 
 				if (message instanceof ExecutedAction)

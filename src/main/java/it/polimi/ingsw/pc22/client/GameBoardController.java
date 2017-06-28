@@ -75,6 +75,8 @@ public class GameBoardController implements Controller {
     @FXML
     private Label labelFaithPoints;
     @FXML
+    private Label info;
+    @FXML
     private ToggleButton black;
     @FXML
     private ToggleButton white;
@@ -102,7 +104,7 @@ public class GameBoardController implements Controller {
     private ToggleGroup LeadersHand;
     @FXML
     private ToggleGroup LeadersPlaceToggle;
-
+    
 
     @FXML
     private void handleBlackButton()
@@ -132,7 +134,12 @@ public class GameBoardController implements Controller {
     private void handleConfirm()
     {
     	ToggleButton selectedToggle = (ToggleButton) GameBoardButtons.getSelectedToggle();
-    	String id = selectedToggle.getId();
+    	if (selectedToggle==null || output=="")
+		{
+    		info.setText("Please complete your action! You must select a familiar member and a gameboard's zone");
+    		return;
+		}
+		String id = selectedToggle.getId();
 		String[] idSplitted = id.split(" ");
 		switch (idSplitted[0]) {
 		case "TOWER":
@@ -154,13 +161,18 @@ public class GameBoardController implements Controller {
 		default:
 			break;
 		}
-
-    }
+	}
+    
 
     @FXML
     private void handlePlay()
-    {
+    { 
         ToggleButton selectedLeaderToggle = (ToggleButton) LeadersHand.getSelectedToggle();
+        if (selectedLeaderToggle==null)
+        	{
+        	info.setText("You must select one leader card!");        	
+        	return;
+        	}
         idLeader = selectedLeaderToggle.getId();
 
         getOutSocket().println("play card " + idLeader);
@@ -171,6 +183,11 @@ public class GameBoardController implements Controller {
     private void handleDiscard()
     {
         ToggleButton selectedLeaderToggle = (ToggleButton) LeadersHand.getSelectedToggle();
+        if (selectedLeaderToggle==null)
+    	{
+    	info.setText("You must select one leader card!");        	
+    	return;
+    	}
         idLeader = selectedLeaderToggle.getId();
 
         getOutSocket().println("discard card " + idLeader);
@@ -180,6 +197,11 @@ public class GameBoardController implements Controller {
     private void handleActivate()
     {
         ToggleButton selectedLeaderToggle = (ToggleButton) LeadersPlaceToggle.getSelectedToggle();
+        if (selectedLeaderToggle==null)
+    	{
+    	info.setText("You must select one leader card!");        	
+    	return;
+    	}
         String id = selectedLeaderToggle.getId();
 
         getOutSocket().println("activate card " + id);
@@ -250,6 +272,9 @@ public class GameBoardController implements Controller {
         int y = 552;
 
         for (int i = 0; i < councilPalace.getCouncilPalaceCells().length; i++) {
+            ImageView imageView = new ImageView();
+            imageView.setX(x + width + i * delta);
+            imageView.setY(y);
 
             if (councilPalace.getCouncilPalaceCells()[i].getFamilyMember() != null)
             {
@@ -258,10 +283,12 @@ public class GameBoardController implements Controller {
                 ClassLoader classLoader = Client.class.getClassLoader();
                 String path = "GUI/familiars/familiar_" + currPlayerEnum + "_" + currFamiliarEnum + ".png";
                 Image image = new Image(classLoader.getResourceAsStream(path));
-                ImageView imageView = new ImageView(image);
+                imageView.setImage(image);
 
-                    imageView.setX(x + width + i * delta);
-                    imageView.setY(y);
+            }
+            else
+            {
+            	imageView.setImage(null);
             }
         }
     }
@@ -275,25 +302,34 @@ public class GameBoardController implements Controller {
         int width = 15;
         int y = 865;
         for (int i = 0; i < harvest.getHarvestCell().length; i++) {
-
+            ImageView imageView = new ImageView();
+            if (i == 0) {
+                imageView.setX(62);
+                imageView.setY(865);
+            }
+            else {
+                imageView.setX(x + width + i * delta);
+                imageView.setY(y);
+            }
+            
             if (harvest.getHarvestCell()[i].getFamilyMember() != null)
             {
+            	
                 ColorsEnum currFamiliarEnum = harvest.getHarvestCell()[i].getFamilyMember().getColor();
                 PlayerColorsEnum currPlayerEnum = harvest.getHarvestCell()[i].getFamilyMember().getPlayerColor();
+                String familiarEnum = currFamiliarEnum.toString();
+                String playerEnum = currPlayerEnum.toString();
                 ClassLoader classLoader = Client.class.getClassLoader();
-                String path = "GUI/familiars/familiar_" + currPlayerEnum + "_" + currFamiliarEnum + ".png";
+                String path = "GUI/familiars/familiar_" + playerEnum.toLowerCase() + "_" + familiarEnum.toLowerCase() + ".png";
                 Image image = new Image(classLoader.getResourceAsStream(path));
-                ImageView imageView = new ImageView(image);
+                imageView.setImage(image);
 
-                if (i == 0) {
-                    imageView.setX(62);
-                    imageView.setY(865);
-                }
-                else {
-                    imageView.setX(x + width + i * delta);
-                    imageView.setY(y);
-                }
             }
+            else 
+            {
+            	imageView.setImage(null);
+            }
+            
         }
 
     }
@@ -307,7 +343,16 @@ public class GameBoardController implements Controller {
         int y = 784;
 
         for (int i = 0; i < production.getProductionCell().length; i++) {
-
+            ImageView imageView = new ImageView();
+            if (i == 0) {
+                imageView.setX(62);
+                imageView.setY(784);
+            }
+            else {
+                imageView.setX(x + width + i * delta);
+                imageView.setY(y);
+            }
+            
             if (production.getProductionCell()[i].getFamilyMember() != null)
             {
                 ColorsEnum currFamiliarEnum = production.getProductionCell()[i].getFamilyMember().getColor();
@@ -317,16 +362,11 @@ public class GameBoardController implements Controller {
                 ClassLoader classLoader = Client.class.getClassLoader();
                 String path = "GUI/familiars/familiar_" + playerEnum.toLowerCase() + "_" + familiarEnum.toLowerCase() + ".png";
                 Image image = new Image(classLoader.getResourceAsStream(path));
-                ImageView imageView = new ImageView(image);
-
-                if (i == 0) {
-                    imageView.setX(62);
-                    imageView.setY(784);
-                }
-                else {
-                    imageView.setX(x + width + i * delta);
-                    imageView.setY(y);
-                }
+                imageView.setImage(image);
+            }
+            else 
+            {
+            	imageView.setImage(null);
             }
         }
     }
@@ -351,8 +391,10 @@ public class GameBoardController implements Controller {
                 ColorsEnum currFamiliarEnum = currMarketCell.getFamilyMember().getColor();
                 PlayerColorsEnum currPlayerEnum = currMarketCell.getFamilyMember().getPlayerColor();
                 toggleButton.setOpacity(1);
+                String familiarEnum = currFamiliarEnum.toString();
+                String playerEnum = currPlayerEnum.toString();
                 ClassLoader classLoader = Client.class.getClassLoader();
-                String path = "GUI/familiars/familiar_" + currPlayerEnum +"_" + currFamiliarEnum +".png";
+                String path = "GUI/familiars/familiar_" + playerEnum +"_" + familiarEnum +".png";
                 Image image = new Image(classLoader.getResourceAsStream(path));
                 ImageView imageView = new ImageView(image);
                 imageView.setFitHeight(20);
@@ -366,6 +408,8 @@ public class GameBoardController implements Controller {
 
     private void updateButtons()
     {
+    	output = "";
+    	
         if (gameboard.getDices().size() < 3)
             orange.setDisable(true);
 
@@ -390,6 +434,40 @@ public class GameBoardController implements Controller {
                     neuter.setDisable(true);
                 }
             }
+        }
+        
+        for (int i=0; i<4; i++)
+        {
+        	if (gameboard.getMarket().getMarketCells().get(i).getFamilyMember()==null)
+        		{
+        			ToggleButton currToggle = (ToggleButton) market.getChildren().get(i);
+        			currToggle.setBackground(null);
+        			currToggle.setDisable(false);
+        		}
+        	if (gameboard.getTowers()[0].getTowerCells().get(i)==null)
+				{
+					ToggleButton currToggle = (ToggleButton) territoryTower.getChildren().get(i);
+					currToggle.setBackground(null);
+					currToggle.setDisable(false);
+				}
+			if (gameboard.getTowers()[1].getTowerCells().get(i)==null)
+				{
+					ToggleButton currToggle = (ToggleButton) characterTower.getChildren().get(i);
+					currToggle.setBackground(null);
+					currToggle.setDisable(false);
+				}
+			if (gameboard.getTowers()[2].getTowerCells().get(i)==null)
+			{
+				ToggleButton currToggle = (ToggleButton) buildingTower.getChildren().get(i);
+				currToggle.setBackground(null);
+				currToggle.setDisable(false);
+			}
+			if (gameboard.getTowers()[3].getTowerCells().get(i)==null)
+			{
+				ToggleButton currToggle = (ToggleButton) ventureTower.getChildren().get(i);
+				currToggle.setBackground(null);
+				currToggle.setDisable(false);
+			}
         }
     }
 
