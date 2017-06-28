@@ -5,5 +5,14 @@ package it.polimi.ingsw.pc22.messages;
  */
 public class ExecutedAction extends Message
 {
+    private String message;
 
+    public ExecutedAction(String message)
+    {
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
+    }
 }

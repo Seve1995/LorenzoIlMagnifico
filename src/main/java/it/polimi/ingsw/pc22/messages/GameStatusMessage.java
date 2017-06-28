@@ -8,11 +8,13 @@ public class GameStatusMessage extends  Message
     private GameBoard gameBoard;
     private Player player;
 
-    public GameStatusMessage
-        (GameBoard gameBoard, Player player)
+    private String state;
+
+    public GameStatusMessage(GameBoard gameBoard, Player player, String state)
     {
         this.gameBoard = gameBoard;
         this.player = player;
+        this.state = state;
     }
 
     public GameBoard getGameBoard() {
@@ -21,6 +23,11 @@ public class GameStatusMessage extends  Message
 
     public Player getPlayer() {
         return player;
+    }
+
+    public String getState()
+    {
+        return state;
     }
 
     @Override

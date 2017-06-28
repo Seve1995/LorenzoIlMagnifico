@@ -11,11 +11,6 @@ public class ProductionCell extends Cell
 	{
 		super(requiredDiceValue, null);
 	}
-	
-	@Override
-	public void executeEffects(Player player) {
-		// TODO Auto-generated method stub
-	}
 
 	public boolean isABlockedCell() {
 		return isABlockedCell;

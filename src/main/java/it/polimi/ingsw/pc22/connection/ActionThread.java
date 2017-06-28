@@ -5,6 +5,7 @@ import it.polimi.ingsw.pc22.actions.ActionFactory;
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.messages.CommunicationMessage;
 import it.polimi.ingsw.pc22.messages.ErrorMessage;
+import it.polimi.ingsw.pc22.messages.ExecutedAction;
 
 /**
  * Created by fandroid95 on 25/06/2017.
@@ -47,9 +48,13 @@ public class ActionThread implements Runnable
 
             System.out.println(executed + " - " +  GameMatch.getCurrentPlayer().isHasPassed());
 
-            if (executed)
+            if (!executed) continue;
+
+            if (GameMatch.getCurrentPlayer().isFamiliarPositioned())
             {
-                adapter.printMessage(new CommunicationMessage("Action Performed"));
+                adapter.printMessage(new ExecutedAction("Action Performed"));
+
+                break;
             }
 
             if (GameMatch.getCurrentPlayer().isHasPassed())

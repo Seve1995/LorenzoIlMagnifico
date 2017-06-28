@@ -21,16 +21,6 @@ public class MarketCell extends Cell
 	public void setABlockedCell(boolean isABlockedCell) {
 		this.isABlockedCell = isABlockedCell;
 	}
-	
-	@Override
-	public void executeEffects(Player player) {
-		
-		for(Effect e : this.getEffects())
-		{
-			e.executeEffects(player, null);
-		}
-		
-	}
 
 	@Override
 	public String toString()

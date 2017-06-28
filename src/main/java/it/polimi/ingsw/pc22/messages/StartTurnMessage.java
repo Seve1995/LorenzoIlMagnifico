@@ -6,6 +6,10 @@ import it.polimi.ingsw.pc22.player.Player;
 /**
  * Created by fandroid95 on 20/06/2017.
  */
+
+
+//IN TEORIA STA COSA SI PUò ELIMINARE
+
 public class StartTurnMessage extends Message
 {
     private GameBoard gameBoard;

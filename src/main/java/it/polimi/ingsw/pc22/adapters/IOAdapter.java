@@ -254,7 +254,6 @@ public abstract class IOAdapter
 
         while(System.currentTimeMillis() < maxTimeStamp || i < numberOfAssets)
         {
-
             String choice = getMessage();
 
             if ("1".equals(choice) && councilPrivilege.getBonus1()!=null)

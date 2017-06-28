@@ -11,15 +11,4 @@ public class CouncilPalaceCell extends Cell
 	{
 		super(requiredDiceValue, effects);
 	}
-	
-	@Override
-	public void executeEffects(Player player)
-	{
-		
-		for(Effect e : this.getEffects())
-		{
-			e.executeEffects(player, null);
-		}
-		
-	}
 }

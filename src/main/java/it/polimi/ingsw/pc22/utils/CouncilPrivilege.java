@@ -3,10 +3,12 @@ package it.polimi.ingsw.pc22.utils;
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.AssetType;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class CouncilPrivilege {
+public class CouncilPrivilege
+{
 	private List<Asset> bonus1;
     private List<Asset> bonus2;
     private List<Asset> bonus3;
@@ -73,15 +75,60 @@ public class CouncilPrivilege {
 	public void setBonus5(List<Asset> bonus5) {
 		this.bonus5 = bonus5;
 	}
-    
-	@Override
-    public String toString() {
-    	String output = "";
-    	if (bonus1!=null) output += "1) One stone & One wood" + '\n';
-    	if (bonus2!=null) output += "2) Two servants" + '\n';
-    	if (bonus3!=null) output += "3) Two coins" + '\n';
-    	if (bonus4!=null) output += "4) Two military points" + '\n';
-    	if (bonus5!=null) output += "5) Two faith points";
-    	return output;
-    }
+
+	public List<Asset> getBonusFromNumberString(String number)
+	{
+		switch (number)
+		{
+			case "1":
+				return bonus1;
+
+			case "2":
+				return bonus2;
+
+			case "3":
+				return bonus3;
+
+			case "4":
+				return bonus4;
+
+			case "5":
+				return bonus5;
+
+			default:
+				return null;
+		}
+	}
+
+	public boolean validateBonusDecision(String decision, int numberOfBonus)
+	{
+		Pattern bonusPattern = null;
+
+		if (numberOfBonus == 1)
+		{
+			bonusPattern = Pattern.compile("[1-5]");
+		}
+
+		if (numberOfBonus == 2)
+		{
+			bonusPattern = Pattern.compile("[1-5]-[1-5]");
+		}
+
+		if (numberOfBonus == 3)
+		{
+			bonusPattern = Pattern.compile("[1-5]-[1-5]-[1-5]");
+		}
+
+		Matcher matcher = bonusPattern.matcher(decision);
+
+		if (bonusPattern != null && matcher.find()) return true;
+
+		Set<String> duplicates = new HashSet<>();
+
+		duplicates.addAll(Arrays.asList(decision.split("-")));
+
+		if (duplicates.size() == numberOfBonus) return true;
+
+		return false;
+	}
 }

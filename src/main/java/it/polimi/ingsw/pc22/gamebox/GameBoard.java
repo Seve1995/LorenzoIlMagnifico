@@ -1,5 +1,7 @@
 package it.polimi.ingsw.pc22.gamebox;
 
+import it.polimi.ingsw.pc22.effects.Effect;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -12,6 +14,8 @@ public class GameBoard implements Serializable
 	private CouncilPalace councilPalace;
 	private List<Dice> dices;
 	private List<ExcommunicationCard> excommunicationCards;
+
+	private Effect currEffect = null;
 	
 	public GameBoard() 
 	{
@@ -72,6 +76,14 @@ public class GameBoard implements Serializable
 
 	public void setExcommunicationCards(List<ExcommunicationCard> excommunicationCards) {
 		this.excommunicationCards = excommunicationCards;
+	}
+
+	public Effect getCurreEffect() {
+		return currEffect;
+	}
+
+	public void setCurreEffect(Effect curreEffect) {
+		this.currEffect = curreEffect;
 	}
 
 	@Override

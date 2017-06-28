@@ -8,8 +8,8 @@ import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 
-public class SettingFamiliarMemberOnCouncilPalace extends Action {
-
+public class SettingFamiliarMemberOnCouncilPalace extends Action
+{
 	public SettingFamiliarMemberOnCouncilPalace(FamilyMember familyMember) {
 		super(familyMember);
 	}
@@ -47,11 +47,13 @@ public class SettingFamiliarMemberOnCouncilPalace extends Action {
 
 		CouncilPalaceCell cell = councilPalace.getCouncilPalaceCells()[firstCellFree];
 
+		boolean executed = cell.executeEffects(player);
+
+		if (!executed) return false;
+
 		cell.setFamilyMember(familyMember);
 
 		familyMember.setPlayed(true);
-
-		cell.executeEffects(player);
 
 		player.setFamiliarPositioned(true);
 

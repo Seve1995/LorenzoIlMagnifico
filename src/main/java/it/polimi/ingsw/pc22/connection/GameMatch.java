@@ -162,7 +162,7 @@ public class GameMatch implements Runnable
 
 				adapter.printMessage(new CommunicationMessage("Is your turn!"));
 
-				adapter.printMessage(new StartTurnMessage(currentGameBoard, currentPlayer));
+				adapter.printMessage(new GameStatusMessage(gameBoard, player, "started"));
 
 				if (adapter instanceof SocketIOAdapter)
 				{
@@ -183,10 +183,10 @@ public class GameMatch implements Runnable
 
 					if (currentPlayer.isHasPassed()) break;
 
-					//if (executed) break;
+					if (currentPlayer.isFamiliarPositioned()) break;
 				}
 
-				adapter.printMessage(new GameStatusMessage(gameBoard, player));
+				adapter.printMessage(new GameStatusMessage(gameBoard, player, "finished"));
 			}
 
 			GameBoardUtils.resetPlayerStatus(players);

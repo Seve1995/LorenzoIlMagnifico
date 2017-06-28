@@ -21,7 +21,16 @@ public abstract class Cell implements Serializable
 
 	public Cell() {}
 
-	public abstract void executeEffects(Player player);
+	public boolean executeEffects(Player player)
+	{
+		for(Effect e : this.getEffects())
+		{
+			if (!e.executeEffects(player, null))
+				return false;
+		}
+
+		return true;
+	}
 
 	public int getRequiredDiceValue() {
 		return requiredDiceValue;

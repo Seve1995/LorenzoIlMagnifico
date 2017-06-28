@@ -24,12 +24,6 @@ public class TowerCell extends Cell
 	public void setDevelopmentCard(DevelopmentCard developmentCard) {
 		this.developmentCard = developmentCard;
 	}
-	
-	@Override
-	public void executeEffects(Player player)
-	{
-
-	}
 
 	@Override
 	public String toString()

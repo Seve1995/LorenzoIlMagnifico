@@ -1,10 +1,7 @@
 package it.polimi.ingsw.pc22.client;
 
 import it.polimi.ingsw.pc22.messages.*;
-import it.polimi.ingsw.pc22.states.IdleState;
-import it.polimi.ingsw.pc22.states.PlayState;
-import it.polimi.ingsw.pc22.states.StartMatchState;
-import it.polimi.ingsw.pc22.states.WaitingState;
+import it.polimi.ingsw.pc22.states.*;
 import javafx.application.Platform;
 
 import java.io.ObjectInputStream;
@@ -86,13 +83,29 @@ public class ReceiveThread implements Runnable
 
 				if (message instanceof GameStatusMessage)
 				{
-					Client.setPlayer(((StartTurnMessage) message).getPlayer());
+					GameStatusMessage gameStatusMessage = (GameStatusMessage) message;
 
-					Client.setGameBoard(((StartTurnMessage) message).getGameBoard());
+					Client.setPlayer(gameStatusMessage.getPlayer());
+
+					Client.setGameBoard(gameStatusMessage.getGameBoard());
 
 					printOnClient(message);
 
-					Client.setGenericState(new PlayState());
+					if ("started".equals(gameStatusMessage.getState()))
+						Client.setGenericState(new PlayState());
+
+					if ("finished".equals(gameStatusMessage.getState()))
+						Client.setGenericState(new IdleState());
+
+					Client.setStateChanged(true);
+				}
+
+				if (message instanceof PickPrivilegeMessage)
+				{
+					int numberOFPrivileges =
+							((PickPrivilegeMessage) message).getNumberOfPrivilege();
+
+					Client.setGenericState(new PickCouncilState(numberOFPrivileges));
 
 					Client.setStateChanged(true);
 				}
@@ -102,26 +115,15 @@ public class ReceiveThread implements Runnable
 					Platform.runLater(() -> {
 						Client.launchGameBoard();
 				              });
-				}
+				}*/
 
 				if (message instanceof ExecutedAction)
 				{
 					printOnClient((ExecutedAction) message);
 
-				}*/
-
-				if (message instanceof GameStatusMessage)
-				{
-					Client.setPlayer(((GameStatusMessage) message).getPlayer());
-
-					Client.setGameBoard(((GameStatusMessage) message).getGameBoard());
-
-					printOnClient(message);
-
-					Client.setGenericState(new IdleState());
-
-					Client.setStateChanged(true);
 				}
+
+
 				
 				if (message instanceof CommunicationMessage)
 				{
