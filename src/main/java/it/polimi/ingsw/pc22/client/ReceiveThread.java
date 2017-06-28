@@ -92,7 +92,16 @@ public class ReceiveThread implements Runnable
 					printOnClient(message);
 
 					if ("started".equals(gameStatusMessage.getState()))
+					{
 						Client.setGenericState(new PlayState());
+
+						Platform.runLater(() -> {
+							Client.launchGameBoard();
+						});
+
+						printOnClient(message);
+
+					}
 
 					if ("finished".equals(gameStatusMessage.getState()))
 						Client.setGenericState(new IdleState());
@@ -109,17 +118,10 @@ public class ReceiveThread implements Runnable
 
 					Client.setStateChanged(true);
 				}
-				
-				/*if (message instanceof StartMatchMessage)
-				{
-					Platform.runLater(() -> {
-						Client.launchGameBoard();
-				              });
-				}*/
 
 				if (message instanceof ExecutedAction)
 				{
-					printOnClient((ExecutedAction) message);
+					printOnClient(message);
 
 				}
 

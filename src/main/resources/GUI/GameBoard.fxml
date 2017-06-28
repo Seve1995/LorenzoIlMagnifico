@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="1886.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.pc22.client.GameBoardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="1886.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.pc22.client.GameBoardController">
    <children>
       <ImageView fitHeight="965.0" fitWidth="1299.0" layoutX="585.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -27,7 +27,7 @@
          <content>
             <AnchorPane>
                <children>
-                  <ImageView fitHeight="950.0" fitWidth="678.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <ImageView fitHeight="950.0" fitWidth="678.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0384521484375" AnchorPane.topAnchor="0.0">
                      <image>
                         <Image url="@GameBoard.jpg" />
                      </image>
@@ -188,10 +188,6 @@
                   <ToggleButton id="PRODUCTION" layoutX="260.0" layoutY="787.0" mnemonicParsing="false" text="Production" toggleGroup="$GameBoardButtons" />
                   <ToggleButton id="COUNCIL" layoutX="350.0" layoutY="638.0" mnemonicParsing="false" text="Council Palace" toggleGroup="$GameBoardButtons" />
                   <ToggleButton id="HARVEST" layoutX="268.0" layoutY="863.0" mnemonicParsing="false" text="Harvest" toggleGroup="$GameBoardButtons" />
-                  <ToggleButton id="MARKET 0" layoutX="359.0" layoutY="749.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="54.0" toggleGroup="$GameBoardButtons" visible="false" />
-                  <ToggleButton id="MARKET 1" layoutX="416.0" layoutY="746.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="54.0" toggleGroup="$GameBoardButtons" visible="false" />
-                  <ToggleButton id="MARKET 2" layoutX="475.0" layoutY="766.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="48.0" toggleGroup="$GameBoardButtons" visible="false" />
-                  <ToggleButton id="MARKET 3" layoutX="524.0" layoutY="806.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="44.0" toggleGroup="$GameBoardButtons" visible="false" />
                   <GridPane fx:id="market" layoutX="360.0" layoutY="746.0" prefHeight="102.0" prefWidth="216.0" visible="false">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -202,6 +198,12 @@
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
+                     <children>
+                        <ToggleButton id="MARKET 0" mnemonicParsing="false" prefHeight="43.0" prefWidth="54.0" toggleGroup="$GameBoardButtons" visible="false" />
+                        <ToggleButton id="MARKET 1" mnemonicParsing="false" prefHeight="53.0" prefWidth="54.0" toggleGroup="$GameBoardButtons" visible="false" GridPane.columnIndex="1" />
+                        <ToggleButton id="MARKET 2" mnemonicParsing="false" prefHeight="50.0" prefWidth="48.0" toggleGroup="$GameBoardButtons" visible="false" GridPane.columnIndex="2" />
+                        <ToggleButton id="MARKET 3" mnemonicParsing="false" prefHeight="119.0" prefWidth="44.0" toggleGroup="$GameBoardButtons" visible="false" GridPane.columnIndex="3" />
+                     </children>
                   </GridPane>
                   <ImageView fitHeight="53.0" fitWidth="50.0" layoutX="41.0" layoutY="773.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fitHeight="61.0" fitWidth="57.0" layoutX="45.0" layoutY="846.0" pickOnBounds="true" preserveRatio="true" />
@@ -214,29 +216,29 @@
       <Label layoutX="738.0" layoutY="575.0" text="Choose a utility action" />
       <ButtonBar layoutX="957.0" layoutY="477.0" prefHeight="40.0" prefWidth="200.0">
          <buttons>
-            <ToggleButton fx:id="neuter" mnemonicParsing="false" text="Neuter" onAction="#handleNeuterButton">
+            <ToggleButton fx:id="neuter" mnemonicParsing="false" onAction="#handleNeuterButton" text="Neuter">
                <toggleGroup>
                   <ToggleGroup fx:id="FamiliarChoice" />
                </toggleGroup></ToggleButton>
-            <ToggleButton fx:id="black" mnemonicParsing="false" text="Black" toggleGroup="$FamiliarChoice" onAction="#handleBlackButton"/>
-            <ToggleButton fx:id="white" mnemonicParsing="false" text="White" toggleGroup="$FamiliarChoice" onAction="#handleWhiteButton"/>
-            <ToggleButton fx:id="orange" mnemonicParsing="false" text="Orange" toggleGroup="$FamiliarChoice" onAction="#handleOrangeButton"/>
+            <ToggleButton fx:id="black" mnemonicParsing="false" onAction="#handleBlackButton" text="Black" toggleGroup="$FamiliarChoice" />
+            <ToggleButton fx:id="white" mnemonicParsing="false" onAction="#handleWhiteButton" text="White" toggleGroup="$FamiliarChoice" />
+            <ToggleButton fx:id="orange" mnemonicParsing="false" onAction="#handleOrangeButton" text="Orange" toggleGroup="$FamiliarChoice" />
          </buttons>
       </ButtonBar>
       <ButtonBar layoutX="979.0" layoutY="517.0" prefHeight="40.0" prefWidth="274.0">
          <buttons>
-            <ToggleButton mnemonicParsing="false" text="Play" onAction="#handlePlay">
+            <ToggleButton mnemonicParsing="false" onAction="#handlePlay" text="Play">
                <toggleGroup>
                   <ToggleGroup fx:id="LeaderActionChoice" />
                </toggleGroup></ToggleButton>
-            <ToggleButton onAction="#handleActivate" mnemonicParsing="false" text="Active" toggleGroup="$LeaderActionChoice" />
-            <ToggleButton onAction="#handleDiscard" mnemonicParsing="false" text="Discard" toggleGroup="$LeaderActionChoice" />
+            <ToggleButton mnemonicParsing="false" onAction="#handleActivate" text="Active" toggleGroup="$LeaderActionChoice" />
+            <ToggleButton mnemonicParsing="false" onAction="#handleDiscard" text="Discard" toggleGroup="$LeaderActionChoice" />
          </buttons>
       </ButtonBar>
       <ButtonBar layoutX="957.0" layoutY="559.0" prefHeight="40.0" prefWidth="184.0">
          <buttons>
-            <Button  mnemonicParsing="false" text="Exit" onAction="#handleExitButton"/>
-            <Button fx:id="pass" mnemonicParsing="false" text="Pass" onAction="#handlePassButton"/>
+            <Button mnemonicParsing="false" onAction="#handleExitButton" text="Exit" />
+            <Button fx:id="pass" mnemonicParsing="false" onAction="#handlePassButton" text="Pass" />
          </buttons>
       </ButtonBar>
       <ImageView fitHeight="402.0" fitWidth="595.0" layoutX="720.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
@@ -441,5 +443,16 @@
       </GridPane>
       <Spinner fx:id="servantsSpinner" layoutX="980.0" layoutY="615.0" prefHeight="25.0" prefWidth="75.0" />
       <Label layoutX="740.0" layoutY="619.0" text="Servants to sacrifice:" />
+      <GridPane layoutX="611.0" layoutY="774.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
    </children>
 </AnchorPane>

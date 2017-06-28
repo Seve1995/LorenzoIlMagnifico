@@ -1,8 +1,7 @@
 package it.polimi.ingsw.pc22.client;
 
 import it.polimi.ingsw.pc22.gamebox.*;
-import it.polimi.ingsw.pc22.messages.ExecutedAction;
-import it.polimi.ingsw.pc22.messages.PickPrivilegeMessage;
+import it.polimi.ingsw.pc22.messages.*;
 import it.polimi.ingsw.pc22.player.Player;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,8 +17,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.polimi.ingsw.pc22.messages.Message;
-import it.polimi.ingsw.pc22.messages.StartTurnMessage;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -201,7 +198,7 @@ public class GameBoardController implements Controller {
 
     }
 
-    //TODO:gestire le azioni
+
     //TODO:gestire i dialoghi
 
     private void updateTowers(){
@@ -315,8 +312,10 @@ public class GameBoardController implements Controller {
             {
                 ColorsEnum currFamiliarEnum = production.getProductionCell()[i].getFamilyMember().getColor();
                 PlayerColorsEnum currPlayerEnum = production.getProductionCell()[i].getFamilyMember().getPlayerColor();
+                String familiarEnum = currFamiliarEnum.toString();
+                String playerEnum = currPlayerEnum.toString();
                 ClassLoader classLoader = Client.class.getClassLoader();
-                String path = "GUI/familiars/familiar_" + currPlayerEnum + "_" + currFamiliarEnum + ".png";
+                String path = "GUI/familiars/familiar_" + playerEnum.toLowerCase() + "_" + familiarEnum.toLowerCase() + ".png";
                 Image image = new Image(classLoader.getResourceAsStream(path));
                 ImageView imageView = new ImageView(image);
 
@@ -339,9 +338,8 @@ public class GameBoardController implements Controller {
         {
 
             MarketCell currMarketCell = gameboard.getMarket().getMarketCells().get(i);
+
             ToggleButton toggleButton = (ToggleButton) market.getChildren().get(i);
-
-
 
             if (currMarketCell.getFamilyMember() == null)
             {
@@ -634,7 +632,7 @@ public class GameBoardController implements Controller {
 
     private void updateExcommunication(){
 
-        for (int i=0; i<=2; i++)
+        for (int i=0; i < gameboard.getExcommunicationCards().size(); i++)
         {
             ImageView imageView = (ImageView) excommunications.getChildren().get(i);
             int currentExcommunicationNumber = gameboard.getExcommunicationCards().get(i).getNumber();
@@ -705,7 +703,7 @@ public class GameBoardController implements Controller {
     @Override
     public void updateScene(Object message)
     {
-    	if (message instanceof StartTurnMessage)
+    	if (message instanceof GameStatusMessage)
     	{
     	    player = Client.getPlayer();
             gameboard = Client.getGameBoard();
@@ -723,9 +721,10 @@ public class GameBoardController implements Controller {
         if (message instanceof PickPrivilegeMessage)
         {
             councilPrivilegeDialog();
+
+            updatePlayerBoard();
         }
 
     }
-
 
 }
