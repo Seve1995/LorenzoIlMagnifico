@@ -63,17 +63,7 @@ public class GameCreationState implements GenericState
 
         if ("socket".equals(Client.getNetworkChoice()))
         {
-            try
-            {
-                PrintWriter outSocket = new PrintWriter(Client.getSocket().getOutputStream(), true);
-
-                outSocket.println(string);
-
-            } catch (IOException e)
-
-            {
-                e.printStackTrace();
-            }
+            Client.socketSend(string);
         }
     }
 }
