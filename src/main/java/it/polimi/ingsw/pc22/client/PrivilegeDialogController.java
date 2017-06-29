@@ -1,6 +1,7 @@
 package it.polimi.ingsw.pc22.client;
 
 import it.polimi.ingsw.pc22.messages.ExecutedAction;
+import it.polimi.ingsw.pc22.messages.Message;
 import it.polimi.ingsw.pc22.messages.PickPrivilegeMessage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -30,15 +31,6 @@ public class PrivilegeDialogController implements Controller {
 
     private String output;
 
-    @Override
-    public void updateScene(Object message)
-    {
-        startingLabel.setText("You have " + ((PickPrivilegeMessage) message).getNumberOfPrivilege() + " left");
-
-        if (((PickPrivilegeMessage) message).getNumberOfPrivilege() == 0)
-            dialogStage.close();
-    }
-
     @FXML
     public void handleConfirm()
     {
@@ -53,7 +45,7 @@ public class PrivilegeDialogController implements Controller {
     {
         output = "1";
         toggle1.setDisable(true);
-        //getOutSocket().println(output);
+        Client.getGenericState().sendToServer(output);
 
     }
 
@@ -62,7 +54,7 @@ public class PrivilegeDialogController implements Controller {
     {
         output = "2";
         toggle2.setDisable(true);
-        //getOutSocket().println(output);
+        Client.getGenericState().sendToServer(output);
     }
 
     @FXML
@@ -70,7 +62,7 @@ public class PrivilegeDialogController implements Controller {
     {
         output = "3";
         toggle3.setDisable(true);
-        //getOutSocket().println(output);
+        Client.getGenericState().sendToServer(output);
     }
 
     @FXML
@@ -78,7 +70,7 @@ public class PrivilegeDialogController implements Controller {
     {
         output = "4";
         toggle4.setDisable(true);
-        //getOutSocket().println(output);
+        Client.getGenericState().sendToServer(output);
     }
 
     @FXML
@@ -86,7 +78,7 @@ public class PrivilegeDialogController implements Controller {
     {
         output = "5";
         toggle5.setDisable(true);
-        //getOutSocket().println(output);
+        Client.getGenericState().sendToServer(output);
 
     }
 
@@ -99,8 +91,16 @@ public class PrivilegeDialogController implements Controller {
         this.confirmClicked = confirmClicked;
     }
 
-    public void setDialogStage(Stage dialogStage)
+    public void setDialogStage(Stage dialogStage, Object message)
     {
         this.dialogStage = dialogStage;
+        startingLabel.setText("You have " + ((PickPrivilegeMessage) message).getNumberOfPrivilege() + " left");
+        if (((PickPrivilegeMessage) message).getNumberOfPrivilege() == 0)
+            dialogStage.close();
     }
+
+	@Override
+	public void updateScene(Object message) {
+		
+	}
 }

@@ -65,7 +65,12 @@ public class MessageHandler
             printOnClient(message);
 
             if ("started".equals(gameStatusMessage.getState()))
-                Client.setGenericState(new PlayState());
+                {
+            	Client.setGenericState(new PlayState());
+                Platform.runLater(() -> {
+                    Client.launchGameBoard();
+                          });
+                }
 
             if ("finished".equals(gameStatusMessage.getState()))
                 Client.setGenericState(new IdleState());
@@ -82,12 +87,6 @@ public class MessageHandler
             Client.setStateChanged(true);
         }
 
-        /*if (message instanceof StartMatchMessage)
-        {
-            Platform.runLater(() -> {
-                Client.launchGameBoard();
-                      });
-        }*/
 
         if (message instanceof ExecutedAction) {
             printOnClient((ExecutedAction) message);

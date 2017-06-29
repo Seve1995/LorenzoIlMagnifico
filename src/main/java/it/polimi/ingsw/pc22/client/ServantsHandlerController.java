@@ -36,16 +36,6 @@ public class ServantsHandlerController implements Controller {
 
     }
 
-	public SpinnerValueFactory<Integer> getValueFactory() {
-		return valueFactory;
-	}
-
-
-
-	public void setValueFactory(SpinnerValueFactory<Integer> valueFactory) {
-		this.valueFactory = valueFactory;
-	}
-
     public boolean isConfirmClicked()
     {
         return confirmClicked;

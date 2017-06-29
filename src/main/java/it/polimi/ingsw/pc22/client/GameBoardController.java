@@ -3,6 +3,7 @@ package it.polimi.ingsw.pc22.client;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.messages.*;
 import it.polimi.ingsw.pc22.player.Player;
+import it.polimi.ingsw.pc22.states.PickCouncilState;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -751,7 +752,7 @@ public class GameBoardController implements Controller {
 
     }
 
-    public boolean councilPrivilegeDialog() {
+    public boolean councilPrivilegeDialog(Object message) {
         try {
 
             FXMLLoader loader = new FXMLLoader();
@@ -772,7 +773,7 @@ public class GameBoardController implements Controller {
 
             PrivilegeDialogController controller = loader.getController();
 
-            controller.setDialogStage(dialogStage);
+            controller.setDialogStage(dialogStage, message);
 
             dialogStage.showAndWait();
 
@@ -840,7 +841,7 @@ public class GameBoardController implements Controller {
 
         if (message instanceof PickPrivilegeMessage)
         {
-            councilPrivilegeDialog();
+            councilPrivilegeDialog(message);
 
             updatePlayerBoard();
         }
@@ -871,9 +872,6 @@ public class GameBoardController implements Controller {
         if (message instanceof ErrorMessage)
         {
             info.setText("OOOPS! Try again!");
-
-
-            councilPrivilegeDialog();
 
         }
 
