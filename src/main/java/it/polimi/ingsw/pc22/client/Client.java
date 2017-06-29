@@ -256,4 +256,21 @@ public class Client extends Application
 	{
 		launch(args);
 	}
+
+	public static void socketSend(String string)
+	{
+		try
+		{
+			PrintWriter outSocket = new PrintWriter(socket.getOutputStream(), true);
+
+			System.out.println(string);
+
+			outSocket.println(string);
+
+		} catch (IOException e)
+
+		{
+			e.printStackTrace();
+		}
+	}
 }

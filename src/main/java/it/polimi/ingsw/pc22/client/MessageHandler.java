@@ -55,7 +55,8 @@ public class MessageHandler
             printOnClient(((ErrorMessage) message).getMessage());
         }
 
-        if (message instanceof GameStatusMessage) {
+        if (message instanceof GameStatusMessage)
+        {
             GameStatusMessage gameStatusMessage = (GameStatusMessage) message;
 
             Client.setPlayer(gameStatusMessage.getPlayer());
@@ -63,38 +64,40 @@ public class MessageHandler
             Client.setGameBoard(gameStatusMessage.getGameBoard());
             
             if (Client.getInterfaceChoice().equals("GUI") && !(Client.getController() instanceof GameBoardController))
+            {
+                Platform.runLater(() ->
                 {
-            	Platform.runLater(() ->         {
                     Client.launchGameBoard();
-                	printOnClient(message);
+                    printOnClient(message);
                 });
-                }
+            }
             
             else
-            	{
-	            	if ("refreshGameBoard".equals(gameStatusMessage.getState()))
-		            {
-		            	printOnClient(message);
-				        printOnClient(new CommunicationMessage("Wait your turn..."));
-		            }
-		            
-		            if ("started".equals(gameStatusMessage.getState()))
-		            {
-				    	Client.setGenericState(new PlayState());
-				        printOnClient(new CommunicationMessage("Is your turn!"));
-		            }
-		
-		            if ("finished".equals(gameStatusMessage.getState()))
-		            {
-			        	Client.setGenericState(new IdleState());
-			        	//TODO: Gestire fine
-		            }
-        		}
+            {
+                if ("refreshGameBoard".equals(gameStatusMessage.getState()))
+                {
+                    printOnClient(message);
+                    printOnClient(new CommunicationMessage("Wait your turn..."));
+                }
+
+                if ("started".equals(gameStatusMessage.getState()))
+                {
+                    Client.setGenericState(new PlayState());
+                    printOnClient(new CommunicationMessage("Is your turn!"));
+                }
+
+                if ("finished".equals(gameStatusMessage.getState()))
+                {
+                    Client.setGenericState(new IdleState());
+                    //TODO: Gestire fine
+                }
+            }
             
             Client.setStateChanged(true);
         }
 
-        if (message instanceof PickPrivilegeMessage) {
+        if (message instanceof PickPrivilegeMessage)
+        {
             int numberOFPrivileges =
                     ((PickPrivilegeMessage) message).getNumberOfPrivilege();
 
@@ -103,20 +106,23 @@ public class MessageHandler
             Client.setStateChanged(true);
         }
 
-        if (message instanceof ChooseServantsMessage) {
+        if (message instanceof ChooseServantsMessage)
+        {
+            Client.setPlayer(((ChooseServantsMessage) message).getPlayer());
 
             Client.setGenericState(new ChooseServantsState());
 
             Client.setStateChanged(true);
         }
 
-        if (message instanceof ExecutedAction) {
-            printOnClient((ExecutedAction) message);
+        if (message instanceof ExecutedAction)
+        {
+            printOnClient(message);
 
         }
 
-
-        if (message instanceof CommunicationMessage) {
+        if (message instanceof CommunicationMessage)
+        {
             printOnClient(((CommunicationMessage) message).getMessage());
         }
 

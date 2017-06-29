@@ -1,12 +1,16 @@
 package it.polimi.ingsw.pc22.effects;
 
+import it.polimi.ingsw.pc22.adapters.IOAdapter;
+import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
+import it.polimi.ingsw.pc22.connection.GameMatch;
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.gamebox.TerritoryCard;
+import it.polimi.ingsw.pc22.messages.ChooseServantsMessage;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class DoProductionAction implements Effect {
-
+public class DoProductionAction extends ServantsAction implements Effect
+{
 	private int value;
 
 	public int getValue() {
@@ -18,45 +22,51 @@ public class DoProductionAction implements Effect {
 	}
 
 	@Override
-	public boolean isLegal(Player player, GameBoard gameBoard) {
+	public boolean isLegal(Player player, GameBoard gameBoard)
+	{
 		if (value < player.getPlayerBoard().getBonusTile().getProductionActivationValue())
 			return false;
 		return true;
-		
 	}
 
 	@Override
-	public boolean executeEffects(Player player, GameBoard gameBoard) {
-		
-		value += player.getProductionValueModifier(); //Serve per gestire il malus dell'excommunication card
+	public boolean executeEffects(Player player, GameBoard gameBoard)
+	{
+		GameMatch.getCurrentGameBoard().setCurreEffect(this);
 
-		if (isLegal(player, gameBoard))
+		IOAdapter adapter = player.getAdapter();
+
+		adapter.printMessage(new ChooseServantsMessage(player));
+
+		if (adapter instanceof SocketIOAdapter)
+			new Thread(new ReceiveServantsDecisionThread()).start();
+
+		//Serve per gestire il malus dell'excommunication card
+		value += player.getProductionValueModifier();
+
+		if (!isLegal(player, gameBoard))
+			return false;
+
+		if (!super.waitForResult()) return false;
+
+		value += super.getServants().getValue();
+
+		player.addAsset(player.getPlayerBoard().getBonusTile().getProductionCoinsBonus());
+		player.addAsset(player.getPlayerBoard().getBonusTile().getProductionMilitaryPointsBonus());
+		player.addAsset(player.getPlayerBoard().getBonusTile().getProductionServantBonus());
+
+		for (TerritoryCard t : player.getPlayerBoard().getTerritories())
 		{
-				Asset servants = player.getAdapter().askServants(player);
-
-				if (servants==null) return false;
-
-				value += servants.getValue();
-				player.addAsset(player.getPlayerBoard().getBonusTile().getProductionCoinsBonus());
-				player.addAsset(player.getPlayerBoard().getBonusTile().getProductionMilitaryPointsBonus());
-				player.addAsset(player.getPlayerBoard().getBonusTile().getProductionServantBonus());
-			
-			for (TerritoryCard t : player.getPlayerBoard().getTerritories())
-			
+			if (value >= t.getPermanentEffectActivationCost())
 			{
-				if (value >= t.getPermanentEffectActivationCost())
+				for (Effect e : t.getPermanentEffects())
 				{
-					for (Effect e : t.getPermanentEffects())
-					{
-						e.executeEffects(player, gameBoard);
-					}
+					e.executeEffects(player, gameBoard);
 				}
 			}
-			
-			return true;
 		}
-		
-		return false;
+
+		return true;
 	}
 	
 	

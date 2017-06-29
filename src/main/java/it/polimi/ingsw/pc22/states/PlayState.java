@@ -74,19 +74,7 @@ public class PlayState implements GenericState
 
         if ("socket".equals(Client.getNetworkChoice()))
         {
-            try
-            {
-                PrintWriter outSocket = new PrintWriter(Client.getSocket().getOutputStream(), true);
-
-                System.out.println(string);
-                
-                outSocket.println(string);
-
-            } catch (IOException e)
-
-            {
-                e.printStackTrace();
-            }
+            Client.socketSend(string);
         }
     }
 }

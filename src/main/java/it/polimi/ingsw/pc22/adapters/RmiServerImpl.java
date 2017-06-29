@@ -3,16 +3,21 @@ package it.polimi.ingsw.pc22.adapters;
 import it.polimi.ingsw.pc22.actions.Action;
 import it.polimi.ingsw.pc22.actions.ActionFactory;
 import it.polimi.ingsw.pc22.connection.GameMatch;
+import it.polimi.ingsw.pc22.effects.PickCouncilPrivilege;
 import it.polimi.ingsw.pc22.exceptions.GenericException;
+import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.messages.ErrorMessage;
 import it.polimi.ingsw.pc22.messages.ExecutedAction;
 import it.polimi.ingsw.pc22.messages.LoginMessage;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.rmi.RMIClientStreamService;
 import it.polimi.ingsw.pc22.rmi.RMIServerInterface;
+import it.polimi.ingsw.pc22.utils.CouncilPrivilege;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -128,5 +133,45 @@ public class RmiServerImpl implements RMIServerInterface
 
         if (GameMatch.getCurrentPlayer().isHasPassed())
             return;
+    }
+
+    @Override
+    public void takeCouncilDecision(String councilMessage, Long key, int numberOfBonus)
+            throws RemoteException
+    {
+        IOAdapter adapter = rmiAdapters.get(key);
+
+        if (councilMessage == null)
+        {
+            adapter.printMessage(new ErrorMessage("Council decision Not received"));
+
+            return;
+        }
+
+        CouncilPrivilege privileges = new CouncilPrivilege();
+
+        boolean valid = privileges.validateBonusDecision(councilMessage, numberOfBonus);
+
+        if (!valid)
+        {
+            adapter.printMessage(new ErrorMessage("Invalid message received"));
+
+            return;
+        }
+
+
+        String[] bonuses = councilMessage.split("-");
+
+        List<Asset> assets = new ArrayList<>();
+
+        for (String bonus : bonuses)
+        {
+            assets.addAll(privileges.getBonusFromNumberString(bonus));
+        }
+
+        PickCouncilPrivilege effect =
+                (PickCouncilPrivilege) GameMatch.getCurrentGameBoard().getCurreEffect();
+
+        effect.setChosenAssets(assets);
     }
 }

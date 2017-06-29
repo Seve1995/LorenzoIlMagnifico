@@ -1,16 +1,17 @@
 package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
+import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
+import it.polimi.ingsw.pc22.connection.GameMatch;
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
+import it.polimi.ingsw.pc22.messages.PickPrivilegeMessage;
 import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 
-public class PickTwoCouncilPrivilege implements Effect{
-
-	private List<Asset> chosenTwoAsset;
-
+public class PickTwoCouncilPrivilege extends PickCouncilPrivilege implements Effect
+{
 	@Override
 	public boolean isLegal(Player player, GameBoard gameBoard) 
 	{
@@ -20,16 +21,16 @@ public class PickTwoCouncilPrivilege implements Effect{
 	@Override
 	public boolean executeEffects(Player player, GameBoard gameBoard)
 	{
+		GameMatch.getCurrentGameBoard().setCurreEffect(this);
+
 		IOAdapter adapter = player.getAdapter();
 
-		chosenTwoAsset = adapter.chooseCouncilPrivileges(2);
+		adapter.printMessage(new PickPrivilegeMessage(2));
 
-		if (chosenTwoAsset==null) return false;
+		if (adapter instanceof SocketIOAdapter)
+			new Thread(new ReceiveCouncilDecisionThread(2)).start();
 
-		for (Asset asset : chosenTwoAsset)
-			player.addAsset(asset);
-
-		return true;
+		return super.waitForResult(player);
 	}
 
 	@Override

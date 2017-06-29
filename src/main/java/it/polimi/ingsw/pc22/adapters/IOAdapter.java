@@ -106,44 +106,6 @@ public abstract class IOAdapter
         return null;
     }
 
-    public Asset askServants(Player player)
-    {
-        Long maxTimeStamp = System.currentTimeMillis() + timeout;
-
-        while(System.currentTimeMillis() < maxTimeStamp)
-        {
-            //this.printMessage("Voi sacrificare servitori per aumentare il valore dell'azione? \n" +
-                    //"Indica un numero da 0 a " + player.getServants());
-
-            String value = getMessage();
-
-            if (value == null)
-                continue;
-
-            Integer servantNumber;
-
-            try
-            {
-                servantNumber = Integer.parseInt(value);
-            }
-            catch (NumberFormatException e)
-            {
-                this.printMessage(new ErrorMessage("ERROR! You must enter a valid input"));
-
-                continue;
-            }
-
-            if (servantNumber > player.getServants())
-                continue;
-
-            return new Asset(servantNumber, AssetType.SERVANT);
-        }
-
-        printMessage(new TimerMessage("Timeout Azione terminato"));
-
-        return null;
-    }
-
     public FamilyMember askFamiliarMemberForBonus(Player player) 
     {
         List<FamilyMember> familyMembers =
@@ -238,76 +200,6 @@ public abstract class IOAdapter
 
     }
 
-
-    public List<Asset> chooseCouncilPrivileges(int numberOfAssets)
-    {
-        CouncilPrivilege councilPrivilege = new CouncilPrivilege();
-        List<Asset> chosenAssets = new ArrayList<>();
-
-        int i = 0;
-        Long maxTimeStamp = System.currentTimeMillis() + timeout;
-
-        while(System.currentTimeMillis() < maxTimeStamp || i < numberOfAssets)
-        {
-            String choice = getMessage();
-
-            if ("1".equals(choice) && councilPrivilege.getBonus1()!=null)
-            {
-                chosenAssets.addAll(councilPrivilege.getBonus1());
-
-                councilPrivilege.setBonus1(null);
-
-                i++;
-            }
-
-            if ("2".equals(choice) && councilPrivilege.getBonus2()!=null)
-            {
-                chosenAssets.addAll(councilPrivilege.getBonus2());
-
-                councilPrivilege.setBonus2(null);
-
-                i++;
-            }
-
-            if ("3".equals(choice) && councilPrivilege.getBonus3()!=null)
-            {
-                chosenAssets.addAll(councilPrivilege.getBonus3());
-
-                councilPrivilege.setBonus3(null);
-
-                i++;
-            }
-
-            if ("4".equals(choice) && councilPrivilege.getBonus4()!=null)
-            {
-                chosenAssets.addAll(councilPrivilege.getBonus4());
-
-                councilPrivilege.setBonus4(null);
-
-                i++;
-            }
-
-            if ("5".equals(choice) && councilPrivilege.getBonus5()!=null)
-            {
-                chosenAssets.addAll(councilPrivilege.getBonus5());
-
-                councilPrivilege.setBonus5(null);
-
-                i++;
-            }
-            
-            if (i==numberOfAssets)
-
-            	return chosenAssets;
-            
-        }
-
-        printMessage(new TimerMessage("Timeout Azione terminato"));
-
-        return null;
-
-    }
-    
     public List<Asset> chooseAssets(int numberOfAssets, List<Asset> assets)
     {
         List<Asset> chosenAssets = new ArrayList<>();

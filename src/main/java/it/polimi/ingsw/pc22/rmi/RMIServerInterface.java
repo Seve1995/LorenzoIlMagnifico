@@ -17,4 +17,7 @@ public interface RMIServerInterface extends Remote
 
     void doAction(String actionMessage, Long key) throws RemoteException;
 
+    void takeCouncilDecision(String councilMessage, Long key, int numberOfBonus)
+            throws RemoteException;
+
 }

@@ -12,11 +12,11 @@ import java.util.List;
 /**
  * Created by fandroid95 on 27/06/2017.
  */
-public class ReceiceCouncilDecisionThread implements Runnable
+public class ReceiveCouncilDecisionThread implements Runnable
 {
     private int numberOfBonus;
 
-    public ReceiceCouncilDecisionThread(int numberOfBonus)
+    public ReceiveCouncilDecisionThread(int numberOfBonus)
     {
         this.numberOfBonus = numberOfBonus;
     }
@@ -62,14 +62,12 @@ public class ReceiceCouncilDecisionThread implements Runnable
                 assets.addAll(privileges.getBonusFromNumberString(bonus));
             }
 
-            PickOneCouncilPrivilege effect =
-                    (PickOneCouncilPrivilege) GameMatch.getCurrentGameBoard().getCurreEffect();
+            PickCouncilPrivilege effect =
+                    (PickCouncilPrivilege) GameMatch.getCurrentGameBoard().getCurreEffect();
 
-            effect.setChosenAsset(assets);
+            effect.setChosenAssets(assets);
 
             break;
         }
-
-        System.out.println("TURN FINISHED");
     }
 }

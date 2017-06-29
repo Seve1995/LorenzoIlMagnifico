@@ -1,5 +1,8 @@
 package it.polimi.ingsw.pc22.states;
 
+import it.polimi.ingsw.pc22.client.Client;
+
+import java.rmi.RemoteException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -43,12 +46,11 @@ public class PickCouncilState implements GenericState
         if (numberOfPrivileges == 1)
         {
             pattern = Pattern.compile("[1-5]");
-
         }
 
         if (numberOfPrivileges == 2)
         {
-             pattern = Pattern.compile("[1-5]-[1-5]");
+            pattern = Pattern.compile("[1-5]-[1-5]");
         }
 
         if (numberOfPrivileges == 3)
@@ -72,6 +74,22 @@ public class PickCouncilState implements GenericState
     @Override
     public void sendToServer(String string)
     {
+        if ("rmi".equals(Client.getNetworkChoice()))
+        {
+            try
+            {
+                Client.getRmiServerInterface().takeCouncilDecision
+                        (string, Client.getAssignedID(), numberOfPrivileges);
+            }
+            catch (RemoteException e)
+            {
+                e.printStackTrace();
+            }
+        }
 
+        if ("socket".equals(Client.getNetworkChoice()))
+        {
+            Client.socketSend(string);
+        }
     }
 }
