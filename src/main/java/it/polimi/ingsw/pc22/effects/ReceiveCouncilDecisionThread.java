@@ -69,7 +69,5 @@ public class ReceiveCouncilDecisionThread implements Runnable
 
             break;
         }
-
-        System.out.println("TURN FINISHED");
     }
 }

@@ -151,8 +151,6 @@ public class GameMatch implements Runnable
 			
 			for(Player player : players)
 			{
-				//TODO RAGAZZI QUESTO CICLO NON MI PIACE TANTISSIMO AHAHA
-				//E' un ciclo da max 4-5 iterazioni, non riusciamo a fare altrimenti!!
 				for (Player p : players)
 				{
 					IOAdapter adapter = p.getAdapter();

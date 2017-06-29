@@ -106,44 +106,6 @@ public abstract class IOAdapter
         return null;
     }
 
-    public Asset askServants(Player player)
-    {
-        Long maxTimeStamp = System.currentTimeMillis() + timeout;
-
-        while(System.currentTimeMillis() < maxTimeStamp)
-        {
-            //this.printMessage("Voi sacrificare servitori per aumentare il valore dell'azione? \n" +
-                    //"Indica un numero da 0 a " + player.getServants());
-
-            String value = getMessage();
-
-            if (value == null)
-                continue;
-
-            Integer servantNumber;
-
-            try
-            {
-                servantNumber = Integer.parseInt(value);
-            }
-            catch (NumberFormatException e)
-            {
-                this.printMessage(new ErrorMessage("ERROR! You must enter a valid input"));
-
-                continue;
-            }
-
-            if (servantNumber > player.getServants())
-                continue;
-
-            return new Asset(servantNumber, AssetType.SERVANT);
-        }
-
-        printMessage(new TimerMessage("Timeout Azione terminato"));
-
-        return null;
-    }
-
     public FamilyMember askFamiliarMemberForBonus(Player player) 
     {
         List<FamilyMember> familyMembers =
