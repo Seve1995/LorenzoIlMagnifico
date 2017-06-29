@@ -22,8 +22,6 @@ public class ActionFactory
     {
         String actionName = ParseEnum.parseAction(userCommand);
 
-        System.out.println("String action name: " + actionName);
-
         if (actionName == null) return null;
 
         Action action;

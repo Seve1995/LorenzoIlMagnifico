@@ -61,20 +61,39 @@ public class MessageHandler
             Client.setPlayer(gameStatusMessage.getPlayer());
 
             Client.setGameBoard(gameStatusMessage.getGameBoard());
-
-            printOnClient(message);
-
-            if ("started".equals(gameStatusMessage.getState()))
+            
+            if (!(Client.getController() instanceof GameBoardController))
                 {
-            	Client.setGenericState(new PlayState());
-                Platform.runLater(() -> {
+            	Platform.runLater(() ->         {
                     Client.launchGameBoard();
-                          });
+                });
+            	printOnClient(message);
                 }
-
-            if ("finished".equals(gameStatusMessage.getState()))
-                Client.setGenericState(new IdleState());
-
+            
+            else
+            	{
+	            	if ("refreshGameBoard".equals(gameStatusMessage.getState()))
+		            {
+		            	printOnClient(message);
+				        printOnClient(new CommunicationMessage("Wait your turn..."));
+		            }
+		            
+		            if ("started".equals(gameStatusMessage.getState()))
+		            {
+				    	Client.setGenericState(new PlayState());
+		            	printOnClient(message);
+				        printOnClient(new CommunicationMessage("Is your turn!"));
+		            }
+		
+		            if ("finished".equals(gameStatusMessage.getState()))
+		            {
+			        	Client.setGenericState(new IdleState());
+		            	printOnClient(message);
+				        printOnClient(new CommunicationMessage("Wait your turn..."));
+			        	//TODO: Gestire fine
+		            }
+        		}
+            
             Client.setStateChanged(true);
         }
 
@@ -87,6 +106,12 @@ public class MessageHandler
             Client.setStateChanged(true);
         }
 
+        if (message instanceof ChooseServantsMessage) {
+
+            Client.setGenericState(new ChooseServantsState());
+
+            Client.setStateChanged(true);
+        }
 
         if (message instanceof ExecutedAction) {
             printOnClient((ExecutedAction) message);

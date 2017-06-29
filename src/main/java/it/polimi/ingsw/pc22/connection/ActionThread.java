@@ -22,8 +22,6 @@ public class ActionThread implements Runnable
 
         while (System.currentTimeMillis() < timestamp + timeout)
         {
-            System.out.println(adapter);
-
             String actionMessage = adapter.getMessage();
 
             if (actionMessage == null)
