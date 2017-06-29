@@ -46,8 +46,6 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
     @Override
     public void run()
     {
-        System.out.println("SOCKET");
-
         Player player = null;
 
         boolean started = false;

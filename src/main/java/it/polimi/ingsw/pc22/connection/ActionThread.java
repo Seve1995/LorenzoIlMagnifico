@@ -22,6 +22,8 @@ public class ActionThread implements Runnable
 
         while (System.currentTimeMillis() < timestamp + timeout)
         {
+            System.out.println(adapter);
+
             String actionMessage = adapter.getMessage();
 
             if (actionMessage == null)
@@ -49,7 +51,6 @@ public class ActionThread implements Runnable
 
             if (!executed)
             {
-
                 adapter.printMessage(new ErrorMessage("Action not Performed"));
 
                 continue;

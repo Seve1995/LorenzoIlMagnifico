@@ -10,10 +10,8 @@ import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 
-public class PickOneCouncilPrivilege implements Effect
+public class PickOneCouncilPrivilege extends PickCouncilPrivilege implements Effect
 {
-	private List<Asset> chosenAsset = null;
-
 	@Override
 	public boolean isLegal(Player player, GameBoard gameBoard)
 	{
@@ -30,49 +28,15 @@ public class PickOneCouncilPrivilege implements Effect
 		adapter.printMessage(new PickPrivilegeMessage(1));
 
 		if (adapter instanceof SocketIOAdapter)
-			new Thread(new ReceiceCouncilDecisionThread(1)).start();
+			new Thread(new ReceiveCouncilDecisionThread(1)).start();
 
-		chosenAsset = adapter.chooseCouncilPrivileges(1);
-
-		Long timestamp = System.currentTimeMillis();
-
-		Long timeout = GameMatch.getTimeout();
-
-		while (System.currentTimeMillis() < timestamp + timeout)
-		{
-			try
-			{
-				Thread.sleep(100L);
-			} catch (InterruptedException e)
-			{
-				e.printStackTrace();
-			}
-
-			if (chosenAsset != null)
-			{
-				System.out.println(chosenAsset);
-
-				for (Asset asset : chosenAsset)
-					player.addAsset(asset);
-
-				return true;
-			}
-		}
-
-		return false;
-
-	}
-
-	public void setChosenAsset(List<Asset> chosenAsset)
-	{
-		this.chosenAsset = chosenAsset;
+		return super.waitForResult(player);
 	}
 
 	@Override
 	public String toString() {
 		return "Pick One Council Privilege";
 	}
-	
-	
-	
+
+
 }
