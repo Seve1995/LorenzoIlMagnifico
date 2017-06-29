@@ -1753,20 +1753,12 @@
             {
               "type": "WOOD",
               "value": 1
-            },
-            {
-              "type": "WOOD",
-              "value": 3
             }
           ],
           "gainedAssets": [
             {
               "type": "VICTORYPOINT",
               "value": 3
-            },
-            {
-              "type": "VICTORYPOINT",
-              "value": 5
             }
           ],
           "onlyOneAsset": false,
@@ -1820,20 +1812,12 @@
             {
               "type": "STONE",
               "value": 1
-            },
-            {
-              "type": "STONE",
-              "value": 3
             }
           ],
           "gainedAssets": [
             {
               "type": "VICTORYPOINT",
               "value": 3
-            },
-            {
-              "type": "VICTORYPOINT",
-              "value": 7
             }
           ],
           "onlyOneAsset": false,
