@@ -1729,7 +1729,7 @@
       "cardNumber": 35,
       "cardType": "BUILDING",
       "roundNumber": 2,
-      "permanentEffectChoice": false,
+      "permanentEffectChoice": true,
       "permanentEffectActivationCost": 4,
       "costs": [
         {
@@ -1753,12 +1753,20 @@
             {
               "type": "WOOD",
               "value": 1
+            },
+            {
+              "type": "WOOD",
+              "value": 3
             }
           ],
           "gainedAssets": [
             {
               "type": "VICTORYPOINT",
               "value": 3
+            },
+            {
+              "type": "VICTORYPOINT",
+              "value": 5
             }
           ],
           "onlyOneAsset": false,
@@ -1788,7 +1796,7 @@
       "cardNumber": 36,
       "cardType": "BUILDING",
       "roundNumber": 2,
-      "permanentEffectChoice": false,
+      "permanentEffectChoice": true,
       "permanentEffectActivationCost": 5,
       "costs": [
         {
@@ -1812,12 +1820,20 @@
             {
               "type": "STONE",
               "value": 1
+            },
+            {
+              "type": "STONE",
+              "value": 3
             }
           ],
           "gainedAssets": [
             {
               "type": "VICTORYPOINT",
               "value": 3
+            },
+            {
+              "type": "VICTORYPOINT",
+              "value": 7
             }
           ],
           "onlyOneAsset": false,

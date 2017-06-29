@@ -13,6 +13,7 @@ public class FromAssetToAssetOrEffect implements Effect{
 	private List<Asset> gainedAssets;
 	private boolean onlyOneAsset;
 	private Effect gainedEffect;
+	private boolean permanentEffectChoice;
 	
 	public List<Asset> getPaiedAssets() {
 		return paiedAssets;
@@ -38,11 +39,15 @@ public class FromAssetToAssetOrEffect implements Effect{
 	public void setGainedEffect(Effect gainedEffect) {
 		this.gainedEffect = gainedEffect;
 	}
+	public boolean isPermanentEffectChoice() {
+		return permanentEffectChoice;
+	}
 	
 	@Override
 	public boolean isLegal(Player player, GameBoard gameBoard) 
 	{
 		for (Asset a : paiedAssets){
+
 			if(a.getValue() > player.getAsset(a.getType()))
 			{
 				return false;
@@ -55,29 +60,51 @@ public class FromAssetToAssetOrEffect implements Effect{
 	@Override
 	public boolean executeEffects(Player player, GameBoard gameBoard)
 	{
+		IOAdapter adapter = player.getAdapter();
+		int numberOfAsset = 0;
+
 		if (isOnlyOneAsset())
 		{
-				
-			IOAdapter adapter = player.getAdapter();
-				
 			paiedAssets = adapter.chooseAssets(1, paiedAssets);
 			
 			if (paiedAssets==null) return false;
 		}
+
+		if (isPermanentEffectChoice())
+		{
+			List<Asset> choosenAsset = adapter.chooseAssets(1, paiedAssets);
+
+			for (int i=0; i < paiedAssets.size(); i++)
+			{
+				if (choosenAsset.get(0).equals(paiedAssets.get(i)))
+				{
+					paiedAssets = choosenAsset;
+					numberOfAsset = i;
+				}
+			}
+		}
 		
 		if (isLegal(player, gameBoard))
 			{
+
 				if (gainedEffect != null)
 				{
 					gainedEffect.executeEffects(player, gameBoard);
-					
 				}
-				if (gainedAssets != null){
+
+				if (gainedAssets != null)
+				{
 					for (Asset a : gainedAssets)
 					{
 						player.addAsset(a);
 					}
 				}
+
+				if (isPermanentEffectChoice())
+				{
+					player.addAsset(gainedAssets.get(numberOfAsset));
+				}
+
 				return true;
 		}
 		
