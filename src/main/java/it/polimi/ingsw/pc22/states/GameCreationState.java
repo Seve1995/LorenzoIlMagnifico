@@ -53,7 +53,7 @@ public class GameCreationState implements GenericState
         {
             try
             {
-                Client.getRmiServerInterface().matchHandling(string);
+                Client.getRmiServerInterface().matchHandling(string, Client.getAssignedID());
             }
             catch (RemoteException e)
             {

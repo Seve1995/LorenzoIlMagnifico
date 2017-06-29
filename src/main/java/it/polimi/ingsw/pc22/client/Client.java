@@ -32,7 +32,9 @@ public class Client extends Application
 	private static ClassLoader classLoader = Client.class.getClassLoader();
 
 	private static RMIServerInterface rmiServerInterface;
-	
+
+	private static Long assignedID;
+
 	private static Socket socket;
 	
 	private static Controller controller;
@@ -81,6 +83,15 @@ public class Client extends Application
 	public static void setRmiServerInterface(RMIServerInterface rmiServerInterface) {
 		Client.rmiServerInterface = rmiServerInterface;
 	}
+
+	public static Long getAssignedID() {
+		return assignedID;
+	}
+
+	public static void setAssignedID(Long assignedID) {
+		Client.assignedID = assignedID;
+	}
+
 
 	public static String getNetworkChoice() {
 		return networkChoice;

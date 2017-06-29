@@ -95,17 +95,23 @@ public class StartingChoiceController implements Controller {
 			RMIServerInterface rmiServerInterface = (RMIServerInterface)
 					registry.lookup("auth");
 
-			System.out.println();
-
-			Client.setRmiServerInterface(rmiServerInterface);
-
 			RMIClientStreamServiceImpl streamService =
 					new RMIClientStreamServiceImpl(30000L);
-			
-			RMIClientStreamService stub = (RMIClientStreamService)
-					UnicastRemoteObject.exportObject(streamService, 0);
 
-			registry.rebind("client", stub);
+			UnicastRemoteObject.exportObject(streamService, 0);
+
+			Long id = rmiServerInterface.registerClient(streamService);
+
+			if (id == null)
+			{
+				System.out.println("PROBLEM IN BINDING RMI");
+
+				return;
+			}
+
+			Client.setAssignedID(id);
+
+			Client.setRmiServerInterface(rmiServerInterface);
 
 			//SISTEMARE QUESTA RIPETIZIONE
 

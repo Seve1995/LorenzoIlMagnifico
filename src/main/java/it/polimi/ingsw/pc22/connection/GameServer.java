@@ -1,6 +1,7 @@
 package it.polimi.ingsw.pc22.connection;
 
 import it.polimi.ingsw.pc22.adapters.RMIIOAdapter;
+import it.polimi.ingsw.pc22.adapters.RmiServerImpl;
 import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.player.Player;
@@ -48,10 +49,10 @@ public class GameServer
 		{
 			Registry registry = LocateRegistry.createRegistry(RMI_PORT);
 
-			RMIIOAdapter rmiIoAdapter = new RMIIOAdapter(registry, timeout);
+			RmiServerImpl rmiServer = new RmiServerImpl(timeout);
 
 			RMIServerInterface stub = (RMIServerInterface)
-					UnicastRemoteObject.exportObject(rmiIoAdapter, 0);
+					UnicastRemoteObject.exportObject(rmiServer, 0);
 
 			registry.rebind("auth", stub);
 

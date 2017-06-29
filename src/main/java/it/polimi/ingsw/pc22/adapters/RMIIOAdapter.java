@@ -24,105 +24,17 @@ import java.util.logging.Logger;
 /**
  * Created by fandroid95 on 30/05/2017.
  */
-public class RMIIOAdapter extends IOAdapter implements RMIServerInterface
+public class RMIIOAdapter extends IOAdapter
 {
-    private Registry registry;
-
     private RMIClientStreamService streamService;
 
     private static final Logger LOGGER = Logger.getLogger(RMIIOAdapter.class.getName());
 
-    public RMIIOAdapter(Registry registry, Long timeout)
+    public RMIIOAdapter(RMIClientStreamService streamService, Long timeout)
     {
-        this.registry = registry;
         super.setTimeout(timeout);
-    }
 
-    @Override
-    public void login(String loginMessage) throws RemoteException
-    {
-        Player player;
-
-        try
-        {
-            streamService = (RMIClientStreamService) registry.lookup("client");
-
-            player = authenticate(loginMessage);
-
-            if (player != null)
-            {
-                LoginMessage message = new LoginMessage(true, false, player);
-
-                System.out.println(message);
-
-                printMessage(message);
-            }
-        }
-        catch (NotBoundException | IOException e)
-        {
-            throw new GenericException("Cannot find client in registry", e);
-        }
-    }
-
-    @Override
-    public void matchHandling(String matchString) throws RemoteException
-    {
-        boolean started;
-
-        try
-        {
-            started = gameHandling(matchString);
-
-            if (started)
-            {
-                LoginMessage message = new LoginMessage(true, true, null);
-
-                printMessage(message);
-            }
-        }
-        catch (IOException e)
-        {
-            throw new GenericException("Cannot find client in registry", e);
-        }
-    }
-
-    @Override
-    public void doAction(String actionMessage) throws RemoteException
-    {
-        if (actionMessage == null)
-        {
-            printMessage(new ErrorMessage("Action Not received"));
-
-            return;
-        }
-
-        Action action = ActionFactory.createAction(actionMessage, GameMatch.getCurrentPlayer());
-
-        System.out.println("Action: " + action);
-
-        if (action == null)
-        {
-            printMessage(new ErrorMessage("Action Not Valid"));
-
-            return;
-        }
-
-        boolean executed = action.executeAction
-                (GameMatch.getCurrentPlayer(), GameMatch.getCurrentGameBoard());
-
-        System.out.println(executed + " - " +  GameMatch.getCurrentPlayer().isHasPassed());
-
-        if (!executed) return;
-
-        if (GameMatch.getCurrentPlayer().isFamiliarPositioned())
-        {
-            printMessage(new ExecutedAction("Action Performed"));
-
-            return;
-        }
-
-        if (GameMatch.getCurrentPlayer().isHasPassed())
-            return;
+        this.streamService = streamService;
     }
 
     @Override

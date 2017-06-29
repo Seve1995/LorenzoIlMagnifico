@@ -64,7 +64,7 @@ public class PlayState implements GenericState
         {
             try
             {
-                Client.getRmiServerInterface().doAction(string);
+                Client.getRmiServerInterface().doAction(string, Client.getAssignedID());
             }
             catch (RemoteException e)
             {

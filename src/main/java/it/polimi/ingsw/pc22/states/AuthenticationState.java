@@ -43,7 +43,7 @@ public class AuthenticationState implements GenericState
         {
             try
             {
-                Client.getRmiServerInterface().login(string);
+                Client.getRmiServerInterface().login(string, Client.getAssignedID());
             }
                 catch (RemoteException e)
             {
