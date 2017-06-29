@@ -62,12 +62,12 @@ public class MessageHandler
 
             Client.setGameBoard(gameStatusMessage.getGameBoard());
             
-            if (!(Client.getController() instanceof GameBoardController))
+            if (Client.getInterfaceChoice().equals("GUI") && !(Client.getController() instanceof GameBoardController))
                 {
             	Platform.runLater(() ->         {
                     Client.launchGameBoard();
+                	printOnClient(message);
                 });
-            	printOnClient(message);
                 }
             
             else
@@ -81,15 +81,12 @@ public class MessageHandler
 		            if ("started".equals(gameStatusMessage.getState()))
 		            {
 				    	Client.setGenericState(new PlayState());
-		            	printOnClient(message);
 				        printOnClient(new CommunicationMessage("Is your turn!"));
 		            }
 		
 		            if ("finished".equals(gameStatusMessage.getState()))
 		            {
 			        	Client.setGenericState(new IdleState());
-		            	printOnClient(message);
-				        printOnClient(new CommunicationMessage("Wait your turn..."));
 			        	//TODO: Gestire fine
 		            }
         		}
