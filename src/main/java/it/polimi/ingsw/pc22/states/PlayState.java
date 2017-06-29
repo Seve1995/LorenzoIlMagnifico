@@ -76,8 +76,10 @@ public class PlayState implements GenericState
         {
             try
             {
-                PrintWriter outSocket = new PrintWriter(Client.getSocket().getOutputStream());
+                PrintWriter outSocket = new PrintWriter(Client.getSocket().getOutputStream(), true);
 
+                System.out.println(string);
+                
                 outSocket.println(string);
 
             } catch (IOException e)

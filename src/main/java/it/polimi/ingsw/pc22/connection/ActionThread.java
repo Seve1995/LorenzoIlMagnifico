@@ -22,8 +22,11 @@ public class ActionThread implements Runnable
 
         while (System.currentTimeMillis() < timestamp + timeout)
         {
+            System.out.println("Non ho ricevuto niente!");
+
             String actionMessage = adapter.getMessage();
 
+            System.out.println("Ho ricevuto" + adapter.getMessage());
             if (actionMessage == null)
             {
                 adapter.printMessage(new ErrorMessage("Action Not received"));

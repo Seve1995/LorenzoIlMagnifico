@@ -4,6 +4,7 @@ import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.messages.*;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.states.PickCouncilState;
+import it.polimi.ingsw.pc22.states.PlayState;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -823,6 +824,9 @@ public class GameBoardController implements Controller {
     @Override
     public void updateScene(Object message)
     {
+    	if (message instanceof CommunicationMessage)
+    		info.setText(((CommunicationMessage) message).getMessage());
+
     	if (message instanceof GameStatusMessage)
     	{
     	    player = Client.getPlayer();

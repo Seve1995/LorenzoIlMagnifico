@@ -152,20 +152,20 @@ public class GameMatch implements Runnable
 			for(Player player : players)
 			{
 				//TODO RAGAZZI QUESTO CICLO NON MI PIACE TANTISSIMO AHAHA
-
-				//for (Player p : players)
-				//{
-				//	IOAdapter adapter = p.getAdapter();
-				//	adapter.printMessage(new GameStatusMessage(gameBoard, p));
-				//}
-
+				//E' un ciclo da max 4-5 iterazioni, non riusciamo a fare altrimenti!!
+				for (Player p : players)
+				{
+					IOAdapter adapter = p.getAdapter();
+					adapter.printMessage(new GameStatusMessage(gameBoard, p, "refreshGameBoard"));
+				}
+				
 				currentPlayer = player;
 
 				currentGameBoard = gameBoard;
 
 				IOAdapter adapter = player.getAdapter();
 
-				adapter.printMessage(new CommunicationMessage("Is your turn!"));
+				//adapter.printMessage(new CommunicationMessage("Is your turn!"));
 
 				adapter.printMessage(new GameStatusMessage(gameBoard, player, "started"));
 
