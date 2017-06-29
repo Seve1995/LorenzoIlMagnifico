@@ -143,20 +143,20 @@ public class GameBoardController implements Controller {
 		String[] idSplitted = id.split(" ");
 		switch (idSplitted[0]) {
 		case "TOWER":
-			//getOutSocket().println("set tower " + output.toUpperCase() +
-              //      " " + servantsSpinner.getValue() + " " + idSplitted[1] + " " + idSplitted[2]);
+			Client.getGenericState().sendToServer("set tower " + output.toUpperCase() +
+                    " " + servantsSpinner.getValue() + " " + idSplitted[1] + " " + idSplitted[2]);
 			break;
 		case "MARKET":
-			//getOutSocket().println("set market " + output.toUpperCase() + " " + servantsSpinner.getValue() + " " + idSplitted[1]);
+			Client.getGenericState().sendToServer("set market " + output.toUpperCase() + " " + servantsSpinner.getValue() + " " + idSplitted[1]);
 			break;
 		case "COUNCIL":
-			//getOutSocket().println("set council " + output.toUpperCase() + " " + servantsSpinner.getValue());
+			Client.getGenericState().sendToServer("set council " + output.toUpperCase() + " " + servantsSpinner.getValue());
 			break;
 		case "HARVEST":
-			//getOutSocket().println("set harvest " + output.toUpperCase() + " " + servantsSpinner.getValue());
+			Client.getGenericState().sendToServer("set harvest " + output.toUpperCase() + " " + servantsSpinner.getValue());
 			break;
 		case "PRODUCTION":
-			//getOutSocket().println("set production " + output.toUpperCase() + " " + servantsSpinner.getValue());
+			Client.getGenericState().sendToServer("set production " + output.toUpperCase() + " " + servantsSpinner.getValue());
 			break;
 		default:
 			break;
@@ -175,7 +175,7 @@ public class GameBoardController implements Controller {
         	}
         idLeader = selectedLeaderToggle.getId();
 
-        //getOutSocket().println("play card " + idLeader);
+        Client.getGenericState().sendToServer("play card " + idLeader);
 
     }
 
@@ -190,7 +190,7 @@ public class GameBoardController implements Controller {
     	}
         idLeader = selectedLeaderToggle.getId();
 
-        //getOutSocket().println("discard card " + idLeader);
+        Client.getGenericState().sendToServer("discard card " + idLeader);
     }
 
     @FXML
@@ -204,14 +204,14 @@ public class GameBoardController implements Controller {
     	}
         String id = selectedLeaderToggle.getId();
 
-        //getOutSocket().println("activate card " + id);
+        Client.getGenericState().sendToServer("activate card " + id);
     }
 
     @FXML
     private void handlePassButton()
     {
         output = "pass";
-        //getOutSocket().println(output);
+        Client.getGenericState().sendToServer(output);
     }
 
     @FXML
@@ -283,7 +283,7 @@ public class GameBoardController implements Controller {
                 ColorsEnum currFamiliarEnum = councilPalace.getCouncilPalaceCells()[i].getFamilyMember().getColor();
                 PlayerColorsEnum currPlayerEnum = councilPalace.getCouncilPalaceCells()[i].getFamilyMember().getPlayerColor();
                 ClassLoader classLoader = Client.class.getClassLoader();
-                String path = "GUI/familiars/familiar_" + currPlayerEnum + "_" + currFamiliarEnum + ".png";
+                String path = "GUI/familiars/familiar_" + currPlayerEnum.toString().toLowerCase() + "_" + currFamiliarEnum.toString().toLowerCase() + ".png";
                 Image image = new Image(classLoader.getResourceAsStream(path));
                 imageView.setImage(image);
 
@@ -319,10 +319,10 @@ public class GameBoardController implements Controller {
             	
                 ColorsEnum currFamiliarEnum = harvest.getHarvestCell()[i].getFamilyMember().getColor();
                 PlayerColorsEnum currPlayerEnum = harvest.getHarvestCell()[i].getFamilyMember().getPlayerColor();
-                String familiarEnum = currFamiliarEnum.toString();
-                String playerEnum = currPlayerEnum.toString();
+                //String familiarEnum = currFamiliarEnum.toString();
+                //String playerEnum = currPlayerEnum.toString();
                 ClassLoader classLoader = Client.class.getClassLoader();
-                String path = "GUI/familiars/familiar_blue_neuter.png";
+                String path = "GUI/familiars/familiar_" + currPlayerEnum.toString().toLowerCase() + "_" + currFamiliarEnum.toString().toLowerCase() + ".png";
                 Image image = new Image(classLoader.getResourceAsStream(path));
                 imageView.setImage(image);
 
@@ -784,6 +784,41 @@ public class GameBoardController implements Controller {
         }
     }
 
+    public boolean servantsDialog() {
+        try {
+
+            FXMLLoader loader = new FXMLLoader();
+
+            loader.setLocation(getClassLoader().getResource("GUI/ServantsHandler.fxml"));
+
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage dialogStage = new Stage();
+
+            dialogStage.setTitle("Choose servants");
+            
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            
+            Scene scene = new Scene(page);
+
+            dialogStage.setScene(scene);
+
+            ServantsHandlerController controller = loader.getController();
+
+            controller.setDialogStage(dialogStage, servantsSpinner.getValueFactory());
+            
+            dialogStage.showAndWait();
+
+            return controller.isConfirmClicked();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        
+    }
+    
+       
     @Override
     public void updateScene(Object message)
     {
@@ -827,6 +862,9 @@ public class GameBoardController implements Controller {
 
         if (message instanceof ChooseServantsMessage)
         {
+            servantsDialog();
+
+            updatePlayerBoard();
 
         }
 

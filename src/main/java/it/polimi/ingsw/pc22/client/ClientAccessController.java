@@ -24,6 +24,7 @@ public class ClientAccessController implements Controller {
     @FXML
     private void handleLoginButton() throws InterruptedException {
     	String output = username.getText() + " " + password.getText() + " L";
+		Client.getGenericState().sendToServer(output);
     	//getOutSocket().println(output);
     	//if (Client.getGenericState() instanceof GameCreationState)
     	//	Client.launchCreationMatch();
@@ -32,6 +33,7 @@ public class ClientAccessController implements Controller {
     @FXML
     private void handleRegisterButton() {
     	String output = username.getText() + " " + password.getText() + " R";
+		Client.getGenericState().sendToServer(output);
     	//getOutSocket().println(output);
         
     }

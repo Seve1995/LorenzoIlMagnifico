@@ -25,20 +25,20 @@ public class CreationMatchController implements Controller{
     private void handleCreateButton()
 	{
     	textString = Text.getText();
-    	//getOutSocket().println(textString + " C");
+		Client.getGenericState().sendToServer(textString + " C");
 	}
     
     @FXML
     private void handleJoinButton()
 	{
 		textString = Text.getText();
-    	//getOutSocket().println(textString + " J");
+		Client.getGenericState().sendToServer(textString + " J");
 	}
     
     @FXML
     private void handleRandomButton()
 	{
-    	//getOutSocket().println("R");
+		Client.getGenericState().sendToServer("R");
 	}
 
 	@Override
