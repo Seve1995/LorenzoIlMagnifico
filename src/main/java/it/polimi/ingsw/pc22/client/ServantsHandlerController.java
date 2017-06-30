@@ -1,7 +1,5 @@
 package it.polimi.ingsw.pc22.client;
 
-import org.omg.CORBA.portable.ValueFactory;
-
 import it.polimi.ingsw.pc22.messages.ExecutedAction;
 import javafx.fxml.FXML;
 import javafx.scene.control.Spinner;

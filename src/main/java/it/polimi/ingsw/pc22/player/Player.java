@@ -435,7 +435,7 @@ public class Player implements Serializable
 			
 		case "victorypoint":
 			this.victoryPoints += value;
-			if (victoryPoints<0) victoryPoints=0;
+			if (victoryPoints < 0) victoryPoints=0;
 			break;
 			
 		case "militarypoint":

@@ -3,9 +3,8 @@ package it.polimi.ingsw.pc22.effects;
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.connection.GameMatch;
-import it.polimi.ingsw.pc22.gamebox.Asset;
+import it.polimi.ingsw.pc22.gamebox.BuildingCard;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
-import it.polimi.ingsw.pc22.gamebox.TerritoryCard;
 import it.polimi.ingsw.pc22.messages.ChooseServantsMessage;
 import it.polimi.ingsw.pc22.player.Player;
 
@@ -41,13 +40,13 @@ public class DoProductionAction extends ServantsAction implements Effect
 		if (adapter instanceof SocketIOAdapter)
 			new Thread(new ReceiveServantsDecisionThread()).start();
 
+		if (!super.waitForResult()) return false;
+
 		//Serve per gestire il malus dell'excommunication card
 		value += player.getProductionValueModifier();
 
 		if (!isLegal(player, gameBoard))
 			return false;
-
-		if (!super.waitForResult()) return false;
 
 		value += super.getServants().getValue();
 
@@ -55,14 +54,14 @@ public class DoProductionAction extends ServantsAction implements Effect
 		player.addAsset(player.getPlayerBoard().getBonusTile().getProductionMilitaryPointsBonus());
 		player.addAsset(player.getPlayerBoard().getBonusTile().getProductionServantBonus());
 
-		for (TerritoryCard t : player.getPlayerBoard().getTerritories())
+		for (BuildingCard card : player.getPlayerBoard().getBuildings())
 		{
-			if (value >= t.getPermanentEffectActivationCost())
+			if (value < card.getPermanentEffectActivationCost())
+				continue;
+
+			for (Effect effect : card.getPermanentEffects())
 			{
-				for (Effect e : t.getPermanentEffects())
-				{
-					e.executeEffects(player, gameBoard);
-				}
+				effect.executeEffects(player, gameBoard);
 			}
 		}
 

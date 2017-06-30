@@ -1,7 +1,6 @@
 package it.polimi.ingsw.pc22.client;
 
 import it.polimi.ingsw.pc22.exceptions.GenericException;
-import it.polimi.ingsw.pc22.rmi.RMIClientStreamService;
 import it.polimi.ingsw.pc22.rmi.RMIServerInterface;
 import it.polimi.ingsw.pc22.states.AuthenticationState;
 import javafx.fxml.FXML;

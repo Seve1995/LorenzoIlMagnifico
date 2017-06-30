@@ -11,7 +11,7 @@ public class ChooseServantsState implements GenericState
     public void printState()
     {
         System.out.println("Would you like to sacrifice up to " + Client.getPlayer().getServants() + "?");
-        System.out.println("write a number from  0  to" + Client.getPlayer().getServants());
+        System.out.println("write a number from  0  to " + Client.getPlayer().getServants());
     }
 
     @Override
@@ -26,16 +26,27 @@ public class ChooseServantsState implements GenericState
         }
             catch (NumberFormatException e)
         {
+            System.out.println("Invalid Input");
+
             return false;
         }
 
         if (servantsNumber == null)
+        {
+            System.out.println("Invalid Input");
+
             return false;
+        }
+
 
         if (servantsNumber > Client.getPlayer().getServants())
-            return false;
+        {
+            System.out.println("Invalid Input");
 
-        return false;
+            return false;
+        }
+
+        return true;
     }
 
     @Override

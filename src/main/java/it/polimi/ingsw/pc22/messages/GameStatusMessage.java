@@ -34,8 +34,8 @@ public class GameStatusMessage extends  Message
     public String toString()
     {
         return "GameStatusMessage{" +
-                "player=" + player +
+                "gameBoard=" + gameBoard +
+                ", player=" + player +
                 '}';
     }
-
 }

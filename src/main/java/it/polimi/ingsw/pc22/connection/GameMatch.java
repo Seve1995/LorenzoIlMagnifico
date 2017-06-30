@@ -3,7 +3,6 @@ package it.polimi.ingsw.pc22.connection;
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.gamebox.*;
-import it.polimi.ingsw.pc22.messages.CommunicationMessage;
 import it.polimi.ingsw.pc22.messages.GameStatusMessage;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.*;
@@ -128,8 +127,6 @@ public class GameMatch implements Runnable
 
 		for (int currentRoundNumber = 0; currentRoundNumber < turnNumber; currentRoundNumber++)
 		{
-			//int era = GameBoardUtils.getEra(currentRoundNumber, playerCounter);
-			
 			if (isNewTurn(currentRoundNumber))
 			{
 				turn++;
@@ -153,6 +150,9 @@ public class GameMatch implements Runnable
 			{
 				for (Player p : players)
 				{
+					if (p.equals(player))
+						continue;
+
 					IOAdapter adapter = p.getAdapter();
 					adapter.printMessage(new GameStatusMessage(gameBoard, p, "refreshGameBoard"));
 				}
@@ -162,8 +162,6 @@ public class GameMatch implements Runnable
 				currentGameBoard = gameBoard;
 
 				IOAdapter adapter = player.getAdapter();
-
-				//adapter.printMessage(new CommunicationMessage("Is your turn!"));
 
 				adapter.printMessage(new GameStatusMessage(gameBoard, player, "started"));
 
@@ -321,9 +319,6 @@ public class GameMatch implements Runnable
 		JSONObject bonusTiles = new JSONObject(bonusTilesString);
 
 		tiles = BonusTileLoader.loadBonusTiles(bonusTiles);
-
-		for (BonusTile b : tiles)
-			System.out.println(b.toString());
 	}
 
 	private void loadLeaderCards()

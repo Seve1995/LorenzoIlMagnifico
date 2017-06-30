@@ -7,7 +7,6 @@ import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.messages.ChooseAssetsMessage;
 import it.polimi.ingsw.pc22.messages.ChooseCardMessage;
 import it.polimi.ingsw.pc22.messages.ChooseCostsMessage;
-import it.polimi.ingsw.pc22.messages.PickPrivilegeMessage;
 import it.polimi.ingsw.pc22.player.CardModifier;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.MilitaryPointsCalc;
@@ -71,16 +70,7 @@ public class PickTowerCard extends ChooseAsset implements Effect
 	{
 		if (floor==-1 || cardType==null) return false;
 		
-		Tower tower = null;
-		
-		for (Tower t : gameBoard.getTowers())
-		{
-			if (t.getTowerType().equals(cardType))
-			{
-				tower=t;
-			}
-			
-		}
+		Tower tower = gameBoard.getTowerByType(cardType);
 		
 		if(tower.getTowerCells().get(floor).getDevelopmentCard() == null) return false;
 		
@@ -92,9 +82,7 @@ public class PickTowerCard extends ChooseAsset implements Effect
 				diceValue += c.getValueModifier();
 			}
 		}
-		
-		//applyDiceChanges(player);
-		
+
 		if (this.cardType.equals(CardTypeEnum.CHARACTER))
 		{
 			if (player.getPlayerBoard().getCharacters().size() > 6 || diceValue < tower.getTowerCells().get(floor).getRequiredDiceValue())
@@ -111,7 +99,7 @@ public class PickTowerCard extends ChooseAsset implements Effect
 							costs.get(0).setValue(costs.get(0).getValue() - asset.getValue());
 			}
 			
-			if (applyCardModifiers(player)==false) 
+			if (applyCardModifiers(player) == false)
 				return false;
 			
 			if (costs.get(0).getValue() > player.getCoins())
@@ -306,53 +294,47 @@ public class PickTowerCard extends ChooseAsset implements Effect
 			}
 		}
 
-		Tower currTower = new Tower(CardTypeEnum.ANY);
+		Tower currTower = gameBoard.getTowerByType(cardType);
 
-		for (Tower t : gameBoard.getTowers())
+		if (!isLegal(player, gameBoard))
+			return false;
+
+		//TODO QUESTA POTREBBE FALLIRE
+		activeEffects(currTower.getTowerCells().get(floor).getDevelopmentCard(), player, gameBoard);
+
+		for (Asset asset : costs)
 		{
-			if (t.getTowerType().equals(cardType))
-			{
-				currTower = t;
-			}
+			Asset costAsset = new Asset(-asset.getValue(), asset.getType());
+
+			player.addAsset(costAsset);
 		}
 
-		if (isLegal(player, gameBoard))
+		if (cardType.equals(CardTypeEnum.BUILDING))
 		{
-
-			if (cardType.equals(CardTypeEnum.BUILDING))
-			{
-				player.getPlayerBoard().getBuildings().add((BuildingCard) currTower.getTowerCells().get(floor).getDevelopmentCard());
-
-			}
-
-			if (cardType.equals(CardTypeEnum.CHARACTER))
-			{
-				player.getPlayerBoard().getCharacters().add((CharacterCard) currTower.getTowerCells().get(floor).getDevelopmentCard());
-
-			}
-
-			if (cardType.equals(CardTypeEnum.TERRITORY))
-			{
-				player.getPlayerBoard().getTerritories().add((TerritoryCard) currTower.getTowerCells().get(floor).getDevelopmentCard());
-
-			}
-
-			if (cardType.equals(CardTypeEnum.VENTURE))
-			{
-				player.getPlayerBoard().getVentures().add((VentureCard) currTower.getTowerCells().get(floor).getDevelopmentCard());
-
-			}
-
-			activeEffects(currTower.getTowerCells().get(floor).getDevelopmentCard(), player, gameBoard);
-
-			currTower.getTowerCells().get(floor).setDevelopmentCard(null);
-
-			return true;
+			player.getPlayerBoard().getBuildings().add((BuildingCard) currTower.getTowerCells().get(floor).getDevelopmentCard());
 		}
 
+		if (cardType.equals(CardTypeEnum.CHARACTER))
+		{
+			player.getPlayerBoard().getCharacters().add((CharacterCard) currTower.getTowerCells().get(floor).getDevelopmentCard());
 
-		return false;
-	
+		}
+
+		if (cardType.equals(CardTypeEnum.TERRITORY))
+		{
+			player.getPlayerBoard().getTerritories().add((TerritoryCard) currTower.getTowerCells().get(floor).getDevelopmentCard());
+
+		}
+
+		if (cardType.equals(CardTypeEnum.VENTURE))
+		{
+			player.getPlayerBoard().getVentures().add((VentureCard) currTower.getTowerCells().get(floor).getDevelopmentCard());
+
+		}
+
+		currTower.getTowerCells().get(floor).setDevelopmentCard(null);
+
+		return true;
 	}
 	
 
@@ -453,7 +435,7 @@ public class PickTowerCard extends ChooseAsset implements Effect
 				e.executeEffects(p, null);
 				
 				if ((e instanceof AddAsset) && p.isSantaRita())
-					
+
 					e.executeEffects(p, gb);
 		}
 	}

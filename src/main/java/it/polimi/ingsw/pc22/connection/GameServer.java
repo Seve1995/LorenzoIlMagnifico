@@ -1,6 +1,5 @@
 package it.polimi.ingsw.pc22.connection;
 
-import it.polimi.ingsw.pc22.adapters.RMIIOAdapter;
 import it.polimi.ingsw.pc22.adapters.RmiServerImpl;
 import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.exceptions.GenericException;
@@ -43,7 +42,7 @@ public class GameServer
 		
 		gameMatchMap = new ConcurrentHashMap<>();
 
-		Long timeout = 30000L;
+		Long timeout = 60000L;
 
 		try
 		{

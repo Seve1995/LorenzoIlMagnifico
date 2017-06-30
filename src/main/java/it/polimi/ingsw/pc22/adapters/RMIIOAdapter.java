@@ -1,23 +1,14 @@
 package it.polimi.ingsw.pc22.adapters;
 
-import it.polimi.ingsw.pc22.actions.Action;
-import it.polimi.ingsw.pc22.actions.ActionFactory;
-import it.polimi.ingsw.pc22.connection.GameMatch;
 import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.connection.User;
 import it.polimi.ingsw.pc22.exceptions.GenericException;
-import it.polimi.ingsw.pc22.messages.ErrorMessage;
-import it.polimi.ingsw.pc22.messages.ExecutedAction;
-import it.polimi.ingsw.pc22.messages.LoginMessage;
 import it.polimi.ingsw.pc22.messages.Message;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.rmi.RMIClientStreamService;
-import it.polimi.ingsw.pc22.rmi.RMIServerInterface;
 
 import java.io.IOException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.Registry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

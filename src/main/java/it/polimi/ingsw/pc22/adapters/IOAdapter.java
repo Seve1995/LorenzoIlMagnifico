@@ -3,13 +3,13 @@ package it.polimi.ingsw.pc22.adapters;
 import it.polimi.ingsw.pc22.connection.GameMatch;
 import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.connection.User;
-import it.polimi.ingsw.pc22.gamebox.*;
+import it.polimi.ingsw.pc22.gamebox.ColorsEnum;
+import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.messages.CommunicationMessage;
 import it.polimi.ingsw.pc22.messages.ErrorMessage;
 import it.polimi.ingsw.pc22.messages.Message;
 import it.polimi.ingsw.pc22.messages.TimerMessage;
 import it.polimi.ingsw.pc22.player.Player;
-import it.polimi.ingsw.pc22.utils.CouncilPrivilege;
 import it.polimi.ingsw.pc22.utils.UserLoader;
 
 import java.io.IOException;
@@ -375,7 +375,7 @@ public abstract class IOAdapter
     //TODO2 DISTINGUERE IL TIMEOUT DELL'AVVIO PARTITA DAL TIMEOUT DELL'AZIONE (ce ne vogliono 2 distinti)
     private void startNewGameMatch(String gameName, Player player)
     {
-        GameMatch gameMatch = new GameMatch(30000L, 4);
+        GameMatch gameMatch = new GameMatch(60000L, 4);
 
         Map<String, GameMatch> gameMatchMap = GameServer.getGameMatchMap();
 

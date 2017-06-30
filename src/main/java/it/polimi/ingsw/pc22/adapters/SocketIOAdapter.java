@@ -56,6 +56,8 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
             {
                 String authentication = getMessage();
 
+                if (authentication == null) continue;
+
                 player = authenticate(authentication);
             }
 
@@ -64,6 +66,8 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
             while (!started)
             {
                 String match = getMessage();
+
+                if (match == null) continue;
 
                 started = gameHandling(match);
             }

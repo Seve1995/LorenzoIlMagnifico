@@ -5,8 +5,6 @@ import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.utils.ParseEnum;
 import it.polimi.ingsw.pc22.utils.PositionUtils;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.rmi.RemoteException;
 
 /**

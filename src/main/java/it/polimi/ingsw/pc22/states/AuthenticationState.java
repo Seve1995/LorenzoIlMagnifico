@@ -2,8 +2,6 @@ package it.polimi.ingsw.pc22.states;
 
 import it.polimi.ingsw.pc22.client.Client;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.rmi.RemoteException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

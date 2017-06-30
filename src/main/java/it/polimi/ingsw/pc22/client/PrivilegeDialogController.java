@@ -1,7 +1,6 @@
 package it.polimi.ingsw.pc22.client;
 
 import it.polimi.ingsw.pc22.messages.ExecutedAction;
-import it.polimi.ingsw.pc22.messages.Message;
 import it.polimi.ingsw.pc22.messages.PickPrivilegeMessage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

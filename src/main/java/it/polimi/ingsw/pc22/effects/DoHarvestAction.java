@@ -3,11 +3,9 @@ package it.polimi.ingsw.pc22.effects;
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.connection.GameMatch;
-import it.polimi.ingsw.pc22.gamebox.Asset;
-import it.polimi.ingsw.pc22.gamebox.BuildingCard;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
+import it.polimi.ingsw.pc22.gamebox.TerritoryCard;
 import it.polimi.ingsw.pc22.messages.ChooseServantsMessage;
-import it.polimi.ingsw.pc22.messages.PickPrivilegeMessage;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class DoHarvestAction extends ServantsAction implements Effect
@@ -60,15 +58,14 @@ public class DoHarvestAction extends ServantsAction implements Effect
 		player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestWoodsBonus());
 
 
-		for (BuildingCard b : player.getPlayerBoard().getBuildings())
+		for (TerritoryCard card : player.getPlayerBoard().getTerritories())
 		{
-			if(value >= b.getPermanentEffectActivationCost())
-			{
-				for (Effect e : b.getPermanentEffects())
-				{
-					e.executeEffects(player, gameBoard);
-				}
+			if (value < card.getPermanentEffectActivationCost())
+				continue;
 
+			for (Effect effect : card.getPermanentEffects())
+			{
+				effect.executeEffects(player, gameBoard);
 			}
 		}
 
