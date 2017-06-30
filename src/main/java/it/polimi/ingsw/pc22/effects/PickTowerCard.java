@@ -150,7 +150,6 @@ public class PickTowerCard extends ChooseAsset implements Effect
 			{
 				IOAdapter adapter = player.getAdapter();
 
-
 				Asset militaryPointsRequired = currVentureCard.getMilitaryPointsRequired();
 				Asset militaryPointsCost = currVentureCard.getMilitaryPointsCost();
 				List<Asset> resourcesCost = currVentureCard.getResourcesCost();
@@ -161,7 +160,7 @@ public class PickTowerCard extends ChooseAsset implements Effect
 				adapter.printMessage(costsMessage);
 
 				if (adapter instanceof SocketIOAdapter)
-					new Thread(new ReceiveCardDecisionThread()).start();
+					new Thread(new ReceiveCostsDecisionThread()).start();
 
 				Long timestamp = System.currentTimeMillis();
 
@@ -261,10 +260,10 @@ public class PickTowerCard extends ChooseAsset implements Effect
 	@Override
 	public boolean executeEffects(Player player, GameBoard gameBoard)
 	{
-		GameMatch.getCurrentGameBoard().setCurreEffect(this);
-
 		if (cardType.equals(CardTypeEnum.ANY) || floor == -1)
 		{
+			GameMatch.getCurrentGameBoard().setCurreEffect(this);
+
 			IOAdapter adapter = player.getAdapter();
 
 			adapter.printMessage(new ChooseCardMessage(cardType, gameBoard));
@@ -299,15 +298,15 @@ public class PickTowerCard extends ChooseAsset implements Effect
 		if (!isLegal(player, gameBoard))
 			return false;
 
-		//TODO QUESTA POTREBBE FALLIRE
-		activeEffects(currTower.getTowerCells().get(floor).getDevelopmentCard(), player, gameBoard);
-
 		for (Asset asset : costs)
 		{
 			Asset costAsset = new Asset(-asset.getValue(), asset.getType());
 
 			player.addAsset(costAsset);
 		}
+
+		//TODO QUESTA POTREBBE FALLIRE
+		activeEffects(currTower.getTowerCells().get(floor).getDevelopmentCard(), player, gameBoard);
 
 		if (cardType.equals(CardTypeEnum.BUILDING))
 		{
@@ -432,7 +431,7 @@ public class PickTowerCard extends ChooseAsset implements Effect
 
 		for (Effect e : immediateEffects)
 		{
-				e.executeEffects(p, null);
+				e.executeEffects(p, gb);
 				
 				if ((e instanceof AddAsset) && p.isSantaRita())
 

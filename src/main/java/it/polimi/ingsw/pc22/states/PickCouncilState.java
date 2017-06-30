@@ -60,13 +60,23 @@ public class PickCouncilState implements GenericState
 
         Matcher matcher = pattern.matcher(string);
 
-        if (pattern == null || !matcher.find()) return false;
+        if (pattern == null || !matcher.find())
+        {
+            System.out.println("Invalid input retry");
+
+            return false;
+        }
 
         Set<String> duplicates = new HashSet<>();
 
         duplicates.addAll(Arrays.asList(string.split("-")));
 
-        if (duplicates.size() != numberOfPrivileges) return false;
+        if (duplicates.size() != numberOfPrivileges)
+        {
+            System.out.println("Duplicate choice retry");
+
+            return false;
+        }
 
         return true;
     }

@@ -56,11 +56,15 @@ public class DoProductionAction extends ServantsAction implements Effect
 
 		for (BuildingCard card : player.getPlayerBoard().getBuildings())
 		{
+			System.out.println(card);
+
 			if (value < card.getPermanentEffectActivationCost())
 				continue;
 
 			for (Effect effect : card.getPermanentEffects())
 			{
+				System.out.println(effect);
+
 				effect.executeEffects(player, gameBoard);
 			}
 		}

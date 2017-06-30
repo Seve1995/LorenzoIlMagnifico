@@ -20,11 +20,11 @@ public class ChooseAssetsState implements GenericState
     @Override
     public void printState()
     {
-        System.out.println("Choose one asset:" + '\n');
+        System.out.println("Choose one asset:");
 
         for (int j=0; j < assetList.size(); j++)
         {
-            System.out.println(j + ")" + assetList.get(j).toString());
+            System.out.println(j+1 + ") " + assetList.get(j).toString());
         }
     }
 
@@ -59,7 +59,7 @@ public class ChooseAssetsState implements GenericState
         }
 
 
-        return false;
+        return true;
     }
 
     @Override

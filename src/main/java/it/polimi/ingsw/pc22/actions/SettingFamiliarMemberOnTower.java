@@ -107,8 +107,8 @@ public class SettingFamiliarMemberOnTower extends Action {
 	
 	
 	@Override
-	public boolean executeAction (Player player, GameBoard gameBoard) {
-		
+	public boolean executeAction (Player player, GameBoard gameBoard)
+	{
 		Tower tower = selectedTower(gameBoard.getTowers());
 		
 		List<Effect> currEffects;
