@@ -1,8 +1,11 @@
 package it.polimi.ingsw.pc22.client;
 
+import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.messages.*;
 import it.polimi.ingsw.pc22.states.*;
 import javafx.application.Platform;
+
+import java.util.List;
 
 /**
  * Created by fandroid95 on 28/06/2017.
@@ -111,6 +114,15 @@ public class MessageHandler
             Client.setPlayer(((ChooseServantsMessage) message).getPlayer());
 
             Client.setGenericState(new ChooseServantsState());
+
+            Client.setStateChanged(true);
+        }
+
+        if (message instanceof ChooseAssetsMessage)
+        {
+            List<Asset> assets = ((ChooseAssetsMessage) message).getAssets();
+
+            Client.setGenericState(new ChooseAssetsState(assets));
 
             Client.setStateChanged(true);
         }
