@@ -57,8 +57,6 @@ public abstract class IOAdapter
 		   for (FamilyMember f : familyMembers)
 			   sb.append(f.toString());
 
-		   //this.printMessage(sb.toString());
-
 		    String choice = this.getMessage();
 
 		    if (choice == null)

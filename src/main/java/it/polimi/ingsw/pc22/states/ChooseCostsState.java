@@ -3,6 +3,7 @@ package it.polimi.ingsw.pc22.states;
 import it.polimi.ingsw.pc22.client.Client;
 import it.polimi.ingsw.pc22.gamebox.Asset;
 
+import java.rmi.RemoteException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -55,6 +56,19 @@ public class ChooseCostsState implements GenericState
     @Override
     public void sendToServer(String string)
     {
+        if ("rmi".equals(Client.getNetworkChoice()))
+        {
+            try
+            {
+                Client.getRmiServerInterface().takeCostsDecision
+                        (string, Client.getAssignedID());
+            }
+            catch (RemoteException e)
+            {
+                e.printStackTrace();
+            }
+        }
+
         if ("socket".equals(Client.getNetworkChoice()))
         {
             Client.socketSend(string);

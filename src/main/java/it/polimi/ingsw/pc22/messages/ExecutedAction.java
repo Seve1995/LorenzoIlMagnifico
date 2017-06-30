@@ -15,4 +15,11 @@ public class ExecutedAction extends Message
     public String getMessage() {
         return message;
     }
+
+    @Override
+    public String toString()
+    {
+        return "ExecutedAction - " + message;
+    }
 }
+

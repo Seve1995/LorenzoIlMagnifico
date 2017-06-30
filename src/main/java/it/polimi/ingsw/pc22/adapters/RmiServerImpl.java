@@ -3,9 +3,14 @@ package it.polimi.ingsw.pc22.adapters;
 import it.polimi.ingsw.pc22.actions.Action;
 import it.polimi.ingsw.pc22.actions.ActionFactory;
 import it.polimi.ingsw.pc22.connection.GameMatch;
+import it.polimi.ingsw.pc22.effects.ChooseAsset;
 import it.polimi.ingsw.pc22.effects.PickCouncilPrivilege;
+import it.polimi.ingsw.pc22.effects.PickTowerCard;
+import it.polimi.ingsw.pc22.effects.ServantsAction;
 import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.gamebox.Asset;
+import it.polimi.ingsw.pc22.gamebox.AssetType;
+import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
 import it.polimi.ingsw.pc22.messages.ErrorMessage;
 import it.polimi.ingsw.pc22.messages.ExecutedAction;
 import it.polimi.ingsw.pc22.messages.LoginMessage;
@@ -20,6 +25,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by fandroid95 on 29/06/2017.
@@ -173,5 +180,144 @@ public class RmiServerImpl implements RMIServerInterface
                 (PickCouncilPrivilege) GameMatch.getCurrentGameBoard().getCurreEffect();
 
         effect.setChosenAssets(assets);
+    }
+
+    @Override
+    public void takeAssetDecision(String assetDecision, Long key, List<Asset> payedAssets)
+        throws RemoteException
+    {
+        IOAdapter adapter = rmiAdapters.get(key);
+
+        if (assetDecision == null)
+        {
+            adapter.printMessage(new ErrorMessage("Asset decision Not received"));
+
+            return;
+        }
+
+        String assetMessage = adapter.getMessage();
+
+        Integer choiceInt = Integer.parseInt(assetMessage);
+
+        if (choiceInt < 0 || choiceInt > payedAssets.size())
+        {
+            adapter.printMessage(new ErrorMessage("Numero inserito non valido"));
+
+            return;
+        }
+
+        ChooseAsset effect =
+                (ChooseAsset) GameMatch.getCurrentGameBoard().getCurreEffect();
+
+        effect.setChosenAssetsToPay(choiceInt);
+    }
+
+    @Override
+    public void takeCardDecision(String cardMessage, Long key, CardTypeEnum currCardType)
+        throws RemoteException
+    {
+        IOAdapter adapter = rmiAdapters.get(key);
+
+        Pattern cardPattern;
+
+        if (!currCardType.equals(CardTypeEnum.ANY))
+        {
+            cardPattern = Pattern.compile("^[0-3]$");
+        }
+        else
+        {
+            cardPattern = Pattern.compile("^(BUILDING|VENTURE|CHARACTER|TERRITORY) [0-3]$");
+        }
+
+        Matcher matcher = cardPattern.matcher(cardMessage);
+
+        if (!matcher.find())
+        {
+            adapter.printMessage(new ErrorMessage("INVALID INSERTION RETRY"));
+
+            return;
+        }
+
+        String[] choices = cardMessage.split(" ");
+
+        Integer floor;
+
+        PickTowerCard effect =
+                (PickTowerCard) GameMatch.getCurrentGameBoard().getCurreEffect();
+
+        if (!currCardType.equals(CardTypeEnum.ANY))
+        {
+            floor = Integer.parseInt(choices[0]);
+        }
+        else
+        {
+            floor = Integer.parseInt(choices[1]);
+
+            CardTypeEnum type = CardTypeEnum.valueOf(choices[0]);
+
+            effect.setCardType(type);
+        }
+
+        effect.setFloor(floor);
+    }
+
+    @Override
+    public void takeCostsDecision(String costMessage, Long key)
+        throws RemoteException
+    {
+        IOAdapter adapter = rmiAdapters.get(key);
+
+        Pattern costPattern = Pattern.compile("^[1-2]$");
+
+        Matcher matcher = costPattern.matcher(costMessage);
+
+        if (!matcher.find())
+        {
+            adapter.printMessage(new ErrorMessage("INVALID INSERTION RETRY"));
+
+            return;
+        }
+
+        Integer choiceInt = Integer.parseInt(costMessage);
+
+        PickTowerCard effect =
+                (PickTowerCard) GameMatch.getCurrentGameBoard().getCurreEffect();
+
+
+        effect.setCostDecision(choiceInt);
+    }
+
+    @Override
+    public void takeServantsDecision(String servantsMessage, Long key)
+        throws RemoteException
+    {
+        IOAdapter adapter = rmiAdapters.get(key);
+
+        Integer servantNumber;
+
+        try
+        {
+            servantNumber = Integer.parseInt(servantsMessage);
+        }
+        catch (NumberFormatException e)
+        {
+            adapter.printMessage(new ErrorMessage("ERROR! You must enter a valid input"));
+
+            return;
+        }
+
+        if (servantNumber > GameMatch.getCurrentPlayer().getServants())
+        {
+            adapter.printMessage(new ErrorMessage("You haven't so much servants"));
+
+            return;
+        }
+
+        Asset servants =  new Asset(servantNumber, AssetType.SERVANT);
+
+        ServantsAction effect =
+                (ServantsAction) GameMatch.getCurrentGameBoard().getCurreEffect();
+
+        effect.setServants(servants);
     }
 }

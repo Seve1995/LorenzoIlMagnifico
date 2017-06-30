@@ -34,13 +34,12 @@ public class PlayState implements GenericState
         }
 
         System.out.println
-                ("- play card <index>" + '\n' +
-                "- discard card <index>" + '\n' +
-                "- activate card <index>" + '\n' +
-                "- pass" + '\n' +
-                "- show cards" + '\n' + //questa in realtà si può sempre fare
-                "- end game / exit game" + '\n'+
-                "- show board"); //questa in realtà si può sempre fare
+        ("- play card <index>" + '\n' +
+        "- discard card <index>" + '\n' +
+        "- activate card <index>" + '\n' +
+        "- pass" + '\n' +
+        "- end game / exit game" + '\n'+
+        "- show board - player board"); //questa in realtà si può sempre fare
     }
 
     @Override
@@ -58,6 +57,13 @@ public class PlayState implements GenericState
     @Override
     public void sendToServer(String string)
     {
+        if ("show board".equals(string))
+        {
+            System.out.println(Client.getPlayer().getPlayerBoard().toString());
+
+            return;
+        }
+
         if ("rmi".equals(Client.getNetworkChoice()))
         {
             try

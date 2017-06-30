@@ -14,6 +14,8 @@ public class WaitingState implements GenericState
     @Override
     public boolean validate(String string)
     {
+        System.out.println("PLEASE WAIT FOR THE MATCH TO START");
+
         return false;
     }
 

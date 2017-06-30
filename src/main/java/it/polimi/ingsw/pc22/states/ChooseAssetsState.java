@@ -3,6 +3,7 @@ package it.polimi.ingsw.pc22.states;
 import it.polimi.ingsw.pc22.client.Client;
 import it.polimi.ingsw.pc22.gamebox.Asset;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 /**
@@ -65,6 +66,19 @@ public class ChooseAssetsState implements GenericState
     @Override
     public void sendToServer(String string)
     {
+        if ("rmi".equals(Client.getNetworkChoice()))
+        {
+            try
+            {
+                Client.getRmiServerInterface().takeAssetDecision
+                        (string, Client.getAssignedID(), assetList);
+            }
+            catch (RemoteException e)
+            {
+                e.printStackTrace();
+            }
+        }
+
         if ("socket".equals(Client.getNetworkChoice()))
         {
             Client.socketSend(string);

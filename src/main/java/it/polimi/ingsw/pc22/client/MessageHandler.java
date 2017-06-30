@@ -104,8 +104,6 @@ public class MessageHandler
                     Client.setStateChanged(true);
                 }
             }
-            
-
         }
 
         if (message instanceof PickPrivilegeMessage)

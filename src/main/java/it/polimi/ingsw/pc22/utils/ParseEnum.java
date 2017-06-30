@@ -16,7 +16,8 @@ public enum ParseEnum
     PASS("^pass$", "PassTurn"),
     PLAY_CARD("^play card [0-3]$", "PlayLeaderCard"),
     DISCARD_CARD("^activate card [0-3]$", "ActiveLoaderCard"),
-    ACTIVATE_CARD("^discard card [0-3]$", "DiscardLeaderCard");
+    ACTIVATE_CARD("^discard card [0-3]$", "DiscardLeaderCard"),
+    SHOW_BOARD("^show board$", "ShowBoard");
 
 
     private String regex;
