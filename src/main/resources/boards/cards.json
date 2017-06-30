@@ -1441,20 +1441,7 @@
             {
               "type": "WOOD",
               "value": 1
-            }
-          ],
-          "gainedAssets": [
-            {
-              "type": "COIN",
-              "value": 3
-            }
-          ],
-          "onlyOneAsset": false,
-          "gainedEffect": null
-        },
-        {
-          "name": "FromAssetToAssetOrEffect",
-          "paidAssets": [
+            },
             {
               "type": "WOOD",
               "value": 2
@@ -1463,10 +1450,14 @@
           "gainedAssets": [
             {
               "type": "COIN",
+              "value": 3
+            },
+            {
+              "type": "COIN",
               "value": 5
             }
           ],
-          "onlyOneAsset": false,
+          "onlyOneAsset": true,
           "gainedEffect": null
         }
       ]
@@ -1504,20 +1495,7 @@
             {
               "type": "STONE",
               "value": 1
-            }
-          ],
-          "gainedAssets": [
-            {
-              "type": "COIN",
-              "value": 3
-            }
-          ],
-          "onlyOneAsset": false,
-          "gainedEffect": null
-        },
-        {
-          "name": "FromAssetToAssetOrEffect",
-          "paidAssets": [
+            },
             {
               "type": "STONE",
               "value": 2
@@ -1526,10 +1504,14 @@
           "gainedAssets": [
             {
               "type": "COIN",
+              "value": 3
+            },
+            {
+              "type": "COIN",
               "value": 5
             }
           ],
-          "onlyOneAsset": false,
+          "onlyOneAsset": true,
           "gainedEffect": null
         }
       ]
@@ -1694,20 +1676,7 @@
             {
               "type": "COIN",
               "value": 1
-            }
-          ],
-          "gainedAssets": [
-            {
-              "type": "VICTORYPOINT",
-              "value": 3
-            }
-          ],
-          "onlyOneAsset": false,
-          "gainedEffect": null
-        },
-        {
-          "name": "FromAssetToAssetOrEffect",
-          "paidAssets": [
+            },
             {
               "type": "COIN",
               "value": 2
@@ -1716,10 +1685,14 @@
           "gainedAssets": [
             {
               "type": "VICTORYPOINT",
+              "value": 3
+            },
+            {
+              "type": "VICTORYPOINT",
               "value": 5
             }
           ],
-          "onlyOneAsset": false,
+          "onlyOneAsset": true,
           "gainedEffect": null
         }
       ]
@@ -1729,7 +1702,7 @@
       "cardNumber": 35,
       "cardType": "BUILDING",
       "roundNumber": 2,
-      "permanentEffectChoice": false,
+      "permanentEffectChoice": true,
       "permanentEffectActivationCost": 4,
       "costs": [
         {
@@ -1753,20 +1726,7 @@
             {
               "type": "WOOD",
               "value": 1
-            }
-          ],
-          "gainedAssets": [
-            {
-              "type": "VICTORYPOINT",
-              "value": 3
-            }
-          ],
-          "onlyOneAsset": false,
-          "gainedEffect": null
-        },
-        {
-          "name": "FromAssetToAssetOrEffect",
-          "paidAssets": [
+            },
             {
               "type": "WOOD",
               "value": 3
@@ -1775,10 +1735,14 @@
           "gainedAssets": [
             {
               "type": "VICTORYPOINT",
+              "value": 3
+            },
+            {
+              "type": "VICTORYPOINT",
               "value": 7
             }
           ],
-          "onlyOneAsset": false,
+          "onlyOneAsset": true,
           "gainedEffect": null
         }
       ]
@@ -1788,7 +1752,7 @@
       "cardNumber": 36,
       "cardType": "BUILDING",
       "roundNumber": 2,
-      "permanentEffectChoice": false,
+      "permanentEffectChoice": true,
       "permanentEffectActivationCost": 5,
       "costs": [
         {

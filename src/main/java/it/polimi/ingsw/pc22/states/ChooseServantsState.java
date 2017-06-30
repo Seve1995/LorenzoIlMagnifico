@@ -44,6 +44,10 @@ public class ChooseServantsState implements GenericState
         if ("rmi".equals(Client.getNetworkChoice()))
         {
             //TODO DA IMPLEMENTARE
+
+
+
+
         }
 
         if ("socket".equals(Client.getNetworkChoice()))
