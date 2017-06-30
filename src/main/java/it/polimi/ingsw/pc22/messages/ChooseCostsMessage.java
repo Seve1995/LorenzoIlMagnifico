@@ -13,7 +13,8 @@ public class ChooseCostsMessage extends Message
     private Asset militaryPointsCost;
     private List<Asset> resourcesCost;
 
-    public ChooseCostsMessage(Asset militaryPointsRequired, Asset militaryPointsCost, List<Asset> resourcesCost)
+    public ChooseCostsMessage
+        (Asset militaryPointsRequired, Asset militaryPointsCost, List<Asset> resourcesCost)
     {
         this.militaryPointsRequired = militaryPointsRequired;
         this.militaryPointsCost = militaryPointsCost;

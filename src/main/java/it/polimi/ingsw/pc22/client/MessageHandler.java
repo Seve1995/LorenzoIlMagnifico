@@ -148,6 +148,21 @@ public class MessageHandler
             Client.setStateChanged(true);
         }
 
+        if (message instanceof  ChooseCostsMessage)
+        {
+            ChooseCostsMessage costsMessage = (ChooseCostsMessage) message;
+
+            Asset militaryPointsRequired = costsMessage.getMilitaryPointsRequired();
+            Asset militaryPointsCost = costsMessage.getMilitaryPointsCost();
+            List<Asset> resourcesCost = costsMessage.getResourcesCost();
+
+            ChooseCostsState costsState = new ChooseCostsState
+                    (militaryPointsRequired, militaryPointsCost, resourcesCost);
+
+            Client.setGenericState(costsState);
+
+            Client.setStateChanged(true);
+        }
         /*
         if ("show board".equals(msgReceived))
         {

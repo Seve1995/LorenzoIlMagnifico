@@ -5,6 +5,9 @@ import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.connection.GameMatch;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.messages.ChooseAssetsMessage;
+import it.polimi.ingsw.pc22.messages.ChooseCardMessage;
+import it.polimi.ingsw.pc22.messages.ChooseCostsMessage;
+import it.polimi.ingsw.pc22.messages.PickPrivilegeMessage;
 import it.polimi.ingsw.pc22.player.CardModifier;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.MilitaryPointsCalc;
@@ -23,6 +26,8 @@ public class PickTowerCard extends ChooseAsset implements Effect
 	private List<Asset> costs = new ArrayList<>();
 	//Auxiliary arrayList that storage the card modifiers associated with the cardType
 	private List<CardModifier> currentCardModifiers = new ArrayList<>();
+
+	private Integer costDecision = null;
 
 	public int getFloor() {
 		return floor;
@@ -46,6 +51,11 @@ public class PickTowerCard extends ChooseAsset implements Effect
 
 	public void setAssetsDiscount(List<Asset> assetsDiscount) {
 		this.assetsDiscount = assetsDiscount;
+	}
+
+	public void setCostDecision(Integer costDecision)
+	{
+		this.costDecision = costDecision;
 	}
 
 	public PickTowerCard() {}
@@ -150,17 +160,54 @@ public class PickTowerCard extends ChooseAsset implements Effect
 			
 			if (currVentureCard.isRequiredCostChoice())
 			{
-				int choice = player.getAdapter().chooseCost(currVentureCard.getMilitaryPointsRequired(), currVentureCard.getMilitaryPointsCost(), currVentureCard.getResourcesCost());
-			
-				switch (choice) {
-				case 1:
-					costs.add(currVentureCard.getMilitaryPointsCost());
-					break;
-				case 2:
-					costs.addAll(currVentureCard.getResourcesCost());
-					break;
-				default:
-					return false;
+				IOAdapter adapter = player.getAdapter();
+
+
+				Asset militaryPointsRequired = currVentureCard.getMilitaryPointsRequired();
+				Asset militaryPointsCost = currVentureCard.getMilitaryPointsCost();
+				List<Asset> resourcesCost = currVentureCard.getResourcesCost();
+
+				ChooseCostsMessage costsMessage = new ChooseCostsMessage
+						(militaryPointsRequired, militaryPointsCost, resourcesCost);
+
+				adapter.printMessage(costsMessage);
+
+				if (adapter instanceof SocketIOAdapter)
+					new Thread(new ReceiveCardDecisionThread()).start();
+
+				Long timestamp = System.currentTimeMillis();
+
+				Long timeout = GameMatch.getTimeout();
+
+				while (System.currentTimeMillis() < timestamp + timeout)
+				{
+					try
+					{
+						Thread.sleep(100L);
+					}
+					catch (InterruptedException e)
+					{
+						e.printStackTrace();
+					}
+
+					if (costDecision != null)
+					{
+						break;
+					}
+				}
+
+				if (costDecision == null) return false;
+
+				switch (costDecision)
+				{
+					case 1:
+						costs.add(currVentureCard.getMilitaryPointsCost());
+						break;
+					case 2:
+						costs.addAll(currVentureCard.getResourcesCost());
+						break;
+					default:
+						return false;
 				}
 				
 			}
@@ -230,6 +277,13 @@ public class PickTowerCard extends ChooseAsset implements Effect
 
 		if (cardType.equals(CardTypeEnum.ANY) || floor == -1)
 		{
+			IOAdapter adapter = player.getAdapter();
+
+			adapter.printMessage(new ChooseCardMessage(cardType, gameBoard));
+
+			if (adapter instanceof SocketIOAdapter)
+				new Thread(new ReceiveCardDecisionThread()).start();
+
 			Long timestamp = System.currentTimeMillis();
 
 			Long timeout = GameMatch.getTimeout();
@@ -239,7 +293,8 @@ public class PickTowerCard extends ChooseAsset implements Effect
 				try
 				{
 					Thread.sleep(100L);
-				} catch (InterruptedException e)
+				}
+					catch (InterruptedException e)
 				{
 					e.printStackTrace();
 				}
