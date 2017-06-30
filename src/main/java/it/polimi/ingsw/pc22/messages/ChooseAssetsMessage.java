@@ -10,19 +10,13 @@ import java.util.List;
 public class ChooseAssetsMessage extends Message
 {
     private List<Asset> assets;
-    private int numberOfAssets;
 
-    public ChooseAssetsMessage(List<Asset> assets, int numberOfAssets)
+    public ChooseAssetsMessage(List<Asset> assets)
     {
         this.assets = assets;
-        this.numberOfAssets = numberOfAssets;
     }
 
     public List<Asset> getAssets() {
         return assets;
-    }
-
-    public int getNumberOfAssets() {
-        return numberOfAssets;
     }
 }

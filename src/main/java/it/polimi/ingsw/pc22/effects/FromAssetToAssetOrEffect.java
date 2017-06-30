@@ -1,27 +1,25 @@
 package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
+import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
+import it.polimi.ingsw.pc22.connection.GameMatch;
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
+import it.polimi.ingsw.pc22.messages.ChooseAssetsMessage;
 import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 
-public class FromAssetToAssetOrEffect implements Effect{
+public class FromAssetToAssetOrEffect extends ChooseAsset implements Effect
+{
+	private List<Asset> paiedAssets = null;
 
-	private List<Asset> paiedAssets;
 	private List<Asset> gainedAssets;
 	private boolean onlyOneAsset;
 	private Effect gainedEffect;
-	
-	public List<Asset> getPaiedAssets() {
-		return paiedAssets;
-	}
+
 	public void setPaiedAssets(List<Asset> paiedAssets) {
 		this.paiedAssets = paiedAssets;
-	}
-	public List<Asset> getGainedAssets() {
-		return gainedAssets;
 	}
 	public void setGainedAssets(List<Asset> gainedAssets) {
 		this.gainedAssets = gainedAssets;
@@ -32,17 +30,15 @@ public class FromAssetToAssetOrEffect implements Effect{
 	public void setOnlyOneAsset(boolean onlyOneAsset) {
 		this.onlyOneAsset = onlyOneAsset;
 	}
-	public Effect getGainedEffect() {
-		return gainedEffect;
-	}
 	public void setGainedEffect(Effect gainedEffect) {
 		this.gainedEffect = gainedEffect;
 	}
-	
+
 	@Override
 	public boolean isLegal(Player player, GameBoard gameBoard) 
 	{
-		for (Asset a : paiedAssets){
+		for (Asset a : paiedAssets)
+		{
 			if(a.getValue() > player.getAsset(a.getType()))
 			{
 				return false;
@@ -55,34 +51,45 @@ public class FromAssetToAssetOrEffect implements Effect{
 	@Override
 	public boolean executeEffects(Player player, GameBoard gameBoard)
 	{
+		GameMatch.getCurrentGameBoard().setCurreEffect(this);
+
 		if (isOnlyOneAsset())
 		{
-				
 			IOAdapter adapter = player.getAdapter();
-				
-			paiedAssets = adapter.chooseAssets(1, paiedAssets);
-			
-			if (paiedAssets==null) return false;
+
+			adapter.printMessage(new ChooseAssetsMessage(paiedAssets));
+
+			if (adapter instanceof SocketIOAdapter)
+				new Thread(new ReceiveAssetDecisionThread(paiedAssets)).start();
+
+			if (!super.waitForResult()) return false;
 		}
 		
-		if (isLegal(player, gameBoard))
-			{
-				if (gainedEffect != null)
-				{
-					gainedEffect.executeEffects(player, gameBoard);
-					
-				}
-				if (gainedAssets != null){
-					for (Asset a : gainedAssets)
-					{
-						player.addAsset(a);
-					}
-				}
-				return true;
+		if (!isLegal(player, gameBoard)) return false;
+
+		if (gainedEffect != null)
+		{
+			boolean executed = gainedEffect.executeEffects(player, gameBoard);
+
+			if (!executed) return false;
 		}
-		
-		return false;
-				
+
+		Asset payedAsset = paiedAssets.get(getChosenAssetsToPay());
+
+		player.addAsset(payedAsset);
+
+		if (gainedAssets == null) return false;
+
+		if (gainedAssets.size() == 1)
+			player.addAsset(gainedAssets.get(0));
+		else
+		{
+			Asset asset = gainedAssets.get(getChosenAssetsToPay());
+
+			player.addAsset(asset);
+		}
+
+		return true;
 	}
 	
 	@Override
@@ -128,7 +135,5 @@ public class FromAssetToAssetOrEffect implements Effect{
 	public String toString() {
 		return "FromAssetToAssetOrEffect [paiedAssets=" + paiedAssets + ", gainedAssets=" + gainedAssets
 				+ ", onlyOneAsset=" + onlyOneAsset + ", gainedEffect=" + gainedEffect + "]";
-	} 
-	
-	
+	}
 }

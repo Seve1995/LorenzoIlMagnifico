@@ -54,6 +54,5 @@ public class ReceiveServantsDecisionThread implements Runnable
             break;
         }
 
-        System.out.println("TURN FINISHED");
     }
 }

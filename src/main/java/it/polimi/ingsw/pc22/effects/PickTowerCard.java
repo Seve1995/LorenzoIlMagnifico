@@ -1,6 +1,10 @@
 package it.polimi.ingsw.pc22.effects;
 
+import it.polimi.ingsw.pc22.adapters.IOAdapter;
+import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
+import it.polimi.ingsw.pc22.connection.GameMatch;
 import it.polimi.ingsw.pc22.gamebox.*;
+import it.polimi.ingsw.pc22.messages.ChooseAssetsMessage;
 import it.polimi.ingsw.pc22.player.CardModifier;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.MilitaryPointsCalc;
@@ -8,7 +12,7 @@ import it.polimi.ingsw.pc22.utils.MilitaryPointsCalc;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PickTowerCard implements Effect
+public class PickTowerCard extends ChooseAsset implements Effect
 {
 	private int floor;
 	private CardTypeEnum cardType;
@@ -60,7 +64,6 @@ public class PickTowerCard implements Effect
 	@Override
 	public boolean isLegal(Player player, GameBoard gameBoard)
 	{
-		
 		if (floor==-1 || cardType==null) return false;
 		
 		Tower tower = null;
@@ -188,18 +191,14 @@ public class PickTowerCard implements Effect
 				if (a.getValue() > player.getAsset(a.getType()))
 				{
 					return false;
-					
 				}
-			
 			}
 			
 			return true;
-			
 		}
 		
 		if (this.cardType.equals(CardTypeEnum.TERRITORY)) 
 		{
-			
 			if (player.getPlayerBoard().getTerritories().size() > 6 || diceValue < tower.getTowerCells().get(floor).getRequiredDiceValue())
 			{
 				return false;
@@ -231,7 +230,9 @@ public class PickTowerCard implements Effect
 	
 	@Override
 	public boolean executeEffects(Player player, GameBoard gameBoard)
-	{		
+	{
+		GameMatch.getCurrentGameBoard().setCurreEffect(this);
+
 		if (cardType.equals(CardTypeEnum.ANY))
 			
 			cardType = player.getAdapter().askForCardType();
@@ -290,29 +291,31 @@ public class PickTowerCard implements Effect
 	}
 	
 
-	private boolean applyCardModifiers(Player p)
-	
+	private boolean applyCardModifiers(Player player)
 	{
 		if (cardType.equals(CardTypeEnum.BUILDING))
-			
 		{			
 			for (CardModifier cm : currentCardModifiers)
 			{		
 				if (cm.isOnlyOneAsset())
 				{
-						
-					List<Asset> chosenAssets = p.getAdapter().chooseAssets(1, cm.getAssetDiscount());
-					
-					if (chosenAssets==null) return false;
+					List<Asset> assets = cm.getAssetDiscount();
 
-					Asset chosenAsset = chosenAssets.get(0);
+					IOAdapter adapter = player.getAdapter();
+
+					adapter.printMessage(new ChooseAssetsMessage(assets));
+
+					if (adapter instanceof SocketIOAdapter)
+						new Thread(new ReceiveAssetDecisionThread(assets)).start();
+
+					if (!super.waitForResult()) return false;
+
+					Asset chosenAsset = assets.get(getChosenAssetsToPay());
 					
-					for (Asset a1 : costs)
+					for (Asset cost : costs)
 					{
-					
-						if (a1.getType().equals(chosenAsset.getType()))
-						
-							costs.add(new Asset(a1.getValue() - chosenAsset.getValue(), a1.getType()));
+						if (cost.getType().equals(chosenAsset.getType()))
+							costs.add(new Asset(cost.getValue() - chosenAsset.getValue(), cost.getType()));
 					}
 					
 					continue;
@@ -326,47 +329,41 @@ public class PickTowerCard implements Effect
 						if (a1.getType().equals(a.getType()))
 						
 							a1.setValue((a1.getValue() - a.getValue()));
-						
 					}
-				
 				}
 				
-				}
-			
 			}
+			
+		}
 		
 		if (cardType.equals(CardTypeEnum.CHARACTER))
-			
 		{			
-				Asset coinsCost = costs.get(0);
-				
-				for (CardModifier cm : currentCardModifiers)
+			Asset coinsCost = costs.get(0);
+
+			for (CardModifier cm : currentCardModifiers)
+			{
+				for (Asset a : cm.getAssetDiscount())
 				{
-					for (Asset a : cm.getAssetDiscount())
+
+					if (a.getType().equals(AssetType.COIN))
 					{
-				
-						if (a.getType().equals(AssetType.COIN))
-						{
-							costs.get(0).setValue(coinsCost.getValue() - a.getValue());
-						}
-				
+						costs.get(0).setValue(coinsCost.getValue() - a.getValue());
 					}
-			
+
 				}
+
+			}
 	
 		}
 		
 		if (cardType.equals(CardTypeEnum.VENTURE))
-			
 		{
-			
 			for (CardModifier cm : currentCardModifiers)
 			{
 				for (Asset a : cm.getAssetDiscount())
 				{
 					for (Asset a1 : costs)
 					{
-					
 						if (a1.getType().equals(a.getType()))
 						
 							a1.setValue(a1.getValue() - a.getValue());	
@@ -378,7 +375,6 @@ public class PickTowerCard implements Effect
 		
 		}	
 		return true;
-		
 	}
 
 	private void activeEffects(DevelopmentCard d, Player p, GameBoard gb)
@@ -395,7 +391,6 @@ public class PickTowerCard implements Effect
 					
 					e.executeEffects(p, gb);
 		}
-			
 	}
 	
 }

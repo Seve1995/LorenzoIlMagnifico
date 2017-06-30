@@ -42,6 +42,41 @@ public abstract class IOAdapter
         this.timeout = timeout;
     }
 
+
+    public int chooseCost(Asset militaryPointsRequired, Asset militaryPointsCost, List<Asset> resourcesCost)
+    {
+        //this.printMessage("You have to choose one cost between:");
+        //this.printMessage("1) You must have" + militaryPointsRequired.getValue() + "and you will pay" + militaryPointsCost.getValue());
+        //this.printMessage("2) Pay these resources:" + resourcesCost.toString());
+        Long maxTimeStamp = System.currentTimeMillis() + timeout;
+
+        while(System.currentTimeMillis() < maxTimeStamp)
+        {
+            try{
+                String choice = getMessage();
+
+                int choiceInt = Integer.parseInt(choice);
+
+                if (choiceInt!=1 || choiceInt!=2)
+                    throw new NumberFormatException();
+
+                return choiceInt;
+
+            } catch(NumberFormatException e) {
+
+                this.printMessage(new ErrorMessage("ERROR! You must enter a valid input"));
+
+                continue;
+            }
+
+        }
+
+        printMessage(new TimerMessage("Timeout Azione terminato"));
+
+        return -1;
+
+    }
+
     public int askFloor() {
 
         Long maxTimeStamp = System.currentTimeMillis() + timeout;
@@ -106,11 +141,11 @@ public abstract class IOAdapter
         return null;
     }
 
-    public FamilyMember askFamiliarMemberForBonus(Player player) 
+    public FamilyMember askFamiliarMemberForBonus(Player player)
     {
         List<FamilyMember> familyMembers =
                 player.getFamilyMembers();
-        
+
         Long maxTimeStamp = System.currentTimeMillis() + timeout;
 
         while(System.currentTimeMillis() < maxTimeStamp)
@@ -120,28 +155,28 @@ public abstract class IOAdapter
  		   //TODO SISTEMARE STA COSA; BISOGNA CHIAMARE UNA FUNZIONE STATICA ESTERNA!!
 		   for (FamilyMember f : familyMembers)
 			   sb.append(f.toString());
-		    
+
 		   //this.printMessage(sb.toString());
-		
+
 		    String choice = this.getMessage();
-		
+
 		    if (choice == null)
 		        continue;
-		
+
 		    ColorsEnum color = ColorsEnum.getColorFromString(choice);
-		
+
 		    if (color == null)
 		        continue;
-		
+
 		    FamilyMember member = player.getFamilyMemberByColor(color);
-		
+
 		    if (member == null)
 		        continue;
-		
+
 		    return member;
-        
+
         }
-        
+
         printMessage(new TimerMessage("Timeout Azione terminato"));
 
         return null;
@@ -188,97 +223,9 @@ public abstract class IOAdapter
 
     }
 
-    //SISTEMARE IL CONCETTO DI PRIVILEGIO DEL CONSIGLIO, MEGLIO GESTIRE CON UNA MAPPA
-    // O UNA ENUM INVECE CHE CON I NULL IN QUESTO MODO SI VA ANCHE A TOGLIERE LA NECESSITÀ
-    // DEGLI IF, POI VISTO CHE VIENE USATO SOLO QUI MEGLIO CREARE UNA CLASSE
-    // UTILIÀ CHE GESTISCA IL PRIVILEGIO INVECE CHE UN OGGETTO DA INSTANZIARE OGNI VOLTA,
-    //PS COMUNQUE E GIUSTA L'IDEA, NON MI RICORDAVO PIÙ CHE CI FOSSE DA SCEGLIERE TRAI PRIVILEGI
-
     public void printWinnerNameToSingleUser(String playerName)
     {
         this.printMessage(new CommunicationMessage("The winner is: " + playerName));
-
-    }
-
-    public List<Asset> chooseAssets(int numberOfAssets, List<Asset> assets)
-    {
-        List<Asset> chosenAssets = new ArrayList<>();
-        
-    	int i = 0;
-
-        Long maxTimeStamp = System.currentTimeMillis() + timeout;
-
-        while(System.currentTimeMillis() < maxTimeStamp || i < numberOfAssets)
-        {
-            /*this.printMessage("Choose one asset:" + '\n');
-            for (int j=0; j<assets.size(); j++)
-            {
-            	this.printMessage(j + ")" + assets.get(j).toString());
-            }*/
-            
-            try{
-            	String choice = getMessage();
-            	
-            	int choiceInt = Integer.parseInt(choice);
-            	
-                if (choiceInt<0 || choiceInt>assets.size())
-                    throw new NumberFormatException();
-                
-                chosenAssets.add(assets.get(choiceInt));
-                
-                assets.remove(choiceInt);
-                
-                i++;
-
-                if (i==numberOfAssets)
-
-                	return chosenAssets;
-
-            } catch(NumberFormatException e) {
-            	
-            	this.printMessage(new ErrorMessage("ERROR! You must enter a valid input"));
-            	
-            	continue;
-            }
-
-        }
-
-        printMessage(new ErrorMessage("Timeout Azione terminato"));
-
-        return null;
-    }
-    
-    public int chooseCost(Asset militaryPointsRequired, Asset militaryPointsCost, List<Asset> resourcesCost)
-    {
-    	//this.printMessage("You have to choose one cost between:");
-    	//this.printMessage("1) You must have" + militaryPointsRequired.getValue() + "and you will pay" + militaryPointsCost.getValue());
-    	//this.printMessage("2) Pay these resources:" + resourcesCost.toString());
-        Long maxTimeStamp = System.currentTimeMillis() + timeout;
-
-        while(System.currentTimeMillis() < maxTimeStamp)
-	    {
-	    	try{
-	        	String choice = getMessage();
-
-	        	int choiceInt = Integer.parseInt(choice);
-
-	            if (choiceInt!=1 || choiceInt!=2)
-	                throw new NumberFormatException();
-
-		    	return choiceInt;
-
-	    	} catch(NumberFormatException e) {
-
-	        	this.printMessage(new ErrorMessage("ERROR! You must enter a valid input"));
-
-	        	continue;
-	        }
-
-	    }
-
-        printMessage(new TimerMessage("Timeout Azione terminato"));
-
-        return -1;
 
     }
 
@@ -386,9 +333,7 @@ public abstract class IOAdapter
     }
 
     private synchronized String firstMatchFree(Map<String, GameMatch> gameMatchMap)
-
     {
-
         for (Map.Entry<String, GameMatch> entry : gameMatchMap.entrySet())
         {
             if (entry.getValue().getPlayerCounter() < 5)
