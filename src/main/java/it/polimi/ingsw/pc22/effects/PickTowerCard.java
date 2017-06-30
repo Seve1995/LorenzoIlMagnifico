@@ -17,9 +17,12 @@ public class PickTowerCard extends ChooseAsset implements Effect
 	private int floor;
 	private CardTypeEnum cardType;
 	private int diceValue;
-	private List<Asset> assetsDiscount; //This contains the assets 
-	private List<Asset> costs = new ArrayList<Asset>(); //Auxiliary arraylist that storage the card's cost
-	private List<CardModifier> currentCardModifiers = new ArrayList<CardModifier>(); //Auxiliary arraylist that storage the card modifiers associated with the cardType
+	//This contains the assets
+	private List<Asset> assetsDiscount;
+	//Auxiliary arrayList that storage the card's cost
+	private List<Asset> costs = new ArrayList<>();
+	//Auxiliary arrayList that storage the card modifiers associated with the cardType
+	private List<CardModifier> currentCardModifiers = new ArrayList<>();
 
 	public int getFloor() {
 		return floor;
@@ -37,16 +40,8 @@ public class PickTowerCard extends ChooseAsset implements Effect
 		this.cardType = cardType;
 	}
 
-	public int getDiceValue() {
-		return diceValue;
-	}
-
 	public void setDiceValue(int diceValue) {
 		this.diceValue = diceValue;
-	}
-
-	public List<Asset> getAssetsDiscount() {
-		return assetsDiscount;
 	}
 
 	public void setAssetsDiscount(List<Asset> assetsDiscount) {
@@ -233,13 +228,28 @@ public class PickTowerCard extends ChooseAsset implements Effect
 	{
 		GameMatch.getCurrentGameBoard().setCurreEffect(this);
 
-		if (cardType.equals(CardTypeEnum.ANY))
-			
-			cardType = player.getAdapter().askForCardType();
+		if (cardType.equals(CardTypeEnum.ANY) || floor == -1)
+		{
+			Long timestamp = System.currentTimeMillis();
 
-		if (floor == -1)
-			
-			floor = player.getAdapter().askFloor();
+			Long timeout = GameMatch.getTimeout();
+
+			while (System.currentTimeMillis() < timestamp + timeout)
+			{
+				try
+				{
+					Thread.sleep(100L);
+				} catch (InterruptedException e)
+				{
+					e.printStackTrace();
+				}
+
+				if (!cardType.equals(CardTypeEnum.ANY) && floor != -1)
+				{
+					break;
+				}
+			}
+		}
 
 		Tower currTower = new Tower(CardTypeEnum.ANY);
 
@@ -392,5 +402,7 @@ public class PickTowerCard extends ChooseAsset implements Effect
 					e.executeEffects(p, gb);
 		}
 	}
+
+
 	
 }

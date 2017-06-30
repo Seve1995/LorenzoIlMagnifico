@@ -83,8 +83,6 @@ public abstract class IOAdapter
 
         while(System.currentTimeMillis() < maxTimeStamp)
         {
-            //this.printMessage("Ok, now select the tower floor:");
-
             String value = getMessage();
 
             if (value == null)
@@ -115,14 +113,12 @@ public abstract class IOAdapter
 
     }
 
-    public CardTypeEnum askForCardType() {
-
+    public CardTypeEnum askForCardType()
+    {
         Long maxTimeStamp = System.currentTimeMillis() + timeout;
 
         while(System.currentTimeMillis() < maxTimeStamp)
         {
-	            //this.printMessage(new Com"Select a Card Type to pick:");
-
 	            String value = getMessage();
 
 	            if (value == null)

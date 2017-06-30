@@ -22,8 +22,20 @@ public class GameBoard implements Serializable
 		
 	}
 
-	public Tower[] getTowers() {
+	public Tower[] getTowers()
+	{
 		return towers;
+	}
+
+	public Tower getTowerByType(CardTypeEnum type)
+	{
+		for (Tower tower : towers)
+		{
+			if (tower.getTowerType().equals(type))
+				return tower;
+		}
+
+		return null;
 	}
 
 	public void setTowers(Tower[] towers) {

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.pc22.client;
 
 import it.polimi.ingsw.pc22.gamebox.Asset;
+import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
 import it.polimi.ingsw.pc22.messages.*;
 import it.polimi.ingsw.pc22.states.*;
 import javafx.application.Platform;
@@ -136,6 +137,15 @@ public class MessageHandler
         if (message instanceof CommunicationMessage)
         {
             printOnClient(((CommunicationMessage) message).getMessage());
+        }
+
+        if (message instanceof ChooseCardMessage)
+        {
+            CardTypeEnum type = ((ChooseCardMessage) message).getCardType();
+
+            Client.setGenericState(new ChooseCardState(type));
+
+            Client.setStateChanged(true);
         }
 
         /*
