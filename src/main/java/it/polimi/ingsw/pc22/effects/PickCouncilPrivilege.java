@@ -29,10 +29,10 @@ public class PickCouncilPrivilege
                 e.printStackTrace();
             }
 
+            System.out.println(chosenAssets);
+
             if (chosenAssets != null)
             {
-                System.out.println(chosenAssets);
-
                 for (Asset asset : chosenAssets)
                     player.addAsset(asset);
 

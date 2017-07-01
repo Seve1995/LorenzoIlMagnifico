@@ -112,9 +112,11 @@ public class MessageHandler
             Client.setGenericState(new PickCouncilState(numberOFPrivileges));
 
             Client.setStateChanged(true);
-            
-            printOnClient(message);
 
+            if ("rmi".equals(Client.getNetworkChoice()))
+            {
+                new Thread(new RMIAuxiliarViewThread()).start();
+            }
         }
 
         if (message instanceof ChooseServantsMessage)
@@ -124,6 +126,11 @@ public class MessageHandler
             Client.setGenericState(new ChooseServantsState());
 
             Client.setStateChanged(true);
+
+            if ("rmi".equals(Client.getNetworkChoice()))
+            {
+                new Thread(new RMIAuxiliarViewThread()).start();
+            }
         }
 
         if (message instanceof ChooseAssetsMessage)
@@ -133,6 +140,11 @@ public class MessageHandler
             Client.setGenericState(new ChooseAssetsState(assets));
 
             Client.setStateChanged(true);
+
+            if ("rmi".equals(Client.getNetworkChoice()))
+            {
+                new Thread(new RMIAuxiliarViewThread()).start();
+            }
         }
 
         if (message instanceof ExecutedAction)
@@ -153,6 +165,11 @@ public class MessageHandler
             Client.setGenericState(new ChooseCardState(type));
 
             Client.setStateChanged(true);
+
+            if ("rmi".equals(Client.getNetworkChoice()))
+            {
+                new Thread(new RMIAuxiliarViewThread()).start();
+            }
         }
 
         if (message instanceof  ChooseCostsMessage)
@@ -169,6 +186,11 @@ public class MessageHandler
             Client.setGenericState(costsState);
 
             Client.setStateChanged(true);
+
+            if ("rmi".equals(Client.getNetworkChoice()))
+            {
+                new Thread(new RMIAuxiliarViewThread()).start();
+            }
         }
 
         if (message instanceof SuspendedMessage)
