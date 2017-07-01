@@ -114,9 +114,7 @@ public class MessageHandler
             Client.setStateChanged(true);
 
             printOnClient(message);
-            
-            System.out.println("CIAO CE L'HO FATTA!");
-            
+
             if ("rmi".equals(Client.getNetworkChoice()))
             {
                 new Thread(new RMIAuxiliarViewThread()).start();
@@ -204,6 +202,25 @@ public class MessageHandler
             Client.setGenericState(new AuthenticationState());
 
             Client.setStateChanged(true);
+        }
+
+        if (message instanceof ExcommunicationMessage)
+        {
+            printOnClient(message);
+
+            Client.setGenericState(new ExcommunicateState());
+
+            Client.setStateChanged(true);
+        }
+
+        if (message instanceof EndTurnMessage)
+        {
+            //TODO IMPLEMENTARE CORRETTAMENTE
+        }
+
+        if (message instanceof ExcommunicationMessage)
+        {
+            //TODO IMPLEMENTARE CORRETTAMENTE
         }
     }
 
