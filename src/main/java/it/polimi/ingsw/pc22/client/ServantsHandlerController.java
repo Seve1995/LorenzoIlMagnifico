@@ -1,6 +1,7 @@
 package it.polimi.ingsw.pc22.client;
 
 import it.polimi.ingsw.pc22.messages.ExecutedAction;
+import it.polimi.ingsw.pc22.player.Player;
 import javafx.fxml.FXML;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
@@ -13,21 +14,25 @@ public class ServantsHandlerController implements Controller {
 
     private boolean confirmClicked = false;
     private Stage dialogStage;
+    private int output;
     
-	@FXML
-	private SpinnerValueFactory<Integer> valueFactory;
+
 	@FXML
 	private Spinner<Integer> spinner;
     @FXML
     private void handleConfirm()
     {
         confirmClicked = true;
+
+        output = spinner.getValue();
+
+        Client.getGenericState().sendToServer("" + output);
+
         dialogStage.close();
+
         Client.getController().updateScene(new ExecutedAction("action performed"));
+
     }
-
-    
-
 
     @Override
     public void updateScene(Object message) {
@@ -43,10 +48,10 @@ public class ServantsHandlerController implements Controller {
         this.confirmClicked = confirmClicked;
     }
 
-    public void setDialogStage(Stage dialogStage, SpinnerValueFactory<Integer> valueFactory)
+    public void setDialogStage(Stage dialogStage, Player p)
     {
         this.dialogStage = dialogStage;
-        this.valueFactory = valueFactory;
+        SpinnerValueFactory valueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0 , p.getServants());
         spinner.setValueFactory(valueFactory);
     }
     

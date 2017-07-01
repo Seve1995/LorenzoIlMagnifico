@@ -84,6 +84,9 @@ public class GameBoardController implements Controller {
     private Button confirm;
     @FXML
     private Spinner<Integer> servantsSpinner;
+    @FXML
+    private AnchorPane gameBoardPane;
+
 
     private GameBoard gameboard;
 
@@ -261,8 +264,8 @@ public class GameBoardController implements Controller {
     private void updateCouncilPalace()
     {
         CouncilPalace councilPalace = gameboard.getCouncilPalace();
-        int x = 362;
-        int delta = 10;
+        int x = 342;
+        int delta = 15;
         int width = 15;
         int y = 552;
 
@@ -281,11 +284,15 @@ public class GameBoardController implements Controller {
                 String path = "GUI/familiars/familiar_" + currPlayerEnum.toString().toLowerCase() + "_" + currFamiliarEnum.toString().toLowerCase() + ".png";
                 Image image = new Image(classLoader.getResourceAsStream(path));
                 imageView.setImage(image);
+                imageView.setFitHeight(8.75);
+                imageView.setFitWidth(13);
+                gameBoardPane.getChildren().add(imageView);
 
             }
             else
             {
-            	imageView.setImage(null);
+            	//imageView.setImage(null);
+                gameBoardPane.getChildren().remove(imageView);
             }
         }
     }
@@ -779,7 +786,7 @@ public class GameBoardController implements Controller {
         }
     }
 
-    public boolean servantsDialog() {
+    public boolean servantsDialog(Object message) {
         try {
 
             FXMLLoader loader = new FXMLLoader();
@@ -800,7 +807,7 @@ public class GameBoardController implements Controller {
 
             ServantsHandlerController controller = loader.getController();
 
-            controller.setDialogStage(dialogStage, servantsSpinner.getValueFactory());
+            controller.setDialogStage(dialogStage, ((ChooseServantsMessage) message).getPlayer());
             
             dialogStage.showAndWait();
 
@@ -812,13 +819,85 @@ public class GameBoardController implements Controller {
         }
         
     }
-    
-       
+
+    public boolean choiceCardDialog(Object message)
+
+    {
+        try {
+
+            FXMLLoader loader = new FXMLLoader();
+
+            loader.setLocation(getClassLoader().getResource("GUI/TowerChoice.fxml"));
+
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage dialogStage = new Stage();
+
+            dialogStage.setTitle("Choices");
+
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+
+            Scene scene = new Scene(page);
+
+            dialogStage.setScene(scene);
+
+            PrivilegeDialogController controller = loader.getController();
+
+            controller.setDialogStage(dialogStage, message);
+
+            dialogStage.showAndWait();
+
+            return controller.isConfirmClicked();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    public boolean choiceCostAssetDialog(Object message) {
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader();
+
+            loader.setLocation(getClassLoader().getResource("GUI/ChoiceCost&Asset.fxml"));
+
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage dialogStage = new Stage();
+
+            dialogStage.setTitle("Choices");
+
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+
+            Scene scene = new Scene(page);
+
+            dialogStage.setScene(scene);
+
+            PrivilegeDialogController controller = loader.getController();
+
+            controller.setDialogStage(dialogStage, message);
+
+            dialogStage.showAndWait();
+
+            return controller.isConfirmClicked();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
     @Override
     public void updateScene(Object message)
     {
     	if (message instanceof CommunicationMessage)
+    	{
     		info.setText(((CommunicationMessage) message).getMessage());
+    	}
 
     	if (message instanceof GameStatusMessage)
     	{
@@ -842,25 +921,36 @@ public class GameBoardController implements Controller {
 
             updatePlayerBoard();
         }
-
         if (message instanceof ChooseAssetsMessage)
         {
+            choiceCostAssetDialog(message);
 
+            updatePlayerBoard();
+
+            updateGameBoard();
         }
 
         if (message instanceof ChooseCardMessage)
         {
+            choiceCardDialog(message);
 
+            updateGameBoard();
+
+            updatePlayerBoard();
         }
 
         if (message instanceof ChooseCostsMessage)
         {
+            choiceCostAssetDialog(message);
 
+            updatePlayerBoard();
+
+            updateGameBoard();
         }
 
         if (message instanceof ChooseServantsMessage)
         {
-            servantsDialog();
+            servantsDialog(message);
 
             updatePlayerBoard();
 
