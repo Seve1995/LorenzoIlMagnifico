@@ -52,7 +52,6 @@ public abstract class IOAdapter
         {
  		   StringBuilder sb = new StringBuilder("Choose the familiar member for the bonus:\n");
 
- 		   //TODO SISTEMARE STA COSA; BISOGNA CHIAMARE UNA FUNZIONE STATICA ESTERNA!!
 		   for (FamilyMember f : familyMembers)
 			   sb.append(f.toString());
 
@@ -146,7 +145,7 @@ public abstract class IOAdapter
 
         if ("L".equalsIgnoreCase(login[2]))
         {
-            player = loginUser(login[0],login[1]);
+            player = loginPlayer(login[0],login[1]);
         }
 
         if ("S".equalsIgnoreCase(login[2]))
@@ -300,13 +299,14 @@ public abstract class IOAdapter
         if (gameMatch.getPlayerCounter() == 2)
             new Thread(gameMatch).start();
 
-        printMessage(new CommunicationMessage("Player: " + player.getUsername() + " joined GameMatch - " + gameName));
+        printMessage(new CommunicationMessage("Player: " + player.getUsername()
+                + " joined GameMatch - " + gameName));
 
         return true;
     }
 
 
-    private synchronized Player loginUser(String username, String password)
+    private synchronized Player loginPlayer(String username, String password)
     {
         Map<String, Player> playerMap = GameServer.getPlayersMap();
 
@@ -334,6 +334,7 @@ public abstract class IOAdapter
         }
 
         player.setLogged(true);
+        player.setSuspended(false);
 
         return player;
     }

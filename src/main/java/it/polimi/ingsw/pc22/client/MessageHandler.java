@@ -170,41 +170,15 @@ public class MessageHandler
 
             Client.setStateChanged(true);
         }
-        /*
-        if ("show board".equals(msgReceived))
+
+        if (message instanceof SuspendedMessage)
         {
-            //PlayerBoard board = player.getPlayerBoard();
+            printOnClient(message);
 
-            //player.getAdapter().printMessage(board.toString());
+            Client.setGenericState(new AuthenticationState());
 
-            //continue;
+            Client.setStateChanged(true);
         }
-
-
-        if ("show cards".equals(msgReceived))
-        {
-            //PlayerBoard board = player.getPlayerBoard();
-
-            //IOAdapter adapter = player.getAdapter();
-
-            //adapter.printMessage(board.getTerritories().toString());
-            //adapter.printMessage(board.getBuildings().toString());
-            //adapter.printMessage(board.getCharacters().toString());
-            //adapter.printMessage(board.getVentures().toString());
-
-            //adapter.printMessage(board.getLeaderCards().toString());
-
-            continue;
-        }
-
-        if("EXIT".equalsIgnoreCase(msgReceived))
-        {
-            System.out.println("Shutting down input");
-
-            socket.close();
-
-            break;
-        }*/
     }
 
     private static void printOnClient(Object message)

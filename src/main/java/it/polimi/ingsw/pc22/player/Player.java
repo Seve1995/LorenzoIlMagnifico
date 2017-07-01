@@ -16,7 +16,7 @@ public class Player implements Serializable
 	private String password;
 
 	private boolean isLogged = false;
-
+	private boolean isInMatch = false;
 	private boolean isSuspended = false;
 
 	private PlayerColorsEnum playerColorsEnum;
@@ -76,10 +76,6 @@ public class Player implements Serializable
 
 	public String getPassword() {
 		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public boolean isLogged() {
@@ -400,6 +396,14 @@ public class Player implements Serializable
 
 	public void setFamiliarPositioned(boolean familiarPositioned) {
 		this.familiarPositioned = familiarPositioned;
+	}
+
+	public boolean isInMatch() {
+		return isInMatch;
+	}
+
+	public void setInMatch(boolean inMatch) {
+		isInMatch = inMatch;
 	}
 
 	public int getAsset(AssetType assetType)

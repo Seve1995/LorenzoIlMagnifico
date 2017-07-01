@@ -4,6 +4,7 @@ import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.messages.GameStatusMessage;
+import it.polimi.ingsw.pc22.messages.SuspendedMessage;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.*;
 import org.json.JSONObject;
@@ -54,7 +55,7 @@ public class GameMatch implements Runnable
 	
 	public GameMatch(Long timeOut, int maxPlayersNumber)
 	{
-		this.timeout = timeOut;
+		GameMatch.timeout = timeOut;
 		this.maxPlayersNumber = maxPlayersNumber;
 	}
 	
@@ -94,7 +95,8 @@ public class GameMatch implements Runnable
 
 		for (Player player : players)
 		{
-			System.out.println(player.getAdapter());
+			//TODO RICORDARSI POI ALLA FINE DI RESETTARE LO STATO
+			player.setInMatch(true);
 		}
 
 		this.started = true;
@@ -151,10 +153,11 @@ public class GameMatch implements Runnable
 				
 				addFamiliarsValue();
 			}
-			
-				
+
 			for(Player player : players)
 			{
+				if (player.isSuspended()) continue;
+
 				for (Player p : players)
 				{
 					if (p.equals(player) )
@@ -195,6 +198,13 @@ public class GameMatch implements Runnable
 				}
 
 				adapter.printMessage(new GameStatusMessage(gameBoard, player, "finished"));
+
+				if (!currentPlayer.isHasPassed() && !currentPlayer.isFamiliarPositioned())
+				{
+					player.setSuspended(true);
+
+					adapter.printMessage(new SuspendedMessage("YOU HAVE BEEN SUSPENDED, PLEASE RE-LOG"));
+				}
 			}
 
 			GameBoardUtils.resetPlayerStatus(players);
@@ -524,7 +534,6 @@ public class GameMatch implements Runnable
 		{
 			if(p.getVictoryPoints() > winner)
 			{
-				
 				winner = p.getVictoryPoints(); 
 			
 				winnerName = p.getUsername();
@@ -537,7 +546,6 @@ public class GameMatch implements Runnable
 
 
 	private void printWinnerNameToAll(List<Player>  players, String winnerName)
-
 	{
 		for (Player p : players)
 		{
@@ -553,10 +561,6 @@ public class GameMatch implements Runnable
 
 	public Boolean getStarted() {
 		return started;
-	}
-
-	public void setStarted(Boolean started) {
-		this.started = started;
 	}
 
 	public List<Player> getPlayers() {

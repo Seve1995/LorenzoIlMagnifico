@@ -59,6 +59,13 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
                 player = authenticate(authentication);
             }
 
+            if (player.isInMatch())
+            {
+                printMessage(new LoginMessage(true, true, player));
+
+                return;
+            }
+
             printMessage(new LoginMessage(true, false, player));
 
             while (!started)
