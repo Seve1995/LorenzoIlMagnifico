@@ -1,0 +1,81 @@
+package it.polimi.ingsw.pc22.client;
+
+import it.polimi.ingsw.pc22.messages.ChooseAssetsMessage;
+import it.polimi.ingsw.pc22.messages.ChooseCostsMessage;
+import it.polimi.ingsw.pc22.messages.ExecutedAction;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleButton;
+import javafx.stage.Stage;
+
+/**
+ * Created by matteo on 01/07/17.
+ */
+public class ChoiceCostAssetController implements Controller {
+
+    private boolean confirmClicked = false;
+    private Stage dialogStage;
+    private String output;
+    private Label startingLabel;
+
+    @FXML
+    private ToggleButton choice1;
+    @FXML
+    private ToggleButton choice2;
+
+    @FXML
+    private void handleChoice1()
+    {
+        output = "1";
+    }
+
+    @FXML
+    private void handleChoice2()
+    {
+        output = "2";
+    }
+
+
+    @FXML
+    private void handleConfirm()
+    {
+        Client.getGenericState().sendToServer(output);
+        dialogStage.close();
+        Client.getController().updateScene(new ExecutedAction("action performed"));
+    }
+
+    @FXML
+    private void setDialogStage(Stage dialogStage, Object message)
+    {
+        this.dialogStage = dialogStage;
+        if (message instanceof ChooseAssetsMessage)
+        {
+            startingLabel.setText("Choose one asset:");
+
+        }
+
+        if (message instanceof ChooseCostsMessage)
+        {
+            startingLabel.setText("Do you want to spend military points or other Assets shown on the card");
+        }
+
+        else
+        {
+            startingLabel.setText("Apparently, an error occurred!");
+        }
+
+
+    }
+
+
+
+
+    @Override
+    public void updateScene(Object message)
+    {
+
+    }
+
+
+}
