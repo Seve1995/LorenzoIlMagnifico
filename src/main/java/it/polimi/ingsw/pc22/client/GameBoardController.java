@@ -492,7 +492,6 @@ public class GameBoardController implements Controller {
 
     		    if (t.getTowerCells().get(i).getDevelopmentCard() != null)
     		    {
-
                     int currentCardNumber = t.getTowerCells().get(i).getDevelopmentCard().getCardNumber();
                     ClassLoader classLoader = Client.class.getClassLoader();
                     String path = "GUI/Cards/devcards_f_en_c_" + currentCardNumber + ".png";

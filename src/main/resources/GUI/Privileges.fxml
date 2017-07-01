@@ -12,14 +12,8 @@
             <Image url="@background1.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="40.0" layoutY="50.0" text="You have x more privileges left." fx:id="startingLabel">
-         <font>
-            <Font username="System Bold" size="13.0" />
-         </font></Label>
-      <Label layoutX="40.0" layoutY="82.0" text="Choose a privilege:">
-         <font>
-            <Font username="System Bold" size="13.0" />
-         </font></Label>
+      <Label layoutX="40.0" layoutY="50.0" text="You have x more privileges left." fx:id="startingLabel"></Label>
+      <Label layoutX="40.0" layoutY="82.0" text="Choose a privilege:"></Label>
       <ToggleButton layoutX="40.0" layoutY="135.0" mnemonicParsing="false" text="1 WOOD &amp; 1 STONE" onAction="#handle1" fx:id="toggle1"/>
       <ToggleButton layoutX="39.0" layoutY="173.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="149.0" text="2 SERVANTS" onAction="#handle2" fx:id="toggle2"/>
       <ToggleButton layoutX="41.0" layoutY="212.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="149.0" text="2 COIN" onAction="#handle3" fx:id="toggle3"/>

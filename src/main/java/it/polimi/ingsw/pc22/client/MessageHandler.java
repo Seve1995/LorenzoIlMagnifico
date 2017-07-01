@@ -113,6 +113,10 @@ public class MessageHandler
 
             Client.setStateChanged(true);
 
+            printOnClient(message);
+            
+            System.out.println("CIAO CE L'HO FATTA!");
+            
             if ("rmi".equals(Client.getNetworkChoice()))
             {
                 new Thread(new RMIAuxiliarViewThread()).start();
