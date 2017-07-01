@@ -120,7 +120,7 @@ public class RmiServerImpl implements RMIServerInterface
 
         Action action = ActionFactory.createAction(actionMessage, GameMatch.getCurrentPlayer());
 
-        System.out.println("Action: " + action);
+        System.out.println("Action created: " + action);
 
         if (action == null)
         {

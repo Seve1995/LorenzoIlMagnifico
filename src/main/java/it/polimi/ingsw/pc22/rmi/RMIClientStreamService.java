@@ -10,7 +10,5 @@ import java.rmi.RemoteException;
  */
 public interface RMIClientStreamService extends Remote
 {
-    String getMessage() throws RemoteException;
-
     void printMessage(Message message) throws RemoteException;
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.pc22.client;
 
+import it.polimi.ingsw.pc22.messages.GameStatusMessage;
 import it.polimi.ingsw.pc22.messages.Message;
 import it.polimi.ingsw.pc22.rmi.RMIClientStreamService;
 import it.polimi.ingsw.pc22.utils.ConsoleReader;
@@ -24,56 +25,6 @@ public class RMIClientStreamServiceImpl implements RMIClientStreamService
     {
         this.timeout = timeout;
     }
-
-    @Override
-    public String getMessage() throws RemoteException
-    {
-        ExecutorService ex = Executors.newSingleThreadExecutor();
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        
-        String message;
-
-        while (true)
-        {
-            if (Client.isStateChanged())
-            {
-                Client.getGenericState().printState();
-
-                Client.setStateChanged(false);
-            }
-
-            Future<String> result = ex.submit(new ConsoleReader(reader));
-
-            try
-            {
-                message = result.get(this.timeout, TimeUnit.MILLISECONDS);
-
-            }
-            catch (ExecutionException | InterruptedException e)
-            {
-                LOGGER.log(Level.INFO, "Cancelling reading task", e);
-
-                return null;
-            }
-            catch (TimeoutException e)
-            {
-                result.cancel(true);
-
-                LOGGER.log(Level.INFO, "Timeout EXPIRED", e);
-
-                return null;
-            }
-
-            if (!Client.getGenericState().validate(message))
-                continue;
-
-            return message;
-        }
-
-
-    }
-
 
     @Override
     public void printMessage(Message message) throws RemoteException
