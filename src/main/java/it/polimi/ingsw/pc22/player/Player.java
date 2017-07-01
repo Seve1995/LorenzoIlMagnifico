@@ -10,8 +10,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Player implements Serializable
-{	
-	private String name;
+{
+	private String username;
+
+	private String password;
+
+	private boolean isLogged = false;
+
+	private boolean isSuspended = false;
+
 	private PlayerColorsEnum playerColorsEnum;
 	private int numberOfMatch;
 	private int woods = 2;
@@ -52,12 +59,43 @@ public class Player implements Serializable
 	private boolean hasPassed = false;
 	private boolean familiarPositioned = false;
 
-	public String getName() {
-		return name;
+	public Player(String username, String password, boolean isLogged)
+	{
+		this.username = username;
+		this.password = password;
+		this.isLogged = isLogged;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public boolean isLogged() {
+		return isLogged;
+	}
+
+	public void setLogged(boolean logged) {
+		isLogged = logged;
+	}
+
+	public boolean isSuspended() {
+		return isSuspended;
+	}
+
+	public void setSuspended(boolean suspended) {
+		isSuspended = suspended;
 	}
 
 	public PlayerColorsEnum getPlayerColorsEnum() {
@@ -404,47 +442,45 @@ public class Player implements Serializable
 		
 		int value = asset.getValue();
 
+		switch (assetType)
+		{
+			case "coin":
+				this.coins += value;
+				if (coins<0) coins=0;
+				break;
 
-		
-		switch (assetType) {
-		
-		case "coin":
-			this.coins += value;
-			if (coins<0) coins=0;
-			break;
-			
-		case "wood":
-			this.woods += value;
-			if (woods<0) woods=0;
-			break;
-			
-		case "stone":
-			this.stones += value;
-			if (stones<0) stones=0;
-			break;
-			
-		case "servant":
-			this.servants += value;
-			if (servants<0) servants=0;
-			break;
-			
-		case "faithpoint":
-			this.faithPoints += value;
-			if (faithPoints<0) faithPoints=0;
-			break;
-			
-		case "victorypoint":
-			this.victoryPoints += value;
-			if (victoryPoints < 0) victoryPoints=0;
-			break;
-			
-		case "militarypoint":
-			this.militaryPoints += value;
-			if (militaryPoints<0) militaryPoints=0;
-			break;
+			case "wood":
+				this.woods += value;
+				if (woods<0) woods=0;
+				break;
 
-		default:
-			break;
+			case "stone":
+				this.stones += value;
+				if (stones<0) stones=0;
+				break;
+
+			case "servant":
+				this.servants += value;
+				if (servants<0) servants=0;
+				break;
+
+			case "faithpoint":
+				this.faithPoints += value;
+				if (faithPoints<0) faithPoints=0;
+				break;
+
+			case "victorypoint":
+				this.victoryPoints += value;
+				if (victoryPoints < 0) victoryPoints=0;
+				break;
+
+			case "militarypoint":
+				this.militaryPoints += value;
+				if (militaryPoints<0) militaryPoints=0;
+				break;
+
+			default:
+				break;
 		}
 		
 	}
@@ -524,7 +560,7 @@ public class Player implements Serializable
 
 	@Override
 	public String toString() {
-		return "Name:" + name + '|' 
+		return "Name:" + username + '|'
 				+ "NumOfMatch:" + numberOfMatch +'|'
 				+ "Woods:" + woods + '|'
 				+ "Stones:" + stones + '|'
@@ -573,7 +609,7 @@ public class Player implements Serializable
 		if (removeTowerBonus != player.removeTowerBonus) return false;
 		if (hasPassed != player.hasPassed) return false;
 		if (familiarPositioned != player.familiarPositioned) return false;
-		if (name != null ? !name.equals(player.name) : player.name != null) return false;
+		if (username != null ? !username.equals(player.username) : player.username != null) return false;
 		if (playerColorsEnum != player.playerColorsEnum) return false;
 		if (leaderCards != null ? !leaderCards.equals(player.leaderCards) : player.leaderCards != null) return false;
 		if (cardModifiers != null ? !cardModifiers.equals(player.cardModifiers) : player.cardModifiers != null)
@@ -588,7 +624,7 @@ public class Player implements Serializable
 
 	@Override
 	public int hashCode() {
-		int result = name != null ? name.hashCode() : 0;
+		int result = username != null ? username.hashCode() : 0;
 		result = 31 * result + (playerColorsEnum != null ? playerColorsEnum.hashCode() : 0);
 		result = 31 * result + numberOfMatch;
 		result = 31 * result + woods;

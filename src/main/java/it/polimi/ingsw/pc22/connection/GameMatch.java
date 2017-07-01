@@ -518,7 +518,7 @@ public class GameMatch implements Runnable
 				
 				winner = p.getVictoryPoints(); 
 			
-				winnerName = p.getName(); 
+				winnerName = p.getUsername();
 			}
 		}
 

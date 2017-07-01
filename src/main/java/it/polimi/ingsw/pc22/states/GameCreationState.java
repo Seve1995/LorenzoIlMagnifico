@@ -43,7 +43,7 @@ public class GameCreationState implements GenericState
     @Override
     public void sendToServer(String string)
     {
-        string = Client.getPlayer().getName() + ":" + string;
+        string = Client.getPlayer().getUsername() + ":" + string;
 
         if ("rmi".equals(Client.getNetworkChoice()))
         {

@@ -5,7 +5,7 @@ import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.rmi.RMIServerInterface;
-import it.polimi.ingsw.pc22.utils.UserLoader;
+import it.polimi.ingsw.pc22.utils.PlayerLoader;
 import org.json.JSONException;
 
 import java.io.IOException;
@@ -32,7 +32,7 @@ public class GameServer
 
 	private static final int RMI_PORT = 5439;
 
-	private static Map<String, User> usersMap;
+	private static Map<String, Player> playerMap;
 
     private static final Logger LOGGER = Logger.getLogger(GameServer.class.getName());
 
@@ -75,7 +75,7 @@ public class GameServer
 		{
 			serverSocket = new ServerSocket(SOCKET_PORT);
 
-			usersMap = loadUsers();
+			playerMap = loadPlayers();
 
 			while(true)
 			{
@@ -111,9 +111,9 @@ public class GameServer
         }
     }
 	
-	protected static Map<String, User> loadUsers() throws IOException, JSONException
+	protected static Map<String, Player> loadPlayers() throws IOException, JSONException
 	{
-		Map<String, User> usersMap = UserLoader.generateUserMap();
+		Map<String, Player> usersMap = PlayerLoader.generatePlayerMap();
 		
 		return usersMap;
 	}
@@ -123,17 +123,8 @@ public class GameServer
 		return gameMatchMap;
 	}
 
-	public static void setGameMatchMap(Map<String, GameMatch> gameMatchMap) 
-	{
-		GameServer.gameMatchMap = gameMatchMap;
-	}
-
-	public static Map<String, User> getUsersMap() {
-		return usersMap;
-	}
-
-	public static void setUsersMap(Map<String, User> usersMap) {
-		GameServer.usersMap = usersMap;
+	public static Map<String, Player> getPlayersMap() {
+		return playerMap;
 	}
 
 	public class PlayerComparator implements Comparator<Player>
@@ -143,7 +134,7 @@ public class GameServer
 		{
 			int value = Integer.compare(o1.getPriority(), o2.getPriority());
 
-			if (value == 0) value = o1.getName().compareTo(o2.getName());
+			if (value == 0) value = o1.getUsername().compareTo(o2.getUsername());
 
 			return value;
 		}

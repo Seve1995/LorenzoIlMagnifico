@@ -1,7 +1,6 @@
 package it.polimi.ingsw.pc22.adapters;
 
 import it.polimi.ingsw.pc22.connection.GameServer;
-import it.polimi.ingsw.pc22.connection.User;
 import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.messages.Message;
 import it.polimi.ingsw.pc22.player.Player;
@@ -31,9 +30,9 @@ public class RMIIOAdapter extends IOAdapter
     @Override
     public void endConnection(Player player) throws IOException
     {
-        String userName = player.getName();
+        String userName = player.getUsername();
 
-        User user = GameServer.getUsersMap().get(userName);
+        Player user = GameServer.getPlayersMap().get(userName);
 
         user.setLogged(false);
     }

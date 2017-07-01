@@ -1,7 +1,5 @@
 package it.polimi.ingsw.pc22.adapters;
 
-import it.polimi.ingsw.pc22.connection.GameServer;
-import it.polimi.ingsw.pc22.connection.User;
 import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.messages.LoginMessage;
 import it.polimi.ingsw.pc22.messages.Message;
@@ -86,11 +84,7 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
     {
         if (player != null)
         {
-            String userName = player.getName();
-
-            User user = GameServer.getUsersMap().get(userName);
-
-            user.setLogged(false);
+            player.setLogged(false);
         }
 
         PrintWriter printWriter =

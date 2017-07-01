@@ -2,7 +2,6 @@ package it.polimi.ingsw.pc22.adapters;
 
 import it.polimi.ingsw.pc22.connection.GameMatch;
 import it.polimi.ingsw.pc22.connection.GameServer;
-import it.polimi.ingsw.pc22.connection.User;
 import it.polimi.ingsw.pc22.gamebox.ColorsEnum;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.messages.CommunicationMessage;
@@ -10,7 +9,7 @@ import it.polimi.ingsw.pc22.messages.ErrorMessage;
 import it.polimi.ingsw.pc22.messages.Message;
 import it.polimi.ingsw.pc22.messages.TimerMessage;
 import it.polimi.ingsw.pc22.player.Player;
-import it.polimi.ingsw.pc22.utils.UserLoader;
+import it.polimi.ingsw.pc22.utils.PlayerLoader;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -143,55 +142,45 @@ public abstract class IOAdapter
 
         String[] login = authentication.split(" ");
 
-        User user = null;
+        Player player = null;
 
         if ("L".equalsIgnoreCase(login[2]))
         {
-            user = loginUser(login[0],login[1]);
+            player = loginUser(login[0],login[1]);
         }
 
         if ("S".equalsIgnoreCase(login[2]))
         {
-            user = signUp(login[0], login[1]);
+            player = signUp(login[0], login[1]);
 
             updateJson();
         }
 
-        if (user == null) return null;
-
-        Player player = new Player();
-
-        player.setName(user.getUsername());
+        if (player == null) return null;
 
         return player;
     }
 
     public boolean gameHandling(String choice) throws IOException
     {
-        String[] userString = choice.split(":");
+        String[] playerString = choice.split(":");
 
-        System.out.println(userString[0] + " " + userString[1]);
+        System.out.println(playerString[0] + " " + playerString[1]);
 
-        Map<String, User> usersMap = GameServer.getUsersMap();
+        Map<String, Player> playerMap = GameServer.getPlayersMap();
 
-        User user = usersMap.get(userString[0]);
+        Player player = playerMap.get(playerString[0]);
 
-        if (user == null)
+        if (player == null)
         {
             printMessage(new ErrorMessage("Invalid INPUT no user found"));
 
             return false;
         }
 
-        String playerName = user.getUsername();
-
-        Player player = new Player();
-
-        player.setName(playerName);
-
         Pattern gameMatcher = Pattern.compile("(^(\\w+) (C|c|J|j|R|r)$)");
 
-        Matcher matcher = gameMatcher.matcher(userString[1]);
+        Matcher matcher = gameMatcher.matcher(playerString[1]);
 
         if (!matcher.find())
         {
@@ -200,7 +189,7 @@ public abstract class IOAdapter
             return false;
         }
 
-        String[] matchStrings = userString[1].split(" ");
+        String[] matchStrings = playerString[1].split(" ");
 
         Map<String, GameMatch> gameMatchMap = GameServer.getGameMatchMap();
 
@@ -260,7 +249,7 @@ public abstract class IOAdapter
 
         startNewGameMatch(gameName, player);
 
-        printMessage(new CommunicationMessage("Player: " + player.getName() + " created GameMatch - " + gameName));
+        printMessage(new CommunicationMessage("Player: " + player.getUsername() + " created GameMatch - " + gameName));
 
         return true;
     }
@@ -311,62 +300,62 @@ public abstract class IOAdapter
         if (gameMatch.getPlayerCounter() == 2)
             new Thread(gameMatch).start();
 
-        printMessage(new CommunicationMessage("Player: " + player.getName() + " joined GameMatch - " + gameName));
+        printMessage(new CommunicationMessage("Player: " + player.getUsername() + " joined GameMatch - " + gameName));
 
         return true;
     }
 
 
-    private synchronized User loginUser(String username, String password)
+    private synchronized Player loginUser(String username, String password)
     {
-        Map<String, User> usersMap = GameServer.getUsersMap();
+        Map<String, Player> playerMap = GameServer.getPlayersMap();
 
-        User user = usersMap.get(username);
+        Player player = playerMap.get(username);
 
-        if (user == null)
+        if (player == null)
         {
             printMessage(new ErrorMessage("User not found"));
 
             return null;
         }
 
-        if (!user.getPassword().equals(password))
+        if (!player.getPassword().equals(password))
         {
             printMessage(new ErrorMessage("Wrong password"));
 
             return null;
         }
 
-        if (user.isLogged())
+        if (player.isLogged() && !player.isSuspended())
         {
             printMessage(new ErrorMessage("Invalid login"));
 
             return null;
         }
 
-        user.setLogged(true);
+        player.setLogged(true);
 
-        return user;
+        return player;
     }
 
-    private synchronized User signUp(String username, String password) throws IOException
+    private synchronized Player signUp(String username, String password) throws IOException
     {
-        Map<String, User> usersMap = GameServer.getUsersMap();
+        Map<String, Player> playerMap = GameServer.getPlayersMap();
 
-        User user = usersMap.get(username);
+        Player player = playerMap.get(username);
 
-        if (user != null)
+        if (player != null)
         {
             printMessage(new ErrorMessage("Invalid login"));
 
             return null;
         }
 
-        user = new User(username, password, true);
+        player = new Player(username, password, true);
 
-        usersMap.put(user.getUsername(), user);
+        playerMap.put(player.getUsername(), player);
 
-        return user;
+        return player;
     }
 
     //TODO FAR SI CHE I VALORI VENGANO GESTITI DAL PARSER JSON
@@ -394,9 +383,9 @@ public abstract class IOAdapter
 
     synchronized private void updateJson() throws IOException
     {
-        Map<String, User> usersMap = GameServer.getUsersMap();
+        Map<String, Player> playerMap = GameServer.getPlayersMap();
 
-        UserLoader.refreshJson(usersMap);
+        PlayerLoader.refreshJson(playerMap);
     }
 
 }

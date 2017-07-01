@@ -191,7 +191,7 @@ public class GameBoardUtils {
 			adapter.printMessage(player.toString());
 			
 			adapter.printMessage("Number of round:" + currentRoundNumber + "|Number of era:" + era);
-			adapter.printMessage("It's " + currPlayer.getName() + " turn.");
+			adapter.printMessage("It's " + currPlayer.getUsername() + " turn.");
 			*/
 			
 		}
