@@ -84,7 +84,9 @@ public class GameBoardController implements Controller {
     private Button confirm;
     @FXML
     private Spinner<Integer> servantsSpinner;
-
+    @FXML
+    private AnchorPane gameBoardPane;
+    
     private GameBoard gameboard;
 
     private Player player;
@@ -261,14 +263,14 @@ public class GameBoardController implements Controller {
     private void updateCouncilPalace()
     {
         CouncilPalace councilPalace = gameboard.getCouncilPalace();
-        int x = 362;
-        int delta = 10;
+        int x = 342;
+        int delta = 15;
         int width = 15;
         int y = 552;
+        
 
         for (int i = 0; i < councilPalace.getCouncilPalaceCells().length; i++)
         {
-
             ImageView imageView = new ImageView();
             imageView.setX(x + width + i * delta);
             imageView.setY(y);
@@ -281,11 +283,16 @@ public class GameBoardController implements Controller {
                 String path = "GUI/familiars/familiar_" + currPlayerEnum.toString().toLowerCase() + "_" + currFamiliarEnum.toString().toLowerCase() + ".png";
                 Image image = new Image(classLoader.getResourceAsStream(path));
                 imageView.setImage(image);
+                //imageView.setScaleX(0.05);
+                //imageView.setScaleY(0.05);
+                imageView.setFitHeight(8.75);
+                imageView.setFitWidth(13);
+            	gameBoardPane.getChildren().add(imageView);
 
             }
             else
             {
-            	imageView.setImage(null);
+            	gameBoardPane.getChildren().remove(imageView);
             }
         }
     }

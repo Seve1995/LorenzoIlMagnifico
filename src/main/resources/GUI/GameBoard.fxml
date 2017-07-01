@@ -25,7 +25,7 @@
       </ImageView>
       <ScrollPane layoutX="10.0" layoutY="10.0" prefHeight="950.0" prefWidth="678.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <content>
-            <AnchorPane>
+            <AnchorPane fx:id="gameBoardPane">
                <children>
                   <ImageView fitHeight="950.0" fitWidth="678.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0384521484375" AnchorPane.topAnchor="0.0">
                      <image>
