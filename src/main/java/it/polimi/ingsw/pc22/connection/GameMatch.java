@@ -4,7 +4,6 @@ import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.messages.GameStatusMessage;
-import it.polimi.ingsw.pc22.messages.SuspendedMessage;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.*;
 import org.json.JSONObject;
@@ -223,7 +222,7 @@ public class GameMatch implements Runnable
 							excommunicationCards, gameBoard);
 		}
 
-		GameBoardUtils.endGameExcommunicatonHandling(players, excommunicationCards, gameBoard, era);
+		GameBoardUtils.endGameExcommunicationHandling(players, excommunicationCards, gameBoard, era);
 
 		//check excommunication
 		GameBoardUtils.sumFinalPoints(players, gameBoard);

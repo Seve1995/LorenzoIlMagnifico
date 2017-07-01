@@ -79,47 +79,6 @@ public abstract class IOAdapter
         return null;
     }
 
-    public int askExcommunication() {
-
-        Long maxTimeStamp = System.currentTimeMillis() + timeout;
-
-        while(System.currentTimeMillis() < maxTimeStamp)
-        {
-            /*this.printMessage("Choose an action:\n"
-                    + "1) Show your support to the Church (you'll lose all yours faith points & you'll gain victory points)\n"
-                    + "2) Take the excommunication (you won't lose your faith points)");
-                    */
-
-            String value = getMessage();
-
-            if (value == null)
-                continue;
-
-            Integer choice;
-
-            try
-            {
-                choice = Integer.parseInt(value);
-            }
-            catch (NumberFormatException e)
-            {
-                this.printMessage(new ErrorMessage("ERROR! You must enter a valid input"));
-
-                continue;
-            }
-
-            if (choice !=1 || choice !=2)
-                continue;
-
-            return choice;
-        }
-
-        printMessage(new TimerMessage("Timeout Azione terminato"));
-
-        return -1;
-
-    }
-
     public void printWinnerNameToSingleUser(String playerName)
     {
         this.printMessage(new CommunicationMessage("The winner is: " + playerName));

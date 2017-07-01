@@ -1,8 +1,11 @@
 package it.polimi.ingsw.pc22.utils;
 
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
+import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
+import it.polimi.ingsw.pc22.connection.GameMatch;
 import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.gamebox.*;
+import it.polimi.ingsw.pc22.messages.ExcommunicationMessage;
 import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.ArrayList;
@@ -10,11 +13,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GameBoardUtils {
+public class GameBoardUtils
+{
+	private static Player currentPlayer;
 
+	public static Player getCurrentPlayer()
+	{
+		return currentPlayer;
+	}
 
 	//FORSE NON È MEGLIO GESIRE ANCHE QUESTA COME UNA ENUM?
-	private static final Map<Integer, Integer> fromFaithToVictory = new HashMap<Integer, Integer>();
+	private static final Map<Integer, Integer> fromFaithToVictory = new HashMap<>();
 
 	static
 	{
@@ -69,11 +78,10 @@ public class GameBoardUtils {
 	}
 
 
-	private static void chooseExcommunication(Player player, int era, List<ExcommunicationCard> excommunicationCards,
+	private static void chooseExcommunication
+		(Player player, int era, List<ExcommunicationCard> excommunicationCards,
 									   GameBoard gameBoard)
 	{
-
-
 		int faithPoints = calculateFaithPointsFromEra(era);
 
 		if (player.getFaithPoints() < faithPoints)
@@ -83,9 +91,34 @@ public class GameBoardUtils {
 
 		else
 		{
-			int choice = player.getAdapter().askExcommunication();
+			IOAdapter adapter = player.getAdapter();
 
-			if (choice == 1)
+			adapter.printMessage(new ExcommunicationMessage(excommunicationCards.get(era)));
+
+			if (adapter instanceof SocketIOAdapter)
+				new Thread(new ReceiveExcommunicationDecisionThread()).start();
+
+			Long timestamp = System.currentTimeMillis();
+
+			Long timeout = GameMatch.getTimeout();
+
+			while (System.currentTimeMillis() < timestamp + timeout)
+			{
+				try
+				{
+					Thread.sleep(100L);
+				} catch (InterruptedException e)
+				{
+					e.printStackTrace();
+				}
+
+				if (player.getExcommunicationChoice() != null)
+				{
+					break;
+				}
+			}
+
+			if (player.getExcommunicationChoice() == 1)
 			{
 				player.setFaithPoints(0);
 
@@ -95,9 +128,7 @@ public class GameBoardUtils {
 
 					player.addAsset(victoryBonus);
 				}
-
 			}
-
 			else
 			{
 				excommunicate(player, excommunicationCards, era, gameBoard);
@@ -106,16 +137,16 @@ public class GameBoardUtils {
 
 	}
 
-	public static void excommunicationHandling(List<Player> players,
-			 int playerCounter, int currentRoundNumber, int era, List<ExcommunicationCard> excommunicationCards,
-												GameBoard gameBoard)
+	public static void excommunicationHandling
+		(List<Player> players, int playerCounter, int currentRoundNumber,
+			 int era, List<ExcommunicationCard> excommunicationCards, GameBoard gameBoard)
 	{
-
-
 		if (((playerCounter < 5) && ((currentRoundNumber==8)) || ((playerCounter == 5) && (currentRoundNumber) == 6)))
 		{
 			for (Player p : players)
 			{
+				currentPlayer = p;
+
 				chooseExcommunication(p, era, excommunicationCards, gameBoard);
 			}
 		}
@@ -124,18 +155,21 @@ public class GameBoardUtils {
 		{
 			for (Player p : players)
 			{
+				currentPlayer = p;
+
 				chooseExcommunication(p, era, excommunicationCards, gameBoard);
 			}
 		}
 	}
 
 	
-	public static void endGameExcommunicatonHandling(List<Player> players, List<ExcommunicationCard> excommunicationCards,
-													 GameBoard gameBoard, int era)
+	public static void endGameExcommunicationHandling
+			(List<Player> players, List<ExcommunicationCard> excommunicationCards, GameBoard gameBoard, int era)
 	{
-
 		for (Player p : players)
 		{
+			currentPlayer = p;
+
 			chooseExcommunication(p, era, excommunicationCards, gameBoard);
 		}
 
@@ -168,32 +202,6 @@ public class GameBoardUtils {
 			System.out.println(color.toString());
 
 			coins++;
-		}
-	}
-
-	/*public static int getEra(int currentRoundNumber, int playerCounter)
-	{
-		return EraCalc.getEraNumber(playerCounter, currentRoundNumber);
-	}
-	*/
-	public static void printToPlayers(Player currPlayer, List<Player> players, GameBoard gameBoard, int era, int currentRoundNumber)
-	{
-		for (Player player : players)
-		{
-			IOAdapter adapter = player.getAdapter();
-			
-			/*adapter.printMessage(currPlayer.toString());
-			
-			adapter.printMessage(gameBoard.toString());
-			
-			adapter.printMessage(player.getPlayerBoard().toString());
-
-			adapter.printMessage(player.toString());
-			
-			adapter.printMessage("Number of round:" + currentRoundNumber + "|Number of era:" + era);
-			adapter.printMessage("It's " + currPlayer.getUsername() + " turn.");
-			*/
-			
 		}
 	}
 
