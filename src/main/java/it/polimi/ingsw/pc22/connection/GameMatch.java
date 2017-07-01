@@ -130,7 +130,8 @@ public class GameMatch implements Runnable
 		for (Player p : players)
 		{
 			IOAdapter adapter = p.getAdapter();
-			adapter.printMessage(new GameStatusMessage(gameBoard, p, "startGameBoard")); //Serve per la GUI
+			//Serve per la GUI
+			adapter.printMessage(new GameStatusMessage(gameBoard, p, "startGameBoard"));
 		}
 		
 		for (int currentRoundNumber = 0; currentRoundNumber < turnNumber; currentRoundNumber++)
@@ -160,7 +161,7 @@ public class GameMatch implements Runnable
 
 				for (Player p : players)
 				{
-					if (p.equals(player) )
+					if (p.equals(player) || p.isSuspended())
 						continue;
 
 					IOAdapter adapter = p.getAdapter();
@@ -197,14 +198,22 @@ public class GameMatch implements Runnable
 					if (currentPlayer.isFamiliarPositioned()) break;
 				}
 
-				adapter.printMessage(new GameStatusMessage(gameBoard, player, "finished"));
+				/*
 
+				LASCIARE PER QUANDO FUNZIONAERÀ LA SOSPENSIONE
 				if (!currentPlayer.isHasPassed() && !currentPlayer.isFamiliarPositioned())
 				{
 					player.setSuspended(true);
 
 					adapter.printMessage(new SuspendedMessage("YOU HAVE BEEN SUSPENDED, PLEASE RE-LOG"));
+
+					if (adapter instanceof SocketIOAdapter)
+						new Thread((SocketIOAdapter) adapter).start();
 				}
+				else
+					adapter.printMessage(new GameStatusMessage(gameBoard, player, "finished"));
+				*/
+				adapter.printMessage(new GameStatusMessage(gameBoard, player, "finished"));
 			}
 
 			GameBoardUtils.resetPlayerStatus(players);
@@ -212,19 +221,18 @@ public class GameMatch implements Runnable
 			GameBoardUtils.excommunicationHandling
 					(players, playerCounter, currentRoundNumber, era,
 							excommunicationCards, gameBoard);
-
 		}
 
 		GameBoardUtils.endGameExcommunicatonHandling(players, excommunicationCards, gameBoard, era);
 
-		GameBoardUtils.sumFinalPoints(players, gameBoard); //check excommunication
+		//check excommunication
+		GameBoardUtils.sumFinalPoints(players, gameBoard);
 
 		String winnerName = selectWinner(players);
 
 		printWinnerNameToAll(players, winnerName);
 
 		endGame();
-		
 	}
 
 	private void endGame()

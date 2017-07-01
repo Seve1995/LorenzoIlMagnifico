@@ -22,6 +22,8 @@ public class ActionThread implements Runnable
 
         while (System.currentTimeMillis() < timestamp + timeout)
         {
+            //TODO CHECKARE SE IL PLAYER È SUSPENDED
+
             String actionMessage = adapter.getMessage();
 
             if (actionMessage == null)
