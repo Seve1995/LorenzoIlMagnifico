@@ -36,14 +36,14 @@ public class StartingChoiceController implements Controller {
 		Client.setGenericState(new AuthenticationState());
     	if (RMI.isSelected())
     	{
-    		loadRMIConnection();
     		Client.setNetworkChoice("rmi");
+    		loadRMIConnection();
     	}
     	
     	if (Socket.isSelected())
     	{
-    		loadSocketConnection();
 			Client.setNetworkChoice("socket");
+    		loadSocketConnection();
     	}
     }
     

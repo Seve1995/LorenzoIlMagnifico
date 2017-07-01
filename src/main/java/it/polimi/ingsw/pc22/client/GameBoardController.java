@@ -818,7 +818,9 @@ public class GameBoardController implements Controller {
     public void updateScene(Object message)
     {
     	if (message instanceof CommunicationMessage)
+    	{
     		info.setText(((CommunicationMessage) message).getMessage());
+    	}
 
     	if (message instanceof GameStatusMessage)
     	{

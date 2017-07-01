@@ -125,6 +125,12 @@ public class GameMatch implements Runnable
 
 		GameBoardUtils.setUpPlayers(players, playerCounter, tiles);
 
+		for (Player p : players)
+		{
+			IOAdapter adapter = p.getAdapter();
+			adapter.printMessage(new GameStatusMessage(gameBoard, p, "startGameBoard")); //Serve per la GUI
+		}
+		
 		for (int currentRoundNumber = 0; currentRoundNumber < turnNumber; currentRoundNumber++)
 		{
 			if (isNewTurn(currentRoundNumber))
@@ -146,11 +152,12 @@ public class GameMatch implements Runnable
 				addFamiliarsValue();
 			}
 			
+				
 			for(Player player : players)
 			{
 				for (Player p : players)
 				{
-					if (p.equals(player))
+					if (p.equals(player) )
 						continue;
 
 					IOAdapter adapter = p.getAdapter();
@@ -488,6 +495,8 @@ public class GameMatch implements Runnable
 
 		List<Player> tempPlayers = palace.getPlayersInCouncilPalace();
 
+		if (tempPlayers==null) return; 
+		
 		for (Player player : players)
 		{
 			if(tempPlayers.contains(player)) continue;
