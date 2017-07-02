@@ -49,7 +49,7 @@ public class MessageHandler
 
         if (message instanceof TimerMessage)
         {
-            printOnClient(((TimerMessage) message).getMessage());
+            printOnClient(message);
 
             Client.setGenericState(new WaitingState());
 
@@ -58,7 +58,7 @@ public class MessageHandler
 
         if (message instanceof ErrorMessage)
         {
-            printOnClient(((ErrorMessage) message).getMessage());
+            printOnClient(message);
         }
 
         if (message instanceof GameStatusMessage)
@@ -115,10 +115,10 @@ public class MessageHandler
 
             printOnClient(message);
 
-            if ("rmi".equals(Client.getNetworkChoice()))
-            {
-                new Thread(new RMIAuxiliarViewThread()).start();
-            }
+            //if ("rmi".equals(Client.getNetworkChoice()))
+            //{
+            //    new Thread(new RMIAuxiliarViewThread()).start();
+            //}
         }
 
         if (message instanceof ChooseServantsMessage)
@@ -128,6 +128,8 @@ public class MessageHandler
             Client.setGenericState(new ChooseServantsState());
 
             Client.setStateChanged(true);
+
+            printOnClient(message);
 
             if ("rmi".equals(Client.getNetworkChoice()))
             {
@@ -143,6 +145,8 @@ public class MessageHandler
 
             Client.setStateChanged(true);
 
+            printOnClient(message);
+
             if ("rmi".equals(Client.getNetworkChoice()))
             {
                 new Thread(new RMIAuxiliarViewThread()).start();
@@ -152,12 +156,11 @@ public class MessageHandler
         if (message instanceof ExecutedAction)
         {
             printOnClient(message);
-
         }
 
         if (message instanceof CommunicationMessage)
         {
-            printOnClient(((CommunicationMessage) message).getMessage());
+            printOnClient(message);
         }
 
         if (message instanceof ChooseCardMessage)
@@ -167,6 +170,8 @@ public class MessageHandler
             Client.setGenericState(new ChooseCardState(type));
 
             Client.setStateChanged(true);
+
+            printOnClient(message);
 
             if ("rmi".equals(Client.getNetworkChoice()))
             {
@@ -188,6 +193,8 @@ public class MessageHandler
             Client.setGenericState(costsState);
 
             Client.setStateChanged(true);
+
+            printOnClient(message);
 
             if ("rmi".equals(Client.getNetworkChoice()))
             {

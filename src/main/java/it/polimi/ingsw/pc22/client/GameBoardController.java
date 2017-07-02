@@ -14,6 +14,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.*;
 
 import static it.polimi.ingsw.pc22.client.Client.getClassLoader;
 
@@ -50,8 +51,7 @@ public class GameBoardController implements Controller {
     private GridPane territoryPlayer;
     @FXML
     private GridPane venturePlayer;
-    @FXML
-    private GridPane market;
+
     @FXML
     private ImageView bonusTile;
     @FXML
@@ -79,6 +79,22 @@ public class GameBoardController implements Controller {
     @FXML
     private ToggleButton neuter;
     @FXML
+    private ToggleButton market0;
+    @FXML
+    private ImageView imageViewMarket0;
+    @FXML
+    private ToggleButton market1;
+    @FXML
+    private ImageView imageViewMarket1;
+    @FXML
+    private ToggleButton market2;
+    @FXML
+    private ImageView imageViewMarket2;
+    @FXML
+    private ToggleButton market3;
+    @FXML
+    private ImageView imageViewMarket3;
+    @FXML
     private Button pass;
     @FXML
     private Button confirm;
@@ -86,7 +102,8 @@ public class GameBoardController implements Controller {
     private Spinner<Integer> servantsSpinner;
     @FXML
     private AnchorPane gameBoardPane;
-
+    @FXML
+    private ImageView imageZoom;
 
     private GameBoard gameboard;
 
@@ -168,7 +185,7 @@ public class GameBoardController implements Controller {
         ToggleButton selectedLeaderToggle = (ToggleButton) LeadersHand.getSelectedToggle();
         if (selectedLeaderToggle==null)
         	{
-        	info.setText("You must select one leader card!");        	
+        	info.setText("You must select one leader card!");
         	return;
         	}
         idLeader = selectedLeaderToggle.getId();
@@ -183,7 +200,7 @@ public class GameBoardController implements Controller {
         ToggleButton selectedLeaderToggle = (ToggleButton) LeadersHand.getSelectedToggle();
         if (selectedLeaderToggle==null)
     	{
-    	info.setText("You must select one leader card!");        	
+    	info.setText("You must select one leader card!");
     	return;
     	}
         idLeader = selectedLeaderToggle.getId();
@@ -218,8 +235,6 @@ public class GameBoardController implements Controller {
 
     }
 
-
-    //TODO:gestire i dialoghi
 
     private void updateTowers(){
     	Tower[] towers = gameboard.getTowers();
@@ -315,23 +330,23 @@ public class GameBoardController implements Controller {
                 imageView.setX(x + width + i * delta);
                 imageView.setY(y);
             }
-            
+
             if (harvest.getHarvestCell()[i].getFamilyMember() != null)
             {
-            	
                 ColorsEnum currFamiliarEnum = harvest.getHarvestCell()[i].getFamilyMember().getColor();
                 PlayerColorsEnum currPlayerEnum = harvest.getHarvestCell()[i].getFamilyMember().getPlayerColor();
-                //String familiarEnum = currFamiliarEnum.toString();
-                //String playerEnum = currPlayerEnum.toString();
                 ClassLoader classLoader = Client.class.getClassLoader();
                 String path = "GUI/familiars/familiar_" + currPlayerEnum.toString().toLowerCase() + "_" + currFamiliarEnum.toString().toLowerCase() + ".png";
                 Image image = new Image(classLoader.getResourceAsStream(path));
                 imageView.setImage(image);
+                imageView.setFitHeight(8.75);
+                imageView.setFitWidth(13);
+                gameBoardPane.getChildren().add(imageView);
 
             }
-            else 
+            else
             {
-            	imageView.setImage(null);
+                gameBoardPane.getChildren().remove(imageView);
             }
             
         }
@@ -356,21 +371,24 @@ public class GameBoardController implements Controller {
                 imageView.setX(x + width + i * delta);
                 imageView.setY(y);
             }
-            
+
             if (production.getProductionCell()[i].getFamilyMember() != null)
             {
                 ColorsEnum currFamiliarEnum = production.getProductionCell()[i].getFamilyMember().getColor();
                 PlayerColorsEnum currPlayerEnum = production.getProductionCell()[i].getFamilyMember().getPlayerColor();
-                String familiarEnum = currFamiliarEnum.toString();
-                String playerEnum = currPlayerEnum.toString();
                 ClassLoader classLoader = Client.class.getClassLoader();
-                String path = "GUI/familiars/familiar_" + playerEnum.toLowerCase() + "_" + familiarEnum.toLowerCase() + ".png";
+                String path = "GUI/familiars/familiar_" + currPlayerEnum.toString().toLowerCase() + "_" + currFamiliarEnum.toString().toLowerCase() + ".png";
                 Image image = new Image(classLoader.getResourceAsStream(path));
                 imageView.setImage(image);
+                imageView.setFitHeight(8.75);
+                imageView.setFitWidth(13);
+                gameBoardPane.getChildren().add(imageView);
+
             }
-            else 
+            else
             {
-            	imageView.setImage(null);
+                //imageView.setImage(null);
+                gameBoardPane.getChildren().remove(imageView);
             }
         }
     }
@@ -378,36 +396,69 @@ public class GameBoardController implements Controller {
 
     private void updateMarket()
     {
-        for (int i=0; i<gameboard.getMarket().getMarketCells().size(); i++)
+
+        for (int i=0; i < gameboard.getMarket().getMarketCells().size(); i++)
         {
+            ImageView imageView = new ImageView();
 
             MarketCell currMarketCell = gameboard.getMarket().getMarketCells().get(i);
 
-            ToggleButton toggleButton = (ToggleButton) market.getChildren().get(i);
+            List<ToggleButton> toggleButtons = new ArrayList<>();
 
-            if (currMarketCell.getFamilyMember() == null)
+            toggleButtons.add(market0);
+            toggleButtons.add(market1);
+            toggleButtons.add(market2);
+            toggleButtons.add(market3);
+
+            if (gameboard.getMarket().getMarketCells().get(i).getFamilyMember()!=null)
             {
-                toggleButton.setOpacity(0);
+                toggleButtons.get(i).setDisable(true);
+                ColorsEnum currFamiliarEnum = currMarketCell.getFamilyMember().getColor();
+                PlayerColorsEnum currPlayerEnum = currMarketCell.getFamilyMember().getPlayerColor();
+                String familiarEnum = currFamiliarEnum.toString();
+                String playerEnum = currPlayerEnum.toString();
+                ClassLoader classLoader = Client.class.getClassLoader();
+                String path = "GUI/familiars/familiar_" + playerEnum.toLowerCase() +"_" + familiarEnum.toLowerCase() +".png";
+                Image image = new Image(classLoader.getResourceAsStream(path));
+                imageView.setFitHeight(8.75);
+                imageView.setFitWidth(13);
+
+                if (i==0)
+                {
+                    imageView.setX(365);
+                    imageView.setY(769);
+                }
+                if (i==1)
+                {
+                    imageView.setX(425);
+                    imageView.setY(766);
+                }
+                if (i==2)
+                {
+                    imageView.setX(480);
+                    imageView.setY(784);
+                }
+                if (i==3)
+                {
+                    imageView.setX(523);
+                    imageView.setY(823);
+                }
+
+                imageView.setImage(image);
+
+                gameBoardPane.getChildren().add(imageView);
             }
 
             else
             {
-                ColorsEnum currFamiliarEnum = currMarketCell.getFamilyMember().getColor();
-                PlayerColorsEnum currPlayerEnum = currMarketCell.getFamilyMember().getPlayerColor();
-                toggleButton.setOpacity(1);
-                String familiarEnum = currFamiliarEnum.toString();
-                String playerEnum = currPlayerEnum.toString();
-                ClassLoader classLoader = Client.class.getClassLoader();
-                String path = "GUI/familiars/familiar_" + playerEnum +"_" + familiarEnum +".png";
-                Image image = new Image(classLoader.getResourceAsStream(path));
-                ImageView imageView = new ImageView(image);
-                imageView.setFitHeight(20);
-                imageView.setFitWidth(40);
-                toggleButton.setGraphic(imageView);
-                toggleButton.setDisable(true);
+                //imageViews.get(i).setImage(null);
+                gameBoardPane.getChildren().remove(imageView);
+                toggleButtons.get(i).setDisable(false);
             }
-
         }
+
+
+
     }
 
     private void updateButtons()
@@ -442,12 +493,7 @@ public class GameBoardController implements Controller {
         
         for (int i=0; i<4; i++)
         {
-        	if (gameboard.getMarket().getMarketCells().get(i).getFamilyMember()==null)
-        		{
-        			ToggleButton currToggle = (ToggleButton) market.getChildren().get(i);
-        			currToggle.setBackground(null);
-        			currToggle.setDisable(false);
-        		}
+
         	if (gameboard.getTowers()[0].getTowerCells().get(i)==null)
 				{
 					ToggleButton currToggle = (ToggleButton) territoryTower.getChildren().get(i);
@@ -486,9 +532,17 @@ public class GameBoardController implements Controller {
 
     private void updateCells(GridPane gridPane, Tower t)
     {
+
+        int x1=439, x2=300, x3=181, x4=55;
+        int y = 447;
+        int shift = 126;
+
+
+
     	for (int i=0; i<=3; i++)
     		{
-    			ToggleButton toggleButton = (ToggleButton) gridPane.getChildren().get(i);
+    			ToggleButton toggleButton = (ToggleButton) gridPane.getChildren().get(3-i);
+                ImageView imageViewFamiliar = new ImageView();
 
     		    if (t.getTowerCells().get(i).getDevelopmentCard() != null)
     		    {
@@ -503,32 +557,61 @@ public class GameBoardController implements Controller {
                     BackgroundSize backgroundSize = new BackgroundSize(73, 115, false, false, true, false);
                     BackgroundImage backgroundImage = new BackgroundImage(image, null, null, null, backgroundSize);
                     Background background = new Background(backgroundImage);
-                    //ImageView imageView = new ImageView(image);
-                    //imageView.setFitHeight(115);
-                    //imageView.setFitWidth(73);
-                    //toggleButton.setGraphic(imageView);
                     toggleButton.setBackground(background);
+                    toggleButton.setOnMouseEntered(evt ->imageZoom.setImage(image));
+                    toggleButton.setOnMouseExited(evt ->imageZoom.setImage(null));
+                    toggleButton.setDisable(false);
                 }
+
 
                 if (t.getTowerCells().get(i).getFamilyMember() != null)
                 {
+                    toggleButton.setDisable(true);
+                    toggleButton.setOnMouseEntered(evt ->imageZoom.setImage(null));
+                    imageViewFamiliar.setFitHeight(20);
+                    imageViewFamiliar.setFitWidth(40);
                     ColorsEnum currFamiliarEnum = t.getTowerCells().get(i).getFamilyMember().getColor();
                     PlayerColorsEnum currPlayerEnum = t.getTowerCells().get(i).getFamilyMember().getPlayerColor();
                     toggleButton.setOpacity(1);
                     ClassLoader classLoader = Client.class.getClassLoader();
-                    String path = "GUI/familiars/familiar_blue_neuter.png";
+                    String familiarEnum = currFamiliarEnum.toString();
+                    String playerEnum = currPlayerEnum.toString();
+                    String path = "GUI/familiars/familiar_" + playerEnum.toLowerCase() + "_" + familiarEnum.toLowerCase() +".png";
                     Image image = new Image(classLoader.getResourceAsStream(path));
-                    ImageView imageView = new ImageView(image);
-                    imageView.setFitHeight(20);
-                    imageView.setFitWidth(40);
-                    toggleButton.setGraphic(imageView);
-                    toggleButton.setDisable(true);
+                    if (t.getTowerType().equals(CardTypeEnum.VENTURE))
+                    {
+                        imageViewFamiliar.setX(x1);
+                    }
+                    if (t.getTowerType().equals(CardTypeEnum.CHARACTER))
+                    {
+                        imageViewFamiliar.setX(x3);
+                    }
+                    if (t.getTowerType().equals(CardTypeEnum.BUILDING))
+                    {
+                        imageViewFamiliar.setX(x2);
+                    }
+                    if (t.getTowerType().equals(CardTypeEnum.TERRITORY))
+                    {
+                        imageViewFamiliar.setX(x4);
+                    }
+
+                    imageViewFamiliar.setY(y - i*shift);
+                    imageViewFamiliar.setImage(image);
+
+                    gameBoardPane.getChildren().add(imageViewFamiliar);
+
                 }
 
                 if (t.getTowerCells().get(i).getDevelopmentCard() == null
                         && t.getTowerCells().get(i).getFamilyMember() != null)
                 {
                     toggleButton.setOpacity(0);
+                    toggleButton.setOnMouseEntered(evt ->imageZoom.setImage(null));
+                }
+
+                if (t.getTowerCells().get(i).getFamilyMember() == null)
+                {
+                    gameBoardPane.getChildren().remove(imageViewFamiliar);
                 }
     		}
     }
@@ -790,16 +873,16 @@ public class GameBoardController implements Controller {
 
             FXMLLoader loader = new FXMLLoader();
 
-            loader.setLocation(getClassLoader().getResource("GUI/ServantsHandler.fxml"));
+            loader.setLocation(getClassLoader().getResource("GUI/ServantHandler.fxml"));
 
             AnchorPane page = (AnchorPane) loader.load();
 
             Stage dialogStage = new Stage();
 
             dialogStage.setTitle("Choose servants");
-            
+
             dialogStage.initModality(Modality.WINDOW_MODAL);
-            
+
             Scene scene = new Scene(page);
 
             dialogStage.setScene(scene);
@@ -807,7 +890,7 @@ public class GameBoardController implements Controller {
             ServantsHandlerController controller = loader.getController();
 
             controller.setDialogStage(dialogStage, ((ChooseServantsMessage) message).getPlayer());
-            
+
             dialogStage.showAndWait();
 
             return controller.isConfirmClicked();
@@ -816,7 +899,7 @@ public class GameBoardController implements Controller {
             e.printStackTrace();
             return false;
         }
-        
+
     }
 
     public boolean choiceCardDialog(Object message)
@@ -861,7 +944,7 @@ public class GameBoardController implements Controller {
 
             FXMLLoader loader = new FXMLLoader();
 
-            loader.setLocation(getClassLoader().getResource("GUI/ChoiceCost&Asset.fxml"));
+            loader.setLocation(getClassLoader().getResource("GUI/ChoiceCost&Assets.fxml"));
 
             AnchorPane page = (AnchorPane) loader.load();
 
@@ -889,6 +972,76 @@ public class GameBoardController implements Controller {
         }
     }
 
+
+    public boolean excommunicationDialog (Object message)
+    {
+        try {
+
+            FXMLLoader loader = new FXMLLoader();
+
+            loader.setLocation(getClassLoader().getResource("GUI/ExcommunicationChoice.fxml"));
+
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage dialogStage = new Stage();
+
+            dialogStage.setTitle("Choices");
+
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+
+            Scene scene = new Scene(page);
+
+            dialogStage.setScene(scene);
+
+            ExcommunicationController controller = loader.getController();
+
+            controller.setDialogStage(dialogStage);
+
+            dialogStage.showAndWait();
+
+            return controller.isConfirmClicked();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean endMatchDialog(Object message)
+    {
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader();
+
+            loader.setLocation(getClassLoader().getResource("GUI/EndGame.fxml"));
+
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage dialogStage = new Stage();
+
+            dialogStage.setTitle("Choices");
+
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+
+            Scene scene = new Scene(page);
+
+            dialogStage.setScene(scene);
+
+            EndMatchController controller = loader.getController();
+
+            controller.setDialogStage(dialogStage, message);
+
+            dialogStage.showAndWait();
+
+            return controller.isConfirmClicked();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
 
     @Override
     public void updateScene(Object message)
@@ -957,13 +1110,26 @@ public class GameBoardController implements Controller {
 
         if (message instanceof ErrorMessage)
         {
-            info.setText("OOOPS! Try again!");
-
+        	System.out.println("Ciao l'ho ricevuto!");
+            info.setText(((ErrorMessage) message).getMessage());
         }
 
-        //if (message instanceof ExcommunicationMessage)
+        if (message instanceof ExcommunicationMessage)
+        {
+            excommunicationDialog(message);
 
-        //if (message instanceof EndGameMessage)
+            updatePlayerBoard();
+        }
+
+        if (message instanceof  EndTurnMessage)
+        {
+            info.setText("Turn " + ((EndTurnMessage) message).getLastTurn() + " is finished");
+        }
+
+        if (message instanceof EndMatchMessage)
+        {
+            endMatchDialog(message);
+        }
 
     }
 

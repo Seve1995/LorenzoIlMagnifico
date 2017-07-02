@@ -8,17 +8,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="359.0" prefWidth="225.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="359.0" prefWidth="225.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.pc22.client.EndMatchController">
    <children>
       <ImageView fitHeight="359.0" fitWidth="258.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@background1.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="37.0" layoutY="54.0" text="The winner is:" />
+      <Label layoutX="37.0" layoutY="54.0" fx:id="winnerLabel"/>
       <Label layoutX="37.0" layoutY="90.0" />
       <Label layoutX="37.0" layoutY="142.0" text="The Global ranking is:" />
-      <Button layoutX="148.0" layoutY="319.0" mnemonicParsing="false" text="Confirm" />
+      <Button layoutX="148.0" layoutY="319.0" mnemonicParsing="false" text="Confirm" onAction="#handleConfirm" />
       <ScrollPane layoutX="35.0" layoutY="171.0" prefHeight="118.0" prefWidth="158.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="117.0" prefWidth="239.0">

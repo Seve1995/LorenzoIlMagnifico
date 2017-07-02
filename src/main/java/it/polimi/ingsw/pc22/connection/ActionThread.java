@@ -65,6 +65,7 @@ public class ActionThread implements Runnable
 
             if (GameMatch.getCurrentPlayer().isFamiliarPositioned())
             {
+
                 adapter.printMessage(new ExecutedAction("Action Performed"));
 
                 break;

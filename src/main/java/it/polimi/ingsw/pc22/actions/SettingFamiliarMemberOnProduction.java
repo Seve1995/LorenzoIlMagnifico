@@ -67,6 +67,7 @@ public class SettingFamiliarMemberOnProduction extends Action
 				
 				doProductionAction.setValue(familyMember.getValue()-3);
 			}
+
 			else
 			{
 				doProductionAction.setValue(familyMember.getValue());
