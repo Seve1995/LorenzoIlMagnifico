@@ -14,7 +14,7 @@ public class ServantsHandlerController implements Controller {
 
     private boolean confirmClicked = false;
     private Stage dialogStage;
-    private int output;
+    private Integer output;
     
 
 	@FXML
@@ -26,7 +26,7 @@ public class ServantsHandlerController implements Controller {
 
         output = spinner.getValue();
 
-        Client.getGenericState().sendToServer("" + output);
+        Client.getGenericState().sendToServer(output.toString());
 
         dialogStage.close();
 

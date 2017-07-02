@@ -24,7 +24,7 @@ public class PickCouncilState implements GenericState
     @Override
     public void printState()
     {
-        String output = "Choose " + numberOfPrivileges + "privileges among:";
+        String output = "Choose " + numberOfPrivileges + " privileges among:"+ '\n';
 
         output += "1) One stone & One wood" + '\n';
         output += "2) Two servants" + '\n';
@@ -58,9 +58,16 @@ public class PickCouncilState implements GenericState
             pattern = Pattern.compile("[1-5]-[1-5]-[1-5]");
         }
 
+        if (pattern == null)
+        {
+            System.out.println("Invalid input retry");
+
+            return false;
+        }
+
         Matcher matcher = pattern.matcher(string);
 
-        if (pattern == null || !matcher.find())
+        if (!matcher.find())
         {
             System.out.println("Invalid input retry");
 

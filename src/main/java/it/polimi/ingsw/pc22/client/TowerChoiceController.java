@@ -59,7 +59,7 @@ public class TowerChoiceController implements Controller
     @FXML
     private void handleConfirm()
     {
-        int tmp = spinnerFloor.getValue();
+        Integer tmp = spinnerFloor.getValue();
 
         tmp--;
 
@@ -67,7 +67,7 @@ public class TowerChoiceController implements Controller
 
         if (onlyTheFloor)
         {
-            Client.getGenericState().sendToServer("" + tmp);
+            Client.getGenericState().sendToServer(tmp.toString());
         }
 
         else

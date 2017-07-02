@@ -2,6 +2,7 @@ package it.polimi.ingsw.pc22.connection;
 
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
+import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.messages.CommunicationMessage;
 import it.polimi.ingsw.pc22.messages.EndMatchMessage;
@@ -195,9 +196,11 @@ public class GameMatch implements Runnable
 					try
 					{
 						Thread.sleep(100L);
-					} catch (InterruptedException e)
+					}
+						catch (InterruptedException e)
 					{
-						e.printStackTrace();
+						LOGGER.log(Level.WARNING, "Interrupted!", e);
+						Thread.currentThread().interrupt();
 					}
 
 					if (currentPlayer.isHasPassed()) break;

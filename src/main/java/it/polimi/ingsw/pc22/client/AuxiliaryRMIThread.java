@@ -6,6 +6,8 @@ import it.polimi.ingsw.pc22.states.*;
 
 import java.rmi.RemoteException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AuxiliaryRMIThread implements Runnable
 {
@@ -16,6 +18,8 @@ public class AuxiliaryRMIThread implements Runnable
 	private CardTypeEnum cardType;
 
 	private Integer numberOfPrivileges;
+
+	private static final Logger LOGGER = Logger.getLogger(AuxiliaryRMIThread.class.getName());
 
 	public AuxiliaryRMIThread(String string, List<Asset> assetList,
 		CardTypeEnum cardType, Integer numberOfPrivileges)
@@ -85,7 +89,7 @@ public class AuxiliaryRMIThread implements Runnable
          }
          catch (RemoteException e)
          {
-             e.printStackTrace();
+			 LOGGER.log(Level.INFO, "CANNOT SEND ITEM TO CLIENT RETRY", e);
          }
 	}
 	

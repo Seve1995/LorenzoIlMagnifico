@@ -23,8 +23,7 @@ public class PositionUtils
         if (isHarvestAvailable(gameBoard.getHarvest()))
             actions += "- Metti familiare nella raccolto (es: set harvest <familiar> <servants>)\n";
 
-        if (isCouncilAvailable(gameBoard.getCouncilPalace()))
-            actions += "- Metti familiare nel concilio (es: set council <familiar> <servants>)";
+        actions += "- Metti familiare nel concilio (es: set council <familiar> <servants>)";
 
         return actions;
     }
@@ -48,11 +47,6 @@ public class PositionUtils
         }
 
         return false;
-    }
-
-    public static boolean isCouncilAvailable(CouncilPalace councilPalace)
-    {
-        return true;
     }
 
     public static boolean isHarvestAvailable(Harvest harvest)

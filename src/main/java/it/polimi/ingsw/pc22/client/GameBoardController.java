@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static it.polimi.ingsw.pc22.client.Client.getClassLoader;
 
@@ -121,7 +123,8 @@ public class GameBoardController implements Controller {
     private ToggleGroup LeadersHand;
     @FXML
     private ToggleGroup LeadersPlaceToggle;
-    
+
+    private static final Logger LOGGER = Logger.getLogger(GameBoardController.class.getName());
 
     @FXML
     private void handleBlackButton()
@@ -903,8 +906,11 @@ public class GameBoardController implements Controller {
 
             return controller.isConfirmClicked();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        }
+            catch (IOException e)
+        {
+            LOGGER.log(Level.INFO, "ERROR RECEIVE THREAD", e);
+
             return false;
         }
     }
@@ -936,8 +942,10 @@ public class GameBoardController implements Controller {
 
             return controller.isConfirmClicked();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException e)
+        {
+            LOGGER.log(Level.INFO, "ERROR RECEIVE THREAD", e);
+
             return false;
         }
 
@@ -972,8 +980,10 @@ public class GameBoardController implements Controller {
 
             return controller.isConfirmClicked();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException e)
+        {
+            LOGGER.log(Level.INFO, "ERROR RECEIVE THREAD", e);
+
             return false;
         }
 
@@ -1007,8 +1017,10 @@ public class GameBoardController implements Controller {
 
             return controller.isConfirmClicked();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException e)
+        {
+            LOGGER.log(Level.INFO, "ERROR RECEIVE THREAD", e);
+
             return false;
         }
     }
@@ -1042,8 +1054,10 @@ public class GameBoardController implements Controller {
 
             return controller.isConfirmClicked();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException e)
+        {
+            LOGGER.log(Level.INFO, "ERROR RECEIVE THREAD", e);
+
             return false;
         }
     }
@@ -1077,8 +1091,10 @@ public class GameBoardController implements Controller {
 
             return controller.isConfirmClicked();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException e)
+        {
+            LOGGER.log(Level.INFO, "ERROR RECEIVE THREAD", e);
+
             return false;
         }
 

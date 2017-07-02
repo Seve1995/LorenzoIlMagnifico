@@ -1,5 +1,6 @@
 package it.polimi.ingsw.pc22.client;
 
+import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.messages.CommunicationMessage;
 import it.polimi.ingsw.pc22.messages.Message;
@@ -10,7 +11,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -26,9 +26,7 @@ public class Client extends Application
 	private static Stage primaryStage;
 	
 	private static AnchorPane anchorPane;
-	
-	private static BorderPane border;
-		
+
 	private static ClassLoader classLoader = Client.class.getClassLoader();
 
 	private static RMIServerInterface rmiServerInterface;
@@ -49,7 +47,7 @@ public class Client extends Application
 
 	private static boolean stopped = false;
 
-	public static GenericState getGenericState()
+	public static synchronized GenericState getGenericState()
 	{
 		return genericState;
 	}
@@ -59,7 +57,7 @@ public class Client extends Application
 		Client.genericState = genericState;
 	}
 
-	public static boolean isStateChanged() {
+	public static synchronized boolean isStateChanged() {
 		return stateChanged;
 	}
 
@@ -183,7 +181,7 @@ public class Client extends Application
 
 		} catch (IOException e)
 		{
-			 e.printStackTrace();
+			throw new GenericException("Cannot Init Starting Choice", e);
 		}
 	}
 	
@@ -202,7 +200,7 @@ public class Client extends Application
 	        Client.controller = controller;
 		} catch (IOException e)
 		{
-			 e.printStackTrace();
+			throw new GenericException("Cannot Init Client access", e);
 		}
 	}
 	
@@ -221,7 +219,7 @@ public class Client extends Application
 	        Client.controller = controller;
 		} catch (IOException e)
 		{
-			 e.printStackTrace();
+			throw new GenericException("Cannot lunch match", e);
 		}
 	}
 
@@ -242,7 +240,7 @@ public class Client extends Application
 
 		} catch (IOException e)
 		{
-			e.printStackTrace();
+			throw new GenericException("Cannot Lunch boards", e);
 		}
 	}
 
@@ -268,7 +266,7 @@ public class Client extends Application
 		} catch (IOException e)
 
 		{
-			e.printStackTrace();
+			throw new GenericException("Cannot write on socket", e);
 		}
 	}
 }

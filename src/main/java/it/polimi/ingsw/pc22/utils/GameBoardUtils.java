@@ -3,7 +3,9 @@ package it.polimi.ingsw.pc22.utils;
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.connection.GameMatch;
+import it.polimi.ingsw.pc22.effects.ChooseAsset;
 import it.polimi.ingsw.pc22.effects.Effect;
+import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.messages.ExcommunicationMessage;
 import it.polimi.ingsw.pc22.player.Player;
@@ -12,6 +14,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GameBoardUtils
 {
@@ -21,6 +25,8 @@ public class GameBoardUtils
 	{
 		return currentPlayer;
 	}
+
+	private static final Logger LOGGER = Logger.getLogger(GameBoardUtils.class.getName());
 
 	//FORSE NON È MEGLIO GESIRE ANCHE QUESTA COME UNA ENUM?
 	private static final Map<Integer, Integer> fromFaithToVictory = new HashMap<>();
@@ -109,7 +115,8 @@ public class GameBoardUtils
 					Thread.sleep(100L);
 				} catch (InterruptedException e)
 				{
-					e.printStackTrace();
+					LOGGER.log(Level.WARNING, "Interrupted!", e);
+					Thread.currentThread().interrupt();
 				}
 
 				if (player.getExcommunicationChoice() != null)

@@ -119,9 +119,11 @@ public class CouncilPrivilege
 			bonusPattern = Pattern.compile("[1-5]-[1-5]-[1-5]");
 		}
 
+		if (bonusPattern == null) return false;
+
 		Matcher matcher = bonusPattern.matcher(decision);
 
-		if (bonusPattern != null && matcher.find()) return true;
+		if (!matcher.find()) return false;
 
 		Set<String> duplicates = new HashSet<>();
 

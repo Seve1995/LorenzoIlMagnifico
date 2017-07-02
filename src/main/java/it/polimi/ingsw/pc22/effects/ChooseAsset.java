@@ -2,12 +2,17 @@ package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.connection.GameMatch;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Created by fandroid95 on 30/06/2017.
  */
 public class ChooseAsset
 {
     private Integer chosenAssetsToPay = null;
+
+    private static final Logger LOGGER = Logger.getLogger(ChooseAsset.class.getName());
 
     public boolean waitForResult()
     {
@@ -22,7 +27,8 @@ public class ChooseAsset
                 Thread.sleep(100L);
             } catch (InterruptedException e)
             {
-                e.printStackTrace();
+                LOGGER.log(Level.WARNING, "Interrupted!", e);
+                Thread.currentThread().interrupt();
             }
 
             if (chosenAssetsToPay != null)
