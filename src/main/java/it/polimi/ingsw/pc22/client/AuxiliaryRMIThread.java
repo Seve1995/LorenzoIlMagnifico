@@ -31,20 +31,15 @@ public class AuxiliaryRMIThread implements Runnable
 	{
 		 try
          {
-         	if (Client.getGenericState() instanceof AuthenticationState)
-			{
-				Client.getRmiServerInterface().login(string, Client.getAssignedID());
-			}
-
-			if (Client.getGenericState() instanceof GameCreationState)
+         	if (Client.getGenericState() instanceof GameCreationState)
 			{
 				Client.getRmiServerInterface().matchHandling
 						(string, Client.getAssignedID());
 			}
 
-			if (Client.getGenericState() instanceof PlayState)
+         	if (Client.getGenericState() instanceof AuthenticationState)
 			{
-				Client.getRmiServerInterface().doAction(string, Client.getAssignedID());
+				Client.getRmiServerInterface().login(string, Client.getAssignedID());
 			}
 
 			if (Client.getGenericState() instanceof ChooseAssetsState)
@@ -80,6 +75,11 @@ public class AuxiliaryRMIThread implements Runnable
 			{
 				Client.getRmiServerInterface().takeCouncilDecision
 						(string, Client.getAssignedID(), numberOfPrivileges);
+			}
+
+			if (Client.getGenericState() instanceof PlayState)
+			{
+				Client.getRmiServerInterface().doAction(string, Client.getAssignedID());
 			}
 
          }
