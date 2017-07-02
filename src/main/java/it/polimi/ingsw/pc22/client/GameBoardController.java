@@ -102,7 +102,8 @@ public class GameBoardController implements Controller {
     private Spinner<Integer> servantsSpinner;
     @FXML
     private AnchorPane gameBoardPane;
-
+    @FXML
+    private ImageView imageZoom;
 
     private GameBoard gameboard;
 
@@ -556,8 +557,9 @@ public class GameBoardController implements Controller {
                     BackgroundSize backgroundSize = new BackgroundSize(73, 115, false, false, true, false);
                     BackgroundImage backgroundImage = new BackgroundImage(image, null, null, null, backgroundSize);
                     Background background = new Background(backgroundImage);
-
                     toggleButton.setBackground(background);
+                    toggleButton.setOnMouseEntered(evt ->imageZoom.setImage(image));
+                    toggleButton.setOnMouseExited(evt ->imageZoom.setImage(null));
                     toggleButton.setDisable(false);
                 }
 
@@ -565,6 +567,7 @@ public class GameBoardController implements Controller {
                 if (t.getTowerCells().get(i).getFamilyMember() != null)
                 {
                     toggleButton.setDisable(true);
+                    toggleButton.setOnMouseEntered(evt ->imageZoom.setImage(null));
                     imageViewFamiliar.setFitHeight(20);
                     imageViewFamiliar.setFitWidth(40);
                     ColorsEnum currFamiliarEnum = t.getTowerCells().get(i).getFamilyMember().getColor();
@@ -603,6 +606,7 @@ public class GameBoardController implements Controller {
                         && t.getTowerCells().get(i).getFamilyMember() != null)
                 {
                     toggleButton.setOpacity(0);
+                    toggleButton.setOnMouseEntered(evt ->imageZoom.setImage(null));
                 }
 
                 if (t.getTowerCells().get(i).getFamilyMember() == null)
@@ -1039,7 +1043,21 @@ public class GameBoardController implements Controller {
 
     }
 
+    @FXML
+    private void handleOnMouseEntered()
+    {
+        ClassLoader classLoader = Client.class.getClassLoader();
+        String path = "GUI/Cards/devcards_f_en_c_" + 45 + ".png";
+        Image image = new Image(classLoader.getResourceAsStream(path));
+    	imageZoom.setImage(image);
+    }
 
+    @FXML
+    private void handleOnMouseExited()
+    {
+    	imageZoom.setImage(null);
+    }
+    
     @Override
     public void updateScene(Object message)
     {
