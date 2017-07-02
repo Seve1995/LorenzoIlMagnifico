@@ -1110,8 +1110,8 @@ public class GameBoardController implements Controller {
 
         if (message instanceof ErrorMessage)
         {
-            info.setText("OOOPS! Try again!");
-
+        	System.out.println("Ciao l'ho ricevuto!");
+            info.setText(((ErrorMessage) message).getMessage());
         }
 
         if (message instanceof ExcommunicationMessage)
