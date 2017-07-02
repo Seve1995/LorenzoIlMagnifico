@@ -49,7 +49,7 @@ public class MessageHandler
 
         if (message instanceof TimerMessage)
         {
-            printOnClient(((TimerMessage) message).getMessage());
+            printOnClient(message);
 
             Client.setGenericState(new WaitingState());
 
@@ -58,7 +58,7 @@ public class MessageHandler
 
         if (message instanceof ErrorMessage)
         {
-            printOnClient(((ErrorMessage) message).getMessage());
+            printOnClient(message);
         }
 
         if (message instanceof GameStatusMessage)
@@ -160,7 +160,7 @@ public class MessageHandler
 
         if (message instanceof CommunicationMessage)
         {
-            printOnClient(((CommunicationMessage) message).getMessage());
+            printOnClient(message);
         }
 
         if (message instanceof ChooseCardMessage)
