@@ -1,9 +1,9 @@
 package it.polimi.ingsw.pc22.states;
 
+import it.polimi.ingsw.pc22.client.AuxiliaryRMIThread;
 import it.polimi.ingsw.pc22.client.Client;
 import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
 
-import java.rmi.RemoteException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -63,15 +63,7 @@ public class ChooseCardState implements GenericState
     {
         if ("rmi".equals(Client.getNetworkChoice()))
         {
-            try
-            {
-                Client.getRmiServerInterface().takeCardDecision
-                        (string, Client.getAssignedID(), cardType);
-            }
-            catch (RemoteException e)
-            {
-                e.printStackTrace();
-            }
+            new Thread(new AuxiliaryRMIThread(string, null, cardType, null)).start();
         }
 
         if ("socket".equals(Client.getNetworkChoice()))

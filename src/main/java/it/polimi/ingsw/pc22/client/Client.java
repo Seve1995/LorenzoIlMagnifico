@@ -263,8 +263,6 @@ public class Client extends Application
 		{
 			PrintWriter outSocket = new PrintWriter(socket.getOutputStream(), true);
 
-			System.out.println(string);
-
 			outSocket.println(string);
 
 		} catch (IOException e)

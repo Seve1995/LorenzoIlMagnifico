@@ -2,15 +2,12 @@ package it.polimi.ingsw.pc22.adapters;
 
 import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.exceptions.GenericException;
-import it.polimi.ingsw.pc22.messages.GameStatusMessage;
 import it.polimi.ingsw.pc22.messages.Message;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.rmi.RMIClientStreamService;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Created by fandroid95 on 30/05/2017.

@@ -1,8 +1,7 @@
 package it.polimi.ingsw.pc22.states;
 
+import it.polimi.ingsw.pc22.client.AuxiliaryRMIThread;
 import it.polimi.ingsw.pc22.client.Client;
-
-import java.rmi.RemoteException;
 
 /**
  * Created by fandroid95 on 27/06/2017.
@@ -56,15 +55,7 @@ public class ChooseServantsState implements GenericState
     {
         if ("rmi".equals(Client.getNetworkChoice()))
         {
-            try
-            {
-                Client.getRmiServerInterface().takeServantsDecision
-                        (string, Client.getAssignedID());
-            }
-            catch (RemoteException e)
-            {
-                e.printStackTrace();
-            }
+            new Thread(new AuxiliaryRMIThread(string, null, null, null)).start();
         }
 
         if ("socket".equals(Client.getNetworkChoice()))

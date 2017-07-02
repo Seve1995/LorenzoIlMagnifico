@@ -1,9 +1,9 @@
 package it.polimi.ingsw.pc22.states;
 
+import it.polimi.ingsw.pc22.client.AuxiliaryRMIThread;
 import it.polimi.ingsw.pc22.client.Client;
 import it.polimi.ingsw.pc22.gamebox.Asset;
 
-import java.rmi.RemoteException;
 import java.util.List;
 
 /**
@@ -68,15 +68,7 @@ public class ChooseAssetsState implements GenericState
     {
         if ("rmi".equals(Client.getNetworkChoice()))
         {
-            try
-            {
-                Client.getRmiServerInterface().takeAssetDecision
-                        (string, Client.getAssignedID(), assetList);
-            }
-            catch (RemoteException e)
-            {
-                e.printStackTrace();
-            }
+            new Thread(new AuxiliaryRMIThread(string, assetList, null, null)).start();
         }
 
         if ("socket".equals(Client.getNetworkChoice()))

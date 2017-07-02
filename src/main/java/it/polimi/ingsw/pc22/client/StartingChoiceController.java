@@ -95,7 +95,7 @@ public class StartingChoiceController implements Controller {
 					registry.lookup("auth");
 
 			RMIClientStreamServiceImpl streamService =
-					new RMIClientStreamServiceImpl(30000L);
+					new RMIClientStreamServiceImpl();
 
 			UnicastRemoteObject.exportObject(streamService, 0);
 

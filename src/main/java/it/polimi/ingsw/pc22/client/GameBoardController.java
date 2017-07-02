@@ -14,7 +14,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static it.polimi.ingsw.pc22.client.Client.getClassLoader;
 
@@ -1159,11 +1160,6 @@ public class GameBoardController implements Controller {
             excommunicationDialog(message);
 
             updatePlayerBoard();
-        }
-
-        if (message instanceof  EndTurnMessage)
-        {
-            info.setText("Turn " + ((EndTurnMessage) message).getLastTurn() + " is finished");
         }
 
         if (message instanceof EndMatchMessage)

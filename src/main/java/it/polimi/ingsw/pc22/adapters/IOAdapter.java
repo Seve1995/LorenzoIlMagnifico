@@ -79,12 +79,6 @@ public abstract class IOAdapter
         return null;
     }
 
-    public void printWinnerNameToSingleUser(String playerName)
-    {
-        this.printMessage(new CommunicationMessage("The winner is: " + playerName));
-
-    }
-
     public Player authenticate(String authentication) throws IOException
     {
         Pattern loginPattern = Pattern.compile("(^(\\w+) (\\w+) (L|S|l|s)$)");
@@ -122,8 +116,6 @@ public abstract class IOAdapter
     public boolean gameHandling(String choice) throws IOException
     {
         String[] playerString = choice.split(":");
-
-        System.out.println(playerString[0] + " " + playerString[1]);
 
         Map<String, Player> playerMap = GameServer.getPlayersMap();
 
