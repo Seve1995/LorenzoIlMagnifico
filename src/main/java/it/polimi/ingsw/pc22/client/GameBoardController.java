@@ -53,6 +53,11 @@ public class GameBoardController implements Controller {
     private GridPane venturePlayer;
 
     @FXML
+    private ToggleButton production;
+    @FXML
+    private ToggleButton harvest;
+
+    @FXML
     private ImageView bonusTile;
     @FXML
     private Label labelCoin;
@@ -80,20 +85,16 @@ public class GameBoardController implements Controller {
     private ToggleButton neuter;
     @FXML
     private ToggleButton market0;
-    @FXML
-    private ImageView imageViewMarket0;
+
     @FXML
     private ToggleButton market1;
-    @FXML
-    private ImageView imageViewMarket1;
+
     @FXML
     private ToggleButton market2;
-    @FXML
-    private ImageView imageViewMarket2;
+
     @FXML
     private ToggleButton market3;
-    @FXML
-    private ImageView imageViewMarket3;
+
     @FXML
     private Button pass;
     @FXML
@@ -341,13 +342,44 @@ public class GameBoardController implements Controller {
                 imageView.setFitHeight(8.75);
                 imageView.setFitWidth(13);
                 gameBoardPane.getChildren().add(imageView);
+                checkHarvestButton();
 
             }
             else
             {
                 gameBoardPane.getChildren().remove(imageView);
+                checkHarvestButton();
             }
             
+        }
+
+    }
+
+    private void checkProductionButton()
+    {
+        if (gameboard.getProduction().getProductionCell()[0].getFamilyMember() != null
+                && gameboard.getProduction().getProductionCell()[1].isABlockedCell())
+        {
+            production.setDisable(true);
+        }
+
+        else
+        {
+            production.setDisable(false);
+        }
+    }
+
+    private void checkHarvestButton()
+    {
+        if (gameboard.getHarvest().getHarvestCell()[0].getFamilyMember() != null
+                && gameboard.getHarvest().getHarvestCell()[1].isABlockedCell())
+        {
+            harvest.setDisable(true);
+        }
+
+        else
+        {
+            harvest.setDisable(false);
         }
 
     }
@@ -382,12 +414,14 @@ public class GameBoardController implements Controller {
                 imageView.setFitHeight(8.75);
                 imageView.setFitWidth(13);
                 gameBoardPane.getChildren().add(imageView);
+                checkProductionButton();
 
             }
             else
             {
                 //imageView.setImage(null);
                 gameBoardPane.getChildren().remove(imageView);
+                checkProductionButton();
             }
         }
     }
@@ -448,11 +482,17 @@ public class GameBoardController implements Controller {
                 gameBoardPane.getChildren().add(imageView);
             }
 
-            else
+
+            if (gameboard.getMarket().getMarketCells().get(i).getFamilyMember()==null)
             {
                 //imageViews.get(i).setImage(null);
                 gameBoardPane.getChildren().remove(imageView);
                 toggleButtons.get(i).setDisable(false);
+            }
+
+            if (gameboard.getMarket().getMarketCells().get(i).isABlockedCell())
+            {
+                toggleButtons.get(i).setDisable(true);
             }
         }
 
@@ -485,7 +525,7 @@ public class GameBoardController implements Controller {
                 }
                 if (f.getColor().equals(ColorsEnum.WHITE))
                 {
-                    neuter.setDisable(true);
+                    white.setDisable(true);
                 }
             }
         }

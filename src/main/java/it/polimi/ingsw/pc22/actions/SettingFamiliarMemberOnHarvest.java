@@ -22,6 +22,12 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 		if (familyMember.getValue() < 1)
 			
 			return false;
+
+		if (harvest.getHarvestCell()[0].getFamilyMember() != null &&
+				harvest.getHarvestCell()[1].isABlockedCell())
+		{
+			return false;
+		}
 		
 		for (HarvestCell harvestCell : harvest.getHarvestCell()){
 			
@@ -31,16 +37,14 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 			
 			if
 			(
-					currFamilyMember.getColor()==ColorsEnum.NEUTER ||
-					familyMember.getColor() == ColorsEnum.NEUTER
+				currFamilyMember.getColor()==ColorsEnum.NEUTER ||
+				familyMember.getColor() == ColorsEnum.NEUTER
 			)
 				break;
 			
 			if (familyMember.getColor().equals(currFamilyMember.getColor()) && !player.isDontCareOccupiedPlaces())
 
 				return false;
-
-			
 		}
 		
 		return true;
