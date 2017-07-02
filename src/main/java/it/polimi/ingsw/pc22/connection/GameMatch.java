@@ -3,6 +3,8 @@ package it.polimi.ingsw.pc22.connection;
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.gamebox.*;
+import it.polimi.ingsw.pc22.messages.CommunicationMessage;
+import it.polimi.ingsw.pc22.messages.EndMatchMessage;
 import it.polimi.ingsw.pc22.messages.GameStatusMessage;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.*;
@@ -152,6 +154,12 @@ public class GameMatch implements Runnable
 				GameBoardUtils.purgeGameBoard(gameBoard);
 				
 				addFamiliarsValue();
+
+				for (Player p : players)
+				{
+					IOAdapter adapter = p.getAdapter();
+					adapter.printMessage(new CommunicationMessage("Turn " + turn + " is started"));
+				}
 			}
 
 			for(Player player : players)
@@ -229,7 +237,14 @@ public class GameMatch implements Runnable
 
 		String winnerName = selectWinner(players);
 
-		printWinnerNameToAll(players, winnerName);
+		for (Player p : players)
+		{
+			IOAdapter adapter = p.getAdapter();
+
+			List<Player> standings = new ArrayList<>(GameServer.getPlayersMap().values());
+
+			adapter.printMessage(new EndMatchMessage(standings, winnerName));
+		}
 
 		endGame();
 	}
@@ -533,32 +548,32 @@ public class GameMatch implements Runnable
 	
 	private String selectWinner(List<Player> players)
 	{
-		int winner=0;
-		
+		Collections.sort(players, new PlayerComparator());
+
 		String winnerName = null;
-		
-		for (Player p : players)
+
+		for (int i  = 0; i < players.size(); i++)
 		{
-			if(p.getVictoryPoints() > winner)
+			Player player = players.get(i);
+
+			if (i == 0)
 			{
-				winner = p.getVictoryPoints(); 
-			
-				winnerName = p.getUsername();
+				winnerName = player.getUsername();
+
+				int victories = player.getNumberOfMatchWon() + 1;
+
+				player.setNumberOfMatchWon(victories);
 			}
+			else
+			{
+				int matchesLost = player.getNumberOfMatchLost() + 1;
+
+				player.setNumberOfMatchLost(matchesLost);
+			}
+
 		}
 
 		return winnerName;
-
-	}
-
-
-	private void printWinnerNameToAll(List<Player>  players, String winnerName)
-	{
-		for (Player p : players)
-		{
-			p.getAdapter().printWinnerNameToSingleUser(winnerName);
-		}
-
 	}
 
 	public int getMaxPlayersNumber()
@@ -605,5 +620,16 @@ public class GameMatch implements Runnable
 	public static Long getTimeout()
 	{
 		return timeout;
+	}
+
+	public class PlayerComparator implements Comparator<Player>
+	{
+		@Override
+		public int compare(Player o1, Player o2)
+		{
+			int value = Integer.compare(o2.getVictoryPoints(), o1.getVictoryPoints());
+
+			return value;
+		}
 	}
 }
