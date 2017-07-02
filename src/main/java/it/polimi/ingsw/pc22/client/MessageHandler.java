@@ -213,11 +213,6 @@ public class MessageHandler
             Client.setStateChanged(true);
         }
 
-        if (message instanceof EndTurnMessage)
-        {
-            //TODO IMPLEMENTARE CORRETTAMENTE
-        }
-
         if (message instanceof ExcommunicationMessage)
         {
             //TODO IMPLEMENTARE CORRETTAMENTE

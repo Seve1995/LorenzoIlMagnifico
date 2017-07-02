@@ -21,8 +21,12 @@ public class Player implements Serializable
 
 	private Integer excommunicationChoice = null;
 
-	private PlayerColorsEnum playerColorsEnum;
 	private int numberOfMatch;
+	private int numberOfMatchWon;
+	private int numberOfMatchLost;
+
+	private PlayerColorsEnum playerColorsEnum;
+
 	private int woods = 2;
 	private int stones = 2;
 	private int servants = 3;
@@ -66,6 +70,22 @@ public class Player implements Serializable
 		this.username = username;
 		this.password = password;
 		this.isLogged = isLogged;
+	}
+
+	public int getNumberOfMatchWon() {
+		return numberOfMatchWon;
+	}
+
+	public void setNumberOfMatchWon(int numberOfMatchWon) {
+		this.numberOfMatchWon = numberOfMatchWon;
+	}
+
+	public int getNumberOfMatchLost() {
+		return numberOfMatchLost;
+	}
+
+	public void setNumberOfMatchLost(int numberOfMatchLost) {
+		this.numberOfMatchLost = numberOfMatchLost;
 	}
 
 	public String getUsername() {
