@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="1886.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.pc22.client.GameBoardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="1886.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.pc22.client.GameBoardController">
    <children>
       <ImageView fitHeight="965.0" fitWidth="1299.0" layoutX="585.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -190,14 +190,14 @@
                   <ToggleButton id="HARVEST" layoutX="268.0" layoutY="863.0" mnemonicParsing="false" text="Harvest" toggleGroup="$GameBoardButtons" fx:id="harvest"/>
                   <ImageView fitHeight="53.0" fitWidth="50.0" layoutX="41.0" layoutY="773.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fitHeight="61.0" fitWidth="57.0" layoutX="45.0" layoutY="846.0" pickOnBounds="true" preserveRatio="true" />
-                  <ToggleButton id="MARKET 0" layoutX="367.0" layoutY="729.0" mnemonicParsing="false" text="1" toggleGroup="$GameBoardButtons" fx:id="market0"/>
-                  <ToggleButton id="MARKET 1" layoutX="431.0" layoutY="729.0" mnemonicParsing="false" text="2" toggleGroup="$GameBoardButtons" fx:id="market1"/>
-                  <ToggleButton id="MARKET 2" layoutX="493.0" layoutY="744.0" mnemonicParsing="false" text="3" toggleGroup="$GameBoardButtons" fx:id="market2"/>
-                  <ToggleButton id="MARKET 3" layoutX="537.0" layoutY="786.0" mnemonicParsing="false" text="4" toggleGroup="$GameBoardButtons" fx:id="market3"/>
-                  <ImageView fitHeight="34.0" fitWidth="36.0" layoutX="365.0" layoutY="769.0" pickOnBounds="true" preserveRatio="true" fx:id="imageViewMarket0"/>
-                  <ImageView fitHeight="34.0" fitWidth="36.0" layoutX="425.0" layoutY="766.0" pickOnBounds="true" preserveRatio="true" fx:id="imageViewMarket1"/>
-                  <ImageView fitHeight="34.0" fitWidth="36.0" layoutX="480.0" layoutY="784.0" pickOnBounds="true" preserveRatio="true" fx:id="imageViewMarket2"/>
-                  <ImageView fitHeight="34.0" fitWidth="36.0" layoutX="523.0" layoutY="823.0" pickOnBounds="true" preserveRatio="true" fx:id="imageViewMarket3"/>
+                  <ToggleButton id="MARKET 0" fx:id="market0" layoutX="367.0" layoutY="729.0" mnemonicParsing="false" text="1" toggleGroup="$GameBoardButtons" />
+                  <ToggleButton id="MARKET 1" fx:id="market1" layoutX="431.0" layoutY="729.0" mnemonicParsing="false" text="2" toggleGroup="$GameBoardButtons" />
+                  <ToggleButton id="MARKET 2" fx:id="market2" layoutX="493.0" layoutY="744.0" mnemonicParsing="false" text="3" toggleGroup="$GameBoardButtons" />
+                  <ToggleButton id="MARKET 3" fx:id="market3" layoutX="537.0" layoutY="786.0" mnemonicParsing="false" text="4" toggleGroup="$GameBoardButtons" />
+                  <ImageView fx:id="imageViewMarket0" fitHeight="34.0" fitWidth="36.0" layoutX="365.0" layoutY="769.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewMarket1" fitHeight="34.0" fitWidth="36.0" layoutX="425.0" layoutY="766.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewMarket2" fitHeight="34.0" fitWidth="36.0" layoutX="480.0" layoutY="784.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageViewMarket3" fitHeight="34.0" fitWidth="36.0" layoutX="523.0" layoutY="823.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
          </content>
@@ -232,6 +232,7 @@
             <Button fx:id="pass" mnemonicParsing="false" onAction="#handlePassButton" text="Pass" />
          </buttons>
       </ButtonBar>
+      <ImageView fx:id="imageZoom" fitHeight="276.0" fitWidth="175.0" layoutX="684.0" layoutY="646.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="402.0" fitWidth="595.0" layoutX="720.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@pboard.jpg" />
@@ -303,9 +304,9 @@
             <ImageView fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" />
          </children>
       </GridPane>
-      <Label fx:id="info" layoutX="829.0" layoutY="835.0" prefHeight="81.0" prefWidth="452.0">
+      <Label fx:id="info" layoutX="1449.0" layoutY="835.0" prefHeight="81.0" prefWidth="418.0">
          <font>
-            <Font size="14.0" />
+            <Font size="11.0" />
          </font>
       </Label>
       <ImageView fitHeight="137.0" fitWidth="554.0" layoutX="1315.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
@@ -348,7 +349,10 @@
             <ToggleButton id="2" mnemonicParsing="false" prefHeight="128.0" prefWidth="118.0" toggleGroup="$LeadersHand" GridPane.columnIndex="2" />
          </children>
       </GridPane>
-      <Button fx:id="confirm" layoutX="744.0" layoutY="851.0" mnemonicParsing="false" onAction="#handleConfirm" text="Confirm" />
+      <Button fx:id="confirm" layoutX="1318.0" layoutY="847.0" mnemonicParsing="false" onAction="#handleConfirm" prefHeight="58.0" prefWidth="117.0" text="CONFIRM" textFill="RED">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Button>
       <GridPane id="Leaders" fx:id="leadersPlace" layoutX="1376.0" layoutY="659.0" prefHeight="115.0" prefWidth="469.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
