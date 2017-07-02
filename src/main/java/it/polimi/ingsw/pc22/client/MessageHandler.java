@@ -129,6 +129,8 @@ public class MessageHandler
 
             Client.setStateChanged(true);
 
+            printOnClient(message);
+
             if ("rmi".equals(Client.getNetworkChoice()))
             {
                 new Thread(new RMIAuxiliarViewThread()).start();
@@ -142,6 +144,8 @@ public class MessageHandler
             Client.setGenericState(new ChooseAssetsState(assets));
 
             Client.setStateChanged(true);
+
+            printOnClient(message);
 
             if ("rmi".equals(Client.getNetworkChoice()))
             {
@@ -168,6 +172,8 @@ public class MessageHandler
 
             Client.setStateChanged(true);
 
+            printOnClient(message);
+
             if ("rmi".equals(Client.getNetworkChoice()))
             {
                 new Thread(new RMIAuxiliarViewThread()).start();
@@ -188,6 +194,8 @@ public class MessageHandler
             Client.setGenericState(costsState);
 
             Client.setStateChanged(true);
+
+            printOnClient(message);
 
             if ("rmi".equals(Client.getNetworkChoice()))
             {
@@ -218,7 +226,7 @@ public class MessageHandler
             //TODO IMPLEMENTARE CORRETTAMENTE
         }
 
-        if (message instanceof ExcommunicationMessage)
+        if (message instanceof EndMatchMessage)
         {
             //TODO IMPLEMENTARE CORRETTAMENTE
         }

@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="1886.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.pc22.client.GameBoardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="1886.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.pc22.client.GameBoardController">
    <children>
       <ImageView fitHeight="965.0" fitWidth="1299.0" layoutX="585.0" layoutY="-12.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -188,38 +188,16 @@
                   <ToggleButton id="PRODUCTION" layoutX="260.0" layoutY="787.0" mnemonicParsing="false" text="Production" toggleGroup="$GameBoardButtons" />
                   <ToggleButton id="COUNCIL" layoutX="350.0" layoutY="638.0" mnemonicParsing="false" text="Council Palace" toggleGroup="$GameBoardButtons" />
                   <ToggleButton id="HARVEST" layoutX="268.0" layoutY="863.0" mnemonicParsing="false" text="Harvest" toggleGroup="$GameBoardButtons" />
-                  <GridPane fx:id="market" layoutX="360.0" layoutY="746.0" prefHeight="129.0" prefWidth="216.0" visible="false">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <ToggleButton id="MARKET 0" mnemonicParsing="false" prefHeight="43.0" prefWidth="54.0" toggleGroup="$GameBoardButtons" visible="false">
-                           <GridPane.margin>
-                              <Insets bottom="65.0" />
-                           </GridPane.margin>
-                        </ToggleButton>
-                        <ToggleButton id="MARKET 1" mnemonicParsing="false" prefHeight="53.0" prefWidth="54.0" toggleGroup="$GameBoardButtons" visible="false" GridPane.columnIndex="1">
-                           <GridPane.margin>
-                              <Insets bottom="65.0" />
-                           </GridPane.margin></ToggleButton>
-                        <ToggleButton id="MARKET 2" mnemonicParsing="false" prefHeight="50.0" prefWidth="48.0" toggleGroup="$GameBoardButtons" visible="false" GridPane.columnIndex="2">
-                           <GridPane.margin>
-                              <Insets bottom="35.0" />
-                           </GridPane.margin></ToggleButton>
-                        <ToggleButton id="MARKET 3" mnemonicParsing="false" prefHeight="59.0" prefWidth="44.0" toggleGroup="$GameBoardButtons" visible="false" GridPane.columnIndex="3">
-                           <GridPane.margin>
-                              <Insets top="60.0" />
-                           </GridPane.margin></ToggleButton>
-                     </children>
-                  </GridPane>
                   <ImageView fitHeight="53.0" fitWidth="50.0" layoutX="41.0" layoutY="773.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fitHeight="61.0" fitWidth="57.0" layoutX="45.0" layoutY="846.0" pickOnBounds="true" preserveRatio="true" />
+                  <ToggleButton id="MARKET 0" layoutX="367.0" layoutY="729.0" mnemonicParsing="false" text="1" toggleGroup="$GameBoardButtons" fx:id="market0"/>
+                  <ToggleButton id="MARKET 1" layoutX="431.0" layoutY="729.0" mnemonicParsing="false" text="2" toggleGroup="$GameBoardButtons" fx:id="market1"/>
+                  <ToggleButton id="MARKET 2" layoutX="493.0" layoutY="744.0" mnemonicParsing="false" text="3" toggleGroup="$GameBoardButtons" fx:id="market2"/>
+                  <ToggleButton id="MARKET 3" layoutX="537.0" layoutY="786.0" mnemonicParsing="false" text="4" toggleGroup="$GameBoardButtons" fx:id="market3"/>
+                  <ImageView fitHeight="34.0" fitWidth="36.0" layoutX="365.0" layoutY="769.0" pickOnBounds="true" preserveRatio="true" fx:id="imageViewMarket0"/>
+                  <ImageView fitHeight="34.0" fitWidth="36.0" layoutX="425.0" layoutY="766.0" pickOnBounds="true" preserveRatio="true" fx:id="imageViewMarket1"/>
+                  <ImageView fitHeight="34.0" fitWidth="36.0" layoutX="480.0" layoutY="784.0" pickOnBounds="true" preserveRatio="true" fx:id="imageViewMarket2"/>
+                  <ImageView fitHeight="34.0" fitWidth="36.0" layoutX="523.0" layoutY="823.0" pickOnBounds="true" preserveRatio="true" fx:id="imageViewMarket3"/>
                </children>
             </AnchorPane>
          </content>
