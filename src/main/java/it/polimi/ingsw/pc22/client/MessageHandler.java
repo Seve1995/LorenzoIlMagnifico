@@ -115,10 +115,10 @@ public class MessageHandler
 
             printOnClient(message);
 
-            if ("rmi".equals(Client.getNetworkChoice()))
-            {
-                new Thread(new RMIAuxiliarViewThread()).start();
-            }
+            //if ("rmi".equals(Client.getNetworkChoice()))
+            //{
+            //    new Thread(new RMIAuxiliarViewThread()).start();
+            //}
         }
 
         if (message instanceof ChooseServantsMessage)
