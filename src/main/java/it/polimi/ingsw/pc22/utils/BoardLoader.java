@@ -134,14 +134,14 @@ public class BoardLoader extends GenericLoader
 
         JSONArray jsonEffects = jsonCells.getJSONArray("effects");
 
-        List<Effect> effects = loadEffectList(jsonEffects);
-
         CouncilPalace palace = new CouncilPalace();
 
         CouncilPalaceCell[] cells = new CouncilPalaceCell[councilPalaceMaxPlaces];
 
         for (int i = 0; i < councilPalaceMaxPlaces; i++)
         {
+            List<Effect> effects = loadEffectList(jsonEffects);
+
             CouncilPalaceCell cell =
                     new CouncilPalaceCell(requiredDiceValue,effects);
 

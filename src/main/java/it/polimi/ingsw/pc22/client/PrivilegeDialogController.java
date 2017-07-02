@@ -37,6 +37,7 @@ public class PrivilegeDialogController implements Controller {
 
         confirmClicked = true;
         dialogStage.close();
+        Client.getGenericState().sendToServer(output);
         Client.getController().updateScene(new ExecutedAction("action performed"));
     }
 
@@ -70,7 +71,6 @@ public class PrivilegeDialogController implements Controller {
         output = "1";
         toggle1.setDisable(true);
         checkForOtherPrivileges();
-        Client.getGenericState().sendToServer(output);
 
     }
 
@@ -80,7 +80,6 @@ public class PrivilegeDialogController implements Controller {
         output = "2";
         toggle2.setDisable(true);
         checkForOtherPrivileges();
-        Client.getGenericState().sendToServer(output);
     }
 
     @FXML
@@ -89,7 +88,6 @@ public class PrivilegeDialogController implements Controller {
         output = "3";
         toggle3.setDisable(true);
         checkForOtherPrivileges();
-        Client.getGenericState().sendToServer(output);
     }
 
     @FXML
@@ -98,7 +96,6 @@ public class PrivilegeDialogController implements Controller {
         output = "4";
         toggle4.setDisable(true);
         checkForOtherPrivileges();
-        Client.getGenericState().sendToServer(output);
     }
 
     @FXML
@@ -107,7 +104,6 @@ public class PrivilegeDialogController implements Controller {
         output = "5";
         toggle5.setDisable(true);
         checkForOtherPrivileges();
-        Client.getGenericState().sendToServer(output);
     }
 
     public boolean isConfirmClicked()

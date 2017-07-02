@@ -29,8 +29,6 @@ public class PickCouncilPrivilege
                 e.printStackTrace();
             }
 
-            System.out.println(chosenAssets);
-
             if (chosenAssets != null)
             {
                 for (Asset asset : chosenAssets)

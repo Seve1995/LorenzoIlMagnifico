@@ -19,6 +19,8 @@ public class Player implements Serializable
 	private boolean isInMatch = false;
 	private boolean isSuspended = false;
 
+	private Integer excommunicationChoice = null;
+
 	private PlayerColorsEnum playerColorsEnum;
 	private int numberOfMatch;
 	private int woods = 2;
@@ -404,6 +406,18 @@ public class Player implements Serializable
 
 	public void setInMatch(boolean inMatch) {
 		isInMatch = inMatch;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Integer getExcommunicationChoice() {
+		return excommunicationChoice;
+	}
+
+	public void setExcommunicationChoice(Integer excommunicationChoice) {
+		this.excommunicationChoice = excommunicationChoice;
 	}
 
 	public int getAsset(AssetType assetType)

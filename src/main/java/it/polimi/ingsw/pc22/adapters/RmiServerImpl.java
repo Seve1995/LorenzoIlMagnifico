@@ -18,6 +18,7 @@ import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.rmi.RMIClientStreamService;
 import it.polimi.ingsw.pc22.rmi.RMIServerInterface;
 import it.polimi.ingsw.pc22.utils.CouncilPrivilege;
+import it.polimi.ingsw.pc22.utils.GameBoardUtils;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
@@ -324,5 +325,34 @@ public class RmiServerImpl implements RMIServerInterface
                 (ServantsAction) GameMatch.getCurrentGameBoard().getCurreEffect();
 
         effect.setServants(servants);
+    }
+
+    @Override
+    public void takeExcommunicationDecision(String excommunicationMessage, Long key)
+        throws RemoteException
+    {
+        IOAdapter adapter = rmiAdapters.get(key);
+
+        if (excommunicationMessage == null)
+        {
+            adapter.printMessage(new ErrorMessage("Decision Not received"));
+
+            return;
+        }
+
+        Pattern costMessage = Pattern.compile("^[1-2]$");
+
+        Matcher matcher = costMessage.matcher(excommunicationMessage);
+
+        if (!matcher.find())
+        {
+            adapter.printMessage(new ErrorMessage("INVALID INSERTION RETRY"));
+
+            return;
+        }
+
+        Integer choiceInt = Integer.parseInt(excommunicationMessage);
+
+        GameBoardUtils.getCurrentPlayer().setExcommunicationChoice(choiceInt);
     }
 }
