@@ -114,11 +114,6 @@ public class MessageHandler
             Client.setStateChanged(true);
 
             printOnClient(message);
-
-            //if ("rmi".equals(Client.getNetworkChoice()))
-            //{
-            //    new Thread(new RMIAuxiliarViewThread()).start();
-            //}
         }
 
         if (message instanceof ChooseServantsMessage)
@@ -130,11 +125,6 @@ public class MessageHandler
             Client.setStateChanged(true);
 
             printOnClient(message);
-
-            if ("rmi".equals(Client.getNetworkChoice()))
-            {
-                new Thread(new RMIAuxiliarViewThread()).start();
-            }
         }
 
         if (message instanceof ChooseAssetsMessage)
@@ -146,11 +136,6 @@ public class MessageHandler
             Client.setStateChanged(true);
 
             printOnClient(message);
-
-            if ("rmi".equals(Client.getNetworkChoice()))
-            {
-                new Thread(new RMIAuxiliarViewThread()).start();
-            }
         }
 
         if (message instanceof ExecutedAction)
@@ -172,11 +157,6 @@ public class MessageHandler
             Client.setStateChanged(true);
 
             printOnClient(message);
-
-            if ("rmi".equals(Client.getNetworkChoice()))
-            {
-                new Thread(new RMIAuxiliarViewThread()).start();
-            }
         }
 
         if (message instanceof  ChooseCostsMessage)
@@ -195,11 +175,6 @@ public class MessageHandler
             Client.setStateChanged(true);
 
             printOnClient(message);
-
-            if ("rmi".equals(Client.getNetworkChoice()))
-            {
-                new Thread(new RMIAuxiliarViewThread()).start();
-            }
         }
 
         if (message instanceof SuspendedMessage)

@@ -5,7 +5,6 @@ import it.polimi.ingsw.pc22.messages.ChooseCostsMessage;
 import it.polimi.ingsw.pc22.messages.ExecutedAction;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.stage.Stage;
 

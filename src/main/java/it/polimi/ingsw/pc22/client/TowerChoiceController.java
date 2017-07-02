@@ -9,14 +9,11 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.stage.Stage;
 
-import java.util.List;
-
 /**
  * Created by matteo on 01/07/17.
  */
-public class TowerChoiceController implements Controller {
-
-
+public class TowerChoiceController implements Controller
+{
     @FXML
     private Spinner<String> spinnerTower;
     @FXML

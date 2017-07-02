@@ -1,8 +1,8 @@
 package it.polimi.ingsw.pc22.states;
 
+import it.polimi.ingsw.pc22.client.AuxiliaryRMIThread;
 import it.polimi.ingsw.pc22.client.Client;
 
-import java.rmi.RemoteException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -86,15 +86,7 @@ public class PickCouncilState implements GenericState
     {
         if ("rmi".equals(Client.getNetworkChoice()))
         {
-            try
-            {
-                Client.getRmiServerInterface().takeCouncilDecision
-                        (string, Client.getAssignedID(), numberOfPrivileges);
-            }
-            catch (RemoteException e)
-            {
-                e.printStackTrace();
-            }
+            new Thread(new AuxiliaryRMIThread(string, null, null, numberOfPrivileges)).start();
         }
 
         if ("socket".equals(Client.getNetworkChoice()))

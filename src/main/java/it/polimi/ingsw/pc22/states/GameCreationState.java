@@ -1,8 +1,8 @@
 package it.polimi.ingsw.pc22.states;
 
+import it.polimi.ingsw.pc22.client.AuxiliaryRMIThread;
 import it.polimi.ingsw.pc22.client.Client;
 
-import java.rmi.RemoteException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -47,14 +47,7 @@ public class GameCreationState implements GenericState
 
         if ("rmi".equals(Client.getNetworkChoice()))
         {
-            try
-            {
-                Client.getRmiServerInterface().matchHandling(string, Client.getAssignedID());
-            }
-            catch (RemoteException e)
-            {
-                e.printStackTrace();
-            }
+            new Thread(new AuxiliaryRMIThread(string, null, null, null)).start();
         }
 
         if ("socket".equals(Client.getNetworkChoice()))
