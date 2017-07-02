@@ -398,17 +398,12 @@ public class GameBoardController implements Controller {
 
         for (int i=0; i < gameboard.getMarket().getMarketCells().size(); i++)
         {
+            ImageView imageView = new ImageView();
 
             MarketCell currMarketCell = gameboard.getMarket().getMarketCells().get(i);
 
-            List<ImageView> imageViews = new ArrayList<>();
-
             List<ToggleButton> toggleButtons = new ArrayList<>();
 
-            imageViews.add(imageViewMarket0);
-            imageViews.add(imageViewMarket1);
-            imageViews.add(imageViewMarket2);
-            imageViews.add(imageViewMarket3);
             toggleButtons.add(market0);
             toggleButtons.add(market1);
             toggleButtons.add(market2);
@@ -424,38 +419,39 @@ public class GameBoardController implements Controller {
                 ClassLoader classLoader = Client.class.getClassLoader();
                 String path = "GUI/familiars/familiar_" + playerEnum.toLowerCase() +"_" + familiarEnum.toLowerCase() +".png";
                 Image image = new Image(classLoader.getResourceAsStream(path));
-                imageViews.get(i).setFitHeight(20);
-                imageViews.get(i).setFitWidth(40);
+                imageView.setFitHeight(8.75);
+                imageView.setFitWidth(13);
+
                 if (i==0)
                 {
-                    imageViews.get(i).setX(365);
-                    imageViews.get(i).setY(769);
+                    imageView.setX(365);
+                    imageView.setY(769);
                 }
                 if (i==1)
                 {
-                    imageViews.get(i).setX(425);
-                    imageViews.get(i).setY(766);
+                    imageView.setX(425);
+                    imageView.setY(766);
                 }
                 if (i==2)
                 {
-                    imageViews.get(i).setX(480);
-                    imageViews.get(i).setY(784);
+                    imageView.setX(480);
+                    imageView.setY(784);
                 }
                 if (i==3)
                 {
-                    imageViews.get(i).setX(523);
-                    imageViews.get(i).setY(823);
+                    imageView.setX(523);
+                    imageView.setY(823);
                 }
 
-                imageViews.get(i).setImage(image);
+                imageView.setImage(image);
 
-                gameBoardPane.getChildren().add(imageViews.get(i));
+                gameBoardPane.getChildren().add(imageView);
             }
 
             else
             {
                 //imageViews.get(i).setImage(null);
-                gameBoardPane.getChildren().remove(imageViews.get(i));
+                gameBoardPane.getChildren().remove(imageView);
                 toggleButtons.get(i).setDisable(false);
             }
         }
@@ -535,9 +531,17 @@ public class GameBoardController implements Controller {
 
     private void updateCells(GridPane gridPane, Tower t)
     {
+
+        int x1=439, x2=300, x3=181, x4=55;
+        int y = 447;
+        int shift = 126;
+
+
+
     	for (int i=0; i<=3; i++)
     		{
     			ToggleButton toggleButton = (ToggleButton) gridPane.getChildren().get(3-i);
+                ImageView imageViewFamiliar = new ImageView();
 
     		    if (t.getTowerCells().get(i).getDevelopmentCard() != null)
     		    {
@@ -557,25 +561,53 @@ public class GameBoardController implements Controller {
                     toggleButton.setDisable(false);
                 }
 
+
                 if (t.getTowerCells().get(i).getFamilyMember() != null)
                 {
+                    toggleButton.setDisable(true);
+                    imageViewFamiliar.setFitHeight(20);
+                    imageViewFamiliar.setFitWidth(40);
                     ColorsEnum currFamiliarEnum = t.getTowerCells().get(i).getFamilyMember().getColor();
                     PlayerColorsEnum currPlayerEnum = t.getTowerCells().get(i).getFamilyMember().getPlayerColor();
                     toggleButton.setOpacity(1);
                     ClassLoader classLoader = Client.class.getClassLoader();
-                    String path = "GUI/familiars/familiar_blue_neuter.png";
+                    String familiarEnum = currFamiliarEnum.toString();
+                    String playerEnum = currPlayerEnum.toString();
+                    String path = "GUI/familiars/familiar_" + playerEnum.toLowerCase() + "_" + familiarEnum.toLowerCase() +".png";
                     Image image = new Image(classLoader.getResourceAsStream(path));
-                    ImageView imageView = new ImageView(image);
-                    imageView.setFitHeight(20);
-                    imageView.setFitWidth(40);
-                    toggleButton.setGraphic(imageView);
-                    toggleButton.setDisable(true);
+                    if (t.getTowerType().equals(CardTypeEnum.VENTURE))
+                    {
+                        imageViewFamiliar.setX(x1);
+                    }
+                    if (t.getTowerType().equals(CardTypeEnum.CHARACTER))
+                    {
+                        imageViewFamiliar.setX(x3);
+                    }
+                    if (t.getTowerType().equals(CardTypeEnum.BUILDING))
+                    {
+                        imageViewFamiliar.setX(x2);
+                    }
+                    if (t.getTowerType().equals(CardTypeEnum.TERRITORY))
+                    {
+                        imageViewFamiliar.setX(x4);
+                    }
+
+                    imageViewFamiliar.setY(y - i*shift);
+                    imageViewFamiliar.setImage(image);
+
+                    gameBoardPane.getChildren().add(imageViewFamiliar);
+
                 }
 
                 if (t.getTowerCells().get(i).getDevelopmentCard() == null
                         && t.getTowerCells().get(i).getFamilyMember() != null)
                 {
                     toggleButton.setOpacity(0);
+                }
+
+                if (t.getTowerCells().get(i).getFamilyMember() == null)
+                {
+                    gameBoardPane.getChildren().remove(imageViewFamiliar);
                 }
     		}
     }

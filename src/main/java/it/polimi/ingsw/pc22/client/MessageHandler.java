@@ -156,7 +156,6 @@ public class MessageHandler
         if (message instanceof ExecutedAction)
         {
             printOnClient(message);
-
         }
 
         if (message instanceof CommunicationMessage)
