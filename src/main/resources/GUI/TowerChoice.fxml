@@ -16,8 +16,8 @@
          </image>
       </ImageView>
       <Label layoutX="23.0" layoutY="44.0" />
-      <Spinner layoutX="19.0" layoutY="127.0" />
-      <Spinner layoutX="19.0" layoutY="196.0" />
+      <Spinner layoutX="19.0" layoutY="127.0" fx:id="spinnerFloor" />
+      <Spinner layoutX="19.0" layoutY="196.0" fx:id="spinnerTower"/>
       <Button layoutX="110.0" layoutY="291.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="88.0" text="Confirm" onAction="#handleConfirm" />
       <Label layoutX="23.0" layoutY="28.0" text="Choose the floor, &#10;and evenutally the tower, &#10;you want to pick the card from" />
    </children>

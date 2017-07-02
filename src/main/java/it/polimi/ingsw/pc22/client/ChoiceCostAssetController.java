@@ -17,7 +17,10 @@ public class ChoiceCostAssetController implements Controller {
     private boolean confirmClicked = false;
     private Stage dialogStage;
     private String output;
+    @FXML
     private Label startingLabel;
+
+
 
     @FXML
     private ToggleButton choice1;
@@ -36,17 +39,23 @@ public class ChoiceCostAssetController implements Controller {
         output = "2";
     }
 
+    public boolean isConfirmClicked() {
+        return confirmClicked;
+    }
+
 
     @FXML
     private void handleConfirm()
     {
         Client.getGenericState().sendToServer(output);
+        confirmClicked = true;
+
         dialogStage.close();
         Client.getController().updateScene(new ExecutedAction("action performed"));
     }
 
     @FXML
-    private void setDialogStage(Stage dialogStage, Object message)
+    public void setDialogStage(Stage dialogStage, Object message)
     {
         this.dialogStage = dialogStage;
         if (message instanceof ChooseAssetsMessage)

@@ -36,14 +36,14 @@ public class TowerChoiceController implements Controller {
 
     }
 
-    private void setDialogStage(Stage dialogStage, Object message)
+    public void setDialogStage(Stage dialogStage, Object message)
     {
         this.dialogStage = dialogStage;
 
         ObservableList<String> typeOfTowers = FXCollections.observableArrayList(
                 "BUILDING", "CHARACTER", "TERRITORY", "VENTURES");
 
-        SpinnerValueFactory valueFactoryFloor = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,4);
+        SpinnerValueFactory valueFactoryFloor = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,4);
 
         SpinnerValueFactory valueFactoryTower = new SpinnerValueFactory.ListSpinnerValueFactory(typeOfTowers);
 
@@ -54,7 +54,6 @@ public class TowerChoiceController implements Controller {
         if (!((ChooseCardMessage) message).getCardType().equals(CardTypeEnum.ANY))
         {
             spinnerTower.setDisable(true);
-
             onlyTheFloor = true;
         }
 

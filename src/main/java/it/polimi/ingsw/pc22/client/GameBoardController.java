@@ -168,7 +168,7 @@ public class GameBoardController implements Controller {
         ToggleButton selectedLeaderToggle = (ToggleButton) LeadersHand.getSelectedToggle();
         if (selectedLeaderToggle==null)
         	{
-        	info.setText("You must select one leader card!");        	
+        	info.setText("You must select one leader card!");
         	return;
         	}
         idLeader = selectedLeaderToggle.getId();
@@ -183,7 +183,7 @@ public class GameBoardController implements Controller {
         ToggleButton selectedLeaderToggle = (ToggleButton) LeadersHand.getSelectedToggle();
         if (selectedLeaderToggle==null)
     	{
-    	info.setText("You must select one leader card!");        	
+    	info.setText("You must select one leader card!");
     	return;
     	}
         idLeader = selectedLeaderToggle.getId();
@@ -318,7 +318,7 @@ public class GameBoardController implements Controller {
             
             if (harvest.getHarvestCell()[i].getFamilyMember() != null)
             {
-            	
+
                 ColorsEnum currFamiliarEnum = harvest.getHarvestCell()[i].getFamilyMember().getColor();
                 PlayerColorsEnum currPlayerEnum = harvest.getHarvestCell()[i].getFamilyMember().getPlayerColor();
                 //String familiarEnum = currFamiliarEnum.toString();
@@ -329,7 +329,7 @@ public class GameBoardController implements Controller {
                 imageView.setImage(image);
 
             }
-            else 
+            else
             {
             	imageView.setImage(null);
             }
@@ -368,7 +368,7 @@ public class GameBoardController implements Controller {
                 Image image = new Image(classLoader.getResourceAsStream(path));
                 imageView.setImage(image);
             }
-            else 
+            else
             {
             	imageView.setImage(null);
             }
@@ -798,9 +798,9 @@ public class GameBoardController implements Controller {
             Stage dialogStage = new Stage();
 
             dialogStage.setTitle("Choose servants");
-            
+
             dialogStage.initModality(Modality.WINDOW_MODAL);
-            
+
             Scene scene = new Scene(page);
 
             dialogStage.setScene(scene);
@@ -808,7 +808,7 @@ public class GameBoardController implements Controller {
             ServantsHandlerController controller = loader.getController();
 
             controller.setDialogStage(dialogStage, ((ChooseServantsMessage) message).getPlayer());
-            
+
             dialogStage.showAndWait();
 
             return controller.isConfirmClicked();
@@ -817,7 +817,7 @@ public class GameBoardController implements Controller {
             e.printStackTrace();
             return false;
         }
-        
+
     }
 
     public boolean choiceCardDialog(Object message)
