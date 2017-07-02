@@ -1043,21 +1043,6 @@ public class GameBoardController implements Controller {
 
     }
 
-    @FXML
-    private void handleOnMouseEntered()
-    {
-        ClassLoader classLoader = Client.class.getClassLoader();
-        String path = "GUI/Cards/devcards_f_en_c_" + 45 + ".png";
-        Image image = new Image(classLoader.getResourceAsStream(path));
-    	imageZoom.setImage(image);
-    }
-
-    @FXML
-    private void handleOnMouseExited()
-    {
-    	imageZoom.setImage(null);
-    }
-    
     @Override
     public void updateScene(Object message)
     {
