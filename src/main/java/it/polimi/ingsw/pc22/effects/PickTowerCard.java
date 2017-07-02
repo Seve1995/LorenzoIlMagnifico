@@ -13,6 +13,8 @@ import it.polimi.ingsw.pc22.utils.MilitaryPointsCalc;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PickTowerCard extends ChooseAsset implements Effect
 {
@@ -25,6 +27,8 @@ public class PickTowerCard extends ChooseAsset implements Effect
 	private List<Asset> costs = new ArrayList<>();
 	//Auxiliary arrayList that storage the card modifiers associated with the cardType
 	private List<CardModifier> currentCardModifiers = new ArrayList<>();
+
+	private static final Logger LOGGER = Logger.getLogger(PickTowerCard.class.getName());
 
 	private Integer costDecision = null;
 
@@ -174,7 +178,8 @@ public class PickTowerCard extends ChooseAsset implements Effect
 					}
 					catch (InterruptedException e)
 					{
-						e.printStackTrace();
+						LOGGER.log(Level.WARNING, "Interrupted!", e);
+						Thread.currentThread().interrupt();
 					}
 
 					if (costDecision != null)
@@ -283,7 +288,8 @@ public class PickTowerCard extends ChooseAsset implements Effect
 				}
 					catch (InterruptedException e)
 				{
-					e.printStackTrace();
+					LOGGER.log(Level.WARNING, "Interrupted!", e);
+					Thread.currentThread().interrupt();
 				}
 
 				if (!cardType.equals(CardTypeEnum.ANY) && floor != -1)

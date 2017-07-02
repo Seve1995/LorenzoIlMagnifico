@@ -69,7 +69,7 @@ public class MessageHandler
 
             Client.setGameBoard(gameStatusMessage.getGameBoard());
             
-            if (Client.getInterfaceChoice().equals("GUI") &&
+            if ("GUI".equals(Client.getInterfaceChoice()) &&
             		"startGameBoard".equals(gameStatusMessage.getState()))
             {
                 Platform.runLater(() ->

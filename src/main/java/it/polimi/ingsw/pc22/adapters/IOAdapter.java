@@ -53,7 +53,9 @@ public abstract class IOAdapter
  		   StringBuilder sb = new StringBuilder("Choose the familiar member for the bonus:\n");
 
 		   for (FamilyMember f : familyMembers)
-			   sb.append(f.toString());
+		   {
+               sb.append(f.toString());
+           }
 
 		    String choice = this.getMessage();
 
@@ -157,9 +159,11 @@ public abstract class IOAdapter
 
         if ("R".equalsIgnoreCase(matchStrings[1]))
         {
-            if (firstMatchFree(gameMatchMap).equals(null))
+            if (firstMatchFree(gameMatchMap) == null)
             {
                 printMessage(new ErrorMessage("No matches available."));
+
+                return false;
             }
 
             return addToExistingGame(gameMatchMap, this.firstMatchFree(gameMatchMap), player);

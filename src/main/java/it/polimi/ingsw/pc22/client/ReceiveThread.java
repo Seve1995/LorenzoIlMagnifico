@@ -35,6 +35,9 @@ public class ReceiveThread implements Runnable
 					continue;
 				}
 
+				if ("EXIT".equals(message.getClass()))
+					break;
+
 				MessageHandler.handleMessage(message);
 			}
 		}
