@@ -66,14 +66,7 @@ public class PlayState implements GenericState
 
         if ("rmi".equals(Client.getNetworkChoice()))
         {
-            try
-            {
-                Client.getRmiServerInterface().doAction(string, Client.getAssignedID());
-            }
-            catch (RemoteException e)
-            {
-                e.printStackTrace();
-            }
+           new Thread(new AuxRMIThread(string)).start();
         }
 
         if ("socket".equals(Client.getNetworkChoice()))
