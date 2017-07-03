@@ -376,7 +376,7 @@ public class GameBoardController implements Controller {
             }
         }
 
-        gameBoardPane.getChildren().addAll(councilImageViewList);
+        gameBoardPane.getChildren().addAll(harvestImageViewList);
 
     }
 
@@ -418,7 +418,7 @@ public class GameBoardController implements Controller {
             }
         }
         
-        gameBoardPane.getChildren().addAll(councilImageViewList);
+        gameBoardPane.getChildren().addAll(productionImageViewList);
         
     }
 
