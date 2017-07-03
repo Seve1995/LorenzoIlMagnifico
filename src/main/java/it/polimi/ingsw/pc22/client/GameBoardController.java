@@ -513,13 +513,10 @@ public class GameBoardController implements Controller {
 
                 marketImageViewList.add(imageView);
 
-                gameBoardPane.getChildren().add(imageView);
-
             }
 
             else
             {
-                gameBoardPane.getChildren().remove(imageView);
                 toggleButtons.get(i).setDisable(false);
 
                 if (currMarketCell.isABlockedCell())
@@ -530,6 +527,9 @@ public class GameBoardController implements Controller {
 
 
         }
+        
+        gameBoardPane.getChildren().addAll(marketImageViewList);
+
     }
 
     private void updateButtons()
