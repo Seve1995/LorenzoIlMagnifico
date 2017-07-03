@@ -4,20 +4,18 @@ import it.polimi.ingsw.pc22.effects.AddAsset;
 import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
-import it.polimi.ingsw.pc22.states.PlayState;
+import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class SettingFamiliarMemberOnMarketTest
+public class SettingFamiliarMemberOnMarketTest extends TestCase
 {
 	private Market market;
 	private MarketCell marketCell;
@@ -69,13 +67,15 @@ public class SettingFamiliarMemberOnMarketTest
 
 		familyMember.setFamiliarValue(1);
 
-		when(player.isDontCareOccupiedPlaces()).thenReturn(true);
+		when(player.isDontCareOccupiedPlaces()).thenReturn(false);
 
 		when(player.isDisableMarket()).thenReturn(false);
 
-		when(marketCell.isEmpty()).thenReturn(false);
+		when(marketCell.isEmpty()).thenReturn(true);
 
 		when(marketCell.getRequiredDiceValue()).thenReturn(1);
+
+		when(marketCell.isABlockedCell()).thenReturn(false);
 
 		assertTrue(settingFamiliarMemberOnMarket.isLegal(player, gameBoard));
 	}

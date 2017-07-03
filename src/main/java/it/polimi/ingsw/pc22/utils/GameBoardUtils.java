@@ -5,6 +5,7 @@ import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.connection.GameMatch;
 import it.polimi.ingsw.pc22.effects.ChooseAsset;
 import it.polimi.ingsw.pc22.effects.Effect;
+import it.polimi.ingsw.pc22.effects.PickCouncilPrivilege;
 import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.messages.ExcommunicationMessage;
@@ -242,6 +243,16 @@ public class GameBoardUtils
 		for (CouncilPalaceCell cp : gameBoard.getCouncilPalace().getCouncilPalaceCells())
 		{
 			cp.setFamilyMember(null);
+
+			List<Effect> effects = cp.getEffects();
+
+			for (Effect effect : effects)
+			{
+				if (effect instanceof PickCouncilPrivilege)
+				{
+					((PickCouncilPrivilege) effect).setChosenAssets(null);
+				}
+			}
 		}
 
 		gameBoard.getCouncilPalace().setPlayersInCouncilPalace(new ArrayList<Player>());

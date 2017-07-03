@@ -27,11 +27,7 @@ public class PickTwoCouncilPrivilege extends PickCouncilPrivilege implements Eff
 		if (adapter instanceof SocketIOAdapter)
 			new Thread(new ReceiveCouncilDecisionThread(2)).start();
 
-		boolean executed = super.waitForResult(player);
-
-		super.setChosenAssets(null);
-
-		return executed;
+		return super.waitForResult(player);
 	}
 
 	@Override

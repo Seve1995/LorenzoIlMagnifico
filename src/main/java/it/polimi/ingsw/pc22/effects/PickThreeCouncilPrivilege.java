@@ -27,11 +27,7 @@ public class PickThreeCouncilPrivilege extends PickCouncilPrivilege implements E
 		if (adapter instanceof SocketIOAdapter)
 			new Thread(new ReceiveCouncilDecisionThread(3)).start();
 
-		boolean executed = super.waitForResult(player);
-
-		super.setChosenAssets(null);
-
-		return executed;
+		return super.waitForResult(player);
 	}
 	
 	@Override

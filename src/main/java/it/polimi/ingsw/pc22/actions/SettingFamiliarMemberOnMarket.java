@@ -31,16 +31,7 @@ public class SettingFamiliarMemberOnMarket extends Action
 		Market market = gameBoard.getMarket(); 
 		
 		List<MarketCell> currMarketCells = market.getMarketCells();
-		
-		if(currMarketCells.get(zone).getRequiredDiceValue() > familyMember.getValue())
-			return false;
-		
-		if (!currMarketCells.get(zone).isEmpty() && !player.isDontCareOccupiedPlaces())
-			return false;
 
-		if(!currMarketCells.get(zone).isEmpty())
-			return false;		
-		
 		if (player.isDisableMarket())
 			return false;
 
@@ -48,7 +39,13 @@ public class SettingFamiliarMemberOnMarket extends Action
 		{
 			return false;
 		}
+
+		if (currMarketCells.get(zone).getRequiredDiceValue() > familyMember.getValue())
+			return false;
 		
+		if (!currMarketCells.get(zone).isEmpty() && !player.isDontCareOccupiedPlaces())
+			return false;
+
 		return true;
 	}
 	
