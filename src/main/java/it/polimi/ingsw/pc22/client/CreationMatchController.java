@@ -9,9 +9,9 @@ import javafx.scene.control.TextField;
 public class CreationMatchController implements Controller{
 
 	@FXML
-	private Label Label;
+	private Label info;
 	@FXML
-	private TextField Text;
+	private TextField text;
 	@FXML
 	private Button create;
 	@FXML
@@ -24,14 +24,14 @@ public class CreationMatchController implements Controller{
     @FXML
     private void handleCreateButton()
 	{
-    	textString = Text.getText();
+    	textString = text.getText();
 		Client.getGenericState().sendToServer(textString + " C");
 	}
     
     @FXML
     private void handleJoinButton()
 	{
-		textString = Text.getText();
+		textString = text.getText();
 		Client.getGenericState().sendToServer(textString + " J");
 	}
     
@@ -48,9 +48,10 @@ public class CreationMatchController implements Controller{
     		create.setDisable(true);
     		join.setDisable(true);
     		random.setDisable(true);
+    		text.setDisable(true);
     	}
     	else
-        	Label.setText(message.toString());
+        	info.setText(message.toString());
 
 	}
 }

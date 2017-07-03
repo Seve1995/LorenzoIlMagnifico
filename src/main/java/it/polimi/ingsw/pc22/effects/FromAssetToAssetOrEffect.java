@@ -74,14 +74,18 @@ public class FromAssetToAssetOrEffect extends ChooseAsset implements Effect
 			if (!executed) return false;
 		}
 
-		Asset payedAsset = paiedAssets.get(getChosenAssetsToPay());
+		if (isOnlyOneAsset())
+		{
+			Asset payedAsset = paiedAssets.get(getChosenAssetsToPay());
 
-		player.addAsset(payedAsset);
+			player.addAsset(payedAsset);
+		}
 
-		if (gainedAssets == null) return false;
+		if (gainedAssets == null) return true;
 
 		if (gainedAssets.size() == 1)
 			player.addAsset(gainedAssets.get(0));
+
 		else
 		{
 			Asset asset = gainedAssets.get(getChosenAssetsToPay());

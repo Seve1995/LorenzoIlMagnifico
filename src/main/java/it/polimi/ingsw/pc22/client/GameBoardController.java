@@ -56,6 +56,10 @@ public class GameBoardController implements Controller {
     private GridPane venturePlayer;
 
     @FXML
+    private ToggleButton productionButton;
+    @FXML
+    private ToggleButton harvestButton;
+    @FXML
     private ImageView bonusTile;
     @FXML
     private Label labelCoin;
@@ -72,7 +76,7 @@ public class GameBoardController implements Controller {
     @FXML
     private Label labelFaithPoints;
     @FXML
-    private Label info;
+    private TextArea info;
     @FXML
     private ToggleButton black;
     @FXML
@@ -166,7 +170,7 @@ public class GameBoardController implements Controller {
     	ToggleButton selectedToggle = (ToggleButton) GameBoardButtons.getSelectedToggle();
     	if (selectedToggle==null || output=="")
 		{
-    		info.setText("Please complete your action! You must select a familiar member and a gameboard's zone");
+    		info.appendText("Please complete your action! You must select a familiar member and a gameboard's zone\n");
     		return;
 		}
 		String id = selectedToggle.getId();
@@ -200,7 +204,7 @@ public class GameBoardController implements Controller {
         ToggleButton selectedLeaderToggle = (ToggleButton) LeadersHand.getSelectedToggle();
         if (selectedLeaderToggle==null)
         	{
-        	info.setText("You must select one leader card!");
+        	info.appendText("You must select one leader card!\n" );
         	return;
         	}
         idLeader = selectedLeaderToggle.getId();
@@ -215,7 +219,7 @@ public class GameBoardController implements Controller {
         ToggleButton selectedLeaderToggle = (ToggleButton) LeadersHand.getSelectedToggle();
         if (selectedLeaderToggle==null)
     	{
-    	info.setText("You must select one leader card!");
+    	info.appendText("You must select one leader card!\n");
     	return;
     	}
         idLeader = selectedLeaderToggle.getId();
@@ -229,7 +233,7 @@ public class GameBoardController implements Controller {
         ToggleButton selectedLeaderToggle = (ToggleButton) LeadersPlaceToggle.getSelectedToggle();
         if (selectedLeaderToggle==null)
     	{
-    	info.setText("You must select one leader card!");        	
+    	info.appendText("You must select one leader card!\n");        	
     	return;
     	}
         String id = selectedLeaderToggle.getId();
@@ -351,6 +355,16 @@ public class GameBoardController implements Controller {
     	
     	harvestImageViewList.clear();
 
+        if ((harvest.getHarvestCell()[0].getFamilyMember() != null) && harvest.getHarvestCell()[1].isABlockedCell())
+        {
+            harvestButton.setDisable(true);
+        }
+
+        else
+        {
+            harvestButton.setDisable(false);
+        }
+
         for (int i = 0; i < harvest.getHarvestCell().length; i++) {
             ImageView imageView = new ImageView();
             if (i == 0) {
@@ -391,6 +405,16 @@ public class GameBoardController implements Controller {
     	gameBoardPane.getChildren().removeAll(productionImageViewList);
     	
     	productionImageViewList.clear();
+
+    	if ((production.getProductionCell()[0].getFamilyMember() != null) && production.getProductionCell()[1].isABlockedCell())
+        {
+            productionButton.setDisable(true);
+        }
+
+        else
+        {
+            productionButton.setDisable(false);
+        }
 
         for (int i = 0; i < production.getProductionCell().length; i++) {
             ImageView imageView = new ImageView();
@@ -437,6 +461,12 @@ public class GameBoardController implements Controller {
             toggleButtons.add(market1);
             toggleButtons.add(market2);
             toggleButtons.add(market3);
+
+            if (gameboard.getMarket().getMarketCells().get(i).isABlockedCell())
+            {
+                toggleButtons.get(i).setDisable(true);
+            }
+
 
             if (gameboard.getMarket().getMarketCells().get(i).getFamilyMember()!=null)
             {
@@ -1092,7 +1122,7 @@ public class GameBoardController implements Controller {
     {
     	if (message instanceof CommunicationMessage)
     	{
-    		info.setText(((CommunicationMessage) message).getMessage());
+    		info.appendText(((CommunicationMessage) message).getMessage()+"\n");
     	}
 
     	if (message instanceof GameStatusMessage)
@@ -1160,7 +1190,7 @@ public class GameBoardController implements Controller {
 
         if (message instanceof ErrorMessage)
         {
-            info.setText(((ErrorMessage) message).getMessage());
+            info.appendText(((ErrorMessage) message).getMessage()+"\n");
         }
 
         if (message instanceof ExcommunicationMessage)

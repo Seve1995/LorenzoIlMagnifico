@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
@@ -185,9 +186,9 @@
                         <ImageView fitHeight="91.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
                      </children>
                   </GridPane>
-                  <ToggleButton id="PRODUCTION" layoutX="260.0" layoutY="787.0" mnemonicParsing="false" text="Production" toggleGroup="$GameBoardButtons" fx:id="production" />
+                  <ToggleButton id="PRODUCTION" fx:id="productionButton" layoutX="260.0" layoutY="787.0" mnemonicParsing="false" text="Production" toggleGroup="$GameBoardButtons" />
                   <ToggleButton id="COUNCIL" layoutX="350.0" layoutY="638.0" mnemonicParsing="false" text="Council Palace" toggleGroup="$GameBoardButtons" />
-                  <ToggleButton id="HARVEST" layoutX="268.0" layoutY="863.0" mnemonicParsing="false" text="Harvest" toggleGroup="$GameBoardButtons" fx:id="harvest"/>
+                  <ToggleButton id="HARVEST" fx:id="harvestButton" layoutX="268.0" layoutY="863.0" mnemonicParsing="false" text="Harvest" toggleGroup="$GameBoardButtons" />
                   <ImageView fitHeight="53.0" fitWidth="50.0" layoutX="41.0" layoutY="773.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fitHeight="61.0" fitWidth="57.0" layoutX="45.0" layoutY="846.0" pickOnBounds="true" preserveRatio="true" />
                   <ToggleButton id="MARKET 0" fx:id="market0" layoutX="367.0" layoutY="729.0" mnemonicParsing="false" text="1" toggleGroup="$GameBoardButtons" />
@@ -304,11 +305,6 @@
             <ImageView fitHeight="144.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" />
          </children>
       </GridPane>
-      <Label fx:id="info" layoutX="1449.0" layoutY="835.0" prefHeight="81.0" prefWidth="418.0">
-         <font>
-            <Font size="11.0" />
-         </font>
-      </Label>
       <ImageView fitHeight="137.0" fitWidth="554.0" layoutX="1315.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@backgroundStoneDark.png" />
@@ -438,5 +434,6 @@
       </GridPane>
       <Spinner fx:id="servantsSpinner" layoutX="974.0" layoutY="615.0" prefHeight="25.0" prefWidth="75.0" />
       <Label layoutX="740.0" layoutY="619.0" text="Servants to sacrifice:" />
+      <TextArea fx:id="info" layoutX="1458.0" layoutY="783.0" prefHeight="135.0" prefWidth="390.0" />
    </children>
 </AnchorPane>

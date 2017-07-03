@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.stage.Stage;
 
 import java.awt.*;
+import java.util.*;
 
 /**
  * Created by matteo on 02/07/17.
@@ -15,6 +16,8 @@ public class EndMatchController implements Controller {
     private Stage dialogStage;
     @FXML
     private Label winnerLabel;
+    @FXML
+    private Label listLabel;
 
     private boolean confirmClicked;
 
@@ -23,8 +26,7 @@ public class EndMatchController implements Controller {
         return confirmClicked;
     }
 
-    @FXML
-    private Label tryLabel;
+
 
     @Override
     public void updateScene(Object message) {
@@ -36,20 +38,20 @@ public class EndMatchController implements Controller {
     {
         this.dialogStage = dialogStage;
 
-        int currVictoryPoints = 0;
+        String winnerName = ((EndMatchMessage) message).getWinnerName();
 
-        String winnerName = null;
+        winnerLabel.setText("The winner is " + winnerName);
 
-        for (Player p : ((EndMatchMessage) message).getStanding())
+        java.util.List<Player> wholePlayers = ((EndMatchMessage) message).getStanding();
+
+        String output = null;
+
+        for (Player p : wholePlayers)
         {
-            if (p.getVictoryPoints() > currVictoryPoints)
-            {
-                winnerName = p.getUsername();
-            }
-
+            output += "" + p.getUsername() + " W: " + p.getNumberOfMatchWon() + " L: " + p.getNumberOfMatchLost() + "\n";
         }
 
-        winnerLabel.setText("The winner is " + winnerName + " with " + currVictoryPoints + "VictoryPoints");
+        listLabel.setText(output);
 
     }
 
