@@ -17,7 +17,7 @@ public class ClientAccessController implements Controller {
     @FXML
     private TextField password;
     @FXML 
-    private Label output;
+    private Label info;
     
     private PrintWriter printWriter;
     
@@ -40,6 +40,6 @@ public class ClientAccessController implements Controller {
 
 	@Override
 	public void updateScene(Object message) {
-		output.setText(message.toString());
+		info.setText(message.toString());
 	}
 }
