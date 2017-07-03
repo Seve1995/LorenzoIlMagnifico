@@ -43,6 +43,11 @@ public class SettingFamiliarMemberOnMarket extends Action
 		
 		if (player.isDisableMarket())
 			return false;
+
+		if (currMarketCells.get(zone).isABlockedCell())
+		{
+			return false;
+		}
 		
 		return true;
 	}

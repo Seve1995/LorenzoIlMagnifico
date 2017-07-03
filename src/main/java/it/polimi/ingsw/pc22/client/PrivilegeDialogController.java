@@ -5,6 +5,7 @@ import it.polimi.ingsw.pc22.messages.PickPrivilegeMessage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 /**
@@ -28,13 +29,21 @@ public class PrivilegeDialogController implements Controller {
     private ToggleButton toggle4;
     @FXML
     private ToggleButton toggle5;
-
+    @FXML 
+    private ToggleGroup toggles;
+    @FXML
+    private Label errorLabel;
+    
     private String output;
 
     @FXML
     public void handleConfirm()
     {
-
+    	if (toggles.getSelectedToggle()==null) 
+    	{
+    		errorLabel.setText("Please make a selection!");
+    		return;
+    	}
         confirmClicked = true;
         dialogStage.close();
         Client.getGenericState().sendToServer(output);

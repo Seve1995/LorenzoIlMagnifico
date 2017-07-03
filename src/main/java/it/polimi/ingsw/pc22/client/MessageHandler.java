@@ -87,7 +87,9 @@ public class MessageHandler
             if ("started".equals(gameStatusMessage.getState()))
             {
                 Client.setGenericState(new PlayState());
+                
                 printOnClient(message);
+                
                 printOnClient(new CommunicationMessage("Is your turn!"));
 
                 Client.setStateChanged(true);
@@ -97,8 +99,11 @@ public class MessageHandler
             if ("finished".equals(gameStatusMessage.getState()))
             {
                 Client.setGenericState(new IdleState());
-                //TODO: Gestire fine
-
+                
+                printOnClient(message);
+                
+                printOnClient(new CommunicationMessage("Turn finished!"));
+                
                 Client.setStateChanged(true);
             }
         }

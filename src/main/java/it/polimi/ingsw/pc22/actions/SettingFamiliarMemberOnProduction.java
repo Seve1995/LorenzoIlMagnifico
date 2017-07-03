@@ -25,6 +25,12 @@ public class SettingFamiliarMemberOnProduction extends Action
 
 			return false;
 
+		if (production.getProductionCell()[0].getFamilyMember() != null &&
+				production.getProductionCell()[1].isABlockedCell())
+		{
+			return false;
+		}
+
 		for (ProductionCell productionCell : production.getProductionCell())
 		{
 

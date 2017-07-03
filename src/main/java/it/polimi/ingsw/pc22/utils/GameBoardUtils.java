@@ -244,7 +244,7 @@ public class GameBoardUtils
 			cp.setFamilyMember(null);
 		}
 
-		gameBoard.getCouncilPalace().setPlayersInCouncilPalace(new ArrayList<>());
+		gameBoard.getCouncilPalace().setPlayersInCouncilPalace(new ArrayList<Player>());
 	}
 
 	private static void excommunicate(Player p, List<ExcommunicationCard> e, int era, GameBoard gameBoard)
