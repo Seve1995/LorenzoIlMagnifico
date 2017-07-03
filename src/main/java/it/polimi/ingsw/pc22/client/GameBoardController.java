@@ -122,9 +122,18 @@ public class GameBoardController implements Controller {
     private ToggleGroup LeadersHand;
     @FXML
     private ToggleGroup LeadersPlaceToggle;
-
+    
     private Stage dialogStage;
     
+    private ArrayList<ImageView> councilImageViewList = new ArrayList<ImageView>();
+
+    private ArrayList<ImageView> harvestImageViewList = new ArrayList<ImageView>();
+    
+    private ArrayList<ImageView> productionImageViewList = new ArrayList<ImageView>();
+
+    private ArrayList<ImageView> towerImageViewList = new ArrayList<ImageView>();
+
+
     private static final Logger LOGGER = Logger.getLogger(GameBoardController.class.getName());
 
     @FXML
@@ -242,8 +251,14 @@ public class GameBoardController implements Controller {
     }
 
 
-    private void updateTowers(){
+    private void updateTowers()
+    {
     	Tower[] towers = gameboard.getTowers();
+    	
+    	gameBoardPane.getChildren().removeAll(towerImageViewList);
+    	
+    	towerImageViewList.clear();
+
     	for (Tower t : towers)
     		switch (t.getTowerType()) {
 			case TERRITORY:
@@ -261,6 +276,9 @@ public class GameBoardController implements Controller {
 			default:
 				break;
 			}
+    	
+        gameBoardPane.getChildren().addAll(towerImageViewList);
+
     }
 
     private void updateGameBoard()
@@ -289,10 +307,14 @@ public class GameBoardController implements Controller {
         int delta = 15;
         int width = 15;
         int y = 552;
+        
+    	gameBoardPane.getChildren().removeAll(councilImageViewList);
+    	
+    	councilImageViewList.clear();
 
         for (int i = 0; i < councilPalace.getCouncilPalaceCells().length; i++)
         {
-
+        	
             ImageView imageView = new ImageView();
             imageView.setX(x + width + i * delta);
             imageView.setY(y);
@@ -307,15 +329,13 @@ public class GameBoardController implements Controller {
                 imageView.setImage(image);
                 imageView.setFitHeight(8.75);
                 imageView.setFitWidth(13);
-                gameBoardPane.getChildren().add(imageView);
+                councilImageViewList.add(imageView);
 
             }
-            else
-            {
-            	//imageView.setImage(null);
-                gameBoardPane.getChildren().remove(imageView);
-            }
         }
+        
+        gameBoardPane.getChildren().addAll(councilImageViewList);
+
     }
 
 
@@ -326,6 +346,11 @@ public class GameBoardController implements Controller {
         int delta = 10;
         int width = 15;
         int y = 865;
+        
+    	gameBoardPane.getChildren().removeAll(harvestImageViewList);
+    	
+    	harvestImageViewList.clear();
+
         for (int i = 0; i < harvest.getHarvestCell().length; i++) {
             ImageView imageView = new ImageView();
             if (i == 0) {
@@ -347,15 +372,11 @@ public class GameBoardController implements Controller {
                 imageView.setImage(image);
                 imageView.setFitHeight(8.75);
                 imageView.setFitWidth(13);
-                gameBoardPane.getChildren().add(imageView);
-
+                harvestImageViewList.add(imageView);
             }
-            else
-            {
-                gameBoardPane.getChildren().remove(imageView);
-            }
-            
         }
+
+        gameBoardPane.getChildren().addAll(councilImageViewList);
 
     }
 
@@ -366,6 +387,10 @@ public class GameBoardController implements Controller {
         int delta = 10;
         int width = 15;
         int y = 784;
+        
+    	gameBoardPane.getChildren().removeAll(productionImageViewList);
+    	
+    	productionImageViewList.clear();
 
         for (int i = 0; i < production.getProductionCell().length; i++) {
             ImageView imageView = new ImageView();
@@ -388,17 +413,14 @@ public class GameBoardController implements Controller {
                 imageView.setImage(image);
                 imageView.setFitHeight(8.75);
                 imageView.setFitWidth(13);
-                gameBoardPane.getChildren().add(imageView);
+                productionImageViewList.add(imageView);
 
-            }
-            else
-            {
-                //imageView.setImage(null);
-                gameBoardPane.getChildren().remove(imageView);
             }
         }
+        
+        gameBoardPane.getChildren().addAll(councilImageViewList);
+        
     }
-
 
     private void updateMarket()
     {
@@ -457,14 +479,10 @@ public class GameBoardController implements Controller {
 
             else
             {
-                //imageViews.get(i).setImage(null);
                 gameBoardPane.getChildren().remove(imageView);
                 toggleButtons.get(i).setDisable(false);
             }
         }
-
-
-
     }
 
     private void updateButtons()
@@ -553,9 +571,7 @@ public class GameBoardController implements Controller {
         int x1=439, x2=300, x3=181, x4=55;
         int y = 447;
         int shift = 126;
-
-
-
+        
     	for (int i=0; i<=3; i++)
     		{
     			ToggleButton toggleButton = (ToggleButton) gridPane.getChildren().get(3-i);
@@ -580,7 +596,8 @@ public class GameBoardController implements Controller {
                     toggleButton.setDisable(false);
                 }
 
-
+    		    
+    		    
                 if (t.getTowerCells().get(i).getFamilyMember() != null)
                 {
                     toggleButton.setDisable(true);
@@ -615,7 +632,7 @@ public class GameBoardController implements Controller {
                     imageViewFamiliar.setY(y - i*shift);
                     imageViewFamiliar.setImage(image);
 
-                    gameBoardPane.getChildren().add(imageViewFamiliar);
+                    towerImageViewList.add(imageViewFamiliar);
 
                 }
 
@@ -625,12 +642,9 @@ public class GameBoardController implements Controller {
                     toggleButton.setOpacity(0);
                     toggleButton.setOnMouseEntered(evt ->imageZoom.setImage(null));
                 }
-
-                if (t.getTowerCells().get(i).getFamilyMember() == null)
-                {
-                    gameBoardPane.getChildren().remove(imageViewFamiliar);
-                }
+                
     		}
+    	
     }
 
 
@@ -1086,8 +1100,7 @@ public class GameBoardController implements Controller {
     		GameStatusMessage gameStatusMessage = (GameStatusMessage) message;
             if ("finished".equals(gameStatusMessage.getState()))
             {
-            	System.out.println("We zio");
-            	if (dialogStage!=null && dialogStage.isShowing())
+            	if (dialogStage!=null)
             		dialogStage.close();
             }
     	    player = Client.getPlayer();
