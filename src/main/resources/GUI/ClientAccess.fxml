@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+
 <AnchorPane prefHeight="500.0" prefWidth="231.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.pc22.client.ClientAccessController">
    <children>
       <ImageView fitHeight="500.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
@@ -21,7 +25,7 @@
             <Button fx:id="register" mnemonicParsing="false" onAction="#handleRegisterButton" text="Register" />
         </buttons>
       </ButtonBar>
-      <Label fx:id="output" layoutX="34.0" layoutY="288.0" prefHeight="132.0" prefWidth="181.0" text="OUTPUT FROM SERVER" />
       <Label layoutX="32.0" layoutY="81.0" text="Type your credential:" />
+      <Label fx:id="info" layoutX="20.0" layoutY="425.0" prefHeight="17.0" prefWidth="243.0" />
    </children>
 </AnchorPane>
