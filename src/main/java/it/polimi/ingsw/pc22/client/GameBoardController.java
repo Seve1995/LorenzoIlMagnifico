@@ -123,6 +123,8 @@ public class GameBoardController implements Controller {
     @FXML
     private ToggleGroup LeadersPlaceToggle;
 
+    private Stage dialogStage;
+    
     private static final Logger LOGGER = Logger.getLogger(GameBoardController.class.getName());
 
     @FXML
@@ -474,26 +476,37 @@ public class GameBoardController implements Controller {
 
         for (FamilyMember f : player.getFamilyMembers())
         {
-            if (f.isPlayed())
-            {
-                if (f.getColor().equals(ColorsEnum.NEUTER))
-                {
-                    neuter.setDisable(true);
-                }
-                if (f.getColor().equals(ColorsEnum.BLACK))
-                {
-                    black.setDisable(true);
-                }
-                if (f.getColor().equals(ColorsEnum.ORANGE))
-                {
-                    orange.setDisable(true);
-                }
-                if (f.getColor().equals(ColorsEnum.WHITE))
-                {
-                    neuter.setDisable(true);
-                }
-            }
-        }
+        	switch (f.getColor()) {
+			case NEUTER:
+				if (f.isPlayed())       
+					neuter.setDisable(true);
+				else 
+					neuter.setDisable(false);
+				break;
+			case BLACK:
+				if (f.isPlayed())       
+					black.setDisable(true);
+				else 
+					black.setDisable(false);
+				break;
+			case ORANGE:
+				if (f.isPlayed())       
+					orange.setDisable(true);
+				else 
+					orange.setDisable(false);
+				break;
+			case WHITE:
+				if (f.isPlayed())       
+					white.setDisable(true);
+				else 
+					white.setDisable(false);
+				break;
+				
+			default:
+				break;
+			}
+        	
+         }
         
         for (int i=0; i<4; i++)
         {
@@ -848,7 +861,7 @@ public class GameBoardController implements Controller {
 
             AnchorPane page = (AnchorPane) loader.load();
 
-            Stage dialogStage = new Stage();
+            dialogStage = new Stage();
 
             dialogStage.setTitle("Privilege");
 
@@ -884,7 +897,7 @@ public class GameBoardController implements Controller {
 
             AnchorPane page = (AnchorPane) loader.load();
 
-            Stage dialogStage = new Stage();
+            dialogStage = new Stage();
 
             dialogStage.setTitle("Choose servants");
 
@@ -922,7 +935,7 @@ public class GameBoardController implements Controller {
 
             AnchorPane page = (AnchorPane) loader.load();
 
-            Stage dialogStage = new Stage();
+            dialogStage = new Stage();
 
             dialogStage.setTitle("Choices");
 
@@ -959,7 +972,7 @@ public class GameBoardController implements Controller {
 
             AnchorPane page = (AnchorPane) loader.load();
 
-            Stage dialogStage = new Stage();
+            dialogStage = new Stage();
 
             dialogStage.setTitle("Choices");
 
@@ -996,7 +1009,7 @@ public class GameBoardController implements Controller {
 
             AnchorPane page = (AnchorPane) loader.load();
 
-            Stage dialogStage = new Stage();
+            dialogStage = new Stage();
 
             dialogStage.setTitle("Choices");
 
@@ -1033,7 +1046,7 @@ public class GameBoardController implements Controller {
 
             AnchorPane page = (AnchorPane) loader.load();
 
-            Stage dialogStage = new Stage();
+            dialogStage = new Stage();
 
             dialogStage.setTitle("Choices");
 
@@ -1070,6 +1083,13 @@ public class GameBoardController implements Controller {
 
     	if (message instanceof GameStatusMessage)
     	{
+    		GameStatusMessage gameStatusMessage = (GameStatusMessage) message;
+            if ("finished".equals(gameStatusMessage.getState()))
+            {
+            	System.out.println("We zio");
+            	if (dialogStage!=null && dialogStage.isShowing())
+            		dialogStage.close();
+            }
     	    player = Client.getPlayer();
             gameboard = Client.getGameBoard();
 
@@ -1127,7 +1147,6 @@ public class GameBoardController implements Controller {
 
         if (message instanceof ErrorMessage)
         {
-        	System.out.println("Ciao l'ho ricevuto!");
             info.setText(((ErrorMessage) message).getMessage());
         }
 
