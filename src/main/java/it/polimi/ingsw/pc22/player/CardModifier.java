@@ -5,10 +5,8 @@ import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
 
 import java.util.List;
 
-public class CardModifier {
-	
-	
-	
+public class CardModifier
+{
 	private CardTypeEnum cardType; //puo essere any
 	private int valueModifier; // +qualcosa -qualcosa
 	private List<Asset> assetDiscount;

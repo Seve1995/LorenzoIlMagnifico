@@ -689,7 +689,7 @@ public class GameBoardController implements Controller {
 
     private void updatePlayerCharacters()
     {
-        if (player.getPlayerBoard().getCharacters().size() == 0)
+        if (player.getPlayerBoard().getCharacters().isEmpty())
             return;
 
         for (int i=0; i<player.getPlayerBoard().getCharacters().size(); i++)
@@ -707,7 +707,7 @@ public class GameBoardController implements Controller {
 
     private void updatePlayerVentures()
     {
-        if (player.getPlayerBoard().getVentures().size()==0)
+        if (player.getPlayerBoard().getVentures().isEmpty())
             return;
 
         for (int i=0; i< player.getPlayerBoard().getVentures().size(); i++)
@@ -725,7 +725,7 @@ public class GameBoardController implements Controller {
 
     private void updatePlayerBuildings()
     {
-        if (player.getPlayerBoard().getBuildings().size()==0)
+        if (player.getPlayerBoard().getBuildings().isEmpty())
             return;
 
         for (int i=0; i< player.getPlayerBoard().getBuildings().size(); i++)
@@ -743,7 +743,7 @@ public class GameBoardController implements Controller {
 
     private void updatePlayerTerritories()
     {
-        if (player.getPlayerBoard().getTerritories().size()==0)
+        if (player.getPlayerBoard().getTerritories().isEmpty())
             return;
 
         for (int i=0; i< player.getPlayerBoard().getTerritories().size(); i++)
@@ -796,7 +796,7 @@ public class GameBoardController implements Controller {
 
     private void updateLeadersPlayed()
     {
-        if (player.getPlayerBoard().getLeaderCards().size() == 0)
+        if (player.getPlayerBoard().getLeaderCards().isEmpty())
             return;
 
         for (int i=0; i<player.getPlayerBoard().getLeaderCards().size(); i++)

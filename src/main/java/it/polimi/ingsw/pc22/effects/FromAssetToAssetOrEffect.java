@@ -12,7 +12,7 @@ import java.util.List;
 
 public class FromAssetToAssetOrEffect extends ChooseAsset implements Effect
 {
-	private List<Asset> paiedAssets = null;
+	private transient List<Asset> paiedAssets = null;
 
 	private List<Asset> gainedAssets;
 	private boolean onlyOneAsset;

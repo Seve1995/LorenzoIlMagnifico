@@ -1,5 +1,6 @@
 package it.polimi.ingsw.pc22.client;
 
+import it.polimi.ingsw.pc22.messages.CommunicationMessage;
 import it.polimi.ingsw.pc22.messages.Message;
 
 import java.io.ObjectInputStream;
@@ -35,8 +36,13 @@ public class ReceiveThread implements Runnable
 					continue;
 				}
 
-				if ("EXIT".equals(message.getClass()))
-					break;
+				if (message instanceof CommunicationMessage)
+				{
+					String messageString = ((CommunicationMessage) message).getMessage();
+
+					if ("EXIT".equals(messageString))
+						break;
+				}
 
 				MessageHandler.handleMessage(message);
 			}

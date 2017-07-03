@@ -26,7 +26,7 @@ public class PickTowerCard extends ChooseAsset implements Effect
 	//Auxiliary arrayList that storage the card's cost
 	private List<Asset> costs = new ArrayList<>();
 	//Auxiliary arrayList that storage the card modifiers associated with the cardType
-	private List<CardModifier> currentCardModifiers = new ArrayList<>();
+	private transient List<CardModifier> currentCardModifiers = new ArrayList<>();
 
 	private static final Logger LOGGER = Logger.getLogger(PickTowerCard.class.getName());
 
