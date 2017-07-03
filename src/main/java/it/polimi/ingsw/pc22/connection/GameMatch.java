@@ -2,9 +2,11 @@ package it.polimi.ingsw.pc22.connection;
 
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
+import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.messages.CommunicationMessage;
 import it.polimi.ingsw.pc22.messages.EndMatchMessage;
+import it.polimi.ingsw.pc22.messages.ErrorMessage;
 import it.polimi.ingsw.pc22.messages.GameStatusMessage;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.*;
@@ -158,6 +160,13 @@ public class GameMatch implements Runnable
 				for (Player p : players)
 				{
 					IOAdapter adapter = p.getAdapter();
+
+					for (CharacterCard c : p.getPlayerBoard().getCharacters())
+					{
+						executeOneTurnEffect(adapter, c.getPermanentEffects(), p);
+					}
+
+
 					adapter.printMessage(new CommunicationMessage("Turn " + turn + " now starting!"));
 				}
 			}
@@ -250,6 +259,27 @@ public class GameMatch implements Runnable
 		}
 
 		endGame();
+	}
+
+	private void executeOneTurnEffect(IOAdapter adapter, List<Effect> effects, Player p)
+	{
+		if (effects == null)
+			return;
+
+		for (Effect e : effects)
+		{
+			if (e.executeEffects(p, gameBoard))
+			{
+				continue;
+			}
+
+			else
+			{
+				adapter.printMessage(new ErrorMessage("Effect not executed!"));
+			}
+
+		}
+
 	}
 
 	private void endGame()

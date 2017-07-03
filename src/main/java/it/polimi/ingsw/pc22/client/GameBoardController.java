@@ -135,7 +135,13 @@ public class GameBoardController implements Controller {
     
     private ArrayList<ImageView> productionImageViewList = new ArrayList<ImageView>();
 
+    private ArrayList<ImageView> marketImageViewList = new ArrayList<>();
+
     private ArrayList<ImageView> towerImageViewList = new ArrayList<ImageView>();
+
+    private ArrayList<ToggleButton> towersButton = new ArrayList<>();
+
+
 
 
     private static final Logger LOGGER = Logger.getLogger(GameBoardController.class.getName());
@@ -197,6 +203,9 @@ public class GameBoardController implements Controller {
 		}
 	}
     
+
+	//TODO: familiars in market, card.setopacity(0)
+
 
     @FXML
     private void handlePlay()
@@ -418,6 +427,7 @@ public class GameBoardController implements Controller {
 
         for (int i = 0; i < production.getProductionCell().length; i++) {
             ImageView imageView = new ImageView();
+
             if (i == 0) {
                 imageView.setX(62);
                 imageView.setY(784);
@@ -455,17 +465,15 @@ public class GameBoardController implements Controller {
         toggleButtons.add(market2);
         toggleButtons.add(market3);
 
+        gameBoardPane.getChildren().removeAll(marketImageViewList);
+
+        marketImageViewList.clear();
+
         for (int i=0; i < gameboard.getMarket().getMarketCells().size(); i++)
         {
             ImageView imageView = new ImageView();
 
             MarketCell currMarketCell = gameboard.getMarket().getMarketCells().get(i);
-
-            if (currMarketCell.isABlockedCell())
-            {
-                toggleButtons.get(i).setDisable(true);
-                System.out.println("tasto disabilitato");
-            }
 
             if (gameboard.getMarket().getMarketCells().get(i).getFamilyMember()!=null)
             {
@@ -503,14 +511,24 @@ public class GameBoardController implements Controller {
 
                 imageView.setImage(image);
 
+                marketImageViewList.add(imageView);
+
                 gameBoardPane.getChildren().add(imageView);
+
             }
 
             else
             {
                 gameBoardPane.getChildren().remove(imageView);
                 toggleButtons.get(i).setDisable(false);
+
+                if (currMarketCell.isABlockedCell())
+                {
+                    toggleButtons.get(i).setDisable(true);
+                }
             }
+
+
         }
     }
 
@@ -600,7 +618,9 @@ public class GameBoardController implements Controller {
         int x1=439, x2=300, x3=181, x4=55;
         int y = 447;
         int shift = 126;
-        
+
+
+
     	for (int i=0; i<=3; i++)
     		{
     			ToggleButton toggleButton = (ToggleButton) gridPane.getChildren().get(3-i);
@@ -623,6 +643,8 @@ public class GameBoardController implements Controller {
                     toggleButton.setOnMouseEntered(evt ->imageZoom.setImage(image));
                     toggleButton.setOnMouseExited(evt ->imageZoom.setImage(null));
                     toggleButton.setDisable(false);
+
+                    toggleButton.setOpacity(1);
                 }
 
     		    
@@ -635,7 +657,7 @@ public class GameBoardController implements Controller {
                     imageViewFamiliar.setFitWidth(40);
                     ColorsEnum currFamiliarEnum = t.getTowerCells().get(i).getFamilyMember().getColor();
                     PlayerColorsEnum currPlayerEnum = t.getTowerCells().get(i).getFamilyMember().getPlayerColor();
-                    toggleButton.setOpacity(1);
+                    //toggleButton.setOpacity(1);
                     ClassLoader classLoader = Client.class.getClassLoader();
                     String familiarEnum = currFamiliarEnum.toString();
                     String playerEnum = currPlayerEnum.toString();
@@ -988,7 +1010,7 @@ public class GameBoardController implements Controller {
 
             dialogStage.setScene(scene);
 
-            PrivilegeDialogController controller = loader.getController();
+            TowerChoiceController controller = loader.getController();
 
             controller.setDialogStage(dialogStage, message);
 
@@ -1025,7 +1047,7 @@ public class GameBoardController implements Controller {
 
             dialogStage.setScene(scene);
 
-            PrivilegeDialogController controller = loader.getController();
+            ChoiceCostAssetController controller = loader.getController();
 
             controller.setDialogStage(dialogStage, message);
 
