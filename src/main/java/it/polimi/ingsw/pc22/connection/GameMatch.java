@@ -159,7 +159,7 @@ public class GameMatch implements Runnable
 				for (Player p : players)
 				{
 					IOAdapter adapter = p.getAdapter();
-					adapter.printMessage(new CommunicationMessage("Turn " + turn + " is started"));
+					adapter.printMessage(new CommunicationMessage("Turn " + turn + " now starting!"));
 				}
 			}
 
@@ -223,6 +223,7 @@ public class GameMatch implements Runnable
 				else
 					adapter.printMessage(new GameStatusMessage(gameBoard, player, "finished"));
 				*/
+				
 				adapter.printMessage(new GameStatusMessage(gameBoard, player, "finished"));
 			}
 

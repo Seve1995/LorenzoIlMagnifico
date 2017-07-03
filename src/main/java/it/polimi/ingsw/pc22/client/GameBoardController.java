@@ -56,11 +56,6 @@ public class GameBoardController implements Controller {
     private GridPane venturePlayer;
 
     @FXML
-    private ToggleButton production;
-    @FXML
-    private ToggleButton harvest;
-
-    @FXML
     private ImageView bonusTile;
     @FXML
     private Label labelCoin;
@@ -88,16 +83,20 @@ public class GameBoardController implements Controller {
     private ToggleButton neuter;
     @FXML
     private ToggleButton market0;
-
+    @FXML
+    private ImageView imageViewMarket0;
     @FXML
     private ToggleButton market1;
-
+    @FXML
+    private ImageView imageViewMarket1;
     @FXML
     private ToggleButton market2;
-
+    @FXML
+    private ImageView imageViewMarket2;
     @FXML
     private ToggleButton market3;
-
+    @FXML
+    private ImageView imageViewMarket3;
     @FXML
     private Button pass;
     @FXML
@@ -124,6 +123,8 @@ public class GameBoardController implements Controller {
     @FXML
     private ToggleGroup LeadersPlaceToggle;
 
+    private Stage dialogStage;
+    
     private static final Logger LOGGER = Logger.getLogger(GameBoardController.class.getName());
 
     @FXML
@@ -347,44 +348,13 @@ public class GameBoardController implements Controller {
                 imageView.setFitHeight(8.75);
                 imageView.setFitWidth(13);
                 gameBoardPane.getChildren().add(imageView);
-                checkHarvestButton();
 
             }
             else
             {
                 gameBoardPane.getChildren().remove(imageView);
-                checkHarvestButton();
             }
             
-        }
-
-    }
-
-    private void checkProductionButton()
-    {
-        if (gameboard.getProduction().getProductionCell()[0].getFamilyMember() != null
-                && gameboard.getProduction().getProductionCell()[1].isABlockedCell())
-        {
-            production.setDisable(true);
-        }
-
-        else
-        {
-            production.setDisable(false);
-        }
-    }
-
-    private void checkHarvestButton()
-    {
-        if (gameboard.getHarvest().getHarvestCell()[0].getFamilyMember() != null
-                && gameboard.getHarvest().getHarvestCell()[1].isABlockedCell())
-        {
-            harvest.setDisable(true);
-        }
-
-        else
-        {
-            harvest.setDisable(false);
         }
 
     }
@@ -419,14 +389,12 @@ public class GameBoardController implements Controller {
                 imageView.setFitHeight(8.75);
                 imageView.setFitWidth(13);
                 gameBoardPane.getChildren().add(imageView);
-                checkProductionButton();
 
             }
             else
             {
                 //imageView.setImage(null);
                 gameBoardPane.getChildren().remove(imageView);
-                checkProductionButton();
             }
         }
     }
@@ -487,17 +455,11 @@ public class GameBoardController implements Controller {
                 gameBoardPane.getChildren().add(imageView);
             }
 
-
-            if (gameboard.getMarket().getMarketCells().get(i).getFamilyMember()==null)
+            else
             {
                 //imageViews.get(i).setImage(null);
                 gameBoardPane.getChildren().remove(imageView);
                 toggleButtons.get(i).setDisable(false);
-            }
-
-            if (gameboard.getMarket().getMarketCells().get(i).isABlockedCell())
-            {
-                toggleButtons.get(i).setDisable(true);
             }
         }
 
@@ -514,26 +476,37 @@ public class GameBoardController implements Controller {
 
         for (FamilyMember f : player.getFamilyMembers())
         {
-            if (f.isPlayed())
-            {
-                if (f.getColor().equals(ColorsEnum.NEUTER))
-                {
-                    neuter.setDisable(true);
-                }
-                if (f.getColor().equals(ColorsEnum.BLACK))
-                {
-                    black.setDisable(true);
-                }
-                if (f.getColor().equals(ColorsEnum.ORANGE))
-                {
-                    orange.setDisable(true);
-                }
-                if (f.getColor().equals(ColorsEnum.WHITE))
-                {
-                    white.setDisable(true);
-                }
-            }
-        }
+        	switch (f.getColor()) {
+			case NEUTER:
+				if (f.isPlayed())       
+					neuter.setDisable(true);
+				else 
+					neuter.setDisable(false);
+				break;
+			case BLACK:
+				if (f.isPlayed())       
+					black.setDisable(true);
+				else 
+					black.setDisable(false);
+				break;
+			case ORANGE:
+				if (f.isPlayed())       
+					orange.setDisable(true);
+				else 
+					orange.setDisable(false);
+				break;
+			case WHITE:
+				if (f.isPlayed())       
+					white.setDisable(true);
+				else 
+					white.setDisable(false);
+				break;
+				
+			default:
+				break;
+			}
+        	
+         }
         
         for (int i=0; i<4; i++)
         {
@@ -888,7 +861,7 @@ public class GameBoardController implements Controller {
 
             AnchorPane page = (AnchorPane) loader.load();
 
-            Stage dialogStage = new Stage();
+            dialogStage = new Stage();
 
             dialogStage.setTitle("Privilege");
 
@@ -924,7 +897,7 @@ public class GameBoardController implements Controller {
 
             AnchorPane page = (AnchorPane) loader.load();
 
-            Stage dialogStage = new Stage();
+            dialogStage = new Stage();
 
             dialogStage.setTitle("Choose servants");
 
@@ -962,7 +935,7 @@ public class GameBoardController implements Controller {
 
             AnchorPane page = (AnchorPane) loader.load();
 
-            Stage dialogStage = new Stage();
+            dialogStage = new Stage();
 
             dialogStage.setTitle("Choices");
 
@@ -999,7 +972,7 @@ public class GameBoardController implements Controller {
 
             AnchorPane page = (AnchorPane) loader.load();
 
-            Stage dialogStage = new Stage();
+            dialogStage = new Stage();
 
             dialogStage.setTitle("Choices");
 
@@ -1036,7 +1009,7 @@ public class GameBoardController implements Controller {
 
             AnchorPane page = (AnchorPane) loader.load();
 
-            Stage dialogStage = new Stage();
+            dialogStage = new Stage();
 
             dialogStage.setTitle("Choices");
 
@@ -1073,7 +1046,7 @@ public class GameBoardController implements Controller {
 
             AnchorPane page = (AnchorPane) loader.load();
 
-            Stage dialogStage = new Stage();
+            dialogStage = new Stage();
 
             dialogStage.setTitle("Choices");
 
@@ -1110,6 +1083,13 @@ public class GameBoardController implements Controller {
 
     	if (message instanceof GameStatusMessage)
     	{
+    		GameStatusMessage gameStatusMessage = (GameStatusMessage) message;
+            if ("finished".equals(gameStatusMessage.getState()))
+            {
+            	System.out.println("We zio");
+            	if (dialogStage!=null && dialogStage.isShowing())
+            		dialogStage.close();
+            }
     	    player = Client.getPlayer();
             gameboard = Client.getGameBoard();
 
@@ -1167,7 +1147,6 @@ public class GameBoardController implements Controller {
 
         if (message instanceof ErrorMessage)
         {
-        	System.out.println("Ciao l'ho ricevuto!");
             info.setText(((ErrorMessage) message).getMessage());
         }
 
