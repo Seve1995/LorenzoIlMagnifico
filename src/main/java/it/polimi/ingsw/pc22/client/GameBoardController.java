@@ -448,6 +448,12 @@ public class GameBoardController implements Controller {
 
     private void updateMarket()
     {
+        List<ToggleButton> toggleButtons = new ArrayList<>();
+
+        toggleButtons.add(market0);
+        toggleButtons.add(market1);
+        toggleButtons.add(market2);
+        toggleButtons.add(market3);
 
         for (int i=0; i < gameboard.getMarket().getMarketCells().size(); i++)
         {
@@ -455,18 +461,11 @@ public class GameBoardController implements Controller {
 
             MarketCell currMarketCell = gameboard.getMarket().getMarketCells().get(i);
 
-            List<ToggleButton> toggleButtons = new ArrayList<>();
-
-            toggleButtons.add(market0);
-            toggleButtons.add(market1);
-            toggleButtons.add(market2);
-            toggleButtons.add(market3);
-
-            if (gameboard.getMarket().getMarketCells().get(i).isABlockedCell())
+            if (currMarketCell.isABlockedCell())
             {
                 toggleButtons.get(i).setDisable(true);
+                System.out.println("tasto disabilitato");
             }
-
 
             if (gameboard.getMarket().getMarketCells().get(i).getFamilyMember()!=null)
             {
