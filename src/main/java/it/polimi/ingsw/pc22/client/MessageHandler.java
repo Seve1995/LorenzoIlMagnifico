@@ -100,8 +100,18 @@ public class MessageHandler
                 //TODO: Gestire fine
 
                 Client.setStateChanged(true);
-
             }
+        }
+
+        if (message instanceof ChooseFamiliarMessage)
+        {
+            Client.setPlayer(((ChooseFamiliarMessage) message).getPlayer());
+
+            Client.setGenericState(new ChooseFamiliarState());
+
+            Client.setStateChanged(true);
+
+            printOnClient(message);
         }
 
         if (message instanceof PickPrivilegeMessage)

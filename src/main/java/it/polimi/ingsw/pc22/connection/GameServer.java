@@ -42,7 +42,7 @@ public class GameServer
 		
 		gameMatchMap = new ConcurrentHashMap<>();
 
-		Long timeout = 60000L; 
+		Long timeout = 60000L;
 
 		try
 		{

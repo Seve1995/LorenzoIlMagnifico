@@ -38,4 +38,7 @@ public interface RMIServerInterface extends Remote
     void takeExcommunicationDecision(String servantsMessage, Long key)
             throws RemoteException;
 
+    void takeFamiliarDecision(String familiarMessage, Long key)
+            throws RemoteException;
+
 }

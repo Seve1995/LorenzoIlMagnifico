@@ -41,46 +41,6 @@ public abstract class IOAdapter
         this.timeout = timeout;
     }
 
-    public FamilyMember askFamiliarMemberForBonus(Player player)
-    {
-        List<FamilyMember> familyMembers =
-                player.getFamilyMembers();
-
-        Long maxTimeStamp = System.currentTimeMillis() + timeout;
-
-        while(System.currentTimeMillis() < maxTimeStamp)
-        {
- 		   StringBuilder sb = new StringBuilder("Choose the familiar member for the bonus:\n");
-
-		   for (FamilyMember f : familyMembers)
-		   {
-               sb.append(f.toString());
-           }
-
-		    String choice = this.getMessage();
-
-		    if (choice == null)
-		        continue;
-
-		    ColorsEnum color = ColorsEnum.getColorFromString(choice);
-
-		    if (color == null)
-		        continue;
-
-		    FamilyMember member = player.getFamilyMemberByColor(color);
-
-		    if (member == null)
-		        continue;
-
-		    return member;
-
-        }
-
-        printMessage(new TimerMessage("Timeout Azione terminato"));
-
-        return null;
-    }
-
     public Player authenticate(String authentication) throws IOException
     {
         Pattern loginPattern = Pattern.compile("(^(\\w+) (\\w+) (L|S|l|s)$)");
@@ -223,8 +183,6 @@ public abstract class IOAdapter
 
         GameMatch gameMatch = gameMatchMap.get(gameName);
 
-        //TODO FARE IN MODO CHE SI POSSA RILOGGARE
-
         if (gameMatch.getStarted())
         {
             printMessage(new ErrorMessage("Game already started"));
@@ -318,7 +276,7 @@ public abstract class IOAdapter
     //TODO2 DISTINGUERE IL TIMEOUT DELL'AVVIO PARTITA DAL TIMEOUT DELL'AZIONE (ce ne vogliono 2 distinti)
     private void startNewGameMatch(String gameName, Player player)
     {
-        GameMatch gameMatch = new GameMatch(40000L, 4); 
+        GameMatch gameMatch = new GameMatch(timeout, 5);
 
         Map<String, GameMatch> gameMatchMap = GameServer.getGameMatchMap();
 

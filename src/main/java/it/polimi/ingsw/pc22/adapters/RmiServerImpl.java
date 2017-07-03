@@ -3,14 +3,12 @@ package it.polimi.ingsw.pc22.adapters;
 import it.polimi.ingsw.pc22.actions.Action;
 import it.polimi.ingsw.pc22.actions.ActionFactory;
 import it.polimi.ingsw.pc22.connection.GameMatch;
-import it.polimi.ingsw.pc22.effects.ChooseAsset;
-import it.polimi.ingsw.pc22.effects.PickCouncilPrivilege;
-import it.polimi.ingsw.pc22.effects.PickTowerCard;
-import it.polimi.ingsw.pc22.effects.ServantsAction;
+import it.polimi.ingsw.pc22.effects.*;
 import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.AssetType;
 import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
+import it.polimi.ingsw.pc22.gamebox.ColorsEnum;
 import it.polimi.ingsw.pc22.messages.ErrorMessage;
 import it.polimi.ingsw.pc22.messages.ExecutedAction;
 import it.polimi.ingsw.pc22.messages.LoginMessage;
@@ -355,4 +353,38 @@ public class RmiServerImpl implements RMIServerInterface
 
         GameBoardUtils.getCurrentPlayer().setExcommunicationChoice(choiceInt);
     }
+
+    @Override
+    public void takeFamiliarDecision(String familiarMessage, Long key)
+    {
+        IOAdapter adapter = rmiAdapters.get(key);
+
+        if (familiarMessage == null)
+        {
+            adapter.printMessage(new ErrorMessage("Invalid Choice retry"));
+
+            return;
+        }
+
+        Pattern familiarPattern =
+                Pattern.compile("^(BLACK|ORANGE|WHITE|NEUTER)$");
+
+        Matcher matcher = familiarPattern.matcher(familiarMessage);
+
+        if (!matcher.find())
+        {
+            adapter.printMessage(new ErrorMessage("Invalid Choice retry"));
+
+            return;
+        }
+
+        ColorsEnum color = ColorsEnum.getColorFromString(familiarMessage);
+
+
+        FamilyMemberModifier effect = (FamilyMemberModifier)
+                GameMatch.getCurrentGameBoard().getCurreEffect();
+
+        effect.setFamilyMemberColor(color);
+    }
+
 }

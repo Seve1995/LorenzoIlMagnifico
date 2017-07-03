@@ -81,6 +81,12 @@ public class AuxiliaryRMIThread implements Runnable
 						(string, Client.getAssignedID(), numberOfPrivileges);
 			}
 
+			if (Client.getGenericState() instanceof ChooseFamiliarState)
+			{
+				Client.getRmiServerInterface().takeFamiliarDecision
+						(string, Client.getAssignedID());
+			}
+
 			if (Client.getGenericState() instanceof PlayState)
 			{
 				Client.getRmiServerInterface().doAction(string, Client.getAssignedID());

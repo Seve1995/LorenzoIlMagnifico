@@ -61,7 +61,8 @@ public abstract class Cell implements Serializable
 		this.familyMember = null;
 	}
 	
-	public boolean isEmpty() {
+	public boolean isEmpty()
+	{
 		if (this.familyMember==null)
 			return true;
 		else

@@ -42,6 +42,8 @@ public class DoHarvestAction extends ServantsAction implements Effect
 		if (adapter instanceof SocketIOAdapter)
 			new Thread(new ReceiveServantsDecisionThread()).start();
 
+		if (!super.waitForResult()) return false;
+
 		//Serve per gestire il malus dell'excommunication card
 		value += player.getHarvestValueModifier();
 

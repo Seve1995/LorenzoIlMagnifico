@@ -47,15 +47,14 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 	}
 
 	@Override
-	public boolean executeAction(Player player, GameBoard gameBoard) {
-		
+	public boolean executeAction(Player player, GameBoard gameBoard)
+	{
 		Harvest harvest = gameBoard.getHarvest(); 
 		
 		DoHarvestAction doHarvestAction = new DoHarvestAction();
 		
 		if (isLegal(player, gameBoard) && !(player.isDontCareOccupiedPlaces()))
 		{
-
 			harvest.getHarvestCell()[harvest.firstCellFree()].setFamilyMember(familyMember);
 
 			familyMember.setPlayed(true);
@@ -65,14 +64,10 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 				familyMember.setValueModifier(familyMember.getValueModifier()-3);
 				
 				doHarvestAction.setValue(familyMember.getValue());
-				
 			}
-			
 			else
 			{
-				
 				doHarvestAction.setValue(familyMember.getValue());
-				
 			}
 			
 			doHarvestAction.executeEffects(player, gameBoard);

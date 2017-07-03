@@ -140,6 +140,8 @@ public class GameBoardUtils
 			{
 				excommunicate(player, excommunicationCards, era, gameBoard);
 			}
+
+			player.setExcommunicationChoice(null);
 		}
 
 	}

@@ -89,6 +89,8 @@ public class FromAssetToAssetOrEffect extends ChooseAsset implements Effect
 			player.addAsset(asset);
 		}
 
+		super.setChosenAssetsToPay(null);
+
 		return true;
 	}
 	

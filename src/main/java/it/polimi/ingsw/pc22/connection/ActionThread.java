@@ -35,8 +35,6 @@ public class ActionThread implements Runnable
 
             Action action = ActionFactory.createAction(actionMessage, GameMatch.getCurrentPlayer());
 
-            System.out.println("Action: " + action);
-
             if (action == null)
             {
                 adapter.printMessage(new ErrorMessage("Action Not Valid"));
@@ -56,20 +54,7 @@ public class ActionThread implements Runnable
                 continue;
             }
 
-            if (!GameMatch.getCurrentPlayer().isFamiliarPositioned())
-            {
-                adapter.printMessage(new ErrorMessage("Action not Performed"));
-
-                continue;
-            }
-
-            if (GameMatch.getCurrentPlayer().isFamiliarPositioned())
-            {
-
-                adapter.printMessage(new ExecutedAction("Action Performed"));
-
-                break;
-            }
+            adapter.printMessage(new ErrorMessage("Action Performed"));
 
             if (GameMatch.getCurrentPlayer().isHasPassed())
                 break;
