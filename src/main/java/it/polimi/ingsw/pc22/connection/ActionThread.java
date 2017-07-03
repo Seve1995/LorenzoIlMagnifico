@@ -4,7 +4,6 @@ import it.polimi.ingsw.pc22.actions.Action;
 import it.polimi.ingsw.pc22.actions.ActionFactory;
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.messages.ErrorMessage;
-import it.polimi.ingsw.pc22.messages.ExecutedAction;
 
 /**
  * Created by fandroid95 on 25/06/2017.
@@ -55,6 +54,11 @@ public class ActionThread implements Runnable
             }
 
             adapter.printMessage(new ErrorMessage("Action Performed"));
+
+            if (GameMatch.getCurrentPlayer().isFamiliarPositioned())
+            {
+                break;
+            }
 
             if (GameMatch.getCurrentPlayer().isHasPassed())
                 break;

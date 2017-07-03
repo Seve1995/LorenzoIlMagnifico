@@ -3,10 +3,8 @@ package it.polimi.ingsw.pc22.utils;
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.connection.GameMatch;
-import it.polimi.ingsw.pc22.effects.ChooseAsset;
 import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.effects.PickCouncilPrivilege;
-import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.messages.ExcommunicationMessage;
 import it.polimi.ingsw.pc22.player.Player;
@@ -255,7 +253,7 @@ public class GameBoardUtils
 			}
 		}
 
-		gameBoard.getCouncilPalace().setPlayersInCouncilPalace(new ArrayList<Player>());
+		gameBoard.getCouncilPalace().setPlayersInCouncilPalace(new ArrayList<>());
 	}
 
 	private static void excommunicate(Player p, List<ExcommunicationCard> e, int era, GameBoard gameBoard)

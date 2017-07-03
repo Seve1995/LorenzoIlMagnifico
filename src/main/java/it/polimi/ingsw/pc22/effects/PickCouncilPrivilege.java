@@ -1,10 +1,8 @@
 package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.connection.GameMatch;
-import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.player.Player;
-import it.polimi.ingsw.pc22.states.PickCouncilState;
 
 import java.util.List;
 import java.util.logging.Level;

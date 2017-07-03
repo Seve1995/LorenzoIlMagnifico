@@ -57,7 +57,7 @@ public class SettingFamiliarMemberOnMarketTest extends TestCase
 	}
 
 	@Test
-	public void testIsValid()
+	public void testIsLegalTrue()
 	{
 		SettingFamiliarMemberOnMarket settingFamiliarMemberOnMarket
 				= new SettingFamiliarMemberOnMarket();
@@ -78,5 +78,49 @@ public class SettingFamiliarMemberOnMarketTest extends TestCase
 		when(marketCell.isABlockedCell()).thenReturn(false);
 
 		assertTrue(settingFamiliarMemberOnMarket.isLegal(player, gameBoard));
+	}
+
+	@Test
+	public void testIsLegalBlockedMarket()
+	{
+		SettingFamiliarMemberOnMarket settingFamiliarMemberOnMarket
+				= new SettingFamiliarMemberOnMarket();
+
+		settingFamiliarMemberOnMarket.setZone(0);
+		settingFamiliarMemberOnMarket.setFamilyMember(familyMember);
+
+		when(player.isDisableMarket()).thenReturn(true);
+
+		when(player.isDontCareOccupiedPlaces()).thenReturn(false);
+
+		when(marketCell.isEmpty()).thenReturn(true);
+
+		when(marketCell.getRequiredDiceValue()).thenReturn(1);
+
+		when(marketCell.isABlockedCell()).thenReturn(false);
+
+		assertFalse(settingFamiliarMemberOnMarket.isLegal(player, gameBoard));
+	}
+
+	@Test
+	public void testIsLegalBlockedCell()
+	{
+		SettingFamiliarMemberOnMarket settingFamiliarMemberOnMarket
+				= new SettingFamiliarMemberOnMarket();
+
+		settingFamiliarMemberOnMarket.setZone(0);
+		settingFamiliarMemberOnMarket.setFamilyMember(familyMember);
+
+		when(player.isDisableMarket()).thenReturn(false);
+
+		when(player.isDontCareOccupiedPlaces()).thenReturn(false);
+
+		when(marketCell.isEmpty()).thenReturn(true);
+
+		when(marketCell.getRequiredDiceValue()).thenReturn(1);
+
+		when(marketCell.isABlockedCell()).thenReturn(true);
+
+		assertFalse(settingFamiliarMemberOnMarket.isLegal(player, gameBoard));
 	}
 }

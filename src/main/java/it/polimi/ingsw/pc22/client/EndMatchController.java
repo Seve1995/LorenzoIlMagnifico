@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.stage.Stage;
 
 import java.awt.*;
-import java.util.*;
 
 /**
  * Created by matteo on 02/07/17.

@@ -42,17 +42,3 @@ public class ExcommunicationCard implements Serializable
 		return description;
 	}
 }
-
-
-/*carta
- nome
- age
- effects[
-  {
-	  nome null
-	  
-	  
-	  
-  }
-  ]
-*/

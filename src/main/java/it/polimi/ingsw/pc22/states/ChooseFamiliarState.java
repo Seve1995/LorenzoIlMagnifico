@@ -3,7 +3,6 @@ package it.polimi.ingsw.pc22.states;
 import it.polimi.ingsw.pc22.client.AuxiliaryRMIThread;
 import it.polimi.ingsw.pc22.client.Client;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
-import it.polimi.ingsw.pc22.messages.ErrorMessage;
 
 import java.util.List;
 import java.util.regex.Matcher;
