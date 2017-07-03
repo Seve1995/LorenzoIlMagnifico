@@ -186,9 +186,9 @@
                         <ImageView fitHeight="91.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" />
                      </children>
                   </GridPane>
-                  <ToggleButton id="PRODUCTION" fx:id="production" layoutX="260.0" layoutY="787.0" mnemonicParsing="false" text="Production" toggleGroup="$GameBoardButtons" />
+                  <ToggleButton id="PRODUCTION" fx:id="productionButton" layoutX="260.0" layoutY="787.0" mnemonicParsing="false" text="Production" toggleGroup="$GameBoardButtons" />
                   <ToggleButton id="COUNCIL" layoutX="350.0" layoutY="638.0" mnemonicParsing="false" text="Council Palace" toggleGroup="$GameBoardButtons" />
-                  <ToggleButton id="HARVEST" fx:id="harvest" layoutX="268.0" layoutY="863.0" mnemonicParsing="false" text="Harvest" toggleGroup="$GameBoardButtons" />
+                  <ToggleButton id="HARVEST" fx:id="harvestButton" layoutX="268.0" layoutY="863.0" mnemonicParsing="false" text="Harvest" toggleGroup="$GameBoardButtons" />
                   <ImageView fitHeight="53.0" fitWidth="50.0" layoutX="41.0" layoutY="773.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fitHeight="61.0" fitWidth="57.0" layoutX="45.0" layoutY="846.0" pickOnBounds="true" preserveRatio="true" />
                   <ToggleButton id="MARKET 0" fx:id="market0" layoutX="367.0" layoutY="729.0" mnemonicParsing="false" text="1" toggleGroup="$GameBoardButtons" />

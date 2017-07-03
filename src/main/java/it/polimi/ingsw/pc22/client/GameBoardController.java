@@ -56,6 +56,10 @@ public class GameBoardController implements Controller {
     private GridPane venturePlayer;
 
     @FXML
+    private ToggleButton productionButton;
+    @FXML
+    private ToggleButton harvestButton;
+    @FXML
     private ImageView bonusTile;
     @FXML
     private Label labelCoin;
@@ -351,6 +355,16 @@ public class GameBoardController implements Controller {
     	
     	harvestImageViewList.clear();
 
+        if ((harvest.getHarvestCell()[0].getFamilyMember() != null) && harvest.getHarvestCell()[1].isABlockedCell())
+        {
+            harvestButton.setDisable(true);
+        }
+
+        else
+        {
+            harvestButton.setDisable(false);
+        }
+
         for (int i = 0; i < harvest.getHarvestCell().length; i++) {
             ImageView imageView = new ImageView();
             if (i == 0) {
@@ -391,6 +405,16 @@ public class GameBoardController implements Controller {
     	gameBoardPane.getChildren().removeAll(productionImageViewList);
     	
     	productionImageViewList.clear();
+
+    	if ((production.getProductionCell()[0].getFamilyMember() != null) && production.getProductionCell()[1].isABlockedCell())
+        {
+            productionButton.setDisable(true);
+        }
+
+        else
+        {
+            productionButton.setDisable(false);
+        }
 
         for (int i = 0; i < production.getProductionCell().length; i++) {
             ImageView imageView = new ImageView();
@@ -437,6 +461,12 @@ public class GameBoardController implements Controller {
             toggleButtons.add(market1);
             toggleButtons.add(market2);
             toggleButtons.add(market3);
+
+            if (gameboard.getMarket().getMarketCells().get(i).isABlockedCell())
+            {
+                toggleButtons.get(i).setDisable(true);
+            }
+
 
             if (gameboard.getMarket().getMarketCells().get(i).getFamilyMember()!=null)
             {
