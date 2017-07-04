@@ -6,12 +6,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO: Nel gameMatch va controllata la lista di playersInCouncilPalace all'inizio di ogni nuovo turno e va SVUOTATA all'inizio del nuovo turno.
+//TODO: Nel gameMatch va controllata la lista di playersInCouncilPalace
+// all'inizio di ogni nuovo turno e va SVUOTATA all'inizio del nuovo turno.
 public class CouncilPalace implements Serializable
 {
 
 	private CouncilPalaceCell[] councilPalaceCells;
-	private List<Player> playersInCouncilPalace = new ArrayList<Player>();
+	private List<Player> playersInCouncilPalace = new ArrayList<>();
 	
 	public List<Player> getPlayersInCouncilPalace() {
 		return playersInCouncilPalace;

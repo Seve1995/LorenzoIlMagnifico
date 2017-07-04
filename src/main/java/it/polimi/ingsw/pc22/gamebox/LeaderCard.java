@@ -60,11 +60,10 @@ public class LeaderCard implements Serializable
 		this.effects = effects;
 	}
 
-	public String toString(){
-
+	public String toString()
+	{
 		String output = name + " |";
 
 		return output;
-
 	}
 }

@@ -8,30 +8,28 @@ public class DiscardLeaderCard extends Action
 {
 	private int index;
 
-	public int getIndex() {
-		return index;
-	}
-
 	public void setIndex(int index) {
 		this.index = index;
 	}
 
 	@Override
-	protected boolean isLegal(Player player, GameBoard gameBoard) {
-
-		if (player.getLeaderCards().isEmpty()) return false;
+	protected boolean isLegal(Player player, GameBoard gameBoard)
+	{
+		if (player.getLeaderCards().isEmpty())
+			return false;
 		
-		if (player.getLeaderCards().size() >= index ) return false;
+		if (player.getLeaderCards().size() >= index)
+			return false;
 
 		return true;
 	}
 
 	@Override
-	public boolean executeAction(Player player, GameBoard gameBoard) {
-		
+	public boolean executeAction(Player player, GameBoard gameBoard)
+	{
 		player.getLeaderCards().set(index, null);
 		
-		PickOneCouncilPrivilege currCouncilPrivilege=new PickOneCouncilPrivilege();
+		PickOneCouncilPrivilege currCouncilPrivilege = new PickOneCouncilPrivilege();
 		
 		currCouncilPrivilege.executeEffects(player, gameBoard);
 		

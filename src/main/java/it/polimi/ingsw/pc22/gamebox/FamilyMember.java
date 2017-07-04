@@ -50,7 +50,7 @@ public class FamilyMember implements Serializable
 	
 	public int getValue()
 	{
-		if (familiarPermanentValue>0) familiarValue=familiarPermanentValue;
+		if (familiarPermanentValue > 0) familiarValue = familiarPermanentValue;
 		
 		if (familiarValue + valueModifier < 0 ) return 0;
 					

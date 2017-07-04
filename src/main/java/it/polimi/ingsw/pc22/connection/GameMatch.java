@@ -166,7 +166,6 @@ public class GameMatch implements Runnable
 						executeOneTurnEffect(adapter, c.getPermanentEffects(), p);
 					}
 
-
 					adapter.printMessage(new CommunicationMessage("Turn " + turn + " now starting!"));
 				}
 			}

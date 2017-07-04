@@ -54,7 +54,8 @@ public class SettingFamiliarMemberOnMarket extends Action
 	{
 		Market market = gameBoard.getMarket();
 		
-		if (!isLegal(player, gameBoard)) return false;
+		if (!isLegal(player, gameBoard))
+			return false;
 
 		market.getMarketCells().get(zone).setFamilyMember(familyMember);
 

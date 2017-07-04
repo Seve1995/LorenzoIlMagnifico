@@ -2,15 +2,14 @@ package it.polimi.ingsw.pc22.actions;
 
 import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
+import it.polimi.ingsw.pc22.gamebox.LeaderCard;
 import it.polimi.ingsw.pc22.player.Player;
+
+import java.util.List;
 
 public class ActiveLeaderCard extends Action 
 {
 	private int index;
-
-	public int getIndex() {
-		return index;
-	}
 
 	public void setIndex(int index) {
 		this.index = index;
@@ -19,12 +18,14 @@ public class ActiveLeaderCard extends Action
 	@Override
 	protected boolean isLegal(Player player, GameBoard gameBoard) 
 	{
-		if (player.getPlayerBoard().getLeaderCards() == null)
+		List<LeaderCard> cards = player.getPlayerBoard().getLeaderCards();
+
+		if (cards == null)
 		{
 			return false;
 		}
 		
-		if(player.getPlayerBoard().getLeaderCards().get(index).isFaceUp())
+		if(cards.get(index).isFaceUp())
 		{
 			return true;
 		}
@@ -35,9 +36,11 @@ public class ActiveLeaderCard extends Action
 	@Override
 	public boolean executeAction(Player player, GameBoard gameBoard)
 	{
-		player.getPlayerBoard().getLeaderCards().get(index).setFaceUp(false);
+		List<LeaderCard> cards = player.getPlayerBoard().getLeaderCards();
+
+		cards.get(index).setFaceUp(false);
 		
-		for (Effect e : player.getPlayerBoard().getLeaderCards().get(index).getEffects())
+		for (Effect e : cards.get(index).getEffects())
 		{
 			e.executeEffects(player, gameBoard);
 		}
