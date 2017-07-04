@@ -37,17 +37,18 @@ public class ServantsHandler extends Action
     @Override
     public boolean executeAction(Player player, GameBoard gameBoard)
     {
-		int servantsNumber = servants.getValue();
+    	if (!isLegal(player, gameBoard))
+    	    return false;
 
-		double multiplier;
-    	
-    	if (player.isServantMalus())
-    		multiplier=1;
-    	
-    	else
-    		multiplier=0.5;
-    	
-    	if (!isLegal(player, gameBoard)) return false;
+        int servantsNumber = servants.getValue();
+
+        double multiplier;
+
+        if (player.isServantMalus())
+            multiplier=1;
+
+        else
+            multiplier=0.5;
 
 		int familiarValue = action.getFamilyMember().getFamiliarValue();
 
@@ -59,8 +60,13 @@ public class ServantsHandler extends Action
 
 		servantsNumber = (int) (currServants - 2 * multiplier * servantsNumber);
 
+		boolean executed = action.executeAction(player, gameBoard);
+
+		if (!executed)
+		    return false;
+
 		player.setServants(servantsNumber);
 
-		return action.executeAction(player, gameBoard);
+		return true;
     }
 }
