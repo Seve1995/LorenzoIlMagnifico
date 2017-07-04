@@ -693,6 +693,13 @@ public class GameBoardController implements Controller {
                     toggleButton.setOpacity(0);
                     toggleButton.setOnMouseEntered(evt ->imageZoom.setImage(null));
                 }
+
+                if (t.getTowerCells().get(i).getDevelopmentCard() == null
+                        && t.getTowerCells().get(i).getFamilyMember() == null)
+                {
+                    toggleButton.setOpacity(0);
+                    toggleButton.setOnMouseEntered(evt -> imageZoom.setImage(null));
+                }
                 
     		}
     	
@@ -1138,6 +1145,43 @@ public class GameBoardController implements Controller {
 
     }
 
+
+    public boolean chooseFamiliarDialog(int size) {
+        try {
+
+            FXMLLoader loader = new FXMLLoader();
+
+            loader.setLocation(getClassLoader().getResource("GUI/FamilyMemberDialog.fxml"));
+
+            AnchorPane page = (AnchorPane) loader.load();
+
+            dialogStage = new Stage();
+
+            dialogStage.setTitle("Choices");
+
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+
+            Scene scene = new Scene(page);
+
+            dialogStage.setScene(scene);
+
+            ChooseFamiliarController controller = loader.getController();
+
+            controller.setDialogStage(dialogStage, size);
+
+            dialogStage.showAndWait();
+
+            return controller.isConfirmClicked();
+
+        } catch (IOException e) {
+            LOGGER.log(Level.INFO, "ERROR RECEIVE THREAD", e);
+
+            return false;
+        }
+
+    }
+
+
     @Override
     public void updateScene(Object message)
     {
@@ -1217,6 +1261,15 @@ public class GameBoardController implements Controller {
         if (message instanceof ExcommunicationMessage)
         {
             excommunicationDialog(message);
+
+            updatePlayerBoard();
+        }
+
+        if (message instanceof ChooseFamiliarMessage)
+        {
+            chooseFamiliarDialog(gameboard.getDices().size());
+
+            updateGameBoard();
 
             updatePlayerBoard();
         }
