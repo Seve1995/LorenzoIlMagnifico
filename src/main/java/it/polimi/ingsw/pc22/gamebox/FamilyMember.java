@@ -2,6 +2,17 @@ package it.polimi.ingsw.pc22.gamebox;
 
 import java.io.Serializable;
 
+/**
+ * This class represents a family member,
+ * identified by:
+ * its colour, a reference to the player who owns it,
+ * its value, a boolean to store the information about its state
+ * (played or not in the current turn), a value modifier to store infos about bonus/malus
+ * gained by the player and also a permanent value (please refer to some leader
+ * card effects)
+ */
+
+
 public class FamilyMember implements Serializable
 {
 	private ColorsEnum color;
@@ -47,7 +58,12 @@ public class FamilyMember implements Serializable
 	public void setValueModifier(int valueModifier) {
 		this.valueModifier = valueModifier;
 	}
-	
+
+	/**
+	 * It calcuates the value of a familiar, limited to 0 if negative
+	 * @return a value of a family member
+	 */
+
 	public int getValue()
 	{
 		if (familiarPermanentValue > 0) familiarValue = familiarPermanentValue;

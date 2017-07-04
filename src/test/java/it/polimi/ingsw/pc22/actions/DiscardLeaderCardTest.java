@@ -1,6 +1,6 @@
 package it.polimi.ingsw.pc22.actions;
 
-import it.polimi.ingsw.pc22.connection.GameMatch;
+import it.polimi.ingsw.pc22.effects.PickOneCouncilPrivilege;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.gamebox.LeaderCard;
 import it.polimi.ingsw.pc22.player.Player;
@@ -10,11 +10,11 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
+;
 
 /**
  * Created by fandroid95 on 04/07/2017.
@@ -84,11 +84,17 @@ public class DiscardLeaderCardTest
         DiscardLeaderCard discardLeaderCard = new DiscardLeaderCard();
         discardLeaderCard.setIndex(0);
 
+        PickOneCouncilPrivilege pick = mock(PickOneCouncilPrivilege.class);
+
+        discardLeaderCard.setPickPrivilege(pick);
+
         when(player.getLeaderCards()).thenReturn(cards);
+
+        when(pick.executeEffects(player, gameBoard)).thenReturn(true);
 
         discardLeaderCard.executeAction(player, gameBoard);
 
-        //assertNull(cards.get(0));
+        assertNull(cards.get(0));
 
         //assertTrue(discardLeaderCard.executeAction(player, gameBoard));
     }
