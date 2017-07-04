@@ -1,5 +1,6 @@
 package it.polimi.ingsw.pc22.actions;
 
+import it.polimi.ingsw.pc22.effects.PickOneCouncilPrivilege;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.ParseEnum;
@@ -166,6 +167,9 @@ public class ActionFactory
             Integer index = Integer.parseInt(matcher.group(0));
 
             ((DiscardLeaderCard) action).setIndex(index);
+
+            ((DiscardLeaderCard) action).setPickPrivilege
+                    (new PickOneCouncilPrivilege());
 
             action.setFamiliarNeeded(false);
         }

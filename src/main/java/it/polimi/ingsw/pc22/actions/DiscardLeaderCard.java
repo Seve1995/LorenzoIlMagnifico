@@ -1,12 +1,19 @@
 package it.polimi.ingsw.pc22.actions;
 
-import it.polimi.ingsw.pc22.effects.PickOneCouncilPrivilege;
+import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class DiscardLeaderCard extends Action
 {
 	private int index;
+
+	private Effect pickPrivilege;
+
+	public void setPickPrivilege(Effect pickPrivilege)
+	{
+		this.pickPrivilege = pickPrivilege;
+	}
 
 	public void setIndex(int index) {
 		this.index = index;
@@ -28,10 +35,8 @@ public class DiscardLeaderCard extends Action
 	public boolean executeAction(Player player, GameBoard gameBoard)
 	{
 		player.getLeaderCards().set(index, null);
-		
-		PickOneCouncilPrivilege currCouncilPrivilege = new PickOneCouncilPrivilege();
-		
-		currCouncilPrivilege.executeEffects(player, gameBoard);
+
+		pickPrivilege.executeEffects(player, gameBoard);
 		
 		return true;
 		
