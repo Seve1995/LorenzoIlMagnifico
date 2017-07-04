@@ -30,28 +30,11 @@ public class AddAsset implements Effect
 	}
 
 	@Override
-	public boolean executeEffects(Player player, GameBoard gameBoard) {
+	public boolean executeEffects(Player player, GameBoard gameBoard) 
+	{
+		player.addAsset(asset);
 		
-		if (isLegal(player,gameBoard))
-		{
-			player.addAsset(asset);
-			return true;
-		}
-		
-		return false;
+		return true;
 	}
 	
-	/*
-	public static void main(String[] args) {
-		AddAsset add = new AddAsset();
-		add.setAsset(new Asset(3, AssetType.COIN));
-		Player p1 = new Player();
-		add.executeEffects(p1);
-		System.out.println(p1.getAsset(AssetType.COIN));
-	}
-	*/
 }	
-	
-	
-	
-	
