@@ -9,14 +9,9 @@ import it.polimi.ingsw.pc22.utils.RequiredCard;
 
 import java.util.List;
 
-public class PlayLeaderCard extends Action {
-	
+public class PlayLeaderCard extends Action
+{
 	private int index;
-
-	public int getIndex()
-	{
-		return index;
-	}
 
 	public void setIndex(int index)
 	{
@@ -25,17 +20,17 @@ public class PlayLeaderCard extends Action {
 
 	protected boolean isLegal(Player player, GameBoard gameBoard)
 	{
-
-		if (index >= player.getLeaderCards().size()) return false;
-
-		LeaderCard leaderCard = player.getLeaderCards().get(index);
+		if (index >= player.getLeaderCards().size())
+			return false;
 
 		if (player.getPlayerBoard().getLeaderCards().size() > 4)
 		{
 			return false;
 		}
 
-		if (player.getLeaderCards().get(index).getRequiredAssets() != null)
+		LeaderCard leaderCard = player.getLeaderCards().get(index);
+
+		if (leaderCard.getRequiredAssets() != null)
 		{
 			for (Asset a : leaderCard.getRequiredAssets())
 			{
@@ -53,38 +48,25 @@ public class PlayLeaderCard extends Action {
 
 		for (RequiredCard requiredCard : requiredCards)
 		{
-
 			int value = requiredCard.getValue();
 
 			CardTypeEnum key = requiredCard.getType();
 
-			if (key.equals(CardTypeEnum.BUILDING))
+			if (key.equals(CardTypeEnum.BUILDING) && player.getPlayerBoard().getBuildings().size() < value)
 			{
-				if (player.getPlayerBoard().getBuildings().size() < value)
-				{
-					return false;
-				}
+				return false;
 			}
-			if (key.equals(CardTypeEnum.TERRITORY))
+			if (key.equals(CardTypeEnum.TERRITORY) && player.getPlayerBoard().getTerritories().size() < value)
 			{
-				if (player.getPlayerBoard().getTerritories().size() < value)
-				{
-					return false;
-				}
+				return false;
 			}
-			if(key.equals(CardTypeEnum.VENTURE))
+			if(key.equals(CardTypeEnum.VENTURE) && player.getPlayerBoard().getVentures().size() < value)
 			{
-				if (player.getPlayerBoard().getVentures().size() < value)
-				{
-					return false;
-				}
+				return false;
 			}
-			if(key.equals(CardTypeEnum.CHARACTER))
+			if(key.equals(CardTypeEnum.CHARACTER) && player.getPlayerBoard().getCharacters().size() < value)
 			{
-				if (player.getPlayerBoard().getCharacters().size() < value)
-				{
-					return false;
-				}
+				return false;
 			}
 			if(key.equals(CardTypeEnum.ANY))
 			{
@@ -107,17 +89,15 @@ public class PlayLeaderCard extends Action {
 	@Override
 	public boolean executeAction(Player player, GameBoard gameBoard) 
 	{
-		if (isLegal(player, gameBoard))
-		{
-			LeaderCard leaderCard = player.getLeaderCards().get(index);
+		if (!isLegal(player, gameBoard))
+			return false;
 
-			player.getPlayerBoard().getLeaderCards().add(leaderCard);
+		LeaderCard leaderCard = player.getLeaderCards().get(index);
 
-			leaderCard.setPlayed(true);
-			
-			return true;
-		}
+		player.getPlayerBoard().getLeaderCards().add(leaderCard);
 
-		return false;
+		leaderCard.setPlayed(true);
+
+		return true;
 	}
 }

@@ -12,18 +12,12 @@ public class SettingFamiliarMemberOnTower extends Action {
 	private int floor;
 	private CardTypeEnum cardTypeEnum;
 
-	public SettingFamiliarMemberOnTower(){}
-
 	public int getFloor() {
 		return floor;
 	}
 
 	public void setFloor(int floor) {
 		this.floor = floor;
-	}
-
-	public CardTypeEnum getCardTypeEnum() {
-		return cardTypeEnum;
 	}
 
 	public void setCardTypeEnum(CardTypeEnum cardTypeEnum) {

@@ -1,11 +1,9 @@
 package it.polimi.ingsw.pc22.actions;
 
-import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.gamebox.LeaderCard;
 import it.polimi.ingsw.pc22.gamebox.PlayerBoard;
 import it.polimi.ingsw.pc22.player.Player;
-import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 

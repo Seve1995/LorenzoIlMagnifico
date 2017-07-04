@@ -1,8 +1,6 @@
 package it.polimi.ingsw.pc22.client;
 
 
-import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
-import it.polimi.ingsw.pc22.messages.ChooseCardMessage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
