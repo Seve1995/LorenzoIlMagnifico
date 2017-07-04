@@ -34,18 +34,19 @@ public class PrivilegeDialogController implements Controller {
     @FXML
     private Label errorLabel;
     
-    private String output;
+    private String output = "";
 
     @FXML
     public void handleConfirm()
     {
-    	if (toggles.getSelectedToggle()==null) 
+    	if (toggles.getSelectedToggle()==null || privilegesLeft != 0) 
     	{
     		errorLabel.setText("Please make a selection!");
     		return;
     	}
         confirmClicked = true;
         dialogStage.close();
+        System.out.println(output);
         Client.getGenericState().sendToServer(output);
         Client.getController().updateScene(new ExecutedAction("action performed"));
     }
@@ -65,19 +66,19 @@ public class PrivilegeDialogController implements Controller {
         if (privilegesLeft == 0)
         {
             disableAll();
-            startingLabel.setText("You have " + privilegesLeft + " left");
         }
         else
         {
             output += "-";
         }
+        startingLabel.setText("You have " + privilegesLeft + " left");
     }
 
     @FXML
     public void handle1()
     {
 
-        output = "1";
+        output += "1";
         toggle1.setDisable(true);
         checkForOtherPrivileges();
 
@@ -86,7 +87,7 @@ public class PrivilegeDialogController implements Controller {
     @FXML
     public void handle2()
     {
-        output = "2";
+        output += "2";
         toggle2.setDisable(true);
         checkForOtherPrivileges();
     }
@@ -94,7 +95,7 @@ public class PrivilegeDialogController implements Controller {
     @FXML
     public void handle3()
     {
-        output = "3";
+        output += "3";
         toggle3.setDisable(true);
         checkForOtherPrivileges();
     }
@@ -102,7 +103,7 @@ public class PrivilegeDialogController implements Controller {
     @FXML
     public void handle4()
     {
-        output = "4";
+        output += "4";
         toggle4.setDisable(true);
         checkForOtherPrivileges();
     }
@@ -110,7 +111,7 @@ public class PrivilegeDialogController implements Controller {
     @FXML
     public void handle5()
     {
-        output = "5";
+        output += "5";
         toggle5.setDisable(true);
         checkForOtherPrivileges();
     }
