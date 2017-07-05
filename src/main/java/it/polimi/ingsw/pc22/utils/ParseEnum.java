@@ -15,7 +15,7 @@ public enum ParseEnum
     COUNCIL("set council (BLACK|ORANGE|NEUTER|WHITE) [0-9]$", "SettingFamiliarMemberOnCouncilPalace"),
     PASS("^pass$", "PassTurn"),
     PLAY_CARD("^play card [0-3]$", "PlayLeaderCard"),
-    DISCARD_CARD("^activate card [0-3]$", "ActiveLoaderCard"),
+    DISCARD_CARD("^activate card [0-3]$", "ActiveLeaderCard"),
     ACTIVATE_CARD("^discard card [0-3]$", "DiscardLeaderCard"),
     SHOW_BOARD("^show board$", "ShowBoard");
 

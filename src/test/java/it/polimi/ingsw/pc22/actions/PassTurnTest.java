@@ -5,7 +5,7 @@ import it.polimi.ingsw.pc22.player.Player;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
 /**
@@ -40,5 +40,21 @@ public class PassTurnTest
         assertTrue(pass.executeAction(player, gameBoard));
 
         assertTrue(player.isHasPassed());
+    }
+
+    @Test
+    public void equals()
+    {
+        PassTurn pass = new PassTurn();
+
+        PassTurn pass1 = new PassTurn();
+
+        assertEquals(pass, pass1);
+
+        assertTrue(pass.equals(pass));
+
+        assertFalse(pass.equals(new Integer(1)));
+
+        assertFalse(pass.equals(null));
     }
 }

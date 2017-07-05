@@ -38,7 +38,6 @@ public class Player implements Serializable
 	private int endGameVictoryPoints;
 	private List<LeaderCard> leaderCards = new ArrayList<>();
 	private transient List<CardModifier> cardModifiers = new ArrayList<>();
-	private List<AddEndGameVictoryPoints> addEndGameVictoryPoints;
 	private int harvestValueModifier; //Serve per gestire l'effetto AddHarvestValueBonus
 	private int productionValueModifier; //Serve per gestire l'effetto AddProductionValueBonus
 	private boolean militaryPointsMalus; //Serve per gestire l'effetto della tessera scomunica
@@ -234,14 +233,6 @@ public class Player implements Serializable
 
 	public void setCardModifiers(List<CardModifier> cardModifiers) {
 		this.cardModifiers = cardModifiers;
-	}
-
-	public List<AddEndGameVictoryPoints> getAddEndGameVictoryPoints() {
-		return addEndGameVictoryPoints;
-	}
-
-	public void setAddEndGameVictoryPoints(List<AddEndGameVictoryPoints> addEndGameVictoryPoints) {
-		this.addEndGameVictoryPoints = addEndGameVictoryPoints;
 	}
 
 	public int getHarvestValueModifier() {
@@ -656,8 +647,6 @@ public class Player implements Serializable
 		if (leaderCards != null ? !leaderCards.equals(player.leaderCards) : player.leaderCards != null) return false;
 		if (cardModifiers != null ? !cardModifiers.equals(player.cardModifiers) : player.cardModifiers != null)
 			return false;
-		if (addEndGameVictoryPoints != null ? !addEndGameVictoryPoints.equals(player.addEndGameVictoryPoints) : player.addEndGameVictoryPoints != null)
-			return false;
 		if (familyMembers != null ? !familyMembers.equals(player.familyMembers) : player.familyMembers != null)
 			return false;
 		if (playerBoard != null ? !playerBoard.equals(player.playerBoard) : player.playerBoard != null) return false;
@@ -680,7 +669,6 @@ public class Player implements Serializable
 		result = 31 * result + endGameVictoryPoints;
 		result = 31 * result + (leaderCards != null ? leaderCards.hashCode() : 0);
 		result = 31 * result + (cardModifiers != null ? cardModifiers.hashCode() : 0);
-		result = 31 * result + (addEndGameVictoryPoints != null ? addEndGameVictoryPoints.hashCode() : 0);
 		result = 31 * result + harvestValueModifier;
 		result = 31 * result + productionValueModifier;
 		result = 31 * result + (militaryPointsMalus ? 1 : 0);

@@ -85,7 +85,7 @@ public class GenericLoader
 
                 CardTypeEnum type = CardTypeEnum.valueOf(paidCardTypeValue);
 
-                addAssetForEveryAssetOrCard.setGainedCardType(type);
+                addAssetForEveryAssetOrCard.setPaidCardType(type);
             }
 
             if (jsonEffect.isNull("paidAsset")) return;
@@ -94,7 +94,7 @@ public class GenericLoader
 
             Asset payedAsset = loadAsset(payedAssetJson);
 
-            addAssetForEveryAssetOrCard.setPayedAsset(payedAsset);
+            addAssetForEveryAssetOrCard.setPaidAsset(payedAsset);
         }
 
         if (effect instanceof FromAssetToAssetOrEffect)

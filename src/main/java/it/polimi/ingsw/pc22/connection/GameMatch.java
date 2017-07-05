@@ -145,6 +145,10 @@ public class GameMatch implements Runnable
 
 				if (turn%2==1) era++;
 				
+				GameBoardUtils.excommunicationHandling
+				(players, playerCounter, currentRoundNumber, era,
+						excommunicationCards, gameBoard);
+				
 				addDices();
 
 				addTowerCards(era);
@@ -236,9 +240,6 @@ public class GameMatch implements Runnable
 
 			GameBoardUtils.resetPlayerStatus(players);
 
-			GameBoardUtils.excommunicationHandling
-					(players, playerCounter, currentRoundNumber, era,
-							excommunicationCards, gameBoard);
 		}
 
 		GameBoardUtils.endGameExcommunicationHandling(players, excommunicationCards, gameBoard, era);
