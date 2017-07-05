@@ -11,15 +11,11 @@ public class AddNoFirstActionMalus implements Effect{
 	}
 
 	@Override
-	public boolean executeEffects(Player player, GameBoard gameBoard) {
+	public boolean executeEffects(Player player, GameBoard gameBoard) 
+	{
+		player.setNoFirstAction(true);
 		
-		if (isLegal(player,gameBoard))
-		{
-			player.setNoFirstAction(true);
-			return true;
-		}
-		return false;
-		
-	}
+		return true;
+}
 
 }

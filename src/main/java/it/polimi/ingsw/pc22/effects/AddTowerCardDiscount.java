@@ -39,67 +39,33 @@ public class AddTowerCardDiscount implements Effect{
 	public void setOnlyOneAsset(boolean onlyOneAsset) {
 		this.onlyOneAsset = onlyOneAsset;
 	}
+	
 	@Override
 	public boolean isLegal(Player player, GameBoard gameBoard) 
 	{
 		return true;
 	}
-	@Override
-	public boolean executeEffects(Player player, GameBoard gameBoard) {
-		
-		if (isLegal(player,gameBoard))
-		{
-			List<CardModifier> playerCardModifiers;
-			playerCardModifiers = player.getCardModifiers();
-			CardModifier cardModifier = new CardModifier();
-			cardModifier.setValueModifier(diceValueDiscount);
-			cardModifier.setAssetDiscount(assetDiscounts);
-			cardModifier.setOnlyOneAsset(onlyOneAsset);
-			playerCardModifiers.add(cardModifier);
-			return true;
-		}
-		
-		return false;
-	}
 	
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((cardType == null) ? 0 : cardType.hashCode());
-		result = prime * result + diceValueDiscount;
-		result = prime * result + ((assetDiscounts == null) ? 0 : assetDiscounts.hashCode());
-		result = prime * result + (onlyOneAsset ? 1231 : 1237);
-		return result;
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		AddTowerCardDiscount other = (AddTowerCardDiscount) obj;
-		if (cardType != other.cardType)
-			return false;
-		if (diceValueDiscount != other.diceValueDiscount)
-			return false;
-		if (assetDiscounts == null) {
-			if (other.assetDiscounts != null)
-				return false;
-		} else if (!assetDiscounts.equals(other.assetDiscounts))
-			return false;
-		if (onlyOneAsset != other.onlyOneAsset)
-			return false;
+	public boolean executeEffects(Player player, GameBoard gameBoard) 
+	{
+		List<CardModifier> playerCardModifiers;
+		
+		playerCardModifiers = player.getCardModifiers();
+		
+		CardModifier cardModifier = new CardModifier();
+		
+		cardModifier.setCardType(cardType);
+
+		cardModifier.setValueModifier(diceValueDiscount);
+		
+		cardModifier.setAssetDiscount(assetDiscounts);
+		
+		cardModifier.setOnlyOneAsset(onlyOneAsset);
+		
+		playerCardModifiers.add(cardModifier);
+		
 		return true;
-	}
-	
-	@Override
-	public String toString() {
-		return "AddTowerCardDiscount [cardType=" + cardType + ", diceValue=" + diceValueDiscount + ", discounts=" + assetDiscounts
-				+ ", onlyOneAsset=" + onlyOneAsset + "]";
 	}
 	
 }
