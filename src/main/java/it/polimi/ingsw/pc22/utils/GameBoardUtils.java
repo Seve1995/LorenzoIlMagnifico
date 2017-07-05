@@ -6,6 +6,7 @@ import it.polimi.ingsw.pc22.connection.GameMatch;
 import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.effects.PickCouncilPrivilege;
 import it.polimi.ingsw.pc22.gamebox.*;
+import it.polimi.ingsw.pc22.messages.CommunicationMessage;
 import it.polimi.ingsw.pc22.messages.ExcommunicationMessage;
 import it.polimi.ingsw.pc22.player.Player;
 
@@ -27,7 +28,6 @@ public class GameBoardUtils
 
 	private static final Logger LOGGER = Logger.getLogger(GameBoardUtils.class.getName());
 
-	//FORSE NON È MEGLIO GESIRE ANCHE QUESTA COME UNA ENUM?
 	private static final Map<Integer, Integer> fromFaithToVictory = new HashMap<>();
 
 	static
@@ -60,9 +60,11 @@ public class GameBoardUtils
 
 	static
 	{
-		fromEraToFaithPoints.put(1,3);
-		fromEraToFaithPoints.put(2,4);
-		fromEraToFaithPoints.put(3,5);
+		fromEraToFaithPoints.put(2,3);
+		fromEraToFaithPoints.put(3,4);
+
+		//TODO SISTAMERE STA COSA
+		fromEraToFaithPoints.put(4,5);
 	}
 
 	public static int calculateFaithPointsFromEra(int era)
@@ -83,94 +85,8 @@ public class GameBoardUtils
 	}
 
 
-	private static void chooseExcommunication
-		(Player player, int era, List<ExcommunicationCard> excommunicationCards,
-									   GameBoard gameBoard)
-	{
-		int faithPoints = calculateFaithPointsFromEra(era);
 
-		if (player.getFaithPoints() < faithPoints)
-		{
-			excommunicate(player, excommunicationCards, era, gameBoard);
-		}
 
-		else
-		{
-			IOAdapter adapter = player.getAdapter();
-
-			adapter.printMessage(new ExcommunicationMessage(excommunicationCards.get(era)));
-
-			if (adapter instanceof SocketIOAdapter)
-				new Thread(new ReceiveExcommunicationDecisionThread()).start();
-
-			Long timestamp = System.currentTimeMillis();
-
-			Long timeout = GameMatch.getTimeout();
-
-			while (System.currentTimeMillis() < timestamp + timeout)
-			{
-				try
-				{
-					Thread.sleep(100L);
-				} catch (InterruptedException e)
-				{
-					LOGGER.log(Level.WARNING, "Interrupted!", e);
-					Thread.currentThread().interrupt();
-				}
-
-				if (player.getExcommunicationChoice() != null)
-				{
-					break;
-				}
-			}
-
-			if (player.getExcommunicationChoice() == 1)
-			{
-				player.setFaithPoints(0);
-
-				if (player.isSistoIV())
-				{
-					Asset victoryBonus = new Asset(5, AssetType.VICTORYPOINT);
-
-					player.addAsset(victoryBonus);
-				}
-			}
-			else
-			{
-				excommunicate(player, excommunicationCards, era, gameBoard);
-			}
-
-			player.setExcommunicationChoice(null);
-		}
-
-	}
-
-	public static void excommunicationHandling
-		(List<Player> players, int playerCounter, int currentRoundNumber,
-			 int era, List<ExcommunicationCard> excommunicationCards, GameBoard gameBoard)
-	{
-		if (((playerCounter < 5) && ((currentRoundNumber==8)) || ((playerCounter == 5) && (currentRoundNumber) == 6)))
-		{
-			for (Player p : players)
-			{
-				currentPlayer = p;
-
-				chooseExcommunication(p, era, excommunicationCards, gameBoard);
-			}
-		}
-
-		if ((playerCounter < 5 && currentRoundNumber == 16) ||  (playerCounter == 5 && currentRoundNumber == 12))
-		{
-			for (Player p : players)
-			{
-				currentPlayer = p;
-
-				chooseExcommunication(p, era, excommunicationCards, gameBoard);
-			}
-		}
-	}
-
-	
 	public static void endGameExcommunicationHandling
 			(List<Player> players, List<ExcommunicationCard> excommunicationCards, GameBoard gameBoard, int era)
 	{
@@ -178,7 +94,7 @@ public class GameBoardUtils
 		{
 			currentPlayer = p;
 
-			chooseExcommunication(p, era, excommunicationCards, gameBoard);
+			//chooseExcommunication(era, excommunicationCards, gameBoard);
 		}
 
 	}
@@ -205,8 +121,6 @@ public class GameBoardUtils
 
 			player.setPlayerColorsEnum(color);
 
-
-
 			System.out.println(color.toString());
 
 			coins++;
@@ -217,6 +131,8 @@ public class GameBoardUtils
 	{
 		for (Tower t : gameBoard.getTowers())
 		{
+			t.setListPlayers(new ArrayList<>());
+
 			for (TowerCell tc : t.getTowerCells())
 			{
 				tc.setFamilyMember(null);
@@ -254,16 +170,6 @@ public class GameBoardUtils
 		}
 
 		gameBoard.getCouncilPalace().setPlayersInCouncilPalace(new ArrayList<>());
-	}
-
-	private static void excommunicate(Player p, List<ExcommunicationCard> e, int era, GameBoard gameBoard)
-	{
-
-		for (Effect eff : e.get(era).getEffects())
-		{
-			eff.executeEffects(p, gameBoard);
-		}
-
 	}
 
 	public static void sumFinalPoints(List<Player> players, GameBoard gameBoard)

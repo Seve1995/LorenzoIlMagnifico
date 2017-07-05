@@ -22,8 +22,8 @@ public class DoHarvestAction extends ServantsAction implements Effect
 	}
 
 	@Override
-	public boolean isLegal(Player player, GameBoard gameBoard) {
-		
+	public boolean isLegal(Player player, GameBoard gameBoard)
+	{
 		if (value < player.getPlayerBoard().getBonusTile().getHarvestActivationValue())
 			return false;
 		
@@ -42,23 +42,26 @@ public class DoHarvestAction extends ServantsAction implements Effect
 		if (adapter instanceof SocketIOAdapter)
 			new Thread(new ReceiveServantsDecisionThread()).start();
 
-		if (!super.waitForResult()) return false;
+		if (!super.waitForResult())
+			return false;
 
 		//Serve per gestire il malus dell'excommunication card
 		value += player.getHarvestValueModifier();
 
+		value += super.getServants().getValue();
+
+		System.out.println("SOno QU +" + value);
+
 		if (!isLegal(player,gameBoard))
 			return false;
 
-		if (!super.waitForResult()) return false;
+		System.out.println("SOno QUI: " + value);
 
-		value += super.getServants().getValue();
 		player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestServantBonus());
 		player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestCoinsBonus());
 		player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestMilitaryPointsBonus());
 		player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestStonesBonus());
 		player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestWoodsBonus());
-
 
 		for (TerritoryCard card : player.getPlayerBoard().getTerritories())
 		{
@@ -67,13 +70,12 @@ public class DoHarvestAction extends ServantsAction implements Effect
 
 			for (Effect effect : card.getPermanentEffects())
 			{
+				System.out.println(effect);
+
 				effect.executeEffects(player, gameBoard);
 			}
 		}
 
 		return true;
 	}
-		
-	
-	
 }

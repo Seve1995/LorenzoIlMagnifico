@@ -23,7 +23,8 @@ public class Production implements Serializable
 		this.productionCells = productionCell;
 	}
 	
-	public int firstCellFree() {
+	public int firstCellFree()
+	{
 		int i=0;
 		while ( i < this.productionCells.length)
 		{

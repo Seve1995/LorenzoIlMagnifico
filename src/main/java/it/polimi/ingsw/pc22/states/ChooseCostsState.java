@@ -30,16 +30,16 @@ public class ChooseCostsState implements GenericState
     {
         System.out.println("You have to choose one cost between:");
 
-        System.out.println("1) You must have" + militaryPointsRequired.getValue()
+        System.out.println("0) You must have" + militaryPointsRequired.getValue()
                 + "and you will pay" + militaryPointsCost.getValue());
 
-        System.out.println("2) Pay these resources:" + resourcesCost.toString());
+        System.out.println("1) Pay these resources:" + resourcesCost.toString());
     }
 
     @Override
     public boolean validate(String string)
     {
-        Pattern costMessage = Pattern.compile("^[1-2]$");
+        Pattern costMessage = Pattern.compile("^[0-1]$");
 
         Matcher matcher = costMessage.matcher(string);
 

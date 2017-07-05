@@ -1,11 +1,8 @@
 package it.polimi.ingsw.pc22.actions;
 
-
 import it.polimi.ingsw.pc22.effects.DoProductionAction;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
-
-
 
 public class SettingFamiliarMemberOnProduction extends Action
 {
@@ -33,10 +30,10 @@ public class SettingFamiliarMemberOnProduction extends Action
 
 		for (ProductionCell productionCell : production.getProductionCell())
 		{
-
 			FamilyMember currFamilyMember = productionCell.getFamilyMember();
 
-			if (currFamilyMember == null) continue;
+			if (currFamilyMember == null)
+				continue;
 
 			if
 			(
@@ -49,14 +46,10 @@ public class SettingFamiliarMemberOnProduction extends Action
 					&& !player.isDontCareOccupiedPlaces())
 
 				return false;
-
 		}
 
 		return true;
-
 	}
-
-
 
 	@Override
 	public boolean executeAction(Player player, GameBoard gameBoard)
@@ -65,13 +58,16 @@ public class SettingFamiliarMemberOnProduction extends Action
 
 		DoProductionAction doProductionAction = new DoProductionAction();
 
-		if (isLegal(player, gameBoard) && !(player.isDontCareOccupiedPlaces()))
+		if (!isLegal(player, gameBoard))
+			return false;
+
+		if (!(player.isDontCareOccupiedPlaces()))
 		{
 			if (production.firstCellFree() > 0)
 			{
-				familyMember.setValueModifier(familyMember.getValueModifier()-3);
+				familyMember.setValueModifier(familyMember.getValueModifier() - 3);
 				
-				doProductionAction.setValue(familyMember.getValue()-3);
+				doProductionAction.setValue(familyMember.getValue() - 3);
 			}
 
 			else
@@ -81,7 +77,8 @@ public class SettingFamiliarMemberOnProduction extends Action
 
 			boolean executed = doProductionAction.executeEffects(player, gameBoard);
 
-			if (!executed) return false;
+			if (!executed)
+				return false;
 
 			production.getProductionCell()[production.firstCellFree()].setFamilyMember(familyMember);
 
@@ -92,7 +89,7 @@ public class SettingFamiliarMemberOnProduction extends Action
 			return true;
 
 		}
-		else if (isLegal(player, gameBoard) && player.isDontCareOccupiedPlaces())
+		else if (player.isDontCareOccupiedPlaces())
 		{
 			doProductionAction.setValue(familyMember.getValue());
 

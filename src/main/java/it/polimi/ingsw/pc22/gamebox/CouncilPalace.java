@@ -30,7 +30,8 @@ public class CouncilPalace implements Serializable
 		this.councilPalaceCells = councilPalaceCells;
 	}
 
-	public int firstCellFree() {
+	public int firstCellFree()
+	{
 		int i=0;
 		while ( i < this.councilPalaceCells.length)
 		{

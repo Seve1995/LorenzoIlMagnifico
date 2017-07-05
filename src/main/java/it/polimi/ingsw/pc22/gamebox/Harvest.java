@@ -23,8 +23,10 @@ public class Harvest implements Serializable
 	}
 	
 
-	public int firstCellFree() {
+	public int firstCellFree()
+	{
 		int i=0;
+
 		while ( i < this.harvestCells.length)
 		{
 			if ((harvestCells[i].isEmpty()))

@@ -27,6 +27,8 @@ public class PickOneCouncilPrivilege extends PickCouncilPrivilege implements Eff
 		if (adapter instanceof SocketIOAdapter)
 			new Thread(new ReceiveCouncilDecisionThread(1)).start();
 
+		System.out.println("Executed");
+
 		return super.waitForResult(player);
 	}
 

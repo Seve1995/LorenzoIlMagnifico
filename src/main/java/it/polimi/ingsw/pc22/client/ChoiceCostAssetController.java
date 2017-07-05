@@ -19,8 +19,6 @@ public class ChoiceCostAssetController implements Controller {
     @FXML
     private Label startingLabel;
 
-
-
     @FXML
     private ToggleButton choice1;
     @FXML
@@ -29,13 +27,13 @@ public class ChoiceCostAssetController implements Controller {
     @FXML
     private void handleChoice1()
     {
-        output = "1";
+        output = "0";
     }
 
     @FXML
     private void handleChoice2()
     {
-        output = "2";
+        output = "1";
     }
 
     public boolean isConfirmClicked() {
@@ -57,10 +55,12 @@ public class ChoiceCostAssetController implements Controller {
     public void setDialogStage(Stage dialogStage, Object message)
     {
         this.dialogStage = dialogStage;
+
+        startingLabel.setText("Apparently, an error occurred!");
+
         if (message instanceof ChooseAssetsMessage)
         {
             startingLabel.setText("Choose one asset:");
-
         }
 
         if (message instanceof ChooseCostsMessage)
@@ -68,22 +68,10 @@ public class ChoiceCostAssetController implements Controller {
             startingLabel.setText("Do you want to spend military points or other Assets shown on the card");
         }
 
-        else
-        {
-            startingLabel.setText("Apparently, an error occurred!");
-        }
-
-
     }
-
-
-
 
     @Override
-    public void updateScene(Object message)
-    {
-
-    }
+    public void updateScene(Object message) {}
 
 
 }

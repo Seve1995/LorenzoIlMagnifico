@@ -580,7 +580,7 @@ public class Player implements Serializable
 		
 		else
 		{
-			for(int i=0; i<dices.size(); i++)
+			for(int i=0; i < dices.size(); i++)
 			{//HANDLE THE COLOURED:
 				familyMembers.get(i).setFamiliarValue(dices.get(i).getNumber());
 				familyMembers.get(i).setPlayed(false);

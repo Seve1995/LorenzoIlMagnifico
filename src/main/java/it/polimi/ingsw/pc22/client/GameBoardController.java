@@ -24,8 +24,8 @@ import static it.polimi.ingsw.pc22.client.Client.getClassLoader;
 /**
  * Created by matteo on 22/06/17.
  */
-public class GameBoardController implements Controller {
-
+public class GameBoardController implements Controller
+{
     @FXML
     private GridPane characterTower;
     @FXML

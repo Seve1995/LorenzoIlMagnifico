@@ -4,10 +4,7 @@ import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.gamebox.*;
-import it.polimi.ingsw.pc22.messages.CommunicationMessage;
-import it.polimi.ingsw.pc22.messages.EndMatchMessage;
-import it.polimi.ingsw.pc22.messages.ErrorMessage;
-import it.polimi.ingsw.pc22.messages.GameStatusMessage;
+import it.polimi.ingsw.pc22.messages.*;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.*;
 import org.json.JSONObject;
@@ -104,13 +101,6 @@ public class GameMatch implements Runnable
 
 		this.started = true;
 
-		handleGame();
-
-		endGame();
-	}
-
-	private void handleGame()
-	{
 		loadGameBoard();
 
 		loadCards();
@@ -125,6 +115,13 @@ public class GameMatch implements Runnable
 
 		assignExcommunicationCards();
 
+		handleGame();
+
+		endGame();
+	}
+
+	private void handleGame()
+	{
 		//=6 turni da 4 azioni l'una//=6 turni da 3 azioni l'una
         int turnNumber = playerCounter < 5 ? 24 : 18;
 
@@ -140,42 +137,12 @@ public class GameMatch implements Runnable
 		for (int currentRoundNumber = 0; currentRoundNumber < turnNumber; currentRoundNumber++)
 		{
 			if (isNewTurn(currentRoundNumber))
-			{
-				turn++;
-
-				if (turn%2==1) era++;
-				
-				GameBoardUtils.excommunicationHandling
-				(players, playerCounter, currentRoundNumber, era,
-						excommunicationCards, gameBoard);
-				
-				addDices();
-
-				addTowerCards(era);
-
-				checkOrderTurn();
-
-				resetLeaderCards(players);
-
-				GameBoardUtils.purgeGameBoard(gameBoard);
-				
-				addFamiliarsValue();
-
-				for (Player p : players)
-				{
-					IOAdapter adapter = p.getAdapter();
-
-					for (CharacterCard c : p.getPlayerBoard().getCharacters())
-					{
-						executeOneTurnEffect(adapter, c.getPermanentEffects(), p);
-					}
-
-					adapter.printMessage(new CommunicationMessage("Turn " + turn + " now starting!"));
-				}
-			}
+				handleNewTurn(currentRoundNumber);
 
 			for(Player player : players)
 			{
+				System.out.println(player.getFamilyMembers());
+
 				if (player.isSuspended()) continue;
 
 				for (Player p : players)
@@ -259,6 +226,43 @@ public class GameMatch implements Runnable
 		}
 
 		endGame();
+	}
+
+	private void handleNewTurn(int currentRoundNumber)
+	{
+		turn++;
+
+		if (turn%2==1) era++;
+
+		excommunicationHandling(playerCounter, currentRoundNumber, era, excommunicationCards);
+
+		addDices();
+
+		addTowerCards(era);
+
+		checkOrderTurn();
+
+		resetLeaderCards(players);
+
+		GameBoardUtils.purgeGameBoard(gameBoard);
+
+		for (Player p : players)
+		{
+			IOAdapter adapter = p.getAdapter();
+
+			for (CharacterCard c : p.getPlayerBoard().getCharacters())
+			{
+				executeOneTurnEffect(adapter, c.getPermanentEffects(), p);
+			}
+
+			adapter.printMessage(new CommunicationMessage("Turn " + turn + " now starting!"));
+
+			System.out.println(p.getFamilyMembers());
+
+			addFamiliarsValue(p);
+
+			System.out.println(p.getFamilyMembers());
+		}
 	}
 
 	private void executeOneTurnEffect(IOAdapter adapter, List<Effect> effects, Player p)
@@ -345,9 +349,110 @@ public class GameMatch implements Runnable
 		}
 	}
 
+	public void excommunicationHandling(int playerCounter, int currentRoundNumber,
+			 int era, List<ExcommunicationCard> excommunicationCards)
+	{
+		boolean firstExcommunication =
+				((playerCounter < 5) && (currentRoundNumber==8)) || ((playerCounter == 5) && (currentRoundNumber) == 6);
+
+		boolean secondExcommunication =
+				(playerCounter < 5 && currentRoundNumber == 16) ||  (playerCounter == 5 && currentRoundNumber == 12);
+
+		if (firstExcommunication || secondExcommunication)
+		{
+			for (Player p : players)
+			{
+				currentPlayer = p;
+
+				chooseExcommunication(era, excommunicationCards, gameBoard);
+
+				System.out.println(currentPlayer.getUsername());
+			}
+		}
+	}
+
+	private void chooseExcommunication
+			(int era, List<ExcommunicationCard> excommunicationCards,
+			 GameBoard gameBoard)
+	{
+		System.out.println("Era: " + era);
+
+		int faithPoints = GameBoardUtils.calculateFaithPointsFromEra(era);
+
+		if (currentPlayer.getFaithPoints() < faithPoints)
+		{
+			excommunicate(currentPlayer, excommunicationCards, era, gameBoard);
+
+			currentPlayer.getAdapter().printMessage
+					(new CommunicationMessage("For this era you have been excommunicated"));
+		}
+		else
+		{
+			IOAdapter adapter = currentPlayer.getAdapter();
+
+			adapter.printMessage(new ExcommunicationMessage(excommunicationCards.get(era)));
+
+			if (adapter instanceof SocketIOAdapter)
+				new Thread(new ReceiveExcommunicationDecisionThread()).start();
+
+			Long timestamp = System.currentTimeMillis();
+
+			Long timeout = GameMatch.getTimeout();
+
+			while (System.currentTimeMillis() < timestamp + timeout)
+			{
+				try
+				{
+					Thread.sleep(100L);
+				} catch (InterruptedException e)
+				{
+					LOGGER.log(Level.WARNING, "Interrupted!", e);
+					Thread.currentThread().interrupt();
+				}
+
+				if (currentPlayer.getExcommunicationChoice() != null)
+				{
+					break;
+				}
+			}
+
+			System.out.println(currentPlayer.getExcommunicationChoice());
+
+			if (currentPlayer.getExcommunicationChoice() == 1)
+			{
+				currentPlayer.setFaithPoints(0);
+
+				if (currentPlayer.isSistoIV())
+				{
+					Asset victoryBonus = new Asset(5, AssetType.VICTORYPOINT);
+
+					currentPlayer.addAsset(victoryBonus);
+				}
+			}
+			else
+			{
+				excommunicate(currentPlayer, excommunicationCards, era, gameBoard);
+
+				currentPlayer.getAdapter().printMessage
+						(new CommunicationMessage("For this era you have been excommunicated"));
+			}
+
+			currentPlayer.setExcommunicationChoice(null);
+		}
+
+	}
+
+	private void excommunicate(Player p, List<ExcommunicationCard> e, int era, GameBoard gameBoard)
+	{
+		for (Effect eff : e.get(era).getEffects())
+		{
+			eff.executeEffects(p, gameBoard);
+		}
+
+	}
+
 	private void assignExcommunicationCards()
 	{
-
 		ExcommunicationCard firstEraExcommunication =
 				excommunicationCards.stream().filter(excommunicationCard -> (excommunicationCard.getAge()==1))
 						.collect(Collectors.toList()).get(0);
@@ -573,10 +678,9 @@ public class GameMatch implements Runnable
 	}
 
 	
-	private void addFamiliarsValue()
+	private void addFamiliarsValue(Player player)
 	{
-		for (Player player : players)
-			player.setFamiliarToPlayer(gameBoard.getDices());
+		player.setFamiliarToPlayer(gameBoard.getDices());
 	}
 	
 	private String selectWinner(List<Player> players)

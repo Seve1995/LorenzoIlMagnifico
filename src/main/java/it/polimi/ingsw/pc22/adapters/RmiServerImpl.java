@@ -192,14 +192,14 @@ public class RmiServerImpl implements RMIServerInterface
     {
         IOAdapter adapter = rmiAdapters.get(key);
 
+        String assetMessage = adapter.getMessage();
+
         if (assetDecision == null)
         {
             adapter.printMessage(new ErrorMessage("Asset decision Not received"));
 
             return;
         }
-
-        String assetMessage = adapter.getMessage();
 
         Integer choiceInt = Integer.parseInt(assetMessage);
 

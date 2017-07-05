@@ -37,6 +37,16 @@ public class FromAssetToAssetOrEffect extends ChooseAsset implements Effect
 	@Override
 	public boolean isLegal(Player player, GameBoard gameBoard) 
 	{
+		if (getChosenAssetsToPay() != null)
+		{
+			Asset payedAsset = paiedAssets.get(getChosenAssetsToPay());
+
+			if (player.getAsset(payedAsset.getType()) < payedAsset.getValue())
+				return false;
+
+			return true;
+		}
+
 		for (Asset a : paiedAssets)
 		{
 			if(a.getValue() > player.getAsset(a.getType()))
@@ -62,26 +72,34 @@ public class FromAssetToAssetOrEffect extends ChooseAsset implements Effect
 			if (adapter instanceof SocketIOAdapter)
 				new Thread(new ReceiveAssetDecisionThread(paiedAssets)).start();
 
-			if (!super.waitForResult()) return false;
+			if (!super.waitForResult())
+				return false;
 		}
-		
-		if (!isLegal(player, gameBoard)) return false;
+
+		if (!isLegal(player, gameBoard))
+			return false;
 
 		if (gainedEffect != null)
 		{
 			boolean executed = gainedEffect.executeEffects(player, gameBoard);
 
-			if (!executed) return false;
+			if (!executed)
+				return false;
 		}
 
 		if (isOnlyOneAsset())
 		{
 			Asset payedAsset = paiedAssets.get(getChosenAssetsToPay());
 
+			int value = payedAsset.getValue() * -1;
+
+			payedAsset.setValue(value);
+
 			player.addAsset(payedAsset);
 		}
 
-		if (gainedAssets == null) return true;
+		if (gainedAssets == null)
+			return true;
 
 		if (gainedAssets.size() == 1)
 			player.addAsset(gainedAssets.get(0));
@@ -89,6 +107,8 @@ public class FromAssetToAssetOrEffect extends ChooseAsset implements Effect
 		else
 		{
 			Asset asset = gainedAssets.get(getChosenAssetsToPay());
+
+			System.out.println(asset.getValue());
 
 			player.addAsset(asset);
 		}

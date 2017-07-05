@@ -28,7 +28,7 @@ public class ReceiveCostsDecisionThread implements Runnable
         {
             String costDecision = adapter.getMessage();
 
-            Pattern costMessage = Pattern.compile("^[1-2]$");
+            Pattern costMessage = Pattern.compile("^[0-1]$");
 
             Matcher matcher = costMessage.matcher(costDecision);
 

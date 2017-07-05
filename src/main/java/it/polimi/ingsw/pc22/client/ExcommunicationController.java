@@ -13,11 +13,8 @@ public class ExcommunicationController implements Controller {
 
     private boolean confirmClicked;
 
-
     @Override
-    public void updateScene(Object message) {
-
-    }
+    public void updateScene(Object message) {}
 
     public boolean isConfirmClicked() {
         return confirmClicked;
@@ -30,13 +27,13 @@ public class ExcommunicationController implements Controller {
     @FXML
     private void handleYes()
     {
-        output = "2";
+        output = "1";
     }
 
     @FXML
     private void handleNo()
     {
-        output = "1";
+        output = "2";
     }
 
     @FXML

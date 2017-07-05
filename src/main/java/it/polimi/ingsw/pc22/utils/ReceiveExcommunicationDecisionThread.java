@@ -25,6 +25,13 @@ public class ReceiveExcommunicationDecisionThread implements Runnable
         {
             String excommunicationMessage = adapter.getMessage();
 
+            if (excommunicationMessage == null)
+            {
+                adapter.printMessage(new ErrorMessage("INVALID INSERTION RETRY"));
+
+                continue;
+            }
+
             Pattern costMessage = Pattern.compile("^[1-2]$");
 
             Matcher matcher = costMessage.matcher(excommunicationMessage);
@@ -38,7 +45,7 @@ public class ReceiveExcommunicationDecisionThread implements Runnable
 
             Integer choiceInt = Integer.parseInt(excommunicationMessage);
 
-            GameBoardUtils.getCurrentPlayer().setExcommunicationChoice(choiceInt);
+            GameMatch.getCurrentPlayer().setExcommunicationChoice(choiceInt);
 
             break;
         }

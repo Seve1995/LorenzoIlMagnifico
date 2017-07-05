@@ -25,7 +25,7 @@ public class ChooseAssetsState implements GenericState
 
         for (int j=0; j < assetList.size(); j++)
         {
-            System.out.println(j+1 + ") " + assetList.get(j).toString());
+            System.out.println(j  + ") " + assetList.get(j).toString());
         }
     }
 
@@ -50,7 +50,6 @@ public class ChooseAssetsState implements GenericState
 
             return false;
         }
-
 
         if (assetNumber > assetList.size() || assetNumber < 0)
         {

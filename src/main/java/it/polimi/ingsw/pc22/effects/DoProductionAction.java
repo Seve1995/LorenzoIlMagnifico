@@ -12,7 +12,8 @@ public class DoProductionAction extends ServantsAction implements Effect
 {
 	private int value;
 
-	public int getValue() {
+	public int getValue()
+	{
 		return value;
 	}
 
@@ -25,12 +26,12 @@ public class DoProductionAction extends ServantsAction implements Effect
 	{
 		if (value < player.getPlayerBoard().getBonusTile().getProductionActivationValue())
 			return false;
+
 		return true;
 	}
 
 	@Override
-	public boolean executeEffects(Player player, GameBoard gameBoard)
-	{
+	public boolean executeEffects(Player player, GameBoard gameBoard) {
 		GameMatch.getCurrentGameBoard().setCurreEffect(this);
 
 		IOAdapter adapter = player.getAdapter();
@@ -40,38 +41,32 @@ public class DoProductionAction extends ServantsAction implements Effect
 		if (adapter instanceof SocketIOAdapter)
 			new Thread(new ReceiveServantsDecisionThread()).start();
 
-		if (!super.waitForResult()) return false;
+		if (!super.waitForResult())
+			return false;
 
 		//Serve per gestire il malus dell'excommunication card
 		value += player.getProductionValueModifier();
 
+		value += super.getServants().getValue();
+
+		System.out.println(value + " value total value");
+
 		if (!isLegal(player, gameBoard))
 			return false;
-
-		value += super.getServants().getValue();
 
 		player.addAsset(player.getPlayerBoard().getBonusTile().getProductionCoinsBonus());
 		player.addAsset(player.getPlayerBoard().getBonusTile().getProductionMilitaryPointsBonus());
 		player.addAsset(player.getPlayerBoard().getBonusTile().getProductionServantBonus());
 
-		for (BuildingCard card : player.getPlayerBoard().getBuildings())
-		{
-			System.out.println(card);
-
+		for (BuildingCard card : player.getPlayerBoard().getBuildings()) {
 			if (value < card.getPermanentEffectActivationCost())
 				continue;
 
-			for (Effect effect : card.getPermanentEffects())
-			{
-				System.out.println(effect);
-
+			for (Effect effect : card.getPermanentEffects()) {
 				effect.executeEffects(player, gameBoard);
 			}
 		}
 
 		return true;
 	}
-	
-	
-
 }

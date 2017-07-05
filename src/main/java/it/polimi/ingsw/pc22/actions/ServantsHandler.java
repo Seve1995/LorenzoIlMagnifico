@@ -50,20 +50,20 @@ public class ServantsHandler extends Action
         else
             multiplier=0.5;
 
-		int familiarValue = action.getFamilyMember().getFamiliarValue();
+        int familiarValue = action.getFamilyMember().getFamiliarValue();
 
-		familiarValue = (int) (familiarValue + servantsNumber/(2*multiplier));
+        familiarValue = (int) (familiarValue + servantsNumber/(2*multiplier));
 
-		action.getFamilyMember().setFamiliarValue(familiarValue);
+        action.getFamilyMember().setFamiliarValue(familiarValue);
+
+        boolean executed = action.executeAction(player, gameBoard);
+
+        if (!executed)
+            return false;
 
 		int currServants = player.getServants();
 
 		servantsNumber = (int) (currServants - 2 * multiplier * servantsNumber);
-
-		boolean executed = action.executeAction(player, gameBoard);
-
-		if (!executed)
-		    return false;
 
 		player.setServants(servantsNumber);
 
