@@ -10,7 +10,11 @@ public class ProductionCell extends Cell
 		super(requiredDiceValue, null);
 	}
 
-	public boolean isABlockedCell() {
+    public ProductionCell() {
+
+    }
+
+    public boolean isABlockedCell() {
 		return isABlockedCell;
 	}
 

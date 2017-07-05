@@ -10,6 +10,9 @@ public class HarvestCell extends Cell
 		super(requiredDiceValue, null);
 	}
 
+	public HarvestCell() {
+	}
+
 	public boolean isABlockedCell() {
 		return isABlockedCell;
 	}

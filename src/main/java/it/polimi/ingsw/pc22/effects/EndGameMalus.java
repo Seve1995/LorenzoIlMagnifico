@@ -49,6 +49,7 @@ public class EndGameMalus implements Effect{
 		
 		if (isLegal(player, gameBoard))
 		{
+			int sum=0;
 		
 			if (loseOneVictoryPointEveryFiveVictoryPoints)
 			{
@@ -57,13 +58,10 @@ public class EndGameMalus implements Effect{
 			
 			if (assetsMalus != null)
 			{
-				int sum=0;
-				
+
 				for (Asset a : assetsMalus)
 				{
-						
-						sum += player.getAsset(a.getType());
-						
+					sum += player.getAsset(a.getType());
 				}
 				
 				player.setVictoryPoints(player.getVictoryPoints() - sum);
@@ -71,14 +69,11 @@ public class EndGameMalus implements Effect{
 			
 			if (buildingCardsMalus)
 			{
-				int sum = 0;
+				sum = 0;
+
 				for (BuildingCard b : player.getPlayerBoard().getBuildings())
 				{
-					for (Asset a : b.getCosts())
-						
-						if (a.getType().equals(AssetType.WOOD) || a.getType().equals(AssetType.STONE))
-							
-							sum += a.getValue();
+					sum = sumWoodsAndStones(b.getCosts());
 				}
 				
 				player.setVictoryPoints(player.getVictoryPoints() - sum);
@@ -103,5 +98,19 @@ public class EndGameMalus implements Effect{
 		
 		return false;
 			
+	}
+
+
+	protected int sumWoodsAndStones(List<Asset> assets)
+	{
+		int sum =0;
+
+		for (Asset a : assets)
+
+			if (a.getType().equals(AssetType.WOOD) || a.getType().equals(AssetType.STONE))
+
+				sum += a.getValue();
+
+		return sum;
 	}
 }

@@ -11,6 +11,9 @@ public class Harvest implements Serializable
 		this.harvestCells = harvestCells;
 	}
 
+	public Harvest() {
+	}
+
 	public HarvestCell[] getHarvestCell() {
 		return harvestCells;
 	}

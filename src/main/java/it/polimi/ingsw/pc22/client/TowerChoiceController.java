@@ -40,7 +40,7 @@ public class TowerChoiceController implements Controller
         ObservableList<String> typeOfTowers = FXCollections.observableArrayList(
                 "BUILDING", "CHARACTER", "TERRITORY", "VENTURES");
 
-        SpinnerValueFactory valueFactoryFloor = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,4);
+        SpinnerValueFactory valueFactoryFloor = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,4);
 
         SpinnerValueFactory valueFactoryTower = new SpinnerValueFactory.ListSpinnerValueFactory(typeOfTowers);
 

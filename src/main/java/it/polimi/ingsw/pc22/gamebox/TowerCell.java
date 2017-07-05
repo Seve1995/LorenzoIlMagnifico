@@ -43,13 +43,4 @@ public class TowerCell extends Cell
 		
 	}
 	
-	/*public static void main(String[] args) {
-		List<Effect> effects = new ArrayList<Effect>();
-		effects.add(new GainAsset(new Asset(3, AssetType.COIN)));
-		DevelopmentCard developmentCard = new VentureCard("Morgana", 1, effects, null, null, null, 0);
-		TowerCell c = new TowerCell(3, effects);
-		c.setDevelopmentCard(developmentCard);
-		System.out.println(c.toString());
-	}*/
-	
 }

@@ -41,6 +41,9 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
         }
     }
 
+    public SocketIOAdapter() {
+    }
+
     @Override
     public void run()
     {

@@ -11,6 +11,10 @@ public class Production implements Serializable
 		this.productionCells = productionCell;
 	}
 
+	public Production() {
+
+	}
+
 	public ProductionCell[] getProductionCell() {
 		return productionCells;
 	}

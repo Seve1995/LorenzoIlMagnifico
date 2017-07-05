@@ -31,11 +31,4 @@ public class Market implements Serializable {
 		return output.toString();
 	}
 
-	public String gainInfo() {
-		String output = "There are 4 action spaces in the Market."
-				+ "Each space may contain only 1 Family Member."
-				+ "There can be any number of Family Members of the same color in the market area."
-				+ "Every action space has a different effect.";
-		return output;
-	}
 }

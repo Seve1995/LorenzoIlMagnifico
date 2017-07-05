@@ -177,7 +177,15 @@ public class Player implements Serializable
 	}
 
 	public void setFaithPoints(int faithPoints) {
-		this.faithPoints = faithPoints;
+        if (faithPoints>=0)
+        {
+            this.faithPoints = faithPoints;
+        }
+        else
+        {
+            this.faithPoints = 0;
+        }
+
 	}
 
 	public int getVictoryPoints() {
@@ -185,7 +193,15 @@ public class Player implements Serializable
 	}
 
 	public void setVictoryPoints(int victoryPoints) {
-		this.victoryPoints = victoryPoints;
+	    if (victoryPoints>=0)
+        {
+            this.victoryPoints = victoryPoints;
+        }
+        else
+        {
+            this.victoryPoints = 0;
+        }
+
 	}
 
 	public int getPriority() {
