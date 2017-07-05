@@ -24,44 +24,11 @@ public class AddEndGameVictoryPoints implements Effect{
 
 	@Override
 	public boolean executeEffects(Player player, GameBoard gameBoard) {
-		
-		if (isLegal(player,gameBoard))
-		{
-			player.setEndGameVictoryPoints(player.getEndGameVictoryPoints()+asset.getValue());
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((asset == null) ? 0 : asset.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!(obj instanceof AddEndGameVictoryPoints))
-			return false;
-		AddEndGameVictoryPoints other = (AddEndGameVictoryPoints) obj;
-		if (asset == null) {
-			if (other.asset != null)
-				return false;
-		} else if (!asset.equals(other.asset))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "AddEndGameVictoryPoints [asset=" + asset + "]";
-	}
 	
+		player.setEndGameVictoryPoints(player.getEndGameVictoryPoints()+asset.getValue());
+
+		return true;
+		
+	}
 	
 }

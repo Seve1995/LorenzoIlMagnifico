@@ -17,24 +17,18 @@ public class AddFamilyMembersMalus implements Effect{
 	}
 
 	@Override
-	public boolean isLegal(Player player, GameBoard gameBoard) {
+	public boolean isLegal(Player player, GameBoard gameBoard) 
+	{
 		return true;
 	}
 
-	//TODO: Bisogna renderlo un effetto permanente! I family member vengono rimossi ogni volta, quindi non va bene!
 	@Override
-	public boolean executeEffects(Player player, GameBoard gameBoard) {
+	public boolean executeEffects(Player player, GameBoard gameBoard) 
+	{
+		for(FamilyMember f : player.getFamilyMembers())
+			f.setValueModifier(diceValueMalus);
 		
-		if (isLegal(player,gameBoard)){
-			for(FamilyMember f : player.getFamilyMembers())
-			{
-				f.setValueModifier(diceValueMalus);
-			}
-			return true;
-		}
-		
-		return false;
-		
+		return true;
 	}
 
 }

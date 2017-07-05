@@ -80,12 +80,14 @@ public class AddAssetForEveryAssetOrCard implements Effect{
 		{
 			int totalAsset;
 			
-			totalAsset = player.getAsset(gainedAsset.getType());
+			totalAsset = player.getAsset(paidAsset.getType());
 			
-			totalAsset = totalAsset/paidAsset.getValue(); 
-			
-			for (int i=0; i<totalAsset; i++)
-				player.addAsset(gainedAsset);
+			if (paidAsset.getValue()>0)
+				{
+					totalAsset = totalAsset/paidAsset.getValue(); 
+					for (int i=0; i<totalAsset; i++)
+						player.addAsset(gainedAsset);
+				}
 			
 			return true;
 			
