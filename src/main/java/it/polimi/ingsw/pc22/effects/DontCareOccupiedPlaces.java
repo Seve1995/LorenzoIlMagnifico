@@ -11,12 +11,11 @@ public class DontCareOccupiedPlaces implements Effect {
 	}
 
 	@Override
-	public boolean executeEffects(Player player, GameBoard gameBoard) {
-		
+	public boolean executeEffects(Player player, GameBoard gameBoard) 
+	{
 		player.setDontCareOccupiedPlaces(true);
 		
 		return true;
-		
 	}
 
 }

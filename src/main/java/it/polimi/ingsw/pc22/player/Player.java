@@ -47,7 +47,6 @@ public class Player implements Serializable
 	private boolean stoneMalus; //Serve per gestire l'effetto della tessera scomunica
 	private boolean familyMemberMalus; //Serve per gestire l'effetto della tessera scomunica
 	private boolean disableMarket; //Serve per gestire l'effetto della tessera scomunica
-	private boolean servantsHandlerMalus; //Serve per gestire l'effetto della tessera scomunica
 	private boolean noFirstAction; //Serve per gestire l'effetto della tessera scomunica
 	private boolean noMilitaryPointsForTerritories;//Serve per gestire l'effetto della carta Leader Cesare Borgia
 	private boolean dontCareOccupiedPlaces; //Serve per l'effetto del leader Ludovico Ariosto
@@ -305,14 +304,6 @@ public class Player implements Serializable
 
 	public void setDisableMarket(boolean disableMarket) {
 		this.disableMarket = disableMarket;
-	}
-
-	public boolean isServantsHandlerMalus() {
-		return servantsHandlerMalus;
-	}
-
-	public void setServantsHandlerMalus(boolean servantsHandlerMalus) {
-		this.servantsHandlerMalus = servantsHandlerMalus;
 	}
 
 	public boolean isNoFirstAction() {
@@ -630,7 +621,6 @@ public class Player implements Serializable
 		if (stoneMalus != player.stoneMalus) return false;
 		if (familyMemberMalus != player.familyMemberMalus) return false;
 		if (disableMarket != player.disableMarket) return false;
-		if (servantsHandlerMalus != player.servantsHandlerMalus) return false;
 		if (noFirstAction != player.noFirstAction) return false;
 		if (noMilitaryPointsForTerritories != player.noMilitaryPointsForTerritories) return false;
 		if (dontCareOccupiedPlaces != player.dontCareOccupiedPlaces) return false;
@@ -678,7 +668,6 @@ public class Player implements Serializable
 		result = 31 * result + (stoneMalus ? 1 : 0);
 		result = 31 * result + (familyMemberMalus ? 1 : 0);
 		result = 31 * result + (disableMarket ? 1 : 0);
-		result = 31 * result + (servantsHandlerMalus ? 1 : 0);
 		result = 31 * result + (noFirstAction ? 1 : 0);
 		result = 31 * result + (noMilitaryPointsForTerritories ? 1 : 0);
 		result = 31 * result + (dontCareOccupiedPlaces ? 1 : 0);

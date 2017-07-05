@@ -11,8 +11,8 @@ public class DoubleYourBonuses implements Effect{
 	}
 
 	@Override
-	public boolean executeEffects(Player player, GameBoard gameBoard) {
-		
+	public boolean executeEffects(Player player, GameBoard gameBoard) 
+	{
 		player.setSantaRita(true);
 		
 		return true;
