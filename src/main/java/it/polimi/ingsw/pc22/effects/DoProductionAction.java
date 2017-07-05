@@ -23,8 +23,8 @@ public class DoProductionAction extends ServantsAction implements Effect
 	@Override
 	public boolean isLegal(Player player, GameBoard gameBoard)
 	{
-		//if (value < player.getPlayerBoard().getBonusTile().getProductionActivationValue())
-		//	return false;
+		if (value < player.getPlayerBoard().getBonusTile().getProductionActivationValue())
+			return false;
 		return true;
 	}
 

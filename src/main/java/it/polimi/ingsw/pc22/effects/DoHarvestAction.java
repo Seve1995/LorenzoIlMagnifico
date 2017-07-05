@@ -47,7 +47,7 @@ public class DoHarvestAction extends ServantsAction implements Effect
 		//Serve per gestire il malus dell'excommunication card
 		value += player.getHarvestValueModifier();
 
-		if (isLegal(player,gameBoard))
+		if (!isLegal(player,gameBoard))
 			return false;
 
 		if (!super.waitForResult()) return false;

@@ -126,7 +126,7 @@ public class GameMatch implements Runnable
 		assignExcommunicationCards();
 
 		//=6 turni da 4 azioni l'una//=6 turni da 3 azioni l'una
-        int turnNumber = playerCounter == 5 ? 24 : 18;
+        int turnNumber = playerCounter < 5 ? 24 : 18;
 
 		GameBoardUtils.setUpPlayers(players, playerCounter, tiles);
 
