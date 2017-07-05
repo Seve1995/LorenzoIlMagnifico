@@ -30,7 +30,7 @@ public class PickCouncilState implements GenericState
         output += "2) Two servants" + '\n';
         output += "3) Two coins" + '\n';
         output += "4) Two military points" + '\n';
-        output += "5) Two faith points";
+        output += "5) One faith points";
 
         if (numberOfPrivileges > 1)
             output += "write like use \"-\" to separate numbers";
