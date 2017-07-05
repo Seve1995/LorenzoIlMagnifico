@@ -118,19 +118,7 @@ public class FamilyMemberModifierTest extends TestCase {
 
         IOAdapter adapter = new SocketIOAdapter();
 
-        familyMemberModifier.setToColoured(true);
 
-        familyMemberModifier.setABonus(false);
-
-        familyMemberModifier.setToAll(false);
-
-        familyMemberModifier.setDiceValueSet(4);
-
-        familyMemberModifier.setFamilyMemberColor(ColorsEnum.BLACK);
-
-        familyMemberModifier.executeEffects(player, gameBoard);
-
-        assertEquals(4, player.getFamilyMembers().get(0).getFamiliarPermanentValue());
 
     }
 
