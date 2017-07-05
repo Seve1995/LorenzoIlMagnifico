@@ -21,4 +21,23 @@ public class PassTurn extends Action
 
         return true;
     }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o)
+            return true;
+        if (o == null)
+            return false;
+        if (! (o instanceof PassTurn))
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return super.hashCode();
+    }
 }

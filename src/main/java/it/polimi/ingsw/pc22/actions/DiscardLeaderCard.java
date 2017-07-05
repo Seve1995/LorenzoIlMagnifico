@@ -41,5 +41,22 @@ public class DiscardLeaderCard extends Action
 		return true;
 		
 	}
-	
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+
+		DiscardLeaderCard that = (DiscardLeaderCard) o;
+
+		return index == that.index;
+	}
+
+	@Override
+	public int hashCode() {
+		return index;
+	}
 }

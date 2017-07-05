@@ -98,4 +98,24 @@ public class DiscardLeaderCardTest
 
         //assertTrue(discardLeaderCard.executeAction(player, gameBoard));
     }
+
+    @Test
+    public void equals()
+    {
+        DiscardLeaderCard discardLeaderCard = new DiscardLeaderCard();
+
+        discardLeaderCard.setIndex(0);
+
+        DiscardLeaderCard discardLeaderCard1 = new DiscardLeaderCard();
+
+        discardLeaderCard1.setIndex(0);
+
+        assertEquals(discardLeaderCard, discardLeaderCard1);
+
+        assertEquals(discardLeaderCard, discardLeaderCard);
+
+        assertFalse(discardLeaderCard.equals(new Integer(1)));
+
+        assertFalse(discardLeaderCard.equals(null));
+    }
 }

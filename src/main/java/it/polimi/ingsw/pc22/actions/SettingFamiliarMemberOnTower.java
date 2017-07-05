@@ -8,7 +8,8 @@ import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 
-public class SettingFamiliarMemberOnTower extends Action {
+public class SettingFamiliarMemberOnTower extends Action
+{
 	private int floor;
 	private CardTypeEnum cardTypeEnum;
 
@@ -30,7 +31,9 @@ public class SettingFamiliarMemberOnTower extends Action {
 		this.floor = floor;
 		this.cardTypeEnum = cardTypeEnum;
 	}
-	
+
+	public SettingFamiliarMemberOnTower() {}
+
 	private boolean payThreeCoins(Player p, Tower t)
 	{
 		for (TowerCell tc : t.getTowerCells())

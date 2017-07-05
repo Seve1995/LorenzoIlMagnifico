@@ -15,7 +15,12 @@ import java.util.regex.Pattern;
  */
 public class ActionFactory
 {
-    private static String ACTION_PATH = "it.polimi.ingsw.pc22.actions.";
+    private ActionFactory()
+    {
+        throw new IllegalAccessError("Utility class");
+    }
+
+    private static String action_path = "it.polimi.ingsw.pc22.actions.";
 
     private static final Logger LOGGER = Logger.getLogger(ActionFactory.class.getName());
 
@@ -23,13 +28,14 @@ public class ActionFactory
     {
         String actionName = ParseEnum.parseAction(userCommand);
 
-        if (actionName == null) return null;
+        if (actionName == null)
+            return null;
 
         Action action;
 
         try
         {
-            String className = ACTION_PATH + actionName;
+            String className = action_path + actionName;
 
             Class actionClass = Class.forName(className);
 
@@ -88,8 +94,7 @@ public class ActionFactory
 
         Matcher matcher = familiarPattern.matcher(userCommand);
 
-        if (!matcher.find())
-            return null;
+        matcher.find();
 
         ColorsEnum color = ColorsEnum.getColorFromString(matcher.group(0));
 

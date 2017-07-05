@@ -335,5 +335,23 @@ public class PlayLeaderCardTest
         assertEquals(playerBoard.getLeaderCards(), expectedArray);
     }
 
+    @Test
+    public void equals()
+    {
+        PlayLeaderCard playLeaderCard = new PlayLeaderCard();
 
+        playLeaderCard.setIndex(0);
+
+        PlayLeaderCard playLeaderCard1 = new PlayLeaderCard();
+
+        playLeaderCard1.setIndex(0);
+
+        assertEquals(playLeaderCard, playLeaderCard1);
+
+        assertEquals(playLeaderCard, playLeaderCard);
+
+        assertFalse(playLeaderCard.equals(new Integer(1)));
+
+        assertFalse(playLeaderCard.equals(null));
+    }
 }

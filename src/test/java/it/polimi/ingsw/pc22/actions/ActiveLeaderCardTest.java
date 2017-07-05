@@ -10,8 +10,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -103,5 +102,25 @@ public class ActiveLeaderCardTest
         assertTrue(activeLeaderCard.executeAction(player, gameBoard));
 
         assertFalse(card.isFaceUp());
+    }
+
+    @Test
+    public void equals()
+    {
+        ActiveLeaderCard activeLeaderCard = new ActiveLeaderCard();
+
+        activeLeaderCard.setIndex(0);
+
+        ActiveLeaderCard activeLeaderCard1 = new ActiveLeaderCard();
+
+        activeLeaderCard1.setIndex(0);
+
+        assertEquals(activeLeaderCard, activeLeaderCard1);
+
+        assertEquals(activeLeaderCard, activeLeaderCard);
+
+        assertFalse(activeLeaderCard.equals(new Integer(1)));
+
+        assertFalse(activeLeaderCard.equals(null));
     }
 }
