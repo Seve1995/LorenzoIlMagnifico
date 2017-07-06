@@ -108,7 +108,7 @@ public class FamilyMemberModifier implements Effect
 				adapter.printMessage(new ChooseFamiliarMessage(player));
 
 				if (adapter instanceof SocketIOAdapter)
-					new Thread(new ReceiveFamiliarDecisionThread()).start();
+					new Thread(new ReceiveFamiliarDecisionThread(gameBoard.getGameMatchName())).start();
 
 				Long timestamp = System.currentTimeMillis();
 

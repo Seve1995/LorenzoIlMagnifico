@@ -3,6 +3,7 @@ package it.polimi.ingsw.pc22.adapters;
 import it.polimi.ingsw.pc22.actions.Action;
 import it.polimi.ingsw.pc22.actions.ActionFactory;
 import it.polimi.ingsw.pc22.connection.GameMatch;
+import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.effects.*;
 import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.gamebox.Asset;
@@ -43,7 +44,8 @@ public class RmiServerImpl implements RMIServerInterface
     }
 
     @Override
-    public synchronized Long registerClient(RMIClientStreamService streamService) throws RemoteException
+    public synchronized Long registerClient(RMIClientStreamService streamService)
+        throws RemoteException
     {
         RMIIOAdapter adapter = new RMIIOAdapter(streamService, timeout);
 
@@ -55,7 +57,8 @@ public class RmiServerImpl implements RMIServerInterface
     }
 
     @Override
-    public void login(String loginMessage, Long key) throws RemoteException
+    public void login(String loginMessage, Long key)
+        throws RemoteException
     {
         IOAdapter adapter = rmiAdapters.get(key);
 
@@ -106,8 +109,10 @@ public class RmiServerImpl implements RMIServerInterface
     }
 
     @Override
-    public void doAction(String actionMessage, Long key) throws RemoteException
+    public void doAction(String actionMessage, Long key, String gameMathName) throws RemoteException
     {
+        GameMatch gameMatch = GameServer.getGameMatchMap().get(gameMathName);
+
         IOAdapter adapter = rmiAdapters.get(key);
 
         if (actionMessage == null)
@@ -117,7 +122,7 @@ public class RmiServerImpl implements RMIServerInterface
             return;
         }
 
-        Action action = ActionFactory.createAction(actionMessage, GameMatch.getCurrentPlayer());
+        Action action = ActionFactory.createAction(actionMessage, gameMatch.getCurrentPlayer());
 
         System.out.println("Action created: " + action);
 
@@ -129,27 +134,29 @@ public class RmiServerImpl implements RMIServerInterface
         }
 
         boolean executed = action.executeAction
-                (GameMatch.getCurrentPlayer(), GameMatch.getCurrentGameBoard());
+                (gameMatch.getCurrentPlayer(), gameMatch.getCurrentGameBoard());
 
-        System.out.println(executed + " - " +  GameMatch.getCurrentPlayer().isHasPassed());
+        System.out.println(executed + " - " +  gameMatch.getCurrentPlayer().isHasPassed());
 
         if (!executed) return;
 
-        if (GameMatch.getCurrentPlayer().isFamiliarPositioned())
+        if (gameMatch.getCurrentPlayer().isFamiliarPositioned())
         {
             adapter.printMessage(new ExecutedAction("Action Performed"));
 
             return;
         }
 
-        if (GameMatch.getCurrentPlayer().isHasPassed())
+        if (gameMatch.getCurrentPlayer().isHasPassed())
             return;
     }
 
     @Override
-    public void takeCouncilDecision(String councilMessage, Long key, int numberOfBonus)
+    public void takeCouncilDecision(String councilMessage, Long key, int numberOfBonus, String gameMathName)
             throws RemoteException
     {
+        GameMatch gameMatch = GameServer.getGameMatchMap().get(gameMathName);
+
         IOAdapter adapter = rmiAdapters.get(key);
 
         if (councilMessage == null)
@@ -181,15 +188,17 @@ public class RmiServerImpl implements RMIServerInterface
         }
 
         PickCouncilPrivilege effect =
-                (PickCouncilPrivilege) GameMatch.getCurrentGameBoard().getCurreEffect();
+                (PickCouncilPrivilege) gameMatch.getCurrEffect();
 
         effect.setChosenAssets(assets);
     }
 
     @Override
-    public void takeAssetDecision(String assetDecision, Long key, List<Asset> payedAssets)
+    public void takeAssetDecision(String assetDecision, Long key, List<Asset> payedAssets, String gameMathName)
         throws RemoteException
     {
+        GameMatch gameMatch = GameServer.getGameMatchMap().get(gameMathName);
+
         IOAdapter adapter = rmiAdapters.get(key);
 
         String assetMessage = adapter.getMessage();
@@ -211,15 +220,17 @@ public class RmiServerImpl implements RMIServerInterface
         }
 
         ChooseAsset effect =
-                (ChooseAsset) GameMatch.getCurrentGameBoard().getCurreEffect();
+                (ChooseAsset) gameMatch.getCurrEffect();
 
         effect.setChosenAssetsToPay(choiceInt);
     }
 
     @Override
-    public void takeCardDecision(String cardMessage, Long key, CardTypeEnum currCardType)
+    public void takeCardDecision(String cardMessage, Long key, CardTypeEnum currCardType, String gameMathName)
         throws RemoteException
     {
+        GameMatch gameMatch = GameServer.getGameMatchMap().get(gameMathName);
+
         IOAdapter adapter = rmiAdapters.get(key);
 
         Pattern cardPattern;
@@ -247,7 +258,7 @@ public class RmiServerImpl implements RMIServerInterface
         Integer floor;
 
         PickTowerCard effect =
-                (PickTowerCard) GameMatch.getCurrentGameBoard().getCurreEffect();
+                (PickTowerCard) gameMatch.getCurrEffect();
 
         if (!currCardType.equals(CardTypeEnum.ANY))
         {
@@ -266,9 +277,11 @@ public class RmiServerImpl implements RMIServerInterface
     }
 
     @Override
-    public void takeCostsDecision(String costMessage, Long key)
+    public void takeCostsDecision(String costMessage, Long key, String gameMathName)
         throws RemoteException
     {
+        GameMatch gameMatch = GameServer.getGameMatchMap().get(gameMathName);
+
         IOAdapter adapter = rmiAdapters.get(key);
 
         Pattern costPattern = Pattern.compile("^[1-2]$");
@@ -285,16 +298,18 @@ public class RmiServerImpl implements RMIServerInterface
         Integer choiceInt = Integer.parseInt(costMessage);
 
         PickTowerCard effect =
-                (PickTowerCard) GameMatch.getCurrentGameBoard().getCurreEffect();
+                (PickTowerCard) gameMatch.getCurrEffect();
 
 
         effect.setCostDecision(choiceInt);
     }
 
     @Override
-    public void takeServantsDecision(String servantsMessage, Long key)
+    public void takeServantsDecision(String servantsMessage, Long key, String gameMathName)
         throws RemoteException
     {
+        GameMatch gameMatch = GameServer.getGameMatchMap().get(gameMathName);
+
         IOAdapter adapter = rmiAdapters.get(key);
 
         Integer servantNumber;
@@ -310,7 +325,7 @@ public class RmiServerImpl implements RMIServerInterface
             return;
         }
 
-        if (servantNumber > GameMatch.getCurrentPlayer().getServants())
+        if (servantNumber > gameMatch.getCurrentPlayer().getServants())
         {
             adapter.printMessage(new ErrorMessage("You haven't so much servants"));
 
@@ -320,15 +335,17 @@ public class RmiServerImpl implements RMIServerInterface
         Asset servants =  new Asset(servantNumber, AssetType.SERVANT);
 
         ServantsAction effect =
-                (ServantsAction) GameMatch.getCurrentGameBoard().getCurreEffect();
+                (ServantsAction) gameMatch.getCurrEffect();
 
         effect.setServants(servants);
     }
 
     @Override
-    public void takeExcommunicationDecision(String excommunicationMessage, Long key)
+    public void takeExcommunicationDecision(String excommunicationMessage, Long key, String gameMathName)
         throws RemoteException
     {
+        GameMatch gameMatch = GameServer.getGameMatchMap().get(gameMathName);
+
         IOAdapter adapter = rmiAdapters.get(key);
 
         if (excommunicationMessage == null)
@@ -351,12 +368,14 @@ public class RmiServerImpl implements RMIServerInterface
 
         Integer choiceInt = Integer.parseInt(excommunicationMessage);
 
-        GameBoardUtils.getCurrentPlayer().setExcommunicationChoice(choiceInt);
+        gameMatch.getCurrentPlayer().setExcommunicationChoice(choiceInt);
     }
 
     @Override
-    public void takeFamiliarDecision(String familiarMessage, Long key)
+    public void takeFamiliarDecision(String familiarMessage, Long key, String gameMathName)
     {
+        GameMatch gameMatch = GameServer.getGameMatchMap().get(gameMathName);
+
         IOAdapter adapter = rmiAdapters.get(key);
 
         if (familiarMessage == null)
@@ -382,7 +401,7 @@ public class RmiServerImpl implements RMIServerInterface
 
 
         FamilyMemberModifier effect = (FamilyMemberModifier)
-                GameMatch.getCurrentGameBoard().getCurreEffect();
+                gameMatch.getCurrEffect();
 
         effect.setFamilyMemberColor(color);
     }

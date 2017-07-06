@@ -17,7 +17,8 @@ public enum ParseEnum
     PLAY_CARD("^play card [0-3]$", "PlayLeaderCard"),
     DISCARD_CARD("^activate card [0-3]$", "ActiveLeaderCard"),
     ACTIVATE_CARD("^discard card [0-3]$", "DiscardLeaderCard"),
-    SHOW_BOARD("^show board$", "ShowBoard");
+    SHOW_BOARD("^show board$", "ShowBoard"),
+    EXIT_GAME("^exit$", "ExitGame");
 
 
     private String regex;

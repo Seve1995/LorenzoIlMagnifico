@@ -15,7 +15,9 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
@@ -33,6 +35,8 @@ public class GameServer
 	private static final int RMI_PORT = 5439;
 
 	private static Map<String, Player> playerMap;
+
+	private static boolean isClosed = false;
 
     private static final Logger LOGGER = Logger.getLogger(GameServer.class.getName());
 
@@ -69,7 +73,7 @@ public class GameServer
 
 		ExecutorService executor = Executors.newSingleThreadExecutor();
 
-		Future<Boolean> exit = executor.submit(new ExitThread());
+		executor.submit(new ExitThread());
 
 		try 
 		{
@@ -79,12 +83,6 @@ public class GameServer
 
 			while(true)
 			{
-
-                if (exit.isDone())
-                {
-                    break;
-                }
-
 				Socket socket = serverSocket.accept();
 
 				SocketIOAdapter socketIOAdapter
@@ -118,7 +116,15 @@ public class GameServer
 		return usersMap;
 	}
 
-	public static Map<String, GameMatch> getGameMatchMap() 
+	public static boolean isIsClosed() {
+		return isClosed;
+	}
+
+	public static void setIsClosed(boolean isClosed) {
+		GameServer.isClosed = isClosed;
+	}
+
+	public static Map<String, GameMatch> getGameMatchMap()
 	{
 		return gameMatchMap;
 	}

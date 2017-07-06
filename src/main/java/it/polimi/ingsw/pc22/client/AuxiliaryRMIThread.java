@@ -49,47 +49,55 @@ public class AuxiliaryRMIThread implements Runnable
 			if (Client.getGenericState() instanceof ChooseAssetsState)
 			{
 				Client.getRmiServerInterface().takeAssetDecision
-						(string, Client.getAssignedID(), assetList);
+						(string, Client.getAssignedID(), assetList,
+								Client.getGameBoard().getGameMatchName());
 			}
 			if (Client.getGenericState() instanceof ChooseCardState)
 			{
 				Client.getRmiServerInterface().takeCardDecision
-						(string, Client.getAssignedID(), cardType);
+						(string, Client.getAssignedID(), cardType,
+								Client.getGameBoard().getGameMatchName());
 			}
 
 		 	if (Client.getGenericState() instanceof ChooseCostsState)
 		 	{
 			 	Client.getRmiServerInterface().takeCostsDecision
-					 	(string, Client.getAssignedID());
+					 	(string, Client.getAssignedID(),
+								Client.getGameBoard().getGameMatchName());
 		 	}
 
 		 	if (Client.getGenericState() instanceof  ChooseServantsState)
 			{
 				Client.getRmiServerInterface().takeServantsDecision
-						(string, Client.getAssignedID());
+						(string, Client.getAssignedID(),
+								Client.getGameBoard().getGameMatchName());
 			}
 
 			if (Client.getGenericState() instanceof ExcommunicateState)
 			{
 				Client.getRmiServerInterface().takeExcommunicationDecision
-						(string, Client.getAssignedID());
+						(string, Client.getAssignedID(),
+								Client.getGameBoard().getGameMatchName());
 			}
 
 			if (Client.getGenericState() instanceof PickCouncilState)
 			{
 				Client.getRmiServerInterface().takeCouncilDecision
-						(string, Client.getAssignedID(), numberOfPrivileges);
+						(string, Client.getAssignedID(), numberOfPrivileges,
+								Client.getGameBoard().getGameMatchName());
 			}
 
 			if (Client.getGenericState() instanceof ChooseFamiliarState)
 			{
 				Client.getRmiServerInterface().takeFamiliarDecision
-						(string, Client.getAssignedID());
+						(string, Client.getAssignedID(),
+								Client.getGameBoard().getGameMatchName());
 			}
 
 			if (Client.getGenericState() instanceof PlayState)
 			{
-				Client.getRmiServerInterface().doAction(string, Client.getAssignedID());
+				Client.getRmiServerInterface().doAction(string, Client.getAssignedID(),
+						Client.getGameBoard().getGameMatchName());
 			}
 
          }

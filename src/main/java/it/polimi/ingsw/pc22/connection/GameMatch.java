@@ -23,6 +23,8 @@ public class GameMatch implements Runnable
 
 	private Boolean started = false;
 
+	private boolean stopped = false;
+
 	private List<Player> players;
 
 	private int playerCounter = 0;
@@ -45,9 +47,11 @@ public class GameMatch implements Runnable
 	
 	private int era = 0;
 
-	private static Player currentPlayer;
+	private Player currentPlayer;
 
-	private static GameBoard currentGameBoard;
+	private GameBoard currentGameBoard;
+
+	private Effect currEffect = null;
 
 	private static final String BOARD_PATH = "boards/";
 
@@ -78,6 +82,13 @@ public class GameMatch implements Runnable
 						System.currentTimeMillis() > timeStamp + timeout;
 
 				System.out.println("isTimeoutExpired " + isTimeoutExpired);
+
+				if (GameServer.isIsClosed())
+				{
+					handleStoppedServer();
+
+					timer.cancel();
+				}
 
 				if (isTimeoutExpired || isGameFull)
 				{
@@ -136,6 +147,9 @@ public class GameMatch implements Runnable
 		
 		for (int currentRoundNumber = 0; currentRoundNumber < turnNumber; currentRoundNumber++)
 		{
+			if (GameServer.isIsClosed())
+				break;
+
 			if (isNewTurn(currentRoundNumber))
 				handleNewTurn(currentRoundNumber);
 
@@ -143,7 +157,8 @@ public class GameMatch implements Runnable
 			{
 				System.out.println(player.getFamilyMembers());
 
-				if (player.isSuspended()) continue;
+				if (player.isSuspended())
+					continue;
 
 				for (Player p : players)
 				{
@@ -164,7 +179,7 @@ public class GameMatch implements Runnable
 
 				if (adapter instanceof SocketIOAdapter)
 				{
-					new Thread(new ActionThread()).start();
+					new Thread(new ActionThread(gameName)).start();
 				}
 
 				Long timestamp = System.currentTimeMillis();
@@ -187,7 +202,6 @@ public class GameMatch implements Runnable
 				}
 
 				/*
-
 				LASCIARE PER QUANDO FUNZIONAERÀ LA SOSPENSIONE
 				if (!currentPlayer.isHasPassed() && !currentPlayer.isFamiliarPositioned())
 				{
@@ -206,7 +220,13 @@ public class GameMatch implements Runnable
 			}
 
 			GameBoardUtils.resetPlayerStatus(players);
+		}
 
+		if (GameServer.isIsClosed())
+		{
+			handleStoppedServer();
+
+			return;
 		}
 
 		GameBoardUtils.endGameExcommunicationHandling(players, excommunicationCards, gameBoard, era);
@@ -226,6 +246,20 @@ public class GameMatch implements Runnable
 		}
 
 		endGame();
+
+		this.stopped = true;
+	}
+
+	private void handleStoppedServer()
+	{
+		for (Player p : players)
+		{
+			IOAdapter adapter = p.getAdapter();
+
+			adapter.printMessage(new StoppedServerMessage("SERVER STOPPED"));
+		}
+
+		this.stopped = true;
 	}
 
 	private void handleNewTurn(int currentRoundNumber)
@@ -256,8 +290,6 @@ public class GameMatch implements Runnable
 			}
 
 			adapter.printMessage(new CommunicationMessage("Turn " + turn + " now starting!"));
-
-			System.out.println(p.getFamilyMembers());
 
 			addFamiliarsValue(p);
 
@@ -312,6 +344,8 @@ public class GameMatch implements Runnable
 		JSONObject jsonBoard = new JSONObject(boardString);
 
 		gameBoard = BoardLoader.loadGameBoard(jsonBoard);
+
+		gameBoard.setGameMatchName(gameName);
 	}
 
 	private void loadCards()
@@ -393,7 +427,7 @@ public class GameMatch implements Runnable
 			adapter.printMessage(new ExcommunicationMessage(excommunicationCards.get(era)));
 
 			if (adapter instanceof SocketIOAdapter)
-				new Thread(new ReceiveExcommunicationDecisionThread()).start();
+				new Thread(new ReceiveExcommunicationDecisionThread(gameName)).start();
 
 			Long timestamp = System.currentTimeMillis();
 
@@ -739,26 +773,39 @@ public class GameMatch implements Runnable
 	public void setPlayerCounter(int playerCounter) {
 		this.playerCounter = playerCounter;
 	}
-	
-	public GameBoard getGameBoard() {
-		return gameBoard;
-	}
-	
-	public void setGameBoard(GameBoard gameBoard) {
-		this.gameBoard = gameBoard;
-	}
-
-	public static Player getCurrentPlayer() {
-		return currentPlayer;
-	}
-
-	public static GameBoard getCurrentGameBoard() {
-		return currentGameBoard;
-	}
 
 	public static Long getTimeout()
 	{
 		return timeout;
+	}
+
+	public boolean isStopped() {
+		return stopped;
+	}
+
+	public String getGameName() {
+		return gameName;
+	}
+
+	public void setGameName(String gameName)
+	{
+		this.gameName = gameName;
+	}
+
+	public Player getCurrentPlayer() {
+		return currentPlayer;
+	}
+
+	public GameBoard getCurrentGameBoard() {
+		return currentGameBoard;
+	}
+
+	public Effect getCurrEffect() {
+		return currEffect;
+	}
+
+	public void setCurrEffect(Effect currEffect) {
+		this.currEffect = currEffect;
 	}
 
 	public class PlayerComparator implements Comparator<Player>

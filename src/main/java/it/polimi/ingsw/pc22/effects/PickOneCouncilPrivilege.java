@@ -3,6 +3,7 @@ package it.polimi.ingsw.pc22.effects;
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.connection.GameMatch;
+import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.messages.PickPrivilegeMessage;
 import it.polimi.ingsw.pc22.player.Player;
@@ -18,14 +19,18 @@ public class PickOneCouncilPrivilege extends PickCouncilPrivilege implements Eff
 	@Override
 	public boolean executeEffects(Player player, GameBoard gameBoard)
 	{
-		GameMatch.getCurrentGameBoard().setCurreEffect(this);
+		String gameName = gameBoard.getGameMatchName();
+
+		GameMatch gameMatch = GameServer.getGameMatchMap().get(gameName);
+
+		gameMatch.setCurrEffect(this);
 
 		IOAdapter adapter = player.getAdapter();
 
 		adapter.printMessage(new PickPrivilegeMessage(1));
 
 		if (adapter instanceof SocketIOAdapter)
-			new Thread(new ReceiveCouncilDecisionThread(1)).start();
+			new Thread(new ReceiveCouncilDecisionThread(1, gameName)).start();
 
 		System.out.println("Executed");
 

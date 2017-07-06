@@ -3,6 +3,7 @@ package it.polimi.ingsw.pc22.effects;
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.connection.GameMatch;
+import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.messages.ChooseAssetsMessage;
 import it.polimi.ingsw.pc22.messages.ChooseCardMessage;
@@ -72,6 +73,8 @@ public class PickTowerCard extends ChooseAsset implements Effect
 	@Override
 	public boolean isLegal(Player player, GameBoard gameBoard)
 	{
+		String gameName = gameBoard.getGameMatchName();
+
 		if (floor==-1 || cardType==null) return false;
 		
 		Tower tower = gameBoard.getTowerByType(cardType);
@@ -103,7 +106,7 @@ public class PickTowerCard extends ChooseAsset implements Effect
 							costs.get(0).setValue(costs.get(0).getValue() - asset.getValue());
 			}
 			
-			if (applyCardModifiers(player) == false)
+			if (applyCardModifiers(player, gameName) == false)
 				return false;
 			
 			if (costs.get(0).getValue() > player.getCoins())
@@ -129,7 +132,7 @@ public class PickTowerCard extends ChooseAsset implements Effect
 							asset1.setValue(asset1.getValue() - asset.getValue());
 			}
 			
-			if (applyCardModifiers(player)==false) return false;
+			if (applyCardModifiers(player, gameName)==false) return false;
 			
 			for (Asset a : costs)
 			{
@@ -164,7 +167,7 @@ public class PickTowerCard extends ChooseAsset implements Effect
 				adapter.printMessage(costsMessage);
 
 				if (adapter instanceof SocketIOAdapter)
-					new Thread(new ReceiveCostsDecisionThread()).start();
+					new Thread(new ReceiveCostsDecisionThread(gameName)).start();
 
 				Long timestamp = System.currentTimeMillis();
 
@@ -218,7 +221,7 @@ public class PickTowerCard extends ChooseAsset implements Effect
 			if (currVentureCard.getResourcesCost() == null)
 				costs.add(currVentureCard.getMilitaryPointsCost());
 				
-			if (applyCardModifiers(player)==false) return false;
+			if (applyCardModifiers(player, gameName)==false) return false;
 
 			for (Asset a : costs)
 			{
@@ -267,14 +270,18 @@ public class PickTowerCard extends ChooseAsset implements Effect
 	{
 		if (cardType.equals(CardTypeEnum.ANY) || floor == -1)
 		{
-			GameMatch.getCurrentGameBoard().setCurreEffect(this);
+			String gameName = gameBoard.getGameMatchName();
+
+			GameMatch gameMatch = GameServer.getGameMatchMap().get(gameName);
+
+			gameMatch.setCurrEffect(this);
 
 			IOAdapter adapter = player.getAdapter();
 
 			adapter.printMessage(new ChooseCardMessage(cardType, gameBoard));
 
 			if (adapter instanceof SocketIOAdapter)
-				new Thread(new ReceiveCardDecisionThread()).start();
+				new Thread(new ReceiveCardDecisionThread(gameName)).start();
 
 			Long timestamp = System.currentTimeMillis();
 
@@ -343,7 +350,7 @@ public class PickTowerCard extends ChooseAsset implements Effect
 	}
 	
 
-	private boolean applyCardModifiers(Player player)
+	private boolean applyCardModifiers(Player player, String gameName)
 	{
 		if (cardType.equals(CardTypeEnum.BUILDING))
 		{			
@@ -358,7 +365,7 @@ public class PickTowerCard extends ChooseAsset implements Effect
 					adapter.printMessage(new ChooseAssetsMessage(assets));
 
 					if (adapter instanceof SocketIOAdapter)
-						new Thread(new ReceiveAssetDecisionThread(assets)).start();
+						new Thread(new ReceiveAssetDecisionThread(assets, gameName)).start();
 
 					if (!super.waitForResult()) return false;
 

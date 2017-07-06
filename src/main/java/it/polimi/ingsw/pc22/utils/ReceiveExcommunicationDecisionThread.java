@@ -2,6 +2,7 @@ package it.polimi.ingsw.pc22.utils;
 
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.connection.GameMatch;
+import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.messages.ErrorMessage;
 
 import java.util.regex.Matcher;
@@ -12,6 +13,13 @@ import java.util.regex.Pattern;
  */
 public class ReceiveExcommunicationDecisionThread implements Runnable
 {
+    private String gameMatchName;
+
+    public ReceiveExcommunicationDecisionThread(String gameMatchName)
+    {
+        this.gameMatchName = gameMatchName;
+    }
+
     @Override
     public void run()
     {
@@ -19,7 +27,9 @@ public class ReceiveExcommunicationDecisionThread implements Runnable
 
         Long timestamp = System.currentTimeMillis();
 
-        IOAdapter adapter = GameMatch.getCurrentPlayer().getAdapter();
+        GameMatch gameMatch = GameServer.getGameMatchMap().get(gameMatchName);
+
+        IOAdapter adapter = gameMatch.getCurrentPlayer().getAdapter();
 
         while (System.currentTimeMillis() < timestamp + timeout)
         {
@@ -45,7 +55,7 @@ public class ReceiveExcommunicationDecisionThread implements Runnable
 
             Integer choiceInt = Integer.parseInt(excommunicationMessage);
 
-            GameMatch.getCurrentPlayer().setExcommunicationChoice(choiceInt);
+            gameMatch.getCurrentPlayer().setExcommunicationChoice(choiceInt);
 
             break;
         }

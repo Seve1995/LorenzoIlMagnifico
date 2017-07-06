@@ -2,6 +2,7 @@ package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.connection.GameMatch;
+import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.messages.ErrorMessage;
 
 import java.util.regex.Matcher;
@@ -12,6 +13,12 @@ import java.util.regex.Pattern;
  */
 public class ReceiveCostsDecisionThread implements Runnable
 {
+    private String gameMatchName;
+
+    public ReceiveCostsDecisionThread(String gameMatchName) {
+        this.gameMatchName = gameMatchName;
+    }
+
     @Override
     public void run()
     {
@@ -19,10 +26,11 @@ public class ReceiveCostsDecisionThread implements Runnable
 
         Long timestamp = System.currentTimeMillis();
 
-        IOAdapter adapter = GameMatch.getCurrentPlayer().getAdapter();
+        GameMatch gameMatch = GameServer.getGameMatchMap().get(gameMatchName);
 
-        PickTowerCard effect =
-                (PickTowerCard) GameMatch.getCurrentGameBoard().getCurreEffect();
+        IOAdapter adapter = gameMatch.getCurrentPlayer().getAdapter();
+
+        PickTowerCard effect = (PickTowerCard) gameMatch.getCurrEffect();
 
         while (System.currentTimeMillis() < timestamp + timeout)
         {

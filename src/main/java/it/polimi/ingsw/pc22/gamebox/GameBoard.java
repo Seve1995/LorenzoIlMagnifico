@@ -7,6 +7,8 @@ import java.util.List;
 
 public class GameBoard implements Serializable
 {
+	private String gameMatchName;
+
 	private Tower[] towers;
 	private Harvest harvest;
 	private Production production;
@@ -15,8 +17,6 @@ public class GameBoard implements Serializable
 	private List<Dice> dices;
 	private List<ExcommunicationCard> excommunicationCards;
 
-	private Effect currEffect = null;
-	
 	public GameBoard() 
 	{
 		
@@ -90,12 +90,14 @@ public class GameBoard implements Serializable
 		this.excommunicationCards = excommunicationCards;
 	}
 
-	public Effect getCurreEffect() {
-		return currEffect;
+	public String getGameMatchName()
+	{
+		return gameMatchName;
 	}
 
-	public void setCurreEffect(Effect curreEffect) {
-		this.currEffect = curreEffect;
+	public void setGameMatchName(String gameMatchName)
+	{
+		this.gameMatchName = gameMatchName;
 	}
 
 	@Override

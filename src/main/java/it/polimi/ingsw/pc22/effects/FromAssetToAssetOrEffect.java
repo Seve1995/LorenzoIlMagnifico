@@ -3,6 +3,7 @@ package it.polimi.ingsw.pc22.effects;
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.connection.GameMatch;
+import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.messages.ChooseAssetsMessage;
@@ -61,7 +62,11 @@ public class FromAssetToAssetOrEffect extends ChooseAsset implements Effect
 	@Override
 	public boolean executeEffects(Player player, GameBoard gameBoard)
 	{
-		GameMatch.getCurrentGameBoard().setCurreEffect(this);
+		String gameName = gameBoard.getGameMatchName();
+
+		GameMatch gameMatch = GameServer.getGameMatchMap().get(gameName);
+
+		gameMatch.setCurrEffect(this);
 
 		if (isOnlyOneAsset())
 		{
@@ -70,7 +75,7 @@ public class FromAssetToAssetOrEffect extends ChooseAsset implements Effect
 			adapter.printMessage(new ChooseAssetsMessage(paiedAssets));
 
 			if (adapter instanceof SocketIOAdapter)
-				new Thread(new ReceiveAssetDecisionThread(paiedAssets)).start();
+				new Thread(new ReceiveAssetDecisionThread(paiedAssets, gameName)).start();
 
 			if (!super.waitForResult())
 				return false;

@@ -279,6 +279,8 @@ public abstract class IOAdapter
 
         gameMatchMap.put(gameName, gameMatch);
 
+        gameMatch.setGameName(gameName);
+
         player.setAdapter(this);
 
         List<Player> players = new ArrayList<>();

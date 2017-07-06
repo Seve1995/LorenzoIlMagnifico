@@ -2,6 +2,7 @@ package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.connection.GameMatch;
+import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.AssetType;
 import it.polimi.ingsw.pc22.messages.ErrorMessage;
@@ -11,6 +12,13 @@ import it.polimi.ingsw.pc22.messages.ErrorMessage;
  */
 public class ReceiveServantsDecisionThread implements Runnable
 {
+    private String gameMatchName;
+
+    public ReceiveServantsDecisionThread(String gameMatchName)
+    {
+        this.gameMatchName = gameMatchName;
+    }
+
     @Override
     public void run()
     {
@@ -18,7 +26,9 @@ public class ReceiveServantsDecisionThread implements Runnable
 
         Long timestamp = System.currentTimeMillis();
 
-        IOAdapter adapter = GameMatch.getCurrentPlayer().getAdapter();
+        GameMatch gameMatch = GameServer.getGameMatchMap().get(gameMatchName);
+
+        IOAdapter adapter = gameMatch.getCurrentPlayer().getAdapter();
 
         while (System.currentTimeMillis() < timestamp + timeout)
         {
@@ -37,7 +47,7 @@ public class ReceiveServantsDecisionThread implements Runnable
                 continue;
             }
 
-            if (servantNumber > GameMatch.getCurrentPlayer().getServants())
+            if (servantNumber > gameMatch.getCurrentPlayer().getServants())
             {
                 adapter.printMessage(new ErrorMessage("You haven't so much servants"));
 
@@ -46,8 +56,7 @@ public class ReceiveServantsDecisionThread implements Runnable
 
             Asset servants =  new Asset(servantNumber, AssetType.SERVANT);
 
-            ServantsAction effect =
-                    (ServantsAction) GameMatch.getCurrentGameBoard().getCurreEffect();
+            ServantsAction effect = (ServantsAction) gameMatch.getCurrEffect();
 
             effect.setServants(servants);
 

@@ -10,6 +10,13 @@ import it.polimi.ingsw.pc22.messages.ErrorMessage;
  */
 public class ActionThread implements Runnable
 {
+    private String gameMatchName;
+
+    public ActionThread(String gameMatchName)
+    {
+        this.gameMatchName = gameMatchName;
+    }
+
     @Override
     public void run()
     {
@@ -17,7 +24,15 @@ public class ActionThread implements Runnable
 
         Long timestamp = System.currentTimeMillis();
 
-        IOAdapter adapter = GameMatch.getCurrentPlayer().getAdapter();
+        GameMatch gameMatch = GameServer.getGameMatchMap().get(gameMatchName);
+
+        System.out.println(gameMatch.getGameName());
+
+        System.out.println(gameMatch.getCurrentPlayer());
+
+        System.out.println(gameMatch.getCurrentGameBoard());
+
+        IOAdapter adapter = gameMatch.getCurrentPlayer().getAdapter();
 
         while (System.currentTimeMillis() < timestamp + timeout)
         {
@@ -32,7 +47,7 @@ public class ActionThread implements Runnable
                 continue;
             }
 
-            Action action = ActionFactory.createAction(actionMessage, GameMatch.getCurrentPlayer());
+            Action action = ActionFactory.createAction(actionMessage, gameMatch.getCurrentPlayer());
 
             if (action == null)
             {
@@ -42,9 +57,9 @@ public class ActionThread implements Runnable
             }
 
             boolean executed = action.executeAction
-                    (GameMatch.getCurrentPlayer(), GameMatch.getCurrentGameBoard());
+                    (gameMatch.getCurrentPlayer(), gameMatch.getCurrentGameBoard());
 
-            System.out.println(executed + " - " +  GameMatch.getCurrentPlayer().isHasPassed());
+            System.out.println(executed + " - " +  gameMatch.getCurrentPlayer().isHasPassed());
 
             if (!executed)
             {
@@ -55,12 +70,12 @@ public class ActionThread implements Runnable
 
             adapter.printMessage(new ErrorMessage("Action Performed"));
 
-            if (GameMatch.getCurrentPlayer().isFamiliarPositioned())
+            if (gameMatch.getCurrentPlayer().isFamiliarPositioned())
             {
                 break;
             }
 
-            if (GameMatch.getCurrentPlayer().isHasPassed())
+            if (gameMatch.getCurrentPlayer().isHasPassed())
                 break;
         }
 

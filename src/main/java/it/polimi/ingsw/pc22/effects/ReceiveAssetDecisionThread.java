@@ -2,6 +2,7 @@ package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.connection.GameMatch;
+import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.messages.ErrorMessage;
 
@@ -14,9 +15,13 @@ public class ReceiveAssetDecisionThread implements Runnable
 {
     private List<Asset> payedAssets;
 
-    public ReceiveAssetDecisionThread(List<Asset> payedAssets)
+    private String gameMatchName;
+
+    public ReceiveAssetDecisionThread(List<Asset> payedAssets, String gameMatchName)
     {
+
         this.payedAssets = payedAssets;
+        this.gameMatchName = gameMatchName;
     }
 
     @Override
@@ -26,7 +31,9 @@ public class ReceiveAssetDecisionThread implements Runnable
 
         Long timestamp = System.currentTimeMillis();
 
-        IOAdapter adapter = GameMatch.getCurrentPlayer().getAdapter();
+        GameMatch gameMatch = GameServer.getGameMatchMap().get(gameMatchName);
+
+        IOAdapter adapter = gameMatch.getCurrentPlayer().getAdapter();
 
         while (System.currentTimeMillis() < timestamp + timeout)
         {
@@ -41,8 +48,7 @@ public class ReceiveAssetDecisionThread implements Runnable
                 continue;
             }
 
-            ChooseAsset effect =
-                    (ChooseAsset) GameMatch.getCurrentGameBoard().getCurreEffect();
+            ChooseAsset effect = (ChooseAsset) gameMatch.getCurrEffect();
 
             effect.setChosenAssetsToPay(choiceInt);
 

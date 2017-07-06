@@ -21,11 +21,11 @@ public abstract class Cell implements Serializable
 
 	public Cell() {}
 
-	public boolean executeEffects(Player player)
+	public boolean executeEffects(Player player, GameBoard gameBoard)
 	{
 		for(Effect e : this.getEffects())
 		{
-			if (!e.executeEffects(player, null))
+			if (!e.executeEffects(player, gameBoard))
 				return false;
 		}
 

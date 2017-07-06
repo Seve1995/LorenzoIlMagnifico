@@ -1,8 +1,14 @@
 package it.polimi.ingsw.pc22.connection;
 
+import it.polimi.ingsw.pc22.adapters.IOAdapter;
+import it.polimi.ingsw.pc22.messages.StoppedServerMessage;
+import it.polimi.ingsw.pc22.player.Player;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,14 +16,14 @@ import java.util.logging.Logger;
 /**
  * Created by fandroid95 on 13/06/2017.
  */
-public class ExitThread implements Callable<Boolean>
+public class ExitThread implements Runnable
 {
     private BufferedReader console;
 
     private static final Logger LOGGER = Logger.getLogger(ExitThread.class.getName());
 
     @Override
-    public Boolean call() throws Exception
+    public void run()
     {
         console = new BufferedReader(new InputStreamReader(System.in));
 
@@ -29,17 +35,54 @@ public class ExitThread implements Callable<Boolean>
 
                 String msgReceived = console.readLine();
 
-                if(!"EXIT".equalsIgnoreCase(msgReceived)) continue;
+                if (!"EXIT".equalsIgnoreCase(msgReceived))
+                    continue;
 
-                return true;
+                System.out.println(msgReceived);
+
+                GameServer.setIsClosed(true);
+
+                break;
             }
-
         }
         catch (IOException | InterruptedException e)
         {
             LOGGER.log(Level.INFO, "ERROR RECEIVE THREAD", e);
-
-            return true;
         }
+
+        Integer currentSize = GameServer.getGameMatchMap().size();
+
+        List<GameMatch> stoppedGames = new ArrayList<>();
+
+        while(stoppedGames.size() < currentSize)
+        {
+            for (GameMatch gameMatch  : GameServer.getGameMatchMap().values())
+            {
+                if (!gameMatch.getStarted() && !stoppedGames.contains(gameMatch))
+                {
+                    stoppedGames.add(gameMatch);
+
+                    System.out.println("GAMENAME: " + gameMatch.getGameName());
+
+                    List<Player> players = gameMatch.getPlayers();
+
+                    for (Player p : players)
+                    {
+                        IOAdapter adapter = p.getAdapter();
+
+                        adapter.printMessage(new StoppedServerMessage("SERVER STOPPED"));
+                    }
+                }
+
+                if ((gameMatch.isStopped() && !stoppedGames.contains(gameMatch)))
+                {
+                    stoppedGames.add(gameMatch);
+
+                    System.out.println("GAMENAME: " + gameMatch.getGameName());
+                }
+            }
+        }
+
+        System.exit(0);
     }
 }

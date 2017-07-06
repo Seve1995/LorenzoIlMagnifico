@@ -96,7 +96,7 @@ public class SettingFamiliarMemberOnCouncilTest extends TestCase
 
         when(palace.getCouncilPalaceCells()).thenReturn(cells);
 
-        when(cell.executeEffects(player)).thenReturn(false);
+        when(cell.executeEffects(player, gameBoard)).thenReturn(false);
 
         assertFalse(settingFamiliar.executeAction(player, gameBoard));
     }
@@ -119,7 +119,7 @@ public class SettingFamiliarMemberOnCouncilTest extends TestCase
 
         when(palace.getCouncilPalaceCells()).thenReturn(cells);
 
-        when(cell.executeEffects(player)).thenReturn(true);
+        when(cell.executeEffects(player, gameBoard)).thenReturn(true);
 
         assertTrue(settingFamiliar.executeAction(player, gameBoard));
 

@@ -30,9 +30,9 @@ public class SettingFamiliarMemberOnCouncilPalace extends Action
 	@Override
 	public boolean executeAction(Player player, GameBoard gameBoard)
 	{
-		CouncilPalace councilPalace = gameBoard.getCouncilPalace();
 
-		System.out.println(isLegal(player, gameBoard));
+
+		CouncilPalace councilPalace = gameBoard.getCouncilPalace();
 
 		if (!isLegal(player, gameBoard))
 			return false;
@@ -49,9 +49,7 @@ public class SettingFamiliarMemberOnCouncilPalace extends Action
 
 		CouncilPalaceCell cell = councilPalace.getCouncilPalaceCells()[firstCellFree];
 
-		boolean executed = cell.executeEffects(player);
-
-		System.out.println("Effect executed " + executed);
+		boolean executed = cell.executeEffects(player, gameBoard);
 
 		if (!executed)
 			return false;

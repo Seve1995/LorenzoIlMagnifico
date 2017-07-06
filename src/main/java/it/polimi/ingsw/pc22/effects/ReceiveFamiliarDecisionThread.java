@@ -2,6 +2,7 @@ package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.connection.GameMatch;
+import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.gamebox.ColorsEnum;
 import it.polimi.ingsw.pc22.messages.ErrorMessage;
 
@@ -13,6 +14,12 @@ import java.util.regex.Pattern;
  */
 public class ReceiveFamiliarDecisionThread implements Runnable
 {
+    private String gameMatchName;
+
+    public ReceiveFamiliarDecisionThread(String gameMatchName) {
+        this.gameMatchName = gameMatchName;
+    }
+
     @Override
     public void run()
     {
@@ -20,7 +27,9 @@ public class ReceiveFamiliarDecisionThread implements Runnable
 
         Long timestamp = System.currentTimeMillis();
 
-        IOAdapter adapter = GameMatch.getCurrentPlayer().getAdapter();
+        GameMatch gameMatch = GameServer.getGameMatchMap().get(gameMatchName);
+
+        IOAdapter adapter = gameMatch.getCurrentPlayer().getAdapter();
 
         while (System.currentTimeMillis() < timestamp + timeout)
         {
@@ -49,7 +58,7 @@ public class ReceiveFamiliarDecisionThread implements Runnable
 
 
             FamilyMemberModifier effect = (FamilyMemberModifier)
-                    GameMatch.getCurrentGameBoard().getCurreEffect();
+                    gameMatch.getCurrEffect();
 
             effect.setFamilyMemberColor(color);
 

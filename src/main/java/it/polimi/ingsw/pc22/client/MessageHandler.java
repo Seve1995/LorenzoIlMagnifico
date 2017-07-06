@@ -210,9 +210,13 @@ public class MessageHandler
             Client.setStateChanged(true);
         }
 
-        if (message instanceof ExcommunicationMessage)
+        if (message instanceof StoppedServerMessage)
         {
-            //TODO IMPLEMENTARE CORRETTAMENTE
+            printOnClient(message);
+
+            System.out.println("IL SERVER SI È CHIUSO");
+
+            System.exit(0);
         }
     }
 

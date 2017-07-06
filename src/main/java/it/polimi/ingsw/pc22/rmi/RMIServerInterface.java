@@ -18,27 +18,27 @@ public interface RMIServerInterface extends Remote
 
     void matchHandling(String matchString, Long key) throws RemoteException;
 
-    void doAction(String actionMessage, Long key) throws RemoteException;
+    void doAction(String actionMessage, Long key, String gameMathName) throws RemoteException;
 
-    void takeCouncilDecision(String councilMessage, Long key, int numberOfBonus)
+    void takeCouncilDecision(String councilMessage, Long key, int numberOfBonus, String gameMathName)
             throws RemoteException;
 
-    void takeAssetDecision(String assetDecision, Long key, List<Asset> payedAssets)
+    void takeAssetDecision(String assetDecision, Long key, List<Asset> payedAssets, String gameMathName)
             throws RemoteException;
 
-    void takeCardDecision(String cardMessage, Long key, CardTypeEnum currCardType)
+    void takeCardDecision(String cardMessage, Long key, CardTypeEnum currCardType, String gameMathName)
             throws RemoteException;
 
-    void takeCostsDecision(String costMessage, Long key)
+    void takeCostsDecision(String costMessage, Long key, String gameMathName)
             throws RemoteException;
 
-    void takeServantsDecision(String servantsMessage, Long key)
+    void takeServantsDecision(String servantsMessage, Long key, String gameMathName)
             throws RemoteException;
 
-    void takeExcommunicationDecision(String servantsMessage, Long key)
+    void takeExcommunicationDecision(String servantsMessage, Long key, String gameMathName)
             throws RemoteException;
 
-    void takeFamiliarDecision(String familiarMessage, Long key)
+    void takeFamiliarDecision(String familiarMessage, Long key, String gameMathName)
             throws RemoteException;
 
 }
