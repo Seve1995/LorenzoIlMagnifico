@@ -174,13 +174,14 @@ public class Client extends Application
 				System.exit(0);
 			}
 		});
+
+		Client.primaryStage.resizableProperty().setValue(Boolean.FALSE);
 	}
 	
 	public static void initStartingChoice()
 	{ 
 		try
-		{	
-
+		{
 			FXMLLoader loader = new FXMLLoader();
 	        loader.setLocation(classLoader.getResource("GUI/StartingChoice.fxml"));
 	        anchorPane = loader.load();
@@ -210,7 +211,6 @@ public class Client extends Application
 	        // Give the controller access to the main app.
 	        ClientAccessController controller = loader.getController();
 	        Client.controller = controller;
-
 		} catch (IOException e)
 		{
 			throw new GenericException("Cannot Init Client access", e);

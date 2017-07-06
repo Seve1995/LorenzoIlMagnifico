@@ -212,20 +212,40 @@ public class GameBoardController implements Controller
         idLeader = selectedLeaderToggle.getId();
 
         Client.getGenericState().sendToServer("play card " + idLeader);
+
+        updatePlayerBoard();
     }
 
     @FXML
     private void handleDiscard()
     {
+
         ToggleButton selectedLeaderToggle = (ToggleButton) LeadersHand.getSelectedToggle();
+
         if (selectedLeaderToggle==null)
     	{
-    	info.appendText("You must select one leader card!\n");
-    	return;
+            info.appendText("You must select one leader card!\n");
+            return;
     	}
+
         idLeader = selectedLeaderToggle.getId();
 
+        int id = Integer.parseInt(idLeader);
+
+        ClassLoader classLoader = Client.class.getClassLoader();
+        String path = "GUI/leaders/leaders_b_c_0.jpg";
+        Image image = new Image(classLoader.getResourceAsStream(path));
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(115);
+        imageView.setFitWidth(73);
+
+        ToggleButton toggleButton = (ToggleButton) leaders.getChildren().get(id);
+
+        toggleButton.setGraphic(imageView);
+        toggleButton.setDisable(true);
+
         Client.getGenericState().sendToServer("discard card " + idLeader);
+
     }
 
     @FXML
@@ -240,6 +260,8 @@ public class GameBoardController implements Controller
         String id = selectedLeaderToggle.getId();
 
         Client.getGenericState().sendToServer("activate card " + id);
+
+        updatePlayerBoard();
     }
 
     @FXML
@@ -469,10 +491,13 @@ public class GameBoardController implements Controller
 
         if (message instanceof PickPrivilegeMessage)
         {
+
             GameBoardDialogs.councilPrivilegeDialog(message);
 
             updatePlayerBoard();
         }
+
+
         if (message instanceof ChooseAssetsMessage)
         {
             GameBoardDialogs.choiceCostAssetDialog(message);
