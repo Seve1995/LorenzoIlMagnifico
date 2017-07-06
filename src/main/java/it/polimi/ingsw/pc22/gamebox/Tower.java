@@ -10,8 +10,10 @@ public class Tower implements Serializable
 	private CardTypeEnum towerType;
 	private List<TowerCell> towerCells;
 	private List<PlayerColorsEnum> listPlayers = new ArrayList<>();
-	
-	public List<PlayerColorsEnum> getListPlayers() {
+
+
+
+    public List<PlayerColorsEnum> getListPlayers() {
 		return listPlayers;
 	}
 

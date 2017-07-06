@@ -136,10 +136,6 @@ public class SettingFamiliarMemberOnTower extends Action
 		{
 			player.setCoins(player.getCoins() - 3);
 		}
-
-		tower.getTowerCells().get(floor).setFamilyMember(familyMember);
-
-		familyMember.setPlayed(true);
 		
 		if(familyMember.getColor()!=ColorsEnum.NEUTER)
 			tower.getListPlayers().add(player.getPlayerColorsEnum());
@@ -160,6 +156,10 @@ public class SettingFamiliarMemberOnTower extends Action
 			return false;
 
 		player.setFamiliarPositioned(true);
+
+		familyMember.setPlayed(true);
+
+		tower.getTowerCells().get(floor).setFamilyMember(familyMember);
 
 		return true;
 	}

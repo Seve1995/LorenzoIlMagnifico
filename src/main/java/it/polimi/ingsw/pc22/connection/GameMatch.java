@@ -453,6 +453,9 @@ public class GameMatch implements Runnable
 
 	private void assignExcommunicationCards()
 	{
+
+		Collections.shuffle(excommunicationCards);
+
 		ExcommunicationCard firstEraExcommunication =
 				excommunicationCards.stream().filter(excommunicationCard -> (excommunicationCard.getAge()==1))
 						.collect(Collectors.toList()).get(0);
@@ -464,7 +467,6 @@ public class GameMatch implements Runnable
 		ExcommunicationCard thirdEraExcommunication =
 				excommunicationCards.stream().filter(excommunicationCard -> (excommunicationCard.getAge()==3))
 						.collect(Collectors.toList()).get(0);
-
 
 		List<ExcommunicationCard> tempExcCards = new ArrayList<>();
 

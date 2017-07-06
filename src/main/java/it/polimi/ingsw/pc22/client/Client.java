@@ -8,10 +8,13 @@ import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.rmi.RMIServerInterface;
 import it.polimi.ingsw.pc22.states.GenericState;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -160,15 +163,24 @@ public class Client extends Application
 	public void start(Stage primaryStage)
 	{
 		Client.primaryStage = primaryStage;
+
 		primaryStage.setTitle("Main");
 		initStartingChoice();
+
+		Client.primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			@Override
+			public void handle(WindowEvent e) {
+				Platform.exit();
+				System.exit(0);
+			}
+		});
 	}
 	
 	public static void initStartingChoice()
 	{ 
 		try
 		{	
-			// Load root layout from fxml file.
+
 			FXMLLoader loader = new FXMLLoader();
 	        loader.setLocation(classLoader.getResource("GUI/StartingChoice.fxml"));
 	        anchorPane = loader.load();
@@ -177,7 +189,7 @@ public class Client extends Application
 		    primaryStage.show();		    
 	        StartingChoiceController controller = loader.getController();
 	        Client.controller = controller;
-	        //controller.setClient(this);
+
 
 		} catch (IOException e)
 		{
@@ -198,6 +210,7 @@ public class Client extends Application
 	        // Give the controller access to the main app.
 	        ClientAccessController controller = loader.getController();
 	        Client.controller = controller;
+
 		} catch (IOException e)
 		{
 			throw new GenericException("Cannot Init Client access", e);
@@ -217,6 +230,9 @@ public class Client extends Application
 	        // Give the controller access to the main app.
 	        CreationMatchController controller = loader.getController();
 	        Client.controller = controller;
+
+
+
 		} catch (IOException e)
 		{
 			throw new GenericException("Cannot lunch match", e);
@@ -232,10 +248,10 @@ public class Client extends Application
 			anchorPane = loader.load();
 			Scene scene = new Scene(anchorPane);
 			primaryStage.setScene(scene);
-			// Give the controller access to the main app.
-			//TODO:
+
 			GameBoardController controller = loader.getController();
 			Client.controller = controller;
+
 
 
 		} catch (IOException e)
