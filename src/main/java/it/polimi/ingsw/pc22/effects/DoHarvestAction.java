@@ -50,12 +50,8 @@ public class DoHarvestAction extends ServantsAction implements Effect
 
 		value += super.getServants().getValue();
 
-		System.out.println("SOno QU +" + value);
-
 		if (!isLegal(player,gameBoard))
 			return false;
-
-		System.out.println("SOno QUI: " + value);
 
 		player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestServantBonus());
 		player.addAsset(player.getPlayerBoard().getBonusTile().getHarvestCoinsBonus());

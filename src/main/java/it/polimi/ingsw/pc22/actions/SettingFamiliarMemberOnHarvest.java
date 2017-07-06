@@ -16,11 +16,18 @@ public class SettingFamiliarMemberOnHarvest extends Action{
     @Override
 	protected boolean isLegal (Player player, GameBoard gameBoard)
 	{
-		Harvest harvest = gameBoard.getHarvest(); 
-		
+		Harvest harvest = gameBoard.getHarvest();
+
+		System.out.println("Harvest the correct value is false: "
+				+ (familyMember.getValue() < 1));
+
 		if (familyMember.getValue() < 1)
 			
 			return false;
+
+		System.out.println("Harvest, the correct blocked is false: "
+				+ (harvest.getHarvestCell()[0].getFamilyMember() != null &&
+				harvest.getHarvestCell()[1].isABlockedCell()));
 
 		if (harvest.getHarvestCell()[0].getFamilyMember() != null &&
 				harvest.getHarvestCell()[1].isABlockedCell())
@@ -41,7 +48,10 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 				familyMember.getColor() == ColorsEnum.NEUTER
 			)
 				break;
-			
+
+			System.out.println("Harvest, the correct color is false: "
+					+ familyMember.getColor().equals(currFamilyMember.getColor()));
+
 			if (familyMember.getColor().equals(currFamilyMember.getColor()) && !player.isDontCareOccupiedPlaces())
 
 				return false;

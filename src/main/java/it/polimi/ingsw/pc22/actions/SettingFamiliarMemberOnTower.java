@@ -82,29 +82,33 @@ public class SettingFamiliarMemberOnTower extends Action
 
 		PickTowerCard pickTowerCard = new PickTowerCard(floor, tower.getTowerType(), familyMember.getValue());
 
-		System.out.println("Toer is empty " + tower.getTowerCells().get(floor).isEmpty());
+		System.out.println("Tower is empty " + tower.getTowerCells().get(floor).isEmpty());
 
 		if (!tower.getTowerCells().get(floor).isEmpty() && !(player.isDontCareOccupiedPlaces()))
 			return false;
 		
 		int familiarValue = familyMember.getValue();
 
-		System.out.println("Toer is value correct " + (tower.getTowerCells().get(floor).getRequiredDiceValue() > familiarValue));
+		System.out.println("Tower is value correct "
+				+ (tower.getTowerCells().get(floor).getRequiredDiceValue() > familiarValue));
 
 		if (tower.getTowerCells().get(floor).getRequiredDiceValue() > familiarValue)
 			return false;
 
-		System.out.println("Toer is already set correct " + (alreadySetAMember(player, tower) && !(familyMember.getColor().equals(ColorsEnum.NEUTER))));
+		System.out.println("Tower is already set correct "
+				+ (alreadySetAMember(player, tower) && !(familyMember.getColor().equals(ColorsEnum.NEUTER))));
 
 		if(alreadySetAMember(player, tower) && !(familyMember.getColor().equals(ColorsEnum.NEUTER)))
 			return false;
 
-		System.out.println("Toer is pay correct " + (payThreeCoins(player, tower) && player.getCoins() < 3));
+		System.out.println("Tower is pay correct "
+				+ (payThreeCoins(player, tower) && player.getCoins() < 3));
 
 		if((payThreeCoins(player, tower) && player.getCoins() < 3) && !(player.isDontPayThreeCoinsInTowers()))
 			return false;
 
-		System.out.println("Toer is pick correct " + (pickTowerCard.isLegal(player, gameBoard)));
+		System.out.println("Tower is pick correct "
+				+ (pickTowerCard.isLegal(player, gameBoard)));
 
 		if (!(pickTowerCard.isLegal(player, gameBoard)))
 			return false;
