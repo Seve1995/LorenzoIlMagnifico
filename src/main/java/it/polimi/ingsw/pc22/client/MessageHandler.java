@@ -196,7 +196,7 @@ public class MessageHandler
         {
             printOnClient(message);
 
-            Client.setGenericState(new AuthenticationState());
+            Client.setGenericState(new GameCreationState());
 
             Client.setStateChanged(true);
         }
@@ -216,7 +216,7 @@ public class MessageHandler
 
             System.out.println("IL SERVER SI È CHIUSO");
 
-            System.exit(0);
+            Client.setStopped(true);
         }
     }
 

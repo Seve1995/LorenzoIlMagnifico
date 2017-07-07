@@ -38,6 +38,7 @@ public class PlayState implements GenericState
         "- activate card <index>" + '\n' +
         "- pass" + '\n' +
         "- end game / exit game" + '\n'+
+        "- exit - exit game" + '\n'+
         "- show board - player board"); //questa in realtà si può sempre fare
     }
 

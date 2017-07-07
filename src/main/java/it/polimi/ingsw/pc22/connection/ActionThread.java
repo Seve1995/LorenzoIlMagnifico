@@ -26,12 +26,6 @@ public class ActionThread implements Runnable
 
         GameMatch gameMatch = GameServer.getGameMatchMap().get(gameMatchName);
 
-        System.out.println(gameMatch.getGameName());
-
-        System.out.println(gameMatch.getCurrentPlayer());
-
-        System.out.println(gameMatch.getCurrentGameBoard());
-
         IOAdapter adapter = gameMatch.getCurrentPlayer().getAdapter();
 
         while (System.currentTimeMillis() < timestamp + timeout)
@@ -75,7 +69,8 @@ public class ActionThread implements Runnable
                 break;
             }
 
-            if (gameMatch.getCurrentPlayer().isHasPassed())
+            if (gameMatch.getCurrentPlayer().isHasPassed()
+                    || gameMatch.getCurrentPlayer().isSuspended())
                 break;
         }
 

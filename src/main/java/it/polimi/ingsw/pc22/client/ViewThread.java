@@ -19,7 +19,8 @@ public class ViewThread implements Runnable
 
 			while(true)
 			{
-				if (Client.isStopped()) break;
+				if (Client.isStopped())
+					break;
 
 				if (Client.isStateChanged())
 				{

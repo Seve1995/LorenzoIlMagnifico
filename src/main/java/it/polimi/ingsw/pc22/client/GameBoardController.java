@@ -1,25 +1,22 @@
 package it.polimi.ingsw.pc22.client;
 
-import it.polimi.ingsw.pc22.gamebox.*;
+import it.polimi.ingsw.pc22.gamebox.FamilyMember;
+import it.polimi.ingsw.pc22.gamebox.GameBoard;
+import it.polimi.ingsw.pc22.gamebox.Tower;
 import it.polimi.ingsw.pc22.messages.*;
 import it.polimi.ingsw.pc22.player.Player;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.stage.Modality;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import static it.polimi.ingsw.pc22.client.Client.getClassLoader;
 import static it.polimi.ingsw.pc22.client.UpdateUtils.updateCells;
 
 

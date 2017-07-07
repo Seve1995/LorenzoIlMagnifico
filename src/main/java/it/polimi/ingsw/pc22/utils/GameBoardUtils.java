@@ -1,20 +1,14 @@
 package it.polimi.ingsw.pc22.utils;
 
-import it.polimi.ingsw.pc22.adapters.IOAdapter;
-import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
-import it.polimi.ingsw.pc22.connection.GameMatch;
 import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.effects.PickCouncilPrivilege;
 import it.polimi.ingsw.pc22.gamebox.*;
-import it.polimi.ingsw.pc22.messages.CommunicationMessage;
-import it.polimi.ingsw.pc22.messages.ExcommunicationMessage;
 import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GameBoardUtils

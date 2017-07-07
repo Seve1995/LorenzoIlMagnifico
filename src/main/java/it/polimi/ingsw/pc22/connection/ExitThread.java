@@ -7,9 +7,9 @@ import it.polimi.ingsw.pc22.player.Player;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,6 +21,13 @@ public class ExitThread implements Runnable
     private BufferedReader console;
 
     private static final Logger LOGGER = Logger.getLogger(ExitThread.class.getName());
+
+    private ServerSocket serverSocket;
+
+    public ExitThread(ServerSocket serverSocket)
+    {
+        this.serverSocket = serverSocket;
+    }
 
     @Override
     public void run()
@@ -83,6 +90,13 @@ public class ExitThread implements Runnable
             }
         }
 
-        System.exit(0);
+        try
+        {
+            serverSocket.close();
+        }
+            catch (IOException e)
+        {
+            LOGGER.log(Level.INFO, "ERROR RECEIVE THREAD", e);
+        }
     }
 }

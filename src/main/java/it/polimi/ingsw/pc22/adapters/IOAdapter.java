@@ -160,6 +160,8 @@ public abstract class IOAdapter
 
         startNewGameMatch(gameName, player);
 
+        player.setSuspended(false);
+
         printMessage(new CommunicationMessage("Player: " + player.getUsername() + " created GameMatch - " + gameName));
 
         return true;
@@ -180,21 +182,31 @@ public abstract class IOAdapter
 
         GameMatch gameMatch = gameMatchMap.get(gameName);
 
-        if (gameMatch.getStarted())
+        boolean contained = gameMatch.getPlayers().contains(player);
+
+        if (gameMatch.getStarted() && !contained)
         {
             printMessage(new ErrorMessage("Game already started"));
 
             return false;
         }
 
-        if (gameMatch.getMaxPlayersNumber() == gameMatch.getPlayerCounter())
+        if (!contained && gameMatch.getMaxPlayersNumber() == gameMatch.getPlayerCounter())
         {
             printMessage(new ErrorMessage("Game is full"));
 
             return false;
         }
 
+        if (contained)
+        {
+            player.setSuspended(false);
+
+            return true;
+        }
+
         player.setAdapter(this);
+        player.setSuspended(false);
 
         List<Player> players = gameMatch.getPlayers();
 

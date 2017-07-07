@@ -17,7 +17,6 @@ import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.rmi.RMIClientStreamService;
 import it.polimi.ingsw.pc22.rmi.RMIServerInterface;
 import it.polimi.ingsw.pc22.utils.CouncilPrivilege;
-import it.polimi.ingsw.pc22.utils.GameBoardUtils;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
@@ -147,7 +146,8 @@ public class RmiServerImpl implements RMIServerInterface
             return;
         }
 
-        if (gameMatch.getCurrentPlayer().isHasPassed())
+        if (gameMatch.getCurrentPlayer().isHasPassed()
+                || gameMatch.getCurrentPlayer().isSuspended())
             return;
     }
 

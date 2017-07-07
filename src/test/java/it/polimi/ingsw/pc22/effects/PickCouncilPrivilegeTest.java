@@ -11,9 +11,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static it.polimi.ingsw.pc22.connection.GameMatch.getTimeout;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class PickCouncilPrivilegeTest extends TestCase {
 

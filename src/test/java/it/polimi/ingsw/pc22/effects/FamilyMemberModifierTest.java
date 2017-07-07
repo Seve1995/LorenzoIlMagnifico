@@ -11,11 +11,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static sun.audio.AudioPlayer.player;
 
 /**
  * Created by matteo on 05/07/17.

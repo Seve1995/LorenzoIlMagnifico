@@ -1,25 +1,16 @@
 package it.polimi.ingsw.pc22.effects;
 
+import it.polimi.ingsw.pc22.gamebox.*;
+import it.polimi.ingsw.pc22.player.Player;
+import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import it.polimi.ingsw.pc22.gamebox.Asset;
-import it.polimi.ingsw.pc22.gamebox.AssetType;
-import it.polimi.ingsw.pc22.gamebox.BuildingCard;
-import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
-import it.polimi.ingsw.pc22.gamebox.CharacterCard;
-import it.polimi.ingsw.pc22.gamebox.GameBoard;
-import it.polimi.ingsw.pc22.gamebox.PlayerBoard;
-import it.polimi.ingsw.pc22.gamebox.TerritoryCard;
-import it.polimi.ingsw.pc22.gamebox.VentureCard;
-import it.polimi.ingsw.pc22.player.Player;
-import junit.framework.TestCase;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class AddAssetForEveryAssetOrCardTest extends TestCase {
 	

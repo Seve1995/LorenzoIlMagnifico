@@ -27,6 +27,8 @@ public class ReceiveThread implements Runnable
 
 			while(true)
 			{
+				if(Client.isStopped()) break;
+
 				Message message = (Message) inSocket.readObject();
 
 				if (message == null)

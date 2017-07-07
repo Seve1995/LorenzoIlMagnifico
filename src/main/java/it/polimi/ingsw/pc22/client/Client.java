@@ -19,6 +19,8 @@ import javafx.stage.WindowEvent;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Client extends Application 
 {
@@ -50,6 +52,8 @@ public class Client extends Application
 
 	private static boolean stopped = false;
 
+	private static final Logger LOGGER = Logger.getLogger(Client.class.getName());
+
 	public static synchronized GenericState getGenericState()
 	{
 		return genericState;
@@ -71,10 +75,6 @@ public class Client extends Application
 
 	public static Stage getPrimaryStage() {
 		return primaryStage;
-	}
-
-	public static void setPrimaryStage(Stage primaryStage) {
-		Client.primaryStage = primaryStage;
 	}
 
 	public static RMIServerInterface getRmiServerInterface() {
@@ -147,10 +147,6 @@ public class Client extends Application
 		return classLoader;
 	}
 
-	public static void setClassLoader(ClassLoader classLoader) {
-		Client.classLoader = classLoader;
-	}
-
 	public static boolean isStopped() {
 		return stopped;
 	}
@@ -167,11 +163,13 @@ public class Client extends Application
 		primaryStage.setTitle("Main");
 		initStartingChoice();
 
-		Client.primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+		Client.primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>()
+		{
 			@Override
-			public void handle(WindowEvent e) {
+			public void handle(WindowEvent e)
+			{
 				Platform.exit();
-				System.exit(0);
+				stopped = true;
 			}
 		});
 
@@ -219,7 +217,8 @@ public class Client extends Application
 	
 	public static void launchCreationMatch()
 	{
-		try {
+		try
+		{
 			// Load root layout from fxml file.
 			primaryStage.setTitle("Creation Match");
 	        FXMLLoader loader = new FXMLLoader();
@@ -231,16 +230,16 @@ public class Client extends Application
 	        CreationMatchController controller = loader.getController();
 	        Client.controller = controller;
 
-
-
 		} catch (IOException e)
 		{
 			throw new GenericException("Cannot lunch match", e);
 		}
 	}
 
-	public static void launchGameBoard(){
-		try {
+	public static void launchGameBoard()
+	{
+		try
+		{
 			// Load root layout from fxml file.
 			primaryStage.setTitle("Lorenzo il Magnifico");
 			FXMLLoader loader = new FXMLLoader();
@@ -251,8 +250,6 @@ public class Client extends Application
 
 			GameBoardController controller = loader.getController();
 			Client.controller = controller;
-
-
 
 		} catch (IOException e)
 		{
@@ -269,6 +266,20 @@ public class Client extends Application
 	public static void main(String[] args)
 	{
 		launch(args);
+
+		/*while (!stopped)
+		{
+			try
+			{
+				Thread.sleep(100);
+			} catch (InterruptedException e)
+			{
+				LOGGER.log(Level.WARNING, "Interrupted!", e);
+				Thread.currentThread().interrupt();
+			}
+		}
+
+		System.exit(0);*/
 	}
 
 	public static void socketSend(String string)

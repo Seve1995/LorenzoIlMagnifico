@@ -4,8 +4,6 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.mockito.Mockito.mock;
-
 
 public class GameBoardTest extends TestCase {
 

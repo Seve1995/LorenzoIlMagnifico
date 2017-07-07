@@ -1,5 +1,6 @@
 package it.polimi.ingsw.pc22.adapters;
 
+import it.polimi.ingsw.pc22.client.Client;
 import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.messages.Message;
@@ -36,6 +37,9 @@ public class RMIIOAdapter extends IOAdapter
     @Override
     public void printMessage(Message message)
     {
+        if (Client.isStopped())
+            return;
+
         try
         {
             streamService.printMessage(message);

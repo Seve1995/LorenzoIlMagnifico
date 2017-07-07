@@ -1,5 +1,6 @@
 package it.polimi.ingsw.pc22.adapters;
 
+import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.messages.LoginMessage;
 import it.polimi.ingsw.pc22.messages.Message;
@@ -18,6 +19,8 @@ import java.util.logging.Logger;
 public class SocketIOAdapter extends IOAdapter implements Runnable
 {
     private Socket socket;
+
+    private String playerName = null;
 
     private BufferedReader in;
     private ObjectOutputStream out;
@@ -41,13 +44,15 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
         }
     }
 
-    public SocketIOAdapter() {
-    }
+    public SocketIOAdapter() {}
 
     @Override
     public void run()
     {
         Player player = null;
+
+        if (playerName != null)
+            player = GameServer.getPlayersMap().get(playerName);
 
         boolean started = false;
 
@@ -57,25 +62,30 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
             {
                 String authentication = getMessage();
 
-                if (authentication == null) continue;
+                if (authentication == null)
+                    continue;
 
                 player = authenticate(authentication);
             }
 
-            if (player.isInMatch())
+            if (player.isInMatch() && playerName == null)
             {
                 printMessage(new LoginMessage(true, true, player));
 
                 return;
             }
 
-            printMessage(new LoginMessage(true, false, player));
+            if (playerName == null)
+            {
+                printMessage(new LoginMessage(true, false, player));
+            }
 
             while (!started)
             {
                 String match = getMessage();
 
-                if (match == null) continue;
+                if (match == null)
+                    continue;
 
                 started = gameHandling(match);
             }
@@ -153,5 +163,10 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
         }
 
         return  answer;
+    }
+
+    public void setPlayerName(String playerName)
+    {
+        this.playerName = playerName;
     }
 }

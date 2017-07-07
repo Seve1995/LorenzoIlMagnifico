@@ -199,6 +199,8 @@ public class GameMatch implements Runnable
 					if (currentPlayer.isHasPassed()) break;
 
 					if (currentPlayer.isFamiliarPositioned()) break;
+
+					if (currentPlayer.isSuspended()) break;
 				}
 
 				/*
@@ -215,8 +217,8 @@ public class GameMatch implements Runnable
 				else
 					adapter.printMessage(new GameStatusMessage(gameBoard, player, "finished"));
 				*/
-				
-				adapter.printMessage(new GameStatusMessage(gameBoard, player, "finished"));
+				if (!currentPlayer.isSuspended())
+					adapter.printMessage(new GameStatusMessage(gameBoard, player, "finished"));
 			}
 
 			GameBoardUtils.resetPlayerStatus(players);

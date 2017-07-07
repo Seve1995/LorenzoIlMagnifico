@@ -1,7 +1,5 @@
 package it.polimi.ingsw.pc22.gamebox;
 
-import it.polimi.ingsw.pc22.effects.Effect;
-
 import java.io.Serializable;
 import java.util.List;
 

@@ -198,6 +198,11 @@ public class ActionFactory
         {
             action.setFamiliarNeeded(false);
         }
+
+        if (action instanceof ExitGame)
+        {
+            action.setFamiliarNeeded(false);
+        }
     }
 
 }

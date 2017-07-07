@@ -15,14 +15,10 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -48,11 +44,15 @@ public class GameServer
 
 		Long timeout = 60000L;
 
+		Registry registry;
+
+		RmiServerImpl rmiServer;
+
 		try
 		{
-			Registry registry = LocateRegistry.createRegistry(RMI_PORT);
+			registry = LocateRegistry.createRegistry(RMI_PORT);
 
-			RmiServerImpl rmiServer = new RmiServerImpl(timeout);
+			rmiServer = new RmiServerImpl(timeout);
 
 			RMIServerInterface stub = (RMIServerInterface)
 					UnicastRemoteObject.exportObject(rmiServer, 0);
@@ -73,15 +73,15 @@ public class GameServer
 
 		ExecutorService executor = Executors.newSingleThreadExecutor();
 
-		executor.submit(new ExitThread());
-
 		try 
 		{
 			serverSocket = new ServerSocket(SOCKET_PORT);
 
+			executor.submit(new ExitThread(serverSocket));
+
 			playerMap = loadPlayers();
 
-			while(true)
+			while(!isClosed)
 			{
 				Socket socket = serverSocket.accept();
 
@@ -93,21 +93,11 @@ public class GameServer
 		} 
 		catch (IOException | JSONException e)
 		{
-			throw new GenericException(e);
+			LOGGER.log(Level.INFO, "SOCKET CLOSED", e);
 		}
-		finally
-        {
-            try
-            {
-                if (serverSocket != null)
-                    serverSocket.close();
-            }
-                catch(IOException e)
-            {
-                LOGGER.log(Level.INFO, "User not loaded", e);
-            }
-        }
-    }
+
+		System.exit(0);
+	}
 	
 	protected static Map<String, Player> loadPlayers() throws IOException, JSONException
 	{
@@ -131,18 +121,5 @@ public class GameServer
 
 	public static Map<String, Player> getPlayersMap() {
 		return playerMap;
-	}
-
-	public class PlayerComparator implements Comparator<Player>
-	{
-		@Override
-		public int compare(Player o1, Player o2)
-		{
-			int value = Integer.compare(o1.getPriority(), o2.getPriority());
-
-			if (value == 0) value = o1.getUsername().compareTo(o2.getUsername());
-
-			return value;
-		}
 	}
 }

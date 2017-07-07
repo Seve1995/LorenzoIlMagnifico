@@ -1,21 +1,17 @@
 package it.polimi.ingsw.pc22.effects;
 
-import junit.framework.TestCase;
-import org.junit.Before;
-import org.junit.Test;
-
-import it.polimi.ingsw.pc22.gamebox.Asset;
-import it.polimi.ingsw.pc22.gamebox.AssetType;
 import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 import junit.framework.TestCase;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 public class AddFamilyMembersMalusTest extends TestCase{
 	
 	private GameBoard gameBoard;
