@@ -22,6 +22,8 @@ public abstract class IOAdapter
 {
     private Long timeout;
 
+    private Long timeForStart;
+
     public abstract void  printMessage(Message message);
 
     public abstract String getMessage();
@@ -299,7 +301,7 @@ public abstract class IOAdapter
     //TODO2 DISTINGUERE IL TIMEOUT DELL'AVVIO PARTITA DAL TIMEOUT DELL'AZIONE (ce ne vogliono 2 distinti)
     private void startNewGameMatch(String gameName, Player player)
     {
-        GameMatch gameMatch = new GameMatch(timeout, 5);
+        GameMatch gameMatch = new GameMatch(timeout, 5, timeForStart);
 
         Map<String, GameMatch> gameMatchMap = GameServer.getGameMatchMap();
 
