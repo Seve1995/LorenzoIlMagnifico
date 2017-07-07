@@ -51,6 +51,12 @@ public class PlayerLoader
 
 			Player player = new Player(userName,password, false);
 
+			player.setNumberOfMatchWon(jsonUser.getInt("won"));
+
+			player.setNumberOfMatchLost(jsonUser.getInt("lost"));
+
+			player.setNumberOfMatch(jsonUser.getInt("matches"));
+
 			playerMap.put(userName, player);
 		}
 
@@ -77,6 +83,12 @@ public class PlayerLoader
 
 				jsonPlayer.put("username", player.getUsername());
 				jsonPlayer.put("password", player.getPassword());
+
+				jsonPlayer.put("won", player.getNumberOfMatchLost());
+
+				jsonPlayer.put("lost", player.getNumberOfMatchWon());
+
+				jsonPlayer.put("matches", player.getNumberOfMatch());
 
 				playerArray.put(jsonPlayer);
 			}

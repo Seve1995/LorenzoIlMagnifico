@@ -173,7 +173,8 @@ public class Player implements Serializable
 		return faithPoints;
 	}
 
-	public void setFaithPoints(int faithPoints) {
+	public void setFaithPoints(int faithPoints)
+	{
         if (faithPoints>=0)
         {
             this.faithPoints = faithPoints;
@@ -189,7 +190,8 @@ public class Player implements Serializable
 		return victoryPoints;
 	}
 
-	public void setVictoryPoints(int victoryPoints) {
+	public void setVictoryPoints(int victoryPoints)
+	{
 	    if (victoryPoints>=0)
         {
             this.victoryPoints = victoryPoints;
@@ -517,7 +519,6 @@ public class Player implements Serializable
 			default:
 				break;
 		}
-		
 	}
 
 	public List<FamilyMember> getUnusedFamiliarMembers()

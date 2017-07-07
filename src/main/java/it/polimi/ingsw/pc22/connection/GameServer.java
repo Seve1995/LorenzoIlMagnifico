@@ -5,6 +5,7 @@ import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.rmi.RMIServerInterface;
+import it.polimi.ingsw.pc22.utils.GameMatchLoader;
 import it.polimi.ingsw.pc22.utils.PlayerLoader;
 import org.json.JSONException;
 
@@ -39,8 +40,6 @@ public class GameServer
 	public static void main(String[] args)
 	{
 		System.out.println("Server online");
-		
-		gameMatchMap = new ConcurrentHashMap<>();
 
 		Long timeout = 60000L;
 
@@ -67,7 +66,7 @@ public class GameServer
 
 		System.out.println("Authentication Service running at " + RMI_PORT + " port");
 
-		ServerSocket serverSocket = null;
+		ServerSocket serverSocket;
 
 		ExecutorService games = Executors.newCachedThreadPool();
 
@@ -80,6 +79,8 @@ public class GameServer
 			executor.submit(new ExitThread(serverSocket));
 
 			playerMap = loadPlayers();
+
+			gameMatchMap = GameMatchLoader.loadGameMatches();
 
 			while(!isClosed)
 			{

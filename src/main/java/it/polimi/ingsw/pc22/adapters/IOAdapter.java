@@ -22,8 +22,6 @@ public abstract class IOAdapter
 {
     private Long timeout;
 
-    public abstract void endConnection(Player player) throws IOException;
-
     public abstract void  printMessage(Message message);
 
     public abstract String getMessage();
@@ -198,9 +196,25 @@ public abstract class IOAdapter
             return false;
         }
 
-        if (contained)
+        if (contained && !gameMatch.isSerialized())
         {
             player.setSuspended(false);
+
+            return true;
+        }
+
+        if (contained && gameMatch.isSerialized())
+        {
+            player.setAdapter(this);
+
+            player.setSuspended(false);
+
+            Long count = gameMatch.getPlayers().stream().filter(p-> !p.isSuspended()).count();
+
+            if (count == gameMatch.getPlayerCounter())
+            {
+                new Thread(gameMatch).start();
+            }
 
             return true;
         }

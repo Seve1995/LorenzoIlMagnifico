@@ -25,16 +25,6 @@ public class RMIIOAdapter extends IOAdapter
     }
 
     @Override
-    public void endConnection(Player player) throws IOException
-    {
-        String userName = player.getUsername();
-
-        Player user = GameServer.getPlayersMap().get(userName);
-
-        user.setLogged(false);
-    }
-
-    @Override
     public void printMessage(Message message)
     {
         if (Client.isStopped())

@@ -218,6 +218,17 @@ public class MessageHandler
 
             Client.setStopped(true);
         }
+
+        if (message instanceof EndMatchMessage)
+        {
+            //TODO SISTEMARE QUESTA COSA
+
+            printOnClient(message);
+
+            Client.setGenericState(new GameCreationState());
+
+            Client.setStateChanged(true);
+        }
     }
 
     private static void printOnClient(Object message)

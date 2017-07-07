@@ -11,17 +11,20 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-public class GameMatch implements Runnable
+public class GameMatch implements Runnable, Serializable
 {	
 	private String gameName;
 
-	private Boolean started = false;
+	private boolean started = false;
+
+	private boolean serialized = false;
 
 	private boolean stopped = false;
 
@@ -53,6 +56,8 @@ public class GameMatch implements Runnable
 
 	private Effect currEffect = null;
 
+	private int currentRoundNumber = 0;
+
 	private static final String BOARD_PATH = "boards/";
 
 	private static final Logger LOGGER = Logger.getLogger(GameMatch.class.getName());
@@ -66,6 +71,20 @@ public class GameMatch implements Runnable
 	@Override
 	public void run()
 	{
+		if (serialized)
+		{
+			//TODO timeout
+			timeout = 60000L;
+
+			System.out.println("SONO QUI");
+
+			handleGame();
+
+			endGame();
+
+			return;
+		}
+
 		Long timeStamp = System.currentTimeMillis();
 
 		Timer timer = new Timer();
@@ -145,7 +164,7 @@ public class GameMatch implements Runnable
 			adapter.printMessage(new GameStatusMessage(gameBoard, p, "startGameBoard"));
 		}
 		
-		for (int currentRoundNumber = 0; currentRoundNumber < turnNumber; currentRoundNumber++)
+		for ( ; currentRoundNumber < turnNumber; currentRoundNumber++)
 		{
 			if (GameServer.isIsClosed())
 				break;
@@ -232,24 +251,6 @@ public class GameMatch implements Runnable
 		}
 
 		GameBoardUtils.endGameExcommunicationHandling(players, excommunicationCards, gameBoard, era);
-
-		//check excommunication
-		GameBoardUtils.sumFinalPoints(players, gameBoard);
-
-		String winnerName = selectWinner(players);
-
-		for (Player p : players)
-		{
-			IOAdapter adapter = p.getAdapter();
-
-			List<Player> standings = new ArrayList<>(GameServer.getPlayersMap().values());
-
-			adapter.printMessage(new EndMatchMessage(standings, winnerName));
-		}
-
-		endGame();
-
-		this.stopped = true;
 	}
 
 	private void handleStoppedServer()
@@ -322,19 +323,20 @@ public class GameMatch implements Runnable
 
 	private void endGame()
 	{
-		for (Player player : players)
-		{
-			IOAdapter playerAdapter = player.getAdapter();
+		GameBoardUtils.sumFinalPoints(players, gameBoard);
 
-			try
-			{
-				playerAdapter.endConnection(player);
-			}
-				catch (IOException e)
-			{
-				LOGGER.log(Level.INFO, "CANNOT CLOSE CONNECTION", e);
-			}
+		String winnerName = selectWinner(players);
+
+		for (Player p : players)
+		{
+			IOAdapter adapter = p.getAdapter();
+
+			List<Player> standings = new ArrayList<>(GameServer.getPlayersMap().values());
+
+			adapter.printMessage(new EndMatchMessage(standings, winnerName));
 		}
+
+		this.stopped = true;
 	}
 
 	private void loadGameBoard()
@@ -808,6 +810,14 @@ public class GameMatch implements Runnable
 
 	public void setCurrEffect(Effect currEffect) {
 		this.currEffect = currEffect;
+	}
+
+	public boolean isSerialized() {
+		return serialized;
+	}
+
+	public void setSerialized(boolean serialized) {
+		this.serialized = serialized;
 	}
 
 	public class PlayerComparator implements Comparator<Player>

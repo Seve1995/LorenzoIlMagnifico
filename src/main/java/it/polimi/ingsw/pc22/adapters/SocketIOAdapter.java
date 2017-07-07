@@ -68,13 +68,6 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
                 player = authenticate(authentication);
             }
 
-            if (player.isInMatch() && playerName == null)
-            {
-                printMessage(new LoginMessage(true, true, player));
-
-                return;
-            }
-
             if (playerName == null)
             {
                 printMessage(new LoginMessage(true, false, player));
@@ -97,22 +90,6 @@ public class SocketIOAdapter extends IOAdapter implements Runnable
         {
             throw new GenericException("Cannot authenticate client", e);
         }
-    }
-
-    @Override
-    public void endConnection(Player player) throws IOException
-    {
-        if (player != null)
-        {
-            player.setLogged(false);
-        }
-
-        PrintWriter printWriter =
-                new PrintWriter(socket.getOutputStream(), true);
-
-        printWriter.println("EXIT");
-
-        socket.close();
     }
 
     @Override

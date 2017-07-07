@@ -4,9 +4,7 @@ import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.messages.StoppedServerMessage;
 import it.polimi.ingsw.pc22.player.Player;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +36,8 @@ public class ExitThread implements Runnable
         {
             while(true)
             {
-                if (!console.ready()) Thread.sleep(100);
+                if (!console.ready())
+                    Thread.sleep(100);
 
                 String msgReceived = console.readLine();
 
@@ -61,33 +60,68 @@ public class ExitThread implements Runnable
 
         List<GameMatch> stoppedGames = new ArrayList<>();
 
-        while(stoppedGames.size() < currentSize)
+        ClassLoader classLoader = ExitThread.class.getClassLoader();
+
+        File playerFile = new File(classLoader.getResource("savedGames.txt").getFile());
+
+        FileOutputStream fileOut;
+
+        try
         {
-            for (GameMatch gameMatch  : GameServer.getGameMatchMap().values())
+            fileOut = new FileOutputStream(playerFile.getPath());
+
+            if (fileOut == null)
+                return;
+
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+
+            while(stoppedGames.size() < currentSize)
             {
-                if (!gameMatch.getStarted() && !stoppedGames.contains(gameMatch))
+                for (GameMatch gameMatch  : GameServer.getGameMatchMap().values())
                 {
-                    stoppedGames.add(gameMatch);
-
-                    System.out.println("GAMENAME: " + gameMatch.getGameName());
-
-                    List<Player> players = gameMatch.getPlayers();
-
-                    for (Player p : players)
+                    if (!gameMatch.getStarted() && !stoppedGames.contains(gameMatch))
                     {
-                        IOAdapter adapter = p.getAdapter();
+                        List<Player> players = gameMatch.getPlayers();
 
-                        adapter.printMessage(new StoppedServerMessage("SERVER STOPPED"));
+                        for (Player p : players)
+                        {
+                            IOAdapter adapter = p.getAdapter();
+
+                            adapter.printMessage(new StoppedServerMessage("SERVER STOPPED"));
+
+                            p.setSuspended(true);
+                        }
+
+                        gameMatch.setSerialized(true);
+
+                        stoppedGames.add(gameMatch);
+
+                    }
+
+                    if ((gameMatch.isStopped() && !stoppedGames.contains(gameMatch)))
+                    {
+                        List<Player> players = gameMatch.getPlayers();
+
+                        for (Player p : players)
+                        {
+                            p.setSuspended(true);
+                        }
+
+                        gameMatch.setSerialized(true);
+
+                        stoppedGames.add(gameMatch);
                     }
                 }
-
-                if ((gameMatch.isStopped() && !stoppedGames.contains(gameMatch)))
-                {
-                    stoppedGames.add(gameMatch);
-
-                    System.out.println("GAMENAME: " + gameMatch.getGameName());
-                }
             }
+
+            out.writeObject(stoppedGames);
+
+            out.close();
+            fileOut.close();
+
+        } catch (IOException e)
+        {
+            LOGGER.log(Level.INFO, "CANNOT WRITE ON FILE", e);
         }
 
         try
