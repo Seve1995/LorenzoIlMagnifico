@@ -5,6 +5,11 @@ import it.polimi.ingsw.pc22.effects.Effect;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * This class represents the Excommunication Card with
+ * its attributes
+ *
+ */
 public class ExcommunicationCard implements Serializable
 {
 	private int age;

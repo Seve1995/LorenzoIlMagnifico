@@ -4,6 +4,17 @@ import it.polimi.ingsw.pc22.effects.Effect;
 
 import java.util.List;
 
+/**
+ * This kind of card is characterized by different type of costs:
+ * -military points
+ * -other resources
+ *
+ * If the cost is quantified by military points we have two values.
+ * Military points required just to take the card and military points
+ * actually spent.
+ * Some cards make the gamer able to choose between the two types of cost
+ */
+
 public class VentureCard extends DevelopmentCard
 {
 	private boolean requiredCostChoice = false;

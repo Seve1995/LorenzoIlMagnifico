@@ -1,5 +1,11 @@
 package it.polimi.ingsw.pc22.gamebox;
 
+
+/**
+ * Please refer to harvest-cell class.
+ */
+
+
 public class ProductionCell extends Cell
 {
 	private boolean isABlockedCell=false;

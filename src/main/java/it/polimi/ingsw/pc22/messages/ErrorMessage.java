@@ -1,5 +1,7 @@
 package it.polimi.ingsw.pc22.messages;
 
+import it.polimi.ingsw.pc22.player.Player;
+
 /**
  * Created by fandroid95 on 20/06/2017.
  */

@@ -2,6 +2,7 @@ package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.connection.GameMatch;
 import it.polimi.ingsw.pc22.gamebox.Asset;
+import it.polimi.ingsw.pc22.messages.GameStatusMessage;
 import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by fandroid95 on 29/06/2017.
+ * This class is used to model the choice of the bonus given by council privilege.
  */
 public class PickCouncilPrivilege
 {
@@ -37,8 +38,9 @@ public class PickCouncilPrivilege
             if (chosenAssets != null)
             {
                 for (Asset asset : chosenAssets)
-                    player.addAsset(asset);
 
+                    player.addAsset(asset);
+                
                 return true;
             }
         }

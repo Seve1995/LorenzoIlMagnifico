@@ -3,6 +3,14 @@ package it.polimi.ingsw.pc22.gamebox;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * This class represents the game board,
+ * the inner place of the game;
+ * The towers are implemented as an array with lenght = 4;
+ * There also is a list of Dices (3 for 2-4 players, 2 for 5 players)
+ * For the other places please refer to their implementation
+ */
+
 public class GameBoard implements Serializable
 {
 	private String gameMatchName;

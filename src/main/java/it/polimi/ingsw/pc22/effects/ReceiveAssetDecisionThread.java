@@ -8,9 +8,7 @@ import it.polimi.ingsw.pc22.messages.ErrorMessage;
 
 import java.util.List;
 
-/**
- * Created by fandroid95 on 29/06/2017.
- */
+
 public class ReceiveAssetDecisionThread implements Runnable
 {
     private List<Asset> payedAssets;

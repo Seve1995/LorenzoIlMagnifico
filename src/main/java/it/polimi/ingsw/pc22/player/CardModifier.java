@@ -5,10 +5,18 @@ import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
 
 import java.util.List;
 
+/**
+ * This class represents the fact that in some cases
+ * a card can be object of bonus or malus.
+ * So its costs (in terms of dice value required, or in terms of resources)
+ * can grow or be discounted.
+ *
+ */
+
 public class CardModifier
 {
-	private CardTypeEnum cardType; //puo essere any
-	private int valueModifier; // +qualcosa -qualcosa
+	private CardTypeEnum cardType;
+	private int valueModifier;
 	private List<Asset> assetDiscount;
 	private boolean onlyOneAsset;
 

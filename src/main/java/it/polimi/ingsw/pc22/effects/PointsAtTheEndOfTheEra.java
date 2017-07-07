@@ -4,8 +4,13 @@ import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
 /**
- * Created by matteo on 12/06/17.
+ * This class is used to model the effect of the Leader Sisto IV:
+ *
+ * so it set to the value "true" the flag of the player.
+ *
  */
+
+
 public class PointsAtTheEndOfTheEra implements Effect {
 
     @Override

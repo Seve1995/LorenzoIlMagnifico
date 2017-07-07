@@ -4,6 +4,12 @@ import it.polimi.ingsw.pc22.effects.Effect;
 
 import java.util.List;
 
+/**
+ * This class represents the Territory-type cards.
+ * This type of cards has no cost. It has immediate and permanent effects, activable
+ * by doing an harvest action.
+ */
+
 public class TerritoryCard extends DevelopmentCard
 {
 	private int permanentEffectActivationCost;

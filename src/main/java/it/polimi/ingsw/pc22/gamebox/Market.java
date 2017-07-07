@@ -4,6 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents the market zone;
+ * as for harvest and production it is composed by an array list
+ * of cells.
+ */
+
 public class Market implements Serializable {
 	private List<MarketCell> marketCells = new ArrayList<>();
 

@@ -2,6 +2,12 @@ package it.polimi.ingsw.pc22.gamebox;
 
 import java.io.Serializable;
 
+/**
+ * This is the implementation of the Harvest Place.
+ * It is composed by an array of 16 cells (the greatest number of familiars
+ * that can be placed here, playing a game of 4-5 players)
+ */
+
 public class Harvest implements Serializable
 {
 	private HarvestCell[] harvestCells = new HarvestCell[16];

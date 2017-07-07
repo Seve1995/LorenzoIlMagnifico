@@ -11,6 +11,13 @@ import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 
+/**
+ * This effects is one of the most important in the game.
+ * It represents the fact that a player can pay something to obtain
+ * something different. It is also useful when a player has to choose between this
+ * or that resource swap.
+ */
+
 public class FromAssetToAssetOrEffect extends ChooseAsset implements Effect
 {
 	private transient List<Asset> paiedAssets = null;
