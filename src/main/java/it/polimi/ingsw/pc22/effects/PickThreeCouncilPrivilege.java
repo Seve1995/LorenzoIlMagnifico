@@ -25,18 +25,18 @@ public class PickThreeCouncilPrivilege extends PickCouncilPrivilege implements E
 	@Override
 	public boolean executeEffects(Player player, GameBoard gameBoard)
 	{
-		String gameName = gameBoard.getGameMatchName();
+		String gameNameThree = gameBoard.getGameMatchName();
 
-		GameMatch gameMatch = GameServer.getGameMatchMap().get(gameName);
+		GameMatch gameMatchThree = GameServer.getGameMatchMap().get(gameNameThree);
 
-		gameMatch.setCurrEffect(this);
+		gameMatchThree.setCurrEffect(this);
 
 		IOAdapter adapter = player.getAdapter();
 
 		adapter.printMessage(new PickPrivilegeMessage(3));
 
 		if (adapter instanceof SocketIOAdapter)
-			new Thread(new ReceiveCouncilDecisionThread(3, gameName)).start();
+			new Thread(new ReceiveCouncilDecisionThread(3, gameNameThree));
 
 		return super.waitForResult(player);
 	}

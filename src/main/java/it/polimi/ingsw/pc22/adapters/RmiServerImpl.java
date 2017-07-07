@@ -29,7 +29,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by fandroid95 on 29/06/2017.
+ * This is the actual implementation of the RMI-server-side.
+ * It contain all the methods that are useful to start, join or create a match.
+ * It also allows the player to signUp or Login.
+ * Finally it has methods to interact with the game (e.g. do an action,
+ * take a decision about something during the match...)
+ * According to RMI-philosophy the client will coll one (or more) of
+ * these methods and the server will do its computation.
+ *
  */
 public class RmiServerImpl implements RMIServerInterface
 {

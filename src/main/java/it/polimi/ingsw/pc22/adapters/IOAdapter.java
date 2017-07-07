@@ -16,7 +16,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by fandroid95 on 30/05/2017.
+ * This is an abstract class. To manage the double protocol
+ * of connection we used this adapter, that stands between server and
+ * client.
+ * In particular, in this class we included some functionalities, that are the same,
+ * even for socket-connection and rmi-connection, such as:
+ * authentication (sign up and login), join and creation of a game.
+ * Also we included a method that handles the starting of a new match.
  */
 public abstract class IOAdapter
 {
@@ -297,8 +303,8 @@ public abstract class IOAdapter
         return player;
     }
 
-    //TODO FAR SI CHE I VALORI VENGANO GESTITI DAL PARSER JSON
-    //TODO2 DISTINGUERE IL TIMEOUT DELL'AVVIO PARTITA DAL TIMEOUT DELL'AZIONE (ce ne vogliono 2 distinti)
+
+
     private void startNewGameMatch(String gameName, Player player)
     {
         GameMatch gameMatch = new GameMatch(timeout, 5, timeForStart);

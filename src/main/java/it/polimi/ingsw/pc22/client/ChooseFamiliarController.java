@@ -8,6 +8,11 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.stage.Stage;
 
+/**
+ * This controller is used to allow the player to choose
+ * the number of servants he/she want to sacrifice to increment
+ * the value of an action.
+ */
 public class ChooseFamiliarController implements Controller {
 
     private Stage dialogStage;

@@ -72,7 +72,7 @@ public class ActionThread implements Runnable
 
             if (!(gameMatch.getCurrentPlayer().isFamiliarPositioned()))
             {
-                adapter.printMessage(new GameStatusMessage(gameMatch.getCurrentGameBoard(), gameMatch.getCurrentPlayer(), "pick privilege"));
+                adapter.printMessage(new GameStatusMessage(gameMatch.getCurrentGameBoard(), gameMatch.getCurrentPlayer(), "leader action"));
             }
 
             if (gameMatch.getCurrentPlayer().isHasPassed()

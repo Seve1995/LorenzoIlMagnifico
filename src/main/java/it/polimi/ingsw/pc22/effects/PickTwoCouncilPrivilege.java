@@ -25,18 +25,16 @@ public class PickTwoCouncilPrivilege extends PickCouncilPrivilege implements Eff
 	@Override
 	public boolean executeEffects(Player player, GameBoard gameBoard)
 	{
-		String gameName = gameBoard.getGameMatchName();
+		IOAdapter adapter = player.getAdapter();
 
-		GameMatch gameMatch = GameServer.getGameMatchMap().get(gameName);
+		GameMatch gameMatch = GameServer.getGameMatchMap().get(gameBoard.getGameMatchName());
 
 		gameMatch.setCurrEffect(this);
-
-		IOAdapter adapter = player.getAdapter();
 
 		adapter.printMessage(new PickPrivilegeMessage(2));
 
 		if (adapter instanceof SocketIOAdapter)
-			new Thread(new ReceiveCouncilDecisionThread(2, gameName)).start();
+			new Thread(new ReceiveCouncilDecisionThread(2, gameBoard.getGameMatchName())).start();
 
 		return super.waitForResult(player);
 	}

@@ -6,6 +6,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+/**
+ * This is the controller of the creation match.
+ * Here you can type a name of a match, and create it (if it does not exists already)
+ * or join it. Or you can join a random match
+ *
+ */
+
 public class CreationMatchController implements Controller{
 
 	@FXML
