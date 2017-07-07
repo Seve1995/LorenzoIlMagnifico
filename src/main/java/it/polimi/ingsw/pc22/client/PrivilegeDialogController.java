@@ -8,9 +8,10 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
-/**
- * Created by matteo on 26/06/17.
- */
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class PrivilegeDialogController implements Controller {
 
     private boolean confirmClicked = false;
@@ -36,6 +37,13 @@ public class PrivilegeDialogController implements Controller {
     
     private String output = "";
 
+    private List<Integer> numbers = new ArrayList<>();
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
+
     @FXML
     public void handleConfirm()
     {
@@ -44,6 +52,7 @@ public class PrivilegeDialogController implements Controller {
     		errorLabel.setText("Please make a selection!");
     		return;
     	}
+
         confirmClicked = true;
         dialogStage.close();
         System.out.println(output);
@@ -80,6 +89,7 @@ public class PrivilegeDialogController implements Controller {
 
         output += "1";
         toggle1.setDisable(true);
+        numbers.add(1);
         checkForOtherPrivileges();
 
     }
@@ -89,6 +99,7 @@ public class PrivilegeDialogController implements Controller {
     {
         output += "2";
         toggle2.setDisable(true);
+        numbers.add(2);
         checkForOtherPrivileges();
     }
 
@@ -97,6 +108,7 @@ public class PrivilegeDialogController implements Controller {
     {
         output += "3";
         toggle3.setDisable(true);
+        numbers.add(3);
         checkForOtherPrivileges();
     }
 
@@ -105,6 +117,7 @@ public class PrivilegeDialogController implements Controller {
     {
         output += "4";
         toggle4.setDisable(true);
+        numbers.add(4);
         checkForOtherPrivileges();
     }
 
@@ -113,6 +126,7 @@ public class PrivilegeDialogController implements Controller {
     {
         output += "5";
         toggle5.setDisable(true);
+        numbers.add(5);
         checkForOtherPrivileges();
     }
 

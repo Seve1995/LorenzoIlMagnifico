@@ -1,5 +1,13 @@
 package it.polimi.ingsw.pc22.gamebox;
 
+/**
+ * This is the implementation of the single cell;
+ * it can be blocked or not (2-3 players-game)
+ * it can be a penalty cell (from the 2th to the 16th cell)
+ * in games composed by 3-5 players
+ *
+ */
+
 public class HarvestCell extends Cell
 {
 	private boolean isABlockedCell=false;

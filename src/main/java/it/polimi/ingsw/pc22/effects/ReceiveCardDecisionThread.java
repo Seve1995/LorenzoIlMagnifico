@@ -10,8 +10,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by fandroid95 on 30/06/2017.
+ * Thread used to handle the choice of the card,
+ * among the availables, after the execution of the effect
+ * "PickTowerCard"
  */
+
+
 public class ReceiveCardDecisionThread implements Runnable
 {
     private String gameMatchName;

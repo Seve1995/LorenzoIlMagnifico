@@ -9,8 +9,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by fandroid95 on 30/06/2017.
+ * Thread used to handle the choice of the cost,
+ * among the availables.
  */
+
 public class ReceiveCostsDecisionThread implements Runnable
 {
     private String gameMatchName;

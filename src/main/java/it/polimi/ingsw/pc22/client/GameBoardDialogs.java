@@ -9,6 +9,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,7 +23,14 @@ public class GameBoardDialogs {
 
     private static final Logger LOGGER = Logger.getLogger(GameBoardDialogs.class.getName());
 
-    public static boolean councilPrivilegeDialog(Object message) {
+
+
+    public static List<Integer> councilPrivilegeDialog(Object message) {
+
+        List<Integer> exception = new ArrayList<>();
+
+        exception.add(-1);
+
         try {
 
             FXMLLoader loader = new FXMLLoader();
@@ -46,14 +55,14 @@ public class GameBoardDialogs {
 
             dialogStage.showAndWait();
 
-            return controller.isConfirmClicked();
+            return controller.getNumbers();
 
         }
         catch (IOException e)
         {
             LOGGER.log(Level.INFO, "ERROR RECEIVE THREAD", e);
 
-            return false;
+            return exception;
         }
     }
 

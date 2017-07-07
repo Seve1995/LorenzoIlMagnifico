@@ -19,6 +19,14 @@ import java.util.logging.Logger;
 
 import static it.polimi.ingsw.pc22.client.UpdateUtils.updateCells;
 
+/**
+ * This class handles two functions:
+ * -update of player board and gameboard
+ * -it makes the buttons work
+ *
+ * Its attributes are referred to the fxml file which models the screen
+ * showed to the user
+ */
 
 public class GameBoardController implements Controller
 {
@@ -50,7 +58,8 @@ public class GameBoardController implements Controller
     private GridPane territoryPlayer;
     @FXML
     private GridPane venturePlayer;
-
+    @FXML
+    private Label colorInfo;
     @FXML
     private ToggleButton productionButton;
     @FXML
@@ -203,8 +212,8 @@ public class GameBoardController implements Controller
         ToggleButton selectedLeaderToggle = (ToggleButton) LeadersHand.getSelectedToggle();
         if (selectedLeaderToggle==null)
         	{
-        	info.appendText("You must select one leader card!\n" );
-        	return;
+                info.appendText("You must select one leader card!\n" );
+                return;
         	}
         idLeader = selectedLeaderToggle.getId();
 
@@ -228,6 +237,8 @@ public class GameBoardController implements Controller
         idLeader = selectedLeaderToggle.getId();
 
         int id = Integer.parseInt(idLeader);
+
+        player.getLeaderCards().set(id, null);
 
         ClassLoader classLoader = Client.class.getClassLoader();
         String path = "GUI/leaders/leaders_b_c_0.jpg";
@@ -271,7 +282,11 @@ public class GameBoardController implements Controller
     @FXML
     private void handleExitButton()
     {
+        String exitOutput = "exit";
 
+        Client.getGenericState().sendToServer(exitOutput);
+
+        Client.launchClientAccess();
     }
 
 
@@ -306,6 +321,8 @@ public class GameBoardController implements Controller
 
     private void updateGameBoard()
     {
+        colorInfo.setText("Your color is " + player.getPlayerColorsEnum().toString());
+
         updateTowers();
 
         UpdateUtils.updateDices(gameboard, blackDice, whiteDice, orangeDice);
@@ -454,10 +471,10 @@ public class GameBoardController implements Controller
 
     }
 
-
     @Override
     public void updateScene(Object message)
     {
+
     	if (message instanceof CommunicationMessage)
     	{
     		info.appendText(((CommunicationMessage) message).getMessage()+"\n");
@@ -466,17 +483,19 @@ public class GameBoardController implements Controller
     	if (message instanceof GameStatusMessage)
     	{
     		GameStatusMessage gameStatusMessage = (GameStatusMessage) message;
+
             if ("finished".equals(gameStatusMessage.getState()))
             {
             	if (dialogStage!=null)
             		dialogStage.close();
             }
 
-    	    player = Client.getPlayer();
+            player = Client.getPlayer();
             gameboard = Client.getGameBoard();
 
-    		updateGameBoard();
-    		updatePlayerBoard();
+            updateGameBoard();
+            updatePlayerBoard();
+
     	}
 
     	if (message instanceof ExecutedAction)
@@ -484,11 +503,11 @@ public class GameBoardController implements Controller
             updateGameBoard();
 
             updatePlayerBoard();
+
         }
 
         if (message instanceof PickPrivilegeMessage)
         {
-
             GameBoardDialogs.councilPrivilegeDialog(message);
 
             updatePlayerBoard();

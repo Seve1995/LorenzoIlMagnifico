@@ -12,6 +12,11 @@ import it.polimi.ingsw.pc22.player.Player;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This class is used to store bonus/malus associated to familiarMembers.
+ * It is useful for Leader Cards effects.
+ */
+
 public class FamilyMemberModifier implements Effect
 {
 

@@ -5,6 +5,11 @@ import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 
+/**
+ * This class represents the malus given at the end
+ * of the game.
+ */
+
 public class EndGameMalus implements Effect{
 	
 	private CardTypeEnum noCardVictoryPoint;

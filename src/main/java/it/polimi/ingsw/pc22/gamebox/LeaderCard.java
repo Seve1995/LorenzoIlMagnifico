@@ -7,6 +7,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is the implementation of the leader Card;
+ * its requisites and its effects are modelled.
+ * A leader card in a certain turn can be or not played,
+ * can be or not activate (boolean "faceUp")
+ */
+
 public class LeaderCard implements Serializable
 {
 	private String name;

@@ -6,9 +6,7 @@ import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.utils.ParseEnum;
 import it.polimi.ingsw.pc22.utils.PositionUtils;
 
-/**
- * Created by fandroid95 on 20/06/2017.
- */
+
 public class PlayState implements GenericState
 {
     @Override

@@ -17,6 +17,13 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This effect is quite complex, full of rules and conditions.
+ * It represents the fact that a player, in some condition,
+ * for example, for the effect of a card, or setting a familyMember,
+ * can take a certain card from a tower.
+ */
+
 public class PickTowerCard extends ChooseAsset implements Effect
 {
 	private int floor;

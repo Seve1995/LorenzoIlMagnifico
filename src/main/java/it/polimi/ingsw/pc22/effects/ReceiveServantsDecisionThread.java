@@ -7,9 +7,12 @@ import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.AssetType;
 import it.polimi.ingsw.pc22.messages.ErrorMessage;
 
+
 /**
- * Created by fandroid95 on 29/06/2017.
+ * Thread used to handle the choice about the number of servants to sacrifice.
  */
+
+
 public class ReceiveServantsDecisionThread implements Runnable
 {
     private String gameMatchName;

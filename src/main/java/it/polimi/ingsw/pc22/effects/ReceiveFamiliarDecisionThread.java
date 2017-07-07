@@ -9,9 +9,12 @@ import it.polimi.ingsw.pc22.messages.ErrorMessage;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
 /**
- * Created by fandroid95 on 03/07/2017.
+ * Thread used to handle the choice of a familiar,
+ * among the availables, to apply a bonus/malus
  */
+
 public class ReceiveFamiliarDecisionThread implements Runnable
 {
     private String gameMatchName;

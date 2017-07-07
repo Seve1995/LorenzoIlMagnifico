@@ -8,6 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * This class represents the Player, with his/her name and password
+ * There is a list of booleans to store his/her bonus and malus.
+ * He/She is associated to his/her resources and playerBoard.
+ * There is an Adapter to manage the communication.
+ *
+ */
+
 public class Player implements Serializable
 {
 	private String username;

@@ -11,8 +11,8 @@ public class Dice implements Serializable
 	public Dice(ColorsEnum color) {
 		this.color = color;
 	}
-	
-	public int getNumber() {
+
+    public int getNumber() {
 		return diceValue;
 	}
 	

@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * This is the representation of the single tower.
+ * As the other zones it is composed by an array of single cells.
+ * For the correct execution of action and effects, we need to store a reference
+ * of the players already present in the tower (PLAYER COLOR)
+ */
+
 public class Tower implements Serializable
 {
 	private CardTypeEnum towerType;

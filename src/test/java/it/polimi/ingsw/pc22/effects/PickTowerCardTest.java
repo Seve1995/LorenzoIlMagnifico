@@ -4,12 +4,14 @@ import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.gamebox.Tower;
 import it.polimi.ingsw.pc22.gamebox.TowerCell;
+import it.polimi.ingsw.pc22.player.CardModifier;
 import it.polimi.ingsw.pc22.player.Player;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by matteo on 05/07/17.
@@ -33,6 +35,9 @@ public class PickTowerCardTest extends TestCase {
         PickTowerCard pickTowerCard = new PickTowerCard();
 
         pickTowerCard.setFloor(-1);
+
+        assertEquals(false, pickTowerCard.isLegal(player, gameBoard));
+
         pickTowerCard.setCardType(null);
 
         assertEquals(false, pickTowerCard.isLegal(player, gameBoard));
@@ -53,12 +58,33 @@ public class PickTowerCardTest extends TestCase {
 
         assertEquals(false, pickTowerCard.isLegal(player, gameBoard));
 
+        List<CardModifier> cardModifiers = new ArrayList<>();
+
+        cardModifiers.add (new CardModifier());
+
+        cardModifiers.get(0).setCardType(CardTypeEnum.BUILDING);
+
+        cardModifiers.get(0).setValueModifier(0);
+
+        pickTowerCard.setCardType(CardTypeEnum.BUILDING);
+
+        player.setCardModifiers(cardModifiers);
+
+        assertEquals(false,  pickTowerCard.isLegal(player, gameBoard));
+
+        pickTowerCard.setCardType(CardTypeEnum.CHARACTER);
+
+
+
+
+
+
+
+
+
+
 
 
     }
-
-
-
-
 
 }

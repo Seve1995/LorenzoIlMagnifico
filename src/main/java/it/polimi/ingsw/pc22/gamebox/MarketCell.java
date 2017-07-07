@@ -4,6 +4,11 @@ import it.polimi.ingsw.pc22.effects.Effect;
 
 import java.util.List;
 
+/**
+ * Like the other cells, this is the single part that composes
+ * market zone. Some cells can be blocked, in 2-3 players-matches
+ */
+
 public class MarketCell extends Cell
 {
 	private boolean isABlockedCell=false;

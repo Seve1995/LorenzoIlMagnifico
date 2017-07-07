@@ -8,6 +8,12 @@ import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.messages.PickPrivilegeMessage;
 import it.polimi.ingsw.pc22.player.Player;
 
+
+/**
+ * Please refer to "PickCouncilPrivilege"
+ *
+ */
+
 public class PickTwoCouncilPrivilege extends PickCouncilPrivilege implements Effect
 {
 	@Override

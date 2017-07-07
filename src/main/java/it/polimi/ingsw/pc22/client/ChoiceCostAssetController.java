@@ -65,7 +65,8 @@ public class ChoiceCostAssetController implements Controller {
 
         if (message instanceof ChooseCostsMessage)
         {
-            startingLabel.setText("Do you want to spend military points or other Assets shown on the card");
+            startingLabel.setText("Do you want to spend military \n" +
+                    "points or other Assets \n" + "shown on the card");
         }
 
     }

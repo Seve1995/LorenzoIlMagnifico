@@ -4,6 +4,7 @@ import it.polimi.ingsw.pc22.actions.Action;
 import it.polimi.ingsw.pc22.actions.ActionFactory;
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.messages.ErrorMessage;
+import it.polimi.ingsw.pc22.messages.GameStatusMessage;
 
 /**
  * Created by fandroid95 on 25/06/2017.
@@ -68,6 +69,7 @@ public class ActionThread implements Runnable
             {
                 break;
             }
+
 
             if (gameMatch.getCurrentPlayer().isHasPassed()
                     || gameMatch.getCurrentPlayer().isSuspended())

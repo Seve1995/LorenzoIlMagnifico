@@ -2,6 +2,11 @@ package it.polimi.ingsw.pc22.gamebox;
 
 import java.io.Serializable;
 
+/**
+ * This zone represent production zone. It is very similar to harvest.
+ * Many attributes are the same; similiraties can be found also reguarding the logic.
+ */
+
 public class Production implements Serializable
 {
 	private ProductionCell[] productionCells = new ProductionCell[16];

@@ -4,6 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents player board. It is composed by several array lists:
+ * one for every type of cards. There is also an extra array list for the leaders played.
+ * In every PlayerBoard there is also a bonus tile.
+ */
+
 public class PlayerBoard implements Serializable
 {
 	private List<TerritoryCard> territories = new ArrayList<>();

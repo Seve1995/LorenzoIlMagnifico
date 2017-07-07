@@ -7,7 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by fandroid95 on 29/06/2017.
+ * It handles the servants sacrifice in order to increment the value of a certain action/familiar
  */
 public class ServantsAction
 {

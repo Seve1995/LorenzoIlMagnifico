@@ -1,5 +1,10 @@
 package it.polimi.ingsw.pc22.gamebox;
 
+
+/**
+ * This enumeration lists the colors of the players.
+ * It is useful to recognise players during the game.
+ */
 public enum PlayerColorsEnum
 {
 	RED(0),

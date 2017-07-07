@@ -5,13 +5,15 @@ import it.polimi.ingsw.pc22.connection.GameMatch;
 import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.messages.ErrorMessage;
+import it.polimi.ingsw.pc22.messages.ExecutedAction;
 import it.polimi.ingsw.pc22.utils.CouncilPrivilege;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by fandroid95 on 27/06/2017.
+ * Thread used to handle the choice of one (or more) councilPrivilege(s),
+ * among the availables
  */
 public class ReceiveCouncilDecisionThread implements Runnable
 {
@@ -66,6 +68,8 @@ public class ReceiveCouncilDecisionThread implements Runnable
             for (String bonus : bonuses)
             {
                 assets.addAll(privileges.getBonusFromNumberString(bonus));
+
+                adapter.printMessage(new ExecutedAction("privilege OK"));
             }
 
             PickCouncilPrivilege effect =

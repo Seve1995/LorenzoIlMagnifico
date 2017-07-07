@@ -170,6 +170,7 @@ public class Client extends Application
 			{
 				Platform.exit();
 				stopped = true;
+				Client.launchClientAccess();
 			}
 		});
 
