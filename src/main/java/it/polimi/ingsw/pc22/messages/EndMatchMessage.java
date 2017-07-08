@@ -14,10 +14,13 @@ public class EndMatchMessage extends Message
 
     private String winnerName;
 
-    public EndMatchMessage(List<Player> standing, String winnerName)
+    private int winnerVictoryPoints;
+    
+    public EndMatchMessage(List<Player> standing, String winnerName, int winnerVictoryPoints)
     {
         this.standing = standing;
         this.winnerName = winnerName;
+        this.winnerVictoryPoints = winnerVictoryPoints;
     }
 
     public List<Player> getStanding()
@@ -29,4 +32,22 @@ public class EndMatchMessage extends Message
     {
         return winnerName;
     }
+    
+    public int getWinnerVictoryPoints()
+    {
+        return winnerVictoryPoints;
+    }
+
+	@Override
+	public String toString() {
+		StringBuilder output = new StringBuilder("The winner is " + winnerName + "\n");
+		output.append("Victory points of the winner:" + winnerVictoryPoints);
+		for (Player p : standing)
+		{
+			output.append(p.getUsername() + " W: " + p.getNumberOfMatchWon() + " L: " + p.getNumberOfMatchLost());
+		}
+		return output.toString();
+	}
+    
+    
 }

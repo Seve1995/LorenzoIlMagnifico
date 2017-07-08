@@ -3,6 +3,7 @@ package it.polimi.ingsw.pc22.effects;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -85,24 +86,26 @@ public class EndGameMalus implements Effect{
 				
 			}
 			
+			if (noCardVictoryPoint==null) 
+				return true;
+			
 			if (noCardVictoryPoint.equals(CardTypeEnum.CHARACTER))
 			
-				player.getPlayerBoard().setCharacters(null);
+				player.getPlayerBoard().setCharacters(new ArrayList<>());
 				
 			if (noCardVictoryPoint.equals(CardTypeEnum.VENTURE))
 				
-				player.getPlayerBoard().setVentures(null);
+				player.getPlayerBoard().setVentures(new ArrayList<>());
 				
 			if (noCardVictoryPoint.equals(CardTypeEnum.TERRITORY))
 				
-				player.getPlayerBoard().setTerritories(null);
+				player.getPlayerBoard().setTerritories(new ArrayList<>());
 		
-		return true;
-		
-		}
-		
-		return false;
+			return true;
 			
+		}
+			
+		return false;
 	}
 
 

@@ -271,7 +271,7 @@ public class GameBoardController implements Controller
 
         Client.getGenericState().sendToServer(exitOutput);
 
-        Client.launchClientAccess();
+        Client.launchCreationMatch();
     }
 
 

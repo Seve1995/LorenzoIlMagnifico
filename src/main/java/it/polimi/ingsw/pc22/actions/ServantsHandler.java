@@ -9,9 +9,6 @@ import it.polimi.ingsw.pc22.player.Player;
  */
 public class ServantsHandler extends Action
 {
-    //COMMENTO AI POSTERI NON C'ENTRA NA MAZZA CON IL PATTERN DECORATOR
-    //MA FUNZIONA E CI PERMETTE DI AGGIUNGERE QUESTA FUNZIONALITA' SOLO SE NECESSARIA
-
     private Action action;
 
     private Asset servants;
@@ -26,9 +23,17 @@ public class ServantsHandler extends Action
     @Override
     public boolean isLegal(Player player, GameBoard gameBoard)
     {
+        double multiplier;
+
+        if (player.isServantMalus())
+            multiplier=1;
+
+        else
+            multiplier=0.5;
+        
     	int servantsNumber = servants.getValue();
 
-    	if(servantsNumber > player.getServants())
+    	if(servantsNumber*(2*multiplier) > player.getServants())
 			return false;
 
         return true;

@@ -3,9 +3,8 @@ package it.polimi.ingsw.pc22.client;
 import it.polimi.ingsw.pc22.messages.EndMatchMessage;
 import it.polimi.ingsw.pc22.player.Player;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
-import java.awt.*;
 
 /**
  * This is the controller of the last screen of the Match.
@@ -41,12 +40,16 @@ public class EndMatchController implements Controller {
 
         String winnerName = ((EndMatchMessage) message).getWinnerName();
 
-        winnerLabel.setText("The winner is " + winnerName);
+        int winnerVictoryPoints = ((EndMatchMessage) message).getWinnerVictoryPoints();
+        
+        winnerLabel.setText("The winner is " + winnerName + "\n" +
+        		"Winner Victory points: " + winnerVictoryPoints
+        );
 
         java.util.List<Player> wholePlayers = ((EndMatchMessage) message).getStanding();
 
         StringBuilder output = new StringBuilder();
-
+        
         for (Player p : wholePlayers)
         {
             output.append(p.getUsername() + " W: " + p.getNumberOfMatchWon() + " L: " + p.getNumberOfMatchLost() + "\n");
@@ -61,5 +64,7 @@ public class EndMatchController implements Controller {
         confirmClicked = true;
 
         dialogStage.close();
+        
+        Client.launchCreationMatch();
     }
 }

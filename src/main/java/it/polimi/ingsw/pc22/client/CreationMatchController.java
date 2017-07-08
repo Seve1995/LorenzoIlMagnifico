@@ -52,13 +52,16 @@ public class CreationMatchController implements Controller{
 	public void updateScene(Object message) {
     	if (message instanceof CommunicationMessage)
     	{
-    		create.setDisable(true);
-    		join.setDisable(true);
-    		random.setDisable(true);
-    		text.setDisable(true);
+    		CommunicationMessage communicationMessage = (CommunicationMessage) message;
+    		if("Match is starting. Please wait...".equals(communicationMessage.getMessage()))
+    		{
+    			create.setDisable(true);
+	    		join.setDisable(true);
+	    		random.setDisable(true);
+	    		text.setDisable(true);
+    		}
     	}
     	else
         	info.setText(message.toString());
-
 	}
 }
