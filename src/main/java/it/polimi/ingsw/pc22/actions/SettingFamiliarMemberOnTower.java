@@ -13,15 +13,20 @@ public class SettingFamiliarMemberOnTower extends Action
 	private int floor;
 	private CardTypeEnum cardTypeEnum;
 
-	public int getFloor() {
+	private PickTowerCard pickTowerCard = null;
+
+	public int getFloor()
+	{
 		return floor;
 	}
 
-	public void setFloor(int floor) {
+	public void setFloor(int floor)
+	{
 		this.floor = floor;
 	}
 
-	public void setCardTypeEnum(CardTypeEnum cardTypeEnum) {
+	public void setCardTypeEnum(CardTypeEnum cardTypeEnum)
+	{
 		this.cardTypeEnum = cardTypeEnum;
 	}
 
@@ -34,7 +39,7 @@ public class SettingFamiliarMemberOnTower extends Action
 
 	public SettingFamiliarMemberOnTower() {}
 
-	private boolean payThreeCoins(Player p, Tower t)
+	private boolean payThreeCoins(Tower t)
 	{
 		for (TowerCell tc : t.getTowerCells())
 			if (!tc.isEmpty()) return true;
@@ -58,19 +63,17 @@ public class SettingFamiliarMemberOnTower extends Action
         return false;
     }
 
-	private Tower selectedTower(Tower[] ts)
+	private Tower selectedTower(Tower[] towers)
 	{
-		for (Tower t : ts)
+		for (Tower t : towers)
 		{
 			if (t.getTowerType().equals(cardTypeEnum))
-				
 				return t;
 		}
 		
 		return null;
 		
 	}
-	
 
 	@Override
 	public boolean isLegal(Player player, GameBoard gameBoard)
@@ -80,7 +83,10 @@ public class SettingFamiliarMemberOnTower extends Action
 		if (tower == null)
 			return false;
 
-		PickTowerCard pickTowerCard = new PickTowerCard(floor, tower.getTowerType(), familyMember.getValue());
+		if (pickTowerCard == null)
+		{
+			pickTowerCard = new PickTowerCard(floor, tower.getTowerType(), familyMember.getValue());
+		}
 
 		System.out.println("Tower is empty " + tower.getTowerCells().get(floor).isEmpty());
 
@@ -102,9 +108,9 @@ public class SettingFamiliarMemberOnTower extends Action
 			return false;
 
 		System.out.println("Tower is pay correct "
-				+ (payThreeCoins(player, tower) && player.getCoins() < 3));
+				+ (payThreeCoins(tower) && player.getCoins() < 3));
 
-		if((payThreeCoins(player, tower) && player.getCoins() < 3) && !(player.isDontPayThreeCoinsInTowers()))
+		if((payThreeCoins(tower) && player.getCoins() < 3) && !player.isDontPayThreeCoinsInTowers())
 			return false;
 
 		System.out.println("Tower is pick correct "
@@ -127,12 +133,15 @@ public class SettingFamiliarMemberOnTower extends Action
 		if (tower == null)
 			return false;
 
-		PickTowerCard pickTowerCard = new PickTowerCard(floor, tower.getTowerType(), familyMember.getValue());
+		if (pickTowerCard == null)
+		{
+			pickTowerCard = new PickTowerCard(floor, tower.getTowerType(), familyMember.getValue());
+		}
 
 		if (!isLegal(player, gameBoard))
 			return false;
 
-		if (payThreeCoins(player, tower))
+		if (payThreeCoins(tower))
 		{
 			player.setCoins(player.getCoins() - 3);
 		}
@@ -163,5 +172,9 @@ public class SettingFamiliarMemberOnTower extends Action
 
 		return true;
 	}
-	
+
+	public void setPickTowerCard(PickTowerCard pickTowerCard)
+	{
+		this.pickTowerCard = pickTowerCard;
+	}
 }

@@ -23,7 +23,8 @@ public class TowerCell extends Cell
 		this.developmentCard = null;
 	}
 
-	public DevelopmentCard getDevelopmentCard() {
+	public DevelopmentCard getDevelopmentCard()
+	{
 		return developmentCard;
 	}
 
