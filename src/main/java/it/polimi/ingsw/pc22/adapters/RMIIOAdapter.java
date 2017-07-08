@@ -11,7 +11,11 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 
 /**
- * Created by fandroid95 on 30/05/2017.
+ * This class is the implementation of RMI-side of the IO-Adapter
+ * It has a method to "send" a message to the client, which is actually
+ * a remote-method-call, to a special function on the user-side (please
+ * refer to MessageHandler class in package "Client")
+ *
  */
 public class RMIIOAdapter extends IOAdapter
 {

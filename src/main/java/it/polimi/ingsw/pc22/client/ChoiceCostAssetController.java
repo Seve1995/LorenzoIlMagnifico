@@ -9,7 +9,12 @@ import javafx.scene.control.ToggleButton;
 import javafx.stage.Stage;
 
 /**
- * Created by matteo on 01/07/17.
+ * This controller is used in two ways:
+ * - to choose between two costs
+ * - to choose between two effects
+ * In so doing, in a single screen, whose labels change dinamically
+ * we manage two different situation, characterized by the same patter
+ * "Do you want A or B?"
  */
 public class ChoiceCostAssetController implements Controller {
 
@@ -66,7 +71,7 @@ public class ChoiceCostAssetController implements Controller {
         if (message instanceof ChooseCostsMessage)
         {
             startingLabel.setText("Do you want to spend military \n" +
-                    "points or other Assets \n" + "shown on the card");
+                    "points or other Assets \n" + "shown on the card?");
         }
 
     }

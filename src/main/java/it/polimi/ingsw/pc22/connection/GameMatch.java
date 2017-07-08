@@ -45,6 +45,8 @@ public class GameMatch implements Runnable, Serializable
 	private List<LeaderCard> leaderCards;
 
 	private static Long timeout;
+
+	private static Long timeForStart;
 	
 	private int turn = 0;
 	
@@ -61,20 +63,27 @@ public class GameMatch implements Runnable, Serializable
 	private static final String BOARD_PATH = "boards/";
 
 	private static final Logger LOGGER = Logger.getLogger(GameMatch.class.getName());
+
+	private TimeOut timeOutFromFile;
 	
-	public GameMatch(Long timeOut, int maxPlayersNumber)
+	public GameMatch(Long timeOut, int maxPlayersNumber, Long timeForStart)
 	{
 		GameMatch.timeout = timeOut;
+		GameMatch.timeForStart = timeForStart;
 		this.maxPlayersNumber = maxPlayersNumber;
 	}
 	
 	@Override
 	public void run()
 	{
+		loadTimeOut();
+
+		timeout = timeOutFromFile.getAction();
+
+		timeForStart = timeOutFromFile.getGameStarting();
+
 		if (serialized)
 		{
-			//TODO timeout
-			timeout = 60000L;
 
 			System.out.println("SONO QUI");
 
@@ -84,6 +93,8 @@ public class GameMatch implements Runnable, Serializable
 
 			return;
 		}
+
+
 
 		Long timeStamp = System.currentTimeMillis();
 
@@ -98,7 +109,7 @@ public class GameMatch implements Runnable, Serializable
 				System.out.println("isGameFull " + isGameFull);
 
 				boolean isTimeoutExpired =
-						System.currentTimeMillis() > timeStamp + timeout;
+						System.currentTimeMillis() > timeStamp + timeForStart;
 
 				System.out.println("isTimeoutExpired " + isTimeoutExpired);
 
@@ -547,6 +558,24 @@ public class GameMatch implements Runnable, Serializable
 		JSONObject leaders = new JSONObject(leaderCardsString);
 
 		leaderCards = LeaderCardLoader.loadLeaderCards(leaders);
+	}
+
+	private void loadTimeOut()
+	{
+		String path = "users/Timeout.json";
+
+		String timeOutString = fileLoader(path);
+
+		JSONObject timeOut = new JSONObject(timeOutString);
+
+		try {
+			timeOutFromFile = TimeOutLoader.loadTimeOut(timeOut);
+
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+
+			LOGGER.log(Level.INFO, "TimeOut Not Loaded", e);
+		}
+
 	}
 
 	private String fileLoader(String path)

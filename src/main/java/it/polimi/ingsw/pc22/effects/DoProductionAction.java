@@ -50,12 +50,9 @@ public class DoProductionAction extends ServantsAction implements Effect
 		if (!super.waitForResult())
 			return false;
 
-		//Serve per gestire il malus dell'excommunication card
 		value += player.getProductionValueModifier();
 
 		value += super.getServants().getValue();
-
-		System.out.println(value + " value total value");
 
 		if (!isLegal(player, gameBoard))
 			return false;

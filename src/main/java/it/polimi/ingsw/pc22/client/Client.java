@@ -22,6 +22,15 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This is the main-app of the client side of our project
+ * This class has many methods and many attributes, referred both to
+ * the game and to the state of a player in a certain moment.
+ * It has also attributes related to the network and interfaces chosen by
+ * the user. For the GU interface we included many methods that launch,
+ * handle and control the screens.
+ */
+
 public class Client extends Application 
 {
 	private static GenericState genericState;

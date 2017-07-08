@@ -236,22 +236,7 @@ public class GameBoardController implements Controller
 
         idLeader = selectedLeaderToggle.getId();
 
-        int id = Integer.parseInt(idLeader);
-
-        player.getLeaderCards().set(id, null);
-
-        ClassLoader classLoader = Client.class.getClassLoader();
-        String path = "GUI/leaders/leaders_b_c_0.jpg";
-        Image image = new Image(classLoader.getResourceAsStream(path));
-        ImageView imageView = new ImageView(image);
-        imageView.setFitHeight(115);
-        imageView.setFitWidth(73);
-
-        ToggleButton toggleButton = (ToggleButton) leaders.getChildren().get(id);
-
-        toggleButton.setGraphic(imageView);
-        toggleButton.setDisable(true);
-
+        
         Client.getGenericState().sendToServer("discard card " + idLeader);
 
     }

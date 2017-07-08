@@ -7,6 +7,11 @@ import javafx.scene.control.TextField;
 
 import java.io.PrintWriter;
 
+/**
+ * This the controller of the welcome-screen.
+ * Here you can insert your data and register/login
+ */
+
 public class ClientAccessController implements Controller {
 	@FXML
     private Button login;
@@ -25,17 +30,14 @@ public class ClientAccessController implements Controller {
     private void handleLoginButton() throws InterruptedException {
     	String output = username.getText() + " " + password.getText() + " L";
 		Client.getGenericState().sendToServer(output);
-    	//getOutSocket().println(output);
-    	//if (Client.getGenericState() instanceof GameCreationState)
-    	//	Client.launchCreationMatch();
+
     }
     
     @FXML
     private void handleRegisterButton() {
     	String output = username.getText() + " " + password.getText() + " R";
 		Client.getGenericState().sendToServer(output);
-    	//getOutSocket().println(output);
-        
+
     }
 
 	@Override

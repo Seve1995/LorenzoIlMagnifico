@@ -1,7 +1,5 @@
-{
-  "Timeout":
+
   {
-    "action": 15000,
-    "gameStarting": 120000
+    "action": 25000,
+    "gameStarting": 60000
   }
-}
