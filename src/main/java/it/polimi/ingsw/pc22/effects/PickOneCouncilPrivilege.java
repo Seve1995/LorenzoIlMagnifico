@@ -30,14 +30,14 @@ public class PickOneCouncilPrivilege extends PickCouncilPrivilege implements Eff
 
 		gameMatch.setCurrEffect(this);
 
-		IOAdapter adapter = player.getAdapter();
+		IOAdapter pickAdapter = player.getAdapter();
 
-		adapter.printMessage(new PickPrivilegeMessage(1));
+		pickAdapter.printMessage(new PickPrivilegeMessage(1));
 
-		if (adapter instanceof SocketIOAdapter)
+		if (pickAdapter instanceof SocketIOAdapter)
 			new Thread(new ReceiveCouncilDecisionThread(1, gameName)).start();
 
-		System.out.println("Executed");
+		System.out.println("Pick One Council Executed");
 
 		return super.waitForResult(player);
 	}
