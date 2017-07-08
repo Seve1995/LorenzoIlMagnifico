@@ -36,15 +36,15 @@ public class DoHarvestAction extends ServantsAction implements Effect
 	{
 		String gameName = gameBoard.getGameMatchName();
 
-		GameMatch gameMatch = GameServer.getGameMatchMap().get(gameName);
+		GameMatch gameMatchForHarvest = GameServer.getGameMatchMap().get(gameName);
 
-		gameMatch.setCurrEffect(this);
+		gameMatchForHarvest.setCurrEffect(this);
 
-		IOAdapter adapter = player.getAdapter();
+		IOAdapter harvestAdapter = player.getAdapter();
 
-		adapter.printMessage(new ChooseServantsMessage(player));
+		harvestAdapter.printMessage(new ChooseServantsMessage(player));
 
-		if (adapter instanceof SocketIOAdapter)
+		if (harvestAdapter instanceof SocketIOAdapter)
 			new Thread(new ReceiveServantsDecisionThread(gameName)).start();
 
 		if (!super.waitForResult())
