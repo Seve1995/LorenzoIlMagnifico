@@ -26,7 +26,7 @@ public class SettingFamiliarMemberOnMarket extends Action
 	}
 
 	@Override
-	protected boolean isLegal(Player player, GameBoard gameBoard)
+    public boolean isLegal(Player player, GameBoard gameBoard)
 	{
 		Market market = gameBoard.getMarket(); 
 		

@@ -73,7 +73,7 @@ public class SettingFamiliarMemberOnTower extends Action
 	
 
 	@Override
-	protected boolean isLegal (Player player, GameBoard gameBoard)
+	public boolean isLegal(Player player, GameBoard gameBoard)
 	{
 		Tower tower = selectedTower(gameBoard.getTowers());
 

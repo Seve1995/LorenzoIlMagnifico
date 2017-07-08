@@ -16,7 +16,7 @@ public class ActiveLeaderCard extends Action
 	}
 
 	@Override
-	protected boolean isLegal(Player player, GameBoard gameBoard) 
+    public boolean isLegal(Player player, GameBoard gameBoard)
 	{
 		List<LeaderCard> cards = player.getPlayerBoard().getLeaderCards();
 

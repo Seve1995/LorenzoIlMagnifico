@@ -9,7 +9,7 @@ import it.polimi.ingsw.pc22.player.Player;
 public class PassTurn extends Action
 {
     @Override
-    protected boolean isLegal(Player player, GameBoard gameBoard)
+    public boolean isLegal(Player player, GameBoard gameBoard)
     {
         return true;
     }

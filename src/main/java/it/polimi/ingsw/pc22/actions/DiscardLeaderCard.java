@@ -20,7 +20,7 @@ public class DiscardLeaderCard extends Action
 	}
 
 	@Override
-	protected boolean isLegal(Player player, GameBoard gameBoard)
+    public boolean isLegal(Player player, GameBoard gameBoard)
 	{
 		if (player.getLeaderCards().isEmpty())
 			return false;

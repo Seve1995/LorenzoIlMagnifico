@@ -4,7 +4,9 @@ import it.polimi.ingsw.pc22.effects.DoHarvestAction;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
 
-public class SettingFamiliarMemberOnHarvest extends Action{
+public class SettingFamiliarMemberOnHarvest extends Action
+{
+	private DoHarvestAction doHarvestAction;
 
 	public SettingFamiliarMemberOnHarvest(FamilyMember familyMember)
 	{
@@ -14,16 +16,15 @@ public class SettingFamiliarMemberOnHarvest extends Action{
     public SettingFamiliarMemberOnHarvest() {}
 
     @Override
-	protected boolean isLegal (Player player, GameBoard gameBoard)
+	public boolean isLegal(Player player, GameBoard gameBoard)
 	{
-		Harvest harvest = gameBoard.getHarvest();
-
 		System.out.println("Harvest the correct value is false: "
 				+ (familyMember.getValue() < 1));
 
 		if (familyMember.getValue() < 1)
-			
 			return false;
+
+		Harvest harvest = gameBoard.getHarvest();
 
 		System.out.println("Harvest, the correct blocked is false: "
 				+ (harvest.getHarvestCell()[0].getFamilyMember() != null &&
@@ -44,7 +45,7 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 			
 			if
 			(
-				currFamilyMember.getColor()==ColorsEnum.NEUTER ||
+				currFamilyMember.getColor() == ColorsEnum.NEUTER ||
 				familyMember.getColor() == ColorsEnum.NEUTER
 			)
 				break;
@@ -64,8 +65,6 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 	public boolean executeAction(Player player, GameBoard gameBoard)
 	{
 		Harvest harvest = gameBoard.getHarvest(); 
-		
-		DoHarvestAction doHarvestAction = new DoHarvestAction();
 
 		if (!isLegal(player, gameBoard))
 			return false;
@@ -97,25 +96,27 @@ public class SettingFamiliarMemberOnHarvest extends Action{
 			return true;
 			
 		}
-		
-		else if (isLegal(player, gameBoard) && player.isDontCareOccupiedPlaces())
+		else
 		{
+			doHarvestAction.setValue(familyMember.getValue());
+
+			boolean executed = doHarvestAction.executeEffects(player, gameBoard);
+
+			if (!executed)
+				return false;
+
 			harvest.getHarvestCell()[harvest.firstCellFree()].setFamilyMember(familyMember);
 			
 			familyMember.setPlayed(true);
-			
-			doHarvestAction.setValue(familyMember.getValue());
-			
-			doHarvestAction.executeEffects(player, gameBoard);
 
 			player.setFamiliarPositioned(true);
 
 			return true;
 		}
-		
-		else 
-		{
-			return false;
-		}
+	}
+
+	public void setDoHarvestAction(DoHarvestAction doHarvestAction)
+	{
+		this.doHarvestAction = doHarvestAction;
 	}
 }

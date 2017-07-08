@@ -1,5 +1,7 @@
 package it.polimi.ingsw.pc22.actions;
 
+import it.polimi.ingsw.pc22.effects.DoHarvestAction;
+import it.polimi.ingsw.pc22.effects.DoProductionAction;
 import it.polimi.ingsw.pc22.effects.PickOneCouncilPrivilege;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
@@ -202,6 +204,22 @@ public class ActionFactory
         if (action instanceof ExitGame)
         {
             action.setFamiliarNeeded(false);
+        }
+
+        if (action instanceof SettingFamiliarMemberOnHarvest)
+        {
+           DoHarvestAction harvestAction = new DoHarvestAction();
+
+           ((SettingFamiliarMemberOnHarvest) action)
+                   .setDoHarvestAction(harvestAction);
+        }
+
+        if (action instanceof SettingFamiliarMemberOnProduction)
+        {
+            DoProductionAction productionAction = new DoProductionAction();
+
+            ((SettingFamiliarMemberOnProduction) action)
+                    .setDoProductionAction(productionAction);
         }
     }
 
