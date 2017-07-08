@@ -167,11 +167,6 @@ public class PickTowerCard extends ChooseAsset implements Effect
 			
 			VentureCard currVentureCard = (VentureCard) tower.getTowerCells().get(floor).getDevelopmentCard();
 
-			if (currVentureCard.isRequiredCostChoice() && currVentureCard == null)
-			{
-				return false;
-			}
-
 			if (currVentureCard.isRequiredCostChoice() && currVentureCard != null)
 			{
 
@@ -198,19 +193,23 @@ public class PickTowerCard extends ChooseAsset implements Effect
 							asset1.setValue(asset1.getValue() - asset.getValue());
 			}
 			
-			if (currVentureCard.getMilitaryPointsRequired() == null)
-				costs.addAll(currVentureCard.getResourcesCost());
-			
-			if (currVentureCard.getResourcesCost() == null)
-				costs.add(currVentureCard.getMilitaryPointsCost());
 				
 			if (!applyCardModifiers(player, gameName)) return false;
 
-			for (Asset a : costs)
+			if (!currVentureCard.isRequiredCostChoice())
 			{
-				if (a.getValue() > player.getAsset(a.getType()))
+				if (currVentureCard.getMilitaryPointsRequired() == null)
+					costs.addAll(currVentureCard.getResourcesCost());
+				
+				if (currVentureCard.getResourcesCost() == null)
+					costs.add(currVentureCard.getMilitaryPointsCost());
+
+				for (Asset a : costs)
 				{
-					return false;
+					if (a.getValue() > player.getAsset(a.getType()))
+					{
+						return false;
+					}
 				}
 			}
 			
@@ -254,13 +253,13 @@ public class PickTowerCard extends ChooseAsset implements Effect
 		String gameName = gameBoard.getGameMatchName();
 
 		Tower tower = gameBoard.getTowerByType(cardType);
+		
+		GameMatch gameMatch = GameServer.getGameMatchMap().get(gameName);
+
+		gameMatch.setCurrEffect(this);
 
 		if (cardType.equals(CardTypeEnum.ANY) || floor == -1)
 		{
-			GameMatch gameMatch = GameServer.getGameMatchMap().get(gameName);
-
-			gameMatch.setCurrEffect(this);
-
 			IOAdapter adapter = player.getAdapter();
 
 			adapter.printMessage(new ChooseCardMessage(cardType, gameBoard));
@@ -333,8 +332,6 @@ public class PickTowerCard extends ChooseAsset implements Effect
 				}
 			}
 
-			System.out.println("THE COSTDECISION is" + costDecision);
-
 			if (costDecision == null)
 				return false;
 		}
@@ -344,7 +341,6 @@ public class PickTowerCard extends ChooseAsset implements Effect
 		if (!isLegal(player, gameBoard))
 			return false;
 
-		//TODO QUESTA POTREBBE FALLIRE
 		activeEffects(currTower.getTowerCells().get(floor).getDevelopmentCard(), player, gameBoard);
 
 		if (cardType.equals(CardTypeEnum.BUILDING))
@@ -387,6 +383,8 @@ public class PickTowerCard extends ChooseAsset implements Effect
 
 		for (Asset asset : costs)
 		{
+			System.out.println(asset);
+			
 			Asset costAsset = new Asset(-asset.getValue(), asset.getType());
 
 			player.addAsset(costAsset);
@@ -422,7 +420,7 @@ public class PickTowerCard extends ChooseAsset implements Effect
 					for (Asset cost : costs)
 					{
 						if (cost.getType().equals(chosenAsset.getType()))
-							costs.add(new Asset(cost.getValue() - chosenAsset.getValue(), cost.getType()));
+							cost.setValue(cost.getValue() - chosenAsset.getValue());
 					}
 					
 					continue;
@@ -500,6 +498,4 @@ public class PickTowerCard extends ChooseAsset implements Effect
 		}
 	}
 
-
-	
 }

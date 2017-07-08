@@ -112,12 +112,6 @@ public class SettingFamiliarMemberOnTower extends Action
 
 		if((payThreeCoins(tower) && player.getCoins() < 3) && !player.isDontPayThreeCoinsInTowers())
 			return false;
-
-		System.out.println("Tower is pick correct "
-				+ (pickTowerCard.isLegal(player, gameBoard)));
-
-		if (!(pickTowerCard.isLegal(player, gameBoard)))
-			return false;
 		
 		return true;
 	}
@@ -139,6 +133,11 @@ public class SettingFamiliarMemberOnTower extends Action
 		if (!isLegal(player, gameBoard))
 			return false;
 
+		boolean executed = pickTowerCard.executeEffects(player, gameBoard);
+
+		if (!executed)
+			return false;
+		
 		if (payThreeCoins(tower))
 		{
 			player.setCoins(player.getCoins() - 3);
@@ -146,7 +145,7 @@ public class SettingFamiliarMemberOnTower extends Action
 		
 		if(familyMember.getColor()!=ColorsEnum.NEUTER)
 			tower.getListPlayers().add(player.getPlayerColorsEnum());
-
+		
 		List<Effect> currEffects = tower.getTowerCells().get(floor).getEffects();
 
 		if (currEffects != null)
@@ -156,11 +155,6 @@ public class SettingFamiliarMemberOnTower extends Action
 				e.executeEffects(player, gameBoard);
 			}
 		}
-
-		boolean executed = pickTowerCard.executeEffects(player, gameBoard);
-
-		if (!executed)
-			return false;
 
 		player.setFamiliarPositioned(true);
 

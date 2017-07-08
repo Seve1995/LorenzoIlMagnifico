@@ -157,6 +157,9 @@ public class GameMatch implements Runnable, Serializable
 
 		handleGame();
 
+		if(GameServer.isIsClosed())
+			return;
+		
 		endGame();
 	}
 
