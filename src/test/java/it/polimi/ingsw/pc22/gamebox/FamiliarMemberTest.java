@@ -23,15 +23,7 @@ public class FamiliarMemberTest extends TestCase {
     @Before
     public void setUp()
     {
-
         familyMember = mock(FamilyMember.class);
-
-
-
-
-
-
-
     }
 
     @Test
@@ -45,7 +37,7 @@ public class FamiliarMemberTest extends TestCase {
         familyMember.setValueModifier(5);
 
         assertEquals(0, familyMember.getValue());
-
+        
     }
 
     @Test
@@ -59,7 +51,7 @@ public class FamiliarMemberTest extends TestCase {
         familyMember.setValueModifier(5);
 
         assertEquals(0, familyMember.getValue());
-
+        
     }
 
 
