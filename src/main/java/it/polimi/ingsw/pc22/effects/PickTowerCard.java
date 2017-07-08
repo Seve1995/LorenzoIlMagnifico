@@ -203,6 +203,8 @@ public class PickTowerCard extends ChooseAsset implements Effect
 					}
 				}
 
+				System.out.println(costDecision);
+				
 				if (costDecision == null)
 					return false;
 

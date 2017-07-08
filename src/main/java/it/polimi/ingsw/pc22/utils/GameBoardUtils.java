@@ -56,14 +56,12 @@ public class GameBoardUtils
 	{
 		fromEraToFaithPoints.put(2,3);
 		fromEraToFaithPoints.put(3,4);
-
-		//TODO SISTAMERE STA COSA
 		fromEraToFaithPoints.put(4,5);
 	}
 
 	public static int calculateFaithPointsFromEra(int era)
 	{
-		if (era < 1 || era > 3)
+		if (era < 2 || era > 4)
 			return -1;
 
 		return fromEraToFaithPoints.get(era);
@@ -76,21 +74,6 @@ public class GameBoardUtils
 			player.setFamiliarPositioned(false);
 			player.setHasPassed(false);
 		}
-	}
-
-
-
-
-	public static void endGameExcommunicationHandling
-			(List<Player> players, List<ExcommunicationCard> excommunicationCards, GameBoard gameBoard, int era)
-	{
-		for (Player p : players)
-		{
-			currentPlayer = p;
-
-			//chooseExcommunication(era, excommunicationCards, gameBoard);
-		}
-
 	}
 
 	public static void setUpPlayers

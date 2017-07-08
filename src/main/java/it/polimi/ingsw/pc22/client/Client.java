@@ -60,6 +60,8 @@ public class Client extends Application
 	private static Player player;
 
 	private static boolean stopped = false;
+	
+	private static boolean isGameBoardGUIActive = false;
 
 	private static final Logger LOGGER = Logger.getLogger(Client.class.getName());
 
@@ -164,6 +166,14 @@ public class Client extends Application
 		Client.stopped = stopped;
 	}
 
+	public static boolean isGameBoardGUIActive() {
+		return isGameBoardGUIActive;
+	}
+
+	public static void setGameBoardGUIActive(boolean isGameBoardGUIActive) {
+		Client.isGameBoardGUIActive = isGameBoardGUIActive;
+	}
+
 	@Override
 	public void start(Stage primaryStage)
 	{
@@ -260,7 +270,7 @@ public class Client extends Application
 
 			GameBoardController controller = loader.getController();
 			Client.controller = controller;
-
+			
 		} catch (IOException e)
 		{
 			throw new GenericException("Cannot Lunch boards", e);

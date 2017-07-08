@@ -158,7 +158,11 @@ public class Player implements Serializable
 	}
 
 	public void setServants(int servants) {
-		this.servants = servants;
+	    if (servants>=0)
+        {
+            this.servants = servants;
+        }
+	    else this.servants = 0;
 	}
 
 	public int getCoins() {
