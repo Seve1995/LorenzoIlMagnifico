@@ -289,7 +289,7 @@ public class GenericLoader
 
                 endGameMalus.setNoCardVictoryPoint(type);
             }
-
+                        
             if (!jsonEffect.isNull("assetsMalus"))
             {
                 List<Asset> assets =
@@ -297,8 +297,7 @@ public class GenericLoader
 
                 endGameMalus.setAssetsMalus(assets);
             }
-
-
+            
         }
 
         if (effect instanceof  FamilyMemberModifier)

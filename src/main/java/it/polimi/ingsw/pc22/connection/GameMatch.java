@@ -3,6 +3,7 @@ package it.polimi.ingsw.pc22.connection;
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.effects.Effect;
+import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.messages.*;
 import it.polimi.ingsw.pc22.player.Player;
@@ -91,12 +92,13 @@ public class GameMatch implements Runnable, Serializable
 
 		if (serialized)
 		{
-
-			System.out.println("SONO QUI");
-
 			handleGame();
 
-			endGame();
+			try {
+				endGame();
+			} catch (IOException e) {
+				throw new GenericException("Message: ", e);
+			}
 
 			return;
 		}
@@ -113,12 +115,8 @@ public class GameMatch implements Runnable, Serializable
 			{
 				boolean isGameFull = playerCounter == maxPlayersNumber;
 
-				System.out.println("isGameFull " + isGameFull);
-
 				boolean isTimeoutExpired =
 						System.currentTimeMillis() > timeStamp + timeForStart;
-
-				System.out.println("isTimeoutExpired " + isTimeoutExpired);
 
 				if (GameServer.isIsClosed())
 				{
@@ -129,7 +127,11 @@ public class GameMatch implements Runnable, Serializable
 
 				if (isTimeoutExpired || isGameFull)
 				{
-					startGame();
+					try {
+						startGame();
+					} catch (IOException e) {
+						throw new GenericException("Message: ", e);
+					}
 
 					timer.cancel();
 				}
@@ -137,13 +139,10 @@ public class GameMatch implements Runnable, Serializable
 		}, 5000, 5000);
 	}
 
-	private void startGame()
+	private void startGame() throws IOException
 	{
-		System.out.println("Inizio partita");
-
 		for (Player player : players)
 		{
-			//TODO RICORDARSI POI ALLA FINE DI RESETTARE LO STATO
 			player.setInMatch(true);
 		}
 
@@ -165,6 +164,9 @@ public class GameMatch implements Runnable, Serializable
 
 		handleGame();
 
+		if(GameServer.isIsClosed())
+			return;
+		
 		endGame();
 	}
 
@@ -268,7 +270,7 @@ public class GameMatch implements Runnable, Serializable
 			return;
 		}
 
-		GameBoardUtils.endGameExcommunicationHandling(players, excommunicationCards, gameBoard, era);
+		endGameExcommunicationHandling(players, excommunicationCards, gameBoard);
 	}
 
 	private void handleStoppedServer()
@@ -304,7 +306,7 @@ public class GameMatch implements Runnable, Serializable
 		for (Player p : players)
 		{
 			IOAdapter adapter = p.getAdapter();
-
+			
 			for (CharacterCard c : p.getPlayerBoard().getCharacters())
 			{
 				executeOneTurnEffect(adapter, c.getPermanentEffects(), p);
@@ -313,8 +315,6 @@ public class GameMatch implements Runnable, Serializable
 			adapter.printMessage(new CommunicationMessage("Turn " + turn + " now starting!"));
 
 			addFamiliarsValue(p);
-
-			System.out.println(p.getFamilyMembers());
 		}
 	}
 
@@ -339,11 +339,11 @@ public class GameMatch implements Runnable, Serializable
 
 	}
 
-	private void endGame()
+	private void endGame() throws IOException
 	{
 		GameBoardUtils.sumFinalPoints(players, gameBoard);
 
-		String winnerName = selectWinner(players);
+		Player winner = selectWinner(players);
 
 		for (Player p : players)
 		{
@@ -351,10 +351,22 @@ public class GameMatch implements Runnable, Serializable
 
 			List<Player> standings = new ArrayList<>(GameServer.getPlayersMap().values());
 
-			adapter.printMessage(new EndMatchMessage(standings, winnerName));
+			adapter.printMessage(new EndMatchMessage(standings, winner.getUsername(), winner.getVictoryPoints()));
+			
+			if (adapter instanceof SocketIOAdapter)
+			{
+				((SocketIOAdapter) adapter).setPlayerName(p.getUsername());
+				new Thread((SocketIOAdapter) adapter).start();
+			}
 		}
 
 		this.stopped = true;
+		
+		Map<String, Player> playerMap = GameServer.getPlayersMap();
+        
+        synchronized (playerMap) {
+        	PlayerLoader.refreshJson(playerMap);
+		}
 	}
 
 	private void loadGameBoard()
@@ -421,8 +433,6 @@ public class GameMatch implements Runnable, Serializable
 				currentPlayer = p;
 
 				chooseExcommunication(era, excommunicationCards, gameBoard);
-
-				System.out.println(currentPlayer.getUsername());
 			}
 		}
 	}
@@ -431,8 +441,6 @@ public class GameMatch implements Runnable, Serializable
 			(int era, List<ExcommunicationCard> excommunicationCards,
 			 GameBoard gameBoard)
 	{
-		System.out.println("Era: " + era);
-
 		int faithPoints = GameBoardUtils.calculateFaithPointsFromEra(era);
 
 		if (currentPlayer.getFaithPoints() < faithPoints)
@@ -497,10 +505,23 @@ public class GameMatch implements Runnable, Serializable
 		}
 
 	}
+	
+	public void endGameExcommunicationHandling
+	(List<Player> players, List<ExcommunicationCard> excommunicationCards, GameBoard gameBoard)
+	{
+		for (Player p : players)
+		{
+			currentPlayer = p;
+		
+			chooseExcommunication(4, excommunicationCards, gameBoard);
+		}
+	}
 
 	private void excommunicate(Player p, List<ExcommunicationCard> e, int era, GameBoard gameBoard)
 	{
-		for (Effect eff : e.get(era).getEffects())
+		int eraNumberInCard = era -2;
+		
+		for (Effect eff : e.get(eraNumberInCard).getEffects())
 		{
 			eff.executeEffects(p, gameBoard);
 		}
@@ -759,11 +780,9 @@ public class GameMatch implements Runnable, Serializable
 		player.setFamiliarToPlayer(gameBoard.getDices());
 	}
 	
-	private String selectWinner(List<Player> players)
+	private Player selectWinner(List<Player> players)
 	{
 		Collections.sort(players, new PlayerComparator());
-
-		String winnerName = null;
 
 		for (int i  = 0; i < players.size(); i++)
 		{
@@ -771,8 +790,6 @@ public class GameMatch implements Runnable, Serializable
 
 			if (i == 0)
 			{
-				winnerName = player.getUsername();
-
 				int victories = player.getNumberOfMatchWon() + 1;
 
 				player.setNumberOfMatchWon(victories);
@@ -786,7 +803,7 @@ public class GameMatch implements Runnable, Serializable
 
 		}
 
-		return winnerName;
+		return players.get(0);
 	}
 
 	public int getMaxPlayersNumber()

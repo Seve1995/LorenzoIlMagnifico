@@ -328,11 +328,13 @@ public abstract class IOAdapter
         gameMatch.setPlayerCounter(counter);
     }
 
-    synchronized private void updateJson() throws IOException
+    public void updateJson() throws IOException
     {
         Map<String, Player> playerMap = GameServer.getPlayersMap();
-
-        PlayerLoader.refreshJson(playerMap);
+        
+        synchronized (playerMap) {
+        	PlayerLoader.refreshJson(playerMap);
+		}
     }
 
 }

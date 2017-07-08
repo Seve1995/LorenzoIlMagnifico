@@ -76,11 +76,24 @@ public class MessageHandler
             if ("GUI".equals(Client.getInterfaceChoice()) &&
             		"startGameBoard".equals(gameStatusMessage.getState()))
             {
+                Client.setGameBoardGUIActive(true);
+
                 Platform.runLater(() ->
                 {
                     Client.launchGameBoard();
                 });
             }
+            
+            if ("GUI".equals(Client.getInterfaceChoice()) && !Client.isGameBoardGUIActive())
+            	{
+            	
+	                Client.setGameBoardGUIActive(true);
+	
+	            	Platform.runLater(() ->
+	                {
+	                    Client.launchGameBoard();
+	                });
+            	}
             
             if ("refreshGameBoard".equals(gameStatusMessage.getState()))
             {
@@ -213,6 +226,8 @@ public class MessageHandler
             Client.setGenericState(new GameCreationState());
 
             Client.setStateChanged(true);
+            
+            Client.setGameBoardGUIActive(false);
         }
 
         if (message instanceof ExcommunicationMessage)
@@ -228,15 +243,11 @@ public class MessageHandler
         {
             printOnClient(message);
 
-            System.out.println("IL SERVER SI È CHIUSO");
-
             Client.setStopped(true);
         }
 
         if (message instanceof EndMatchMessage)
         {
-            //TODO SISTEMARE QUESTA COSA
-
             printOnClient(message);
 
             Client.setGenericState(new GameCreationState());
