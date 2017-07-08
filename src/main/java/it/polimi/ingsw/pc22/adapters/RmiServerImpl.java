@@ -79,10 +79,7 @@ public class RmiServerImpl implements RMIServerInterface
             {
                 LoginMessage message;
 
-                if (player.isInMatch())
-                    message = new LoginMessage(true, true, player);
-                else
-                    message = new LoginMessage(true, false, player);
+                message = new LoginMessage(true, false, player);
 
                 System.out.println(message);
 
