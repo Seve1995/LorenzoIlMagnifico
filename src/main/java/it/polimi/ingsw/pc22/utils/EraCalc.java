@@ -1,10 +1,11 @@
 package it.polimi.ingsw.pc22.utils;
 
 /**
- * Created by fandroid95 on 12/06/2017.
+ * On the basis of the number of turn,
+ * with this class we can infer in which era we are
+ * (Useful for excommunications and some other effects)
  */
 
-//ADESSO E' INUTILE, SE FUNZIONA IL NUOVO METODO DI CALCOLO DELL'ERA VA E L I M I N A T A
 public enum EraCalc
 {
     FIRSTERAFIVEPLAYERSZERO(5,0,1),

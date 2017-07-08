@@ -7,7 +7,11 @@ import it.polimi.ingsw.pc22.messages.ErrorMessage;
 import it.polimi.ingsw.pc22.messages.GameStatusMessage;
 
 /**
- * Created by fandroid95 on 25/06/2017.
+ * This thread is implemented to manage the actions using socket connection.
+ * It creates the object of the action and executes it. After that it gives to
+ * the user a feedback: it can be an error or a communication message, that notify the
+ * success of the action itself. If the action is a setting of a familiar this thread
+ * notifies that the action-time is finished.
  */
 public class ActionThread implements Runnable
 {

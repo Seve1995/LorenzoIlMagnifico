@@ -8,6 +8,13 @@ import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This thread is implemented either when the interface choice is GUI
+ * or CLI, but only when server and client communicate using socket.
+ * Its function is simply to call the proper MessageHandler method
+ * to update the screen in the proper way.
+ */
+
 public class ReceiveThread implements Runnable
 {
 	private Socket socket=null;

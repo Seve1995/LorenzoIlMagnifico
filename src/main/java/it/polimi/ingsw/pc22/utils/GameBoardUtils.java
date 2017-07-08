@@ -11,6 +11,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
+/**
+ * This class has several useful methods for the game board and
+ * for the calculation of the final victory points.
+ * It maps the number of a single player faith points
+ * to victory points he/she will gain at the end of the match.
+ * It also has methods to set up all the things for the game
+ * and to purge the game board at the end of every single turn.
+ *
+ */
+
 public class GameBoardUtils
 {
 	private static Player currentPlayer;

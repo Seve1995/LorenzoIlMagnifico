@@ -11,6 +11,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This is the JSON loader of the gameBoard. According to the number of the players
+ * it loads different gameboards (because some cells are blocked and players can't
+ * place their familiars on them).
+ */
+
 public class BoardLoader extends GenericLoader
 {
     private static final Logger LOGGER = Logger.getLogger(BoardLoader.class.getName());

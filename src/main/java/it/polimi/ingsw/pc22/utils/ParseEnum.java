@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by fandroid95 on 20/06/2017.
+ * This class parses the strings typed by the user to the action related to them.
  */
 public enum ParseEnum
 {

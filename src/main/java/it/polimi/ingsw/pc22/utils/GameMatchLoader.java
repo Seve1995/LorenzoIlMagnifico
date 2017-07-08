@@ -12,7 +12,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by fandroid95 on 07/07/2017.
+ * This is a the loader of the game match.
+ * It is useful to get the persistence work.
+ * All the match saved will be stored in the file "savedGames.txt".
+ * And when the server will be restarted it will load all those matches.
+ *
  */
 public class GameMatchLoader
 {

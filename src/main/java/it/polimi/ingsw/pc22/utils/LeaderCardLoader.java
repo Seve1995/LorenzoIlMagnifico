@@ -12,7 +12,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by matteo on 11/06/17.
+ * This is the loader of the leader cards Deck.
+ * Every single card is fully loaded according to its attributes.
+ *
+ *
  */
 public class LeaderCardLoader extends GenericLoader
 {

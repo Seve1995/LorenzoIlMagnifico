@@ -14,6 +14,11 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This class is used to load players from the JSON file
+ * where they are stored at the moment of the very first registration.
+ */
+
 public class PlayerLoader
 {
 	private static final String FILEPATH = "users/UsersJson.json";

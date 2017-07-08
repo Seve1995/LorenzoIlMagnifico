@@ -16,6 +16,13 @@ import java.util.logging.Logger;
 
 import static it.polimi.ingsw.pc22.client.Client.getClassLoader;
 
+/**
+ * This class handles all the dialogs of the client app.
+ * Every method loads a new stage where there is a question
+ * about something. All the methods return a boolean:
+ * if the confirm is button (present in every screen) is clicked or not
+ */
+
 public class GameBoardDialogs {
 
 
@@ -24,12 +31,7 @@ public class GameBoardDialogs {
     private static final Logger LOGGER = Logger.getLogger(GameBoardDialogs.class.getName());
 
 
-
-    public static List<Integer> councilPrivilegeDialog(Object message) {
-
-        List<Integer> exception = new ArrayList<>();
-
-        exception.add(-1);
+    public static boolean councilPrivilegeDialog(Object message) {
 
         try {
 
@@ -55,14 +57,14 @@ public class GameBoardDialogs {
 
             dialogStage.showAndWait();
 
-            return controller.getNumbers();
+            return controller.isConfirmClicked();
 
         }
         catch (IOException e)
         {
             LOGGER.log(Level.INFO, "ERROR RECEIVE THREAD", e);
 
-            return exception;
+            return false;
         }
     }
 

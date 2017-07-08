@@ -8,6 +8,12 @@ import javafx.scene.layout.*;
 
 import java.util.List;
 
+/**
+ * This class contains all the useful functions to update
+ * the gameBoard. It updates the excommunication cards (only at the beginning of the game),
+ * the dices, and all the familiars in every cell, at the moment that they are set.
+ */
+
 
 public class UpdateUtils {
 

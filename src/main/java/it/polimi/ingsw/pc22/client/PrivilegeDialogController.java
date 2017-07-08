@@ -14,6 +14,12 @@ import java.util.List;
 
 public class PrivilegeDialogController implements Controller {
 
+    /**
+     * This class controls the council-privilege-dialog screen:
+     * it has 5 buttons, one for every possible choice, and the label on
+     * the top inform the player about number of privileges left in real time.
+     */
+
     private boolean confirmClicked = false;
     private Stage dialogStage;
     private int privilegesLeft;
@@ -36,13 +42,6 @@ public class PrivilegeDialogController implements Controller {
     private Label errorLabel;
     
     private String output = "";
-
-    private List<Integer> numbers = new ArrayList<>();
-
-    public List<Integer> getNumbers() {
-        return numbers;
-    }
-
 
     @FXML
     public void handleConfirm()
@@ -89,7 +88,7 @@ public class PrivilegeDialogController implements Controller {
 
         output += "1";
         toggle1.setDisable(true);
-        numbers.add(1);
+
         checkForOtherPrivileges();
 
     }
@@ -99,7 +98,7 @@ public class PrivilegeDialogController implements Controller {
     {
         output += "2";
         toggle2.setDisable(true);
-        numbers.add(2);
+
         checkForOtherPrivileges();
     }
 
@@ -108,7 +107,7 @@ public class PrivilegeDialogController implements Controller {
     {
         output += "3";
         toggle3.setDisable(true);
-        numbers.add(3);
+
         checkForOtherPrivileges();
     }
 
@@ -117,7 +116,7 @@ public class PrivilegeDialogController implements Controller {
     {
         output += "4";
         toggle4.setDisable(true);
-        numbers.add(4);
+
         checkForOtherPrivileges();
     }
 
@@ -126,7 +125,7 @@ public class PrivilegeDialogController implements Controller {
     {
         output += "5";
         toggle5.setDisable(true);
-        numbers.add(5);
+
         checkForOtherPrivileges();
     }
 

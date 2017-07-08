@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.util.concurrent.Callable;
 
 /**
- * Created by fandroid95 on 11/06/2017.
+ * This class reads the command line in synchronized way.
  */
 public class ConsoleReader implements Callable<String>
 {

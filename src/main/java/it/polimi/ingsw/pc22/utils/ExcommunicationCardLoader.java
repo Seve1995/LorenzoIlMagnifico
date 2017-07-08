@@ -11,7 +11,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by fandroid95 on 31/05/2017.
+ * This is the loader of the whole Excommunication Card Deck.
+ * Only 3 of them will be used in a single game. They will be shuffled
+ * and placed in the gameMatch class.
+ *
  */
 public class ExcommunicationCardLoader extends GenericLoader
 {

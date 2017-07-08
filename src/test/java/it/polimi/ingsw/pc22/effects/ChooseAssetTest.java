@@ -33,7 +33,7 @@ public class ChooseAssetTest extends TestCase{
 		
 		chooseAsset.setChosenAssetsToPay(chosenAssetsToPay);
 			
-		GameMatch gameMatch = new GameMatch(500L, 4, 1000L);
+		GameMatch gameMatch = new GameMatch(4);
 								
 		assertTrue(chooseAsset.waitForResult());
 		

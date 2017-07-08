@@ -7,6 +7,11 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * This class associates the bonus given by council privilege to
+ * an integer to easily recognize it alongside the code.
+ */
+
 public class CouncilPrivilege
 {
 	private List<Asset> bonus1;

@@ -8,7 +8,11 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.stage.Stage;
 
 /**
- * Created by matteo on 27/06/17.
+ * This is the controller of the screen that aske the player
+ * if he/she wants to increment the value of his/her action using servants.
+ * It has a simple spinner whose values go from 0 to the number of servants of the
+ * player. As always there is a confirm button.
+
  */
 public class ServantsHandlerController implements Controller {
 

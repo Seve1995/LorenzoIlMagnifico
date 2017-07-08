@@ -14,6 +14,13 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+/**
+ * This is the very first screen of our application.
+ * Here the user can choose between GUI/CLI and SOCKET/RMI
+ * There are four radio buttons, and every combination is allowed.
+ * DEFAULT: GUI+SOCKET
+ */
+
 public class StartingChoiceController implements Controller {
 
 	@FXML
@@ -29,7 +36,7 @@ public class StartingChoiceController implements Controller {
 
 	private static final int SOCKET_PORT = 9001;
 
-    //Predefinito: GUI + Socket
+
     @FXML
     private void handleConfirmButton()
 	{
@@ -112,8 +119,6 @@ public class StartingChoiceController implements Controller {
 
 			Client.setRmiServerInterface(rmiServerInterface);
 
-			//SISTEMARE QUESTA RIPETIZIONE
-
 			if (CLI.isSelected())
 			{
 				Client.setInterfaceChoice("CLI");
@@ -139,7 +144,6 @@ public class StartingChoiceController implements Controller {
 
 	@Override
 	public void updateScene(Object message) {
-		// TODO Auto-generated method stub
 		
 	}
 

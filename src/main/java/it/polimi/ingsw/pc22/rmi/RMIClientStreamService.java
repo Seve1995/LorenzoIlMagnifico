@@ -6,7 +6,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
- * Created by fandroid95 on 30/05/2017.
+ * Interface of the RMI-client.
  */
 public interface RMIClientStreamService extends Remote
 {

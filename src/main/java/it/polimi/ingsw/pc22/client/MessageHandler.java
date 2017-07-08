@@ -9,7 +9,11 @@ import javafx.application.Platform;
 import java.util.List;
 
 /**
- * Created by fandroid95 on 28/06/2017.
+ * This class triggers the launch of a specific screen when a message arrives.
+ * It also stores info about current state of the player and of the gameboard
+ * in a certain moment of the game. According to this kind of info, the game board and
+ * the player board are properly updated.
+ *
  */
 public class MessageHandler
 {

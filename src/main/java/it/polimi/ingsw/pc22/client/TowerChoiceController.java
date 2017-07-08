@@ -10,7 +10,11 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.stage.Stage;
 
 /**
- * Created by matteo on 01/07/17.
+ * This controller is used to handle the request of the
+ * effect "pick tower card". There are two spinners: one for the type
+ * of the card to choose and one for the floor where it is.
+ * When the type of the card is given the first one is disabled.
+ * (Actually the two spinners are on only for the card "Badessa")
  */
 public class TowerChoiceController implements Controller
 {

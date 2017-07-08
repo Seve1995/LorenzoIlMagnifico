@@ -12,7 +12,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by fandroid95 on 13/06/2017.
+ * This thread is useful to manage the closure of the server.
+ * It stops all the games (saving them for the persistence)
+ * and closes all socket-connection (if any).
+ * Every player is notified that the server is shutting down
+ * and they go to a suspended-state.
  */
 public class ExitThread implements Runnable
 {

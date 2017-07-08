@@ -5,7 +5,10 @@ import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
 import java.io.Serializable;
 
 /**
- * Created by matteo on 12/06/17.
+ * This class models the concept of required card
+ * that continuously arises in the game.
+ * It has two attributes: the number of cards required,
+ * and their type.
  */
 public class RequiredCard implements Serializable
 {

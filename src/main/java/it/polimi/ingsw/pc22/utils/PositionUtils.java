@@ -3,7 +3,9 @@ package it.polimi.ingsw.pc22.utils;
 import it.polimi.ingsw.pc22.gamebox.*;
 
 /**
- * Created by fandroid95 on 11/06/2017.
+ * This class shows which actions
+ * are available among the others, printing
+ * them on the command line.
  */
 public class PositionUtils
 {
@@ -12,18 +14,18 @@ public class PositionUtils
         String actions = "";
 
         if (areTowersAvailable(gameBoard.getTowers()))
-            actions = "- Metti familiare su torre (es: set tower <familiar> <servants> <type> <floor>)\n";
+            actions = "- Set a familair on a tower (es: set tower <familiar> <servants> <type> <floor>)\n";
 
         if (isMarketAvailable(gameBoard.getMarket()))
-            actions += "- Metti familiare su market (es: set market <familiar> <servants> <zone>)\n";
+            actions += "- Set a familiar on the market (es: set market <familiar> <servants> <zone>)\n";
 
         if (isProductionAvailable(gameBoard.getProduction()))
-            actions += "- Metti familiare nella produzione (es: set production <familiar> <servants>)\n";
+            actions += "- Set a familiar on the production (es: set production <familiar> <servants>)\n";
 
         if (isHarvestAvailable(gameBoard.getHarvest()))
-            actions += "- Metti familiare nella raccolto (es: set harvest <familiar> <servants>)\n";
+            actions += "- Set a familiar on the harvest (es: set harvest <familiar> <servants>)\n";
 
-        actions += "- Metti familiare nel concilio (es: set council <familiar> <servants>)";
+        actions += "- Set a familiar on the council (es: set council <familiar> <servants>)";
 
         return actions;
     }

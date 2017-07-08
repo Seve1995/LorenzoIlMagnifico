@@ -18,6 +18,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+/**
+ * This class represent the game match cycle.
+ * It has methods to start game and to put all the things
+ * that are needed on the player board, to set up player etc.
+ * It also has methods to manage the excommunication,
+ *
+ */
+
 public class GameMatch implements Runnable, Serializable
 {	
 	private String gameName;
@@ -66,10 +74,9 @@ public class GameMatch implements Runnable, Serializable
 
 	private TimeOut timeOutFromFile;
 	
-	public GameMatch(Long timeOut, int maxPlayersNumber, Long timeForStart)
+	public GameMatch(int maxPlayersNumber)
 	{
-		GameMatch.timeout = timeOut;
-		GameMatch.timeForStart = timeForStart;
+
 		this.maxPlayersNumber = maxPlayersNumber;
 	}
 	

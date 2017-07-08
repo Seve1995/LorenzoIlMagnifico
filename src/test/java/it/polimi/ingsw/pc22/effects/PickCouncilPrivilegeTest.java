@@ -23,7 +23,7 @@ public class PickCouncilPrivilegeTest extends TestCase {
     {
         player = mock(Player.class);
 
-        new GameMatch(500L, 2, 1000L);
+        new GameMatch(2);
     }
 
     @Test

@@ -11,7 +11,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by fandroid95 on 31/05/2017.
+ * This is the card loader.
+ * It can loads costs, permanent effects, immediate effects and alla the attributes
+ * associated to a single development card.
  */
 public class CardLoader extends GenericLoader
 {

@@ -307,7 +307,7 @@ public abstract class IOAdapter
 
     private void startNewGameMatch(String gameName, Player player)
     {
-        GameMatch gameMatch = new GameMatch(timeout, 5, timeForStart);
+        GameMatch gameMatch = new GameMatch(5);
 
         Map<String, GameMatch> gameMatchMap = GameServer.getGameMatchMap();
 

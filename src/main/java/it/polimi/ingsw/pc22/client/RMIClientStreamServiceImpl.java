@@ -6,7 +6,7 @@ import it.polimi.ingsw.pc22.rmi.RMIClientStreamService;
 import java.rmi.RemoteException;
 
 /**
- * Created by fandroid95 on 30/05/2017.
+ * It is the simple implementation of RMI-side of client.
  */
 public class RMIClientStreamServiceImpl implements RMIClientStreamService
 {

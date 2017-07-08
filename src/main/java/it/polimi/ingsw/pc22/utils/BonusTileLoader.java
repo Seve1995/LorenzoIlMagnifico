@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by fandroid95 on 04/06/2017.
+ *
+ * This is the JSON loader of all the bonus tiles.
+ * There are 5 different bonus tiles, one for every player.
  */
 public class BonusTileLoader extends GenericLoader
 {

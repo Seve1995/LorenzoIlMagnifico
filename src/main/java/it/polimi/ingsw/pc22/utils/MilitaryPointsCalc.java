@@ -1,5 +1,12 @@
 package it.polimi.ingsw.pc22.utils;
 
+
+/**
+ * This class is an enum that associates
+ * the military points requested to set a territory
+ * card on the player board.
+ *
+ */
 public enum MilitaryPointsCalc {
 	
 	ZERO(0,0),

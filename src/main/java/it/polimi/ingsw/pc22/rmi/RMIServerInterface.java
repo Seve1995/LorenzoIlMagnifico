@@ -8,7 +8,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 /**
- * Created by fandroid95 on 26/05/2017.
+ * Interface of the RMI-Server
  */
 public interface RMIServerInterface extends Remote
 {

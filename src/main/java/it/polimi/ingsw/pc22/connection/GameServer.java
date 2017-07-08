@@ -23,6 +23,14 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This is the core of the server.
+ * It contains information about ports used, all the player that subscribed
+ * on the server. It contains main method, and it loads all the things
+ * needed to communicate via RMI, and via Socket. It remains online, listening
+ * and accepting connection (or method calling) from the various client.
+ */
+
 public class GameServer 
 {
 	private static Map<String, GameMatch> gameMatchMap;

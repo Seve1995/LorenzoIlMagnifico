@@ -1,7 +1,9 @@
 package it.polimi.ingsw.pc22.utils;
 
 /**
- * Created by fandroid95 on 08/06/2017.
+ * It is useful to calculate the victory point to
+ * assign to the player, on the basis of his/her
+ * military points.
  */
 public enum TerritoriesCalc
 {

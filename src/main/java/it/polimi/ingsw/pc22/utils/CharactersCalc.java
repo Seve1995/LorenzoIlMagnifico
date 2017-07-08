@@ -1,5 +1,10 @@
 package it.polimi.ingsw.pc22.utils;
 
+/**
+ * This enum is useful to calc the victory points at the
+ * end of the match.
+ */
+
 public enum CharactersCalc 
 {
 	ZERO(0,0),

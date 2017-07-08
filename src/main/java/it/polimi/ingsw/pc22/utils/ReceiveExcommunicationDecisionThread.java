@@ -9,7 +9,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by fandroid95 on 01/07/2017.
+ * This thread is useful (in SOCKET) to handle
+ * the decision about supporting or not the pope.
  */
 public class ReceiveExcommunicationDecisionThread implements Runnable
 {

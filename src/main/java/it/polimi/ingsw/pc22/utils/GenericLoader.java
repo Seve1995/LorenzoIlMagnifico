@@ -12,8 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by fandroid95 on 31/05/2017.
+ * Generic loader is used to load some attributes that
+ * are common along side the match, such as effects,
+ * assets, or required cards.
  */
+
 public class GenericLoader
 {
     private static String EFFECT_PATH = "it.polimi.ingsw.pc22.effects.";

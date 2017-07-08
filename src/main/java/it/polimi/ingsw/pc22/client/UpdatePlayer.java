@@ -8,6 +8,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
+/**
+ * This class contains all the functions to update the resources
+ * associated to the player in right way.
+ * All the cards (even the leaders), all the points and all his/her assets.
+ */
+
 public class UpdatePlayer {
 
     public static void updatePlayerCharacters(Player player, GridPane characterPlayer)

@@ -5,6 +5,13 @@ import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This thread is on only when the player want to play using CLI (+SOCKET).
+ * It is used to print the state of the game on the command line,
+ * and to send the messages (strings written on the command line itself) to the server.
+ 
+ */
+
 public class ViewThread implements Runnable
 {
 	private BufferedReader inKeyboard = null;
