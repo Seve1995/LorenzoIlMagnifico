@@ -71,7 +71,8 @@ public class PickTowerCard extends ChooseAsset implements Effect
 
 	public PickTowerCard() {}
 
-	public PickTowerCard(int floor, CardTypeEnum cardType, int diceValue) {
+	public PickTowerCard(int floor, CardTypeEnum cardType, int diceValue)
+	{
 		this.floor = floor;
 		this.cardType = cardType;
 		this.diceValue = diceValue;
@@ -81,6 +82,10 @@ public class PickTowerCard extends ChooseAsset implements Effect
 	public boolean isLegal(Player player, GameBoard gameBoard)
 	{
 		String gameName = gameBoard.getGameMatchName();
+
+		GameMatch gameMatch = GameServer.getGameMatchMap().get(gameName);
+
+		gameMatch.setCurrEffect(this);
 
 		if (floor==-1 || cardType==null) return false;
 		
@@ -198,7 +203,8 @@ public class PickTowerCard extends ChooseAsset implements Effect
 					}
 				}
 
-				if (costDecision == null) return false;
+				if (costDecision == null)
+					return false;
 
 				switch (costDecision)
 				{
