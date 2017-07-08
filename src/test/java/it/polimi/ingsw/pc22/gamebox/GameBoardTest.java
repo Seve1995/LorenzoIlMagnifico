@@ -24,10 +24,7 @@ public class GameBoardTest extends TestCase {
     @Test
     public void testGetTowerByNameNull()
     {
-
-
         assertEquals(null, gameBoard.getTowerByType(CardTypeEnum.ANY));
-
     }
 
     @Test

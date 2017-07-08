@@ -147,14 +147,14 @@ public class BonusTile  implements Serializable
 
 	@Override
 	public String toString() {
-		return "BonusTile:" +
-				"[PROD.]ServantBonus:" + productionServantBonus +
-				"|CoinsBonus:" + productionCoinsBonus +
-				"|MilPointsBonus:" + productionMilitaryPointsBonus + "\n" +
-				"|[HARV.]ServantBonus:" + harvestServantBonus +
-				"|CoinsBonus:" + harvestCoinsBonus +
-				"|MilPointsBonus:" + harvestMilitaryPointsBonus +
-				"|WoodsBonus:" + harvestWoodsBonus +
-				"|StonesBonus:" + harvestStonesBonus;
+		return "BonusTile:\n" +
+				"[PROD.]ServantBonus:" + productionServantBonus.getValue() +
+				"|CoinsBonus:" + productionCoinsBonus.getValue() +
+				"|MilPointsBonus:" + productionMilitaryPointsBonus.getValue() + "\n" +
+				"[HARV.]ServantBonus:" + harvestServantBonus.getValue() +
+				"|CoinsBonus:" + harvestCoinsBonus.getValue() +
+				"|MilPointsBonus:" + harvestMilitaryPointsBonus.getValue() +
+				"|WoodsBonus:" + harvestWoodsBonus.getValue() +
+				"|StonesBonus:" + harvestStonesBonus.getValue();
 	}
 }

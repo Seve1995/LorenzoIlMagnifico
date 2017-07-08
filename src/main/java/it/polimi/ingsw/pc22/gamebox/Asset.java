@@ -11,15 +11,19 @@ public class Asset implements Serializable
 		this.value = value;
 		this.type = type;
 	}
+	
 	public int getValue() {
 		return value;
 	}
+	
 	public void setValue(int value) {
 		this.value = value;
 	}
+	
 	public AssetType getType() {
 		return type;
 	}
+	
 	public void setType(AssetType type) {
 		this.type = type;
 	}
