@@ -35,7 +35,7 @@ public class ClientAccessController implements Controller {
     
     @FXML
     private void handleRegisterButton() {
-    	String output = username.getText() + " " + password.getText() + " R";
+    	String output = username.getText() + " " + password.getText() + " S";
 		Client.getGenericState().sendToServer(output);
 
     }
