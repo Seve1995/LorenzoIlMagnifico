@@ -127,8 +127,6 @@ public class SettingFamiliarMemberOnTower extends Action
 	public boolean executeAction (Player player, GameBoard gameBoard)
 	{
 		Tower tower = selectedTower(gameBoard.getTowers());
-		
-		List<Effect> currEffects;
 
 		if (tower == null)
 			return false;
@@ -148,8 +146,8 @@ public class SettingFamiliarMemberOnTower extends Action
 		
 		if(familyMember.getColor()!=ColorsEnum.NEUTER)
 			tower.getListPlayers().add(player.getPlayerColorsEnum());
-		
-		currEffects = tower.getTowerCells().get(floor).getEffects();
+
+		List<Effect> currEffects = tower.getTowerCells().get(floor).getEffects();
 
 		if (currEffects != null)
 		{
