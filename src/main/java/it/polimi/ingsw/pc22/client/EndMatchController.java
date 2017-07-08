@@ -45,15 +45,14 @@ public class EndMatchController implements Controller {
 
         java.util.List<Player> wholePlayers = ((EndMatchMessage) message).getStanding();
 
-        String output = null;
+        StringBuilder output = new StringBuilder();
 
         for (Player p : wholePlayers)
         {
-            output += "" + p.getUsername() + " W: " + p.getNumberOfMatchWon() + " L: " + p.getNumberOfMatchLost() + "\n";
+            output.append(p.getUsername() + " W: " + p.getNumberOfMatchWon() + " L: " + p.getNumberOfMatchLost() + "\n");
         }
 
-        listLabel.setText(output);
-
+        listLabel.setText(output.toString());
     }
 
     @FXML

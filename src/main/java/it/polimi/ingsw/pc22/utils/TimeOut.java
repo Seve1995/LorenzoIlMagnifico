@@ -1,8 +1,10 @@
 package it.polimi.ingsw.pc22.utils;
 
 
-public class TimeOut {
+import java.io.Serializable;
 
+public class TimeOut implements Serializable
+{
     private Long action;
     private Long gameStarting;
 

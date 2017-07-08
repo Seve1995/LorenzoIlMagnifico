@@ -26,6 +26,8 @@ public class GameMatchLoader
 
         Map<String, GameMatch>  gamesMap = new ConcurrentHashMap<>();
 
+        FileInputStream file = null;
+
         try
         {
             ClassLoader classLoader = GameMatchLoader.class.getClassLoader();
@@ -35,7 +37,7 @@ public class GameMatchLoader
             if (gameMatches.length() == 0)
                 return gamesMap;
 
-            FileInputStream file = new FileInputStream(gameMatches.getPath());
+            file = new FileInputStream(gameMatches.getPath());
 
             InputStream buffer = new BufferedInputStream(file);
             ObjectInput input = new ObjectInputStream(buffer);
@@ -60,6 +62,18 @@ public class GameMatchLoader
         catch (ClassNotFoundException | IOException e)
         {
             LOGGER.log(Level.INFO, "PROBLEMI DESERIALIZZAZIONE MATCHES", e);
+        }
+        finally
+        {
+
+            if (file != null)
+                try
+                {
+                    file.close();
+                } catch (IOException e)
+                {
+                    LOGGER.log(Level.INFO, "PROBLEMI DESERIALIZZAZIONE MATCHES", e);
+                }
         }
 
         return gamesMap;

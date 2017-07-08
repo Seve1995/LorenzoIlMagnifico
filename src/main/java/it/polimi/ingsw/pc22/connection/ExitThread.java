@@ -58,13 +58,13 @@ public class ExitThread implements Runnable
 
         Integer currentSize = GameServer.getGameMatchMap().size();
 
-        List<GameMatch> stoppedGames = new ArrayList<>();
+        ArrayList<GameMatch> stoppedGames = new ArrayList<>();
 
         ClassLoader classLoader = ExitThread.class.getClassLoader();
 
         File playerFile = new File(classLoader.getResource("savedGames.txt").getFile());
 
-        FileOutputStream fileOut;
+        FileOutputStream fileOut = null;
 
         try
         {
@@ -117,11 +117,26 @@ public class ExitThread implements Runnable
             out.writeObject(stoppedGames);
 
             out.close();
-            fileOut.close();
 
         } catch (IOException e)
         {
             LOGGER.log(Level.INFO, "CANNOT WRITE ON FILE", e);
+        }
+        finally
+        {
+
+            if (fileOut != null)
+            {
+                try
+                {
+                    fileOut.close();
+                }
+                    catch (IOException e)
+                {
+                    LOGGER.log(Level.INFO, "ERROR RECEIVE THREAD", e);
+                }
+            }
+
         }
 
         try
