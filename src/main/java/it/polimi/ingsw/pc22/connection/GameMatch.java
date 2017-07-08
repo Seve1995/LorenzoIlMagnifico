@@ -84,7 +84,6 @@ public class GameMatch implements Runnable, Serializable
 
 		if (serialized)
 		{
-
 			System.out.println("SONO QUI");
 
 			handleGame();
@@ -93,8 +92,6 @@ public class GameMatch implements Runnable, Serializable
 
 			return;
 		}
-
-
 
 		Long timeStamp = System.currentTimeMillis();
 

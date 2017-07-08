@@ -59,7 +59,8 @@ public class VentureCard extends DevelopmentCard
 
 
 
-	public Asset getMilitaryPointsCost() {
+	public Asset getMilitaryPointsCost()
+	{
 		return militaryPointsCost;
 	}
 

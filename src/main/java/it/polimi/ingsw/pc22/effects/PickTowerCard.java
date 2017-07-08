@@ -87,11 +87,13 @@ public class PickTowerCard extends ChooseAsset implements Effect
 
 		gameMatch.setCurrEffect(this);
 
-		if (floor==-1 || cardType==null) return false;
+		if (floor==-1 || cardType==null)
+			return false;
 		
 		Tower tower = gameBoard.getTowerByType(cardType);
 		
-		if(tower.getTowerCells().get(floor).getDevelopmentCard() == null) return false;
+		if(tower.getTowerCells().get(floor).getDevelopmentCard() == null)
+			return false;
 		
 		for(CardModifier c : player.getCardModifiers())
 		{
@@ -144,14 +146,14 @@ public class PickTowerCard extends ChooseAsset implements Effect
 							asset1.setValue(asset1.getValue() - asset.getValue());
 			}
 			
-			if (applyCardModifiers(player, gameName)==false) return false;
+			if (applyCardModifiers(player, gameName)==false)
+				return false;
 			
 			for (Asset a : costs)
 			{
 				if (a.getValue() > player.getAsset(a.getType()))
 				{
 					return false;
-					
 				}
 			}
 			
@@ -164,62 +166,30 @@ public class PickTowerCard extends ChooseAsset implements Effect
 				return false;
 			
 			VentureCard currVentureCard = (VentureCard) tower.getTowerCells().get(floor).getDevelopmentCard();
-			
-			if (currVentureCard.isRequiredCostChoice())
+
+			if (currVentureCard.isRequiredCostChoice() && currVentureCard == null)
 			{
-				IOAdapter adapter = player.getAdapter();
+				return false;
+			}
 
-				Asset militaryPointsRequired = currVentureCard.getMilitaryPointsRequired();
-				Asset militaryPointsCost = currVentureCard.getMilitaryPointsCost();
-				List<Asset> resourcesCost = currVentureCard.getResourcesCost();
+			if (currVentureCard.isRequiredCostChoice() && currVentureCard != null)
+			{
 
-				ChooseCostsMessage costsMessage = new ChooseCostsMessage
-						(militaryPointsRequired, militaryPointsCost, resourcesCost);
-
-				adapter.printMessage(costsMessage);
-
-				if (adapter instanceof SocketIOAdapter)
-					new Thread(new ReceiveCostsDecisionThread(gameName)).start();
-
-				Long timestamp = System.currentTimeMillis();
-
-				Long timeout = GameMatch.getTimeout();
-
-				while (System.currentTimeMillis() < timestamp + timeout)
-				{
-					try
-					{
-						Thread.sleep(100L);
-					}
-					catch (InterruptedException e)
-					{
-						LOGGER.log(Level.WARNING, "Interrupted!", e);
-						Thread.currentThread().interrupt();
-					}
-
-					if (costDecision != null)
-					{
-						break;
-					}
-				}
-
-				if (costDecision == null)
+				if (costDecision == 0 && player.getMilitaryPoints() < currVentureCard.getMilitaryPointsCost().getValue())
 					return false;
 
-				switch (costDecision)
+				if (costDecision == 1)
 				{
-					case 1:
-						costs.add(currVentureCard.getMilitaryPointsCost());
-						break;
-					case 2:
-						costs.addAll(currVentureCard.getResourcesCost());
-						break;
-					default:
-						return false;
+					for (Asset asset : currVentureCard.getResourcesCost())
+					{
+						if (asset.getValue() > player.getAsset(asset.getType()))
+						{
+							return false;
+						}
+					}
 				}
-				
 			}
-			
+
 			if (assetsDiscount!=null)
 			{
 				for (Asset asset : assetsDiscount)
@@ -234,7 +204,7 @@ public class PickTowerCard extends ChooseAsset implements Effect
 			if (currVentureCard.getResourcesCost() == null)
 				costs.add(currVentureCard.getMilitaryPointsCost());
 				
-			if (applyCardModifiers(player, gameName)==false) return false;
+			if (!applyCardModifiers(player, gameName)) return false;
 
 			for (Asset a : costs)
 			{
@@ -281,10 +251,12 @@ public class PickTowerCard extends ChooseAsset implements Effect
 	@Override
 	public boolean executeEffects(Player player, GameBoard gameBoard)
 	{
+		String gameName = gameBoard.getGameMatchName();
+
+		Tower tower = gameBoard.getTowerByType(cardType);
+
 		if (cardType.equals(CardTypeEnum.ANY) || floor == -1)
 		{
-			String gameName = gameBoard.getGameMatchName();
-
 			GameMatch gameMatch = GameServer.getGameMatchMap().get(gameName);
 
 			gameMatch.setCurrEffect(this);
@@ -319,17 +291,58 @@ public class PickTowerCard extends ChooseAsset implements Effect
 			}
 		}
 
+		DevelopmentCard card = tower.getTowerCells().get(floor).getDevelopmentCard();
+
+		if (card instanceof VentureCard && ((VentureCard)card).isRequiredCostChoice())
+		{
+			VentureCard currVentureCard = (VentureCard) card;
+
+			IOAdapter adapter = player.getAdapter();
+
+			Asset militaryPointsRequired = currVentureCard.getMilitaryPointsRequired();
+			Asset militaryPointsCost = currVentureCard.getMilitaryPointsCost();
+			List<Asset> resourcesCost = currVentureCard.getResourcesCost();
+
+			ChooseCostsMessage costsMessage = new ChooseCostsMessage
+					(militaryPointsRequired, militaryPointsCost, resourcesCost);
+
+			adapter.printMessage(costsMessage);
+
+			if (adapter instanceof SocketIOAdapter)
+				new Thread(new ReceiveCostsDecisionThread(gameName)).start();
+
+			Long timestamp = System.currentTimeMillis();
+
+			Long timeout = GameMatch.getTimeout();
+
+			while (System.currentTimeMillis() < timestamp + timeout)
+			{
+				try
+				{
+					Thread.sleep(100L);
+				}
+				catch (InterruptedException e)
+				{
+					LOGGER.log(Level.WARNING, "Interrupted!", e);
+					Thread.currentThread().interrupt();
+				}
+
+				if (costDecision != null)
+				{
+					break;
+				}
+			}
+
+			System.out.println("THE COSTDECISION is" + costDecision);
+
+			if (costDecision == null)
+				return false;
+		}
+
 		Tower currTower = gameBoard.getTowerByType(cardType);
 
 		if (!isLegal(player, gameBoard))
 			return false;
-
-		for (Asset asset : costs)
-		{
-			Asset costAsset = new Asset(-asset.getValue(), asset.getType());
-
-			player.addAsset(costAsset);
-		}
 
 		//TODO QUESTA POTREBBE FALLIRE
 		activeEffects(currTower.getTowerCells().get(floor).getDevelopmentCard(), player, gameBoard);
@@ -355,6 +368,28 @@ public class PickTowerCard extends ChooseAsset implements Effect
 		{
 			player.getPlayerBoard().getVentures().add((VentureCard) currTower.getTowerCells().get(floor).getDevelopmentCard());
 
+			VentureCard currVentureCard = (VentureCard) card;
+
+			switch (costDecision)
+			{
+				case 0:
+					costs.add(currVentureCard.getMilitaryPointsCost());
+					break;
+				case 1:
+					costs.addAll(currVentureCard.getResourcesCost());
+					break;
+				default:
+					return false;
+			}
+
+			costDecision = null;
+		}
+
+		for (Asset asset : costs)
+		{
+			Asset costAsset = new Asset(-asset.getValue(), asset.getType());
+
+			player.addAsset(costAsset);
 		}
 
 		currTower.getTowerCells().get(floor).setDevelopmentCard(null);
