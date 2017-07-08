@@ -1,8 +1,10 @@
 package it.polimi.ingsw.pc22.actions;
 
+import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.gamebox.LeaderCard;
+import it.polimi.ingsw.pc22.messages.GameStatusMessage;
 import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
@@ -44,7 +46,11 @@ public class ActiveLeaderCard extends Action
 		{
 			e.executeEffects(player, gameBoard);
 		}
-		
+
+		IOAdapter adapter = player.getAdapter();
+
+		adapter.printMessage(new GameStatusMessage(gameBoard, player, "leader action"));
+
 		return true;
 	}
 

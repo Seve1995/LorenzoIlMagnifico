@@ -1,9 +1,11 @@
 package it.polimi.ingsw.pc22.actions;
 
+import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.gamebox.LeaderCard;
+import it.polimi.ingsw.pc22.messages.GameStatusMessage;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.RequiredCard;
 
@@ -97,6 +99,10 @@ public class PlayLeaderCard extends Action
 		player.getPlayerBoard().getLeaderCards().add(leaderCard);
 
 		leaderCard.setPlayed(true);
+
+		IOAdapter adapter = player.getAdapter();
+
+		adapter.printMessage(new GameStatusMessage(gameBoard, player, "leader action"));
 
 		return true;
 	}

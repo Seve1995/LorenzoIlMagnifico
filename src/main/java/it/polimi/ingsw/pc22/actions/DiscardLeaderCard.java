@@ -1,7 +1,9 @@
 package it.polimi.ingsw.pc22.actions;
 
+import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.effects.Effect;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
+import it.polimi.ingsw.pc22.messages.GameStatusMessage;
 import it.polimi.ingsw.pc22.player.Player;
 
 public class DiscardLeaderCard extends Action
@@ -37,6 +39,10 @@ public class DiscardLeaderCard extends Action
 		player.getLeaderCards().set(index, null);
 
 		pickPrivilege.executeEffects(player, gameBoard);
+
+		IOAdapter adapter = player.getAdapter();
+
+		adapter.printMessage(new GameStatusMessage(gameBoard, player, "leader action"));
 		
 		return true;
 		

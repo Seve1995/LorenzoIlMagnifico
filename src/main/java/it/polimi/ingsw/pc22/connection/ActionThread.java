@@ -70,11 +70,6 @@ public class ActionThread implements Runnable
                 break;
             }
 
-            if (!(gameMatch.getCurrentPlayer().isFamiliarPositioned()))
-            {
-                adapter.printMessage(new GameStatusMessage(gameMatch.getCurrentGameBoard(), gameMatch.getCurrentPlayer(), "leader action"));
-            }
-
             if (gameMatch.getCurrentPlayer().isHasPassed()
                     || gameMatch.getCurrentPlayer().isSuspended())
                 break;

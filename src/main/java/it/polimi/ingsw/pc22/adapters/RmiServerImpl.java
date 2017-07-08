@@ -145,18 +145,18 @@ public class RmiServerImpl implements RMIServerInterface
 
         System.out.println(executed + " - " +  gameMatch.getCurrentPlayer().isHasPassed());
 
-        if (!executed) return;
+        if (!executed)
+        {
+            adapter.printMessage(new ErrorMessage("Action not Performed"));
+
+            return;
+        }
 
         if (gameMatch.getCurrentPlayer().isFamiliarPositioned())
         {
             adapter.printMessage(new ExecutedAction("Action Performed"));
 
             return;
-        }
-
-        if (!(gameMatch.getCurrentPlayer().isFamiliarPositioned()))
-        {
-            adapter.printMessage(new GameStatusMessage(gameMatch.getCurrentGameBoard(), gameMatch.getCurrentPlayer(), "pick Privilege"));
         }
 
         if (gameMatch.getCurrentPlayer().isHasPassed()
