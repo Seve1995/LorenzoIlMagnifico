@@ -18,7 +18,7 @@ public class PlayLeaderCard extends Action
 		this.index = index;
 	}
 
-	protected boolean isLegal(Player player, GameBoard gameBoard)
+	public boolean isLegal(Player player, GameBoard gameBoard)
 	{
 		if (index >= player.getLeaderCards().size())
 			return false;

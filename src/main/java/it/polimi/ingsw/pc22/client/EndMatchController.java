@@ -8,7 +8,9 @@ import javafx.stage.Stage;
 import java.awt.*;
 
 /**
- * Created by matteo on 02/07/17.
+ * This is the controller of the last screen of the Match.
+ * Here you can see the winner of this match, and the global ranking
+ * of our server.
  */
 public class EndMatchController implements Controller {
 
@@ -43,15 +45,14 @@ public class EndMatchController implements Controller {
 
         java.util.List<Player> wholePlayers = ((EndMatchMessage) message).getStanding();
 
-        String output = null;
+        StringBuilder output = new StringBuilder();
 
         for (Player p : wholePlayers)
         {
-            output += "" + p.getUsername() + " W: " + p.getNumberOfMatchWon() + " L: " + p.getNumberOfMatchLost() + "\n";
+            output.append(p.getUsername() + " W: " + p.getNumberOfMatchWon() + " L: " + p.getNumberOfMatchLost() + "\n");
         }
 
-        listLabel.setText(output);
-
+        listLabel.setText(output.toString());
     }
 
     @FXML

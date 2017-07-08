@@ -6,16 +6,16 @@ import it.polimi.ingsw.pc22.player.Player;
 
 public class AddAssetMalus implements Effect{
 
-	private Asset asset;
+	private Asset assetMalus;
 
 	public Asset getAsset()
 	{
-		return asset;
+		return assetMalus;
 	}
 
 	public void setAsset(Asset asset)
 	{
-		this.asset = asset;
+		this.assetMalus = asset;
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class AddAssetMalus implements Effect{
 	@Override
 	public boolean executeEffects(Player player, GameBoard gameBoard) {
 		
-		switch (asset.getType()) {
+		switch (assetMalus.getType()) {
 		
 			case MILITARYPOINT:
 				player.setMilitaryPointsMalus(true);

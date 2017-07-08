@@ -9,6 +9,14 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This class is the implementation of a thread, useful
+ * to make RMI(+GUI) work. In this way we create a new thread
+ * on the client-back end to manage the dialogs; in so doing using
+ * a single FX-thread, multiple windows is allowed and everything is
+ * synchronized, working fine.
+ *
+ */
 public class AuxiliaryRMIThread implements Runnable
 {
 	private String string;

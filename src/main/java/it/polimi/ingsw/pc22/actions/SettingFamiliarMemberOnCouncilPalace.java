@@ -17,7 +17,7 @@ public class SettingFamiliarMemberOnCouncilPalace extends Action
     public SettingFamiliarMemberOnCouncilPalace() {}
 
     @Override
-	protected boolean isLegal(Player player, GameBoard gameBoard)
+    public boolean isLegal(Player player, GameBoard gameBoard)
 	{
 		System.out.println("Council, the correct value is false: " + (familyMember.getValue() < 1));
 

@@ -6,6 +6,8 @@ import it.polimi.ingsw.pc22.player.Player;
 
 public class SettingFamiliarMemberOnProduction extends Action
 {
+	private DoProductionAction doProductionAction;
+
 	public SettingFamiliarMemberOnProduction(FamilyMember familyMember)
 	{
 		super(familyMember);
@@ -14,7 +16,7 @@ public class SettingFamiliarMemberOnProduction extends Action
     public SettingFamiliarMemberOnProduction() {}
 
     @Override
-	protected boolean isLegal(Player player, GameBoard gameBoard)
+    public boolean isLegal(Player player, GameBoard gameBoard)
 	{
 		Production production = gameBoard.getProduction();
 
@@ -56,8 +58,6 @@ public class SettingFamiliarMemberOnProduction extends Action
 	{
 		Production production = gameBoard.getProduction();
 
-		DoProductionAction doProductionAction = new DoProductionAction();
-
 		if (!isLegal(player, gameBoard))
 			return false;
 
@@ -66,10 +66,9 @@ public class SettingFamiliarMemberOnProduction extends Action
 			if (production.firstCellFree() > 0)
 			{
 				familyMember.setValueModifier(familyMember.getValueModifier() - 3);
-				
+
 				doProductionAction.setValue(familyMember.getValue() - 3);
 			}
-
 			else
 			{
 				doProductionAction.setValue(familyMember.getValue());
@@ -87,9 +86,8 @@ public class SettingFamiliarMemberOnProduction extends Action
 			player.setFamiliarPositioned(true);
 
 			return true;
-
 		}
-		else if (player.isDontCareOccupiedPlaces())
+		else
 		{
 			doProductionAction.setValue(familyMember.getValue());
 
@@ -105,13 +103,10 @@ public class SettingFamiliarMemberOnProduction extends Action
 
 			return true;
 		}
-		else
-		{
-			return false;
-		}
-
 	}
 
-		
-
+	public void setDoProductionAction(DoProductionAction doProductionAction)
+	{
+		this.doProductionAction = doProductionAction;
+	}
 }

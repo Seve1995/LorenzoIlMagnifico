@@ -14,7 +14,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by fandroid95 on 30/05/2017.
+ * This class is the implementation of Socket-side of the IO-Adapter
+ * It has a method to send a true message to the client, and to get messages
+ * from the buffer, to make the communication work.
+ * 
  */
 public class SocketIOAdapter extends IOAdapter implements Runnable
 {

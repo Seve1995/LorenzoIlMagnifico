@@ -4,6 +4,12 @@ import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
+/**
+ * Abstract class that represent all the actions in the game
+ * every action need up to one familiar to be executed, but there are
+ * also some actions that don't need it, that's the reason why we implemented
+ * in this abstract class the familiar and the familiarNeeded boolean
+ */
 public abstract class Action 
 {
 	protected FamilyMember familyMember;
@@ -32,7 +38,7 @@ public abstract class Action
 		this.familyMember = familyMember;
 	}
 
-	protected abstract boolean isLegal(Player player, GameBoard gameBoard);
+	public abstract boolean isLegal(Player player, GameBoard gameBoard);
 
 	public abstract boolean executeAction(Player player, GameBoard gameBoard);
 }

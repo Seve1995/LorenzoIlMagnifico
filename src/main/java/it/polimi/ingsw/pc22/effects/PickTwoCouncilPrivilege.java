@@ -27,16 +27,18 @@ public class PickTwoCouncilPrivilege extends PickCouncilPrivilege implements Eff
 	{
 		String gameName = gameBoard.getGameMatchName();
 
-		GameMatch gameMatch = GameServer.getGameMatchMap().get(gameName);
+		GameMatch pickTwoMatch = GameServer.getGameMatchMap().get(gameName);
 
-		gameMatch.setCurrEffect(this);
+		pickTwoMatch.setCurrEffect(this);
 
-		IOAdapter adapter = player.getAdapter();
+		IOAdapter pickTwoAdapter = player.getAdapter();
 
-		adapter.printMessage(new PickPrivilegeMessage(2));
+		pickTwoAdapter.printMessage(new PickPrivilegeMessage(2));
 
-		if (adapter instanceof SocketIOAdapter)
+		if (pickTwoAdapter instanceof SocketIOAdapter)
 			new Thread(new ReceiveCouncilDecisionThread(2, gameName)).start();
+
+		System.out.println("Pick TWO Council Executed");
 
 		return super.waitForResult(player);
 	}

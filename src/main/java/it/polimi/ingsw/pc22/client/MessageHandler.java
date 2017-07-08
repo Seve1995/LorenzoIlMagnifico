@@ -106,6 +106,16 @@ public class MessageHandler
                 
                 Client.setStateChanged(true);
             }
+
+            if ("leader action".equals(gameStatusMessage.getState()))
+            {
+                Client.setPlayer(gameStatusMessage.getPlayer());
+
+                Client.setGameBoard(gameStatusMessage.getGameBoard());
+
+                printOnClient(message);
+
+            }
         }
 
         if (message instanceof ChooseFamiliarMessage)
