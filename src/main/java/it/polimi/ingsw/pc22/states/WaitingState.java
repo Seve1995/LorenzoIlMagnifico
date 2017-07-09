@@ -1,7 +1,9 @@
 package it.polimi.ingsw.pc22.states;
 
 /**
- * Created by fandroid95 on 17/06/2017.
+ * This state basically does nothing.
+ * It is a transition state, waiting for the first turn of the match.
+ *
  */
 public class WaitingState implements GenericState
 {

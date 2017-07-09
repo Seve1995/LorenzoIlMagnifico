@@ -25,7 +25,10 @@ import static it.polimi.ingsw.pc22.client.UpdateUtils.updateCells;
  * -it makes the buttons work
  *
  * Its attributes are referred to the fxml file which models the screen
- * showed to the user
+ * showed to the user.
+ * Every "object" is identified by an ID, which is a string similar
+ * to the string allowed in a certain state. In so doing, getting the id
+ * of a selected button we generate a string to communicate to the server.
  */
 
 public class GameBoardController implements Controller
@@ -92,6 +95,8 @@ public class GameBoardController implements Controller
     private ToggleButton neuter;
     @FXML
     private ToggleButton market0;
+    @FXML
+    private Button exitButton;
     @FXML
     private ImageView imageViewMarket0;
     @FXML
@@ -434,6 +439,8 @@ public class GameBoardController implements Controller
 
         updateBonusTile();
 
+        System.out.println(player.getLeaderCards());
+
         UpdatePlayer.updateLeadersHand(player, leaders);
 
         UpdatePlayer.updateLeadersPlayed(player, leadersPlace);
@@ -463,11 +470,26 @@ public class GameBoardController implements Controller
     	if (message instanceof CommunicationMessage)
     	{
     		info.appendText(((CommunicationMessage) message).getMessage()+"\n");
+
+    		if (((CommunicationMessage) message).getMessage().equals("Is your turn!"))
+            {
+                exitButton.setDisable(false);
+            }
+
+            if (((CommunicationMessage) message).getMessage().equals("Wait your turn..."))
+            {
+                exitButton.setDisable(true);
+            }
     	}
 
     	if (message instanceof GameStatusMessage)
     	{
     		GameStatusMessage gameStatusMessage = (GameStatusMessage) message;
+
+    		if ("started".equals(gameStatusMessage.getState()))
+            {
+                exitButton.setDisable(false);
+            }
 
             if ("finished".equals(gameStatusMessage.getState()))
             {
@@ -558,6 +580,12 @@ public class GameBoardController implements Controller
         if (message instanceof EndMatchMessage)
         {
             GameBoardDialogs.endMatchDialog(message);
+        }
+
+        if (message instanceof StoppedServerMessage)
+        {
+            info.appendText(((StoppedServerMessage) message).getMessage() + "\n");
+            info.appendText("Please press 'Pass'...");
         }
 
     }

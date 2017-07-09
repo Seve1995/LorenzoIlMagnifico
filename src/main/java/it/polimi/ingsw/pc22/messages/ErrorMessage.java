@@ -3,7 +3,8 @@ package it.polimi.ingsw.pc22.messages;
 import it.polimi.ingsw.pc22.player.Player;
 
 /**
- * Created by fandroid95 on 20/06/2017.
+ * If something goes wrong we send this message.
+ * Some details are written in the String attribute.
  */
 public class ErrorMessage extends Message
 {

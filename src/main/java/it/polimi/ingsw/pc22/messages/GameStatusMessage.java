@@ -3,6 +3,13 @@ package it.polimi.ingsw.pc22.messages;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
+/**
+ * This message informs the player about the status
+ * of the match. It provides updated player, updated gameboard.
+ * In so doing the user is informed, practically in real time,
+ * about the match is going.
+ */
+
 public class GameStatusMessage extends  Message
 {
     private GameBoard gameBoard;

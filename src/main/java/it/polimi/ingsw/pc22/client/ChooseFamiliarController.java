@@ -36,7 +36,7 @@ public class ChooseFamiliarController implements Controller {
         this.dialogStage = dialogStage;
 
         ObservableList<String> typeOfFamiliars = FXCollections.observableArrayList(
-                "NEUTER", "BLACK", "WHITE");
+                 "BLACK", "WHITE");
 
         if (size == 3)
         {

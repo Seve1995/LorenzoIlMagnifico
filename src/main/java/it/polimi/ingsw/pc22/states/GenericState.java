@@ -1,7 +1,9 @@
 package it.polimi.ingsw.pc22.states;
 
 /**
- * Created by fandroid95 on 13/06/2017.
+ * Simple interface of generic state;
+ * In every state the player can interact with the server in a certain way;
+ * if he/she provides input not expected the server answers "invalid input"
  */
 public interface GenericState
 {

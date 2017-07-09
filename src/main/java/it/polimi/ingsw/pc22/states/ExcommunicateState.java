@@ -8,7 +8,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by fandroid95 on 01/07/2017.
+ * In this state player can only choose by typing a single number
+ * (0-1) to support or not the pope.
  */
 public class ExcommunicateState implements GenericState
 {

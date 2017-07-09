@@ -4,11 +4,9 @@ import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
 /**
- * Created by fandroid95 on 20/06/2017.
+ * This message informs the player that the turn is started.
+ *
  */
-
-
-//IN TEORIA STA COSA SI PUò ELIMINARE
 
 public class StartTurnMessage extends Message
 {

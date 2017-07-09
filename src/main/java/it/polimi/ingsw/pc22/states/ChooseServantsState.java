@@ -4,7 +4,8 @@ import it.polimi.ingsw.pc22.client.AuxiliaryRMIThread;
 import it.polimi.ingsw.pc22.client.Client;
 
 /**
- * Created by fandroid95 on 27/06/2017.
+ * In this state the player can only type a number of servants (less than his/her servants)
+ * to increment de value of a production/harvest action.
  */
 public class ChooseServantsState implements GenericState
 {

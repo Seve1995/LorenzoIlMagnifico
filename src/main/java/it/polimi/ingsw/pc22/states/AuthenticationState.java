@@ -7,7 +7,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by fandroid95 on 13/06/2017.
+ * In this state the player can only type a username
+ * and a password. Then he/she can only sign up
+ * or login with those data.
  */
 public class AuthenticationState implements GenericState
 {

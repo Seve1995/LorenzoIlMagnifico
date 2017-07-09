@@ -4,7 +4,9 @@ import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 
 /**
- * Created by fandroid95 on 27/06/2017.
+ * This message provides the player the card type (if "any"
+ * the player must specify the type he/she wants), and the updated gameboard.
+ *
  */
 public class ChooseCardMessage extends Message
 {

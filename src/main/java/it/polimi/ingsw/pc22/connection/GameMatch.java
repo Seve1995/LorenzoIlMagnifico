@@ -24,7 +24,8 @@ import java.util.stream.Collectors;
  * It has methods to start game and to put all the things
  * that are needed on the player board, to set up player etc.
  * It also has methods to manage the excommunication,
- *
+ * and the end-game logic.
+ * It also manages the fact that a player can be suspended for some reason.
  */
 
 public class GameMatch implements Runnable, Serializable
@@ -197,7 +198,11 @@ public class GameMatch implements Runnable, Serializable
 				System.out.println(player.getFamilyMembers());
 
 				if (player.isSuspended())
+				{
+					PlayerNotify(player);
 					continue;
+				}
+
 
 				for (Player p : players)
 				{
@@ -881,6 +886,20 @@ public class GameMatch implements Runnable, Serializable
 			int value = Integer.compare(o2.getVictoryPoints(), o1.getVictoryPoints());
 
 			return value;
+		}
+	}
+
+	public void PlayerNotify(Player playerSuspended)
+	{
+		for (Player p : players)
+		{
+			if (!(p.equals(playerSuspended)))
+			{
+				IOAdapter adapter = p.getAdapter();
+
+				adapter.printMessage(new CommunicationMessage("Player " + playerSuspended.getPlayerColorsEnum() + " is suspended"));
+			}
+
 		}
 	}
 }

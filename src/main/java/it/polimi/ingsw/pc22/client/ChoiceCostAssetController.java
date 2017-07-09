@@ -20,7 +20,7 @@ public class ChoiceCostAssetController implements Controller {
 
     private boolean confirmClicked = false;
     private Stage dialogStage;
-    private String output;
+    private String output ;
     @FXML
     private Label startingLabel;
 
@@ -50,10 +50,10 @@ public class ChoiceCostAssetController implements Controller {
     private void handleConfirm()
     {
         Client.getGenericState().sendToServer(output);
+
         confirmClicked = true;
 
         dialogStage.close();
-        Client.getController().updateScene(new ExecutedAction("action performed"));
     }
 
     @FXML

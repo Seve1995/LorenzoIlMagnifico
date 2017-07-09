@@ -7,7 +7,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by fandroid95 on 13/06/2017.
+ * In this state the player can only type a game match name
+ * and a letter. In so doing, a player can create a game match
+ * with that name, or join a game match with that name (if it already exists).
+ * Typing "r" he/she can join a random match.
  */
 public class GameCreationState implements GenericState
 {

@@ -1,7 +1,8 @@
 package it.polimi.ingsw.pc22.messages;
 
 /**
- * Created by matteo on 24/06/17.
+ * Send a notify to a player, to make him/her aware
+ * of the execution of an action.
  */
 public class ExecutedAction extends Message
 {

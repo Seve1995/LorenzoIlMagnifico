@@ -5,7 +5,10 @@ import it.polimi.ingsw.pc22.gamebox.Asset;
 import java.util.List;
 
 /**
- * Created by fandroid95 on 27/06/2017.
+ *
+ * This message provides the player a list of resources
+ * he can choose from.
+ *
  */
 public class ChooseAssetsMessage extends Message
 {

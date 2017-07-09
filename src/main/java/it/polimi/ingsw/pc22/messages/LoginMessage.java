@@ -3,7 +3,10 @@ package it.polimi.ingsw.pc22.messages;
 import it.polimi.ingsw.pc22.player.Player;
 
 /**
- * Created by fandroid95 on 20/06/2017.
+ * This message contains information about the state
+ * of the user:
+ * -he/she is logged or not
+ * -the match he/she has took part has already started or not
  */
 public class LoginMessage extends Message
 {

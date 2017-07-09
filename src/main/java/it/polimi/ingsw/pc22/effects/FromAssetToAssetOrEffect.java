@@ -62,7 +62,7 @@ public class FromAssetToAssetOrEffect extends ChooseAsset implements Effect
 				return false;
 			}
 		}
-		
+
 		return true;
 	}
 	

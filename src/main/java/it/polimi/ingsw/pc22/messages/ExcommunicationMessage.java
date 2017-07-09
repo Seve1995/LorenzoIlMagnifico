@@ -3,7 +3,9 @@ package it.polimi.ingsw.pc22.messages;
 import it.polimi.ingsw.pc22.gamebox.ExcommunicationCard;
 
 /**
- * Created by fandroid95 on 01/07/2017.
+ * This message is sent only when a player has enough faith points
+ * for this era. It asks, in practice, if he/she wants the malus
+ * of the excommunication.
  */
 public class ExcommunicationMessage extends Message
 {

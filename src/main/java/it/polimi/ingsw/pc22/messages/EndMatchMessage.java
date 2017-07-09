@@ -3,9 +3,11 @@ package it.polimi.ingsw.pc22.messages;
 import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
-
 /**
- * Created by fandroid95 on 01/07/2017.
+ * This message contains the winner name, and a list of players.
+ * In so doing the user should be aware of the general ranking
+ * of the players, signed on our server, and of the name of the winner
+ * of this match.
  */
 public class EndMatchMessage extends Message
 {

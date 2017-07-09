@@ -5,7 +5,8 @@ import it.polimi.ingsw.pc22.gamebox.Asset;
 import java.util.List;
 
 /**
- * Created by fandroid95 on 27/06/2017.
+ * Please refer to "chooseAssetMessage"; instead of resources as bonus
+ * here we have resources as costs.
  */
 public class ChooseCostsMessage extends Message
 {

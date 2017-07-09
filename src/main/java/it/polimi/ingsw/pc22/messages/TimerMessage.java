@@ -1,7 +1,7 @@
 package it.polimi.ingsw.pc22.messages;
 
 /**
- * Created by fandroid95 on 21/06/2017.
+ * This message inform a player that is timeout is finished.
  */
 public class TimerMessage extends Message
 {

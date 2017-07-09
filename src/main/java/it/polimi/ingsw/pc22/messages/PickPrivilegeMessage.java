@@ -1,7 +1,8 @@
 package it.polimi.ingsw.pc22.messages;
 
 /**
- * Created by fandroid95 on 27/06/2017.
+ * This message informs the user about the number of privileges
+ * he can take in certain moment of the game.
  */
 public class PickPrivilegeMessage extends Message
 {

@@ -229,7 +229,7 @@
       </ButtonBar>
       <ButtonBar layoutX="951.0" layoutY="555.0" prefHeight="40.0" prefWidth="184.0">
          <buttons>
-            <Button mnemonicParsing="false" onAction="#handleExitButton" text="Exit" />
+            <Button fx:id="exitButton" mnemonicParsing="false" onAction="#handleExitButton" text="Exit" />
             <Button fx:id="pass" mnemonicParsing="false" onAction="#handlePassButton" text="Pass" />
          </buttons>
       </ButtonBar>
@@ -435,6 +435,6 @@
       <Spinner fx:id="servantsSpinner" layoutX="974.0" layoutY="615.0" prefHeight="25.0" prefWidth="75.0" />
       <Label layoutX="740.0" layoutY="619.0" text="Servants to sacrifice:" />
       <TextArea fx:id="info" layoutX="1458.0" layoutY="783.0" prefHeight="135.0" prefWidth="390.0" />
-      <Label fx:id="colorInfo" layoutX="737.0" layoutY="659.0" />
+      <Label fx:id="colorInfo" layoutX="1141.0" layoutY="619.0" prefHeight="16.0" prefWidth="220.0" />
    </children>
 </AnchorPane>

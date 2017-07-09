@@ -6,6 +6,11 @@ import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.utils.ParseEnum;
 import it.polimi.ingsw.pc22.utils.PositionUtils;
 
+/**
+ * Probably the most important state. It allows the player to
+ * do his/her actions; they will be validate and they will be "send" to server
+ * throught socket or by calling the right method
+ */
 
 public class PlayState implements GenericState
 {

@@ -7,7 +7,9 @@ import it.polimi.ingsw.pc22.gamebox.Asset;
 import java.util.List;
 
 /**
- * Created by fandroid95 on 27/06/2017.
+ * When a player is in this state can only
+ * type 0/1 to choose a resource in a certain moment
+ * of the game.
  */
 public class ChooseAssetsState implements GenericState
 {

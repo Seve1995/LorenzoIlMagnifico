@@ -8,7 +8,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by fandroid95 on 30/06/2017.
+ * In this state the player can only
+ * choose a card type (if it is allowed)
+ * and a floor, where a development card is set.
  */
 public class ChooseCardState implements GenericState
 {

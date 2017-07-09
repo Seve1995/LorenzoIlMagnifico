@@ -1,7 +1,8 @@
 package it.polimi.ingsw.pc22.messages;
 
 /**
- * Created by fandroid95 on 20/06/2017.
+ * Communication message, just to notify the player
+ * about something, contained in the string.
  */
 public class CommunicationMessage extends Message
 {

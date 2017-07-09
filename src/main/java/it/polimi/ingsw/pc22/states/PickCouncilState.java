@@ -10,7 +10,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by fandroid95 on 27/06/2017.
+ * In this state the player can only choose one (or more) council privilege by typing
+ * the number associated to it (please refer to CouncilPrivilege class in "utils")
+ 
  */
 public class PickCouncilState implements GenericState
 {

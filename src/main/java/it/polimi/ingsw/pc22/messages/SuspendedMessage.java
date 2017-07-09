@@ -1,5 +1,9 @@
 package it.polimi.ingsw.pc22.messages;
 
+/**
+ * This message informs all the player that a certain player
+ * is suspended (aka his/her action timeout is finished)
+ */
 
 public class SuspendedMessage extends Message
 {

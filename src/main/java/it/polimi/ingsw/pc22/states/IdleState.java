@@ -3,7 +3,8 @@ package it.polimi.ingsw.pc22.states;
 import it.polimi.ingsw.pc22.client.Client;
 
 /**
- * Created by fandroid95 on 22/06/2017.
+ * This is the state where the player is whe it is not his/her turn.
+ * He/she can only type a command to show the two boards (only CLI).
  */
 public class IdleState implements GenericState
 {

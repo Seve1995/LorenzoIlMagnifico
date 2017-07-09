@@ -9,7 +9,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by fandroid95 on 03/07/2017.
+ * This state is used to manage effects that modify
+ * the familiar values. The player can choose the family member to apply these mods.
  */
 public class ChooseFamiliarState implements GenericState
 {

@@ -9,7 +9,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by fandroid95 on 30/06/2017.
+ * Please refer to "ChooseAssetsState", but is focused on costs,
+ * instead of gained resources
  */
 public class ChooseCostsState implements GenericState
 {

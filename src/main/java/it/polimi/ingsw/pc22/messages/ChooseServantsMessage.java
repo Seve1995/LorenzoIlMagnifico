@@ -3,7 +3,10 @@ package it.polimi.ingsw.pc22.messages;
 import it.polimi.ingsw.pc22.player.Player;
 
 /**
- * Created by fandroid95 on 27/06/2017.
+ * This message provides the user his/her representation into the model:
+ * the player. The user should choose a servant number (lower than his/her actual servants)
+ * to increment the value of an action.
+ *
  */
 public class ChooseServantsMessage extends Message
 {

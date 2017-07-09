@@ -3,7 +3,10 @@ package it.polimi.ingsw.pc22.messages;
 import it.polimi.ingsw.pc22.player.Player;
 
 /**
- * Created by fandroid95 on 03/07/2017.
+ * This message provides the user his/her representation into the model:
+ * the player. Among the unused familiars the user should choose one of them to
+ * execute an effect.
+ *
  */
 public class ChooseFamiliarMessage extends Message
 {
