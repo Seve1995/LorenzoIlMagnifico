@@ -12,7 +12,6 @@ import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
 import it.polimi.ingsw.pc22.gamebox.ColorsEnum;
 import it.polimi.ingsw.pc22.messages.ErrorMessage;
 import it.polimi.ingsw.pc22.messages.ExecutedAction;
-import it.polimi.ingsw.pc22.messages.GameStatusMessage;
 import it.polimi.ingsw.pc22.messages.LoginMessage;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.rmi.RMIClientStreamService;

@@ -1,13 +1,10 @@
 package it.polimi.ingsw.pc22.adapters;
 
 import it.polimi.ingsw.pc22.client.Client;
-import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.exceptions.GenericException;
 import it.polimi.ingsw.pc22.messages.Message;
-import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.rmi.RMIClientStreamService;
 
-import java.io.IOException;
 import java.rmi.RemoteException;
 
 /**

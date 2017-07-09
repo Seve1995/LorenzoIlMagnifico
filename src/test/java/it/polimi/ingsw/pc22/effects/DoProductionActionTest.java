@@ -1,18 +1,14 @@
 package it.polimi.ingsw.pc22.effects;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import org.junit.Before;
-import org.junit.Test;
-
-import it.polimi.ingsw.pc22.connection.GameMatch;
-import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.gamebox.BonusTile;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.gamebox.PlayerBoard;
 import it.polimi.ingsw.pc22.player.Player;
 import junit.framework.TestCase;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.mockito.Mockito.mock;
 
 public class DoProductionActionTest extends TestCase{
 	

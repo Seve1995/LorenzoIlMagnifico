@@ -3,9 +3,6 @@ package it.polimi.ingsw.pc22.utils;
 
 import org.json.JSONObject;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public class TimeOutLoader extends GenericLoader {
 
     public static TimeOut loadTimeOut(JSONObject jsonObject)
