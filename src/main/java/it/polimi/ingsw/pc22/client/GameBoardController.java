@@ -5,6 +5,7 @@ import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.gamebox.Tower;
 import it.polimi.ingsw.pc22.messages.*;
 import it.polimi.ingsw.pc22.player.Player;
+import it.polimi.ingsw.pc22.states.PlayState;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -272,11 +273,18 @@ public class GameBoardController implements Controller
     @FXML
     private void handleExitButton()
     {
-        String exitOutput = "exit";
-
-        Client.getGenericState().sendToServer(exitOutput);
-
-        Client.launchCreationMatch();
+    	if (Client.getGenericState() instanceof PlayState)
+			{
+	    		String exitOutput = "exit";
+	
+	            Client.getGenericState().sendToServer(exitOutput);
+	
+	            Client.launchCreationMatch();
+			}
+    	
+    	info.appendText("Error! You must wait your turn before EXIT!");
+    	
+		return;
     }
 
 
@@ -468,26 +476,11 @@ public class GameBoardController implements Controller
     	if (message instanceof CommunicationMessage)
     	{
     		info.appendText(((CommunicationMessage) message).getMessage()+"\n");
-    		
-    		if ("Is your turn!".equals(((CommunicationMessage) message).getMessage()));
-            {
-                exitButton.setDisable(false);
-            }
-
-            if ("Wait your turn...".equals(((CommunicationMessage) message).getMessage()));
-            {
-                exitButton.setDisable(true);
-            }
     	}
 
     	if (message instanceof GameStatusMessage)
     	{
     		GameStatusMessage gameStatusMessage = (GameStatusMessage) message;
-
-    		if ("started".equals(gameStatusMessage.getState()))
-            {
-                exitButton.setDisable(false);
-            }
 
             if ("finished".equals(gameStatusMessage.getState()))
             {
