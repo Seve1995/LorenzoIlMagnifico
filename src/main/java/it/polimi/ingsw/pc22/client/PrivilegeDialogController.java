@@ -54,7 +54,6 @@ public class PrivilegeDialogController implements Controller {
 
         confirmClicked = true;
         dialogStage.close();
-        System.out.println(output);
         Client.getGenericState().sendToServer(output);
         Client.getController().updateScene(new ExecutedAction("action performed"));
     }

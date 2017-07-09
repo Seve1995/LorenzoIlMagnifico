@@ -365,25 +365,28 @@ public class PickTowerCard extends ChooseAsset implements Effect
 			player.getPlayerBoard().getVentures().add((VentureCard) currTower.getTowerCells().get(floor).getDevelopmentCard());
 
 			VentureCard currVentureCard = (VentureCard) card;
-
-			switch (costDecision)
+			
+			if(currVentureCard.isRequiredCostChoice())
 			{
-				case 0:
-					costs.add(currVentureCard.getMilitaryPointsCost());
-					break;
-				case 1:
-					costs.addAll(currVentureCard.getResourcesCost());
-					break;
-				default:
-					return false;
+				switch (costDecision)
+				{
+					case 0:
+						costs.add(currVentureCard.getMilitaryPointsCost());
+						break;
+					case 1:
+						costs.addAll(currVentureCard.getResourcesCost());
+						break;
+					default:
+						return false;
+				}
+		
+				costDecision = null;
 			}
-
-			costDecision = null;
+			
 		}
 
 		for (Asset asset : costs)
 		{
-			System.out.println(asset);
 			
 			Asset costAsset = new Asset(-asset.getValue(), asset.getType());
 
