@@ -6,6 +6,11 @@ import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.messages.GameStatusMessage;
 import it.polimi.ingsw.pc22.player.Player;
 
+/**
+ * This class represent the action used to Discard a leader card, as every action
+ * it exposes the isLegal and executeAction
+ * this action doesn't position a familiarMember
+ */
 public class DiscardLeaderCard extends Action
 {
 	private int index;

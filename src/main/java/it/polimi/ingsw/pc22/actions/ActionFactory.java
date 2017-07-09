@@ -13,7 +13,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by fandroid95 on 06/06/2017.
+ * This class is a factory to create all the actions needed to play the game
+ * it has a single public method that receive the choice and creates the actions
+ * then we crated some private methods that help to set
+ * some custom parameter needed by specific actions
+ * some actions need a familiar, other don't
+ * we used java reflection to build the correct action every time,
+ * the correct path for the actions is retrieved from the ParseEnum
  */
 public class ActionFactory
 {

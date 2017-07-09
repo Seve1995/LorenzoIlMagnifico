@@ -4,6 +4,12 @@ import it.polimi.ingsw.pc22.effects.DoHarvestAction;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
 
+/**
+ * This action is used to play a familiar on the the harvest section
+ * it checks that the requirements are satisfied and executes
+ * the action
+*/
+
 public class SettingFamiliarMemberOnHarvest extends Action
 {
 	private DoHarvestAction doHarvestAction;

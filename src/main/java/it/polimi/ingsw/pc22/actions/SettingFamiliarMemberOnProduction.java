@@ -4,6 +4,12 @@ import it.polimi.ingsw.pc22.effects.DoProductionAction;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
 
+/**
+ * This action is used to play a familiar on the the Production section
+ * it checks that the requirements are satisfied and executes
+ * the action
+ */
+
 public class SettingFamiliarMemberOnProduction extends Action
 {
 	private DoProductionAction doProductionAction;

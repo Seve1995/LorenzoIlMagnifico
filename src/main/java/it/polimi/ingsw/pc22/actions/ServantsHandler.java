@@ -5,7 +5,12 @@ import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
 /**
- * Created by fandroid95 on 24/05/2017.
+ * This is a wrapper for every action that can use servants,
+ * we used the decorator pattern to add to every action the
+ * possibility to sacrifice servants in order to use
+ * increment te value of the single action
+ * this action wraps the action to execute and increments
+ * its value using the servants parameter
  */
 public class ServantsHandler extends Action
 {

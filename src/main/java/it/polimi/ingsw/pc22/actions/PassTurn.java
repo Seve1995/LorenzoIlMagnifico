@@ -4,8 +4,11 @@ import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
 /**
- * Created by fandroid95 on 11/06/2017.
+ * This class represent the action used to pass the turn,
+ * if the player cannot execute any action he can choose to pass the turn,
+ * this action doesn't set a familiar
  */
+
 public class PassTurn extends Action
 {
     @Override
