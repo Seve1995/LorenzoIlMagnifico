@@ -10,13 +10,13 @@ public class WaitingState implements GenericState
     @Override
     public void printState()
     {
-        System.out.println("I'M WAITIN' FOR THE MATCH YA");
+        System.out.println("Please wait for the match to start...");
     }
 
     @Override
     public boolean validate(String string)
     {
-        System.out.println("PLEASE WAIT FOR THE MATCH TO START");
+        System.out.println("Please wait for the match to start!");
 
         return false;
     }
