@@ -19,7 +19,7 @@ If the GUI is the choice other screen will appear, and a user can signUp or logi
 After that a user can create a match, join to an existing match or find a random match.
 After some time the main screen should open. There is the gameboard (shared among all the players of a 
 single match) and the personal player board.
-So from now if it is your turn (take care of the notificiation bottom right)
+So from now if it is your turn (take care of the notification bottom right)
 you can do some actions. Please notice that leaders action should be done before setting familiar action.
 To do an action select the "subject" of that action (leader card or familiar) and then press the button corresponding 
 to the action you want to do. You can click also one card on the tower. Then press confirm. A feedback should appear 
@@ -38,6 +38,7 @@ On the console of the server you can type the key word "exit". In so doing
 the server should stop itself. All the matches should be stopped, as well, and, when the server will be powered on again
 all the matches should be restored. 
 
+The UML representation of the whole project is contained in resources/uml/
 
 
 
