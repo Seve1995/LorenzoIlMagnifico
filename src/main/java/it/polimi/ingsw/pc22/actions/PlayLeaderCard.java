@@ -11,6 +11,11 @@ import it.polimi.ingsw.pc22.utils.RequiredCard;
 
 import java.util.List;
 
+/**
+ * This class represent the action used to Play a leader card, as every action
+ * it exposes the isLegal and executeAction
+ * this action doesn't position a familiarMember
+ */
 public class PlayLeaderCard extends Action
 {
 	private int index;

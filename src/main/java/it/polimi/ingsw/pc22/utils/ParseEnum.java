@@ -20,7 +20,6 @@ public enum ParseEnum
     SHOW_BOARD("^show board$", "ShowBoard"),
     EXIT_GAME("^exit$", "ExitGame");
 
-
     private String regex;
     private String action;
 

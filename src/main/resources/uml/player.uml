@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>it.polimi.ingsw.pc22.player.CardModifier</OriginalElement>
+  <nodes>
+    <node x="596.0" y="0.0">it.polimi.ingsw.pc22.player.CardModifier</node>
+    <node x="0.0" y="167.0">it.polimi.ingsw.pc22.player.Player</node>
+    <node x="460.0" y="44.0">java.io.Serializable</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.ingsw.pc22.player.Player" target="java.io.Serializable">
+      <point x="-305.25" y="-620.5" />
+      <point x="305.25" y="142.0" />
+      <point x="518.0" y="142.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.player.Player" target="it.polimi.ingsw.pc22.player.CardModifier">
+      <point x="305.25" y="-620.5" />
+      <point x="915.75" y="142.0" />
+      <point x="703.0" y="142.0" />
+      <point x="0.0" y="58.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6498599439775911" x="638.9612068965517" y="104.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Inner Classes</Category>
+    <Category>Properties</Category>
+    <Category>Methods</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

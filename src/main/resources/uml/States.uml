@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>it.polimi.ingsw.pc22.states.AuthenticationState</OriginalElement>
+  <nodes>
+    <node x="1789.0" y="207.0">it.polimi.ingsw.pc22.states.ChooseCardState</node>
+    <node x="822.0" y="218.5">it.polimi.ingsw.pc22.states.PlayState</node>
+    <node x="229.0" y="185.0">it.polimi.ingsw.pc22.states.ChooseCostsState</node>
+    <node x="1560.0" y="218.5">it.polimi.ingsw.pc22.states.WaitingState</node>
+    <node x="2092.0" y="218.5">it.polimi.ingsw.pc22.states.ChooseFamiliarState</node>
+    <node x="1280.0" y="207.0">it.polimi.ingsw.pc22.states.ChooseAssetsState</node>
+    <node x="593.0" y="218.5">it.polimi.ingsw.pc22.states.ChooseServantsState</node>
+    <node x="2321.0" y="207.0">it.polimi.ingsw.pc22.states.ExcommunicateState</node>
+    <node x="3036.0" y="218.5">it.polimi.ingsw.pc22.states.GameCreationState</node>
+    <node x="1432.75" y="0.0">it.polimi.ingsw.pc22.states.GenericState</node>
+    <node x="2748.0" y="207.0">it.polimi.ingsw.pc22.states.PickCouncilState</node>
+    <node x="1051.0" y="218.5">it.polimi.ingsw.pc22.states.AuthenticationState</node>
+    <node x="0.0" y="218.5">it.polimi.ingsw.pc22.states.IdleState</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.ingsw.pc22.states.ChooseCostsState" target="it.polimi.ingsw.pc22.states.GenericState">
+      <point x="0.0" y="-81.0" />
+      <point x="401.0" y="125.0" />
+      <point x="1458.875" y="125.0" />
+      <point x="-78.375" y="47.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.states.PlayState" target="it.polimi.ingsw.pc22.states.GenericState">
+      <point x="0.0" y="-47.5" />
+      <point x="926.5" y="145.0" />
+      <point x="1493.7083333333333" y="145.0" />
+      <point x="-43.54166666666674" y="47.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.states.ChooseServantsState" target="it.polimi.ingsw.pc22.states.GenericState">
+      <point x="0.0" y="-47.5" />
+      <point x="697.5" y="135.0" />
+      <point x="1476.2916666666667" y="135.0" />
+      <point x="-60.95833333333326" y="47.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.states.PickCouncilState" target="it.polimi.ingsw.pc22.states.GenericState">
+      <point x="0.0" y="-59.0" />
+      <point x="2882.0" y="125.0" />
+      <point x="1615.625" y="125.0" />
+      <point x="78.375" y="47.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.states.AuthenticationState" target="it.polimi.ingsw.pc22.states.GenericState">
+      <point x="0.0" y="-47.5" />
+      <point x="1155.5" y="155.0" />
+      <point x="1511.125" y="155.0" />
+      <point x="-26.125" y="47.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.states.IdleState" target="it.polimi.ingsw.pc22.states.GenericState">
+      <point x="0.0" y="-47.5" />
+      <point x="104.5" y="115.0" />
+      <point x="1441.4583333333333" y="115.0" />
+      <point x="-95.79166666666674" y="47.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.states.ChooseFamiliarState" target="it.polimi.ingsw.pc22.states.GenericState">
+      <point x="0.0" y="-47.5" />
+      <point x="2196.5" y="145.0" />
+      <point x="1580.7916666666667" y="145.0" />
+      <point x="43.54166666666674" y="47.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.states.ExcommunicateState" target="it.polimi.ingsw.pc22.states.GenericState">
+      <point x="0.0" y="-59.0" />
+      <point x="2524.5" y="135.0" />
+      <point x="1598.2083333333335" y="135.0" />
+      <point x="60.958333333333485" y="47.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.states.ChooseCardState" target="it.polimi.ingsw.pc22.states.GenericState">
+      <point x="0.0" y="-59.0" />
+      <point x="1930.5" y="155.0" />
+      <point x="1563.375" y="155.0" />
+      <point x="26.125" y="47.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.states.ChooseAssetsState" target="it.polimi.ingsw.pc22.states.GenericState">
+      <point x="0.0" y="-59.0" />
+      <point x="1410.0" y="165.0" />
+      <point x="1528.5416666666667" y="165.0" />
+      <point x="-8.708333333333258" y="47.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.states.WaitingState" target="it.polimi.ingsw.pc22.states.GenericState">
+      <point x="0.0" y="-47.5" />
+      <point x="1664.5" y="165.0" />
+      <point x="1545.9583333333333" y="165.0" />
+      <point x="8.708333333333258" y="47.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.states.GameCreationState" target="it.polimi.ingsw.pc22.states.GenericState">
+      <point x="0.0" y="-47.5" />
+      <point x="3140.5" y="115.0" />
+      <point x="1633.0416666666667" y="115.0" />
+      <point x="95.79166666666674" y="47.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.3546707503828484" x="1622.5" y="173.5" />
+  <SelectedNodes>
+    <node>it.polimi.ingsw.pc22.states.AuthenticationState</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

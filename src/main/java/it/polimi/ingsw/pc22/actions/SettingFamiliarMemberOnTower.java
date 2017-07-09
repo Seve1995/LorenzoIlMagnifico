@@ -8,6 +8,12 @@ import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 
+/**
+ * This action is used to play a familiar on the the tower section
+ * it checks that the requirements are satisfied and executes
+ * the action
+ */
+
 public class SettingFamiliarMemberOnTower extends Action
 {
 	private int floor;

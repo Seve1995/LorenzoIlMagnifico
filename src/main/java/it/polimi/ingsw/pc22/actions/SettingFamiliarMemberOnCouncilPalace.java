@@ -8,6 +8,12 @@ import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 
+/**
+ * This action is used to position a familiar on the council,
+ * it controls that the player has the needed familiar value
+ * and resource to execute the action
+ * in particular the action asks the player which privilege he wants
+ */
 public class SettingFamiliarMemberOnCouncilPalace extends Action
 {
 	public SettingFamiliarMemberOnCouncilPalace(FamilyMember familyMember) {
@@ -30,8 +36,6 @@ public class SettingFamiliarMemberOnCouncilPalace extends Action
 	@Override
 	public boolean executeAction(Player player, GameBoard gameBoard)
 	{
-
-
 		CouncilPalace councilPalace = gameBoard.getCouncilPalace();
 
 		if (!isLegal(player, gameBoard))

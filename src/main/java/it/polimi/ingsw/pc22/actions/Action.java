@@ -9,6 +9,9 @@ import it.polimi.ingsw.pc22.player.Player;
  * every action need up to one familiar to be executed, but there are
  * also some actions that don't need it, that's the reason why we implemented
  * in this abstract class the familiar and the familiarNeeded boolean
+ * every action exposes a isLegal and a executedAction
+ * the first method return whether the action can be executed
+ * while the second executes the action
  */
 public abstract class Action 
 {

@@ -9,6 +9,11 @@ import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 
+/**
+ * This class represent the action used to active a leader card, as every action
+ * it exposes the isLegal and executeAction
+ */
+
 public class ActiveLeaderCard extends Action 
 {
 	private int index;

@@ -7,7 +7,9 @@ import it.polimi.ingsw.pc22.messages.SuspendedMessage;
 import it.polimi.ingsw.pc22.player.Player;
 
 /**
- * Created by fandroid95 on 06/07/2017.
+ * This class represent the action used to exit from the game,
+ * it suspends the player that later can relog to the same game
+ * or choose to start a new game
  */
 public class ExitGame extends Action
 {
@@ -24,7 +26,7 @@ public class ExitGame extends Action
 
         IOAdapter adapter = player.getAdapter();
 
-        adapter.printMessage(new SuspendedMessage("SEI USCITO DAL GIOCO"));
+        adapter.printMessage(new SuspendedMessage("YOU'VE LEFT THE GAME"));
 
         if (adapter instanceof SocketIOAdapter)
         {
