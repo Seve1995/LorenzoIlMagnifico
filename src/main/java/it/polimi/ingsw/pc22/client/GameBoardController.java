@@ -470,13 +470,13 @@ public class GameBoardController implements Controller
     	if (message instanceof CommunicationMessage)
     	{
     		info.appendText(((CommunicationMessage) message).getMessage()+"\n");
-
-    		if (((CommunicationMessage) message).getMessage().equals("Is your turn!"))
+    		
+    		if ("Is your turn!".equals(((CommunicationMessage) message).getMessage()));
             {
                 exitButton.setDisable(false);
             }
 
-            if (((CommunicationMessage) message).getMessage().equals("Wait your turn..."))
+            if ("Wait your turn...".equals(((CommunicationMessage) message).getMessage()));
             {
                 exitButton.setDisable(true);
             }

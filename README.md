@@ -1,48 +1,45 @@
 # Project Template - Prova Finale (Ingegneria del Software)
 
-## Project Setup
-In order to set up your project, follow these steps
-### Clone and push the template to your repo
-Using the git command line client for your OS, type the following commands:
-```bash
- # clone the repo on your current folder, naming the remote as 'template'
- git clone https://github.com/deib-polimi/prova-finale-template --origin template
- # move to the cloned repo
- cd prova-finale-template/
- # add your repository as 'origin' (default) remote
- git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME
- # push the template project to your github repository, setting 
- git push --set-upstream origin master
- # alternatively, if you already have some content in your repo (e.g., a README)
- # and YOU WANT TO OVERWRITE IT, force the push
- git push --force --set-upstream origin master
- 
-```
-then, you can safely remove the 'template' remote by typing `git remote rm template`.
+Group 22 is composed by: 
+Matteo Petrini,
+Fabio Piazza,
+Giuseppe Severino
 
-### Customize your project files and Import them in Eclipse
-- Open the `pom.xml` file in a text editor and substitute the two occurrences of **pcXX** with your assigned **team_code**.
-- Import it in Eclipse as Maven Project:
-  * from Eclipse, select `File > Import... > Existing Maven Project`
-  * click `Browse...` and select the directory where you cloned the project
-  * make sure the project is listed and selected under `Projects`
-  * select `Finish`
-  * you should now see the project **team_code** listed in the Package Explorer view of Eclipse
-- from the Package Explorer view, rename packages under `src/main/java` and `src/test/java` substituting **pcXX** with your assigned **team_code**
-- customize the `README.md`
-- in order to check that everything worked fine, try to build with Maven:
-  + from Eclipse (Package Explorer view):
-    * right-click on the project
-    * select `Run as > Maven build...`
-    * type `clean package` into the `Goal` field
-    * click `Run`
-  + from command line:
-    * move to your project directory (you should be in the same folder as `pom.xml` file)
-    * type `mvn clean package`
-  + wait for the build to complete and make sure you have a build success
+## How to run the program: 
+The main classes are:
+Client class, in package "client",
+Game Server class, in package "connection"
 
-### Commit and push your changes:
-  ```
-  git commit -am "customize project"
-  git push origin master
-  ```
+There are no particular parameters to run the game.
+
+### How to play the game
+Every user, in the first screen, has to choose between RMI/SOCKET connection
+and between GU/CL interface. 
+If the GUI is the choice other screen will appear, and a user can signUp or login in our server.
+After that a user can create a match, join to an existing match or find a random match.
+After some time the main screen should open. There is the gameboard (shared among all the players of a 
+single match) and the personal player board.
+So from now if it is your turn (take care of the notificiation bottom right)
+you can do some actions. Please notice that leaders action should be done before setting familiar action.
+To do an action select the "subject" of that action (leader card or familiar) and then press the button corresponding 
+to the action you want to do. You can click also one card on the tower. Then press confirm. A feedback should appear 
+on the notification area. 
+To perform a leader action, just click on a leader card, then press "discard", "play" or "active".
+When it is your turn you can pass (you will lose that action) or you can exit the game (you will be suspended).
+The screen "Creation match" should appear.
+At the end of the game should appear the final window informing you about the winner, and the global ranking of our server.
+
+Playing on CLI allows you to do the same things described above. All the strings you have to write on the command line 
+are exampled and explained in the terminal itself. The only difference is that you can type "show board" in every moment
+to see a representation of the player board as a string. 
+
+### Some other infos
+On the console of the server you can type the key word "exit". In so doing 
+the server should stop itself. All the matches should be stopped, as well, and, when the server will be powered on again
+all the matches should be restored. 
+
+
+
+
+
+  
