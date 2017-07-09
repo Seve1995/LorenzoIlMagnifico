@@ -157,6 +157,8 @@ public class GameMatch implements Runnable, Serializable
 
 		loadLeaderCards();
 
+		resetPlayers();
+
 		assignLeaderCards();
 
 		assignExcommunicationCards();
@@ -420,6 +422,42 @@ public class GameMatch implements Runnable, Serializable
 			player.setLeaderCards(cards);
 
 			i++;
+		}
+	}
+
+	private void resetPlayers()
+	{
+		int i=0;
+		for (Player p : players)
+		{
+			p.setCoins(5+i);
+			i++;
+			p.setServants(2);
+			p.setVictoryPoints(0);
+			p.setFaithPoints(0);
+			p.setMilitaryPoints(0);
+			p.setWoods(2);
+			p.setStones(2);
+			p.setHarvestValueModifier(0);
+			p.setProductionValueModifier(0);
+			p.setMilitaryPointsMalus(false);
+			p.setCoinMalus(false);
+			p.setServantMalus(false);
+			p.setWoodMalus(false);
+			p.setStoneMalus(false);
+			p.setFamilyMemberMalus(false);
+			p.setDisableMarket(false);
+			p.setNoFirstAction(false);
+			p.setNoMilitaryPointsForTerritories(false);
+			p.setDontPayThreeCoinsInTowers(false);
+			p.setDontCareOccupiedPlaces(false);
+			p.setPlayWithThePope(false);
+			p.setSantaRita(false);
+			p.setSistoIV(false);
+			p.setNewAction(false);
+			p.setRemoveTowerBonus(false);
+			p.setFamilyMembers(new ArrayList<>());
+			p.setPlayerBoard(new PlayerBoard());
 		}
 	}
 

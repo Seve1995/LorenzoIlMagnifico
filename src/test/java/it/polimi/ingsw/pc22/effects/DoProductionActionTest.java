@@ -1,14 +1,18 @@
 package it.polimi.ingsw.pc22.effects;
 
+import it.polimi.ingsw.pc22.connection.GameMatch;
+import it.polimi.ingsw.pc22.connection.GameServer;
 import it.polimi.ingsw.pc22.gamebox.BonusTile;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.gamebox.PlayerBoard;
+import it.polimi.ingsw.pc22.gamebox.PlayerBoardTest;
 import it.polimi.ingsw.pc22.player.Player;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class DoProductionActionTest extends TestCase{
 	
@@ -68,8 +72,8 @@ public class DoProductionActionTest extends TestCase{
 
     	assertTrue(doProductionAction.isLegal(player, gameBoard));
     }
-    /*
-    @Test
+
+   /* @Test
     public void testExecuteEffect()
     {
     	DoProductionAction doProductionAction = new DoProductionAction();
@@ -84,7 +88,7 @@ public class DoProductionActionTest extends TestCase{
 
     	value = 1;
     	
-    	GameMatch gameMatch = new GameMatch(500L, 4);
+    	GameMatch gameMatch = new GameMatch( 4);
     	
     	when(gameBoard.getGameMatchName()).thenReturn("Test");
     	
@@ -95,6 +99,6 @@ public class DoProductionActionTest extends TestCase{
     	when(servantAction.waitForResult()).thenReturn(false);
     	
     	assertFalse(doProductionAction.executeEffects(player, gameBoard));
-    }
-    */
+    }*/
+
 }

@@ -439,8 +439,6 @@ public class GameBoardController implements Controller
 
         updateBonusTile();
 
-        System.out.println(player.getLeaderCards());
-
         UpdatePlayer.updateLeadersHand(player, leaders);
 
         UpdatePlayer.updateLeadersPlayed(player, leadersPlace);

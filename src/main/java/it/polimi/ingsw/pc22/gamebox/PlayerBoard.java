@@ -83,7 +83,6 @@ public class PlayerBoard implements Serializable
 		return leaderCards;
 	}
 
-
 	public void setLeaderCards(List<LeaderCard> leaderCards) {
 		this.leaderCards = leaderCards;
 	}
