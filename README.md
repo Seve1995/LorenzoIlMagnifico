@@ -1,8 +1,8 @@
 # Project Template - Prova Finale (Ingegneria del Software)
 
 Group 22 is composed by: 
-Matteo Petrini
-Fabio Piazza
+Matteo Petrini,
+Fabio Piazza,
 Giuseppe Severino
 
 ## How to run the program: 
