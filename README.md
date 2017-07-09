@@ -1,14 +1,15 @@
 # Project Template - Prova Finale (Ingegneria del Software)
 
 Group 22 is composed by: 
--Matteo Petrini
--Fabio Piazza
--Giuseppe Severino
+Matteo Petrini
+Fabio Piazza
+Giuseppe Severino
 
 ## How to run the program: 
 The main classes are:
--Client class, in package "client"
--Game Server class, in package "connection"
+Client class, in package "client",
+Game Server class, in package "connection"
+
 There are no particular parameters to run the game.
 
 ### How to play the game
