@@ -5,14 +5,13 @@ import it.polimi.ingsw.pc22.effects.Effect;
 import java.io.Serializable;
 import java.util.List;
 
-public abstract class DevelopmentCard implements Serializable
+public class DevelopmentCard implements Serializable
 {
 	private String name;
 	private int cardNumber;
 	private int roundNumber;
 	private boolean permanentEffectChoice = false;
-	
-	//TODO SISTEMARE QUESTO
+
 	private transient List<Effect> immediateEffects;
 	private transient List<Effect> permanentEffects;
 
@@ -119,34 +118,4 @@ public abstract class DevelopmentCard implements Serializable
 		return true;
 	}
 	
-	@Override
-	
-	public String toString() {
-		
-		StringBuilder output = new StringBuilder();
-		
-		if ((this.getImmediateEffects())!=null){
-			output.append("It has the following Immediate Effects ");
-			for (Effect e: this.immediateEffects){
-				output.append(e.toString() + "\n");
-			}
-		}
-		
-		if ((this.getPermanentEffects())!=null)
-		{
-			output.append("It has the following Permanent Effects ");
-			for (Effect e: this.permanentEffects){ 
-				output.append(e.toString() + "\n");
-				 if (permanentEffectChoice && !(e.equals(permanentEffects.get(permanentEffects.size()-1))))
-				 {
-					 output.append("or");
-				 }
-			}
-		}
-		
-		return output.toString();
-	}
-	
-	
-
 }

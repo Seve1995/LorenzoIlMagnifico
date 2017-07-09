@@ -59,11 +59,4 @@ public class CharacterCard extends DevelopmentCard
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "CharacterCard{" +
-				"coinsCost=" + coinsCost +
-				'}';
-	}
 }

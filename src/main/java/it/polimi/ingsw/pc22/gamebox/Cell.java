@@ -6,7 +6,7 @@ import it.polimi.ingsw.pc22.player.Player;
 import java.io.Serializable;
 import java.util.List;
 
-public abstract class Cell implements Serializable
+public class Cell implements Serializable
 {
 	private int requiredDiceValue;
 	private FamilyMember familyMember;
@@ -37,7 +37,6 @@ public abstract class Cell implements Serializable
 	}
 	
 	public void setRequiredDiceValue(int requiredDiceValue) { 
-	//Is this necessary? Should requiredDiceValue be final?
 		this.requiredDiceValue = requiredDiceValue;
 	}
 

@@ -6,8 +6,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO: Nel gameMatch va controllata la lista di playersInCouncilPalace
-// all'inizio di ogni nuovo turno e va SVUOTATA all'inizio del nuovo turno.
 public class CouncilPalace implements Serializable
 {
 
@@ -35,6 +33,7 @@ public class CouncilPalace implements Serializable
 		int i=0;
 		while ( i < this.councilPalaceCells.length)
 		{
+			System.out.println(councilPalaceCells.length + " " + councilPalaceCells[i]);
 			if ((councilPalaceCells[i].isEmpty()))
 			{
 				return i;
