@@ -4,9 +4,7 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * Created by matteo on 04/07/17.
- */
+
 public class ProductionTest extends TestCase {
 
     private ProductionCell[] productionCells = new ProductionCell[5];

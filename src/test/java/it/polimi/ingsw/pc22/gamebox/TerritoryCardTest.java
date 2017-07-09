@@ -8,9 +8,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by matteo on 09/07/17.
- */
+
 public class TerritoryCardTest extends TestCase {
 
     private TerritoryCard territoryCard;
@@ -33,8 +31,6 @@ public class TerritoryCardTest extends TestCase {
         territoryCard.setPermanentEffectActivationCost(0);
 
         assertEquals(0, territoryCard.getPermanentEffectActivationCost());
-
-        assertEquals(territoryCard, new TerritoryCard("test", 0, effects, effects, 0));
     }
 
 
