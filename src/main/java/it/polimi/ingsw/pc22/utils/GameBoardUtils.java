@@ -13,15 +13,6 @@ import java.util.logging.Logger;
 
 public class GameBoardUtils
 {
-	private static Player currentPlayer;
-
-	public static Player getCurrentPlayer()
-	{
-		return currentPlayer;
-	}
-
-	private static final Logger LOGGER = Logger.getLogger(GameBoardUtils.class.getName());
-
 	private static final Map<Integer, Integer> fromFaithToVictory = new HashMap<>();
 
 	static
@@ -98,7 +89,7 @@ public class GameBoardUtils
 
 			player.setPlayerColorsEnum(color);
 
-			System.out.println(color.toString());
+			System.out.println(player.getUsername() + " " + color.toString());
 
 			coins++;
 		}

@@ -96,8 +96,6 @@ public class GameMatch implements Runnable, Serializable
 			return;
 		}
 
-
-
 		Long timeStamp = System.currentTimeMillis();
 
 		Timer timer = new Timer();
@@ -394,17 +392,20 @@ public class GameMatch implements Runnable, Serializable
 
 		int i=0;
 
-		while(i<players.size())
+		while(i < players.size())
 		{
-
 			Player player = players.get(i);
+
+			List<LeaderCard> cards = new ArrayList<>();
 
 			for (int j=4*i; j<(4*(i+1)); j++)
 			{
 				LeaderCard currLeaderCard = leaderCards.get(j);
 
-				player.getLeaderCards().add(currLeaderCard);
+				cards.add(currLeaderCard);
 			}
+
+			player.setLeaderCards(cards);
 
 			i++;
 		}
