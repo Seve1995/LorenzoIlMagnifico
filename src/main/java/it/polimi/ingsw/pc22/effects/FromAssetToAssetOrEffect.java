@@ -26,6 +26,15 @@ public class FromAssetToAssetOrEffect extends ChooseAsset implements Effect
 	private boolean onlyOneAsset;
 	private Effect gainedEffect;
 
+	public List<Asset> getPaiedAssets() {
+		return paiedAssets;
+	}
+	public List<Asset> getGainedAssets() {
+		return gainedAssets;
+	}
+	public Effect getGainedEffect() {
+		return gainedEffect;
+	}
 	public void setPaiedAssets(List<Asset> paiedAssets) {
 		this.paiedAssets = paiedAssets;
 	}
