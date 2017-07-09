@@ -38,13 +38,14 @@ public class FromAssetToAssetTest extends TestCase{
 
         fromAssetToAssetOrEffect.setGainedEffect(effect);
 
-        assertEquals();
+       /* assertEquals();
 
         assertEquals();
 
         assertEquals();
 
         assertEquals();
+        */
     }
 
     @Test

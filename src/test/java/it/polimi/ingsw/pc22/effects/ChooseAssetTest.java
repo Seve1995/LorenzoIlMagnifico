@@ -25,20 +25,4 @@ public class ChooseAssetTest extends TestCase{
 		assertEquals(chosenAssetsToPay, chooseAsset.getChosenAssetsToPay());
 	}
 
-	@Test
-	public void testWaitForResult()
-	{
-		ChooseAsset chooseAsset = new ChooseAsset();
-		
-		chooseAsset.setChosenAssetsToPay(chosenAssetsToPay);
-			
-		GameMatch gameMatch = new GameMatch(4);
-								
-		assertTrue(chooseAsset.waitForResult());
-		
-		chooseAsset.setChosenAssetsToPay(null);
-		
-		assertFalse(chooseAsset.waitForResult());
-
-	}
 }
