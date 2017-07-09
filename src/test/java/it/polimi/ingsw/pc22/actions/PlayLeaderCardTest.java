@@ -1,5 +1,7 @@
 package it.polimi.ingsw.pc22.actions;
 
+import it.polimi.ingsw.pc22.adapters.IOAdapter;
+import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.gamebox.*;
 import it.polimi.ingsw.pc22.player.Player;
 import it.polimi.ingsw.pc22.utils.RequiredCard;
@@ -29,6 +31,8 @@ public class PlayLeaderCardTest
 
     private Player player;
 
+    private IOAdapter adapter;
+
     @Before
     public void setUp()
     {
@@ -55,6 +59,8 @@ public class PlayLeaderCardTest
         card.setRequiredAssets(assets);
 
         when(player.getPlayerBoard()).thenReturn(playerBoard);
+
+        adapter = mock(SocketIOAdapter.class);
     }
 
     @Test
@@ -296,6 +302,8 @@ public class PlayLeaderCardTest
 
         when(player.getLeaderCards()).thenReturn(cards);
 
+        when(player.getAdapter()).thenReturn(adapter);
+
         when(playerBoard.getLeaderCards()).thenReturn(cards);
 
         when(player.getAsset(AssetType.COIN)).thenReturn(1);
@@ -323,6 +331,8 @@ public class PlayLeaderCardTest
         when(playerBoard.getLeaderCards()).thenReturn(cards);
 
         when(player.getLeaderCards()).thenReturn(cards);
+
+        when(player.getAdapter()).thenReturn(adapter);
 
         assertFalse(playLeaderCard.executeAction(player, gameBoard));
 

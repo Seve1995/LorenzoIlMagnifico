@@ -1,5 +1,7 @@
 package it.polimi.ingsw.pc22.actions;
 
+import it.polimi.ingsw.pc22.adapters.IOAdapter;
+import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.gamebox.LeaderCard;
 import it.polimi.ingsw.pc22.gamebox.PlayerBoard;
@@ -28,6 +30,8 @@ public class ActiveLeaderCardTest
 
     private Player player;
 
+    private IOAdapter adapter;
+
     @Before
     public void setUp()
     {
@@ -44,6 +48,8 @@ public class ActiveLeaderCardTest
         cards.add(card);
 
         card.setEffects(new ArrayList<>());
+
+        adapter = mock(SocketIOAdapter.class);
     }
 
     @Test
@@ -94,6 +100,8 @@ public class ActiveLeaderCardTest
     {
         ActiveLeaderCard activeLeaderCard = new ActiveLeaderCard();
         activeLeaderCard.setIndex(0);
+
+        when(player.getAdapter()).thenReturn(adapter);
 
         when(player.getPlayerBoard()).thenReturn(playerBoard);
 

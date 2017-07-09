@@ -254,9 +254,7 @@ public class SettingFamiliarOnTowerTest
 
         when(cell.isEmpty()).thenReturn(false);
 
-        when(pickTowerCard.isLegal(player, gameBoard)).thenReturn(false);
-
-        assertFalse(settingTower.isLegal(player, gameBoard));
+        assertTrue(settingTower.isLegal(player, gameBoard));
     }
 
     @Test

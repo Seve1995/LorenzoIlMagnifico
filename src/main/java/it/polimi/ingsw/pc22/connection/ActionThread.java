@@ -4,7 +4,6 @@ import it.polimi.ingsw.pc22.actions.Action;
 import it.polimi.ingsw.pc22.actions.ActionFactory;
 import it.polimi.ingsw.pc22.adapters.IOAdapter;
 import it.polimi.ingsw.pc22.messages.ErrorMessage;
-import it.polimi.ingsw.pc22.messages.GameStatusMessage;
 
 /**
  * This thread is implemented to manage the actions using socket connection.

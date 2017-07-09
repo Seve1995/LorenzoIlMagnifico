@@ -1,7 +1,5 @@
 package it.polimi.ingsw.pc22.messages;
 
-import it.polimi.ingsw.pc22.player.Player;
-
 /**
  * If something goes wrong we send this message.
  * Some details are written in the String attribute.

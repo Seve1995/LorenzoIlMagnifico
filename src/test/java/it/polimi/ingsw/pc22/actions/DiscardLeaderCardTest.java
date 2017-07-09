@@ -1,5 +1,7 @@
 package it.polimi.ingsw.pc22.actions;
 
+import it.polimi.ingsw.pc22.adapters.IOAdapter;
+import it.polimi.ingsw.pc22.adapters.SocketIOAdapter;
 import it.polimi.ingsw.pc22.effects.PickOneCouncilPrivilege;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.gamebox.LeaderCard;
@@ -29,6 +31,8 @@ public class DiscardLeaderCardTest
 
     private Player player;
 
+    private IOAdapter adapter;
+
     @Before
     public void setUp()
     {
@@ -43,6 +47,8 @@ public class DiscardLeaderCardTest
         cards.add(card);
 
         card.setEffects(new ArrayList<>());
+
+        adapter = mock(SocketIOAdapter.class);
     }
 
     @Test
@@ -83,6 +89,8 @@ public class DiscardLeaderCardTest
     {
         DiscardLeaderCard discardLeaderCard = new DiscardLeaderCard();
         discardLeaderCard.setIndex(0);
+
+        when(player.getAdapter()).thenReturn(adapter);
 
         PickOneCouncilPrivilege pick = mock(PickOneCouncilPrivilege.class);
 

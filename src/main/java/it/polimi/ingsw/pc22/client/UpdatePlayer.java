@@ -156,8 +156,4 @@ public class UpdatePlayer {
             toggleButton.setDisable(false);
         }
     }
-
-
-
-
 }

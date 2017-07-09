@@ -1,9 +1,8 @@
 package it.polimi.ingsw.pc22.gamebox;
 
+import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
-
-import junit.framework.TestCase;
 
 public class BonusTileTest extends TestCase{
 	

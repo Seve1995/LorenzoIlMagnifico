@@ -1,10 +1,9 @@
 package it.polimi.ingsw.pc22.effects;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import it.polimi.ingsw.pc22.connection.GameMatch;
 import junit.framework.TestCase;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ChooseAssetTest extends TestCase{
 	

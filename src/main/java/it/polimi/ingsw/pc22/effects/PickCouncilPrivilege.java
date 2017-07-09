@@ -2,7 +2,6 @@ package it.polimi.ingsw.pc22.effects;
 
 import it.polimi.ingsw.pc22.connection.GameMatch;
 import it.polimi.ingsw.pc22.gamebox.Asset;
-import it.polimi.ingsw.pc22.messages.GameStatusMessage;
 import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
