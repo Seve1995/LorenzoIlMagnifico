@@ -19,7 +19,6 @@ import java.util.logging.Logger;
 
 public class FamilyMemberModifier implements Effect
 {
-
 	private ColorsEnum familyMemberColor = null;
 	private int diceValueSet;
 	private int diceValueBonus;
@@ -53,8 +52,6 @@ public class FamilyMemberModifier implements Effect
 		this.toAll = toAll;
 	}
 	
-	//se toCOloured=true && toAll=false richiede un input-> familyMemberColor
-
 	@Override
 	public boolean isLegal(Player player, GameBoard gameBoard) {
 		

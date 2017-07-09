@@ -4,6 +4,15 @@ import it.polimi.ingsw.pc22.effects.Effect;
 
 import java.util.List;
 
+/**
+ * This kind of card is characterized by different type of costs:
+ * -military points
+ * -other resources
+ *
+ * It has immediate and permanent effects. The latter is activable
+ * by doing a production action.
+ */
+
 public class BuildingCard extends DevelopmentCard
 {
 	private List<Asset> costs; 

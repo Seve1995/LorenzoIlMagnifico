@@ -4,6 +4,12 @@ import it.polimi.ingsw.pc22.gamebox.FamilyMember;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
+/**
+ * This class represents the malus added by some excommunication cards,
+ * that consists in receiving a certain diceValueMalus reduction of the 
+ * family members' value each time the player place them 
+ */	
+
 public class AddFamilyMembersMalus implements Effect{
 
 	private int diceValueMalus;

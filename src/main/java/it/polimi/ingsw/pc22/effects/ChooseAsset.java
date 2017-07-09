@@ -6,8 +6,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by fandroid95 on 30/06/2017.
+ * This class will receive the decision of the player
+ * in case he/she has to make a choice between a certain
+ * number of asset 
  */
+
 public class ChooseAsset
 {
     private Integer chosenAssetsToPay = null;

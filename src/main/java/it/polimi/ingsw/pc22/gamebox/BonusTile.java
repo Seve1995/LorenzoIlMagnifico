@@ -2,6 +2,12 @@ package it.polimi.ingsw.pc22.gamebox;
 
 import java.io.Serializable;
 
+/**
+ * This class represents the bonus tile associated to every player.
+ * There are five different types of Bonus Tiles (each one has a different number),
+ * and they're loaded from BonusTiles.json when the match starts. 
+ */
+
 public class BonusTile  implements Serializable
 {
 	private int number;

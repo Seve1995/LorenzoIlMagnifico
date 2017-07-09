@@ -4,6 +4,12 @@ import it.polimi.ingsw.pc22.effects.Effect;
 
 import java.util.List;
 
+/**
+ * This kind of card is characterized by ony one type of cost,
+ * a coins cost.
+ * It has immediate and permanent effects.
+ */
+
 public class CharacterCard extends DevelopmentCard
 {
 	private Asset coinsCost;

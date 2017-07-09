@@ -8,6 +8,15 @@ import it.polimi.ingsw.pc22.player.Player;
 
 import java.util.List;
 
+/**
+ * The activation of this effect will add to a certain player
+ * some discounts when he/she will take a certain cardType from the tower.
+ * It will discount assets cost (=assetDiscounts) or 
+ * the required value (=diceValueDiscount). If onlyOneAsset attribute
+ * is true, the player will have to choose only one asset
+ * from the list of assetDiscounts as discount.
+ */
+
 public class AddTowerCardDiscount implements Effect{
 
 	private CardTypeEnum cardType;

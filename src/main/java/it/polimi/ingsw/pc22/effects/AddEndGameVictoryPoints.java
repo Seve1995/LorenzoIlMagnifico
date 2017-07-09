@@ -4,6 +4,11 @@ import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
+/**
+ * This effect will increase the victory points
+ * of the player by the value specified in asset
+ */	
+
 public class AddEndGameVictoryPoints implements Effect{
 
 	private Asset asset;

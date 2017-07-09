@@ -2,6 +2,13 @@ package it.polimi.ingsw.pc22.gamebox;
 
 import java.io.Serializable;
 
+/**
+ * This class represents the basic resource of the game.
+ * Every asset has a certain value (integer value), and is 
+ * associated to a certain type. The list of all available
+ * type is included in the enumeration "AssetType".
+ */
+
 public class Asset implements Serializable
 {
 	private int value;

@@ -5,6 +5,12 @@ import it.polimi.ingsw.pc22.gamebox.CardTypeEnum;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
+/**
+ * Using this effect the player will gain an asset (attribute gainedAsset) 
+ * for each asset (attribute paidAsset, if it's not null) or for each card of 
+ * a specified type (attribute paidCardType, if it's not null)
+ */
+
 public class AddAssetForEveryAssetOrCard implements Effect{
 	
 	private Asset paidAsset;

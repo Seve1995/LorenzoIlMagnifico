@@ -5,6 +5,17 @@ import it.polimi.ingsw.pc22.effects.Effect;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * This class represents the standard card that is on the tower.
+ * Its parameters are loaded from the cards.json when the game match starts.
+ * name = The name of the card
+ * cardNumber = A unique identifier for the card
+ * roundNumber = Identifies the era in which the card can be played
+ * permanentEffectChoice = True if the card has multiple permanent effect and requires a user's choice
+ * immediateEffects = The list of immediate effects of the card
+ * permanentEffects = The list of permanent effects of the card
+ */
+
 public class DevelopmentCard implements Serializable
 {
 	private String name;

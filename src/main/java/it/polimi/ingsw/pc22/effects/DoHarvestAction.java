@@ -9,6 +9,13 @@ import it.polimi.ingsw.pc22.gamebox.TerritoryCard;
 import it.polimi.ingsw.pc22.messages.ChooseServantsMessage;
 import it.polimi.ingsw.pc22.player.Player;
 
+/**
+ * This effect will execute an harvest action with the
+ * value specified in the attribute 'value'.
+ * The value can also be increased by the player with the 
+ * sacrifice of a certain number of servants.
+ */
+
 public class DoHarvestAction extends ServantsAction implements Effect
 {
 	private int value;

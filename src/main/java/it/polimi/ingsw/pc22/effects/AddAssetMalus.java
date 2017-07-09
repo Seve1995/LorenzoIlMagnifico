@@ -4,6 +4,12 @@ import it.polimi.ingsw.pc22.gamebox.Asset;
 import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.Player;
 
+/**
+ * This class represents the malus added by some excommunication cards,
+ * that consists in receive 1 fewer asset every time the player
+ * gain one asset of the same type of assetMalus 
+ */	
+
 public class AddAssetMalus implements Effect{
 
 	private Asset assetMalus;

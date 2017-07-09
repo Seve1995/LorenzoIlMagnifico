@@ -6,6 +6,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents the council palace zone;
+ * it is composed as an array of 16 council palace
+ * cells. It includes the method firstCellFree() that
+ * return the first council palace cell that doesn't include
+ * a family member. It also has the list of players already in council
+ * palace, orderer from the first player that enter in the council palace
+ * in the current turn to the last, in order to easily check the new turn's starting 
+ * order.
+ */
+
 public class CouncilPalace implements Serializable
 {
 

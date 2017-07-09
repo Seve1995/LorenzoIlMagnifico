@@ -5,6 +5,13 @@ import it.polimi.ingsw.pc22.gamebox.GameBoard;
 import it.polimi.ingsw.pc22.player.CardModifier;
 import it.polimi.ingsw.pc22.player.Player;
 
+/**
+ * This class handle this effect of some excommunication cards:
+ * each time the player take a card of the type specified in the attribute
+ * cardType (through the action space or as a Card effect), his/her action receives 
+ * a -4 reduction of its value
+ */	
+
 public class AddCardPickMalus implements Effect{
 
 	private CardTypeEnum cardType;

@@ -6,6 +6,15 @@ import it.polimi.ingsw.pc22.player.Player;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * This class represents the basic cell of the game.
+ * It has a certain required dice value that specifies the
+ * minimum value for the activation of the effects that the 
+ * cell contains.
+ * In the attribute "familyMember" it stores the player's family
+ * member that was placed in. 
+ */
+
 public class Cell implements Serializable
 {
 	private int requiredDiceValue;
