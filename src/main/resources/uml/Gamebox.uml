@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>it.polimi.ingsw.pc22.gamebox.Asset</OriginalElement>
+  <nodes>
+    <node x="981.533229311142" y="583.0">it.polimi.ingsw.pc22.gamebox.ColorsEnum</node>
+    <node x="1486.6875" y="550.0">it.polimi.ingsw.pc22.gamebox.PlayerColorsEnum</node>
+    <node x="529.0" y="1558.5">it.polimi.ingsw.pc22.gamebox.CouncilPalaceCell</node>
+    <node x="2682.0625" y="1481.0">it.polimi.ingsw.pc22.gamebox.VentureCard</node>
+    <node x="280.5" y="1536.0">it.polimi.ingsw.pc22.gamebox.MarketCell</node>
+    <node x="1438.4375" y="1536.0">it.polimi.ingsw.pc22.gamebox.TowerCell</node>
+    <node x="2400.660598705502" y="1802.0">it.polimi.ingsw.pc22.gamebox.PlayerBoard</node>
+    <node x="2982.0625" y="1470.0">it.polimi.ingsw.pc22.gamebox.LeaderCard</node>
+    <node x="1185.75" y="1846.0">it.polimi.ingsw.pc22.gamebox.Production</node>
+    <node x="592.375" y="883.0">it.polimi.ingsw.pc22.gamebox.Dice</node>
+    <node x="1962.0625" y="1514.0">it.polimi.ingsw.pc22.gamebox.TerritoryCard</node>
+    <node x="2102.0625" y="1106.0">it.polimi.ingsw.pc22.gamebox.DevelopmentCard</node>
+    <node x="1493.6898693943594" y="161.0">java.lang.Enum</node>
+    <node x="1709.6875" y="572.0">it.polimi.ingsw.pc22.gamebox.CardTypeEnum</node>
+    <node x="985.0980987055016" y="806.0">it.polimi.ingsw.pc22.gamebox.FamilyMember</node>
+    <node x="2676.5005490060103" y="561.5">it.polimi.ingsw.pc22.gamebox.AssetType</node>
+    <node x="447.0" y="1846.0">it.polimi.ingsw.pc22.gamebox.CouncilPalace</node>
+    <node x="829.0630490060101" y="1139.0">it.polimi.ingsw.pc22.gamebox.Cell</node>
+    <node x="2704.2505490060103" y="1150.0">it.polimi.ingsw.pc22.gamebox.Asset</node>
+    <node x="850.2500000000001" y="1857.0">it.polimi.ingsw.pc22.gamebox.Harvest</node>
+    <node x="1167.875" y="1536.5">it.polimi.ingsw.pc22.gamebox.ProductionCell</node>
+    <node x="398.34809870550157" y="2068.0">it.polimi.ingsw.pc22.gamebox.GameBoard</node>
+    <node x="2202.0625" y="1503.0">it.polimi.ingsw.pc22.gamebox.BuildingCard</node>
+    <node x="2462.0625" y="1525.0">it.polimi.ingsw.pc22.gamebox.CharacterCard</node>
+    <node x="942.875" y="1536.5">it.polimi.ingsw.pc22.gamebox.HarvestCell</node>
+    <node x="1191.875" y="11.0">java.io.Serializable</node>
+    <node x="10.5" y="260.5">it.polimi.ingsw.pc22.gamebox.ExcommunicationCard</node>
+    <node x="3311.0625" y="1404.0">it.polimi.ingsw.pc22.gamebox.BonusTile</node>
+    <node x="218.0" y="1857.0">it.polimi.ingsw.pc22.gamebox.Market</node>
+    <node x="1724.8475496994915" y="0.0">java.lang.Comparable</node>
+    <node x="1469.4398693943594" y="1824.0">it.polimi.ingsw.pc22.gamebox.Tower</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.ingsw.pc22.gamebox.LeaderCard" target="java.io.Serializable">
+      <point x="77.25" y="-103.0" />
+      <point x="3213.8125" y="81.0" />
+      <point x="1297.0" y="81.0" />
+      <point x="47.125" y="14.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.Asset" target="it.polimi.ingsw.pc22.gamebox.AssetType">
+      <point x="-60.0" y="-70.0" />
+      <point x="2764.2505490060103" y="1081.0" />
+      <point x="2771.5005490060103" y="1081.0" />
+      <point x="0.0" y="91.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.CharacterCard" target="it.polimi.ingsw.pc22.gamebox.DevelopmentCard">
+      <point x="-50.0" y="-48.0" />
+      <point x="2512.0625" y="1364.0" />
+      <point x="2326.0625" y="1364.0" />
+      <point x="64.0" y="114.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.Dice" target="it.polimi.ingsw.pc22.gamebox.ColorsEnum">
+      <point x="53.0" y="-48.0" />
+      <point x="751.375" y="781.0" />
+      <point x="1021.533229311142" y="781.0" />
+      <point x="-40.0" y="70.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.CharacterCard" target="it.polimi.ingsw.pc22.gamebox.Asset">
+      <point x="50.0" y="-48.0" />
+      <point x="2612.0625" y="1384.0" />
+      <point x="2764.2505490060103" y="1384.0" />
+      <point x="-60.0" y="70.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.PlayerBoard" target="java.io.Serializable">
+      <point x="-132.42857142857156" y="-103.0" />
+      <point x="2422.7320272769302" y="1782.0" />
+      <point x="1951.5625" y="1782.0" />
+      <point x="1951.5625" y="111.0" />
+      <point x="1275.25" y="111.0" />
+      <point x="25.375" y="14.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.CouncilPalace" target="java.io.Serializable">
+      <point x="-57.75" y="-59.0" />
+      <point x="504.75" y="1782.0" />
+      <point x="518.5" y="1782.0" />
+      <point x="518.5" y="101.0" />
+      <point x="1217.25" y="101.0" />
+      <point x="-32.625" y="14.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.GameBoard" target="java.io.Serializable">
+      <point x="-217.875" y="-125.0" />
+      <point x="429.47309870550157" y="2048.0" />
+      <point x="0.0" y="2048.0" />
+      <point x="0.0" y="71.0" />
+      <point x="1195.5" y="71.0" />
+      <point x="-54.375" y="14.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.Production" target="java.io.Serializable">
+      <point x="77.0" y="-59.0" />
+      <point x="1378.25" y="1782.0" />
+      <point x="1383.375" y="1782.0" />
+      <point x="1383.375" y="141.0" />
+      <point x="1253.5" y="141.0" />
+      <point x="3.625" y="14.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.LeaderCard" target="it.polimi.ingsw.pc22.gamebox.Asset">
+      <point x="-77.25" y="-103.0" />
+      <point x="3059.3125" y="1374.0" />
+      <point x="2884.2505490060103" y="1374.0" />
+      <point x="60.0" y="70.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.FamilyMember" target="it.polimi.ingsw.pc22.gamebox.PlayerColorsEnum">
+      <point x="116.33333333333326" y="-125.0" />
+      <point x="1275.9314320388348" y="781.0" />
+      <point x="1537.4375" y="781.0" />
+      <point x="-50.75" y="103.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.GameBoard" target="it.polimi.ingsw.pc22.gamebox.ExcommunicationCard">
+      <point x="-155.625" y="-125.0" />
+      <point x="491.72309870550157" y="2038.0" />
+      <point x="135.0" y="2038.0" />
+      <point x="0.0" y="70.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.FamilyMember" target="it.polimi.ingsw.pc22.gamebox.ColorsEnum">
+      <point x="-116.33333333333326" y="-125.0" />
+      <point x="1043.2647653721683" y="781.0" />
+      <point x="1101.533229311142" y="781.0" />
+      <point x="40.0" y="70.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.Market" target="it.polimi.ingsw.pc22.gamebox.MarketCell">
+      <point x="52.25" y="-48.0" />
+      <point x="0.0" y="37.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.FamilyMember" target="java.io.Serializable">
+      <point x="0.0" y="-125.0" />
+      <point x="1159.5980987055016" y="781.0" />
+      <point x="1152.033229311142" y="781.0" />
+      <point x="1152.033229311142" y="141.0" />
+      <point x="1246.25" y="141.0" />
+      <point x="-3.625" y="14.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.GameBoard" target="it.polimi.ingsw.pc22.gamebox.Tower">
+      <point x="217.875" y="-125.0" />
+      <point x="865.2230987055016" y="2048.0" />
+      <point x="1603.9398693943594" y="2048.0" />
+      <point x="0.0" y="81.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.Asset" target="java.io.Serializable">
+      <point x="60.0" y="-70.0" />
+      <point x="2884.2505490060103" y="1081.0" />
+      <point x="2877.0005490060103" y="1081.0" />
+      <point x="2877.0005490060103" y="91.0" />
+      <point x="1289.75" y="91.0" />
+      <point x="39.875" y="14.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.CouncilPalaceCell" target="it.polimi.ingsw.pc22.gamebox.Cell">
+      <point x="0.0" y="-14.5" />
+      <point x="606.5" y="1384.0" />
+      <point x="961.0630490060101" y="1384.0" />
+      <point x="-88.0" y="81.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.Harvest" target="java.io.Serializable">
+      <point x="-70.33333333333326" y="-48.0" />
+      <point x="885.4166666666669" y="1782.0" />
+      <point x="814.875" y="1782.0" />
+      <point x="814.875" y="121.0" />
+      <point x="1231.75" y="121.0" />
+      <point x="-18.125" y="14.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.CouncilPalace" target="it.polimi.ingsw.pc22.gamebox.CouncilPalaceCell">
+      <point x="57.75" y="-59.0" />
+      <point x="620.25" y="1782.0" />
+      <point x="606.5" y="1782.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.Dice" target="java.io.Serializable">
+      <point x="-53.0" y="-48.0" />
+      <point x="645.375" y="111.0" />
+      <point x="1224.5" y="111.0" />
+      <point x="-25.375" y="14.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.MarketCell" target="it.polimi.ingsw.pc22.gamebox.Cell">
+      <point x="0.0" y="-37.0" />
+      <point x="375.0" y="1374.0" />
+      <point x="873.0630490060101" y="1374.0" />
+      <point x="-176.0" y="81.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.TowerCell" target="it.polimi.ingsw.pc22.gamebox.DevelopmentCard">
+      <point x="47.25" y="-37.0" />
+      <point x="1580.1875" y="1374.0" />
+      <point x="2134.0625" y="1374.0" />
+      <point x="-128.0" y="114.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.PlayerColorsEnum" target="java.lang.Enum">
+      <point x="0.0" y="-103.0" />
+      <point x="1588.1875" y="525.0" />
+      <point x="1644.4398693943594" y="525.0" />
+      <point x="-50.25" y="169.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.BonusTile" target="java.io.Serializable">
+      <point x="117.75" y="-169.0" />
+      <point x="3664.3125" y="71.0" />
+      <point x="1304.25" y="71.0" />
+      <point x="54.375" y="14.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.Harvest" target="it.polimi.ingsw.pc22.gamebox.HarvestCell">
+      <point x="70.33333333333326" y="-48.0" />
+      <point x="1026.0833333333335" y="1782.0" />
+      <point x="1096.625" y="1782.0" />
+      <point x="51.25" y="36.5" />
+    </edge>
+    <edge source="java.lang.Enum" target="java.lang.Comparable">
+      <point x="100.5" y="-169.5" />
+      <point x="1795.1898693943594" y="141.0" />
+      <point x="1812.3475496994915" y="141.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.DevelopmentCard" target="java.io.Serializable">
+      <point x="0.0" y="-114.0" />
+      <point x="2262.0625" y="101.0" />
+      <point x="1282.5" y="101.0" />
+      <point x="32.625" y="14.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.PlayerBoard" target="it.polimi.ingsw.pc22.gamebox.LeaderCard">
+      <point x="88.28571428571422" y="-103.0" />
+      <point x="2643.4463129912156" y="1772.0" />
+      <point x="3136.5625" y="1772.0" />
+      <point x="0.0" y="103.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.GameBoard" target="it.polimi.ingsw.pc22.gamebox.Harvest">
+      <point x="93.375" y="-125.0" />
+      <point x="740.7230987055016" y="2028.0" />
+      <point x="955.7500000000001" y="2028.0" />
+      <point x="0.0" y="48.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.GameBoard" target="it.polimi.ingsw.pc22.gamebox.CouncilPalace">
+      <point x="-31.125" y="-125.0" />
+      <point x="616.2230987055016" y="2048.0" />
+      <point x="562.5" y="2048.0" />
+      <point x="0.0" y="59.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.AssetType" target="java.lang.Enum">
+      <point x="0.0" y="-91.5" />
+      <point x="2771.5005490060103" y="525.0" />
+      <point x="1845.4398693943594" y="525.0" />
+      <point x="150.75" y="169.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.Cell" target="it.polimi.ingsw.pc22.gamebox.FamilyMember">
+      <point x="110.0" y="-81.0" />
+      <point x="0.0" y="125.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.ExcommunicationCard" target="java.io.Serializable">
+      <point x="0.0" y="-70.0" />
+      <point x="135.0" y="81.0" />
+      <point x="1202.75" y="81.0" />
+      <point x="-47.125" y="14.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.PlayerBoard" target="it.polimi.ingsw.pc22.gamebox.CharacterCard">
+      <point x="0.0" y="-103.0" />
+      <point x="2555.160598705502" y="1782.0" />
+      <point x="2562.0625" y="1782.0" />
+      <point x="0.0" y="48.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.VentureCard" target="it.polimi.ingsw.pc22.gamebox.DevelopmentCard">
+      <point x="-93.33333333333348" y="-92.0" />
+      <point x="2728.7291666666665" y="1354.0" />
+      <point x="2390.0625" y="1354.0" />
+      <point x="128.0" y="114.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.BuildingCard" target="it.polimi.ingsw.pc22.gamebox.Asset">
+      <point x="60.0" y="-70.0" />
+      <point x="2382.0625" y="1374.0" />
+      <point x="2724.2505490060103" y="1374.0" />
+      <point x="-100.0" y="70.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.GameBoard" target="it.polimi.ingsw.pc22.gamebox.Production">
+      <point x="155.625" y="-125.0" />
+      <point x="802.9730987055016" y="2038.0" />
+      <point x="1301.25" y="2038.0" />
+      <point x="0.0" y="59.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.PlayerBoard" target="it.polimi.ingsw.pc22.gamebox.TerritoryCard">
+      <point x="-88.28571428571422" y="-103.0" />
+      <point x="2466.874884419787" y="1772.0" />
+      <point x="2072.0625" y="1772.0" />
+      <point x="0.0" y="59.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.Tower" target="java.io.Serializable">
+      <point x="-100.875" y="-81.0" />
+      <point x="1503.0648693943594" y="1782.0" />
+      <point x="1408.6600496994915" y="1782.0" />
+      <point x="1408.6600496994915" y="131.0" />
+      <point x="1260.75" y="131.0" />
+      <point x="10.875" y="14.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.GameBoard" target="it.polimi.ingsw.pc22.gamebox.Market">
+      <point x="-93.375" y="-125.0" />
+      <point x="553.9730987055016" y="2028.0" />
+      <point x="322.5" y="2028.0" />
+      <point x="0.0" y="48.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.Tower" target="it.polimi.ingsw.pc22.gamebox.PlayerColorsEnum">
+      <point x="33.625" y="-81.0" />
+      <point x="1637.5648693943594" y="1782.0" />
+      <point x="1638.9375" y="1782.0" />
+      <point x="50.75" y="103.0" />
+    </edge>
+    <edge source="java.lang.Enum" target="java.io.Serializable">
+      <point x="-100.5" y="-169.5" />
+      <point x="1594.1898693943594" y="121.0" />
+      <point x="1268.0" y="121.0" />
+      <point x="18.125" y="14.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.Tower" target="it.polimi.ingsw.pc22.gamebox.CardTypeEnum">
+      <point x="100.875" y="-81.0" />
+      <point x="1704.8148693943594" y="1782.0" />
+      <point x="1813.6875" y="1782.0" />
+      <point x="0.0" y="81.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.TerritoryCard" target="it.polimi.ingsw.pc22.gamebox.DevelopmentCard">
+      <point x="0.0" y="-59.0" />
+      <point x="2072.0625" y="1384.0" />
+      <point x="2198.0625" y="1384.0" />
+      <point x="-64.0" y="114.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.PlayerBoard" target="it.polimi.ingsw.pc22.gamebox.VentureCard">
+      <point x="44.14285714285734" y="-103.0" />
+      <point x="2599.3034558483587" y="1762.0" />
+      <point x="2822.0625" y="1762.0" />
+      <point x="0.0" y="92.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.Cell" target="java.io.Serializable">
+      <point x="-110.0" y="-81.0" />
+      <point x="939.0630490060101" y="1081.0" />
+      <point x="967.033229311142" y="1081.0" />
+      <point x="967.033229311142" y="131.0" />
+      <point x="1239.0" y="131.0" />
+      <point x="-10.875" y="14.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.BuildingCard" target="it.polimi.ingsw.pc22.gamebox.DevelopmentCard">
+      <point x="-60.0" y="-70.0" />
+      <point x="0.0" y="114.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.TowerCell" target="it.polimi.ingsw.pc22.gamebox.Cell">
+      <point x="-47.25" y="-37.0" />
+      <point x="1485.6875" y="1374.0" />
+      <point x="1225.0630490060103" y="1374.0" />
+      <point x="176.0" y="81.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.Production" target="it.polimi.ingsw.pc22.gamebox.ProductionCell">
+      <point x="-77.0" y="-59.0" />
+      <point x="1224.25" y="1782.0" />
+      <point x="1219.125" y="1782.0" />
+      <point x="-51.25" y="36.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.VentureCard" target="it.polimi.ingsw.pc22.gamebox.Asset">
+      <point x="0.0" y="-92.0" />
+      <point x="2822.0625" y="1384.0" />
+      <point x="2804.2505490060103" y="1384.0" />
+      <point x="-20.0" y="70.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.Tower" target="it.polimi.ingsw.pc22.gamebox.TowerCell">
+      <point x="-33.625" y="-81.0" />
+      <point x="1570.3148693943594" y="1782.0" />
+      <point x="1532.9375" y="1782.0" />
+      <point x="0.0" y="37.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.Market" target="java.io.Serializable">
+      <point x="-52.25" y="-48.0" />
+      <point x="270.0" y="91.0" />
+      <point x="1210.0" y="91.0" />
+      <point x="-39.875" y="14.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.PlayerBoard" target="it.polimi.ingsw.pc22.gamebox.BonusTile">
+      <point x="132.42857142857156" y="-103.0" />
+      <point x="2687.5891701340734" y="1782.0" />
+      <point x="3546.5625" y="1782.0" />
+      <point x="0.0" y="169.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.CardTypeEnum" target="java.lang.Enum">
+      <point x="0.0" y="-81.0" />
+      <point x="1813.6875" y="525.0" />
+      <point x="1744.9398693943594" y="525.0" />
+      <point x="50.25" y="169.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.BonusTile" target="it.polimi.ingsw.pc22.gamebox.Asset">
+      <point x="-117.75" y="-169.0" />
+      <point x="3428.8125" y="1364.0" />
+      <point x="2924.2505490060103" y="1364.0" />
+      <point x="100.0" y="70.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.GameBoard" target="it.polimi.ingsw.pc22.gamebox.Dice">
+      <point x="31.125" y="-125.0" />
+      <point x="678.4730987055016" y="2048.0" />
+      <point x="698.375" y="2048.0" />
+      <point x="0.0" y="48.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.PlayerBoard" target="it.polimi.ingsw.pc22.gamebox.BuildingCard">
+      <point x="-44.14285714285688" y="-103.0" />
+      <point x="2511.017741562645" y="1762.0" />
+      <point x="2322.0625" y="1762.0" />
+      <point x="0.0" y="70.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.ColorsEnum" target="java.lang.Enum">
+      <point x="0.0" y="-70.0" />
+      <point x="1061.533229311142" y="525.0" />
+      <point x="1543.9398693943594" y="525.0" />
+      <point x="-150.75" y="169.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.HarvestCell" target="it.polimi.ingsw.pc22.gamebox.Cell">
+      <point x="0.0" y="-36.5" />
+      <point x="1045.375" y="1384.0" />
+      <point x="1049.0630490060103" y="1384.0" />
+      <point x="0.0" y="81.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.gamebox.ProductionCell" target="it.polimi.ingsw.pc22.gamebox.Cell">
+      <point x="0.0" y="-36.5" />
+      <point x="1270.375" y="1384.0" />
+      <point x="1137.0630490060103" y="1384.0" />
+      <point x="88.0" y="81.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7258041987693721" x="1409.0" y="578.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Properties</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

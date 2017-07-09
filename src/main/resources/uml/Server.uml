@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>it.polimi.ingsw.pc22.connection.ActionThread</OriginalElement>
+  <nodes>
+    <node x="715.76" y="1573.0">it.polimi.ingsw.pc22.connection.GameServer</node>
+    <node x="888.6300000000001" y="0.0">java.lang.FunctionalInterface</node>
+    <node x="1106.5" y="180.0">it.polimi.ingsw.pc22.connection.ExitThread</node>
+    <node x="768.6300000000001" y="202.0">it.polimi.ingsw.pc22.connection.ActionThread</node>
+    <node x="453.33000000000004" y="213.5">it.polimi.ingsw.pc22.connection.GameMatch.PlayerComparator</node>
+    <node x="907.1300000000001" y="79.0">java.lang.Runnable</node>
+    <node x="0.0" y="348.0">it.polimi.ingsw.pc22.connection.GameMatch</node>
+    <node x="317.33000000000004" y="224.5">java.io.Serializable</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.ingsw.pc22.connection.GameMatch.PlayerComparator" target="it.polimi.ingsw.pc22.connection.GameMatch">
+      <point x="58.25" y="25.5" />
+      <point x="628.08" y="328.0" />
+      <point x="617.0000000000001" y="328.0" />
+      <point x="1.1368683772161603E-13" y="-587.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.connection.GameMatch" target="java.lang.Runnable">
+      <point x="493.5999999999999" y="-587.5" />
+      <point x="1110.6" y="328.0" />
+      <point x="1014.1300000000001" y="328.0" />
+      <point x="1014.1300000000001" y="160.0" />
+      <point x="971.6300000000001" y="160.0" />
+      <point x="0.0" y="25.5" />
+    </edge>
+    <edge source="java.lang.Runnable" target="java.lang.FunctionalInterface">
+      <point x="0.0" y="-25.5" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.connection.GameMatch" target="it.polimi.ingsw.pc22.connection.GameMatch.PlayerComparator">
+      <point x="-246.79999999999984" y="-587.5" />
+      <point x="370.20000000000016" y="328.0" />
+      <point x="511.58000000000004" y="328.0" />
+      <point x="-58.25" y="25.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.connection.GameMatch" target="it.polimi.ingsw.pc22.connection.ActionThread">
+      <point x="246.80000000000007" y="-587.5" />
+      <point x="863.8000000000001" y="328.0" />
+      <point x="886.1300000000001" y="328.0" />
+      <point x="0.0" y="37.0" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.connection.GameServer" target="it.polimi.ingsw.pc22.connection.GameMatch">
+      <point x="-137.25" y="-147.0" />
+      <point x="853.01" y="1548.0" />
+      <point x="617.0" y="1548.0" />
+      <point x="0.0" y="587.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.connection.ExitThread" target="java.lang.Runnable">
+      <point x="0.0" y="-59.0" />
+      <point x="1244.5" y="150.0" />
+      <point x="1014.6300000000001" y="150.0" />
+      <point x="43.0" y="25.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.connection.ActionThread" target="java.lang.Runnable">
+      <point x="0.0" y="-37.0" />
+      <point x="886.1300000000001" y="160.0" />
+      <point x="928.6300000000001" y="160.0" />
+      <point x="-43.0" y="25.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.connection.GameMatch" target="java.io.Serializable">
+      <point x="-493.5999999999999" y="-587.5" />
+      <point x="123.40000000000009" y="318.0" />
+      <point x="375.33000000000004" y="318.0" />
+      <point x="0.0" y="14.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.connection.GameServer" target="it.polimi.ingsw.pc22.connection.ExitThread">
+      <point x="137.25" y="-147.0" />
+      <point x="1127.51" y="1548.0" />
+      <point x="1244.5" y="1548.0" />
+      <point x="0.0" y="59.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.5112947658402204" x="767.4191810344828" y="1438.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Properties</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

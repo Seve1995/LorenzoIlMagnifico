@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>it.polimi.ingsw.pc22.rmi.RMIClientStreamService</OriginalElement>
+  <nodes>
+    <node x="559.0" y="189.0">it.polimi.ingsw.pc22.rmi.RMIClientStreamService</node>
+    <node x="428.5" y="0.0">java.rmi.Remote</node>
+    <node x="0.0" y="79.0">it.polimi.ingsw.pc22.rmi.RMIServerInterface</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="it.polimi.ingsw.pc22.rmi.RMIClientStreamService" target="java.rmi.Remote">
+      <point x="0.0" y="-25.5" />
+      <point x="681.5" y="54.0" />
+      <point x="499.0" y="54.0" />
+      <point x="23.5" y="14.5" />
+    </edge>
+    <edge source="it.polimi.ingsw.pc22.rmi.RMIServerInterface" target="java.rmi.Remote">
+      <point x="0.0" y="-135.5" />
+      <point x="269.5" y="54.0" />
+      <point x="452.0" y="54.0" />
+      <point x="-23.5" y="14.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="187.5" y="54.0" />
+  <SelectedNodes>
+    <node>it.polimi.ingsw.pc22.rmi.RMIClientStreamService</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Properties</Category>
+    <Category>Methods</Category>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
