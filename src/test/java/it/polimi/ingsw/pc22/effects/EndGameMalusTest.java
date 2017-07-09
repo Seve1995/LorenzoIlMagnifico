@@ -107,7 +107,7 @@ public class EndGameMalusTest extends TestCase {
 
         endGameMalus.executeEffects(player, gameBoard);
 
-        assertEquals(null, player.getPlayerBoard().getCharacters());
+        assertEquals(new ArrayList<>(), player.getPlayerBoard().getCharacters());
 
 
     }
@@ -123,7 +123,7 @@ public class EndGameMalusTest extends TestCase {
 
         endGameMalus.executeEffects(player, gameBoard);
 
-        assertEquals(null, player.getPlayerBoard().getVentures());
+        assertEquals(new ArrayList<>(), player.getPlayerBoard().getVentures());
 
     }
 
@@ -138,7 +138,7 @@ public class EndGameMalusTest extends TestCase {
 
         endGameMalus.executeEffects(player, gameBoard);
 
-        assertEquals(null, player.getPlayerBoard().getTerritories());
+        assertEquals(new ArrayList<>(), player.getPlayerBoard().getTerritories());
 
     }
 
