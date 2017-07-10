@@ -1,4 +1,5 @@
 # Project Template - Prova Finale (Ingegneria del Software)
+![alt text](https://image.ibb.co/gGT67v/Header.png)
 
 Group 22 is composed by: 
 Matteo Petrini,
@@ -47,8 +48,10 @@ Additional persistence information: when a user press (or write, in the case of 
 other players' turn before being disconnected. 
 
 ## GUI Small tutorial
-![alt text](http://i.imgur.com/R6gWAcE.jpg)
-
+![alt text](https://image.ibb.co/kZ0xEa/Game_Board_Tutorial.png)
+In the above image is represented the game's main screen. 
+When a player want to place a family member in the gameboard, he has to press one button from (1).
+Then has to select one zone in the gameboard image (2) by pressing it, and finally he confirm the action by pressing the button "Confirm" (3).
 
 ### Some other infos
 On the console of the server you can type the key word "exit". In so doing 
