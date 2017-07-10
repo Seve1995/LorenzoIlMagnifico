@@ -7,10 +7,19 @@ Giuseppe Severino
 
 ## How to run the program: 
 The main classes are:
-Client class, in package "client",
-Game Server class, in package "connection"
+
+CLIENT: "Client" class, in package "client"
+SERVER: "Game Server" class, in package "connection"
 
 There are no particular parameters to run the game.
+
+Once the client ask for a login or a registration, you can use one of these users to login:
+
+1) Username: "Matteo" , Password: "Petrini"
+2) Username: "Fabio", Password: "Piazza"
+3) Username: "Giuseppe", Password: "Severino"
+
+Alternately, you can create your personale username and password.
 
 ### How to play the game
 Every user, in the first screen, has to choose between RMI/SOCKET connection
@@ -36,7 +45,7 @@ to see a representation of the player board as a string.
 ### Some other infos
 On the console of the server you can type the key word "exit". In so doing 
 the server should stop itself. All the matches should be stopped, as well, and, when the server will be powered on again
-all the matches should be restored. 
+all the matches should be restored.
 
 The UML representation of the whole project is contained in resources/uml/
 
