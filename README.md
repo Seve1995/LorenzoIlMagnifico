@@ -1,5 +1,6 @@
-# Project Template - Prova Finale (Ingegneria del Software)
 ![alt text](https://image.ibb.co/gGT67v/Header.png)
+
+# Project Template - Prova Finale (Ingegneria del Software)
 
 Group 22 is composed by: 
 Matteo Petrini,
