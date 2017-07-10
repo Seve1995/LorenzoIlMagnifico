@@ -29,7 +29,7 @@ public class GameCreationState implements GenericState
     @Override
     public boolean validate(String string)
     {
-        Pattern gameMatcher = Pattern.compile("(^(\\w+) (C|c|J|j|R|r)$)");
+        Pattern gameMatcher = Pattern.compile("(^((\\w+) (C|c|J|j)|(R|r))$)");
 
         Matcher matcher = gameMatcher.matcher(string);
 

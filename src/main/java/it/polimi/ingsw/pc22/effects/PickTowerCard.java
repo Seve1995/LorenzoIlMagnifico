@@ -87,7 +87,7 @@ public class PickTowerCard extends ChooseAsset implements Effect
 
 		gameMatch.setCurrEffect(this);
 
-		if (floor==-1 || cardType==null)
+		if (floor == -1 || cardType == null)
 			return false;
 		
 		Tower tower = gameBoard.getTowerByType(cardType);
@@ -252,8 +252,6 @@ public class PickTowerCard extends ChooseAsset implements Effect
 	{
 		String gameName = gameBoard.getGameMatchName();
 
-		Tower tower = gameBoard.getTowerByType(cardType);
-		
 		GameMatch gameMatch = GameServer.getGameMatchMap().get(gameName);
 
 		gameMatch.setCurrEffect(this);
@@ -289,6 +287,11 @@ public class PickTowerCard extends ChooseAsset implements Effect
 				}
 			}
 		}
+
+		if (cardType.equals(CardTypeEnum.ANY) || floor == -1)
+			return false;
+
+		Tower tower = gameBoard.getTowerByType(cardType);
 
 		DevelopmentCard card = tower.getTowerCells().get(floor).getDevelopmentCard();
 
@@ -336,33 +339,31 @@ public class PickTowerCard extends ChooseAsset implements Effect
 				return false;
 		}
 
-		Tower currTower = gameBoard.getTowerByType(cardType);
-
 		if (!isLegal(player, gameBoard))
 			return false;
 
-		activeEffects(currTower.getTowerCells().get(floor).getDevelopmentCard(), player, gameBoard);
+		activeEffects(card, player, gameBoard);
 
 		if (cardType.equals(CardTypeEnum.BUILDING))
 		{
-			player.getPlayerBoard().getBuildings().add((BuildingCard) currTower.getTowerCells().get(floor).getDevelopmentCard());
+			player.getPlayerBoard().getBuildings().add((BuildingCard) card);
 		}
 
 		if (cardType.equals(CardTypeEnum.CHARACTER))
 		{
-			player.getPlayerBoard().getCharacters().add((CharacterCard) currTower.getTowerCells().get(floor).getDevelopmentCard());
+			player.getPlayerBoard().getCharacters().add((CharacterCard) card);
 
 		}
 
 		if (cardType.equals(CardTypeEnum.TERRITORY))
 		{
-			player.getPlayerBoard().getTerritories().add((TerritoryCard) currTower.getTowerCells().get(floor).getDevelopmentCard());
+			player.getPlayerBoard().getTerritories().add((TerritoryCard) card);
 
 		}
 
 		if (cardType.equals(CardTypeEnum.VENTURE))
 		{
-			player.getPlayerBoard().getVentures().add((VentureCard) currTower.getTowerCells().get(floor).getDevelopmentCard());
+			player.getPlayerBoard().getVentures().add((VentureCard) card);
 
 			VentureCard currVentureCard = (VentureCard) card;
 			
@@ -393,7 +394,7 @@ public class PickTowerCard extends ChooseAsset implements Effect
 			player.addAsset(costAsset);
 		}
 
-		currTower.getTowerCells().get(floor).setDevelopmentCard(null);
+		tower.getTowerCells().get(floor).setDevelopmentCard(null);
 
 		return true;
 	}

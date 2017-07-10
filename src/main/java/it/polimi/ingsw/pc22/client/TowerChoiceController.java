@@ -42,7 +42,7 @@ public class TowerChoiceController implements Controller
         this.dialogStage = dialogStage;
 
         ObservableList<String> typeOfTowers = FXCollections.observableArrayList(
-                "BUILDING", "CHARACTER", "TERRITORY", "VENTURES");
+                "BUILDING", "CHARACTER", "TERRITORY", "VENTURE");
 
         SpinnerValueFactory valueFactoryFloor = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,4);
 

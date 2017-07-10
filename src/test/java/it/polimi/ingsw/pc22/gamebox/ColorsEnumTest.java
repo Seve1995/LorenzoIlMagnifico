@@ -1,8 +1,7 @@
 package it.polimi.ingsw.pc22.gamebox;
 
-import org.junit.Test;
-
 import junit.framework.TestCase;
+import org.junit.Test;
 
 public class ColorsEnumTest extends TestCase{
 	
