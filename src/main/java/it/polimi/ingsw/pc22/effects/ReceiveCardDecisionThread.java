@@ -47,6 +47,8 @@ public class ReceiveCardDecisionThread implements Runnable
 
             Pattern cardPattern;
 
+            System.out.println(cardMessage);
+
             if (cardMessage == null)
             {
                 adapter.printMessage(new ErrorMessage("INVALID INSERTION RETRY"));

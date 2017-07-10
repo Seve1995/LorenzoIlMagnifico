@@ -238,9 +238,16 @@ public class RmiServerImpl implements RMIServerInterface
     public void takeCardDecision(String cardMessage, Long key, CardTypeEnum currCardType, String gameMathName)
         throws RemoteException
     {
-        GameMatch gameMatch = GameServer.getGameMatchMap().get(gameMathName);
-
         IOAdapter adapter = rmiAdapters.get(key);
+
+        if (cardMessage == null)
+        {
+            adapter.printMessage(new ErrorMessage("INVALID INSERTION RETRY"));
+
+            return;
+        }
+
+        GameMatch gameMatch = GameServer.getGameMatchMap().get(gameMathName);
 
         Pattern cardPattern;
 
