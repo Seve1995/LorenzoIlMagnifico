@@ -13,13 +13,14 @@ SERVER: "Game Server" class, in package "connection"
 
 There are no particular parameters to run the game.
 
-Once the client ask for a login or a registration, you can use one of these users to login:
+### How to login/register
+Once the client ask for a login or a registration, you can use one of these defaults users to login:
 
 1) Username: "Matteo" , Password: "Petrini"
 2) Username: "Fabio", Password: "Piazza"
 3) Username: "Giuseppe", Password: "Severino"
 
-Alternately, you can create your personale username and password.
+Alternately, you can create your personale username and password by pressing/writing "Register".
 
 ### How to play the game
 Every user, in the first screen, has to choose between RMI/SOCKET connection
@@ -42,14 +43,16 @@ Playing on CLI allows you to do the same things described above. All the strings
 are exampled and explained in the terminal itself. The only difference is that you can type "show board" in every moment
 to see a representation of the player board as a string. 
 
+Additional persistence information: when a user press (or write, in the case of CLI) "Exit", he has to wait the end of 
+other players' turn before being disconnected. 
+
+## GUI Small tutorial
+![alt text](http://i.imgur.com/R6gWAcE.jpg)
+
+
 ### Some other infos
 On the console of the server you can type the key word "exit". In so doing 
 the server should stop itself. All the matches should be stopped, as well, and, when the server will be powered on again
 all the matches should be restored.
 
 The UML representation of the whole project is contained in resources/uml/
-
-
-
-
-  
