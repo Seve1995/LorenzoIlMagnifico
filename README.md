@@ -23,7 +23,7 @@ Once the client ask for a login or a registration, you can use one of these defa
 2) Username: "Fabio", Password: "Piazza"
 3) Username: "Giuseppe", Password: "Severino"
 
-Alternately, you can create your personale username and password by pressing/writing "Register".
+Alternately, you can create your personal username and password by pressing/writing "Register".
 
 ## How to play the game
 Every user, in the first screen, has to choose between RMI/SOCKET connection
