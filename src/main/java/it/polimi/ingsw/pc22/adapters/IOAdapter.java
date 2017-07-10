@@ -93,8 +93,6 @@ public abstract class IOAdapter
             return false;
         }
 
-        System.out.println(playerString[1]);
-
         Pattern gameMatcher = Pattern.compile("(^((\\w+) (C|c|J|j)|(R|r))$)");
 
         Matcher matcher = gameMatcher.matcher(playerString[1]);

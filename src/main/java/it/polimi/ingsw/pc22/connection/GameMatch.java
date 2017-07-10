@@ -195,14 +195,11 @@ public class GameMatch implements Runnable, Serializable
 
 			for(Player player : players)
 			{
-				System.out.println(player.getFamilyMembers());
-
 				if (player.isSuspended())
 				{
 					PlayerNotify(player);
 					continue;
 				}
-
 
 				for (Player p : players)
 				{
@@ -524,8 +521,6 @@ public class GameMatch implements Runnable, Serializable
 				}
 			}
 
-			System.out.println(currentPlayer.getExcommunicationChoice());
-
 			if (currentPlayer.getExcommunicationChoice() == 1)
 			{
 				currentPlayer.setFaithPoints(0);
@@ -718,8 +713,6 @@ public class GameMatch implements Runnable, Serializable
 
 		final int roundNumber = era;
 		
-		System.out.println(turn);
-		
 		List<TowerCell> territoryTowerCells = towers[0].getTowerCells();
 				
 		List<DevelopmentCard> territoryCards = cards
@@ -783,7 +776,7 @@ public class GameMatch implements Runnable, Serializable
 		{
 			ventureTowerCells.get(i).setDevelopmentCard(ventureCards.get(i));
 		}
-		System.out.println(cards.size());		
+
 	}
 
 	private void resetLeaderCards(List<Player> players)

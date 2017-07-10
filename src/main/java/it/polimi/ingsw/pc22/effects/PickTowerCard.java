@@ -87,7 +87,7 @@ public class PickTowerCard extends ChooseAsset implements Effect
 
 		gameMatch.setCurrEffect(this);
 
-		if (floor==-1 || cardType==null)
+		if (floor == -1 || cardType == null)
 			return false;
 		
 		Tower tower = gameBoard.getTowerByType(cardType);

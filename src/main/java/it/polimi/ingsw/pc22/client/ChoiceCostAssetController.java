@@ -2,7 +2,6 @@ package it.polimi.ingsw.pc22.client;
 
 import it.polimi.ingsw.pc22.messages.ChooseAssetsMessage;
 import it.polimi.ingsw.pc22.messages.ChooseCostsMessage;
-import it.polimi.ingsw.pc22.messages.ExecutedAction;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;

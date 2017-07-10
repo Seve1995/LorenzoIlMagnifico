@@ -80,8 +80,6 @@ public class RmiServerImpl implements RMIServerInterface
 
                 message = new LoginMessage(true, false, player);
 
-                System.out.println(message);
-
                 adapter.printMessage(message);
             }
         }
@@ -414,7 +412,6 @@ public class RmiServerImpl implements RMIServerInterface
         }
 
         ColorsEnum color = ColorsEnum.getColorFromString(familiarMessage);
-
 
         FamilyMemberModifier effect = (FamilyMemberModifier)
                 gameMatch.getCurrEffect();

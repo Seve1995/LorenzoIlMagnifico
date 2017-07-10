@@ -1,13 +1,12 @@
 package it.polimi.ingsw.pc22.gamebox;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import it.polimi.ingsw.pc22.effects.Effect;
+import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
-import it.polimi.ingsw.pc22.effects.Effect;
-import junit.framework.TestCase;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DevelopmentCardTest extends TestCase{
 	
