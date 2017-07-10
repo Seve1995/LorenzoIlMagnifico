@@ -16,7 +16,7 @@ SERVER: "Game Server" class, in package "connection"
 
 There are no particular parameters to run the game.
 
-### How to login/register
+## How to login/register
 Once the client ask for a login or a registration, you can use one of these defaults users to login:
 
 1) Username: "Matteo" , Password: "Petrini"
@@ -25,7 +25,7 @@ Once the client ask for a login or a registration, you can use one of these defa
 
 Alternately, you can create your personale username and password by pressing/writing "Register".
 
-### How to play the game
+## How to play the game
 Every user, in the first screen, has to choose between RMI/SOCKET connection
 and between GU/CL interface. 
 If the GUI is the choice other screen will appear, and a user can signUp or login in our server.
@@ -55,7 +55,7 @@ In the above image is represented the game's main screen.
 When a player want to place a family member in the gameboard, he has to press one button from (1).
 Then has to select one zone in the gameboard image (2) by pressing it, and finally he confirm the action by pressing the button "Confirm" (3).
 
-### Some other infos
+## Some other infos
 On the console of the server you can type the key word "exit". In so doing 
 the server should stop itself. All the matches should be stopped, as well, and, when the server will be powered on again
 all the matches should be restored.
