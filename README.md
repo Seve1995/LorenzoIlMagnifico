@@ -1,4 +1,4 @@
-![alt text](https://image.ibb.co/gGT67v/Header.png)
+![Header](https://image.ibb.co/gGT67v/Header.png)
 
 # Project Template - Prova Finale (Ingegneria del Software)
 
@@ -11,6 +11,7 @@ Giuseppe Severino
 The main classes are:
 
 CLIENT: "Client" class, in package "client"
+
 SERVER: "Game Server" class, in package "connection"
 
 There are no particular parameters to run the game.
@@ -49,7 +50,7 @@ Additional persistence information: when a user press (or write, in the case of 
 other players' turn before being disconnected. 
 
 ## GUI Small tutorial
-![alt text](https://image.ibb.co/kZ0xEa/Game_Board_Tutorial.png)
+![The game's main screen](https://image.ibb.co/kZ0xEa/Game_Board_Tutorial.png)
 In the above image is represented the game's main screen. 
 When a player want to place a family member in the gameboard, he has to press one button from (1).
 Then has to select one zone in the gameboard image (2) by pressing it, and finally he confirm the action by pressing the button "Confirm" (3).
