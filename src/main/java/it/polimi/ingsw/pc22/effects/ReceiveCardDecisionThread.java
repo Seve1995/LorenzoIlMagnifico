@@ -47,6 +47,13 @@ public class ReceiveCardDecisionThread implements Runnable
 
             Pattern cardPattern;
 
+            if (cardMessage == null)
+            {
+                adapter.printMessage(new ErrorMessage("INVALID INSERTION RETRY"));
+
+                continue;
+            }
+
             if (!currCardType.equals(CardTypeEnum.ANY))
             {
                 cardPattern = Pattern.compile("^[0-3]$");
@@ -60,7 +67,7 @@ public class ReceiveCardDecisionThread implements Runnable
 
             if (!matcher.find())
             {
-                adapter.printMessage(new ErrorMessage("INVALID INSERTION RETRY"));
+                adapter.printMessage(new ErrorMessage("NO PLACE FOUND"));
 
                 continue;
             }

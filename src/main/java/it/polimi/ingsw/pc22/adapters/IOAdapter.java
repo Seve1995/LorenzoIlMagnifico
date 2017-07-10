@@ -93,7 +93,9 @@ public abstract class IOAdapter
             return false;
         }
 
-        Pattern gameMatcher = Pattern.compile("(^(\\w+) (C|c|J|j|R|r)$)");
+        System.out.println(playerString[1]);
+
+        Pattern gameMatcher = Pattern.compile("(^((\\w+) (C|c|J|j)|(R|r))$)");
 
         Matcher matcher = gameMatcher.matcher(playerString[1]);
 
@@ -104,9 +106,21 @@ public abstract class IOAdapter
             return false;
         }
 
-        String[] matchStrings = playerString[1].split(" ");
-
         Map<String, GameMatch> gameMatchMap = GameServer.getGameMatchMap();
+
+        if ("R".equalsIgnoreCase(playerString[1]))
+        {
+            if (firstMatchFree(gameMatchMap) == null)
+            {
+                printMessage(new ErrorMessage("No matches available."));
+
+                return false;
+            }
+
+            return addToExistingGame(gameMatchMap, this.firstMatchFree(gameMatchMap), player);
+        }
+
+        String[] matchStrings = playerString[1].split(" ");
 
         if("C".equalsIgnoreCase(matchStrings[1]))
         {
@@ -118,18 +132,6 @@ public abstract class IOAdapter
         {
             return addToExistingGame
                     (gameMatchMap, matchStrings[0], player);
-        }
-
-        if ("R".equalsIgnoreCase(matchStrings[1]))
-        {
-            if (firstMatchFree(gameMatchMap) == null)
-            {
-                printMessage(new ErrorMessage("No matches available."));
-
-                return false;
-            }
-
-            return addToExistingGame(gameMatchMap, this.firstMatchFree(gameMatchMap), player);
         }
 
         printMessage(new ErrorMessage("Non-valid input. Please retry... "));
