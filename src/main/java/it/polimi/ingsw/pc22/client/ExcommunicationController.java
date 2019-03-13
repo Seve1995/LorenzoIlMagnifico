@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 
 /**
  * This is the controller of the Excommunication screen:
- * here you can (if you have enought faith points) support the pope or not.
+ * here you can (if you have enough faith points) support the pope or not.
  * It is up to you...
  */
 public class ExcommunicationController implements Controller {

@@ -14,8 +14,8 @@ import java.util.regex.Pattern;
 
 /**
  * This class is a factory to create all the actions needed to play the game
- * it has a single public method that receive the choice and creates the actions
- * then we crated some private methods that help to set
+ * it has a single public method that receive the choice and creates the actions,
+ * then we created some private methods that help to set
  * some custom parameter needed by specific actions
  * some actions need a familiar, other don't
  * we used java reflection to build the correct action every time,

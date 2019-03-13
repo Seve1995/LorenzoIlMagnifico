@@ -7,8 +7,8 @@ import it.polimi.ingsw.pc22.player.Player;
 /**
  * This is a wrapper for every action that can use servants,
  * we used the decorator pattern to add to every action the
- * possibility to sacrifice servants in order to use
- * increment te value of the single action
+ * possibility to sacrifice servants in order to 
+ * increment the value of the single action
  * this action wraps the action to execute and increments
  * its value using the servants parameter
  */
